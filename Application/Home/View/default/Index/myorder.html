@@ -1,0 +1,263 @@
+<extend name="base" />
+<block name="head">
+	<meta charset="UTF-8">
+	<title>订单</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="__PUBLIC__/home/css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/myorder.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/font_gpke.css"/>
+	
+
+	<style type="text/css">
+		.bot-ul-li {
+			color: #FF4E00 !important;
+		}
+		
+		.bot-ul-li .home_icon:before {
+			content: "\a002";
+		}
+		
+		.bot-ul-li .huod_icon:before {
+			content: "\a004";
+		}
+		
+		.bot-ul-li .order_icon:before {
+			content: "\a006";
+		}
+		
+		.bot-ul-li .mine_icon:before {
+			content: "\a008";
+		}
+	</style>
+</block>
+	<block name="content">
+	<!--订单-->
+	<ul class="ordernav">
+		<li class="check">
+			<span class="ggg icon_allorder"></span>
+			<span>全部</span>
+		</li>
+		<li>
+			<span class="ggg icon_dfukuan"></span>
+			<span>待付款</span>
+		</li>
+		<li>
+			<span class="ggg icon_dshiyong"></span>
+			<span>待使用</span>
+		</li>
+		<li>
+			<span class="ggg icon_dpingjia"></span>
+			<span>待评价</span>
+		</li>
+		<li>
+			<span class="ggg icon_shouhou"></span>
+			<span>退款/售后</span>
+		</li>
+	</ul>
+	
+	
+	<div class="" data-oo="item">
+		
+		<!--待使用-->
+		<div class="orderdiv">
+			<img src="__PUBLIC__/home/img/img1.jpg" class="shoplogo" />
+			<div class="shoptitle">
+				<div class="mui-ellipsis shopname">百乐川烤鱼店百乐川烤鱼店百乐川烤鱼店鱼店</div>
+				<small class="mui-icon mui-icon-arrowright"></small>
+				<span class="mui-pull-right dshiyong">待使用</span>
+			</div>
+			<div class="contdiv">
+				<p>
+					<span>烤清江鱼</span>
+					<span class="mui-pull-right">x1</span>
+				</p>
+				<p>
+					<span>烤清江鱼</span>
+					<span class="mui-pull-right">x1</span>
+				</p>
+				<p>
+					<span>烤清江鱼</span>
+					<span class="mui-pull-right">x1</span>
+				</p>
+				<div id="">
+					<span>...</span>
+					<span class="mui-pull-right">
+						共11件商品，实付￥128.3
+					</span>
+				</div>
+			</div>
+			<div class="bottomdiv">
+				<span class="hexiao">核销码</span>
+				<span>退款</span>
+			</div>
+		</div>
+		
+		<!--待付款-->
+		<if condition="$type eq 1">
+			<div class="orderdiv">
+				<img src="__PUBLIC__/home/img/img1.jpg" class="shoplogo" />
+				<div class="shoptitle">
+					<div class="mui-ellipsis shopname">百乐川烤鱼店百乐川烤鱼店百乐川烤鱼店鱼店</div>
+					<small class="mui-icon mui-icon-arrowright"></small>
+					<span class="mui-pull-right dshiyong">待付款</span>
+				</div>
+				<div class="contdiv">
+					<volist name="data" id="vo">
+						<p>
+							<span>{$vo.ProName}</span>
+							<span class="mui-pull-right">x{$vo.Num}</span>
+						</p>
+					</volist>
+					<div >
+						<span>...</span>
+						<span class="mui-pull-right">
+							共{$num}件商品，实付￥{$vo.total}
+						</span>
+					</div>
+				</div>
+				<div class="bottomdiv">
+					<small class="mui-icon mui-icon-trash mui-pull-left"></small>
+					<span>去付款</span>
+				</div>
+			</div>
+		</if>
+		<!--待评价-->
+		<div class="orderdiv">
+			<img src="__PUBLIC__/home/img/img1.jpg" class="shoplogo" />
+			<div class="shoptitle">
+				<div class="mui-ellipsis shopname">百乐川烤鱼店百乐川烤鱼店百乐川烤鱼店鱼店</div>
+				<small class="mui-icon mui-icon-arrowright"></small>
+				<span class="mui-pull-right dshiyong">待评价</span>
+			</div>
+			<div class="contdiv">
+				<p>
+					<span>烤清江鱼</span>
+					<span class="mui-pull-right">x1</span>
+				</p>
+				<p>
+					<span>烤清江鱼</span>
+					<span class="mui-pull-right">x1</span>
+				</p>
+				<p>
+					<span>烤清江鱼</span>
+					<span class="mui-pull-right">x1</span>
+				</p>
+				<div id="">
+					<span>...</span>
+					<span class="mui-pull-right">
+						共11件商品，实付￥128.3
+					</span>
+				</div>
+			</div>
+			<div class="bottomdiv qupingjia">
+				<small class="mui-icon mui-icon-trash mui-pull-left"></small>
+				<span >去评价</span>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+	</div>
+	
+	
+	
+	
+	<div class="" data-oo="item" hidden="">
+		<!---->
+		<if condition="$type eq 1">
+			<div class="orderdiv">
+				<img src="__PUBLIC__/home/img/img1.jpg" class="shoplogo" />
+				<div class="shoptitle">
+					<div class="mui-ellipsis shopname">百乐川烤鱼店百乐川烤鱼店百乐川烤鱼店鱼店</div>
+					<small class="mui-icon mui-icon-arrowright"></small>
+					<span class="mui-pull-right dshiyong">待付款</span>
+				</div>
+				<div class="contdiv">
+					<volist name="data" id="vo">
+						<p>
+							<span>{$vo.ProName}</span>
+							<span class="mui-pull-right">x{$vo.Num}</span>
+						</p>
+					</volist>
+					<div >
+						<span>...</span>
+						<span class="mui-pull-right">
+							共11件商品，实付￥{$vo.total}
+						</span>
+					</div>
+				</div>
+				<div class="bottomdiv">
+					<small class="mui-icon mui-icon-trash mui-pull-left"></small>
+					<span>去付款</span>
+				</div>
+			</div>
+		</if>
+		
+		
+	</div>
+	
+
+
+
+	
+</block>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+<block name="myjs">
+<script src="__PUBLIC__/home/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/home/js/mui.min.js"></script>
+<script src="__PUBLIC__/home/js/myorder.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	mui.init()
+	
+	$(".mui-bar a:first-child").on("tap",function(){
+		location.href="{:U('Index/index')}";
+	})
+	$(".mui-bar a:nth-child(2)").on("tap",function(){
+		location.href="{:U('Index/activity')}";
+	})
+	$(".mui-bar a:nth-child(3)").on("tap",function(){
+		location.href="{:U('Index/myorder')}";
+	})
+	$(".mui-bar a:last-child").on("tap",function(){
+		location.href="{:U('Index/mycenter')}";
+	})
+
+</script>
+<script type="text/javascript">
+		//核销码
+		$(".hexiao").on("tap",function(){
+			location.href="myserviceindex.html"
+		})
+		
+		
+	</script>
+</block>
+	

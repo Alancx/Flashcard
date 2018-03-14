@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><h1 style='text-align:center;font-size:100px;color:#FF0000;'>请绑定核销员后操作!</h1>

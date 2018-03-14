@@ -1,0 +1,50 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/revenue.css?v=1.2">
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/echarts.common.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/revenue.js"></script>
+<style type="text/css">
+  td,th{text-align: center;}
+</style>
+<div class="reheard">
+  <div id="scharts" class="reheard-1">
+  </div>
+  <div class="reheard-2">
+    <div>
+      <label>￥<?php echo $sdrevenue?sprintf("%.2f",$sdrevenue):'0.00' ?><br><span>七天收入</span></label>
+    </div>
+    <div>
+      <label>￥<?php echo $maxev?sprintf("%.2f",$maxev):'0.00' ?><br><span>单日最高</span></label>
+    </div>
+    <div>
+      <label>￥<?php echo $sdrevenue?sprintf("%.2f",$sdrevenue/7):'0.00' ?><br><span>日均</span></label>
+    </div>
+  </div>
+</div>
+<div class="part" style="display:none">
+  <label>店铺营收</label>
+</div>
+<div class="part-con">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>日期</th>
+      <th>销售额</th>
+      <th>订单数</th>
+    </tr>
+  </thead>
+  <tbody>
+  <foreach name='table_data' item='tb'>
+    <tr>
+      <td>{$tb.PayDate}</td>
+      <td>{$tb.money}</td>
+      <td>{$tb.count}</td>
+    </tr>
+  </foreach>
+  </tbody>
+</table>
+</div>
+<script type="text/javascript">
+var dataday={$dataday};
+var daymon={$daymon};
+var dayven_url="{:U('Record/seldayven')}"; //加载所选日期的营业
+</script>

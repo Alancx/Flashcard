@@ -1,0 +1,23 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usererecord.css">
+<script language="javascript" src="__PUBLIC__/theme2/js/YMDClass.js"></script>
+<script language="javascript" src="__PUBLIC__/theme2/JS/usererecord.js"></script>
+<script>
+    var urecord = "{:U('User/usererecord')}";//积分兑换查询
+</script>
+<div class="recordtitle">
+    <div>
+        <select id="recordyear" name="recordyear"></select>
+        <select id="recordmonth" name="recordmonth"></select>
+    </div>
+    <label>月账单</label>
+</div>
+<div style="height: 40px"></div>
+<div class="recordlist">
+  <foreach name="dhdata" item="i">
+    <div class="recordpart">
+  		<img class="recordimg" src="{:C('RESOURCE_URL')}{$i[ProLogoImg]}">
+  		<label class="recordcons">-{$i[Money]}积分<span class="recordcons-1">{$i[PayDate]}</span><br><span>{$i[ProTitle]}</span></label>
+  	</div>
+  </foreach>
+</div>

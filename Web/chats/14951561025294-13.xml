@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chats>
+  <chat>
+    <type>to</type>
+    <datetime>2017-06-23 15:25:31</datetime>
+    <content type="1">嗨</content>
+  </chat>
+<chat><type>to</type><datetime>2017-06-23 15:25:55</datetime><content type="1">嗨 </content></chat><chat><type>to</type><datetime>2017-06-23 16:20:23</datetime><content type="1">1</content></chat><chat><type>from</type><datetime>2017-06-23 16:20:29</datetime><content type="1">啦啦啦啦</content></chat><chat><type>to</type><datetime>2017-06-23 16:20:39</datetime><content type="1">💖</content></chat><chat><type>to</type><datetime>2017-07-03 15:57:54</datetime><content type="1">hello</content></chat><chat><type>to</type><datetime>2017-07-03 15:58:19</datetime><content type="1">hello</content></chat></chats>

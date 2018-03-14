@@ -1,0 +1,167 @@
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[ermbqlr5s7f0cc2kf5c1xk5szf2acl9f]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611120907473502]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[]]><\/openid><sign><![CDATA[22A805B88D6ABED504F0D113ED69F434]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 09:07:47
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-11-12 09:07:48
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[pe864x0iqypzsmhd2os8ghitbji8m18z]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611120907561691]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[B904C8835E7D2ABC99975C0BD2C38BD1]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 09:07:56
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[lCXdxjfD7X5Mahio]]></nonce_str>
+<sign><![CDATA[DA2F4644A77EFAA6D1168164E3C35037]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20161112090756079a98d7ee0107003227]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 09:07:56
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[kj3xzprhzo3vdqjedf41wmds2hb427cd]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611120908277042]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[CBB7BDD3E78CAACB44DC793BF74DC4E6]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 09:08:27
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[8WLsRAmTtm6lOnWt]]></nonce_str>
+<sign><![CDATA[266D908DAAA8CBA576EE8E11AB6D259C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201611120908273b1dd4f8850708901343]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 09:08:28
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[80zynh6icabymnlpo28jq2v8gebvhj2x]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611120908331254]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[D7AE51587FB8DFCECE2875547DE542ED]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 09:08:33
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[BzZlKeddHUuXVxXO]]></nonce_str>
+<sign><![CDATA[6DCD405D57C9F6F96F9018A01D759CFF]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201611120908332d629f40e90857407476]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 09:08:33
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[ue7d5zlmwpntv94hzxxgdvjn8k3meljk]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611120910152482]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[5E7A9EED6EFB4BC640A0450B703A652E]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 09:10:15
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[o1WGfNTFg8Gcys5j]]></nonce_str>
+<sign><![CDATA[5CA2C30F862A3955696B600325F97126]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20161112091016176b152e9d0849891200]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 09:10:16
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[x0515j7od03nl7uu4fba7o3pluxzy5kq]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611120910332181]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[180.153.81.212]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[]]><\/openid><sign><![CDATA[528722A7EF1E0DC625C459879A048903]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 09:10:33
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-11-12 09:10:35
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[y1ht1q3kb7m48mhj0fq6c7nhknfhhimm]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611120911002791]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[B8335C69F7FF7EE2E95D15B62FF30F1B]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 09:11:00
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[9Rx6CQIxhxmGCYhD]]></nonce_str>
+<sign><![CDATA[48741B9FAFC04ADAA84ACA4F4D2A8B6D]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20161112091101186b94b0090028511361]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 09:11:01
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[3l80f8ti7ntevqwn3t7x3u2raavgb46v]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121020551709]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[]]><\/openid><sign><![CDATA[30419036C52CA58FDB48F691D61191C3]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:20:55
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-11-12 10:20:56
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[67w7biiomttuoz0cla00tla20vn5rv8x]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121021010001]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[3759CED85A3392C41DB531D16D338B8C]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:21:01
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[uS9mLkolzzyNQna2]]></nonce_str>
+<sign><![CDATA[CB10B4CC5202F84D9C8293007A748776]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20161112102101783af7df1b0299341653]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:21:01
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[zrk61zox0jvjak7i2wtpg1t3eyicr0h8]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121021266060]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[C54B3EE3B47F40F6B4458D98C9C20FBE]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:21:26
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[W5gd7y4EwHCVarps]]></nonce_str>
+<sign><![CDATA[D6405D68A5210DF394E9A8D83AB14A50]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20161112102127d190b7bea80908322792]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:21:27
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[pwdb8m06v6841yqptgp8cnncxphmp7uj]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121021565779]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[FCBA0164B4867F89990250DF77631851]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:21:56
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[muSLoHWqfMVjbdBr]]></nonce_str>
+<sign><![CDATA[5A731940F7C663C36ECAD0137F54696B]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201611121021578051a141300517403937]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:21:57
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[yx4xb68zfprka93j7u3qfp0yo4k8jb28]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121022130772]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[ECB989FAB174DAD39E57927598A84F38]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:22:13
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[AzKB5UF28Wx1F3rW]]></nonce_str>
+<sign><![CDATA[BA8EB5D1E767278A022E7F9A6FE79C9D]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20161112102213c22a83342d0594633993]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:22:14
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[4nhw5vg2uzxsyaoqvpwjulfh399j31ct]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121022399642]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[101.226.102.78]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[]]><\/openid><sign><![CDATA[D01C7617BEAD89ABC4759FA2A3F82372]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:22:39
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-11-12 10:22:40
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[25xl7usy3t6tg7ruzfwmie8vkebiaoxj]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121023016843]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[220.114.62.155]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]><\/openid><sign><![CDATA[889829D4FCD205DBFE24885D430D1497]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:23:01
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[Lm9JWBaluddccCL5]]></nonce_str>
+<sign><![CDATA[4AE06B1CFBA30BCC1B99886FA741828B]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016111210230266b0e91b0c0513034720]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:23:02
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[q2p4mpfv62cgvnja7cu5yyice456pxi4]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121045213107]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[61.151.226.202]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[]]><\/openid><sign><![CDATA[5D43DE6BBC51B212DB02E6FD5F5D9081]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:45:21
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-11-12 10:45:22
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[ecdu1mkp2gs85gh8cscepcb81nkstk4h]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121045232931]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[58.19.85.185]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[]]><\/openid><sign><![CDATA[49E0CAA8225C07A3FC65F4E136DB01F4]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:45:23
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-11-12 10:45:24
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[5w57l2cmq6cyv9n2fw1ot9d5xkd3ikkq]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121045398934]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[58.19.85.185]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wR51IvIu5TjnmeQ_p7bs1tg]]><\/openid><sign><![CDATA[06FBEA59498C7E8329F8B07BA84CBC93]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:45:39
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[ubZwRylJd3LmUSYa]]></nonce_str>
+<sign><![CDATA[E57D38FF0B978BF47AD1398436BD77F8]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201611121045392647b9d7f90654625123]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:45:39
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[zrefz05ywvlvjatd2vl602g3b2tz5lkc]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121045403784]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[101.226.125.122]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wR51IvIu5TjnmeQ_p7bs1tg]]><\/openid><sign><![CDATA[648ADD05A0937E5074243A6524787970]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:45:40
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[fJdzcGdnNiFFLsjB]]></nonce_str>
+<sign><![CDATA[380E4CA8DF6860AA41F285468DAC62B5]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016111210454045dd4881350159394086]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:45:40
+操作定位:Index/paying::::"<xml><notify_url><![CDATA[http:\/\/home.58ate.com\/Smodel\/Base\/Notify.html]]><\/notify_url><appid><![CDATA[wx3dd28eb27ded279b]]><\/appid><mch_id>1394550102<\/mch_id><nonce_str><![CDATA[b0i5ooy4b7hh8sgqxavno5njrqz1v2km]]><\/nonce_str><body><![CDATA[\u8d2d\u4e70\u5546\u54c1]]><\/body><out_trade_no><![CDATA[E201611121053103014]]><\/out_trade_no><total_fee>1<\/total_fee><spbill_create_ip><![CDATA[101.226.125.122]]><\/spbill_create_ip><trade_type><![CDATA[JSAPI]]><\/trade_type><openid><![CDATA[oFSe-wR51IvIu5TjnmeQ_p7bs1tg]]><\/openid><sign><![CDATA[18298CC2B6668F989B81953EDA076787]]><\/sign><\/xml>"::::::操作日期:::::::2016-11-12 10:53:10
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[fuYO1hTyvz9og8Fm]]></nonce_str>
+<sign><![CDATA[783CB00D30ECC242DC2EC31C6AA40943]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20161112105311813a64ad570255532023]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-11-12 10:53:11

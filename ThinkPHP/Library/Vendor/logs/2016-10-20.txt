@@ -1,0 +1,8 @@
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-10-20 16:05:09
+操作定位:Cashier/wecode::::通信失败::::::操作日期:::::::2016-10-20 16:05:09
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-10-20 16:05:42
+操作定位:Cashier/wecode::::通信失败::::::操作日期:::::::2016-10-20 16:05:42

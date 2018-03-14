@@ -1,0 +1,149 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<form class="form-inline">
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputAmount"></label>
+		    <div class="input-group">
+		      <div class="input-group-addon">当前可提金额￥：<span id='Money' data-money='{$Money}'>{$Money}</span></div>
+		      <input type="text" class="form-control" id="Gmoney" <if condition="$Money eq 0">readonly='readyonly'</if> placeholder="请输入提现金额">
+		      <!-- <div class="input-group-addon"></div> -->
+		    </div>
+		  </div>
+		  <button type="button" class="btn btn-primary" id="getmoney">提交申请</button>
+		</form>
+		<form class="form-inline" method="post" id="search">
+		<br>
+		<h4>提现记录查询</h4>
+		  <div class="form-group">
+		    <label class="sr-only"></label>
+		    <div class="input-group">
+		      <div class="input-group-addon">选择状态</div>
+		      <select name="Status" id="Status" class="form-control">
+		      	<option value="">请选择</option>
+		      	<option value="0">待处理</option>
+		      	<option value="1">已处理</option>
+		      </select>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only"></label>
+		    <div class="input-group">
+		      <div class="input-group-addon">开始时间</div>
+		      <input type="text" name="StartDate"  class="form-control" id="StartDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only"></label>
+		    <div class="input-group">
+		      <div class="input-group-addon">结束时间</div>
+		      <input type="text" name="EndDate"  class="form-control" id="EndDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})">
+		    </div>
+		  </div>
+		  <button type="submit" class="btn btn-primary">查询</button>
+		</form>
+	</div>
+	<div class="col-sm-12">
+		<table class="table table-hover table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>申请时间</th>
+					<th>金额</th>
+					<th>当前状态</th>
+					<th>账户信息</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="content">
+				<foreach name="Detail" item="emp" >
+					<tr>
+						<td>{$emp.CreateDate}</td>
+						<td>{$emp.Money}</td>
+						<td>{$emp.Status}</td>
+						<td>{$emp.GetName}<br>{$emp.tel}<br>{$emp.IdName}<br>{$emp.IdCard}</td>
+						<td><if condition="$emp['Astu'] eq '0'"><button class="btn btn-default btn-xs cancel" data-id="{$emp.ID}">取消申请</button><else/>已完成</if></td>
+				</tr>
+			</foreach>
+		</tbody>
+	</table>
+	<div style="text-align:right;">{$page}</div>
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#search').submit(function(){
+		var StartDate=$('#StartDate').val();
+		var EndDate=$('EndDate').val();
+		if (true) {};
+	})
+	$('#Gmoney').keyup(function(){
+		var mo=$(this).val();
+		var allmoney=$('#Money').attr('data-money');
+		if (parseFloat(allmoney)<parseFloat(mo)) {
+			art.dialog.tips('非法金额');
+			$('#Gmoney').val(allmoney);
+		};
+	})
+	$(document).on("click",".cancel",function(){
+		var _this=$(this);
+		art.dialog.confirm('确定要取消此申请吗？申请记录将删除!!!',function(){
+			_this.addClass('disabled').html('处理中...');
+			$.ajax({
+				url:"{:U('Stores/cancelMoney')}",
+				type:"post",
+				data:"ID="+_this.attr('data-id'),
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						_this.parent().parent().remove();
+						art.dialog.tips('处理成功');
+						$('#Money').attr('data-money',msg.Money).html(msg.Money);
+					}else{
+						art.dialog.tips(msg.info);
+						_this.removeClass('disabled').html('取消申请');
+					}
+				}
+			})
+		})
+	})
+	$('#getmoney').click(function(){
+		var _this=$(this);
+		var money=$('#Gmoney').val();
+		var allmoney=$('#Money').attr('data-money');
+		if (parseFloat(money)>parseFloat(allmoney)) {
+			art.dialog.tips('非法金额');
+			return false;
+		}else if (!money) {
+			art.dialog.tips('请输入提现金额');
+			return false;
+		}else{
+			_this.addClass('disabled').html('提交中...');
+			$.ajax({
+				url:"{:U('Stores/getmoney')}",
+				type:"post",
+				data:"money="+money,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						var nowmoney=parseFloat(allmoney)-parseFloat(money);
+						$('#Money').attr('data-money',nowmoney).html(nowmoney);
+						$('#Gmoney').val('');
+						var data=msg.data;
+						var tphtml="<tr><td>"+data.CreateDate+"</td><td>"+data.Money+"</td><td>"+data.Status+"</td><td>"+data.GetName+"<br>"+data.tel+"<br>"+data.BankName+"<br>"+data.IdCard+"</td><td><button class='btn btn-xs btn-default cancel' data-id='"+data.ID+"'>取消申请</button></td></tr>";
+						$('#content').prepend(tphtml);
+						_this.removeClass('disabled').html('提交申请');
+						art.dialog.tips('提交成功');
+					}else{
+						art.dialog.tips(msg.info);
+						_this.removeClass('disabled').html('提交申请');
+					}
+				}
+			})
+		}
+	})
+})
+</script>
+<include file="Common:footer" />

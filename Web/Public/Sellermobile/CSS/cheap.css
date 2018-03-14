@@ -1,0 +1,74 @@
+body{
+	padding:0px;
+	margin:0px;
+	background:rgb(241,240,246);
+}
+input,select,option,textarea{
+	outline: none;
+}
+.top{
+	/*width:100%;*/
+	padding-left:10px;
+	height:50px;
+	line-height:50px;
+	font-size:24px;
+	background:#FFFFFF;
+}
+.head{
+	margin-top:8px;
+	padding-left:10px;
+	background:#FFFFFF;
+}
+.shang{
+	border-bottom:1px rgb(161,161,161) solid;
+}
+.xia{
+	border-bottom:1px rgb(161,161,161) solid;
+}
+.xia label{
+	width:64px;
+	height:40px;
+	line-height:40px;
+	color:rgb(161,161,161);
+}
+.shang label{
+	width:64px;
+	height:40px;
+	line-height:40px;
+	color:rgb(161,161,161);
+}
+.head select{
+	width:calc(100% - 74px);
+	border:0px;
+	height:40px;
+	font-size:16px;
+}
+.zhong{
+	padding-left:20px;
+	background: #FFFFFF;
+}
+.zhong label{
+	/*float: left;*/
+	width:64px;
+	height:40px;
+	line-height:40px;
+	color:rgb(161,161,161);
+}
+.zhong input{
+	width:calc(100% - 84px);
+	height:40px;
+	/*line-height:40px;*/
+	border:0px;
+	font-size:18px;
+}
+.bottom{
+	width:100%;
+	height:50px;
+	line-height:50px;
+	background: red;
+	color:#FFFFFF;
+	font-size:18px;
+	position: fixed;
+	bottom:0px;
+	text-align: center;
+}

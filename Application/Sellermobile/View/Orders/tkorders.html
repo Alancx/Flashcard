@@ -1,0 +1,57 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/tkorders.css?v=1.1">
+
+<empty name="tkorders">
+  <div class="nodata">
+    <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+  </div>
+  <else />
+  <div class="ordercontents">
+    <foreach name="tkorders" item="info">
+      <div class="orderinfo order_{$info['OrderId']}">
+        <label class="orderid">{$info['MemberName']}<span>待退款</span><br><span>{$info['OrderId']}</span><span>{$info['oDate']}</span><br>
+        <notempty name="info.ShortOid">
+          <span>就餐码:{$info['ShortOid']};</span>
+        </notempty>
+        <notempty name="info.TableId">
+          <span>桌号:{$info['TableId']};</span>
+        </notempty>
+        </label>
+        <div class="prolist">
+          <foreach name="info['prolist']" item="proinfo">
+            <div class="proinfo">
+              <img src="{$proinfo['ProLogoImg']}">
+              <label class="proname">{$proinfo['ProName']}</label>
+              <label class="proattr">{$proinfo['Spec']}</label>
+              <label class="proprice"><span>￥</span><?php echo $proinfo['Price']?sprintf("%.2f",$proinfo['Price']):'0.00' ?><span>×{$proinfo['Count']}</span></label>
+            </div>
+          </foreach>
+        </div>
+        <label class="totalprice">共{$info['Count']}件,合计:<span>￥<?php echo $info['Price']?sprintf("%.2f",$info['Price']):'0.00' ?></span></label>
+        <div class="btn_group">
+          <label class="tkorder" data-oid="{$info['OrderId']}">同意退款</label>
+          <label class="tkjjorder" data-oid="{$info['OrderId']}">拒接退款</label>
+        </div>
+      </div>
+    </foreach>
+  </div>
+</empty>
+<div class="vercouver">
+  <div>
+    <label>填写验证码</label>
+    <div class="inputver">
+      <input class="vercode" type="number" name="" value="" placeholder="填写验证码">
+      <img class="verimg" src="" alt="">
+    </div>
+    <div class="btn_ver">
+      <label class="qxver">取消</label>
+      <label class="suerver" data-oid="">确定</label>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var verify_url="{:U('Orders/getverify')}";
+  var tk_url="{:U('Orders/settkorder')}";
+  var index_url="{:U('Index/Index')}";
+</script>
+<script src="__PUBLIC__/Sellermobile/js/tkorders.js?v=1.3" charset="utf-8"></script>

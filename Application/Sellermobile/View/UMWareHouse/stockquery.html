@@ -1,0 +1,38 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/prolist.css?v=1.0">
+<style>
+.nodata{
+  display: block;
+  padding: 20% 15% 0px 15%;
+}
+.nodata>img{
+  width: 100%;
+}
+.pcount{
+  position: absolute;
+  right: 0px;
+  bottom: 7px;
+  width: 160px;
+  font-size: 12px;
+  color: #2262DA;
+}
+</style>
+<empty name="plist">
+  <div class="nodata">
+    <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+  </div>
+  <else />
+  <foreach name="plist" item="item">
+    <div class="proinfo P_{$item['ProId']}" data-pid="{$item['ProId']}">
+      <span class="selmag" data-type="1" onclick="selmagpro(this)">
+      </span>
+      <img src="{$item['ProLogoImg']}" alt="">
+      <div>
+        <label class="proname">{$item['ProName']}</label>
+        <label class="protitle">{$item['ProTitle']}</label>
+        <label class="proprice">￥<?php echo $item['Price']?sprintf("%.2f",$item['Price']):'0.00' ?></label>
+        <label class="pcount">当前库存: <?php echo $item['PCount']?sprintf("%.0f",$item['PCount']):'0' ?></label>
+      </div>
+    </div>
+  </foreach>
+</empty>

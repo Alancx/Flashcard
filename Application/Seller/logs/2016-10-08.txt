@@ -1,0 +1,2 @@
+操作定位:Stores/index::::sres= && ires=1002 && ores=UPDATE RS_Order SET Mercut=2 WHERE stoken='Dpytk47261177930' AND Prostoken='kfkos46967638587' AND Status in(4,10)::::::操作日期:::::::2016-10-08 11:41:34
+操作定位:Stores/index::::sres=1 && ires=1003 && ores=UPDATE RS_Order SET Mercut=2 WHERE stoken='Dpytk47261177930' AND Prostoken='kfkos46967638587' AND Status in(4,10)::::::操作日期:::::::2016-10-08 11:43:28

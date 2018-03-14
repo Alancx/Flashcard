@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chats>
+  <chat>
+    <type>to</type>
+    <datetime>2017-05-20 10:34:25</datetime>
+    <content type="1">你好</content>
+  </chat>
+<chat><type>from</type><datetime>2017-05-20 10:34:30</datetime><content type="1">你好</content></chat><chat><type>from</type><datetime>2017-05-20 10:34:34</datetime><content type="1">在？</content></chat><chat><type>to</type><datetime>2017-05-20 10:34:42</datetime><content type="1">嗯嗯嗯嗯</content></chat><chat><type>to</type><datetime>2017-06-10 17:28:35</datetime><content type="1">你好</content></chat></chats>

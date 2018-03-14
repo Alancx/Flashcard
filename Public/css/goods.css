@@ -1,0 +1,552 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+body,
+html {
+	font-size: 14px;
+}
+
+.pic {
+	width: 100%;
+	height: 270px;
+}
+
+.pic img {
+	width: 100%;
+	height: 100%;
+}
+
+.head {
+	/*width:;*/
+	/*margin-top:10px;*/
+	/*border: 1px red solid;*/
+	background: #FFFFFF;
+}
+
+.head-name {
+	width: 100%;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+.number {
+	font-size: 12px;
+	color: rgb(153, 153, 153);
+}
+
+.li {
+	display: inline-block;
+	border: 1px rgb(240, 116, 126) solid;
+	width: 40px;
+	height: 20px;
+	font-size: 10px;
+	color: rgb(240, 116, 126);
+	margin-left: 15px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 20px;
+}
+
+.head-bottom {
+	width: 100%;
+	height: 50px;
+}
+
+.price {
+	/*border:1px red solid;*/
+	width: 140px;
+	height: 40px;
+	float: left;
+	padding-left: 10px;
+	line-height: 40px;
+}
+
+.price span {
+	font-size: 24px;
+	color: rgb(252, 78, 69);
+}
+
+.price del {
+	font-size: 16px;
+	color: rgb(153, 153, 153);
+}
+
+.gouwu {
+	/*border:1px red solid;*/
+	width: 100px;
+	height: 30px;
+	float: right;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 40px;
+	background: #ff8400;
+	margin-right: 10px;
+	color: #fff;
+}
+
+.gouwu span {}
+
+.xian {
+	margin-top: 5px;
+	width: 100%;
+	height: 40px;
+	background: #FFFFFF;
+	line-height: 40px;
+}
+
+.xian-lv {
+	border: 1px #2AC845 solid;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #2AC845;
+	float: left;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+.xian span {
+	padding-left: 10px;
+	font-size: 14px;
+	display: block;
+	width: calc(100%-60px);
+	color: #000000;
+}
+
+.liang {
+	margin-top: 1px;
+	width: 100%;
+	height: 40px;
+	background: #FFFFFF;
+	line-height: 40px;
+}
+
+.liang-lv {
+	border: 1px rgb(252, 172, 2) solid;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: rgb(252, 172, 2);
+	float: left;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+
+.liang span {
+	padding-left: 10px;
+	font-size: 14px;
+	display: block;
+	width: calc(100%-40px);
+	color: #000000;
+}
+
+.logo {
+	margin-top: 5px;
+	width: 100%;
+	height: 60px;
+	background: #FFFFFF;
+}
+
+.logo-img {
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin-left: 10px;
+	margin-top: 5px;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.logo-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.logo-zhong {
+	width: 30%;
+	height: 60px;
+	float: left;
+	margin-left: 10px;
+	line-height: 60px;
+}
+
+.follow {
+	width: 30%;
+	height: 60px;
+	float: right;
+	line-height: 60px;
+	text-align: right;
+	margin-right: 10px;
+	color: rgb(172, 172, 172);
+}
+
+.pingjia {
+	background: #FFFFFF;
+	margin-top: 5px;
+}
+
+.evaluate {
+	/*border:1px red solid;*/
+	width: 100%;
+	height: 50px;
+	clear: both;
+	border-bottom: 1px rgb(244, 244, 244) solid;
+}
+
+.evaluate-text {
+	/*border:1px red solid;*/
+	height: 50px;
+	width: 60%;
+	line-height: 50px;
+	float: left;
+	padding-left: 10px;
+}
+
+.evaluate-text span {}
+
+.evaluate-text span span {
+	color: red;
+}
+
+.evaluate-number {
+	/*border:1px red solid ;*/
+	width: 40%;
+	height: 50px;
+	float: right;
+	text-align: right;
+	line-height: 50px;
+	padding-right: 10px;
+	color: rgb(172, 172, 172);
+}
+
+.pinglun-div {
+	margin-top: 15px;
+}
+
+.pinglun-top {
+	width: 100%;
+	overflow: hidden;
+}
+
+.pinglun-logo {
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	margin-left: 15px;
+	float: left;
+}
+
+.pinglun-logo img {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+}
+
+.pinglun-name {
+	width: calc(100%-50px);
+	height: 50px;
+	margin-left: 10px;
+	float: left;
+}
+
+.dian_icon {
+	font-size: 14px;
+}
+
+.pinglun-name img {
+	width: 13px;
+	height: 13px;
+}
+
+.pinglun-tiem {
+	width: calc(100%-(100%-50px));
+	height: 50px;
+	float: right;
+	line-height: 70px;
+	margin-right: 25px;
+}
+
+.pinglun-content {
+	width: 86%;
+	margin-left: 35px;
+	margin-top: 10px;
+}
+
+.pinglun-ul {
+	display: block;
+	margin-left: 25px;
+	margin-top: 10px;
+	/*margin-bottom:10px;*/
+	/*padding-bottom:10px;*/
+}
+
+.pinglun-ul li {
+	width: calc(86%/4);
+	margin-left: 5px;
+	height: 60px;
+	float: left;
+}
+
+.pinglun-ul li img {
+	width: 100%;
+	height: 100%;
+}
+
+.bottom {
+	width: 100%;
+	height: 50px;
+	overflow: visible;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	z-index: 9 !important;
+}
+
+.bottom-left {
+	width: 70%;
+	height: 50px;
+	background: #EFEFF4;
+	text-align: right;
+	line-height: 50px;
+	float: left;
+}
+
+.bottom-left-top {
+	width: 100px;
+	height: 35px;
+	background: #ff8400;
+	line-height: 35px;
+	text-align: center;
+	border-radius: 30px;
+	float: left;
+	margin: -10px 0px 0px 30px;
+	position: relative;
+	z-index: 11;
+	color: #FFFFFF;
+}
+
+.bottom-left span {
+	color: red;
+}
+
+.bottom-right {
+	width: 30%;
+	height: 50px;
+	background: #ff8400;
+	color: #FFFFFF;
+	line-height: 50px;
+	text-align: center;
+	font-size: 16px;
+	float: right;
+}
+
+.yuan {
+	border: 1px #FFFFFF solid;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background: rgb(244, 244, 244);
+	margin-top: 2px;
+	margin-right: 5px;
+	float: right;
+	background: rgb(255, 133, 0);
+	line-height: 30px;
+}
+
+
+/*评价*/
+
+.pjdiv {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	margin-bottom: 50px;
+}
+
+.pjdiv>div {
+	margin-bottom: 50px;
+}
+
+.pjitem {
+	background: #fff;
+	overflow: hidden;
+}
+
+.pjitem li {
+	float: left;
+}
+
+.pjitem li:first-child {
+	width: 60px;
+	padding: 10px;
+}
+
+.pjitem li:first-child img {
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+}
+
+.pjitem li:last-child {
+	width: calc(100% - 60px);
+	padding: 10px 10px 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.pjitem .ggg {
+	font-size: 14px;
+	color: #FF8400;
+}
+
+.idname {
+	height: 40px;
+	overflow: hidden;
+	margin-bottom: 8px;
+}
+
+.idimg {
+	margin: 8px 0;
+}
+
+.idimg img {
+	width: 60px;
+	height: 60px;
+	display: block;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.qw {
+	display: none;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
+	bottom: 0px;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	z-index: 8;
+	overflow: hidden;
+}
+
+.showselprolist {
+	display: none;
+	position: absolute;
+	height: 60%;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	background-color: #FFFFFF;
+	z-index: 8;
+}
+
+.showselprolist ul {
+	overflow: hidden;
+}
+
+.showselprolist ul li {
+	padding: 10px;
+	overflow: hidden;
+	border-bottom: 1px solid #EFEFF4;
+}
+
+.selprotilte {
+	display: block;
+	height: 41px;
+	width: 100%;
+	border-bottom: solid 1px #EEEEEE;
+}
+
+.selprotilte>span {
+	float: right;
+	margin: 0px 10px 0px 0px;
+	line-height: 40px;
+	height: 40px;
+	color: #666666;
+}
+
+.content-div-span {
+	text-overflow: ellipsis;
+	color: red;
+	font-size: 16px;
+}
+
+.content-div-span small {
+	color: #999;
+}
+
+.content-img {
+	width: 60px;
+	height: 60px;
+	float: left;
+	overflow: hidden;
+	margin-right: 4px;
+	display: block;
+}
+
+.content-img img {
+	height: 100%;
+}
+
+.content-span {
+	width: calc(100% - 64px);
+	height: 60px;
+	float: left;
+	overflow: hidden;
+	font-size: 12px;
+	position: relative;
+}
+
+.content-span span {
+	width: 100%;
+}
+
+.le {
+	width: 50%;
+	float: left;
+}
+
+.mui-numbox {
+	float: right;
+	width: 50% !important;
+	border: none !important;
+	background: none !important;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 30px !important;
+}
+
+.mui-numbox .mui-btn {
+	width: 20px !important;
+	height: 20px !important;
+}
+
+.mui-btn-numbox-minus,
+.mui-btn-numbox-plus {
+	border-radius: 100px !important;
+	background: none !important;
+	border: 1px solid #999 !important;
+	width: 25px !important;
+	height: 25px !important;
+}
+
+.mui-btn-numbox-plus {
+	background: #ff8400 !important;
+	border: none !important;
+	color: #fff !important;
+}
+
+.mui-numbox .mui-input-numbox {
+	border: none !important;
+	height: 20px;
+}
+
+.mui-btn-numbox-minus,
+.mui-numbox .mui-input-numbox {
+	display: none;
+}

@@ -1,0 +1,154 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/userinfo2.css?v=1.3">
+<div class="usertitle">
+  <a href="{:U('User/set')}">
+    <div class="userarrow">
+    </div>
+  </a>
+  <if condition="$userInfo['SignNewtime'] eq date('Y-m-d',time())">
+    <label class="userqsan userhasqd">已签到</label>
+    <else/>
+    <label class="userqsan" onclick="EverydaySign(this)">签 到</label>
+  </if>
+  <if condition="$userInfo['HeadImgUrl'] eq ''">
+    <img class="usertx" src="__PUBLIC__/theme2/Images/touxiang.png">
+    <elseif condition="substr($userInfo['HeadImgUrl'],0,4) eq 'http'" />
+      <img class="usertx" src="{$userInfo['HeadImgUrl']}">
+    <else/>
+    <img class="usertx" src="{:C('RESOURCE_URL')}{$userInfo['HeadImgUrl']}">
+  </if>
+  <label>{$userInfo['MemberName']}</label>
+</div>
+<div class="userport">
+  <label class="uport" RPath="{:U('User/usermyoders',array('type'=>'1'))}">
+    <img src="__PUBLIC__/theme2/Images/dingdan2.png">订单<span></span>
+  </label>
+  <!-- <label class="uport" RPath="{:U('User/useraccount')}">
+    <img src="__PUBLIC__/theme2/Images/qianbao2.png">钱包<span></span>
+  </label> -->
+  <label class="uport" RPath="{:U('User/mycoupons')}">
+    <img src="__PUBLIC__/theme2/Images/kaquan2.png">优惠券<span></span>
+  </label>
+  <label class="uport" RPath="{:U('GroupBuy/Group')}">
+    <img src="__PUBLIC__/theme2/Images/huiyuan2.png">团购<span></span>
+  </label>
+  <label class="uport" RPath="{:U('User/userintegral')}">
+    <img src="__PUBLIC__/theme2/Images/jifen2.png">积分<span></span>
+  </label>
+  <label class="uport" RPath="{:U('User/usercollection')}">
+    <img src="__PUBLIC__/theme2/Images/shoucang2.png">收藏<span></span>
+  </label>
+</div>
+<!-- <div class="userport">
+  <label class="uport" RPath="{:U('User/usermember')}">
+    <img src="__PUBLIC__/theme2/Images/huiyuan2.png">会员<span></span>
+  </label>
+</div> -->
+<div class="userport">
+  <?php if (($mshop=='')||($mshop=='0')||($mshop=='2')): ?>
+    <label class="uport" RPath="{:U('User/userapplys')}">
+      <img src="__PUBLIC__/theme2/Images/kaidian2.png">我要开店<span></span>
+    </label>
+  <?php else: ?>
+    <label class="uport" RPath="{:U('User/usershops')}">
+      <img src="__PUBLIC__/theme2/Images/kaidian2.png">我的店铺<span></span>
+    </label>
+  <?php endif; ?>
+</div>
+
+<!-- <div class="userexit">
+    <label class="userexitan">退出当前账户</label>
+</div>
+ -->
+<div class="cusercover">
+  <div class="cuserlist">
+    <label class="seltitle">请选择客服</label>
+    <div class="selkf">
+      <foreach name='service' item='kf'>
+          <label class="selkfli" onclick="selectkf(this)" data-userid="{$kf.id}">{$kf.userName}</label>
+      </foreach>
+    </div>
+    <div class="selbtn">
+        <div>
+            <label id="cancelkf">取消</label>
+        </div>
+        <div>
+            <label id="surekf">确定</label>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function EverydaySign(obj) {
+  tips('waiting', '正在签到...', 15000, 'weui_icon_notice');
+  $.ajax({
+    url: "{:U('User/MemberSign')}",
+    type: "post",
+    dataType: "json",
+    data: {"type": "sign"},
+    complete: function (e) {
+      hidetips('waiting');
+    },
+    success: function (data) {
+      if (data.status == 0) {
+        tips('notice', '签到成功!', 1500, 'weui_icon_toast');
+        // $(obj).html('<label class="userqsan userhasqd">已签到</label>');
+        $(obj).addClass('userhasqd');
+        $(obj).text('已签到');
+      }
+      else if (data.status == 1) {
+        tips('notice', '商家没有开通签到功能!', 1500, 'weui_icon_notice');
+      }
+      else if (data.status == 2) {
+        tips('notice', '今天已签到!', 1500, 'weui_icon_notice');
+      }
+      else {
+        tips('notice', '签到失败!', 1500, 'weui_icon_notice');
+      }
+    },
+    error: function (e) {
+      tips('notice', '签到失败!', 1500, 'weui_icon_notice');
+    }
+  });
+}
+$(document).ready(function(){
+  $('.userexitan').click(function(){
+    tips('confirm','确定要退出吗？');
+    $('#enter').attr('data-s','{:U('Public/lout')}');
+  })
+  $('#enter').click(function(){
+    window.location.href=$(this).attr('data-s');
+  })
+  $('#esc').click(function(){$('#confirm').hide()});
+  $('.cuser').css('display','block');
+  $('.flomenu').css('height','auto');
+  $('.cuser').click(function(){
+    if($('.cusercover').css('display')=='none'){
+      $('.cusercover').css('display','block');
+      $("body").css("overflow", "hidden");
+      $('.selkf').css('height',$('.cuserlist').height()-99+'px');
+    }
+  })
+  $('#cancelkf').click(function(){
+    $('.cusercover').css('display','none');
+    $('body').css('overflow', 'auto');
+  })
+  $('#surekf').click(function(){
+    if($('.kfactive').length<=0){
+      tips('notice', '选择客服!', 1500, 'weui_icon_notice');
+    } else {
+      var userid=$('.kfactive').attr('data-userid');
+      var cservice_url="{:U('User/cservice',array('userid'=>'SELUSERID'))}";
+      cservice_url=cservice_url.replace(/SELUSERID/g,userid);
+      cservice_url='http://'+window.location.host+cservice_url;
+      window.location.href=cservice_url;
+    }
+  })
+
+})
+function selectkf(label) {
+    $(".selkfli").removeClass("kfactive");
+    $(label).addClass("kfactive");
+}
+</script>

@@ -1,0 +1,5 @@
+操作定位:Public/godata::::{"account":"zhuguiping","password":"123","timestamp":"150060890ato_15e09c24ceece220fa74c81ac6018e13","sign":"e0a2717b6e61234773b9f7906fd4de18","type":"s"}::::::操作日期:::::::2017-07-21 11:48:07
+操作定位:Public/godata::::{"account":"zhuguiping","password":"123","timestamp":"150060890","sign":"2eabc3bbc79a7d3f57617c0bdc33efbf","type":"f"}::::::操作日期:::::::2017-07-21 11:48:14
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-07-21 11:48:17
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-07-21 11:48:20
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-07-21 11:48:21

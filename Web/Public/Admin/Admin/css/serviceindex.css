@@ -1,0 +1,227 @@
+.chat{
+  display: block;
+  position: relative;
+  height: 100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e7eaec;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.chatcontent{
+  float: left;
+  width: 70%;
+}
+.chatpart{
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px 10px 10px;
+  margin: 0px 0px 0px 0px;
+}
+.memlist{
+  float: left;
+  width: 30%;
+  border-width: 0px;
+  padding: 0px 10px 0px 10px;
+}
+.memberlist{
+  width: 100%;
+  height:100%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e7eaec;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.chattop{
+  width: 100%;
+  margin: 0px;
+  height: 35px;
+  line-height: 34px;
+  text-align: center;
+  font-weight: 400;
+  color: #333333;
+  font-size: 14px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #e7eaec;
+}
+.contents{
+  display: block;
+  overflow: auto;
+  height: 418px;
+}
+.inputcontent{
+  width: 100%;
+  height: 45px;
+  padding: 5px 5px 5px 5px;
+  background-color: #ffffff;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #e7eaec;
+}
+.editchat {
+  float: left;
+  width: 100%;
+  font-size: 14px;
+  padding: 0px 10px 0px 10px;
+  color: #333333;
+  height: 34px;
+  border-style: none;
+  border-radius: 4px;
+  outline: none;
+  background-color: #eeeeee;
+}
+.btnsend {
+  width: 50px;
+  height: 34px;
+  color: #ffffff;
+  background-color: #4CAF50;
+  font-size: 12px;
+  margin: 0px 0px 0px 10px;
+  border-style: none;
+  border-radius: 4px;
+  outline: none;
+}
+.chatto, .chatfrom {
+    display: block;
+    position: relative;
+    margin: 20px 15px 20px 15px;
+    overflow: hidden;
+}
+.chatto>img {
+    float: right;
+    height: 40px;
+    width: 40px;
+}
+.chatto>label {
+    float: right;
+    margin: 0px 15px 0px 0px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    background-color: #a0e75a;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #6ab70e;
+    border-radius: 4px;
+}
+.chattoimg{
+   float: right;
+   margin: 0px 15px 0px 0px;
+   height: auto!important;
+   border-style: solid;
+   border-width: 1px;
+   border-color: #6ab70e;
+   border-radius: 4px;
+}
+.chatto>span {
+    position: absolute;
+    top: 10px;
+    right: 46px;
+    width: 12px;
+    height: 18px;
+    background-image: url("../Img/chatto.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 8px;
+}
+.chatfrom>img {
+    float: left;
+    height: 40px;
+    width: 40px;
+}
+.chatfrom>label {
+    float: left;
+    margin: 0px 0px 0px 15px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #dddddd;
+    border-radius: 4px;
+}
+.chatfromimg{
+   float: left;
+   margin: 0px 0px 0px 15px;
+   height: auto!important;
+   border-style: solid;
+   border-width: 1px;
+   border-color: #dddddd;
+   border-radius: 4px;
+}
+.chatfrom>span {
+    position: absolute;
+    top: 10px;
+    left: 46px;
+    width: 12px;
+    height: 18px;
+    background-image: url("../Img/chatfrom.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 8px;
+}
+.listmem{
+  display: block;
+  height: auto;
+  margin: 0px 0px 0px 0px;
+  overflow: auto;
+  list-style: none;
+  padding: 0px;
+}
+.limember{
+   padding: 0px!important;
+   margin: 0px!important;
+   line-height: 45px;
+   font-size: 14px;
+   color: #333333;
+   height: 46px;
+   border-bottom-style: solid!important;
+   border-color: #e7eaec!important;
+   border-width: 1px;
+}
+.limember>img{
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin: 2px 5px 0px 10px;
+  border-radius: 2px;
+}
+.limember>span{
+  float: right;
+  display: none;
+  margin: 17px 10px 0px 0px;
+  padding: 0px 5px 0px 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9px;
+  line-height: 30px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #3a87ad;
+}
+.mselactive{
+  background-color: #f7f7f7;
+}
+.sendimg{
+  width: 34px;
+  height: 34px;
+  margin: 0px 10px 0px 0px;
+}
+#simg{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.contents>div>.chatcontent{
+  float: none!important;
+  width: auto!important;
+}

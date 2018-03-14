@@ -1,0 +1,211 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+  .p-box img{
+    width: 80%;
+  }
+  .p-box{
+    border-bottom: 1px solid #ccc;
+    margin-top: 5px;
+  }
+  .info button{
+    margin-top: 10px;
+  }
+</style>
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+    <div class="col-lg-12">
+       <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加礼包</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+              <form role="form" class="form-inline" action="" method="post" id="save">
+                <div class="form-group">
+                  <input type="text" placeholder="请填写礼包名称" name="CouponName" id="CouponName" class="form-control">
+                </div>
+                <div class="form-group">
+                  <input type="number" placeholder="请填写礼包数量" name="Count" id="Count" class="form-control">
+                </div>
+                <div class="checkbox m-l m-r-xs">
+                  <label class="i-checks">
+                    <input type="radio" name="IsEnable" id="IsEnable" value="1" checked="checked"><i></i> 开启</label>
+                  </div>
+                  <div class="checkbox m-l m-r-xs">
+                    <label class="i-checks">                
+                      <input type="radio" name="IsEnable" id="hide" value="0"><i></i> 关闭
+                    </label>
+                  </div>
+                  <div class="checkbox m-l m-r-xs">
+                    <input type="hidden" name="CouponId" id="CouponId" value="">
+                    <button class="btn btn-white" type="submit" id="btn-submit">保存</button>
+                  </form>
+                </div>
+                <div class="alert alert-warning">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <h3>礼包管理</h3>
+            <table class="table table-bordered table-hover">
+              <tr>
+                 <td style="width:10%;">#</td>
+                 <td style="width:10%;">礼包名称</td>
+                 <td style="width:50%;">礼包商品</td>
+                 <td style="width:20%;">是否开启</td>
+                 <td style="width:10%;">操作</td>
+             </tr>
+             <foreach name="lists" item="list">
+              <tr>
+                 <td>{$list.CouponId}</td>
+                 <td>{$list.CouponName}</td>
+                 <td><div id="add{$list.CouponId}{$list.ID}">
+                   <foreach name="list.pinfo" item="pro">
+                   <div class="row p-box" data-pid='{$pro.ProIdCard}' id="{$pro.ProIdCard}{$list.CouponId}">
+                     <div class="col-xs-3 col-sm-3 col-md-3">
+                       <img src="{$pro.ProLogoImg}" alt="">
+                     </div>
+                     <div class="col-xs-7 col-sm-7 col-md-7">
+                     {$pro.ProName}<br>
+                     {$pro.ProSpec1}/{$pro.ProSpec2}/{$pro.ProSpec3}
+                     <br>
+                     原价：{$pro.Price}  
+                     </div>
+                     <div class="col-xs-2 col-sm-2 col-md-2">
+                       <button class="btn btn-xs btn-danger btn-outline" type="button" onclick="delpro('{$pro.ProIdCard}','{$list.CouponId}')">删除此商品</button>
+                     </div>
+                   </div>
+                   </foreach>
+                 </div><button class="btn btn-xs btn-primary btn-outline btn-chose" style="margin-top:10px;text-align:center;" type="button" data-gid="{$list.CouponId}" data-id="{$list.ID}" onclick="chosePro('{$list.ID}','{$list.CouponId}');">添加商品</button></td>
+                 <td><if condition="$list['IsEnable'] eq '0'">关闭<else/>开启</if></td>
+                 <td class="info"><if condition="$list['UseType'] eq '3'"><button class="btn btn-xs btn-primary btn-outline disabled" onclick="setreg('{$list.CouponId}');">设为注册礼包</button>  <else/><button class="btn btn-xs btn-primary btn-outline" onclick="setreg('{$list.CouponId}');">设为注册礼包</button>  </if>  <if condition="$list['IsEnable'] eq '0'"><button class="btn btn-xs btn-primary btn-outline" onclick="setopen('{$list.CouponId}','open');">开启</button><else/><button class="btn btn-xs btn-warning btn-outline" onclick="setopen('{$list.CouponId}','close');">关闭</button></if>&emsp;<button class="btn btn-xs btn-primary btn-outline" onclick="edit('{$list.CouponId}');">编辑</button><!-- <button class="btn btn-default btn-outline btn-xs" onclick="showgifts({$list.CouponId})">查看礼包使用详情</button> --> <button class="btn btn-xs btn-danger btn-outline" onclick="del('{$list.CouponId}')">删除礼包</button></td>
+             </tr>
+         </foreach>
+     </table>
+     <div style="text-align:right;margin-bottom:100px;">{$page}</div>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+var json={$jsondata};
+function edit(id){
+  $.each(json,function(index,item){
+    if (item.CouponId==id) {
+      $('#CouponId').val(item.CouponId);
+      $('#CouponName').val(item.CouponName);
+      $('#Count').val(item.Count);
+      if (item.IsEnable=='1') {
+        $('#IsEnable').attr('checked',true);
+        $('#hide').attr('checked',false);
+      }else{
+        $('#IsEnable').attr('checked',false);
+        $('#hide').attr('checked',true);
+      }
+    };
+  })
+}
+function del(id){
+  art.dialog.confirm('此操作将该礼包内商品一并删除，确定要删除吗？',function(){
+    window.location.href="{:U('Products/delgifts')}?cid="+id;
+  },function(){
+    art.dialog.tips('取消操作',1);
+  })
+}
+
+function setreg(cid){
+  window.location.href="{:U('Products/setGiftReg')}?cid="+cid;
+}
+
+function setopen(cid,type){
+  window.location.href="{:U('Products/setopen')}?cid="+cid+"&type="+type;
+}
+
+function showgifts(cid){
+  art.dialog.open("{:U('ArtDialog/showgifts')}?cid="+cid,{width:800,height:600});
+}
+
+function chosePro(id,gid){
+  art.dialog.data('thisid',id);
+  art.dialog.data('couponid',gid);
+  art.dialog.open("{:U('ArtDialog/choseGiftsPro')}",{width:800,height:600});
+}
+
+function delpro(id,gid){
+  art.dialog.confirm('确定要把此商品从礼包中删除吗？',function(){
+    var notice=art.dialog({content:'正在处理...',lock:true});
+    $.ajax({
+      type:"post",
+      url:"{:U('Products/delgift')}",
+      data:"ProIdCard="+id+"&CouponId="+gid,
+      dataType:"json",
+      success:function(msg){
+        notice.close();
+        if (msg=='success') {
+          art.dialog.tips('删除成功',1);
+          $('#'+id+gid).remove();
+        }else{
+          art.dialog.tips('删除失败',1);
+        }
+      }
+    })
+    // window.location.href="{:U('Products/delbyproidcard')}?ProIdCard="+id+"&GroupId="+gid;
+  },function(){
+    art.dialog.tips('取消操作');
+  })
+}
+
+
+  $(document).ready(function(){
+    $('#save').submit(function(){
+      var GroupName=$('#CouponName').val();
+      var Count=$('#Count').val();
+      if (!GroupName) {
+        art.dialog.alert('请输入礼包名称');
+        return false;
+      };
+      if (!Count) {
+        art.dialog.alert('请填写礼包数量');
+        return false;
+      }else{
+        art.dialog.tips('正在处理...',10);
+        return true;
+      }
+    })
+    $('#getGid').click(function(){
+      $.ajax({
+        type:"post",
+        url:"{:U('Products/getGid')}",
+        data:"oldgid="+$('#GroupId').val(),
+        dataType:"json",
+        success:function(msg){
+          if (msg.statu=='success') {
+            $('#GroupId').val(msg.newGid);
+            $('#GroupName').val('');
+            $('#SDate').val('');
+            $('#EDate').val('');
+            $('#type').val('add');
+          }else{
+            art.dialog.tips('获取失败',2);
+          }
+        }
+      })
+    })
+  //  $('btn-chose').click(function(){
+  //    var GroupId=$(this).attr('data-gid');
+  //    var domid='add'+$(this).attr('data-id');
+    // art.dialog.data('thisid',domid);
+    // art.dialog.data('groupid',GroupId);
+    // art.dialog.open("{:U('ArtDialog/chosePro')}");
+  //  })
+  })
+</script>
+<include file="Common:footer" />

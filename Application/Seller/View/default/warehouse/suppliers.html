@@ -1,0 +1,99 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		$("#save").validate();
+	});
+</script>
+<include file="$headername" />
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>供货商设置</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>供货商管理</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<a href="{:U('supplier')}" class="btn btn-primary btn-outline btn-md">添加供货商</a>
+			</div>
+			<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+				<form action="{:U('Warehouse/searchSupp')}" class="form-inline" method="post" id="search">
+				<div class="form-group">
+						<input type="text" name="Supplier" placeholder="请填写供应商名称" id="sup" class="form-control">
+					</div>
+					<button class="btn btn-primary btn-outline btn-md" type="submit"><span class="glyphicon glyphicon-search"></span> 搜 索</button>
+				</form>
+
+			</div>
+
+			<div class="ibox-content">
+				<table class="table table-bordered table-condensed table-responsive table-hover">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>供应商名称</td>
+							<td>联系人</td>
+							<td>电话</td>
+							<td>手机</td>
+							<td>地址</td>
+							<td>最后修改时间</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						<foreach name="suppliers" item='supplier' >
+							<tr>
+								<td>{$supplier.ID}</td>
+								<td>{$supplier.Supplier}</td>
+								<td>{$supplier.Name}</td>
+								<td>{$supplier.Phone}</td>
+								<td>{$supplier.Tel}</td>
+								<td>{$supplier.Address}</td>
+								<td>{$supplier.LastUpdateTime}</td>
+								<td><a href="{:U('Warehouse/editSupplier')}?sid={$supplier.ID}">编辑</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="###" onclick="del('{$supplier.ID}')">删除</a></td>
+							</tr>
+						</foreach>
+					</tbody>
+				</table>
+			</div>
+			<div style="text-align:right;">{$page}</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#search").submit(function(){
+			var sup=$("#sup").val();
+			if (!sup) {
+				art.dialog.alert('请输入供应商名字后搜索');
+				return false;
+			}else{
+				return true;
+			}
+		})
+	})
+
+	function del(id){
+		art.dialog.confirm('确定要删除吗？',function(){
+			window.location.href="{:U('Warehouse/delSupplier')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+</script>
+<include file="Common:footer" />

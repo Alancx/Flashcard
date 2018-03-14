@@ -1,0 +1,213 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+	.spl .chosen-container{
+		width: 200px;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			                            <div class="alert alert-warning" style="color:red;">
+			                            已选卖的商品修改价格，双击价格框修改价格，点击输入框之外的空白区域保存价格
+                           </div>
+
+			</div>
+			<div class="ibox-content">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<h5>设置商品</h5>
+						<form role="form" class="form" id="savebuy"  method="post" action="">
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only">选择商品</label>
+								<select name="ProId" id="chosen" class="form-control" style="" value="">
+									<option value="-1">请选择商品</option>
+									<foreach name="pros" item="pro">
+										<option value="{$pro.ProId}">{$pro.ProName}</option>
+									</foreach>
+								</select>
+							</div>
+							<div class="form-group attrs" >
+							</div>
+							<button class="btn btn-primary btn-outline"  type="submit">保存设置</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-12">
+					<table class="table bordered">
+						<thead>
+							<tr>
+								<td>商品名称</td>
+								<td>规格/售价</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+						<foreach name='ppss' item='li'>
+							<tr>
+								<td><img src="{$PICURL}{$li.ProLogoImg}" style="width:100px;height:100px;" alt=""> <br>{$li.ProName} </td>
+								<td>
+									<foreach name='li.sons' item='son'>
+									{$son.Spec}&emsp;/&emsp;￥：<input type="text" class="editprice" data-price='{$son.Price}' name="" value='{$son.Price}' readonly="readonly" id="{$son.ProIdCard}"> <br>
+									</foreach>
+								</td>
+								<td><button class="btn btn-danger btn-xs clelimit" data-pid='{$li.ProId}'>删除</button>&emsp;&emsp;
+								<if condition="$li['ProType'] eq 'new'">
+								<button class="btn btn-primary btn-xs setnew" data-pid='{$li.ProId}' data-statu='0'>取消新品</button>&emsp;&emsp;<button class="btn btn-xs btn-warning sethot" data-pid='{$li.ProId}' data-statu='1'>设为热卖</button></td>
+								<elseif condition="$li['ProType'] eq 'hot'" />
+								<button class="btn btn-primary btn-xs setnew" data-pid='{$li.ProId}' data-statu='1'>设为新品</button>&emsp;&emsp;<button class="btn btn-xs btn-warning sethot" data-pid='{$li.ProId}' data-statu='0'>取消热卖</button></td>
+								<elseif condition="$li['ProType'] eq 'all'" />
+								<button class="btn btn-primary btn-xs setnew" data-pid='{$li.ProId}' data-statu='0'>取消新品</button>&emsp;&emsp;<button class="btn btn-xs btn-warning sethot" data-pid='{$li.ProId}' data-statu='0'>取消热卖</button></td>
+								<else />
+								<button class="btn btn-primary btn-xs setnew" data-pid='{$li.ProId}' data-statu='1'>设为新品</button>&emsp;&emsp;<button class="btn btn-xs btn-warning sethot" data-pid='{$li.ProId}' data-statu='1'>设为热卖</button></td>
+								</if>
+							</tr>
+						</foreach>
+						</tbody>
+					</table>
+					{$page}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+var sondata={$prosons};
+$(document).ready(function(){
+	$('#chosen').chosen();
+	$('#chosen').change(function(){
+		// art.dialog.tips($(this).val());
+		var pid=$(this).val();
+		$.each(sondata,function(index,item){
+			if (index==pid) {
+				var _html='';
+				console.log(item);
+				$.each(item,function(key,value){
+					// console.log(value);
+					var tprice=parseFloat(value.Price);
+					_html+='规格：'+value.Spec+'&emsp;平台价格：'+tprice.toFixed(2)+'&emsp;售价：<input class="prices" type="text" name="Prices[]" id="" value="" /><input class="proidcards" type="hidden" name="ProIdCards[]" value="'+value.ProIdCard+'" /><br>';
+				})
+				$('.attrs').html(_html);
+			};
+		})
+	})
+	$('#savebuy').submit(function(){
+		var pid=$('#chosen').val();
+		var prices=$('.prices');
+		var pres=true;
+		$.each(prices,function(index,item){
+			if (!$(item).val()) {
+				pres=false;
+			};
+		})
+		if (pres && pid!='-1') {
+			return true;
+		}else{
+			art.dialog.tips('请完善信息');
+			return false;
+		}
+	})
+	$('.clelimit').click(function(){
+		var _this=$(this);
+		var pid=_this.attr('data-pid');
+		art.dialog.confirm('确定要删除此商品的价格设置吗？(删除此商品所有属性价格设置)',function(){
+			window.location.href="{:U('Products/delmerpro')}?pid="+pid;
+		})
+	})
+
+	$('.setnew').click(function(){
+		var _this=$(this);
+		var pid=_this.attr('data-pid');
+		var statu=_this.attr('data-statu');
+		$.ajax({
+			url:"{:U('Products/showHome')}",
+			type:"post",
+			data:"type=new&pid="+pid+"&statu="+statu,
+			dataType:"text",
+			success:function(msg){
+				if (msg=='success') {
+					if (statu=='0') {
+						_this.attr('data-statu',1).html('设为新品');
+					}else{
+						_this.attr('data-statu',0).html('取消新品');
+					}
+				}else{
+					art.dialog.tips('设置失败');
+				}
+			}
+		})
+	})
+	$('.sethot').click(function(){
+		var _this=$(this);
+		var pid=_this.attr('data-pid');
+		var statu=_this.attr('data-statu');
+		$.ajax({
+			url:"{:U('Products/showHome')}",
+			type:"post",
+			data:"type=hot&pid="+pid+"&statu="+statu,
+			dataType:"text",
+			success:function(msg){
+				if (msg=='success') {
+					if (statu=='0') {
+						_this.attr('data-statu',1).html('设为热卖');
+					}else{
+						_this.attr('data-statu',0).html('取消热卖');
+					}
+				}else{
+					art.dialog.tips('设置失败');
+				}
+			}
+		})
+	})
+	$('.editprice').dblclick(function(){
+		$(this).attr('readonly',false).focus();
+	})
+	$('.editprice').blur(function(){
+		var _this=$(this);
+		if (!_this.attr('readonly')) {
+			var sprice=_this.attr('data-price');
+			var id=_this.attr('id');
+			art.dialog.confirm('是否要保存此商品属性的选卖价格？',function(){
+				var price=parseFloat(_this.val());
+				if (price) {
+					$.ajax({
+						url:"{:U('Products/editmerprice')}",
+						type:"post",
+						data:"pid="+id+"&price="+price,
+						dataType:"json",
+						success:function(msg){
+							if (msg.status=='success') {
+								art.dialog.tips('修改成功');
+								_this.attr('readonly',true).val(price).attr('data-price',price);
+							}else{
+								art.dialog.tips('修改失败');
+								_this.attr('readonly',true).val(sprice);
+							}
+						}
+					})
+				}else{
+					art.dialog.tips('请填写价格');
+				}
+			},function(){
+				_this.attr('readonly',true).val(sprice);
+			})
+		}
+	})
+	// $('.editprice').click(function(){
+	// 	var _this=$(this);
+	// 	var id=_this.attr('id');
+	// 	var price=_this.val()
+	// })
+})
+</script>
+<include file="Common:footer" />

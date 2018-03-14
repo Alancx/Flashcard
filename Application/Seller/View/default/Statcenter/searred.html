@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html style="height:auto">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit">
+
+  <title>store</title>
+
+  <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+
+  <!-- Morris -->
+  <link href="__PUBLIC__/Admin/Admin/css/style.css?v=2.2.0" rel="stylesheet">
+  <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+
+  <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+  <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+</head>
+
+<body style="background-color:#fff;height:auto;">
+
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-2"></div>
+  </div>
+  <div class="row  wrapper  white-bg" style="margin:0 1%;">
+    <div class="col-sm-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="6" style="text-align:center;">查询总额： {$allmoney}</th>
+          </tr>
+          <tr>
+            <th>#</th>
+            <th>提现人账号</th>
+            <th>提现金额</th>
+            <th>申请时间</th>
+            <th>处理时间</th>
+            <th>查看详情</th>
+          </tr>
+        </thead>
+        <tbody>
+          <if condition="$count neq 0">
+            <foreach name='lists' item='li'>
+              <tr>
+                <td>{$li.ID}</td>
+                <td>{$li.MemberId}</td>
+                <td>{$li.Money}</td>
+                <td>{$li.CreateDate}</td>
+                <td>{$li.EndDate}</td>
+                <td><a href="###" onclick="show('{$li.ID}')">查看详情</a></td>
+              </tr>
+            </foreach>
+            <else/>
+            <tr>
+              <td colspan="5">暂无您查询的信息！</td>
+            </tr>
+          </if>
+        </tbody>
+      </table>
+      <div class="page">{$page}</div>
+    </div>
+  </div>
+  <!-- Mainly scripts -->
+  <script type="text/javascript">
+	function show(id){
+		art.dialog.open('{:U('Statcenter/showred')}?id='+id,{width:'600px'});
+	}
+  </script>
+</body>
+</html>

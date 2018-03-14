@@ -1,0 +1,18 @@
+操作定位:OfflineCashier/getpro:::: ...::::::操作日期:::::::2017-02-06 14:49:31
+操作定位:OfflineCashier/getpro:::: ...2040::::::操作日期:::::::2017-02-06 15:01:20
+操作定位:OfflineCashier/getpro:::: ...2041::::::操作日期:::::::2017-02-06 15:04:40
+操作定位:OfflineCashier/getpro::::0 ... 1::::::操作日期:::::::2017-02-06 15:08:50
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=1,[Price]=12 WHERE ( OrderId='E201702061508133165' and stoken='' )::::::操作日期:::::::2017-02-06 15:10:12
+操作定位:OfflineCashier/getpro::::0 ... 1::::::操作日期:::::::2017-02-06 15:10:12
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=1,[Price]=12 WHERE ( OrderId='E201702061510507333' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:11:05
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=1,[Price]=12 WHERE ( OrderId='E201702061510507333' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:11:09
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=1,[Price]=12 WHERE ( OrderId='E201702061510507333' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:11:14
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=1,[Price]=12 WHERE ( OrderId='E201702061510507333' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:11:17
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=1,[Price]=12 WHERE ( OrderId='E201702061510507333' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:11:21
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=2,[Price]=24 WHERE ( OrderId='E201702061512463849' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:12:59
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=3,[Price]=36 WHERE ( OrderId='E201702061512463849' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:13:02
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=4,[Price]=48 WHERE ( OrderId='E201702061512463849' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:13:03
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=5,[Price]=60 WHERE ( OrderId='E201702061512463849' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:13:05
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=2,[Price]=20 WHERE ( OrderId='E201702061523374986' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:23:51
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=3,[Price]=30 WHERE ( OrderId='E201702061523374986' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:23:54
+操作定位:OfflineCashier/getpro::::UPDATE [RS_Order] SET [Count]=4,[Price]=40 WHERE ( OrderId='E201702061523374986' and stoken='BptjZ47866183234' )::::::操作日期:::::::2017-02-06 15:23:57

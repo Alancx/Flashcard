@@ -1,0 +1,171 @@
+<include file="Common:top" />
+<style type="text/css">
+	.edit_order_proname{
+		display: inline-block;
+		line-height: 20px;
+		float: left;
+		overflow: hidden;
+	    text-overflow: ellipsis;
+	    width: 150px;
+	}
+	#oinfo td{
+		padding: 0px!important;
+	}
+</style>
+<link href="__PUBLIC__/Admin/Admin/common/css/order.style.css?v=1" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row order-all">
+		<div class="col-lg-12">
+			<div class="ibox-title">
+				<h5>
+					订单信息
+					<small>{$param.start_time}--{$param.end_time}</small>
+				</h5>
+			</div>
+			<div class='ibox-tools'>
+				<button class='btn btn-xs btn-danger btn-outline export' data-s='{$param.start_time}' data-e='{$param.end_time}'>导出订单信息</button>
+			</div>
+			<div class="ibox-content" style="padding-top:0px;">
+				<div class="panel blank-panel">
+					<!-- <div style="clear:both;"></div> -->
+					<div class="panel-body">
+						<div class="tab-content">
+						<!--  -->
+							<div id="tablist" class="tab-pane active">
+								<table class="table table-bordered table-hover" id="allorder" data-toggle="table">
+									<thead>
+										<tr>
+											<th colspan="2">商品</th>
+											<th>单价/数量</th>
+											<th>买家</th>
+											<th>下单时间</th>
+											<th>订单状态</th>
+											<th>实付金额</th>
+										</tr>
+									</thead>
+									<tbody id="torderlist">
+										<foreach name="allOrder" item="vo" key="k">
+											<tr>
+												<td colspan="7"></td>
+											</tr>
+											<tr>
+												<td colspan="7">
+													<span style="color:#000">订单号：{$vo.OrderId}</span>
+													<span class="c-gray">
+													<if condition="$vo['PayName'] eq 'XJ'">现金付款
+														<elseif condition="$vo['PayName'] eq 'T'"/>微信支付
+														<elseif condition="$vo['PayName'] eq 'YE'"/>余额支付
+														<elseif condition="$vo['PayName'] eq 'JL'"/>奖励余额支付
+														<elseif condition="$vo['PayName'] eq 'POSXJ'"/>POS端现金支付
+														<elseif condition="$vo['PayName'] eq 'ALIPAY'"/>支付宝付款
+
+													</if>
+													</span>
+													<span class="pull-right">
+														
+													</span>
+												</td>
+											</tr>
+											<foreach name="vo['sons']" item="son" key="i">
+												<tr>
+													<td class="image-cell" >
+														<img src="{$PICURL}{$son.ProLogoImg}" alt='' style="width:60px;height:60px;"/>
+													</td>
+													<td class="product-cell">
+														<p>
+															<a href="{:U('Home/Product/Goods')}?pid={$son.ProId}" target="_blank" title="{$son.ProName}">{$son.ProName}</a>
+														</p>
+														<p>{$son.Spec}</p>
+													</td>
+													<td>
+														<p class='{$vo.OrderId}_{$son.ProIdCard}_price'>{$son["Price"]|sprintf='%.2f',###}</p>
+														<p class='{$vo.OrderId}_{$son.ProIdCard}_count'>({$son.Count} 件)</p>
+													</td>
+													<if condition="$i eq 0">
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															<if condition="$vo['RecevingPost'] eq 'ZT'">
+															<p>店铺自提货<if condition="$vo['SceneContent']">({$vo.SceneContent})</if></p>
+															<else/>
+															<p>{$vo.RecevingName}</p>
+															<p>{$vo.RecevingPhone}</p>
+															</if>
+
+														</td>
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															{$vo.CreateDate}
+														</td>
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															<if condition="$vo['Status'] eq 1">
+																<p>等待买家付款</p>
+															<elseif condition="$vo['Status'] eq 2"/>
+
+															<if condition="$vo['RecevingPost'] eq 'ZT'">
+															<p>店铺自提货</p>
+															<else/>
+
+																<p>已付款，等待发货</p>
+
+															</if>
+
+
+
+
+
+															<elseif condition="$vo['Status'] eq 3"/>
+																<p>卖家已发货</p>
+															<elseif condition="($vo['Status'] eq 4) or ($vo['Status'] eq 10)"/>
+																<p>已收货，交易完成</p>
+															<elseif condition="$vo['Status'] eq 5"/>
+																<p>退款中</p>
+															<elseif condition="$vo['Status'] eq 6"/>
+																<p>买家已退货</p>
+															<elseif condition="$vo['Status'] eq 7"/>
+																<p>买家退货成功</p>
+															<elseif condition="$vo['Status'] eq 8"/>
+																<p>买家退款成功</p>
+															<elseif condition="$vo['Status'] eq 9"/>
+																<p>已过期，订单关闭</p>
+															<elseif condition="$vo['Status'] eq 11"/>
+																<p>订单已撤销</p>
+															<else/>
+															</if>
+														</td>
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															<p class='all_{$vo.OrderId}'>{$vo["orderMoney"]|sprintf='%.2f',###}</p>
+															<p><small class="c-gray ">(含运费：<span class='cf_{$vo.OrderId}'>{$vo.Freight}</span>)</small></p>
+														</td>
+													</if>
+												</tr>
+											</foreach>
+										</foreach>
+									</tbody>
+								</table>
+								<div>{$page}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 订单添加备注 end -->
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.export').click(function(){
+			var start_time=$(this).attr('data-s');
+			var end_time=$(this).attr('data-e');
+			window.location.href="{:U('Order/exportshowindex')}?start_time="+start_time+"&end_time="+end_time;
+		})
+	})
+</script>
+</body>
+</html>

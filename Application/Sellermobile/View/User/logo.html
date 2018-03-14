@@ -1,0 +1,58 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/jieshao.css">
+	<div class="logo logs" style="padding-left:10px;">头像<img src="{$list['Slogo']}"><input type="file" id="log" name="files" onchange="logoupload(this)"></div>
+	<div class="logo" style="padding-left:10px;">店铺名称<span>{$list['storename']}</span></div>
+	<div class="logo" style="padding-left:10px; display:none;">店铺信息<span>{$list['Descinfo']}</span></div>
+	<div class="logo" style="padding-left:10px;">店铺地址<span>{$list['addr']}</span></div>
+<script src="__PUBLIC__/Sellermobile/js/ajaxfileupload.js"></script>
+<script>
+	$(document).on('change','input',function(){
+
+	})
+	osFReader = new FileReader(),
+	rsFilter = /^(?:image\/jpeg|image\/png)$/i;
+	osFReader.onload = function (oFREvent) {
+	  uploads();
+	};
+	function logoupload(ifile){
+		console.log('sss');
+		if (ifile.files.length === 0){
+			return;
+		}
+		var oFile = ifile.files[0];
+		// console.log(oFile);
+		if (!rsFilter.test(oFile.type)) {
+			tips('notice', '选择正确图片格式!', 1500, 'weui_icon_notice');
+			return;
+		}else{
+			osFReader.readAsDataURL(oFile);
+		}
+	}
+	function uploads(){
+		var htmls='';
+		$.ajaxFileUpload({
+			url:"{:U('User/logo')}", //用于文件上传的服务器端请求地址
+			type:"post",
+			secureuri: false, //是否需要安全协议，一般设置为false
+			fileElementId: 'log', //文件上传域的ID
+			dataType: 'json', //返回值类型 一般设置为json
+			success: function (data,status){
+				// console.log(data);
+				if (data.status=='true'){
+					htmls+='头像<img src="'+data['datainfo']+'"><input type="file" id="log" name="files" onchange="logoupload(this)">';
+					$('.logs').html(htmls);
+				}else{
+					tips('notice', '上传失败!', 1500, 'weui_icon_notice');
+				}
+			},
+			complete: function (e) {
+
+			},
+			// error: function (data,status,e)//服务器响应失败处理函数
+			// {
+			// 	// tips('notice', '上传失败!', 1500, 'weui_icon_notice');
+			// }
+		})
+	}
+
+</script>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>订单信息</title>
+
+	<!-- Bootstrap -->
+	<link href="__PUBLIC__/theme2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="__PUBLIC__/theme2/css/orderinfos.css?v=1.2" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+  <body>
+  	<div class="container">
+  		<div class="row addr-box jumps" data-url="{:U('User/express',array('expid'=>'EXPRESSID','expcom'=>'EXPRESSCOM'))}">
+  			<div class="col-xs-2 col-sm-2 midimg">
+  				<span><img src="__PUBLIC__/theme2/Images/kd.png" alt="" class="kd"></span>
+  			</div>
+  			<div class="col-xs-8 col-sm-8 kdinfo" datakdid="{$oinfo.LogisticsId}" datakdcom="{$oinfo.LogisticsCom}">
+					<span>承运来源:{$oinfo.Logistics}</span>
+  				<p>快递单号:{$oinfo.LogisticsId}</p>
+  			</div>
+  			<div class='col-xs-1 col-sm-1 midimg pull-right'>
+  				<img src="__PUBLIC__/theme2/Images/Arrow.png" alt="" class="leftarrow">
+  			</div>
+  		</div>
+  		<div class="hr"></div>
+  		<div class="row addr-box">
+  			<div class="col-xs-2 col-sm-2 pull-left address">
+  				<img src="__PUBLIC__/theme2/Images/address.png" alt="">
+  			</div>
+  			<div class="col-xs-6 col-sm-6 pull-left recinfo" style="padding-top:10px;">
+  				<span>收货人：{$oinfo.RecevingName}</span>
+  			</div>
+  			<div class="col-xs-4 col-sm-4 pull-left" style="padding-top:10px;">
+  				<span>{$oinfo.RecevingPhone}</span>
+  			</div>
+  			<div class="col-xs-10 col-sm-10 pull-left recinfo">
+  				<span>收货地址：{$oinfo.RecevingProvince}{$oinfo.RecevingCity}{$oinfo.RecevingArea}{$oinfo.RecevingAddress}</span>
+  			</div>
+  		</div>
+  		<div class="hr"></div>
+  		<div class="row order-box">
+  			<div class="col-xs-12 col-sm-12 cinfo">
+  				<img src="__PUBLIC__/theme2/Images/shoplogo.png" alt="" class="cimg">
+  				<span style="padding:5px 0px 5px 0px;">商品信息</span>
+  			</div>
+        <foreach name="oinfo.pros" item='pro'>
+  			<div class="col-xs-12 col-sm-12 p-infos jump" data-url="{:U('Product/Goods',array('pid'=>$pro['ProId'],'stoken'=>$oinfo['stoken']))}">
+  				<div class="col-xs-4 col-sm-4 p-img">
+  					<img src="{:C('RESOURCE_URL')}{$pro.ProLogoImg}" alt="">
+  				</div>
+  				<div class="col-xs-8 col-sm-8 p-info">
+  					<p class="title">{$pro.ProName}</p>
+  					<p class="attrs">规格：{$pro.Spec}</p>
+  					<div class="col-xs-10 price"><span>￥</span> {:number_format($pro['Price'],2)}</div>
+  					<div class="col-xs-2" style="padding-right:0px;">x{$pro.Count}</div>
+  				</div>
+  			</div>
+      </foreach>
+  			<div class="col-xs-12 col-sm-12 sendtype">
+  				<div class="col-xs-6">配送方式</div>
+  				<div class="col-xs-6"><if condition="$oinfo['RecevingPost'] eq 'ZT'">自提<elseif condition="$oinfo['RecevingPost'] eq 'PS'"/>配送<else/>快递</if></div>
+  			</div>
+  			<div class="col-xs-12 col-sm-12 youhui">
+  				<div class="col-xs-6">优惠</div>
+  				<div class="col-xs-6">减￥{:number_format($oinfo['Coupon'],2)}</div>
+  			</div>
+  			<div class="col-xs-12 col-sm-12 youhui">
+  				<div class="col-xs-6">运费</div>
+  				<div class="col-xs-6">￥{:number_format($oinfo['Freight'],2)}</div>
+  			</div>
+  			<div class="col-xs-12 col-sm-12 youhui">
+  				<div class="col-xs-4"></div>
+  				<div class="col-xs-8"><span>共计{$oinfo.Count}件商品&emsp;合计：</span>￥{:number_format($oinfo['Price'],2)}</div>
+  			</div>
+  		</div>
+  		<div class="row time-info">
+  			<div class="col-xs-12 col-sm-12">
+  				<p>订单编号：{$oinfo.OrderId}</p>
+  				<p>下单时间：{$oinfo.CreateDate}</p>
+  				<p>付款时间：{$oinfo.PayDate}</p>
+  				<p>发货时间：{$oinfo.ShipDate}</p>
+  			</div>
+  		</div>
+  	</div>
+
+  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  	<script src="__PUBLIC__/theme2/js/jquery.1.11.3.min.js"></script>
+  	<!-- Include all compiled plugins (below), or include individual files as needed -->
+  	<script src="__PUBLIC__/theme2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $('.jump').click(function () {
+        window.location.href = $(this).attr('data-url');
+    })
+		$('.jumps').click(function () {
+			var expid= $('.kdinfo').attr('datakdid');
+			var expcom= $('.kdinfo').attr('datakdcom');
+			if ((expid !='')&&(expcom!='')){
+				var exp_url=$(this).attr('data-url');
+				exp_url=exp_url.replace(/EXPRESSID/g,expid);
+				exp_url=exp_url.replace(/EXPRESSCOM/g,expcom);
+				window.location.href = exp_url;
+			}
+    })
+    </script>
+  </body>
+  </html>

@@ -1,0 +1,527 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.all_prolist{
+	display: block;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #ffffff;
+	padding: 0px 0px 50px 0px;
+	z-index: 4;
+}
+.sel_protype{
+	height: auto;
+	display: block;
+	overflow: hidden;
+	padding: 10px 0px 10px 0px;
+}
+.sel_protype>.sel_protype_1{
+	display: block;
+	height: 30px;
+	height: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ff4200;
+	border-radius: 25px;
+	overflow: hidden;
+	margin: 0px 60px 0px 10%;
+}
+.srarchbtn{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin: 0px 10px 0px 0px;
+}
+.sel_protype_top{
+	display: block;
+	line-height: 28px;
+	font-size: 16px;
+	float: left;
+	width: 50%;
+	text-align: center;
+	color: #ff4200;
+}
+.sel_protype_top:nth-child(2){
+	border-left-style: solid;
+	/*border-right-style: solid;*/
+	border-width: 1px;
+	border-color: #ff4200;
+}
+.sel_topactive{
+	background-color: #ff4200;
+	color: #ffffff;
+}
+.sel_protype_2{
+	display: block;
+	overflow: hidden;
+	margin: 10px 0px 0px 0px;
+	background-color: #e6e6e6;
+}
+.sel_protype_2>.sel_protype_bottom{
+	float: left;
+	width: 30%;
+	line-height: 25px;
+	text-align: center;
+	margin: 0px 10% 0px 10%;
+	position: relative;
+}
+.sel_bottomactive{
+	color: #ff4200;
+}
+.sel_bottomactive>span{
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	height: 2px;
+	width: 100%;
+	background-color: #ff4200;
+}
+.all_pro_list{
+	display: block;
+}
+.all_pro_list>div{
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.proinfo{
+	display: block;
+	position: relative;
+	overflow: hidden;
+	height: 81px;
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #dddddd;
+}
+.proinfo>img{
+	width: 70px;
+	height: 70px;
+	margin: 5px 0px 5px 10px;
+}
+.proinfo>.selmag{
+	display: none;
+	float: left;
+	position: relative;
+	width: 35px;
+	height: 80px;
+	background-image: url("../icon/uncheck.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-size: 25px;
+	z-index: 5;
+}
+.proinfo>div{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 80px;
+	padding: 5px 40px 5px 85px;
+}
+.proname{
+	display: block;
+	line-height: 20px;
+	font-size: 14px;
+	color: #333333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.protitle{
+	display: block;
+	line-height: 15px;
+	font-size: 12px;
+	color: #666666;
+	height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+.proprice{
+	display: block;
+	line-height: 20px;
+	font-size: 14px;
+	color: #ff4200;
+	overflow: hidden;
+}
+.clickinfo{
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	width: 30px;
+	height: 30px;
+}
+.editmenu{
+	display: none;
+	padding: 0px 0px 0px 0px!important;
+	background-color: rgba(0, 0, 0, 0.60);
+}
+.editmenu>div{
+	float: left;
+	width: 70px;
+	height: 80px;
+	padding: 15px;
+}
+.editmenu>div>img{
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin: 10px 10px 0px 10px;
+}
+.editmenu>div>label{
+	display: block;
+	line-height: 20px;
+	color: #ffffff;
+	text-align: center;
+}
+.btn_group{
+	position: absolute;
+	left: 0px;
+	bottom: 50px;
+	height: 51px;
+	width: 100%;
+	border-top-style: solid;
+	border-width: 1px;
+	border-color: #dddddd;
+	overflow: hidden;
+	background-color: #ffffff;
+}
+.btn_group>.noedit{
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+.noedit>label{
+	float: left;
+	width: 50%;
+	line-height: 50px;
+	text-align: center;
+	font-size: 16px;
+}
+.add_pro{
+	background-color: #ff4200;
+	color: #ffffff;
+}
+.btn_group>.yesedit{
+	display: none;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+.yesedit>label{
+	float: right;
+	width: 25%;
+	height: 50px;
+	text-align: center;
+	font-size: 14px;
+	padding: 0px 0px 0px 0px;
+	line-height: 50px;
+}
+.magdel_pro{
+	background-color: #ff4200;
+	color: #ffffff;
+	line-height: 50px;
+	/*background-image: url("../icon/del_pro.png");
+	background-position: center 3px;
+	background-repeat: no-repeat;
+	background-size: 20px;*/
+}
+.magxj_pro{
+	background-color: #ff924f;
+	color: #ffffff;
+	/*background-image: url("../icon/xj_pro.png");
+	background-position: center 3px;
+	background-repeat: no-repeat;
+	background-size: 20px;*/
+}
+.yesedit>.mag_sel{
+	float: left;
+	width: 50%;
+	height: 50px;
+}
+.sel_all{
+	float: left;
+	width: 50%;
+	height: 50px;
+	font-size: 14px;
+	padding: 0px 0px 0px 35px;
+	line-height: 50px;
+	color: #333333;
+	background-image: url("../icon/uncheck.png");
+	background-position: 5px center;
+	background-repeat: no-repeat;
+	background-size: 25px;
+}
+.sel_exit{
+	float: left;
+	width: 50%;
+	text-align: center;
+	line-height: 50px;
+	background-color: #e6e6e6;
+	color: #333333;
+}
+/*添加商品*/
+.converaddpro {
+	display: none;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 101;
+}
+.converaddpro>div {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	background-color: #ffffff;
+}
+.selpro {
+	display: block;
+	overflow: hidden;
+	padding: 5px 0px 5px 0px;
+	text-align: center;
+}
+.selpro>div:nth-child(1) {
+	border-right-style: solid;
+	border-width: 1px;
+	border-color: #dddddd;
+}
+.selpro>div {
+	float: left;
+	width: 50%;
+	overflow: hidden;
+}
+.selpro>div>a>img {
+	width: 30%;
+}
+.selpro>div>a>label {
+	display: block;
+	color: #333333;
+	line-height: 26px;
+}
+.cancelpro {
+	line-height: 50px;
+	text-align: center;
+	font-size: 16px;
+	color: #3db0de;
+	border-top-style: solid;
+	border-width: 1px;
+	border-color: #dddddd;
+}
+.watermatk{
+	width: 60%;
+	margin: 20% 20% 0px 20%;
+}
+.classtype_list{
+	display: block;
+	overflow: hidden;
+}
+.classtype_info{
+	display: block;
+	overflow: hidden;
+	border-bottom-style: solid;
+	border-color: #dddddd;
+	border-width: 1px;
+	padding: 0px 10px 0px 10px;
+}
+.classtype_info>label{
+	display: block;
+	line-height: 40px;
+	font-size: 16px;
+	color: #333333;
+	background-image: url("../icon/next-icon.png");
+	background-position: right 15px center;
+	background-repeat: no-repeat;
+	background-size: 22px;
+}
+.classtype_info>label>span{
+	margin: 0px 0px 0px 15px;
+	font-size: 14px;
+	color: #666666;
+}
+.menulistconver{
+	display: none;
+	overflow: hidden;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 101;
+}
+.menulist{
+	display: block;
+	position: absolute;
+	bottom: 105px;
+	right: 5px;
+	width: calc(50% - 10px);
+	border-style: solid;
+	border-color: #dddddd;
+	border-width: 1px;
+	border-radius: 5px;
+	background-color: #ffffff;
+	padding: 0px 8px 0px 8px;
+}
+.menulist>label{
+	display: block;
+	line-height: 50px;
+	font-size: 16px;
+	color: #333333;
+	text-align: center;
+	border-bottom-style: solid;
+	border-color: #dddddd;
+	border-width: 1px;
+}
+.menulist>label:last-child{
+	border: none;
+}
+/*////////////////////////////////*/
+.attrdata{
+  display: block;
+	height: auto!important;
+	position: relative!important;
+  margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px!important;
+  background-color: #eeeeee;
+  overflow: hidden;
+}
+.attrtop,.attrtitle,.attritem{
+  display: block;
+  padding: 5px 0px 5px 0px;
+  overflow: hidden;
+}
+.attrtop>div{
+  float: left;
+  width: 50%;
+  padding: 0px 5px 0px 5px;
+}
+.attrtop>div>label{
+  float: left;
+  width: 80px;
+  line-height: 20px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.attrtop>div>input{
+  float: left;
+  width: calc(100% - 80px);
+  height: 20px;
+  outline: none;
+  font-size: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b2b2b2;
+  background-color: #eeeeee;
+  padding: 0px 5px 0px 5px;
+}
+.attrtitle>label{
+  float: left;
+  width: 25%;
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #666666;
+}
+.attritem>div{
+  float: left;
+  width: 25%;
+}
+.attritem>div>label{
+  display: block;
+  line-height: 20px;
+  text-align: center;
+  font-size: 12px;
+}
+.attritem>div>input{
+  display: block;
+  height: 20px;
+  margin: 0px 0px 0px 25%;
+  text-align: center;
+  font-size: 12px;
+  width: 50%;
+  outline: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b2b2b2;
+  background-color: #eeeeee;
+}
+.searchconver{
+	display: none;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: calc(100% - 50px);
+	background-color: #ffffff;
+	z-index: 20;
+}
+.seachhaeard {
+	display: block;
+	width: 100%;
+	height: 45px;
+	background-color: #f5f5f5;
+	padding: 4px 15px 5px 50px;
+	position: relative;
+}
+.qxsearch{
+	float: left;
+	width: 50px;
+	height: 36px;
+	margin: 0px 0px 0px -50px;
+	text-align: center;
+	line-height: 36px;
+	color: #0F1CD4;
+}
+.inputseach {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+	border-style: solid;
+	border-color: #dddddd;
+	border-width: 1px;
+	border-radius: 20px;
+	position: relative;
+	padding: 0px 10px 0px 10px;
+	overflow: hidden;
+}
+#inputseach {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	padding: 0px 50px 0px 15px;
+}
+#iconseach {
+	float: right;
+	width: 34px;
+	height: 34px;
+	position: relative;
+	padding: 5px;
+}
+.searchprolist{
+	display: block;
+	overflow: auto;
+	width: 100%;
+}

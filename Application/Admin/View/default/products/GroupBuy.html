@@ -1,0 +1,312 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+	.spl .chosen-container{
+		width: 200px;
+	}
+	.rule_list{
+		display: block;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		margin-top: 5px;
+		padding: 2px;
+		cursor:pointer;
+	}
+	.rule_list:hover{
+		background-color: red;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			                            <div class="alert alert-warning" style="color:red;">
+                               1、设置团购商品与数量之后再设置具体团购规则<br>
+                               2、在团购进行期间，无法修改团购，添加团购规则 <br>
+                               3、团购信息需提前一天设置、团购最短进行时间为30分钟 <br>
+                               4、点击团购规则可删除该规则 <b>***</b>仅未开始的团购可操作
+                           </div>
+
+			</div>
+			<div class="ibox-content">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<h5>设置团购商品</h5>
+						<form role="form" class="form-inline" id="savebuy"  method="post" action="">
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only">选择商品</label>
+								<select name="ProId" id="chosen" class="form-control" style="width:100%;" value="">
+									<option value="">请选择商品</option>
+									<foreach name="NoSalePros" item="pro">
+										<option value="{$pro.ProIdCard}">{$pro.ProName}</option>
+									</foreach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only"></label>
+								<input type="text" name="StartDate" id="StartDate" class="form-control" placeholder='请选择开始时间'  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00',minDate:'%y-%M-{%d+1}'})">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only"></label>
+								<input type="text" name="EndDate" id="EndDate" class="form-control" placeholder='请选择结束时间'  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00',minDate:'%y-%M-{%d+1} %H:{%m+30}:00'})">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only"></label>
+								<input type="text" name="ProductNum" id="ProductNum" class="form-control" placeholder='请填写团购商品数量'>
+							</div>
+							<input type="hidden" name="oid" id="oid">
+							<button class="btn btn-primary btn-outline"  type="submit">保存设置</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-12">
+					<table class="table bordered">
+						<thead>
+							<tr>
+								<td>当前商品</td>
+								<td>团购时间</td>
+								<td>商品数量</td>
+								<td>团购规则【参团人数/价格/最大购买量(每人)】</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+						<foreach name='OnSalePros' item='li'>
+							<tr>
+								<td>{$li.ProName}<br><img src="{$PICURL}{$li.ProLogoImg}" style="width:100px;height:100px;" alt=""></td>
+								<td>{$li.StartDate}--{$li.EndDate}</td>
+								<td>{$li.ProductNum}</td>
+								<td><div id="{$li.GroupId}_rules" data-gid="{$li.GroupId}">
+									<foreach name="li.rules" item='grule'>
+									<span class='rule_list' data-glid="{$grule.GroupListId}">{$grule.PeopleNum}人团&emsp;/团购价￥:{$grule.Price}&emsp;/每人限购{$grule.BuyNum}件</span>
+									</foreach>
+								</div></td>
+								<td><if condition="$li['IsStart'] eq 1">团购进行中 &emsp;&emsp; <button class="btn btn-xs btn-danger forceend" data-gid='{$li.GroupId}'>强制结束</button><elseif condition="$li['IsStart'] eq 2" />团购已结束<else/><button class="btn btn-default btn-xs addrules" data-toggle="modal" data-target="#order_message" data-gid="{$li.GroupId}">添加规则</button>&emsp;&emsp;<button class="btn btn-warning btn-xs editgroup" data-gid='{$li.GroupId}'>编辑</button>&emsp;&emsp;<button class="btn btn-danger btn-xs clelimit" data-gid='{$li.GroupId}'>取消团购</button></if></td>
+							</tr>
+						</foreach>
+						</tbody>
+					</table>
+					{$page}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal inmodal fade" id="order_message" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:428px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				团购规则 <span style="color:red" id='add_notice'></span>
+				<button type="button" class="close" data-dismiss="modal" id="cls_modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<div class="input-group">
+					<span class='input-group-addon'>参团人数</span>
+					<input type="number" name="PeopleNum" id="PeopleNum" class="form-control" placeholder='规则所需参团人数'>
+					<span class='input-group-addon'>人</span>
+				</div>
+				<div class="input-group">
+					<span class='input-group-addon'>参团价格</span>
+					<input type="text" placeholder='规则参团价格' name="Price" id="Price" class="form-control">
+					<span class='input-group-addon'>元</span>
+				</div>
+				<div class="input-group">
+					<span class='input-group-addon'>限购数量</span>
+					<input type="number" name="BuyNum" id="BuyNum" placeholder='每人最大购买数量' class="form-control">
+					<span class='input-group-addon'>件</span>
+				</div>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+				<button type="button" class="btn btn-w-m btn-success input-sm" data-gid='' id="btn_addrules">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+var rules='';  //现有规则人数容器
+var alldata={$alldata}; //当页数据编辑使用
+var alreadypros={$alreadypros};  //不可选团购商品
+$(document).ready(function(){
+	$('#chosen').chosen();
+	//添加团购主体
+	$('#savebuy').submit(function(){
+		var strtime=$('#StartDate').val();
+		var endtime=$('#EndDate').val();
+		var buynum=$('#ProductNum').val();
+		var pid=$('#chosen').val();
+		if (strtime && endtime && buynum && pid) {
+			if (strtime>endtime) {
+				art.dialog.tips('无效的时间区间');
+				return false;
+			}else if (buynum<=0) {
+				art.dialog.tips('团购商品数量需大于1');
+				return false;
+			}else{
+				art.dialog.tips('正在提交...');
+				return true;
+			}
+		}else{
+			art.dialog.tips('请完善团购信息');
+			return false;
+		}
+	})
+
+	//取消团购
+	$(document).on('click','.clelimit',function(){
+		var _this=$(this);
+		var gid=_this.attr('data-gid');
+		art.dialog.confirm('确定要取消此商品的团购设置吗',function(){
+			$.ajax({
+				url:"{:U('Products/delgroupbuy')}",
+				type:"post",
+				data:"gid="+gid,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						art.dialog.tips('操作成功');
+						_this.parent().parent().remove();
+					}else{
+						art.dialog.tips('操作失败');
+					}
+				}
+			})
+		})
+	})
+
+	//获取团购规则
+	$(document).on('click','.addrules',function(){
+		$('#btn_addrules').attr('data-gid',$(this).attr('data-gid'));
+		$('#add_notice').html('');
+		$.ajax({
+			url:"{:U('Products/getrules')}",
+			type:"post",
+			data:"gid="+$(this).attr('data-gid'),
+			dataType:"json",
+			success:function(str){
+				rules=str;
+				console.log(rules,str);
+			}
+		})
+	});
+
+	//判断商品可用性
+	$(document).on('change','#chosen',function(){
+		var pid=$(this).val();
+		$.each(alreadypros,function(index,item){
+			if (item==pid) {
+				art.dialog.tips('该商品已设置团购');
+				$('#chosen').val('');
+				$('#chosen').trigger('chosen:updated');
+			};
+		})
+	})
+
+	//强制停止团购
+	$(document).on('click','.forceend',function(){
+		var gid=$(this).attr('data-gid');
+		art.dialog.confirm('团购进行中是否强制结束！？请慎重选择',function(){
+			window.location.href="{:U('Products/forceend')}?gid="+gid;
+		})
+	})
+
+	//删除团购规则
+	$(document).on('click','.rule_list',function(){
+		var _this=$(this);
+		var glid=_this.attr('data-glid');
+		var gid=$(this).parent().attr('data-gid');
+		var IsStart=0;
+		$.each(alldata,function(index,item){
+			if (gid==item.GroupId) {
+				if (item.IsStart!=0) {
+					IsStart=1;
+				}
+			};
+		})
+		if (IsStart==0) {
+			art.dialog.confirm('确定要删除此规则吗?',function(){
+				$.ajax({
+					url:"{:U('Products/delrules')}",
+					type:"post",
+					data:"glid="+glid,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							_this.remove();
+							art.dialog.tips('删除成功');
+						}else{
+							art.dialog.tips('处理失败');
+						}
+					}
+				})
+			})
+		}else if (IsStart==1) {
+			art.dialog.tips('团购进行中/已结束，无法删除团购规则');
+		};
+	})
+
+	//编辑
+	$(document).on('click','.editgroup',function(){
+		var GroupId=$(this).attr('data-gid');
+		$.each(alldata,function(index,item){
+			if (item.GroupId==GroupId) {
+				$('#StartDate').val(item.StartDate);
+				$('#EndDate').val(item.EndDate);
+				$('#ProductNum').val(item.ProductNum);
+				$('#oid').val(item.GroupId);
+				$('#chosen').val(item.ProIdCard);
+				$('#chosen').trigger('chosen:updated');
+			};
+		})
+	})
+
+	//添加团购规则
+	$(document).on('click','#btn_addrules',function(){
+		var PeopleNum=$('#PeopleNum').val();
+		var Price=$('#Price').val();
+		var BuyNum=$('#BuyNum').val();
+		var GroupId=$(this).attr('data-gid');
+		console.log(PeopleNum,Price,BuyNum);
+		if (PeopleNum && Price && BuyNum && PeopleNum>0 && Price>0 && BuyNum>0) {
+			if (rules.indexOf('n_'+PeopleNum)!='-1') {
+				$('#add_notice').html(PeopleNum+'人团规则已存在');
+			}else{
+				//提交
+				$('#add_notice').html('处理中...');
+				$.ajax({
+					url:"{:U('Products/addgrouprules')}",
+					type:"post",
+					data:"PeopleNum="+PeopleNum+"&Price="+Price+"&BuyNum="+BuyNum+"&GroupId="+GroupId,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							$('#cls_modal').click();
+							art.dialog.tips('添加成功');
+							$('#PeopleNum').val('');
+							$('#Price').val('');
+							$('#BuyNum').val('');
+							var _html="<span class='rule_list' data-glid='"+msg.glid+"'>"+PeopleNum+"人团&emsp;/团购价￥:"+Price+"&emsp;/每人限购"+BuyNum+"件</span>";
+							$('#'+GroupId+"_rules").append(_html);
+						}else{
+							$('#add_notice').html('添加失败');
+						}
+					}
+				})
+			}
+		}else{
+			$('#add_notice').html('规则错误');
+		}
+	})
+})
+</script>
+<include file="Common:footer" />

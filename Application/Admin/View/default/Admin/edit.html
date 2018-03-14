@@ -1,0 +1,138 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>修改资料</h5>
+            </div>
+            <div class="ibox-content">
+                <form method="post" action="{:U('Admin/save')}" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">用户名</label>
+
+                        <div class="col-sm-4">
+                            <input type="text" name="EmployeeId" id="EmployeeId" class="form-control" value="{$info.userName}" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">真实姓名</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="TrueName" id="TrueName" class="form-control" value="{$info.TrueName}" readonly="readonly"> <span class="help-block m-b-none"></span>
+                        </div>
+                    </div>
+                    <button class="col-sm-offset-2 btn btn-primary btn-outline" onclick="show();" id="change" type="button">修改密码</button>
+                    <div class="form-group" id="pass">
+                    </div>
+                    <div class="form-group" id="rep">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">选择用户组</label>
+
+                        <div class="col-sm-4">
+                            <select class="form-control m-b required" name="GroupId" id="GroupId">
+                                <option value="">请选择</option>
+                                <foreach name="groups" item="group" >
+                                    <if condition="$info['GroupId'] eq $group['GroupId']">
+                                        <option style="color:green;" value="{$group.GroupId}" selected="selected">{$group.GroupName}</option>
+                                        <else/>
+                                        <option style="color:green;" value="{$group.GroupId}">{$group.GroupName}</option>
+                                    </if>
+                                </foreach>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别
+                        </label>
+
+                        <div class="col-sm-10">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" <if condition="$info['Sex'] eq '1'">checked="checked"</if>  value="1" id="optionsRadios1" name="Sex">男</label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" <if condition="$info['Sex'] eq '2'">checked="checked"</if> id="optionsRadios2" value="2" name="Sex">女</label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" <if condition="$info['Sex'] eq '0'">checked="checked"</if> id="optionsRadios2" value="0" name="Sex">保密</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="id" value="{$info.id}">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"><span style='color:red;'>是否允许登录</span>
+                                    </label>
+
+                                    <div class="col-sm-10">
+                                        <div class="radio">
+                                            <label>
+                                            <input type="radio"  value="1" id="optionsRadios1" name="IsLogin" <if condition="$info['IsLogin'] eq '1'">checked="checked"</if>>是</label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" id="optionsRadios2" value="0" <if condition="$info['IsLogin'] eq '0'">checked="checked"</if> name="IsLogin">否</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"><span style='color:red;'>管理层</span>
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                              <label>
+                                                <input type="checkbox" value="1" name="IsLeader" <?php if ($info['IsLeader']=='1'): ?>
+                                                    checked="true"
+                                                <?php endif ?> id="IsLeader">
+                                                管理层请勾选
+                                              </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="hr-line-dashed"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"><span style='color:red;'>客服</span>
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                              <label>
+                                                <input type="checkbox" value="1" name="IsServer" <?php if ($info['IsServer']=='1'): ?>
+                                                    checked="true"
+                                                <?php endif ?> id="IsServer">
+                                                客服请勾选
+                                              </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="hr-line-dashed"></div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-4 col-sm-offset-2">
+                                                <button class="btn btn-primary btn-outline" type="submit">保存内容</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                     function show(){
+                      $("#change").hide();
+                      $("#pass").html('<label class="col-sm-2 control-label">密码</label><div class="col-sm-4"><input type="password" name="Password" id="Password" class="form-control" name="password"></div>');
+                      $("#rep").html('<label class="col-sm-2 control-label">确认密码</label><div class="col-sm-4"><input type="password" name="repass" id="repass" class="form-control"></div>');
+                  }
+              </script>
+              <include file="Common:footer" />

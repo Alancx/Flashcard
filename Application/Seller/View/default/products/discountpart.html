@@ -1,0 +1,209 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+  .p-box img{
+    width: 80%;
+  }
+  .p-box{
+    border-bottom: 1px solid #ccc;
+    margin-top: 5px;
+  }
+  body{
+    background-color: #fff!important;
+  }
+</style>
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+    <div class="col-lg-12">
+       <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加组合</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" class="form-inline" action="" method="post" id="save">
+                <div class="form-group">
+                <div class="input-group">
+                	<div class="input-group-addon">
+                		<button class="btn btn-primary btn-outline btn-xs" type="button" id="getGid">重新生成ID</button>
+                	</div>
+                    <input type="text"  name="GroupId" id="GroupId" value="{$GroupId}" readonly="true" class="form-control">
+                </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="请填写组合名称" name="GroupName" id="GroupName" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="SDate" id="SDate" placeholder="开始日期" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d}'})" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="EDate" id="EDate" placeholder="结束日期" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+1}'})" class="form-control">
+                </div>
+
+                <div class="checkbox m-l m-r-xs">
+                <input type="hidden" name="type" id="type" value="add">
+                  <button class="btn btn-white" type="submit" id="btn-submit">保存</button>
+                    </form>
+                </div>
+                <div class="alert alert-warning">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <h3>组合管理</h3>
+            <table class="table table-bordered table-hover">
+              <tr>
+                 <td style="width:10%;">#</td>
+                 <td style="width:10%;">组合名称</td>
+                 <td style="width:50%;">组合商品</td>
+                 <td style="width:20%;">生效时间</td>
+                 <td style="width:10%;">操作</td>
+             </tr>
+             <foreach name="lists" item="list">
+              <tr>
+                 <td>{$list.GroupId}</td>
+                 <td>{$list.GroupName}</td>
+                 <td><div id="add{$list.GroupId}{$list.ID}">
+                   <foreach name="list.pros" item="pro">
+                   <div class="row p-box" data-pid='{$pro.ProIdCard}' id="{$pro.ProIdCard}{$list.GroupId}">
+                     <div class="col-xs-3 col-sm-3 col-md-3">
+                       <img src="{$pro.ProLogoImg}" alt="">
+                     </div>
+                     <div class="col-xs-7 col-sm-7 col-md-7">
+                     {$pro.ProName}<br>
+                     {$pro.ProSpec1}/{$pro.ProSpec2}/{$pro.ProSpec3}
+                     <br>
+                     原价：{$pro.oldPrice}  
+                     <br>
+                     组合价：{$pro.newPrice}
+                     </div>
+                     <div class="col-xs-2 col-sm-2 col-md-2">
+                       <button class="btn btn-xs btn-danger btn-outline" type="button" onclick="delpro('{$pro.ProIdCard}','{$list.GroupId}')">删除此商品</button>
+                     </div>
+                   </div>
+                   </foreach>
+                 </div><button class="btn btn-xs btn-primary btn-outline btn-chose" style="margin-top:10px;text-align:center;" type="button" data-gid="{$list.GroupId}" data-id="{$list.ID}" onclick="chosePro('{$list.ID}','{$list.GroupId}');">添加商品</button></td>
+                 <td>{$list.SDate} 至 <br>{$list.EDate}</td>
+                 <td><a href="###" onclick="edit('{$list.GroupId}');">修改</a> | <a href="###" onclick="del('{$list.GroupId}');">删除</a></td>
+             </tr>
+         </foreach>
+     </table>
+     <div style="text-align:right;margin-bottom:100px;">{$page}</div>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+var json={$jsondata};
+function edit(id){
+	$.each(json,function(index,item){
+		if (item.GroupId==id) {
+			$('#GroupId').val(item.GroupId);
+			$('#GroupName').val(item.GroupName);
+			$('#SDate').val(item.SDate);
+			$('#EDate').val(item.EDate);
+			$('#type').val('edit');
+		};
+	})
+}
+function del(id){
+	art.dialog.confirm('此操作将该组合内商品一并删除，确定要删除吗？',function(){
+		window.location.href="{:U('Products/delgroupdiscount')}?gid="+id;
+	},function(){
+		art.dialog.tips('取消操作',1);
+	})
+}
+
+function chosePro(id,gid){
+	art.dialog.data('thisid',id);
+	art.dialog.data('groupid',gid);
+	art.dialog.open("{:U('ArtDialog/chosePro')}",{width:800,height:600});
+}
+
+function delpro(id,gid){
+  art.dialog.confirm('确定要把此商品从组合中删除吗？',function(){
+    var notice=art.dialog({content:'正在处理...',lock:true});
+    $.ajax({
+      type:"post",
+      url:"{:U('Products/delbyproidcard')}",
+      data:"ProIdCard="+id+"&GroupId="+gid,
+      dataType:"json",
+      success:function(msg){
+        notice.close();
+        if (msg=='success') {
+          art.dialog.tips('删除成功',1);
+          $('#'+id+gid).remove();
+        }else if (msg=='cant') {
+          art.dialog.alert('删除失败！删除后将于其他组合重复！');
+        }else{
+          art.dialog.tips('删除失败',1);
+        }
+      }
+    })
+    // window.location.href="{:U('Products/delbyproidcard')}?ProIdCard="+id+"&GroupId="+gid;
+  },function(){
+    art.dialog.tips('取消操作');
+  })
+}
+
+
+  $(document).ready(function(){
+  	$('#save').submit(function(){
+  		var GroupId=$('#GroupId').val();
+  		var GroupName=$('#GroupName').val();
+  		var SDate=$('#SDate').val();
+  		var EDate=$('#EDate').val();
+  		if (!GroupId) {
+  			art.dialog.alert('ID丢失，请刷新页面或重新生成');
+  			return false;
+  		};
+  		if (!GroupName) {
+  			art.dialog.alert('请输入组合名称');
+  			return false;
+  		};
+  		if (SDate && EDate) {
+  			art.dialog.tips('正在处理...',10);
+  			return true;
+  		}else{
+  			art.dialog.alert('请选择完整时间段');
+  			return false;
+  		}
+  	})
+  	$('#getGid').click(function(){
+  		$.ajax({
+  			type:"post",
+  			url:"{:U('Products/getGid')}",
+  			data:"oldgid="+$('#GroupId').val(),
+  			dataType:"json",
+  			success:function(msg){
+  				if (msg.statu=='success') {
+  					$('#GroupId').val(msg.newGid);
+  					$('#GroupName').val('');
+  					$('#SDate').val('');
+  					$('#EDate').val('');
+  					$('#type').val('add');
+  				}else{
+  					art.dialog.tips('获取失败',2);
+  				}
+  			}
+  		})
+  	})
+  // 	$('btn-chose').click(function(){
+  // 		var GroupId=$(this).attr('data-gid');
+  // 		var domid='add'+$(this).attr('data-id');
+		// art.dialog.data('thisid',domid);
+		// art.dialog.data('groupid',GroupId);
+		// art.dialog.open("{:U('ArtDialog/chosePro')}");
+  // 	})
+  })
+</script>
+<include file="Common:footer" />

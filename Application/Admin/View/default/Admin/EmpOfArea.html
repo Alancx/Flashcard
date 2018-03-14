@@ -1,0 +1,78 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<div class="row  wrapper  white-bg" style="margin:0px;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>区域分配</h5>
+			</div>
+			<div class="ibox-content">
+				<form method="post" action="" class="form-horizontal" id="sv">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">用户名</label>
+
+						<div class="col-sm-4">
+							<input type="text" name="" value="{$Myinfo.userName}" id="" class="form-control" readonly="true">
+							<input type="hidden" name="id" value="{$Myinfo.id}">
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">已选区域</label>
+						<div class="col-sm-10">
+							<foreach name="MyArea" item="mst">
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" name="AreaIds[]" value="{$mst.ID}" checked="true">
+								    {$mst.AreaName}
+								  </label>
+								</div>
+							</foreach>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">可选地区</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<select data-placeholder="请选择地区" name="AreaIds[]" class="chosen-select" multiple style="width:350px;" tabindex="4">
+									<option value="">请选择地区</option>
+									<foreach name="NowArea" item="st">
+										<option value="{$st.ID}" hassubinfo="true">{$st.AreaName}</option>
+									</foreach>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button class="btn btn-primary btn-outline" type="submit" id="sss">保存内容</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.chosen-select').chosen();
+	$('#sv').submit (function(){
+		var value=$('input[name="AreaName[]"]:checked').val();
+		var newvalue=$('.chosen-select').val();
+		console.log(value,newvalue);
+		if (value || newvalue) {
+			return true;
+		}else{
+			// art.dialog.tips('请选择区域');
+			return true;
+		}
+	})
+})
+</script>
+
+<include file="Common:footer" />

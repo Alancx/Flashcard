@@ -1,0 +1,133 @@
+.infor{
+	height: 150px;
+	background: no-repeat center right 20px,#ff7200;
+	background-size:auto 80%;
+	overflow: hidden;
+}
+.infor>div{
+	height: 50px;
+	margin: 25px 0 0 25px;
+	line-height: 50px;
+}
+.myphoto{
+	width: 50px;
+	height: 50px;
+	border-radius:50% ;
+	float: left;
+	margin-right: 10px;
+}
+.myname{
+	color: #fff;
+	display: inline-block;
+}
+.myCommission,.commissionRule,.myMoney{
+	color: #fff;
+}
+.myCommission{
+	position: absolute;
+	top: 0;
+	left: 10px;
+}
+.commissionRule{
+	position: absolute;
+	top: 0;
+	right: 10px;
+}
+.myMoney{
+	position: absolute;
+	top: 60px;
+	font-size: 45px;
+}
+.withdrawMoney{
+	/*border: 1px solid red;*/
+}
+.withdrawMoney p{
+	margin-bottom: 12px;
+}
+.mui-table-view-cell{
+	height: 80px;
+}
+
+.rmb{
+	display: block;
+	width: 40px;
+	height: 40px;
+	float: left;
+	font-size: 30px;
+	line-height: 40px;
+	text-align: left;
+	border-right:1px solid #ddd ;
+}
+#withdrawButton{
+	width: 54px!important;
+	height: 33px!important;
+	position: absolute !important;
+	bottom: 10px;
+	top:inherit !important;
+	right: 10px !important;
+	
+	
+}
+.putmoney{
+	width: calc(100% - 140px) !important;
+	height: 10px;
+	border: none !important;
+	font-size: 20px;
+	float: left;
+	margin: 0 !important;
+}
+.mui-pull-left{
+	border-radius: 100px;
+	margin-top: 10px;
+	
+}
+.mui-table-view-cell{
+	/*margin-top: 10px;*/
+}
+.titles{
+	float: left;
+	margin-top: 22px;
+	
+}
+.nums{
+	float: left;
+	margin-top: 10px;
+	color:#999999;
+}
+.creatTime{
+	position: absolute;
+	right: 10px;
+	bottom: 13px;
+	color:#999999;
+}
+.withBank{
+	padding-top: 10px;
+	font-size: 14px;
+}
+.tx{
+	padding-left: 10px;
+}
+.bank{
+	padding-left: 30px;
+	color: #000000;
+}
+.mui-icon-forward{
+	float: right;
+	color: #000000;
+	padding-right: 15px;
+}
+.save{
+	float: ;
+	height: 40px;
+	width: 120px;
+	color: #FFFFFF;
+	background-color: #FF7200;
+	top: 20px;
+	left: 110px;
+	margin: 0 auto;
+	
+}
+.statu{
+	float: right;
+	color: #999999;
+}

@@ -1,0 +1,59 @@
+<layout name="Public/PageModel" />
+<link rel="stylesheet" href="__PUBLIC__/CSS/Wap/login.css">
+<div class="row">
+	<div class="col-xs-12 col-sm-12"><h1><if condition="$type eq 'TH'">添加提货核销员<else/>添加现金核销员</if></h1></div>
+	<div class="col-xs-12 col-sm-12">
+		<form id="subForm" action="{:U('Account/saveCheckPeople')}" method="post" class="form">
+			<div class="form-group">
+				<div class="input-group">
+						绑定门店：{$minfo['storename']}
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">&emsp;<span class="glyphicon glyphicon-user"></span>&emsp;</span>
+					<input type="text" name="name" id="name" class="form-control" placeholder="请输入核销员姓名">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon">&emsp;<span class="glyphicon glyphicon-lock"></span>&emsp;</span>
+					<input type="password" name="pwd" id="pwd" class="form-control" placeholder="请输入验证码">
+				</div>
+			</div>
+
+			<div class="form-btn">
+				<input type="hidden" id="mid" name="mid" value="{$minfo['id']}"/>
+				<input type="hidden" name="type" value="{$type}"/>
+				<input type="hidden" id="backPage" name="backPage" value="{$backpageurl}"/>
+				<button type="button" id="sub" class="btn btn-success btn-sm">提交验证</button>
+			</div>
+<!--
+			<div class="form-icon">
+				<div class="col-xs-3 col-sm-3 col-xs-offset-3 col-sm-offset-3"><a href="###"><img src="__PUBLIC__/Images/Wap/qq1.png" alt="QQ登陆" title="QQ登陆"></a></div>
+				<div class="col-xs-3 col-sm-3"><a href="###"><img src="__PUBLIC__/Images/Wap/wx2.png" alt="微信登陆" title="微信登陆"></a></div>
+			</div>
+-->
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('#sub').click(function(){
+		if ($("#name").val()=="") {
+			tips('请填写核销员姓名');
+			return false;
+		}
+		if ($('#pwd').val()=="") {
+			tips('请输入验证码');
+			return false;
+		}
+		else
+		{
+			$('#subForm').submit();
+		}
+	});
+
+</script>

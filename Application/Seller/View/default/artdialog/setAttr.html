@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>设置商品属性</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .attrvalues{
+        border: 1px solid green;
+        margin:auto 2px;
+        border-radius: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="width:560px;height:380px;">
+      <div class="row">
+        <form action="{:U('Products/saveProImg')}" method="post" id="saveatr">
+        <h4 style="text-align:center;">商品属性设置</h4>
+        <hr>
+          <div class="form-group col-sm-5">
+          <label for="attriButes">属性</label>
+            <select name="AttributeId" class="chosen-select form-control" id="chosen" style="width:350px;" tabindex="2" onchange="getValues();">
+            	<option value="">请选择</option>
+            	<foreach name="attrs" item="attr">
+            	<option value="{$attr.AttributeId}" id="atname{$attr.AttributeId}">{$attr.AttributeName}</option>
+            	</foreach>
+            </select>
+          <div style="margin-top:20px;" id="attrvalues"></div>
+          <input type="hidden" name="ProId" value="" id="ProId">
+          </div>
+          <div style="text-align:center"><button type="button" class="btn btn-success btn-md" onclick="setAttr();">添 加</button></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  </body>
+<script type="text/javascript">
+var proId=art.dialog.data('proid');
+$(document).ready(function(){
+  $("#ProId").val(proId);
+})
+$("#chosen").chosen();
+
+function getValues(){
+  var id=$("#chosen").val();
+  var origin=artDialog.open.origin;
+  var pdom=origin.document.getElementById('attributes');
+  // alert($("#atname"+id).text());
+  var artopen = art.dialog({content:'正在加载......',lock:true});
+	$.ajax({
+		type:'post',
+		url:'{:U('artDialog/getValues')}',
+		data:'id='+id,
+		dateType:'json',
+		success:function(msg){
+			var msgr=eval("("+msg+")");
+			var html='<div class="form-group"><label class="col-sm-2 control-label" style="padding-left:0px;">属性值</label><div class="col-sm-10">';
+			for (var i in msgr) {
+				html+='<label class="checkbox-inline"><input type="checkbox" name="values[]" class="values" value="'+msgr[i].AttributeValueId+'" id="AttributeName'+msgr[i].AttributeValueId+'"><span class="attrvalues" id="txt'+msgr[i].AttributeValueId+'">'+msgr[i].AttributeValue+'</span></label>';
+			};
+			html+='</div></div>';
+			$("#attrvalues").html(html);
+			// alert(msg);
+
+      artopen.close();
+		}
+	})
+}
+
+function setAttr(){
+  var id=$("#chosen").val();
+  var atname=$("#atname"+id).text();
+	var values=document.getElementsByClassName('values');
+  var html="<div style='margin-top:15px;'><span style='font-size:1.5em;margin-bottom:5px;'>"+atname+"</span> <input type='hidden' name='AttributeId' value='"+id+"'> <br/>"
+  var data="{'attrname':'"+atname+"','attrid':'"+id+"','data':{";
+  for (var i = 0; i < values.length; i++) {
+      // alert(values[i].value);
+    if (values[i].checked==true) {
+      var name=document.getElementById('txt'+values[i].value);
+      html+="<span class='attrvalues'>"+name.innerHTML+"</span><input type='hidden' name='AttributeValue[]' value='"+values[i].value+"'>";
+      data+="'"+i+"':{'AttributeValueId':'"+values[i].value+"','AttributeValue':'"+name.innerHTML+"'},";
+    };
+  };
+  data+="}}";
+  html+="</div>";
+  var origin=artDialog.open.origin;
+  var pdom=origin.document.getElementById('attributes');
+  pdom.innerHTML+=html;
+  var datas=eval("("+data+")");
+  $("#saveatr").submit();
+  art.dialog({content:'数据保存中...',lock:true});
+  console.log(datas);
+  // $.ajax({
+  //   type:'post',
+  //   url:'{:U('Products/test')}',
+  //   data:'data='+data,
+  //   dateType:'json',
+  //   success:function(msg){
+  //     console.log(msg);
+  //     alert(msg);
+  //   }
+  // })
+  // alert(html);
+}
+</script>
+</html>

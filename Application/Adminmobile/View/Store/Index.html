@@ -1,0 +1,28 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/storeindex.css?v=1.0">
+
+<div class="stpart">
+  <div>
+    <label class="tgcodes">推广二维码</label>
+  </div>
+</div>
+
+<!--我的二维码-->
+<div class="coverqrcode">
+    <div class="qr-codes">
+        <label class="qr-codesmy">店铺二维码名片</label>
+        <img src="{:U('Public/getUserQrcode')}">
+        <label class="qr-codess">用手机扫一扫二维码</label>
+        <label class="qr-codegb">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闭</label>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+  $('.tgcodes').click(function(){
+    $('.coverqrcode').css('display','block');
+  })
+  $('.qr-codegb').click(function(){
+    $('.coverqrcode').css('display','none');
+  })
+})
+</script>

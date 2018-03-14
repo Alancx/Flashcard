@@ -1,0 +1,54 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/distribution/css/distribution.css?v=1.4">
+<script src="__PUBLIC__/theme2/js/ajaxfileupload.js"></script>
+<div class="partdis">
+  <div class="headpart">
+    <div class="headimg">
+      <div>
+        <img class="head_img" src="__PUBLIC__/distribution/images/default.png" alt="">
+        <input type="file" id="iptxtp" name="iptxtp" onchange="seltxtp(this)">
+        <input type="hidden" id="tximg" value="">
+      </div>
+    </div>
+    <label class="txtip">上传头像</label>
+  </div>
+  <div class="part">
+    <label class="l_title">真实姓名:</label>
+    <input type="text" id="truename" name="truename" value="" placeholder="填写真实姓名">
+  </div>
+  <div class="part">
+    <label class="l_title">身份证号:</label>
+    <input type="text" id="idcard" name="idcard" value="" placeholder="填写身份证号码">
+  </div>
+  <div class="part_idcard">
+    <div class="part_idcard_img">
+      <img class="selidcard" src="__PUBLIC__/distribution/images/idcard.png" alt="">
+      <input type="file" id="idcards" name="idcards" onchange="selidcard(this)">
+      <input type="hidden" id="idcardimg" value="">
+    </div>
+    <div class="part_idcard_tip">
+      <label>注意:图像为身份证正面<br>&emsp;&emsp; 图像信息清晰可识别<br>&emsp;&emsp; 图片不易过大</label>
+    </div>
+  </div>
+  <div class="part">
+    <label class="l_title">手机号:</label>
+    <input type="number" class="phone" name="phone" value="" placeholder="填写手机号码">
+    <label class="getcode" data-s="0">获得验证码</label>
+  </div>
+  <div class="part">
+    <label class="l_title">验证码:</label>
+    <input type="text" id="pscode" name="pscode" value="" placeholder="填写验证码">
+  </div>
+  <div style="display:block;height:50px;">
+  <div class="btn_group">
+    <label class="saveps">保存</label>
+  </div>
+</div>
+<script type="text/javascript">
+  var gotophnesms="{:U('Distribution/sendphonecode')}";////获得短信验证码
+  var userimg= "{:U('Distribution/userimage')}";//上传头像
+  var useridcard= "{:U('Distribution/useridcard')}";//上传身份证信息
+  var saveuser_url= "{:U('Distribution/savedistribution')}";//保存配送员信息
+  var center_url= "{:U('Distribution/index')}";//配送员个人中心
+</script>
+<script src="__PUBLIC__/distribution/js/distribution.js?v=1.1" charset="utf-8"></script>

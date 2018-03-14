@@ -1,0 +1,35 @@
+.mer-second >p{
+	/*font-weight:bold;*/
+	line-height: 30px;
+}
+.mer-second >p:last-child{
+	color:#000000;
+}
+ ul >li{
+	margin-bottom: 5px;
+} 
+.titles{
+	/*font-weight:bold;*/
+}
+.mui-bar-tab{
+	background-color: orangered;
+}
+.mui-bar-tab a>span{
+	color: #FFFFFF;
+	float: left;
+	margin-left: 13px;
+	margin-top: 13px;
+	/*margin-top: 5px;*/
+	text-align: center;
+}
+.mui-btn-outlined{
+	color: #FFFFFF;
+	margin-bottom: 13px;
+	border-radius: 100px;
+	float: right;
+	margin-right: 10px;
+}
+#topImg{
+	border-radius:100px ;
+}
+

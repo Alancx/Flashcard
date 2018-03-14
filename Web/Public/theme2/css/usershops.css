@@ -1,0 +1,56 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.container{
+	margin: 0px;
+	width: 100%;
+}
+.umshops{
+	background-color: #ffffff;
+  margin: 10px 0px 0px 0px;
+  border-top-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  overflow: hidden;
+}
+.umshops > div {
+    height: 50px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.umshops >div>a>label {
+    width: 95%;
+    height: 100%;
+    font-size: 14px;
+    color: #333333;
+    line-height: 49px;
+    margin: 0px;
+    padding: 0px 0px 0px 50px;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 7px;
+}
+.userszy {
+    background-image: url("../Images/usershzy.png");
+}
+
+.usersjl {
+    background-image: url("../Images/userxgzl.png");
+}
+/*积分使用我要开店界面*/
+.userjfsc{
+    background-image: url("../Images/jfsc.png");
+}
+.usersjlxq{
+    background-image: url("../Images/jfxq.png");
+}
+.usersjldd{
+    background-image: url("../Images/jfdd.png");
+}

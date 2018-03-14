@@ -1,0 +1,65 @@
+<include file="Common:top" />
+<link href="__PUBLIC__/Admin/Admin/common/css/order.style.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<style type="text/css">
+ul,ol,li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+</style>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+    <div class="col-lg-12 col-md-12" style="padding-bottom:10px;">
+        <form action="" class="form-inline" method="post" id="saccess" style="margin-left:20px;">
+            <div class="form-group">
+                <input type="text" name="storename" id="storename" value="{$data.storename}" placeholder='请输入店铺名称' class='form-control'>
+            </div>
+            <button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button> 
+            <!-- <button class="btn btn-default btn-outline btn-md" type="button" id="import"><span class="glyphicon glyphicon-import"></span>导 出</button> -->
+        </form>
+    </div>
+        <div class="col-lg-12">
+            <div class="ibox-content dash-ibox-content">
+                <table class="table table-condensed table-bordered">
+                    <thead>
+                        <tr>
+                            <th>店铺名称</th>
+                            <th>银行</th>
+                            <th>卡号</th>
+                            <th>户主</th>
+                            <th>联系人</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="banks" item='ass'>
+                        <tr>
+                            <td>{$ass.storename}</td>
+                            <td>{$ass.BankName}</td>
+                            <td>{$ass.IdCard}</td>
+                            <td>{$ass.IdName}</td>
+                            <td>{$ass.tel}</td>
+                        </tr>
+                        </foreach>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align:right;">{$page}</div>
+        </div>
+    </div>
+</div>
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">NProgress.done()</script>
+</body>
+<script type="text/javascript">
+    
+</script>
+</html>

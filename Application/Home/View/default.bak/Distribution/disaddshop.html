@@ -1,0 +1,56 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/distribution/css/disaddshop.css?v=1.2">
+<div class="selshoptype">
+  <div>
+    <label class="shoptype selshopactive" data-type='0'>未添加</label>
+    <label class="shoptype" data-type="1">已添加</label>
+  </div>
+</div>
+<div class="shop_content noselect" style="display:block;">
+  <div class="shopnosel">
+  <foreach name="shoplist" item="shopitem">
+    <div class="shopinfo" data-sid="{$shopitem['id']}" data-stoken="{$shopitem['stoken']}">
+      <if condition="$shopitem['Slogo'] eq ''">
+        <img src="__PUBLIC__/distribution/images/shoplogo.png" alt="">
+        <else/>
+        <img src="{:C('RESOURCE_URL')}{$shopitem['Slogo']}" alt="">
+      </if>
+      <label class="shopname">{$shopitem['storename']}</label>
+      <label class="shopaddr">{$shopitem['addr']}</label>
+      <label class="shoptel">{$shopitem['tel']}</label>
+      <div class="conver_shop">
+        <img src="__PUBLIC__/distribution/images/selshop.png" alt="">
+      </div>
+    </div>
+  </foreach>
+</div>
+  <div class="btn_group">
+    <label class="saveselshop">提交(0)</label>
+  </div>
+</div>
+<div class="shop_content hasselect" style="display:none;">
+  <foreach name="hasshoplist" item="shopitem">
+    <div class="dhopinfo">
+      <if condition="$shopitem['Slogo'] eq ''">
+        <img src="__PUBLIC__/distribution/images/shoplogo.png" alt="">
+        <else/>
+        <img src="{:C('RESOURCE_URL')}{$shopitem['Slogo']}" alt="">
+      </if>
+      <label class="shopselname">{$shopitem['storename']}</label>
+      <switch name="shopitem['Status']">
+        <case value="0"><label class="disstatus" style="color:#0f9c47">待审核</label></case>
+        <case value="1"><label class="disstatus" style="color:#fd930d">已审核</label></case>
+        <case value="2"><label class="disstatus" style="color:#b5232c">未通过</label></case>
+        <default/><label class="disstatus"></label>
+      </switch>
+    </div>
+  </foreach>
+</div>
+
+<script type="text/javascript">
+  var savesidlist="{:U('Distribution/saveshoplist')}";//配送员门店绑定
+  var center_url= "{:U('Distribution/index')}";//配送员个人中心
+  $('.shop_content').css('height',$(window).innerHeight()-55+'px');
+  $('.shopnosel').css('height',$('.shop_content').outerHeight()-50+'px');
+</script>
+<script src="__PUBLIC__/distribution/js/disaddshop.js?v=1.4" charset="utf-8"></script>

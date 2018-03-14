@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>{$Title}</title>
+	<!-- Bootstrap -->
+	<link href="__PUBLIC__/Adminmobile/CSS/bootstrap.min.css" rel="stylesheet">
+	<link href="__PUBLIC__/Adminmobile/CSS/weui.css" rel="stylesheet">
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="__PUBLIC__/Adminmobile/JS/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="__PUBLIC__/Adminmobile/JS/bootstrap.min.js"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="__PUBLIC__/Adminmobile/JS/base.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/Adminmobile/CSS/pagemodel.css?v=2.0" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+	<!-- 正文显示区域 -->
+	<div class="container">
+		{__CONTENT__}
+	</div>
+
+	<!-- 底部导航栏 -->
+	<if condition="$footerSign eq 1">
+		<div style="height:50px"></div>
+		<div class="footer">
+			<div>
+				<img src="__PUBLIC__/Adminmobile/icon/dp-act.png">
+				<label>店铺</label>
+			</div>
+			<div>
+				<img src="__PUBLIC__/Adminmobile/icon/kh-act.png">
+				<label>客户</label>
+			</div>
+			<div>
+				<img src="__PUBLIC__/Adminmobile/icon/yx-act.png">
+				<label>营销</label>
+			</div>
+			<div>
+				<img src="__PUBLIC__/Adminmobile/icon/gd-act.png">
+				<label>更多</label>
+			</div>
+		</div>
+	</if>
+	<!-- weui提示框 -->
+	<div id="notice" style="display: none;">
+		<div class="weui_mask_transparent"></div>
+		<div class="weui_toast">
+			<i class="weui_icon_toast"></i>
+			<p class="weui_toast_content"></p>
+		</div>
+	</div>
+
+	<div class="weui_dialog_confirm" id="confirm" style="display: none;">
+		<div class="weui_mask"></div>
+		<div class="weui_dialog">
+			<div class="weui_dialog_hd"><strong class="weui_dialog_title">操作提示</strong></div>
+			<div class="weui_dialog_bd"></div>
+			<div class="weui_dialog_ft">
+				<a href="javascript:;" class="weui_btn_dialog default" id="esc">取消</a>
+				<a href="javascript:;" class="weui_btn_dialog primary" id="enter" data-s="" data-idcard=''>确定</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="weui_dialog_alert" id="alert" style="display: none;">
+		<div class="weui_mask"></div>
+		<div class="weui_dialog">
+			<div class="weui_dialog_hd"><strong class="weui_dialog_title">提示信息</strong></div>
+			<div class="weui_dialog_bd"></div>
+			<div class="weui_dialog_ft">
+				<a href="javascript:;" class="weui_btn_dialog primary" id='alertenter'>确定</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="waiting" class="weui_loading_toast" style="display:none;">
+		<div class="weui_mask_transparent"></div>
+		<div class="weui_toast">
+			<div class="weui_loading">
+				<div class="weui_loading_leaf weui_loading_leaf_0"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_1"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_2"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_3"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_4"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_5"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_6"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_7"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_8"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_9"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_10"></div>
+				<div class="weui_loading_leaf weui_loading_leaf_11"></div>
+			</div>
+			<p class="weui_toast_content">数据加载中</p>
+		</div>
+	</div>
+</body>
+</html>

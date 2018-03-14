@@ -1,0 +1,89 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/seachshop.css?v=1.0">
+<div class="seachhaeard">
+  <div class="inputseach">
+    <input id="inputseach" type="text" name="" value="{$sname}" placeholder="输入小店名称">
+    <img id="iconseach" src="__PUBLIC__/theme2/Images/PageModelIcon/search.png" alt="">
+  </div>
+</div>
+<div class="shopconhent">
+  <if condition="$watermark eq 'true' ">
+    <img class="watermark" src="__PUBLIC__/theme2/Images/watermark.png" style="display:block;" alt="">
+    <else />
+    <img class="watermark" src="__PUBLIC__/theme2/Images/watermark.png" alt="">
+  </if>
+  <div>
+    <foreach name="shoplist" item="shopitem">
+      <div id="{$shopitem['id']}" class="shopinfos" data-stoken="{$shopitem['stoken']}" onclick="gotoshop(this)">
+        <empty name="shopitem['Slogo']">
+          <img src="__PUBLIC__/theme2/images/shoplogo.png" class="shop_img" alt="">
+          <else />
+          <img src="{:C('RESOURCE_URL')}{$shopitem.Slogo}" class="shop_img" alt="">
+        </empty>
+        <div class="shopinfo">
+          <label class="shopname">{$shopitem.storename}</label>
+          <label class="shopaddr">{$shopitem.province}{$shopitem.city}{$shopitem.area}{$shopitem.addr}</label>
+        </div>
+      </div>
+    </foreach>
+  </div>
+</div>
+<script type="text/javascript">
+  var home_url="{:U('Index/Index',array('stoken'=>'SHOPTOKEN'))}";
+  $('.shopconhent').css('height',$(window).innerHeight()-$('.seachhaeard').outerHeight()-10+'px');
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#iconseach').click(function(){
+      var shopname=$('#inputseach').val();
+      if (shopname!='') {
+        tips('waiting',"正在查询···",15000);
+        $.ajax({
+          type: "post", //请求的方式
+          dataType: "json", //数据的格式 建议大家使用json格式
+          data: "shopname="+shopname, //请求的数据
+          url: "{:U('LBS/seachshop')}", //请求的url地址
+          success: function (data) { //请求成功时，处理返回来的数据
+            hidetips('waiting');
+            if (data.status=='true') {
+              var htmls='';
+              $.each(data.info,function(index,item){
+                console.log(item.Slogo);
+                if ((item.Slogo=='')||(item.Slogo==null)) {
+                  htmls+='<div id='+item.id+' class="shopinfos" data-stoken='+item.stoken+' onclick="gotoshop(this)">'+
+                    '<img src="__PUBLIC__/theme2/images/shoplogo.png" class="shop_img" alt="">'+
+                    '<div class="shopinfo">'+
+                      '<label class="shopname">'+item.storename+'</label>'+
+                      '<label class="shopaddr">'+item.province+item.city+item.area+item.addr+'</label>'+
+                    '</div></div>';
+                } else {
+                  htmls+='<div id='+item.id+' class="shopinfos" data-stoken='+item.stoken+' onclick="gotoshop(this)">'+
+                    '<img src={:C("RESOURCE_URL")}'+item.Slogo+' class="shop_img" alt="">'+
+                    '<div class="shopinfo">'+
+                      '<label class="shopname">'+item.storename+'</label>'+
+                      '<label class="shopaddr">'+item.province+item.city+item.area+item.addr+'</label>'+
+                    '</div></div>';
+                }
+              })
+              $('.watermark').css('display','none');
+              $('.shopconhent>div').html(htmls);
+            } else {
+              $('.watermark').css('display','block');
+              $('.shopconhent>div').html('');
+            }
+          }
+        })
+      } else {
+        tips('notice', '输入小店名称!', 1500, 'weui_icon_notice');
+      }
+    })
+  })
+  ////////////到对应的小店////////////////
+  function gotoshop(sdiv){
+    var shoptoken=$(sdiv).attr('data-stoken');
+    if (shoptoken!='') {
+      var homeurl=home_url.replace(/SHOPTOKEN/g,shoptoken);
+      window.location.href=homeurl;
+    }
+  }
+</script>

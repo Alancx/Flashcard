@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>{$Title}</title>
+
+  <!-- Bootstrap -->
+  <link href="__PUBLIC__/theme2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/plugins/swiper/css/swiper.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/plugins/animate/animate.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/plugins/weui/weui.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/css/proinfo.css?v={$VERSION_NO}" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/css/common.css?v={$VERSION_NO}" rel="stylesheet">
+  <script src="__PUBLIC__/JS/jquery.min.js"></script>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+    <script type="text/javascript">
+
+    var latitude=0;
+    var longitude=0;
+
+     function showErr()
+     {
+
+     }
+
+        var wxJSSDKConfig = {$wxJSSDKConfigStr};
+
+        wx.config(wxJSSDKConfig);
+
+        wx.ready(function (a) {
+
+            wx.hideAllNonBaseMenuItem();
+
+            wx.showMenuItems({
+              menuList: ["menuItem:share:appMessage","menuItem:share:timeline"] // 要显示的菜单项，所有menu项见附录3
+            });
+            //wx.hideAllNonBaseMenuItem();
+            wx.onMenuShareAppMessage({
+              title: '{$Title}',
+              desc: '{$Title}',
+              link: '{$shareUrl}',
+              imgUrl: '{$shareImg}',
+              trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                //alert('用户点击发送给朋友');
+              },
+              success: function (res) {
+                alert('已分享');
+              },
+              cancel: function (res) {
+                alert('已取消');
+              },
+              fail: function (res) {
+                alert(JSON.stringify(res));
+              }
+            });
+
+            wx.onMenuShareTimeline({
+              title: '{$Title}',
+              link: '{$shareUrl}',
+              imgUrl: '{$shareImg}',
+              trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+                //alert('用户点击分享到朋友圈');
+              },
+              success: function (res) {
+                alert('已分享');
+              },
+              cancel: function (res) {
+                alert('已取消');
+              },
+              fail: function (res) {
+                alert(JSON.stringify(res));
+              }
+            });
+        });
+
+        wx.error(function (res) {
+            //alert(res);
+        });
+
+        function wxScanQRCode()
+        {
+            wx.scanQRCode({
+                needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success: function (res) {
+                    res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+  <div class="container">
+    <!-- swiper-start -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <foreach name='info["imgs"]' item='img'>
+          <div class="swiper-slide"><img src="{:C('RESOURCE_URL')}{$img}" alt=""></div>
+        </foreach>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+    <!-- swiper-end -->
+
+
+    <!-- 商品基本信息-start -->
+    <div class="base-box">
+    
+      <div class="base-info">
+
+          <span class="wxprice">
+            所需积分  {$attrs[0]['Score']}
+          </span>
+
+        <p class="pro-title">{$info.ProTitle}</p>
+
+      </div>
+
+    </div>
+
+
+    <div class="hr"></div>
+    <!-- 商品基本信息-end -->
+    <!-- 商品详情-start -->
+    <div class="infos-box">
+      <div class="tabs">
+        <div class="tab tab-active" data-id="pinfos">图文详情</div>
+        <div class="tab" data-id='pjinfos'>用户评论</div>
+      </div>
+      <div class="i-box" id="pinfos">{$info.ProContent|htmlspecialchars_decode} </div>
+      <div class="i-box" id="pjinfos">
+        <span class="title"><b>商品评价(<?php echo count($evals)  ?>)</b></span>
+        <foreach name='evals' item='evl'>
+        <div class="pjcontent">
+            <img src="{:C('RESOURCE_URL')}{$evl['HeadImgUrl']}" alt="" style="width:30px;height:30px;border-radius:50%;"> <span class="username">{$evl['MemberName']}</span><br><br>
+          <span class="con">{$evl.Content}</span><br>
+          <span class="star">商品评分： <?php for ($i=0; $i < $evl['ClassScore']; $i++) {  ?>
+            <img src="__PUBLIC__/theme2/Images/xing01.png" alt="">
+          <?php } ?> </span><br>
+          <span class="star">服务评分：<?php for ($i=0; $i < $evl['ServiceScore']; $i++) {  ?>
+            <img src="__PUBLIC__/theme2/Images/xing01.png" alt="">
+          <?php } ?></span><br>
+          <span class="star">物流评分：<?php for ($i=0; $i < $evl['LogisticsScore']; $i++) {  ?>
+            <img src="__PUBLIC__/theme2/Images/xing01.png" alt="">
+          <?php } ?></span>
+        </div>
+      </foreach>
+      </div>
+    </div>
+    <!-- 商品详情-end -->
+  </div>
+  <!-- 底部按钮-s -->
+
+    <div class="bottom-btn">
+      <div class="buy-now" style="width:100%;" data-s='buy'>立即兑换</div>
+    </div>
+
+  <!-- 加入购物车模态框？ -->
+  <div class="shop-car animated">
+    <div class="car-box animated">
+
+    <div class="pro-img"><img src="{:C('RESOURCE_URL')}{$info.ProLogoImg}" alt=""></div>
+
+    <div class="pro-titles">
+
+      <p>{$info.ProTitle}</p>
+
+      <span id="moneyspan">
+        
+      </span>
+
+    </div>
+
+    <div class="car-close"><img src="__PUBLIC__/theme2/Images/guanbi.png" alt="" id="car-close"></div>
+
+    <div class="hr"></div>
+
+    <div class="attrs-info">
+      <div>
+
+        <?php $i=0 ?>
+        <foreach name='attrs' item='atrs'>
+        <!-- <b>{$key}</b> -->
+
+          <?php $i++; ?>
+          <?php if ($i=='1'): ?>
+            <span class="atr atr-select" data-s="{$atrs['ProIdCard']}" data-st='1'>{$atrs['ProSpec1']}</span>
+          <?php else: ?>
+            <span class="atr" data-s="{$atrs['ProIdCard']}" data-st='0'>{$atrs['ProSpec1']}</span>
+          <?php endif; ?>
+
+        </foreach>
+      </div>
+    </div>
+    <div class="hr"></div>
+
+    <div class="nums-info">
+      <span><b>购买数量</b>&emsp;(库存：<span id="kc">0</span>)</span>
+      <div><img src="__PUBLIC__/theme2/Images/ls.png" alt="" id='less'><input type="text" name="nums" id="nums"  value='1' readonly='true'><img id='add' src="__PUBLIC__/theme2/Images/add.png" alt=""></div>
+    </div>
+    <div class="hr"></div>
+
+    <div class="sub-btn">
+      <button type="button" class="btn btn-warning disabled"  id="sure" data-s='' data-st=''>确定</button>
+    </div>
+    </div>
+  </div>
+<!-- 加入购物车模态框？ -->
+
+
+
+<!-- 全屏遮罩/向上浮出效果，加入后隐藏 -->
+<!-- weui提示框 -->
+<div id="notice" style="display: none;">
+  <div class="weui_mask_transparent"></div>
+  <div class="weui_toast">
+    <i class="weui_icon_toast"></i>
+    <p class="weui_toast_content"></p>
+  </div>
+</div>
+<div id="waiting" class="weui_loading_toast" style="display:none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <div class="weui_loading">
+            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+        </div>
+        <p class="weui_toast_content">数据加载中</p>
+    </div>
+</div>
+
+<!--浮动菜单按钮-->
+<div class="flomenu" id="touch">
+    <div class="scanning" onclick="wxScanQRCode();">
+    </div>
+    <div class="scart">
+    </div>
+</div>
+<!--end 浮动菜单按钮-->
+<div class="cusercover">
+  <div class="cuserlist">
+    <label class="seltitle">请选择客服</label>
+    <div class="selkf">
+      <foreach name='service' item='kf'>
+          <label class="selkfli" onclick="selectkf(this)" data-userid="{$kf.id}">{$kf.userName}</label>
+      </foreach>
+    </div>
+    <div class="selbtn">
+        <div>
+            <label id="cancelkf">取消</label>
+        </div>
+        <div>
+            <label id="surekf">确定</label>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="imgtg">
+  <img src="__PUBLIC__/theme2/Images/share.png"/>
+</div>
+
+
+
+<script src="__PUBLIC__/theme2/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/theme2/js/common.js"></script>
+<script type="text/javascript">
+var imgurl='__PUBLIC__/theme2/Images/';
+var whurl="{:U('JiFenStore/getNums')}";
+var pid='{$info.ProId}';
+var clturl="{:U('JiFenStore/collect')}";
+var login="{:U('Account/Login')}";
+var addcarurl="{:U('JiFenStore/AddCart')}";
+var orderUrl="{:U('JiFenOrder/CreateOrder',array('type'=>'G','GoodsInfo'=>'RESPACETEMP','oStoken'=>'RESPACESTOKEN','isOther'=>'RESPACEISOTHER'))}";
+var jforderUrl="{:U('Score/CreateOrder',array('OrderInfo'=>'RESPACETEMP'))}";
+
+var subSign='0';
+
+$('.scart').click(function(){window.location.href="{:U('Order/Cart')}";});
+
+</script>
+<script src="__PUBLIC__/theme2/js/jfproinfo.js?v={$VERSION_NO}"></script>
+<script src="__PUBLIC__/theme2/plugins/swiper/js/swiper.min.js"></script>
+</body>
+<script>
+var swiper = new Swiper('.swiper-container', {
+  pagination: '.swiper-pagination',
+  // nextButton: '.swiper-button-next',
+  // prevButton: '.swiper-button-prev',
+  paginationClickable: true,
+  spaceBetween: 30,
+  centeredSlides: true,
+  autoplay: 2500,
+  autoplayDisableOnInteraction: false
+});
+</script>
+
+<script>
+    ////////浮动按钮拖动////////////////
+    var div = document.getElementById('touch');
+    div.addEventListener('touchstart', function (event)
+    {
+        // 如果这个元素的位置内只有一个手指的话
+
+        if (event.targetTouches.length == 1)
+        {
+            var touch = event.targetTouches[0];  // 把元素放在手指所在的位置
+            div.style.background = "";
+
+        }
+    });
+
+    div.addEventListener('touchmove', function (event)
+    {
+        event.preventDefault();//阻止其他事件
+        // 如果这个元素的位置内只有一个手指的话
+        if (event.targetTouches.length == 1)
+        {
+            var touch = event.targetTouches[0];  // 把元素放在手指所在的位置
+            div.style.left = touch.clientX + 'px';
+            div.style.top = touch.clientY + 'px';
+            div.style.background = "";
+        }
+    }, false);
+
+    div.addEventListener('touchend',function(e){
+
+    });
+</script>
+<script>
+$(document).ready(function(){
+  $('.car-shouc').click(function(){
+    if($('.cusercover').css('display')=='none'){
+      $('.cusercover').css('display','block');
+      $("body").css("overflow", "hidden");
+      $('.selkf').css('height',$('.cuserlist').height()-99+'px');
+    }
+  })
+  $('#cancelkf').click(function(){
+    $('.cusercover').css('display','none');
+    $('body').css('overflow', 'auto');
+  })
+  $('#surekf').click(function(){
+    if($('.kfactive').length<=0){
+      tips('notice', '选择客服!', 1500, 'weui_icon_notice');
+    } else {
+      var userid=$('.kfactive').attr('data-userid');
+      var cservice_url="{:U('User/cservice',array('userid'=>'SELUSERID'))}";
+      cservice_url=cservice_url.replace(/SELUSERID/g,userid);
+      cservice_url='http://'+window.location.host+cservice_url;
+      window.location.href=cservice_url;
+    }
+  })
+  $('.selprotg').click(function(){
+    $('.imgtg').css('display','block');
+  })
+  $('.imgtg').click(function(){
+    $('.imgtg').css('display','none');
+  })
+})
+function selectkf(label) {
+    $(".selkfli").removeClass("kfactive");
+    $(label).addClass("kfactive");
+}
+</script>
+</html>

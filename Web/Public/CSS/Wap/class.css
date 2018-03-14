@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+*{padding:0px;margin:0px;}
+body{font-family:"Microsoft Yahei";max-width:640px;margin:0 auto;}
+a{cursor:pointer;}
+a:link {text-decoration:none;}
+a:visited{text-decoration:none;color:#666;}
+a:hover{text-decoration:none;}
+img{border:none;}
+ul,li{list-style-type:none;}
+a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+.clear{clear:both;width:0px;height:0px;font-size:0px;}
+/*.main{width:640px;margin:0  -15px 0 -15px; padding-left: -15px; padding-right: -15px;}*/
+/*-------------------------------listpage----------------------------------------*/
+/*header*/
+.main_list input{background:url(../images/search.jpg) no-repeat 15px center ,#fff;height:54px;border:none;border-radius:6px;padding-left:60px;font-family:"Microsoft Yahei";font-size:1.4rem;line-height:54px;margin-top:13px;margin-left:17px;width:605px;outline:none;}
+::-webkit-input-placeholder {/* WebKit browsers */color:#cccccc;}
+:-moz-placeholder {/* Mozilla Firefox 4 to 18 */color:#cccccc;}
+::-moz-placeholder {/* Mozilla Firefox 19+ */color:#cccccc;}
+:-ms-input-placeholder {/* Internet Explorer 10+ */color:#cccccc;}
+/*section*/
+section{padding-bottom:94px;}
+.section_list{border-top:1px solid #e3e3e3;}
+/*tab切换*/
+#tags{margin-bottom: 0px;}
+.tab_left{width:30%;float:left;background:#f3f3f3;}
+.tab_left li{height:66px;line-height:66px;font-size:1.5rem;padding-left:10px; border-bottom:#C2D3FF 1px solid;display:block;color:#5f5f5f;cursor:pointer;}
+.selectTags{}
+.category_banner{margin:20px 0px 0px 0;}
+.category_banner img{width:100%;}
+.tab_tab{float:left;width:70%;background-color:#C2D3FF;}
+.category_content_title{font-size:1.5rem;color:#333;padding-top:20px; margin-left: 1em;}
+.category_content_img ul li img{width:90px; height:90px;margin:10px 5%;}
+.category_content_img ul{margin-bottom: 0px;}
+.category_content_img ul li{float:left;width:45%;margin:4px 2%;background:#f8f8f8;}
+.category_content_img li a{color:#414141;}
+.category_content_img li a span{display:block;text-align:center;line-height:30px;font-size:12px;}
+.tab_right{display:none;}
+.cata li.selectTag a{color:#ec4e4e;}
+.cata li.selectTag{background:url(../images/hover.jpg) no-repeat right center;color:#ec4e4e;}
+.tagContent {display:none;}
+.tab_tab div.selectTag{display:block;}
+.tag_select {color: #FF3939 !important; background-color: #C2D3FF;}

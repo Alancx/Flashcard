@@ -1,0 +1,32 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/record.css?v=1.0">
+<div class="part-1">
+  <div class="sdrevenue">
+    <a href="{:U('Record/revenue')}">
+      <label class="showmsg-1">七日营收(元)</label>
+      <label class="showmsg-2"><?php echo $sdrevenue?sprintf("%.2f",$sdrevenue):'0.00' ?></label>
+    </a>
+  </div>
+</div>
+<div class="part-2">
+  <div class="orderyd">
+    <a href="{:U('Record/reorder')}">
+      <label class="showmsg-1">昨日下单(笔)</label>
+      <label class="showmsg-2"><?php echo $orderyd?$orderyd:'0' ?></label>
+    </a>
+  </div>
+</div>
+<!-- <div class="part-1">
+  <div class="tdvisitor">
+    <label class="showmsg-1">今日访客(人)</label>
+    <label class="showmsg-2">100</label>
+  </div>
+</div> -->
+<div class="part-1">
+  <div class="ydncustomers">
+    <a href="{:U('Record/newmember')}">
+      <label class="showmsg-1">昨日新增客户(人)</label>
+      <label class="showmsg-2"><?php echo $ymcount?$ymcount:'0' ?></label>
+    </a>
+  </div>
+</div>

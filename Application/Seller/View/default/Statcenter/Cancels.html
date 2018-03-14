@@ -1,0 +1,282 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+
+	<div class="row">
+		<div class="col-lg-6" style="display:none;">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<div class="flot-chart">
+						<div class="flot-chart-content" id="flot-bar-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>7天核销数据 <span style="font-size:1.5em;">￥{$allmoney}</span></h5>
+					<div style="padding-bottom:15px;text-align:right;">
+						最后统计时间： {$estime}
+					</div>
+				</div>
+				<div class="ibox-content">
+					<div class="echarts" id="echarts-line-chart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>{$title}</h5>
+	</div>
+	<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="{:U('Statcenter/searchcan')}" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<input type="text" name="strtime" id="stime" class="form-control" placeholder="请选择起始时间(发货)" onfocus="WdatePicker({maxDate:'%y-%M-{%d-0}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="{$stime}">
+			</div>
+			<div class="form-group">
+				<input type="text" name="endtime" id="etime" class="form-control" placeholder="请选择查询结束时间(发货)" onfocus="WdatePicker({maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="{$etime}">
+			</div>
+			<div class="form-group">
+				<input type="text" name="username" placeholder="请填写核销员姓名(选填)" id="username" class="form-control">
+			</div>
+			<input type="hidden" name="CanType" id="CanType" value="{$Ctype}">
+			<button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button>
+			<button class="btn btn-default btn-outline btn-md" id="import" type="button"><span class="glyphicon glyphicon-export"></span> 导 出</button>
+		</form>
+
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<if condition="$errmsg">
+			<h3>{$errmsg}</h3>
+			<else/>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>姓名</th>
+						<th>所属门店</th>
+						<th>核销订单数 {$CanType} </th>
+						<th>核销金额 {$CanType} </th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="userlists" item="user" >
+						<tr>
+							<td>{$user.id}</td>
+							<td>{$user.username}</td>
+							<td>{$user.storename}</td>
+							<td>{$user.count}</td>
+							<td>{$user.price}</td>
+							<td><a href="###" onclick="show('{$user.openid}','{$Ctype}','{$user.stoken}')">查看详情</a> | <a href="###" onclick="imports('{$user.openid}','{$Ctype}')">导出数据</a></td>
+						</tr>
+					</foreach>
+				</tbody>
+
+			</table>
+		</if>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function show(id,ctype,stoken){
+		art.dialog.open('{:U('Store/show')}?sid='+id+'&stoken='+stoken+'&CanType='+ctype+"&stime="+'{$stime}'+"&etime="+'{$etime}',{width:'600px'});
+	}
+
+	function del(id){
+		art.dialog.confirm('确定要删除吗？请慎重操作', function () {
+			window.location.href="{:U('Admin/del')}?id="+id;
+			// alert('hahaha')
+		}, function () {
+			art.dialog.tips('取消操作');
+		});
+	}
+
+	function imports(id,ctype){
+		window.location.href='{:U('Store/showOut')}?sid='+id+'&CanType='+ctype+"&stime="+'{$stime}'+"&etime="+'{$etime}';
+	}
+
+	$(document).ready(function(){
+		$("#search").submit(function(){
+			var username=$("#username").val();
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (username || etime || stime) {
+				if (etime || stime) {
+					if (etime && stime) {
+						if (stime>etime) {
+							art.dialog.alert('非法时间段');
+							return false;
+						}else{
+							art.dialog({content:'正在查询....',lock:true});
+							return true;
+						}
+					}else{
+						art.dialog.alert('请选择完整时间段');
+						return false;
+					}
+				}else{
+					art.dialog({content:'正在查询....',lock:true});
+					return true;
+				}
+			}else{
+				art.dialog.alert('请输入查询信息');
+				return false;
+			}
+		})
+
+		$("#import").click(function(){
+			var username=$("#username").val();
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			var CanType=$('#CanType').val();
+			if (username || etime || stime) {
+				if (etime || stime) {
+					if (etime && stime) {
+						if (stime>etime) {
+							art.dialog.alert('非法时间段');
+							return false;
+						}else{
+							art.dialog.tips('正在查询....',3);
+							window.location.href="{:U('Statcenter/cancelsOut')}?CanType="+CanType+"&strtime="+stime+"&endtime="+etime+"&username="+username;
+							return true;
+						}
+					}else{
+						art.dialog.alert('请选择完整时间段');
+						return false;
+					}
+				}else{
+					art.dialog.tips('正在查询....',3);
+					window.location.href="{:U('Statcenter/cancelsOut')}?CanType="+CanType+"&strtime="+stime+"&endtime="+etime+"&username="+username;
+					return true;
+				}
+			}else{
+				art.dialog.alert('请输入查询信息');
+				return false;
+			}
+		})
+	})
+
+
+
+
+
+
+
+
+
+	$(function () {
+		var Money={$money};
+		var Mon={$week};
+		var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
+		var lineoption = {
+			title : {
+				text: '7天核销数据'
+			},
+			tooltip : {
+				trigger: 'axis'
+			},
+			calculable : true,
+			xAxis : [
+			{
+				type : 'category',
+				boundaryGap : false,
+				data : Mon
+			}
+			],
+			yAxis : [
+			{
+				type : 'value',
+				axisLabel : {
+					formatter: '{value}'
+				}
+			}
+			],
+			toolbox: {
+				show : true,
+        orient: 'horizontal',      // 布局方式，默认为水平布局，可选为：
+                                   // 'horizontal' ¦ 'vertical'
+        x: 'right',                // 水平安放位置，默认为全图右对齐，可选为：
+                                   // 'center' ¦ 'left' ¦ 'right'
+                                   // ¦ {number}（x坐标，单位px）
+        y: 'top',                  // 垂直安放位置，默认为全图顶端，可选为：
+                                   // 'top' ¦ 'bottom' ¦ 'center'
+                                   // ¦ {number}（y坐标，单位px）
+                                   color : ['#1e90ff','#22bb22','#4b0082','#d2691e'],
+        backgroundColor: 'rgba(0,0,0,0)', // 工具箱背景颜色
+        borderColor: '#ccc',       // 工具箱边框颜色
+        borderWidth: 0,            // 工具箱边框线宽，单位px，默认为0（无边框）
+        padding: 5,                // 工具箱内边距，单位px，默认各方向内边距为5，
+        showTitle: true,
+        feature : {
+        	mark : {
+        		show : true,
+        		title : {
+        			mark : '辅助线-开关',
+        			markUndo : '辅助线-删除',
+        			markClear : '辅助线-清空'
+        		},
+        		lineStyle : {
+        			width : 1,
+        			color : '#1e90ff',
+        			type : 'dashed'
+        		}
+        	},
+        	magicType: {
+        		show : true,
+        		title : {
+        			line : '动态类型切换-折线图',
+        			bar : '动态类型切换-柱形图',
+        		},
+        		type : ['line', 'bar']
+        	},
+        	restore : {
+        		show : true,
+        		title : '还原',
+        		color : 'black'
+        	},
+        	saveAsImage : {
+        		show : true,
+        		title : '保存为图片',
+        		type : 'jpeg',
+        		lang : ['点击本地保存']
+        	},
+        	myTool : {
+        		show : true,
+        		title : '自定义扩展方法',
+        		icon : 'image://../asset/ico/favicon.png',
+        		onclick : function (){
+        			alert('myToolHandler')
+        		}
+        	}
+        }
+    },
+    series : [
+    {
+    	name:'核销金额',
+    	type:'line',
+    	data:Money,
+    	markLine : {
+    		data : [
+    		{type : 'average', name : '平均值'}
+    		]
+    	}
+    }
+    ]
+};
+lineChart.setOption(lineoption);
+
+});
+
+
+
+
+</script>
+<include file="Common:footer" />
+<script src="__PUBLIC__/Admin/Admin/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/echarts/echarts-all.js"></script>

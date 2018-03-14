@@ -1,0 +1,8 @@
+操作定位:Public/godata::::{"account":"duhu","password":"123","timestamp":"150026169ato_3db28d7bfd0b078a6399ccee790f7430","sign":"bdf1bb386845173bdd558dc89cb044c2","type":"s"}::::::操作日期:::::::2017-07-17 11:21:33
+操作定位:Public/godata::::{"account":"duhu","password":"123","timestamp":"150026169","sign":"b6e967951908256d58a7ebb543b774d4","type":"f"}::::::操作日期:::::::2017-07-17 11:21:45
+操作定位:Public/godata::::{"account":"duhu","password":"123","timestamp":"150026169","sign":"b6e967951908256d58a7ebb543b774d4","type":"f"}::::::操作日期:::::::2017-07-17 11:21:46
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-07-17 11:21:47
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-07-17 11:21:55
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-07-17 11:21:56
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"dataofstores","desc":"desc"}::::::操作日期:::::::2017-07-17 11:22:04
+操作定位:Public/godata::::{"account":"zhuguiping","password":"123","timestamp":"150026493ato_15e09c24ceece220fa74c81ac6018e13","sign":"29fb39af6a8bb0bb5b120105da59a01d","type":"s"}::::::操作日期:::::::2017-07-17 12:15:27

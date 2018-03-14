@@ -1,0 +1,183 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/tejia.css?v=1.4">
+<!-- <script src="__PUBLIC__/Sellermobile/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script> -->
+<script src="__PUBLIC__/Sellermobile/js/base.js"></script>
+<div class="tab">
+	<span class="tab_info tabavtive" data-info="tese">特色</span>
+	<span class="tab_info" data-info="tejia">特价</span>
+	<span class="tab_info" data-info="huodong">活动</span>
+</div>
+<div class="content">
+	<div class="theme tese">
+		<div class="shang">
+			<div class="img" data-type="tese"><img src="{$img}" /></div>
+			<div class="text">
+				<span>首页特色商品展示图</span>
+				<div class="explain">
+					<span>点击左侧图片</span>
+					<span>可更换展示图</span>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="showtitlename">
+			<span class="showtitle">显示名称:</span>
+			<empty name="showname.tsshowname">
+				<input class="showinputname showtsname" type="text" name="" value="特色" placeholder="显示名称">
+				<else />
+				<input class="showinputname showtsname" type="text" name="" value="{$showname.tsshowname}" placeholder="显示名称">
+			</empty>
+			<span class="savebtn" data-type="0">保存</span>
+		</div> -->
+		<div class="zhong">特色商品</div>
+		<div class="header"><a href="{:U('Activity/characteristic')}" style="color:rgb(147,147,147);">添加特色商品</a></div>
+		<div class="xia">
+			<foreach name="list" item="row">
+				<div style="overflow:hidden;">
+					<div class="pic"><img src="{$row['ProLogoImg']}" alt="" /></div>
+					<div class="price">
+						<span>{$row['ProName']}</span>
+						<p style="color:red;">￥{$row['Price']}</p>
+					</div>
+					<div class="aaa"><a data-type="tese" class="a" data-id="{$row['ProId']}">删除</a></div>
+				</div>
+			</foreach>
+		</div>
+	</div>
+
+	<div class="theme tejia">
+		<div class="shang">
+			<div class="img" data-type='tejia'><img src="{$img2}" /></div>
+			<div class="text">
+				<span>首页特价商品展示图</span>
+				<div class="explain">
+					<span>点击左侧图片</span>
+					<span>可更换展示图</span>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="showtitlename">
+			<span class="showtitle">显示名称:</span>
+			<empty name="showname.tjshowname">
+				<input class="showinputname showtjname" type="text" name="" value="特价" placeholder="显示名称">
+				<else />
+				<input class="showinputname showtjname" type="text" name="" value="{$showname.tjshowname}" placeholder="显示名称">
+			</empty>
+			<span class="savebtn" data-type="1">保存</span>
+		</div> -->
+		<div class="zhong">特价商品</div>
+		<div class="header"><a href="{:U('Activity/translate')}" style="color:rgb(147,147,147);">添加特价商品</a></div>
+		<div class="xia">
+			<foreach name="rows" item="listt">
+				<div style="overflow:hidden;">
+					<div class="pic"><img src="{$listt['ProLogoImg']}" alt="" /></div>
+					<div class="price" style="overflow:hidden;">
+						<span>{$listt['ProName']}</span>
+						<div>
+							<span style="color:red;">￥{$listt['sprice']}</span> <del>￥{$listt['Price']}</del>
+						</div>
+					</div>
+					<div class="aaa" ><a data-type="tejia" class="a" data-id="{$listt['ProId']}">删除</a></div>
+				</div>
+			</foreach>
+		</div>
+	</div>
+
+	<div class="theme huodong">
+		<div class="shang">
+			<div class="img" data-type="huodong"><img src="{$img3}" /></div>
+			<div class="text">
+				<span>首页活动商品展示图</span>
+				<div class="explain">
+					<span>点击左侧图片</span>
+					<span>可更换展示图</span>
+				</div>
+			</div>
+		</div>
+		<div class="zhong">活动商品</div>
+		<div class="header"><a href="{:U('Activity/activity')}" style="color:rgb(147,147,147);">添加活动商品</a></div>
+		<div class="xia">
+			<foreach name="result" item="value">
+				<div style="overflow:hidden;">
+					<div class="pic"><img src="{$value['ProLogoImg']}" alt="" /></div>
+					<div class="price">
+						<span>{$value['ProName']}</span>
+						<p style="color:red;">￥{$value['Price']}</p>
+					</div>
+					<div class="aaa"><a data-type="huodong" data-id="{$value['ProId']}" class="a">删除</a></div>
+				</div>
+			</foreach>
+		</div>
+
+	</div>
+</div>
+<div class="choice">
+	<div class="picture">
+		<foreach name="allimg" item="image">
+			<img src="{$image['imgurl']}" class="image" data-url="{$image['imgurl']}">
+		</foreach>
+	</div>
+	<div class="blank"></div>
+</div>
+<script type="text/javascript">
+	var namesave_url = "{:U('Activity/namesave')}";
+</script>
+<script src="__PUBLIC__/Sellermobile/js/tejia.js?v=1.5" type="text/javascript" charset="utf-8"></script>
+<script>
+$('.a').click(function(){
+	var type=$(this).attr('data-type');
+	var id=$(this).attr('data-id');
+	var senddata = {
+		type:type,
+		id:id,
+	}
+	tips('waiting','正在删除中···');
+	$.ajax({
+		url:"{:U('Activity/updata')}",
+		type:"post",
+		data:senddata,
+		dataType:"json",
+		complete: function(e){
+			hidetips('waiting');
+		},
+		success:function(msg){
+			if(msg.status=='true'){
+				tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+				setTimeout( window.location.reload(),1500);
+			}else{
+				tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+			}
+		}
+	})
+
+})
+$('.img').click(function(){
+	$('.choice').css('display','block');
+	$('.picture img').css('height',$('.picture img').width() / 8 * 3 + 'px');
+})
+$('.image').click(function(){
+	var type=$('.tabavtive').attr('data-info');
+	var imgurl=$(this).attr('data-url');
+	var senddata = {
+		type:type,
+		imgurl:imgurl
+	}
+	tips('waiting','正在保存中···');
+	$.ajax({
+		url:"{:U('Activity/updataimg')}",
+		type:"post",
+		data:senddata,
+		dataType:"json",
+		complete: function(e){
+			hidetips('waiting');
+		},
+		success:function(msg){
+			if(msg.status=='true'){
+				tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+				setTimeout( window.location.reload(),1500);
+			}else{
+				tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+			}
+		}
+	})
+})
+</script>

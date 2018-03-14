@@ -1,0 +1,198 @@
+.nodata{
+  display: block;
+  padding: 20% 15% 0px 15%;
+}
+.nodata>img{
+  width: 100%;
+}
+.ordercontents{
+  display: block;
+}
+.orderinfo{
+	display: block;
+	background-color: #ffffff;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #dddddd;
+	margin: -1px 0px 11px 0px;
+	padding: 1px 0px 0px 0px;
+}
+.orderid{
+	width: 100%;
+	font-size: 14px;
+	color: #333333;
+	line-height: 20px;
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #dddddd;
+	padding: 5px 10px 5px 10px;
+}
+.orderid>span{
+	float: left;
+	font-size: 14px;
+	color: #999999;
+}
+.orderid>span:nth-child(1){
+	font-size: 14px;
+	color: #ffb222;
+	float: right;
+}
+.orderid>span:nth-child(4){
+	font-size: 12px;
+	float: right;
+}
+.prolist{
+	display: block;
+	margin: -1px 0px 0px 0px;
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #dddddd;
+}
+.proinfo{
+	display: block;
+	position: relative;
+	height: 71px;
+	border-bottom-style:dashed;
+	border-width: 1px;
+	border-color: #dddddd;
+	margin: 10px 10px -1px 10px;
+}
+.proinfo>img{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 60px;
+	height: 60px;
+}
+.proinfo>label{
+	display: block;
+	width: 100%;
+	padding: 0px 0px 0px 70px;
+}
+.proname{
+	color: #333333;
+	font-size: 14px;
+	line-height: 16px;
+	max-height: 16px;
+	overflow: hidden;
+}
+.proattr{
+	color: #999999;
+	font-size: 12px;
+	line-height: 28px;
+  height: 28px;
+}
+.proprice{
+	color: #ff4200;
+	font-size: 14px;
+	line-height: 16px;
+}
+.proprice>span{
+	font-size: 12px;
+}
+.proprice>span:nth-child(even){
+	float: right;
+	font-size: 14px;
+	color: #333333;
+}
+.totalprice{
+	width: 100%;
+	text-align: right;
+	font-size: 12px;
+	padding: 0px 10px 0px 10px;
+	color: #666666;
+	line-height: 30px;
+}
+.totalprice>span{
+	font-size: 14px;
+	color: #333333;
+	font-weight: 600;
+}
+.btn_group{
+  display: block;
+  overflow: hidden;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+.btn_group>label{
+  float: right;
+  width: 80px;
+  margin: 5px 10px 5px 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ff4200;
+  border-radius: 5px;
+  color: #ff4200;
+  line-height: 28px;
+  text-align: center;
+}
+.vercouver{
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.31);
+}
+.vercouver>div{
+  display: block;
+  position: relative;
+  top:50%;
+  background-color: #ffffff;
+  margin: -55.5px 20% 0px 20%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.vercouver>div>label{
+  display: block;
+  overflow: hidden;
+  font-size: 16px;
+  text-align: center;
+  line-height: 30px;
+  background-color: #6771E8;
+
+}
+.inputver{
+  display: block;
+  overflow: hidden;
+  height: 40px;
+  padding: 0px 5px 0px 5px;
+}
+.inputver>input{
+  float: left;
+  line-height: 40px;
+  width: 70%;
+  border: none;
+  outline: none;
+}
+.inputver>img{
+  float:left;
+  width: 30%;
+  height: 40px;
+}
+.btn_ver{
+  display: block;
+  overflow: hidden;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+.btn_ver>label{
+  line-height: 40px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  font-size: 16px;
+}
+.btn_ver>label:nth-child(2){
+  border-left-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+.tkjjorder{
+  border-color: #666666!important;
+  color: #666666!important;
+}

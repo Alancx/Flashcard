@@ -1,0 +1,96 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/useraccount.css?v=1.1">
+
+<div class="accountpart">
+  <!-- <label class="accountye">账户余额<span>{$mdatainfo.Money}</span></label> -->
+  <div class="accountyexx">
+    <div class="accounttu">
+      <div>
+      </div>
+    </div>
+    <div class="accountever">
+      <label class="acchyye">会员余额<span>{$mdatainfo.Money}</span></label>
+      <label class="accjlye">奖励余额<span>{$mdatainfo.VirtualMoney}</span></label>
+      <label class="accxfje">消费金额<span>{$mdatainfo.OrderMoney}</span></label>
+   <!--    <label class="accsy">收&emsp;&emsp;益<span>
+        <?php echo $mdatainfo['CutTotalMoney']?sprintf("%.2f",$mdatainfo['CutTotalMoney']):'0.00' ?>
+      </span></label> -->
+    </div>
+  </div>
+</div>
+<!-- <div class="accountpart parttwo">
+<div class="accczzx"><a href="{:U('Payment/Rechange')}"><label>充值中心</label></a></div>
+<div class="accczjl"><a href="{:U('User/uservourecord')}"><label>充值记录</label></a></div>
+<div class="acctx"><a href="{:U('User/mymoney')}"><label>提&emsp;&emsp;现</label></a></div>
+<div class="acctxjl"><a href="{:U('User/usergetcashrec')}"><label>提现记录</label></a></div>
+</div> -->
+<div class="accountpart-1">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <div class="tdpart">
+            <img src="__PUBLIC__/theme2/Images/chongzhiyue2.png">
+            <label>充值余额<br>￥{$mdatainfo.Money}</label>
+          </div>
+        </td>
+        <td>
+          <div class="tdpart">
+            <img src="__PUBLIC__/theme2/Images/jiangli2.png">
+            <label>奖励余额<br>￥{$mdatainfo.VirtualMoney}</label>
+          </div>
+        </td>
+        <td>
+          <div class="tdpart">
+            <img src="__PUBLIC__/theme2/Images/xiaofei2.png">
+            <label>消费金额<br>￥{$mdatainfo.OrderMoney}</label>
+          </div>
+        </td>
+      </tr>
+      <!-- <tr>
+        <td>
+          <div class="tdpart">
+            <img src="__PUBLIC__/theme2/Images/shouyi2.png">
+            <label>收益<br>￥<?php echo $mdatainfo['CutTotalMoney']?sprintf("%.2f",$mdatainfo['CutTotalMoney']):'0.00' ?>
+            </label>
+          </div>
+        </td>
+        <td>
+          <div class="tdpart" RPath="{:U('User/mymoney')}">
+            <img src="__PUBLIC__/theme2/Images/tixian2.png">
+            <label>提现<br></label>
+          </div>
+        </td>
+        <td>
+          <div class="tdpart" RPath="{:U('Payment/Rechange')}">
+            <img src="__PUBLIC__/theme2/Images/chongzhi2.png">
+            <label>充值<br></label>
+          </div>
+        </td>
+      </tr> -->
+      <!-- <tr>
+        <td>
+          <div class="tdpart" RPath="{:U('User/usermyprofit')}">
+            <img src="__PUBLIC__/theme2/Images/shouyixiangqing2.png">
+            <label>收益详情<br></label>
+          </div>
+        </td>
+        <td>
+          <div class="tdpart" RPath="{:U('User/usergetcashrec')}">
+            <img src="__PUBLIC__/theme2/Images/tixianjilu2.png">
+            <label>提现记录<br></label>
+          </div>
+        </td>
+        <td>
+          <div class="tdpart" RPath="{:U('User/uservourecord')}">
+            <img src="__PUBLIC__/theme2/Images/chongzhijilu2.png">
+            <label>充值记录<br></label>
+          </div>
+        </td>
+      </tr> -->
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript">
+$('.accountpart-1>table>tbody>tr>td').css('width',$('.accountpart-1>table').width()/3+"px");
+</script>

@@ -1,0 +1,69 @@
+body{
+	margin:0px;
+	padding:0px;
+	background: #FFFFFF;
+}
+.theme{
+	padding:10px;
+	border-bottom:1px rgb(238,238,238) solid;
+}
+.shang{
+	width:100%;
+	height:50px;
+}
+.img{
+	width:50px;
+	height:50px;
+	float: left;
+	/*border-radius:50px;*/
+}
+.img img{
+	width:100%;
+	height:100%;
+	border-radius:8px;
+}
+.price{
+	margin-left:10px;
+	float:left;
+}
+.price p{
+	color:red;
+	font-size:16px;
+	margin-top:8px;
+}
+.ppp{
+	width:20px;
+	height:20px;
+	background:url(../icon/uncheck.png) no-repeat;
+	background-size:100% auto ;
+	float: right;
+	border-radius:30px;
+	margin-top:15px;
+}
+.ppp.tap{
+	background:url(../icon/checked.png) no-repeat;
+	background-size:100% auto ;
+}
+
+.bottom{
+	width:100%;
+	position: fixed;
+	bottom:0;
+	background: rgb(229,229,229);
+}
+.left{
+	float: left;
+	width:50%;
+	height:50px;
+	text-align: center;
+	line-height:50px;
+	color:rgb(114,114,114);
+}
+.right{
+	float:right;
+	width:50%;
+	height:50px;
+	text-align: center;
+	line-height:50px;
+	color:red;
+}

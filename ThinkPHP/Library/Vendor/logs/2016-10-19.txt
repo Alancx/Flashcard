@@ -1,0 +1,282 @@
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-10-19 14:44:44
+操作定位:Cashier/wecode::::通信失败::::::操作日期:::::::2016-10-19 14:44:44
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-10-19 14:45:26
+操作定位:Cashier/wecode::::通信失败::::::操作日期:::::::2016-10-19 14:45:26
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[50Ny2QUyAQ3UtIy1]]></nonce_str>
+<sign><![CDATA[ACAA644373EC9A8D694975492BDA9771]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wT165pnJ2ZOSlexFYVkXRIw]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>100</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004242001201610197113229030]]></transaction_id>
+<out_trade_no><![CDATA[E201610191445559071]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161019144621]]></time_end>
+<cash_fee>100</cash_fee>
+</xml>::::::操作日期:::::::2016-10-19 14:46:22
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[pUFVQXMWhpDpimok]]></nonce_str>
+<sign><![CDATA[3A8A63ECB2A0598A54AB524C6CF31E61]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wT165pnJ2ZOSlexFYVkXRIw]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>100</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004242001201610197114951610]]></transaction_id>
+<out_trade_no><![CDATA[E201610191446439746]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161019144733]]></time_end>
+<cash_fee>100</cash_fee>
+</xml>::::::操作日期:::::::2016-10-19 14:47:33
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[znTDYODhTZCc1Ouk]]></nonce_str>
+<sign><![CDATA[FD76391C91E8BC6FDC1F2882E1FDB0A8]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wT165pnJ2ZOSlexFYVkXRIw]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>100</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004242001201610197114974358]]></transaction_id>
+<out_trade_no><![CDATA[E201610191448346841]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161019144917]]></time_end>
+<cash_fee>100</cash_fee>
+</xml>::::::操作日期:::::::2016-10-19 14:49:17
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[r72GmBd8JhTpAbpS]]></nonce_str>
+<sign><![CDATA[915E7476257A28DADAAD3709C2BEAB43]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wT165pnJ2ZOSlexFYVkXRIw]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>100</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004242001201610197113370741]]></transaction_id>
+<out_trade_no><![CDATA[E201610191449308015]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161019145019]]></time_end>
+<cash_fee>100</cash_fee>
+</xml>::::::操作日期:::::::2016-10-19 14:50:19
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[h2DP6ImBOyQFH0H0]]></nonce_str>
+<sign><![CDATA[A1EA4A5F376138FF5F5BDF05EF7D5693]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wT165pnJ2ZOSlexFYVkXRIw]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>100</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004242001201610197115105635]]></transaction_id>
+<out_trade_no><![CDATA[E201610191451371506]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161019145231]]></time_end>
+<cash_fee>100</cash_fee>
+</xml>::::::操作日期:::::::2016-10-19 14:52:31
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[whWBq1JKZozqGNaD]]></nonce_str>
+<sign><![CDATA[2A5FF9824F6B2049F3FEC2D49A58C301]]></sign>
+<result_code><![CDATA[FAIL]]></result_code>
+<err_code><![CDATA[USERPAYING]]></err_code>
+<err_code_des><![CDATA[需要用户输入支付密码]]></err_code_des>
+</xml>::::::操作日期:::::::2016-10-19 14:53:26
+操作定位:Cashier/wecode::::USERPAYING::::::操作日期:::::::2016-10-19 14:53:26
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[XhviGwjyhBmNqHMX]]></nonce_str>
+<sign><![CDATA[B5AAB097535D3FDDA3EBD2530B652FED]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:26
+操作定位:Cashier/wecode::::查询次数---10---14:53:26::::::操作日期:::::::2016-10-19 14:53:26
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[eJvMp6a96V2r19b3]]></nonce_str>
+<sign><![CDATA[1C736B6AA7448BC1DDCEFCB8509A55B7]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:28
+操作定位:Cashier/wecode::::查询次数---10---14:53:28::::::操作日期:::::::2016-10-19 14:53:28
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[XIgUaOxt1ysJWeYG]]></nonce_str>
+<sign><![CDATA[6D40DAE290DE10CDC44226125E9D0518]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:30
+操作定位:Cashier/wecode::::查询次数---10---14:53:30::::::操作日期:::::::2016-10-19 14:53:30
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[lNUTo91fy8l3hAvo]]></nonce_str>
+<sign><![CDATA[5CD6002C5AB9CAAFC0F132FC3C5F1A0D]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:33
+操作定位:Cashier/wecode::::查询次数---10---14:53:33::::::操作日期:::::::2016-10-19 14:53:33
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[7sw9RQLCnHpBujXZ]]></nonce_str>
+<sign><![CDATA[7061F18A5D623961835F92AB24A2D7D7]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:35
+操作定位:Cashier/wecode::::查询次数---10---14:53:35::::::操作日期:::::::2016-10-19 14:53:35
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[GpPGhpUyk6gZLfvv]]></nonce_str>
+<sign><![CDATA[8C102AF7803858E6C63D532FF34AED49]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:37
+操作定位:Cashier/wecode::::查询次数---10---14:53:37::::::操作日期:::::::2016-10-19 14:53:37
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[AiVfI4NehiFCA4qL]]></nonce_str>
+<sign><![CDATA[E5E02EFB5923ACD7E9F67B968D98B47F]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:39
+操作定位:Cashier/wecode::::查询次数---10---14:53:39::::::操作日期:::::::2016-10-19 14:53:39
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[TFEL3UYdQJ7ntV9w]]></nonce_str>
+<sign><![CDATA[F4C4244BDE9F6C5A019F927AFCDEE07A]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:42
+操作定位:Cashier/wecode::::查询次数---10---14:53:42::::::操作日期:::::::2016-10-19 14:53:42
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[XK7DuXAe7GFzufvP]]></nonce_str>
+<sign><![CDATA[8100B58ED6F88BA15087DE05B181D670]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:44
+操作定位:Cashier/wecode::::查询次数---10---14:53:44::::::操作日期:::::::2016-10-19 14:53:44
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[XmNjfl12PpWOGG86]]></nonce_str>
+<sign><![CDATA[A1FA1BFD25E5581A31ABA969BA9AF9EE]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<out_trade_no><![CDATA[E201610191452534990]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<trade_state><![CDATA[USERPAYING]]></trade_state>
+<trade_state_desc><![CDATA[需要用户输入支付密码]]></trade_state_desc>
+</xml>::::::操作日期:::::::2016-10-19 14:53:46
+操作定位:Cashier/wecode::::查询次数---10---14:53:46::::::操作日期:::::::2016-10-19 14:53:46
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[hXL72VngGVJ50xUj]]></nonce_str>
+<sign><![CDATA[12E156C7AA3825CB3099BE7706F37A5C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>100</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004162001201610197128462903]]></transaction_id>
+<out_trade_no><![CDATA[E201610191739083038]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161019174203]]></time_end>
+<cash_fee>100</cash_fee>
+</xml>::::::操作日期:::::::2016-10-19 17:42:03
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[hk9FVIRfQKSU7i4s]]></nonce_str>
+<sign><![CDATA[DBB1FDEEE1A122353608861F8B5CF23B]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>100</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004162001201610197128965569]]></transaction_id>
+<out_trade_no><![CDATA[E201610191750181074]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161019175252]]></time_end>
+<cash_fee>100</cash_fee>
+</xml>::::::操作日期:::::::2016-10-19 17:52:52

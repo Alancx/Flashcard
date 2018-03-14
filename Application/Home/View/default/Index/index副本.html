@@ -1,0 +1,577 @@
+<extend name="base" />
+<block name="head">
+	<meta charset="utf-8">
+	<title>首页</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/mui.min.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/index.css?v=1" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/font_gpke.css" />
+	<style>
+	html,
+	body {
+		background-color: #efeff4;
+	}
+
+	.bot-ul-li {
+		color: #FF4E00 !important;
+	}
+
+	.bot-ul-li .home_icon:before {
+		content: "\a002";
+	}
+
+	.bot-ul-li .huod_icon:before {
+		content: "\a004";
+	}
+
+	.bot-ul-li .order_icon:before {
+		content: "\a006";
+	}
+
+	.bot-ul-li .mine_icon:before {
+		content: "\a008";
+	}
+</style>
+</block>
+<!--header-->
+<block name="bod">
+	<div class="head">
+		<div class="shopinfor">
+			<img src="__PUBLIC__/home/img/5.png" class="shoplogo" />
+			<div class="">
+				<div class="shopname mui-ellipsis">百乐川烤鱼百乐川烤鱼百乐川烤鱼</div>
+				<span class="shopphone">400-6800-3600</span>
+			</div>
+		</div>
+		<div class="icons">
+			<span>
+				<small class="ggg address_icon"></small>
+				<span>导航</span>
+			</span>
+			<span>
+				<small class="ggg xin_icon"></small>
+				<span>关注</span>
+			</span>
+		</div>
+		<div class="text mui-ellipsis">
+			金水区文化路农业路河南农业大学对面1209号对面1209号对面1209号
+		</div>
+		<img src="" class="bgimg" />
+	</div>
+	<!--领红包-->
+	<div class="hongbao">
+		<img src="__PUBLIC__/home/img/xiaohb1.png" />
+		<div class="">
+			<div class="hb lingwan"><span>10</span></div>
+			<div class="hb"><span>5</span></div>
+			<div class="hb"><span>2</span></div>
+			<div class="hb"><span>1</span></div>
+			<div class="hb"><span>0.5</span></div>
+		</div>
+	</div>
+	<!--特色菜  特价菜-->
+	<div class="tdiv">
+		<div class="tj">
+			<span>特价</span>
+			<img src="__PUBLIC__/home/img/4.jpg" />
+		</div>
+		<div class="ts">
+			<span>特色</span>
+			<img src="__PUBLIC__/home/img/4.jpg" />
+		</div>
+	</div>
+
+	<!--点菜  评论  商家-->
+	<div id="outer" class="tabdiv">
+		<div id="center">
+			<ul id="tab">
+				<li class="current" data-index='0'><span>点菜</span></li>
+				<li class="" data-index='1'><span>评价999+</span></li>
+				<li data-index='2'><span>商家</span></li>
+			</ul>
+		</div>
+	</div>
+</block>
+<!--<block name="main"></block>-->
+
+
+<block name="content">
+	<!--内容区-->
+
+	<div class="contdiv" style="margin-bottom:100px;">
+		<div class="posidiv">
+			<!--点菜-->
+			<div class="dcdiv" data-oo="tabi">
+				<!--联动选项卡组-->
+				<div class="ldiv">
+					<ul>
+						<?php $i=1; ?>
+						
+						<foreach name="allpros" item='ap'>
+							<li class="mui-ellipsis-2 <if condition='$i eq 1'>actives</if>">{$ap.ClassName}</li>
+							<?php $i++; ?>
+						</foreach>
+					</ul>
+				</div>
+
+				<div class="rdiv">
+					<ul>
+						<foreach name='allpros' item='pro'>
+							<li >
+								<div class="class-title"><span>{$pro.ClassName}</span></div>
+								<foreach name='pro.pros' item='po'>
+									<div class="spitem">
+										<img src="{$po.ProLogoImg}" data-url="{:U('Goods/goods')}?pid={$po.ProId}"/>
+
+										<div>
+											<p class="mui-ellipsis">{$po.ProName}</p>
+											<div class="">
+												<span><span class="jiage">{$po.Price}</span ><span class="fubiao">/≈3斤</span></span>
+												<p>月售{$po.SalesCount}</p>
+											</div>
+											<div class="mui-numbox" data-numbox-step='1' data-numbox-min='0' data-numbox-max='100' data-pid="{$po.ProId}" data-pname="{$po.ProName}" data-pimg="{$po.ProLogoImg}" data-price="{$po.Price}">
+												<button class="mui-btn mui-btn-numbox-minus " type="button">-</button>
+												<input class="mui-input-numbox" type="number" disabled="" />
+												<button class="mui-btn mui-btn-numbox-plus " type="button">+</button>
+											</div>
+										</div>
+									</div>
+								</foreach>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+			<!--底部结算栏-->
+			<div id="yidian" class="bottom-left-top ">
+				<small>已点</small>
+				<small>9+</small>
+			</div>
+			<div class="qw" data-s='1'>
+				<div class="showselprolist">
+					<div class="selprotilte">
+						<span class="doempty">清空菜单</span>
+						<span class="gobuy" data-url="{:U('Submit/index')}">去结算</span>
+						<span class="buymoney"> 0</span>
+					</div>
+					<ul class="content-ull list_box">
+
+						
+					</ul>
+				</div>
+			</div>
+
+			<!--评价-->
+			<div class="pjdiv" data-oo="tabi" hidden="">
+				<div class="">
+					<!--1-->
+					<ul class="pjitem">
+						<li>
+							<img src="__PUBLIC__/home/img/4.jpg" class="idphoto" />
+						</li>
+						<li>
+							<div class="idname">
+								<span>紫御琳琳</span>
+								<div>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+
+									<small class="mui-pull-right">2017.11.8</small>
+								</div>
+							</div>
+							<div class="idtext">
+								环境挺好，火锅也挺好，味道美，分量足，还会再来的。
+							</div>
+							<div class="idimg">
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+							</div>
+						</li>
+					</ul>
+					<!--2-->
+					<ul class="pjitem">
+						<li>
+							<img src="__PUBLIC__/home/img/4.jpg" class="idphoto" />
+						</li>
+						<li>
+							<div class="idname">
+								<span>紫御琳琳</span>
+								<div>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+
+									<small class="mui-pull-right">2017.11.8</small>
+								</div>
+							</div>
+							<div class="idtext">
+								环境挺好，火锅也挺好，味道美，分量足，还会再来的。
+							</div>
+							<div class="idimg">
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--商家-->
+			<div class="sjdiv" data-oo="tabi" hidden="">
+				<div class="">
+					<!--地址电话介绍图-->
+					<div class="">
+						<div class="dizhi">
+							<small class="ggg address_icon"></small>
+							<span>{$sinfo.province}{$sinfo.city}{$sinfo.area}{$sinfo.addr}</span>
+							<small class="ggg phone_icon"></small>
+						</div>
+
+						<div class="shopimg">
+							<div class="">
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+							</div>
+						</div>
+					</div>
+
+					<div style="padding: 10px;">商家评价 1236</div>
+					<!--1-->
+					<ul class="pjitem">
+						<li>
+							<img src="__PUBLIC__/home/img/4.jpg" class="idphoto" />
+						</li>
+						<li>
+							<div class="idname">
+								<span>紫御琳琳</span>
+								<div>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+
+									<small class="mui-pull-right">2017.11.8</small>
+								</div>
+							</div>
+							<div class="idtext">
+								环境挺好，火锅也挺好，味道美，分量足，还会再来的。
+							</div>
+							<div class="idimg">
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+							</div>
+						</li>
+					</ul>
+					<!--2-->
+					<ul class="pjitem">
+						<li>
+							<img src="__PUBLIC__/home/img/4.jpg" class="idphoto" />
+						</li>
+						<li>
+							<div class="idname">
+								<span>紫御琳琳</span>
+								<div>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+									<small class="ggg xing_icon"></small>
+
+									<small class="mui-pull-right">2017.11.8</small>
+								</div>
+							</div>
+							<div class="idtext">
+								环境挺好，火锅也挺好，味道美，分量足，还会再来的。
+							</div>
+							<div class="idimg">
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+								<img src="__PUBLIC__/home/img/4.jpg" />
+							</div>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+</block>
+
+
+</body>
+<block name="myjs">
+	<script src="__PUBLIC__/home/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/home/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/home/js/index.js?v=1.2" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$('.gobuy').on("tap",function() {
+			window.location.href = $(this).attr('data-url');
+		})
+	</script>
+	<script type="text/javascript">
+		var getcarturl="{:U('Base/getCart')}";
+		mui.init();
+	</script>
+	<script type="text/javascript">
+		//准备操作
+        $(document).ready(function(){
+            //加+处理
+        	$(document).on("tap",".mui-btn-numbox-plus", function() {
+        		var _this=$(this);
+				var itnum = _this.parent().children(".mui-input-numbox").val();//获取输入框的值,商品的数量
+				itnum=parseInt(itnum);//函数可解析一个字符串，并返回一个整数。
+			var ProId=_this.parent().attr('data-pid');//获取商品的Proid的值
+			if(itnum > 0) {				
+				$(this).parent().children(".mui-input-numbox,.mui-btn-numbox-minus").css("display", "block");//显示+和数字
+				if (_this.attr('data-type')=='edit') {
+					var ProId=_this.parent().attr('data-pid');//获取商品的Proid的值
+					$.ajax({
+						url:"{:U('Base/addCart')}",
+						type:"post",
+						data:{
+							ProId:ProId,
+							num:itnum,
+							type:"edit"
+						},
+						dataType:"json",
+						success:function(msg){
+							if (msg.status=='success') {	
+								var data = msg.data;
+								var total=0;
+                				$.each(data,function(index,item) {
+                					total = item.total;
+                				})
+                				$('.buymoney').html(total);	
+								$(".mui-numbox[data-pid="+ProId+"]>.mui-input-numbox").val(itnum);
+							}
+						}
+					})
+
+				}else{
+                    var ProId=_this.parent().attr('data-pid');//获取商品的Proid的值
+					$.ajax({
+						url:"{:U('Base/addCart')}",
+						type:"post",
+						data:{
+							ProId:ProId,
+							num:itnum,
+							Price:_this.parent().attr('data-price'),//获取节点属性名的值
+							ProName:_this.parent().attr('data-pname'),
+							ProLogoImg:_this.parent().attr('data-pimg'),
+							type:"add"
+						},
+						dataType:"json",
+						success:function(msg){
+							if (msg.status=='success') {
+								// var data = msg.data;
+								// var total=0;
+        //         				$.each(data,function(index,item) {
+        //         					total = item.total;
+        //         				})
+        //         				$('.buymoney').html(total);
+								$(".mui-numbox[data-pid="+ProId+"]>.mui-input-numbox").val(itnum);
+							}
+						}
+					})
+				}
+			}
+		})
+            //减-处理
+            $(document).on("tap",".mui-btn-numbox-minus", function() {
+            	var _this=$(this);
+            	var itnum = $(this).parent().children(".mui-input-numbox").val();
+//                 console.log(itnum);
+                if(itnum < 1) {
+                    var ProId=_this.parent().attr('data-pid');//获取商品的Proid的值
+                	_this.parent().children(".mui-input-numbox,.mui-btn-numbox-minus").css("display", "none");
+                	$.ajax({
+                		url:"{:U('Base/addCart')}",
+                		type:"post",
+                		data:{
+                			ProId:ProId,
+                			type:"none"
+                		},
+                		dataType:"json",
+                		success:function(msg){
+                			if (msg.status=='success') {
+                			 	var data = msg.data;
+                                var total = 0;
+                                $.each(data, function (index, item) {
+                                    total = item.total;
+                                })
+                                $('.buymoney').html(total);
+                				$(".mui-numbox[data-pid="+ProId+"]>.mui-input-numbox").val(itnum);
+                				 $(".mui-numbox[data-pid="+ProId+"]>.mui-input-numbox").css('display','none');
+                				 $(".mui-numbox[data-pid="+ProId+"]>.mui-btn-numbox-minus").css('display','none');
+                                 $(".mui-numbox[data-pid="+ProId+"]>.mui-btn-numbox-minus").attr('disabled',false);
+                                _this.parents('.cartlistinfo').remove();//如果数量为0时则删除掉整个商品列
+//                				mui.toast('已处理');
+                			}
+                		}
+                	})
+                }else{
+                    var ProId=_this.parent().attr('data-pid');//获取商品的Proid的值
+                    $.ajax({
+                        url: "{:U('Base/addCart')}",
+                        type: "post",
+                        data: {
+                			ProId:_this.parent().attr('data-pid'),
+                            num: itnum,
+                            type: "edit"
+                        },
+                        dataType: "json",
+                        success: function (msg) {
+                            if (msg.status == 'success') {
+                                var data = msg.data;
+                                var total = 0;
+                                $.each(data, function (index, item) {
+                                    total = item.total;
+                                })
+                                $('.buymoney').html(total);
+                                $(".mui-numbox[data-pid=" + ProId + "]>.mui-input-numbox").val(itnum);
+                            }
+                        }
+                    });
+                }
+            })
+			//处理点击后的页面,从控制器中接收数据
+    $("#yidian").on("tap",function(){
+		$.ajax({
+			url:"{:U('Base/getCart')}",
+			type:"post",
+			data:"1=1",
+			dataType:"json",
+			success:function(msg){
+			if (msg.status=='success') {
+	            var itnum=0;
+	            var data=msg.data;//后台传递回来的数据
+	            var _html='';
+	            var total=0;//所有商品总价格
+	            var eachPrice='';//每件商品的总价格
+	            $.each(data,function(index,item){
+	                _html+='<li class="cartlistinfo"><div class="content-img"><img src="'+item.ProLogoImg+'" /> </div> <div class="content-span"> <div class="content-ul-span mui-ellipsis">'+item.ProName+'</div> <div class="le"> <div class="content-div-span">￥'+item.Price+'</div> </div> <div class="mui-numbox" data-numbox-step="1" data-numbox-min="0" data-numbox-max="100" data-pid="'+item.ProId+'"> <button class="mui-btn mui-btn-numbox-minus" style="display:block;" data-type="edit" data-pid="'+item.ProId+'" type="button">-</button> <input class="mui-input-numbox" style="display:inline" type="number" disabled="" value="'+item.Num+'" /> <button class="mui-btn mui-btn-numbox-plus" data-type="edit" data-pid="'+item.ProId+'" type="button">+</button> </div> </div> </li>';
+	                    eachPrice =parseFloat(item.Price)*parseInt(item.Num);
+	                    total+=parseFloat(eachPrice);
+	                })
+	                total=total.toFixed(1);//保留小数点位数为1位
+	                $('.buymoney').html(total);//将价钱写入到页面上
+					$('.list_box').html(_html);                                
+					mui('.mui-numbox').numbox();//在购物车里面能够动态加载数据
+					}else{
+						$('.list_box').html('');
+				}
+			}
+		})
+		if ($('.qw').attr('data-s')=='1') {
+			$('.qw').show().attr('data-s','2');
+		}else{
+			$('.qw').hide().attr('data-s','1');
+		}
+	})
+			//清空购物车
+			$('.doempty').on("tap",function() {
+				$.ajax({
+					url : "{:U('Base/doEmpty')}",
+					type : 'post',
+					data : '1=1',
+					datatype : 'json',
+					success: function (msg) {  //执行成功的动作  
+						if (msg.status == 'success') {  
+				            window.location.reload();  //重新刷新页面
+				        }
+				    }
+				})
+			})
+
+
+
+		})
+/*移动*/
+var startX = 0,
+startY = 0,
+endX = 0,
+endY = 0,
+isTouchPad = (/hp-tablet/gi).test(navigator.appVersion),
+hasTouch = 'ontouchstart' in window && !isTouchPad;
+var divstarttop;
+var divstarleft;
+
+document.getElementById('yidian').addEventListener('touchstart', function(e) {
+	var even = typeof event == "undefined" ? e : event;
+	startX = hasTouch ? even.touches[0].pageX : even.pageX;
+	startY = hasTouch ? even.touches[0].pageY : even.pageY;
+	divstarttop = startY - this.offsetTop;
+	divstarleft = startX - this.offsetLeft;
+});
+document.getElementById('yidian').addEventListener('touchmove', function(e) {
+	var even = typeof event == "undefined" ? e : event;
+	endX = hasTouch ? even.touches[0].pageX : even.pageX;
+	endY = hasTouch ? even.touches[0].pageY : even.pageY;
+	even.preventDefault();
+	var divleft = endX - divstarleft;
+	var divtop = endY - divstarttop;
+	this.style.left = divleft + 'px';
+	this.style.top = divtop + 'px';		
+});
+document.getElementById('yidian').addEventListener('touchend', function(e) {	
+	if((this.offsetLeft + this.offsetWidth + 10) > document.documentElement.clientWidth){
+		this.style.left = document.documentElement.clientWidth - this.offsetWidth - 10 + 'px';
+	};
+	if(this.offsetLeft < 10 ){
+		this.style.left = 10 + 'px';
+	};
+	if((this.offsetTop + this.offsetHeight + 10) > document.documentElement.clientHeight){
+		this.style.top = document.documentElement.clientHeight - this.offsetHeight - 10 + 'px';
+	};
+	if(this.offsetTop < 10 ){
+		this.style.top = 10 + 'px';
+	};
+});
+</script>
+<script type="text/javascript">
+	$(".mui-bar a:first-child").on("tap",function(){
+		window.location.href="{:U('Index/index')}";
+	})
+	$(".mui-bar a:nth-child(2)").on("tap",function(){
+		window.location.href="{:U('Index/activity')}";
+	})
+	$(".mui-bar a:nth-child(3)").on("tap",function(){
+		window.location.href="{:U('Index/myorder')}";
+	})
+	$(".mui-bar a:last-child").on("tap",function(){
+		window.location.href="{:U('Index/mycenter')}";
+	})
+		//点击特价、特色
+		$(".tdiv div").on("tap",function(){
+			window.location.href="{:U('Index/sprice')}";
+		})
+	</script>
+	
+</block>
+</html>

@@ -1,0 +1,4 @@
+UPDATE [RS_Order] SET [LogisticsId]=null WHERE ( OrderId='E201605250711217124' and token='rhbnja145862596121' )
+=====2016-06-02 15:44:25=====
+UPDATE [RS_Order] SET [LogisticsId]=1 WHERE ( OrderId='E201605281512024293' and token='rhbnja145862596121' )
+=====2016-06-02 15:46:58=====

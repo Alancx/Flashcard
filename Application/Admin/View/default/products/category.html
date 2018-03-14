@@ -1,0 +1,275 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+    <div class="col-lg-12">
+       <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加分类</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" class="form-inline" action="{:U('Products/saveClass')}" method="post" id="save">
+                    <div class="form-group">
+                        <label for="exampleInputEmail2" class="sr-only">上级分类</label>
+                        <select name="ParentClassId" id="ParentClassId" class="form-control" value="">
+                           <option value="">请选择上级分类</option>
+                           <option value="0">顶级分类</option>
+                           <foreach name="dclass" item="dc">
+                            <option value="{$dc.ClassId}">{$dc.ClassName}</option>
+                        </foreach>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2" class="sr-only">分类名称</label>
+                    <input type="text" placeholder="请填写分类名称" name="ClassName" id="ClassName" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2" class="sr-only">分类排序</label>
+                    <input type="text" placeholder="分类排序" name="ClassSort" id="ClassSort" class="form-control">
+                </div>
+                <div class="form-group" id="logoimg_c">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="ImgPath" id="logoimg" value="" placeholder="请上传分类图片"> <span class="input-group-addon"><a href="###" onclick="upimg('logoimg')">上传</a></span><span class="input-group-addon"><a href="###"  id="logoimg_y">预览 </a> </span>
+                        </div>
+                </div>
+               <div class="checkbox m-l m-r-xs">
+                      <label class="i-checks">
+                          <input type="radio" name="IsVisible" id="IsVisible" value="1" checked="checked"><i></i> 显示</label>
+                      </div>
+                      <div class="checkbox m-l m-r-xs">
+                          <label class="i-checks">                
+                            <input type="radio" name="IsVisible" id="NoVisible" value="0"><i></i> 隐藏
+                          </label>
+                      </div>
+                      &emsp;
+                          <input type="hidden" name="id" value="" id="classId">
+                          <input type="hidden" name="ParentSort" id="ParentSort" value="">
+                          <button class="btn btn-white" type="submit">保 存</button>
+                    </form>
+
+
+                </div>
+                <div class="ibox-content">
+                  <form role="form" class="form-inline" action="{:U('Products/saveClass2')}" method="post" id="save2">
+                    <div class="form-group">
+                      分类显示：
+                      <label class="i-checks">                
+                        <input type="radio" name="classDiaplay" id="classDiaplay1" value="1" <if condition='$classDisplay eq 1'>checked="checked"</if> onclick="$('#save2').submit();"><i></i> 一级
+                      </label>
+                      <label class="i-checks">
+                        <input type="radio" name="classDiaplay" id="classDiaplay2" value="2" <if condition='$classDisplay eq 2'>checked="checked"</if> onclick="$('#save2').submit();"><i></i> 二级
+                      </label>
+
+                    </div>
+                  </form>
+                </div>
+
+                <div class="alert alert-warning">
+                                         1、所有商品分类图片尺寸必须保持一致，否则影响前端显示效果<br>
+                                     </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr class="success">
+              </tr>
+              <foreach name='classes' item='fclass'>
+                <tr>
+                  <td colspan="5">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h5 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne{$fclass.ClassId}"> <button class="btn btn-primary btn-xs" style="line-height:initial;">+</button> 分类名称：{$fclass.ClassName} &emsp; 排序：{$fclass.ClassSort} &emsp; 是否显示：<if condition="$fclass['IsVisible'] eq '1'">是</if><if condition="$fclass['IsVisible'] eq '0'">否</if> &emsp;</a> &emsp;&emsp;&emsp;&emsp; <a href="###" class="btn btn-white btn-xs btn-outline" onclick="edit('{$fclass.ClassId}');">编辑</a> &emsp; <a href="###" class="btn btn-danger btn-xs btn-outline" onclick="del('{$fclass.ClassId}');">删除</a>
+                        </h5>
+                      </div>
+                      <div id="collapseOne{$fclass.ClassId}" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <table class="table table-hover table-bordered">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>分类名称</th>
+                                <th>排序</th>
+                                <th>是否显示</th>
+                                <th>分类图片</th>
+                                <th>操作</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tbody{$fclass.ClassId}">
+                              <foreach name="fclass.sons" item="class">
+                                <tr>
+                                   <td>{$class.ClassId}</td>
+                                   <td>{$class.ClassName}</td>
+                                   <td>{$class.ClassSort}</td>
+                                   <td><if condition="$class['IsVisible'] eq '1'">是</if><if condition="$class['IsVisible'] eq '0'">否</if></td>
+                                   <td><img src="{$PICURL}{$class.ImgPath}" width="100" alt=""></td>
+                                   <td>  <a href="###" onclick="edit('{$class.ClassId}');">编辑</a> | <a href="###" onclick="del('{$class.ClassId}');">删除</a></td>
+                                </tr>
+                              </foreach>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </foreach>
+            </thead>
+          </table>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // $('#ParentClassId').change(function(){
+        //   if ($(this).val()==0) {
+        //     $('#Sys').attr('readonly',true);
+        //     $('#Show').attr('readonly',true);
+        //     $('#Sale').attr('readonly',true);
+        //   }else{
+        //     $('#Sys').removeAttr('readonly');
+        //     $('#Show').removeAttr('readonly');
+        //     $('#Sale').removeAttr('readonly');
+        //   }
+        // })
+        $("#chosen").chosen();
+        $("#save").submit(function(){
+            var parentId=$("#ParentClassId").val();
+            var classname=$("#ClassName").val();
+            var classsort=$("#ClassSort").val();
+            if (!parentId) {
+                alert('请选择上级分类');
+                return false;
+            };
+            if (!classname) {
+                alert('请填写分类名称');
+                return false;
+            };
+            if (!classsort) {
+                alert('请填写分类排序');
+                return false;
+            } else{
+                return true;
+            };
+        })
+
+        $("#logoimg_y").click(function(){
+            art.dialog({title:'图片预览',content:'<img src="{$PICURL}'+$('#logoimg').val()+'" style="width:600px;min-width:50%;" />',lock:true,background: '#000',opacity: 0.45})
+        })
+        $("#proimg_y").click(function(){
+            art.dialog({title:'图片预览',content:'<img src="{$PICURL}'+$('#proimg').val()+'" style="width:600px;min-width:50%;" />',lock:true,background: '#000',opacity: 0.45})
+        })
+    })
+</script>
+<script type="text/javascript">
+    function del(id){
+        art.dialog.confirm('确定要删除吗？请慎重操作', function () {
+            window.location.href="{:U('Products/delClass')}?id="+id;
+            // alert('hahaha')
+        }, function () {
+            art.dialog.tips('取消操作');
+        });
+    }
+
+    function editClass(id){
+        $.ajax({
+            type:'post',
+            url:'{:U("Products/getClassInfo")}',
+            data:'id='+id,
+            dateType:'json',
+            success:function(msg){
+                var msgr=eval("("+msg+")");
+                // alert(msgr);
+                $("#ParentClassId").val(msgr.ParentClassId);
+                $("#ClassName").val(msgr.ClassName);
+                $("#ClassSort").val(msgr.ClassSort);
+                $("#classId").val(msgr.ClassId);
+                if (msgr.IsVisible=='1') {
+                    $("#IsVisible").attr('checked','checked');
+                };
+                if (msgr.IsVisible=='0') {
+                    $("#NoVisible").attr('checked',true);
+                };
+            }
+        })
+    }
+
+    function edit(id){
+      // console.log(id);
+        var allClass={$AllClass};
+        var dclass={$jsondata};
+        $.each(allClass,function(index,item){
+            if (item.ClassId==id) {
+              // console.log('找到了');
+                $("#ParentClassId").val(item.ParentClassId);
+                $("#ClassName").val(item.ClassName);
+                $("#ClassSort").val(item.sort);
+                $("#classId").val(item.ClassId);
+                $("#logoimg").val(item.ImgPath);
+                $("#chosen").val(item.Pid);
+                $("#proimg").val(item.ProImg);
+                // if (item.ClassGrade==1) {
+                //     $('#Sys').attr('readonly',true);
+                //     $('#Show').attr('readonly',true);
+                //     $('#Sale').attr('readonly',true);
+                // }else{
+                //     $('#Sys').removeAttr('readonly');
+                //     $('#Show').removeAttr('readonly');
+                //     $('#Sale').removeAttr('readonly');
+
+                //   for (var i = item.cuts.length - 1; i >= 0; i--) {
+                //     if (item.cuts[i].MemberType==0) {
+                //       $('#Sys').val(item.cuts[i].Cut);
+                //     };
+                //     if (item.cuts[i].MemberType==1) {
+                //       $('#Show').val(item.cuts[i].Cut);
+                //     };
+                //     if (item.cuts[i].MemberType==2) {
+                //       $('#Sale').val(item.cuts[i].Cut);
+                //     };
+                //   };
+                // }
+                if (item.IsVisible=='1') {
+                    $('#NoVisible').prop('checked','');
+                    $("#IsVisible").prop('checked','checked');
+                };
+                if (item.IsVisible=='0') {
+                    $('#IsVisible').prop('checked','');
+                    $("#NoVisible").prop('checked','checked');
+                };
+
+                $.each(dclass,function(index,items){
+                    if (items.ClassId==item.ParentClassId) {
+                      $("#ParentSort").val(items.ClassSort);
+                  };
+              })
+            };
+        })
+    }
+
+    function upimg(id){
+        art.dialog.data('domid',id);
+        art.dialog.open('{:U('Upimg/classimg')}');
+    };
+    $("#ParentClassId").change(function(){
+        var dclass={$jsondata};
+        var ParentClassId=$("#ParentClassId").val();
+        $.each(dclass,function(index,item){
+            if (ParentClassId==item.ClassId) {
+                $("#ParentSort").val(item.ClassSort);
+            };
+        })
+    })
+</script>
+<include file="Common:footer" />

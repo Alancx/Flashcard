@@ -1,0 +1,175 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+label {
+    font-weight: 400;
+}
+
+.proeval {
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+}
+
+.projbxx {
+  position: relative;
+  overflow: hidden;
+    margin: 0px 10px 0px 10px;
+    padding: 10px 0px 10px 0px;
+}
+
+.projbxx > img {
+    float: left;
+    width: 25%;
+    margin: 0px 1% 0px 2%;
+}
+
+.projbxx > label {
+    float: left;
+    width: 72%;
+    margin: 0px;
+    padding-left: 5px;
+    line-height: 20px;
+}
+
+.proevname {
+    font-size: 14px;
+    color: #333333;
+}
+
+.proevgg {
+    font-size: 12px;
+    color: #999999;
+}
+
+.proevfasj {
+    font-size: 12px;
+    color: #FFb222;
+}
+
+.proevalprice {
+    font-size: 18px;
+    color: #ff4200;
+}
+
+.proevalprice > span {
+    float: right;
+    font-size: 16px;
+    color: #333333;
+}
+
+.porevalpy {
+    width: 90%;
+    height: 80px;
+    margin: 10px 5% 10px 5%;
+    padding: 5px;
+    resize: none;
+    border-color: #DDDDDD;
+    border-radius: 5px;
+    outline: none;
+}
+.proevalxj{
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+}
+.proevalxj>div{
+    height: 30px;
+    padding: 0px 10px 0px 10px;
+    margin: 5px 0px 5px 0px;
+}
+.proevalxj>div>label{
+    float: left;
+    line-height: 30px;
+    font-size: 16px;
+    color: #333333;
+    height: 30px;
+    width: 75px;
+    margin: 0px;
+}
+.proevalxj>div>span{
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin: 0px 0px 0px 10px;
+    background-image: url("../Images/xingji2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+.proevalxj>div>.selxj{
+    background-image: url("../Images/xingji1.png");
+}
+.evaltjpl{
+    width: 80%;
+    height: 40px;
+    margin: 10px 10% 0px 10%;
+    color: #ffffff;
+    font-size: 16px;
+    border-style: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: #ffb222;
+}
+.mrproevalpy{
+  position: relative;
+  height: 42px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+.mrtitle{
+  position: relative;
+  height: 40px;
+  width: 95%;
+  margin: 0px 0px 0px 5%;
+  line-height: 40px;
+  color: #333333;
+}
+.mrtitle>span{
+  height: 40px;
+  width: 40px;
+  float: right;
+  background-image: url("../Images/Arrow.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 7px;
+  /*
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  transform:rotate(90deg);
+  */
+}
+.moplnr{
+  display: none;
+  position: absolute;
+  left: 0px;
+  top: 41px;
+  width: 100%;
+  height: 287px;
+  background-color: #ffffff;
+  overflow: auto;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  padding: 0px 0px 5px 0px;
+}
+.moplnr>label{
+  height: 41px;
+  width: 90%;
+  margin: 0px 5% 0px 5%;
+  line-height: 40px;
+  color: #333333;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}

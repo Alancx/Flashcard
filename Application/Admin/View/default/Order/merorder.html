@@ -1,0 +1,558 @@
+<include file="Common:top" />
+<link href="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager_blue.css" rel="stylesheet">
+<link href="__PUBLIC__/Admin/Admin/common/css/order.style.css" rel="stylesheet">
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row order-all">
+		<div class="col-lg-12">
+			<div class="ibox-title">
+				<h5>
+					订单信息
+					<small>显示条件筛选后的订单</small>
+				</h5>
+			</div>
+			<div class="ibox-content">
+				<form role="form" class="form-horizontal" method="post" id="allorder_form">
+					<div class="filter-groups">
+						<div class="form-group">
+							<label class="control-label">订单号：</label>
+							<div class="controls">
+								<input type="text" name="order_no" class="form-control input-sm" id="order_no" maxlength="50" value="{$order_no}"></div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">会员账号或收货人：</label>
+							<div class="controls">
+								<input type="text" name="user_name" class="form-control input-sm" id="user_name" maxlength="50" value="{$user_name}"></div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">收货人手机：</label>
+							<div class="controls">
+								<input type="text" name="tel" class="form-control input-sm" id="tel" maxlength="50"></div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">选择商户：</label>
+							<div class="controls">
+								<select name="merchant" id="merchant" class="form-control input-sm" style="font-size:12px;display:inline-block;">
+									<option value="">全部</option>
+									<?php foreach ($merchants as $mer): ?>
+										<option value="{$mer.stoken}">{$mer.storename}</option>
+									<?php endforeach ?>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="filter-groups" style="width:580px;">
+						<div class="form-group">
+							<label class="control-label">下单时间：</label>
+							<div class="controls">
+								<input type="text" name="start_time" id="start_time" onfocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true,maxDate:'%y-%M-{%d-0}'})" class="Wdate form-control input-sm" style="width:150px;display:inline-block;" value="{$start_time}">
+								<span>至</span>
+								<input type="text" name="end_time" id="end_time" onfocus="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true,maxDate:'%y-%M-{%d}'})" class="Wdate form-control input-sm" style="width:150px;display:inline-block;" value="{$end_time}">
+								&nbsp;&nbsp;
+								<a class="btn btn-xs" data-day="6">最近7天</a>
+								&nbsp;
+								<a class="btn btn-xs" data-day="29">最近30天</a>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">订单状态：</label>
+							<div class="controls">
+								<select name="state" id="state" class="form-control input-sm" style="font-size:12px;width:120px;display:inline-block;">
+									<option value="0" <if condition="$state eq 0">selected="selected"</if> >全部</option>
+									<option value="1" <if condition="$state eq 1">selected="selected"</if>>待付款</option>
+									<option value="2" <if condition="$state eq 2">selected="selected"</if>>已付款</option>
+									<option value="4" <if condition="($state eq 4) or ($state eq 10)">selected="selected"</if>>已完成</option>
+									<option value="5" <if condition="$state eq 5">selected="selected"</if>>退款中</option>
+									<option value="100" <if condition="($state eq 7) or ($state eq 8) or ($state eq 9)">selected="selected"</if>>已关闭</option>
+								</select>
+							</div>
+						</div>
+						<!-- <div class="form-group">
+							<label class="control-label">付款方式：</label>
+							<div class="controls">
+								<select name="buy_way" id="buy_way" class="form-control input-sm" style="font-size:12px;width:120px;display:inline-block;">
+									<option value="ALL">全部</option>
+									<option value="XJ">现金</option>
+									<option value="T">微信支付</option>
+									<option value="YE">余额支付</option>
+									<option value="JL">奖励余额支付</option>
+									<option value="POSXJ">POS端现金支付</option>
+								</select>
+							</div>
+						</div> -->
+					</div>
+					<div style="clear:left;"></div>
+					<div>
+						<button type="button" class="btn btn-w-m btn-success" id="btn_select">筛选</button>
+						<button type="button" class="btn btn-w-m btn-white"  id="btn_excel" data-toggle="" data-target="#modaltoExcel" ><i class="fa fa-download"></i>&nbsp;&nbsp;批量导出</button>
+					</div>
+				</form>
+			</div>
+			<!-- 条件检索 -->
+			<div class="ibox-content" style="padding-top:0px;">
+				<div class="panel blank-panel">
+					<!-- <div style="clear:both;"></div> -->
+					<div class="panel-heading">
+						<div class="panel-options">
+							<ul class="nav nav-tabs">
+								<li <if condition="$state eq 0">class="active"</if> >
+									<a data-toggle="tab" data-state="0" class="panel-active" <if condition="$state eq 0">aria-expanded="true"<else />aria-expanded="false"</if>>
+										<span class="glyphicon glyphicon-th"></span>
+										全部
+									</a>
+								</li>
+								<li <if condition="$state eq 1">class="active"</if> >
+									<a data-toggle="tab" data-state="1" class="panel-active" <if condition="$state eq 1">aria-expanded="true"<else />aria-expanded="false"</if>>
+										<span class="glyphicon glyphicon-yen"></span>
+										待付款
+									</a>
+								</li>
+								<li <if condition="$state eq 2">class="active"</if> >
+									<a data-toggle="tab" data-state="2" class="panel-active" <if condition="$state eq 2">aria-expanded="true"<else />aria-expanded="false"</if>>
+										<span class="glyphicon glyphicon-hourglass"></span>
+										已付款
+									</a>
+								</li>
+								<li <if condition="($state eq 4) or ($state eq 10)">class="active"</if> >
+									<a data-toggle="tab" data-state="4" class="panel-active" <if condition="($state eq 4) or ($state eq 10)">aria-expanded="true"<else />aria-expanded="false"</if>>
+										<span class="glyphicon glyphicon-ok-sign"></span>
+										已完成
+									</a>
+								</li>
+								<li <if condition="$state eq 5">class="active"</if> >
+									<a data-toggle="tab" data-state="5" class="panel-active" <if condition="$state eq 5">aria-expanded="true"<else />aria-expanded="false"</if>>
+										<span class="glyphicon glyphicon-dashboard"></span>
+										退款中
+									</a>
+								</li>
+								<li <if condition="($state eq 7) or ($state eq 8) or ($state eq 9)">class="active"</if> >
+									<a data-toggle="tab" data-state="100" class="panel-active" <if condition="($state eq 7) or ($state eq 8) or ($state eq 9)">aria-expanded="true"<else />aria-expanded="false"</if>>
+										<span class="glyphicon glyphicon-remove"></span>
+										已关闭
+									</a>
+								</li>
+							</ul>
+							<!-- <a href="javascript:void(0);" class="js-help-icon pull-right" style="position:relative;top:0px;">?</a> -->
+						</div>
+					</div>
+					<!-- <div style="clear:both;"></div> -->
+					<div class="panel-body">
+						<div class="tab-content">
+						<!--  -->
+							<div id="tablist" class="tab-pane active">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th colspan="2">商品</th>
+											<th>单价/数量</th>
+											<th>买家</th>
+											<th>下单时间</th>
+											<th>订单状态</th>
+											<th>实付金额</th>
+										</tr>
+									</thead>
+									<tbody id="torderlist">
+										<foreach name="dataOrder" item="vo" key="k">
+											<tr>
+												<td colspan="7"></td>
+											</tr>
+											<tr>
+												<td colspan="7">
+													<input type="checkbox" name="poid" id="" value="{$vo.OrderId}">
+													<span style="color:#000">订单号：{$vo.OrderId}</span>
+													<span class="c-gray">
+													<if condition="$vo['PayName'] eq 'XJ'">现金付款
+														<elseif condition="$vo['PayName'] eq 'T'"/>微信支付
+														<elseif condition="$vo['PayName'] eq 'YE'"/>余额支付
+														<elseif condition="$vo['PayName'] eq 'JL'"/>奖励余额支付
+													</if>
+													</span>&emsp; <span>商户：{$vo.storename}</span>
+													<span class="pull-right">
+														<!-- <a data-toggle="modal" data-target="#orderinfo" data-order="{$vo.OrderId}" class="data-order-info">查看详情</a>&nbsp;-&nbsp;<a data-toggle="modal" data-order="{$vo.OrderId}" class="data_order_message" data-target="#order_message">备注</a> -->
+													</span>
+												</td>
+											</tr>
+											<foreach name="vo['datason']" item="son" key="i">
+												<tr>
+													<td class="image-cell" >
+														<img src="{$PICURL}{$son.ProLogoImg}" alt='' style="width:60px;height:60px;"/>
+													</td>
+													<td class="product-cell">
+														<p>
+															<a href="{:U('Home/Product/Goods')}?pid={$son.ProId}" target="_blank" title="{$son.ProName}">{$son.ProName}</a>
+														</p>
+														<p>{$son.Spec}</p>
+													</td>
+													<td>
+														<p>{$son["Price"]|sprintf='%.2f',###}</p>
+														<p>({$son.Count} 件)</p>
+													</td>
+													<if condition="$i eq 0">
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															<if condition="$vo['RecevingPost'] eq 'ZT'">
+															<p>店铺自提货<if condition="$vo['SceneContent']">({$vo.SceneContent})</if></p>
+															<else/>
+															<p>{$vo.Name}</p>
+															<p>{$vo.Tel}</p>
+															</if>
+
+														</td>
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															{$vo.Date}
+														</td>
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															<if condition="$vo['Status'] eq 1">
+																<p>等待买家付款</p>
+															<elseif condition="$vo['Status'] eq 2"/>
+
+															<if condition="$vo['RecevingPost'] eq 'ZT'">
+															<p>店铺自提货</p>
+															<else/>
+
+																<p>已付款，等待发货</p>
+
+															</if>
+
+
+
+
+
+															<elseif condition="$vo['Status'] eq 3"/>
+																<p>卖家已发货</p>
+															<elseif condition="($vo['Status'] eq 4) or ($vo['Status'] eq 10)"/>
+																<p>已收货，交易完成</p>
+															<elseif condition="$vo['Status'] eq 5"/>
+																<p>买家已退款</p>
+																<p><a href="javascript:;" data-order="{$vo.OrderId}" class="btn btn-outline btn-default status-button order_back" data-transaction="{$vo.TransactionId}" data-type="money">点击确认退款</a></p>
+															<elseif condition="$vo['Status'] eq 6"/>
+																<p>买家已退货</p>
+																<p><a href="javascript:;" data-order="{$vo.OrderId}" class="btn btn-outline btn-default status-button order_back" data-type="pro">确认收到退货</a></p>
+															<elseif condition="$vo['Status'] eq 7"/>
+																<p>买家退货成功</p>
+															<elseif condition="$vo['Status'] eq 8"/>
+																<p>买家退款成功</p>
+															<elseif condition="$vo['Status'] eq 9"/>
+																<p>已过期，订单关闭</p>
+															<elseif condition="$vo['Status'] eq 11"/>
+																<p>订单已撤销</p>
+															<else/>
+															</if>
+														</td>
+														<td <if condition="($vo['sonCount'] neq 1) and ($i eq 0)">rowspan="{$vo.sonCount}"</if>>
+															<p>{$vo["Price"]|sprintf='%.2f',###}</p>
+															<p><small class="c-gray">(含运费：{$vo.Freight})</small></p>
+														</td>
+													</if>
+												</tr>
+											</foreach>
+										</foreach>
+									</tbody>
+								</table>
+								<if condition="$pageCount eq 0">
+									<div class="alert alert-warning" id="alert_message" style="display:block;">还没有相关数据！</div>
+								<else/>
+									<div class="alert alert-warning" id="alert_message" style="display:none;"></div>
+								</if>
+								<div id="kkpager"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 订单详情 start chat-discussion -->
+<div class="modal inmodal fade" id="orderinfo" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				订单详情
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body page-trade-order-detail" style="padding:15px">
+				<!-- 货物进程状态 -->
+				<div class="step-region">
+					<ul class="ui-step ui-step-4" id="modal_status_step">
+					</ul>
+				</div>
+				<!-- 订单明细 -->
+				<div class="content-region clearfix">
+					<div class="info-region">
+						<h3>
+							<span>订单信息</span>
+						</h3>
+						<table class="info-table">
+							<tbody id="modal_info_table1">
+							</tbody>
+						</table>
+						<div class="dashed-line"></div>
+						<table class="info-table">
+							<tbody id="modal_info_table2">
+							</tbody>
+						</table>
+						<!-- 二维码扫描部分 -->
+						<div class="promotion-app hide">
+							<div class="promotion-app-qrcode"></div>
+							<div class="promotion-app-content">
+								<p>随时随地经营店铺</p>
+								<p>订单发货、库存管理通通搞定</p>
+							</div>
+						</div>
+					</div>
+					<div class="state-region">
+						<div style="padding:0px 0 30px 40px;">
+							<h3 class="state-title">
+								<span class="icon info">!</span>
+								<span>订单状态：</span>
+								<span id="modal_order_status"></span>
+							</h3>
+							<div class="state-desc" id="modal_order_status_desc">
+							</div>
+							<div class="state-action" id="modal_order_sell_message">
+								备注：-
+							</div>
+						</div>
+						<div class="state-remind-region">
+							<div class="dashed-line"></div>
+							<div class="state-remind">
+								<h4>温馨提醒：</h4>
+								<ul>
+									<li>请务必等待订单状态变更为“买家已付款，等待卖家发货”后再进行发货。</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 订单商品明细 -->
+				<table class="ui-table ui-table-simple goods-table">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="cell-30">商品名称</th>
+							<th>单价(元)</th>
+							<th>数量</th>
+							<th class="cell-13">小计(元)</th>
+							<th>状态</th>
+							<th class="text-center">运费</th>
+						</tr>
+					</thead>
+					<tbody id="modal_table_info">
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="7" class="text-right">
+								<span class="c-gray">实收总价：</span>
+								<span class="real-pay ui-money-income">
+									<span>¥</span>
+									<span id="tfoot_real_money"></span>
+								</span>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 订单详情 end -->
+<!-- 订单导出 start -->
+<div class="modal inmodal fade" id="modaltoExcel" tabindex="-1" role="dialog"  aria-hidden="true">
+ 	<div class="modal-dialog ">
+ 		<div class="modal-content">
+ 			<div class="modal-header" style="padding:10px 15px;">
+ 				订单-导出
+ 				<button type="button" class="close" data-dismiss="modal">
+ 					<span aria-hidden="true" id="export-close">&times;</span>
+ 					<span class="sr-only">Close</span>
+ 				</button>
+ 			</div>
+ 			<div class="modal-body page-trade-order-detail" style="padding:15px">
+ 				<div class="clearfix">
+	 				<div class="filter-meta">
+	 					<span>下单时间：</span>
+	 					<span id="export_time"></span>
+	 				</div>
+ 				</div>
+ 				<div class="clearfix">
+	 				<div class="filter-meta">
+	 					<span>订单状态：</span>
+	 					<span id="export_state"></span>
+	 				</div>
+	 				<div class="filter-meta">
+	 					<span>付款方式：</span>
+	 					<span id="export_pay_type"></span>
+	 				</div>
+	 				<div class="filter-meta">
+	 					<span>收件人：</span>
+	 					<span id="export_user_name"></span>
+	 				</div>
+ 				</div>
+ 			</div>
+ 			<div class="modal-footer" style="text-align:left;">
+ 				<button type="button" class="btn btn-white btn-sm btn-js-export" data-export-type="default">下载普通报表</button>
+				<button type="button" class="btn btn-white btn-sm btn-js-export" data-export-type="check" disabled="disabled">下载对账报表</button>
+				<!-- <button type="button" class="btn btn-white btn-sm btn-js-export" data-export-type="newxls">下载指定报表(导入使用)</button> -->
+            </div>
+ 		</div>
+ 	</div>
+ </div>
+<!-- 订单添加备注 end -->
+<!-- 订单添加备注 start -->
+<div class="modal inmodal fade" id="order_message" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:428px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				订单备注
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<textarea class="js-remark" id="js-remark" rows="4" placeholder="最多可输入256个字符" maxlength="256" style="width: 396px;"></textarea>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+				<button type="button" class="btn btn-w-m btn-success input-sm" id="btn_message" data-dismiss="modal">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 订单添加备注 end -->
+<!-- 发货 -->
+<div class="modal inmodal fade" id="ModelSend" tabindex="-1" role="dialog"  aria-hidden="true">
+ 	<div class="modal-dialog modal-lg">
+ 		<div class="modal-content">
+ 			<div class="modal-header" style="padding:10px 15px;">
+ 				订单-发货
+ 				<button type="button" class="close" data-dismiss="modal">
+ 					<span aria-hidden="true">&times;</span>
+ 					<span class="sr-only">Close</span>
+ 				</button>
+ 			</div>
+ 			<div class="modal-body page-trade-order-detail" style="padding:15px">
+ 				<div class="content-region clearfix">
+					<div class="info-region">
+						<h3>
+							<span>订单信息</span>
+						</h3>
+						<table class="info-table">
+							<tbody id="modal_send_table1">
+							</tbody>
+						</table>
+						<div class="dashed-line"></div>
+						<table class="info-table">
+							<tbody id="modal_send_table2">
+							</tbody>
+						</table>
+					</div>
+					<div class="state-region">
+						<div style="padding:0px 0 30px 40px;">
+							<h3 class="state-title">
+								<span class="icon info">~</span>
+								<span>发货信息：</span>
+							</h3>
+							<div class="state-desc" id="modal_order_status_desc" style="margin-bottom:0px;margin-top:20px;">
+								<table class="info-table">
+									<tbody>
+										<tr>
+											<td style="padding-bottom:0px;vertical-align:middle;">选择快递：</td>
+											<td style="padding-bottom:0px;">
+												<div class="form-inline">
+													<select id="sendtype" name="sendtype" class="form-control input-sm" style="font-size:12px;">
+														<option value="">请选择快递公司</option>
+														<foreach name="send" item="vo" key="k"><option value="{$vo.Number}" <if condition="$k eq 0">selected="selected"</if>>{$vo.Name}</option></foreach>
+												</select>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding-bottom:0px;padding-top:8px;vertical-align:middle;">
+											快递单号：
+										</td>
+										<td style="padding-top:15px;">
+											<div class="form-inline">
+												<input type="text" placeholder="请输入快递单号" maxlength="50" id="sendCard" name="sendCard" class="form-control input-sm">
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" style="padding-top:20px;">
+											<button type="button" class="btn btn-w-m btn-success input-sm" data-order="" id="btn_send">提交</button>
+											<button type="button" class="hide" data-dismiss="modal" id="btn_send_hide">提交</button>
+										</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="state-remind-region">
+							<div class="dashed-line"></div>
+							<div class="state-remind">
+								<h4>温馨提醒：</h4>
+								<ul>
+									<li>请务必等待订单状态变更为“买家已付款，等待卖家发货”后再进行发货。</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+ 				<table class="ui-table ui-table-simple goods-table">
+					<thead>
+						<tr>
+							<th></th>
+							<th class="cell-30">商品名称</th>
+							<th>单价(元)</th>
+							<th>数量</th>
+							<th class="cell-13">小计(元)</th>
+							<th>当前库存</th>
+							<th>库存下限</th>
+						</tr>
+					</thead>
+					<tbody id="modal_table_send">
+					</tbody>
+				</table>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- WdatePicker -->
+<script src="__PUBLIC__/Admin/Admin/common/js/validaterReg.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.source.js"></script>
+<!-- 分页 -->
+<script src="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager.js"></script>
+<script>
+	var binddefaultinfo={
+		postRootUrl:"{$PICURL}",
+		// postWebRootUrl:"{:C(SHOPWEBROOT)}",
+		// postWebRootUrl:"http://"+"{$URL}",
+		postWebRootUrl:"{:U('Home/Product/Goods')}",
+		postUrl:"{:U('merorder')}",
+		postExport:"{:U('exportorderstoken')}",
+		postNewXls:"{:U('exportxls')}",
+		postinfoUrl:"{:U('getOrderInfoByno')}",
+		pageCount:"{$pageCount}",	// 数据条数
+		totalPage:"{$totalPage}",	// 总页数
+		pno:1, // 当前显示的页码
+		type:"{$selecttype}",
+		state:"{$state}",
+		order_no:""
+	};
+</script>
+<script src="__PUBLIC__/Admin/Admin/common/js/merorder.js?v2.15"></script>
+<script>SetPager();</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><h1 style='text-align:center;font-size:100px;color:#FF0000;'>验证码已过期，请重试</h1>

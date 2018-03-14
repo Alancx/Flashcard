@@ -1,0 +1,48 @@
+<layout name="Public/PageModel"/>
+
+<style>
+.codecontent{
+  position: fixed;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.51);
+z-index: 100;
+}
+.qr-codes {
+    position: absolute;
+    overflow: auto;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #f3f3f3;
+}
+.qr-codesmy {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #333333;
+    margin: 80px 0px 0px 0px;
+}
+.qr-codes > img {
+    width: 60%;
+    margin: 10px 20% 0px 20%;
+}
+.qr-codess {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #333333;
+    margin: 10px 0px 0px 0px;
+}
+</style>
+<div class="codecontent">
+  <div class="qr-codes">
+    <label class="qr-codesmy">绑定接收人</label>
+    <img src="{:U('Public/getmessageQrcode')}">
+    <label class="qr-codess">用手机扫一扫二维码</label>
+    <label class="qr-codess">当前接收人:{$shopinfo['MsgReceverName']}</label>
+  </div>
+</div>

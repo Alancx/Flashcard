@@ -1,0 +1,174 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<script src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;margin-top:20px;">
+		<form action="" class="form-inline" method="post"  id="search">
+			<div class="form-group">
+				<select name="sid" id="sid" class="form-control" >
+					<option value="">请选择结算商户</option>
+					<foreach name='stores' item='store'>
+						<option value="{$store.stoken}" style="color:green;font-size:1.1em;">{$store.storename}</option>
+					</foreach>
+				</select>
+			</div>
+			<div class="form-group">
+				<select name="Status" id="Status" class="form-control" >
+					<option value="all">全部</option>
+					<option value="0" style="color:green;font-size:1.1em;">未结算</option>
+					<option value="1" style="color:green;font-size:1.1em;">已结算</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input type="text" name="strtime" id="stime" class="form-control" placeholder='申请时间(起)' onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"  value="{$data.strtime}">
+			</div>
+			<div class="form-group">
+				<input type="text" name="endtime" id="etime" class="form-control" placeholder="申请时间(止)" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="{$data.endtime}">
+			</div>
+			<button class="btn btn-primary btn-outline btn-md" type="submit"><span class="glyphicon glyphicon-search"></span> 搜 索</button> 
+			<button class="btn btn-default btn-outline btn-md" type="button" id="import"><span class="glyphicon glyphicon-export"></span> 导出</button>
+		</form>
+	</div>
+	<div class="col-sm-12">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>商户名称</th>
+					<th>结算金额</th>
+					<th>申请时间</th>
+					<th>结算账户</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+			<foreach name='lists' item='list'>
+				<tr>
+					<td>{$list.storename}</td>
+					<td>{$list.Money}</td>
+					<td>{$list.CreateDate}</td>
+					<td>{$list.IdName} / {$list.IdCard}  <br> 户名：{$list.GetName} </td>
+					<td><if condition="$list['Status'] eq '1'">已完成<elseif condition="$list['Status'] eq '2'"/>转账申请已提交<else/> <button class="btn btn-xs btn-danger cuted" data-id="{$list.ID}">结算</button></if></td>
+				</tr>
+			</foreach>
+			</tbody>
+
+                            <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">撤销备注内容</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="##" class="form">
+                                            	<div class="form-group" class="col-sm-12">
+                                            		<label>备注信息</label>
+                                            		<textarea name="Remarks" cols="30" rows="10" style="width:100%;" id="content" value=""></textarea>
+                                            		<input type="hidden" name="hid" id="hid" value="">
+                                            	</div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveRemarks">提交</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="modal inmodal fade" id="myModal7" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">撤销备注内容</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="##" class="form">
+                                            	<div class="form-group" class="col-sm-12">
+                                            		<label>备注信息</label>
+                                            		<textarea name="Remarks" cols="30" rows="10" style="width:100%;" id="contents" value=""></textarea>
+                                            	</div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+		</table>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#sid').chosen();
+	$(document).ready(function(){
+		$('#import').click(function(){window.location.href="{:U('Storers/cutrecord')}?param=out&outtype=banks&stime="+$('#stime').val()+"&etime="+$('#etime').val()+"&sid="+$('#sid').val()+"&Status="+$('#Status').val();})
+		$('#search').submit(function(){
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime) {
+				if (stime && etime) {
+					if (stime<etime) {
+						return true;
+					}else{
+						art.dialog.tips('非法时间区间');
+						return false;
+					}
+				}else{
+					art.dialog.tips('请填写完整时间段');
+					return false;
+				}
+			}else{
+				return true;
+			}
+		})
+		$('.cut').click(function(){
+			var stoken=$(this).attr('data-stoken');
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			var _html='';
+			if (stime && etime) {
+				_html='确定要对'+stime+'--'+etime+'（下单时间）内的订单结算吗？';
+			}else{
+				_html="确定要对全部订单结算吗？";
+			}
+			art.dialog.confirm(_html,function(){
+				window.location.href="{:U('Storers/cuted')}?stoken="+stoken+"&stime="+stime+"&etime="+etime;
+			},function(){});
+		})
+		$('.showdetail').click(function(){
+			var stoken=$(this).attr('data-stoken');
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			art.dialog.open("{:U('Storers/getdetail')}?stoken="+stoken+"&stime="+stime+"&etime="+etime,{width:900,height:600});
+		})
+		$('.cuted').click(function(){
+			var id=$(this).attr('data-id');
+			var _this=$(this);
+			art.dialog.confirm('确定已结算吗？',function(){
+				art.dialog.tips('处理中...');
+				$.ajax({
+					url:"{:U('Storers/recordcuted')}",
+					type:"post",
+					data:"id="+id,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							art.dialog.tips('处理成功');
+							_this.attr('class','btn btn-xs btn-default').html('已处理');
+						}else{
+							art.dialog.tips('处理失败');
+						}
+					}
+				})
+			})
+		})
+	})
+</script>
+<include file="Common:footer" />

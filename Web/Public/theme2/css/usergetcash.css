@@ -1,0 +1,89 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.getcashpart{
+    height: 50px;
+    margin: 10px 0px 0px 0px;
+    padding: 0px 15px 0px 15px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.getcashpart>label{
+    height: 100%;
+    width: 100%;
+    line-height: 48px;
+    font-size: 14px;
+    color: #333333;
+    margin: 0px;
+}
+.getcashpart>label>span{
+    float: right;
+    color: #666666;
+
+}
+.getcash{
+    float: right;
+    height: 100%;
+    width: 200px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: right;
+    color: #FF4200;
+    outline: none;
+    border: none;
+}
+.getcashsure{
+    height: 40px;
+    margin: 10px 0px 0px 0px;
+    padding: 0px 15px 0px 15px;
+}
+.getcashsure>label{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #ffb222;
+    border-radius: 8px;
+}
+.getcash-1{
+  height: 24px;
+  border-bottom-style: dashed;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+.getcash-1>label{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  line-height: 23px;
+  color: #333333;
+  font-size: 14px;
+}
+.getcash-2{
+  height: 24px;
+}
+.getcash-2>label{
+  float: left;
+  width: 50%;
+  height: 100%;
+  margin: 0px 0px 0px 0px;
+  padding:0px 0px 0px 20px;
+  line-height: 24px;
+  color: #666666;
+  font-size: 12px;
+  background-image: url("../Images/weixuanze.png");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+}
+.sactive{
+  background-image: url("../Images/xuanze2.png")!important;
+}

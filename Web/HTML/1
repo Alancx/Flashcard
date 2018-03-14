@@ -1,0 +1,227 @@
+
+		 <div class="index_step">
+            <div class="step_left">
+				<a href="a.php?shop/index/category/#tagContent1#1#/">
+					<img src="public/shop/images/step6.png"></a>
+					<h2>万鞋集合</h2>
+					<p>部分品牌展示</p>
+					<div class="step66">
+						<a href="a.php?shop/category/search/骆驼/"><img src="public/shop/images/ss1.png"></a>
+						<a href="a.php?shop/category/search/奥康/"><img src="public/shop/images/ss2.png"></a>
+						<a href="a.php?shop/category/search/戈美其/"><img src="public/shop/images/ss3.png"></a>
+						<a href="a.php?shop/category/search/鞋子/"><img src="public/shop/images/ss4.png"></a>
+						<a href="a.php?shop/category/search/汉慕思/"><img src="public/shop/images/ss5.png"></a>
+						<a href="a.php?shop/category/search/佩艾妮/"><img src="public/shop/images/ss6.png"></a>
+						<a href="a.php?shop/category/search/ABA/"><img src="public/shop/images/ss7.png"></a>
+						<a href="a.php?shop/category/search/皇妹/"><img src="public/shop/images/ss8.png"></a>
+						<a href="a.php?shop/category/search/印象风/"><img src="public/shop/images/ss9.png"></a>
+						<a href="a.php?shop/category/search/女鞋/"><img src="public/shop/images/ss10.png"></a>
+						<a href="a.php?shop/category/search/焦点女孩/"><img src="public/shop/images/ss11.png"></a>
+						<a href="a.php?shop/category/search/尼恩宾利/"><img src="public/shop/images/ss12.png"></a>
+						<a href="a.php?shop/category/search/玫瑰仟金/"><img src="public/shop/images/ss13.png"></a>
+						<a href="a.php?shop/category/search/鞋子/"><img src="public/shop/images/ss14.png"></a>
+						<a href="a.php?shop/category/search/小西/"><img src="public/shop/images/ss15.png"></a>
+						<a href="a.php?shop/category/search/鞋子/"><img src="public/shop/images/ss16.png"></a>
+						<a href="a.php?shop/category/search/鞋子/"><img src="public/shop/images/ss17.png"></a>
+						<a href="a.php?shop/category/search/jyh/"><img src="public/shop/images/ss18.png"></a>
+					</div>
+                
+            </div>
+            
+            
+            
+            <div class="step_right">
+                <ul>
+                    <li><a href="a.php?shop/category/search/真皮女鞋/"><h2>真皮女鞋</h2><p>舒适时尚</p><img src="public/shop/images/step6_1.png"></a></li>
+                    <li><a href="a.php?shop/category/search/时尚女鞋/"><h2>时尚女鞋</h2><p>足够精彩</p><img src="public/shop/images/step6_2.png"></a></li>
+                    <li><a href="a.php?shop/category/search/靴子/"><h2>品牌鞋靴</h2><p>时尚炫酷</p><img src="public/shop/images/step6_3.png"></a></li>
+                    <li><a href="a.php?shop/category/search/男鞋/"><h2>精品男鞋</h2><p>品质生活</p><img src="public/shop/images/step6_4.png"></a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+         </div>
+         
+         
+         <div class="index_step">
+            <div class="step_left">
+				<a href="a.php?shop/category/index/298/">
+					<img src="public/shop/images/step1.png">
+					<h2>女装精选</h2>
+					<p>女人必备单品</p>
+					<img src="public/shop/images/step1_left.png">
+                </a>
+            </div>
+            <div class="step_right">
+                <ul>
+                    <li><a href="a.php?shop/category/index/29/"><h2>潮流上装</h2><p>婀娜多姿</p><img src="public/shop/images/step1_1.png"></a></li>
+                    <li><a href="a.php?shop/category/index/260/"><h2>时尚下装</h2><p>性感修长</p><img src="public/shop/images/step1_2.png"></a></li>
+                    <li><a href="a.php?shop/category/index/269/"><h2>优雅裙装</h2><p>亭亭玉立</p><img src="public/shop/images/step1_3.png"></a></li>
+                    <li><a href="a.php?shop/category/search/女包/"><h2>精品女包</h2><p>引领时尚</p><img src="public/shop/images/step1_4.png"></a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+         </div>
+		 <div class="index_brand">
+         	<ul>
+				<li><a href="a.php?shop/category/search/奥康/"><img src="public/shop/images/brand18.png"></a></li>
+				<li><a href="a.php?shop/category/search/皇妹/"><img src="public/shop/images/brand4.png"></a></li>
+                <li><a href="a.php?shop/category/search/印象风/"><img src="public/shop/images/brand1.png"></a></li>
+				<li><a href="a.php?shop/category/search/凯睿福/"><img src="public/shop/images/brand21.png"></a></li>
+                <!--<li><a href="a.php?shop/category/search/艾曼连/"><img src="public/shop/images/brand2.png" /></a></li>              
+                <li><a href="a.php?shop/category/search/羽迹/"><img src="public/shop/images/brand5.png" /></a></li>-->  
+				<li><a href="a.php?shop/category/search/布自在/"><img src="public/shop/images/brand28.png"></a></li>
+				<li><a href="a.php?shop/category/search/艾格赛琳/"><img src="public/shop/images/brand6.png"></a></li>
+				<li><a href="a.php?shop/category/search/咫尺缘/"><img src="public/shop/images/brand23.png"></a></li>
+				<li><a href="a.php?shop/category/search/如丹/"><img src="public/shop/images/brand29.png"></a></li>
+                <div class="clear"></div>
+            </ul>
+         </div>
+         <div class="index_step">
+            <div class="step_left">
+            <a href="a.php?shop/index/category/7/">
+                <img src="public/shop/images/step2.png">
+				<h2>大牌彩妆</h2>
+                <p>甜蜜出彩 清凉彩妆秀</p>
+                <img src="public/shop/images/step2_left.png">
+                </a>
+            </div>
+            <div class="step_right">
+                <ul>
+					<li><a href="a.php?shop/category/index/160/"><h2>女士护肤</h2><p>高端领导品牌</p><img src="public/shop/images/step2_4.png"></a></li>
+                    <li><a href="a.php?shop/category/search/香水/"><h2>优雅女人</h2><p>经典芳香 持久迷人</p><img src="public/shop/images/step2_2.png"></a></li>
+                    <li><a href="a.php?shop/category/index/82/"><h2>男士专区</h2><p>型男必备单品</p><img src="public/shop/images/step2_3.png"></a></li>
+                    <li><a href="a.php?shop/category/index/125/"><h2>洗护套装</h2><p>家庭首选 经济实惠</p><img src="public/shop/images/step2_1.png"></a></li>
+                    
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+         </div>
+		 <div class="index_brand">
+         	<ul>
+                <li><a href="a.php?shop/category/search/雅芳/"><img src="public/shop/images/brand7.png"></a></li>
+                <li><a href="a.php?shop/category/search/索璞/"><img src="public/shop/images/brand41.png"></a></li>
+                <li><a href="a.php?shop/category/search/田亮/"><img src="public/shop/images/brand39.png"></a></li>
+                <!--<li><a href="a.php?shop/category/search/阿迪达斯/"><img src="public/shop/images/brand40.png" /></a></li>-->
+                <div class="clear"></div>
+            </ul>
+         </div>
+         <div class="index_step">
+            <div class="step_left">
+            <a href="a.php?shop/index/category/4/">
+                <img src="public/shop/images/step3.png">
+				<h2>精品套装</h2>
+                <p>尊享品质生活</p>
+                <img src="public/shop/images/step3_left.png">
+                </a>
+            </div>
+            <div class="step_right">
+                <ul>
+                    <li><a href="a.php?shop/category/index/24/"><h2>气质上装</h2><p>汇聚精品 倾心推荐</p><img src="public/shop/images/step3_1.png"></a></li>
+                    <li><a href="a.php?shop/category/index/244/"><h2>精品下装</h2><p>时尚品质 透气薄款</p><img src="public/shop/images/step3_2.png"></a></li>
+                    <li><a href="a.php?shop/category/index/35/"><h2>经典商务男包</h2><p>人气商品 大牌巨献</p><img src="public/shop/images/step3_3.png"></a></li>
+                    <li><a href="a.php?shop/category/index/200/"><h2>精品配饰</h2><p>舒适/绅士/专业</p><img src="public/shop/images/step3_4.png"></a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+         </div>
+		 <div class="index_brand">
+         	<ul>
+                <li><a href="a.php?shop/category/search/洛丁斯特/"><img src="public/shop/images/brand47.png"></a></li>
+                <li><a href="a.php?shop/category/search/老人头/"><img src="public/shop/images/brand8.png"></a></li>
+                <li><a href="a.php?shop/category/search/慕/"><img src="public/shop/images/brand9.png"></a></li>
+                <li><a href="a.php?shop/category/search/ABA/"><img src="public/shop/images/brand10.png"></a></li>
+                <li><a href="a.php?shop/category/search/骆驼/"><img src="public/shop/images/brand11.png"></a></li>
+                <div class="clear"></div>
+            </ul>
+         </div>
+         <div class="index_step">
+            <div class="step_left">
+            <a href="a.php?shop/category/search/亲子装/">
+                <img src="public/shop/images/step4.png">
+				<h2>时尚套装</h2>
+                <p>时尚新款 正品保证</p>
+                <img src="public/shop/images/step4_left.png">
+                </a>
+            </div>
+            <div class="step_right">
+                <ul>
+                    <li><a href="a.php?shop/category/index/154/"><h2>可爱女童</h2><p>不做平凡公主</p><img src="public/shop/images/step4_1.png"></a></li>
+                    <li><a href="a.php?shop/category/index/139/"><h2>舒适男童</h2><p>活力无限 运动休闲</p><img src="public/shop/images/step4_2.png"></a></li>
+                    <li><a href="a.php?shop/category/index/94/"><h2>儿童书包</h2><p>减负护脊双肩背包</p><img src="public/shop/images/step4_3.png"></a></li>
+                    <li><a href="#"><h2>男/女童鞋</h2><p>大牌热卖 休闲舒适</p><img src="public/shop/images/step4_4.png"></a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+         </div>
+		 <div class="index_brand">
+         	<ul>
+                <li><a href="a.php?shop/category/search/7号小兔/"><img src="public/shop/images/brand12.png"></a></li>
+                <li><a href="a.php?shop/category/index/154/"><img src="public/shop/images/brand13.png"></a></li>
+                <li><a href="a.php?shop/category/search/骏野/"><img src="public/shop/images/brand14.png"></a></li>
+                <li><a href="a.php?shop/category/index/94/"><img src="public/shop/images/brand15.png"></a></li>
+                <li><a href="a.php?shop/category/search/吉吉小屋/"><img src="public/shop/images/brand24.png"></a></li>
+                <div class="clear"></div>
+            </ul>
+         </div>
+         <div class="index_step">
+            <div class="step_left">
+            <a href="a.php?shop/index/category/9/">
+                <img src="public/shop/images/step5.png">
+				<h2>整果榨汁机</h2>
+                <p>多汁营养 健康正能量</p>
+                <img src="public/shop/images/step5_left.png">
+                </a>
+            </div>
+            <div class="step_right">
+                <ul>
+                    <li><a href="a.php?shop/category/index/106/"><h2>品质厨具</h2><p>精选商品 你值得拥有</p><img src="public/shop/images/step5_1.png"></a></li>
+                    <li><a href="a.php?shop/category/index/150/"><h2>精品电器</h2><p>品质生活从你我开始</p><img src="public/shop/images/step5_2.png"></a></li>
+                    <li><a href="a.php?shop/category/index/214/"><h2>品牌手机</h2><p>爆款来袭 任性到底</p><img src="public/shop/images/step5_3.png"></a></li>
+                    <li><a href="a.php?shop/category/index/208/"><h2>新潮平衡车</h2><p>简便新潮</p><img src="public/shop/images/step5_4.png"></a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="clear"></div>
+         </div>
+		 <div class="index_brand">
+         	<ul>
+                <li><a href="a.php?shop/category/search/华为/"><img src="public/shop/images/brand16.png"></a></li>
+				<li><a href="a.php?shop/category/search/苹果/"><img src="public/shop/images/brand19.png"></a></li>
+				<li><a href="a.php?shop/category/search/酷派/"><img src="public/shop/images/brand33.png"></a></li>
+				<li><a href="a.php?shop/category/search/三星/"><img src="public/shop/images/brand22.png"></a></li>
+				<li><a href="a.php?shop/category/search/联想/"><img src="public/shop/images/brand30.png"></a></li>  
+				<li><a href="a.php?shop/category/search/小米4/"><img src="public/shop/images/brand42.png"></a></li> 
+                <li><a href="a.php?shop/category/search/罗马仕/"><img src="public/shop/images/brand32.png"></a></li>
+				<li><a href="a.php?shop/category/search/羽博/"><img src="public/shop/images/brand45.png"></a></li>				               
+                <li><a href="a.php?shop/category/search/砖投/"><img src="public/shop/images/brand43.png"></a></li> 
+				<li><a href="a.php?shop/category/search/乐行/"><img src="public/shop/images/brand26.png"></a></li>				
+                <li><a href="a.php?shop/category/search/思维翼/"><img src="public/shop/images/brand44.png"></a></li>
+				<li><a href="a.php?shop/category/search/先锋/"><img src="public/shop/images/brand17.png"></a></li>                
+                <li><a href="a.php?shop/category/search/九阳/"><img src="public/shop/images/brand20.png"></a></li>   
+                <li><a href="a.php?shop/category/search/荣事达/"><img src="public/shop/images/brand31.png"></a></li>                
+				<li><a href="a.php?shop/category/search/布瑞斯/"><img src="public/shop/images/brand46.png"></a></li>				
+                <div class="clear"></div>
+            </ul>
+         </div>
+         <div class="index_hot">
+            <ul>
+				<li><a href="a.php?shop/category/search/奥康/"><img src="public/shop/images/indexhot11.jpg"><p>奥康 红火鸟</p></a></li>
+				<!-- <li><a href="a.php?shop/category/search/真皮女鞋/"><img src="public/shop/images/indexhot12.jpg" /><p>成都真皮女鞋</p></a></li> -->
+				<!--<li><a href="a.php?shop/category/index/172/"><img src="public/shop/images/indexhot13.jpg" /><p>潮鞋馆</p></a></li>-->
+                <!--<li><a href="a.php?shop/category/search/皇妹/"><img src="public/shop/images/indexhot6.jpg" /><p>皇妹</p></a></li>-->
+				<!--<li><a href="a.php?shop/category/search/小西/"><img src="public/shop/images/indexhot10.jpg" /><p>小西</p></a></li>-->
+                <!--<li><a href="a.php?shop/ware/index/1096/"><img src="public/shop/images/indexhot1.jpg" /><p>轻奢馆</p></a></li>-->
+                <li><a href="a.php?shop/ware/index/771/"><img src="public/shop/images/indexhot3.jpg"><p>汉慕思 高档休闲男鞋</p></a></li> 
+                <li><a href="a.php?shop/ware/index/88/"><img src="public/shop/images/indexhot2.jpg"><p>ABA</p></a></li>
+				<li><a href="a.php?shop/category/search/骆驼/"><img src="public/shop/images/indexhot7.jpg"><p>骆驼</p></a></li>
+				<!--<li><a href="a.php?shop/ware/index/1467/"><img src="public/shop/images/indexhot5.jpg" /><p>羽博</p></a></li>	-->			
+				<li><a href="a.php?shop/ware/index/1220/"><img src="public/shop/images/indexhot9.jpg"><p>银座拉杆箱</p></a></li>
+                <!--<li><a href="a.php?shop/category/search/九阳/"><img src="public/shop/images/indexhot4.jpg" /><p>九阳</p></a></li>-->
+            </ul>
+         </div>
+   

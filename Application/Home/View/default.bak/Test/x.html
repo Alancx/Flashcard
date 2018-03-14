@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head><meta charset="UTF-8"><title>Untitled Document</title></head>
+<script type="text/javascript">
+     
+    function javaNoParam(){  
+       web.chooseFile();   
+    }
+    
+    function javaWithParam(message){    
+       web.showToast(message);   
+    }
+     
+    function jsNoParam(){  
+           alert("来自Java调用，无参")  
+    }
+    
+    function jsWithParam(message){    
+        alert("来自Java调用，有参数:"+message) 
+    }
+
+</script>
+<body>
+<p> <input type="button" name="button" id="button" value="调用Java无参函数" onClick="javaNoParam()"></p>
+<p> <input type="button" name="button2" id="button2" value="调用Java有参函数" onClick="javaWithParam('有参数')"></p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/uservourecord.css">
+
+<div class="recordpart">
+  <img src="__PUBLIC__/theme2/Images/wushuju.jpg" class="isshow" style="width: 100%; display: none;">
+  <foreach name="cashlist" item='list'>
+    <div>
+      <if condition="$list['Status'] eq 1">
+        <label>待审核<br><span>{$list.CreateDate}</span>
+        <if condition="$list['AccountType'] eq WXPAY">
+         <span>会员收益</span>
+         <else/>
+         <span>推广收益</span>
+        </if>
+        </label>
+        <label>{$list.Money}元</label>
+        <elseif condition="$list['Status'] eq 2"/>
+        <label>已审核<br><span>{$list.CheckDate}</span>
+          <if condition="$list['AccountType'] eq WXPAY">
+           <span>会员收益</span>
+           <else/>
+           <span>推广收益</span>
+          </if>
+        </label>
+        <label>{$list.Money}元</label>
+        <else/>
+        <if condition="$list['IsSuccess'] eq 0">
+          <label>提现失败，金额已返还<br><span>{$list.EndDate}</span>
+            <if condition="$list['AccountType'] eq WXPAY">
+             <span>会员收益</span>
+             <else/>
+             <span>推广收益</span>
+            </if>
+          </label>
+          <label>{$list.Money}元</label>
+          <else/>
+          <label>提现成功<br><span>{$list.CheckDate}</span></label>
+          <label>{$list.Money}元</label>
+        </if>
+      </if>
+    </div>
+  </foreach>
+</div>
+<script>
+$(document).ready(function () {
+  if (ishasorder()=='true') {
+    $('.isshow').css('display','none');
+    $('body').css('background-color','#f3f3f3');
+  } else {
+    $('.isshow').css('display','block');
+    $('body').css('background-color','#f6f6f6');
+    $('.recordpart').css('border','none');
+  }
+})
+function ishasorder(){
+  var hasorder='false';
+  $(".recordpart>div").each(function (index, item) {
+      if ($(item).css('display')!='none') {
+        hasorder='true';
+      }
+  })
+  return hasorder;
+}
+</script>

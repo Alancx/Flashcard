@@ -1,0 +1,35 @@
+操作定位:Public/godata::::{"account":"lihua","password":"123","timestamp":"149671794ato_f72c8ee5a2dc804a9e8f5ff5325ee6ac","sign":"e573907ea5bada8a3be2c6ebcf829394","type":"s"}::::::操作日期:::::::2017-06-06 10:59:05
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-06-06 10:59:08
+操作定位:Phone/getsomething::::get{"time":"today","timetype":"d","data_type":"p","type":"gethomedata","oftype":"sale","aname":"\u897f\u5357","pname":"","cname":""}::::::操作日期:::::::2017-06-06 10:59:53
+操作定位:Storers/checking::::INSERT INTO `tb_user` (`userName`,`Password`,`token`,`stoken`,`TrueName`,`IsLogin`,`Sex`,`InputId`,`InputName`,`CreateDate`,`LastUpdateDate`,`IsAdmin`,`DepartmentName`) VALUES ('17711045634','72bcba983cd3b0bf1d4251311d8b3772','rhbnja145862596121','Rnmkm49672133165','王金烽',1,0,0,'store',1496721383,1496721383,1,'1016')::::::操作日期:::::::2017-06-06 11:56:23
+操作定位:Storers/checking::::http://api.sms1086.com/api/Sendutf8.aspx?username=%E7%9E%AC%E8%81%94%E5%85%AC%E5%8F%B8&password=1211ea1f74cc1578d69a5356f9dc94f6&mobiles=17711045634&content=%E3%80%90%E5%BE%BD%E8%AE%B0%E9%A3%9F%E5%93%81%E3%80%91%E6%82%A8%E7%9A%84%E5%BC%80%E5%BA%97%E7%94%B3%E8%AF%B7%E5%B7%B2%E9%80%9A%E8%BF%87%E5%AE%A1%E6%A0%B8%EF%BC%8CPC%E7%AB%AF%E7%AE%A1%E7%90%86%E5%9C%B0%E5%9D%80www.huijistore.com%2FSeller+%E3%80%82+%E7%99%BB%E9%99%86%E8%B4%A6%E5%8F%B7%EF%BC%9A17711045634+%E5%AF%86%E7%A0%81%EF%BC%9A5634+%E3%80%82+&f=1&timestamp=2017-06-06+11%3A56%3A23---结果result=0&faillist=&balance=56&linkid=2E643B0DFC254195A34EC1DE295A3807&description=%e5%8f%91%e9%80%81%e7%9f%ad%e4%bf%a1%e6%88%90%e5%8a%9f::::::操作日期:::::::2017-06-06 11:56:23
+操作定位:Storers/checking::::INSERT INTO `tb_user` (`userName`,`Password`,`token`,`stoken`,`TrueName`,`IsLogin`,`Sex`,`InputId`,`InputName`,`CreateDate`,`LastUpdateDate`,`IsAdmin`,`DepartmentName`) VALUES ('13999289304','05425f51eaeab268c26a5d42f2ccedaf','rhbnja145862596121','tyivU49673093021','徐园园',1,0,0,'store',1496730943,1496730943,1,'1017')::::::操作日期:::::::2017-06-06 14:35:43
+操作定位:Storers/checking::::http://api.sms1086.com/api/Sendutf8.aspx?username=%E7%9E%AC%E8%81%94%E5%85%AC%E5%8F%B8&password=d1030a0843548a05ece016929a23f5cb&mobiles=13999289304&content=%E3%80%90%E5%BE%BD%E8%AE%B0%E9%A3%9F%E5%93%81%E3%80%91%E6%82%A8%E7%9A%84%E5%BC%80%E5%BA%97%E7%94%B3%E8%AF%B7%E5%B7%B2%E9%80%9A%E8%BF%87%E5%AE%A1%E6%A0%B8%EF%BC%8CPC%E7%AB%AF%E7%AE%A1%E7%90%86%E5%9C%B0%E5%9D%80www.huijistore.com%2FSeller+%E3%80%82+%E7%99%BB%E9%99%86%E8%B4%A6%E5%8F%B7%EF%BC%9A13999289304+%E5%AF%86%E7%A0%81%EF%BC%9A9304+%E3%80%82+&f=1&timestamp=2017-06-06+14%3A35%3A43---结果result=0&faillist=&balance=51&linkid=9DCA4C9C0D3D44BC8AE2BF1CC112FF4F&description=%e5%8f%91%e9%80%81%e7%9f%ad%e4%bf%a1%e6%88%90%e5%8a%9f::::::操作日期:::::::2017-06-06 14:35:43
+操作定位:Public/godata::::{"account":"lihua","password":"123","timestamp":"149673760ato_f72c8ee5a2dc804a9e8f5ff5325ee6ac","sign":"6b473121150c804323c106de7f5c51ed","type":"s"}::::::操作日期:::::::2017-06-06 16:26:42
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-06-06 16:26:44
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-06-06 16:27:27
+操作定位:Public/godata::::{"account":"lihua","password":"123","timestamp":"149673821ato_f72c8ee5a2dc804a9e8f5ff5325ee6ac","sign":"458592bfe77c68de3801d01ced84d4c5","type":"s"}::::::操作日期:::::::2017-06-06 16:36:59
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-06-06 16:37:01
+操作定位:Public/godata::::{"account":"lihua","password":"123","timestamp":"149673824ato_f72c8ee5a2dc804a9e8f5ff5325ee6ac","sign":"4652031dd828759b75badb413c25bb0b","type":"s"}::::::操作日期:::::::2017-06-06 16:37:30
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-06-06 16:37:32
+操作定位:Phone/getsomething::::get{"time":"today","timetype":"d","data_type":"p","type":"gethomedata","oftype":"sale","aname":"\u897f\u5357","pname":"","cname":""}::::::操作日期:::::::2017-06-06 16:37:40
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-06-06 16:37:46
+操作定位:Phone/getsomething::::get{"type":"linetypes","time":"today","time_type":"d","data_type":"online","pname":"","cname":""}::::::操作日期:::::::2017-06-06 16:37:49
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-06-06 16:38:10
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"dataofemps","desc":"desc"}::::::操作日期:::::::2017-06-06 16:38:17
+操作定位:Phone/getsomething::::人员销售排行--->>>{"status":"error"}::::::操作日期:::::::2017-06-06 16:38:18
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"dataofstores","desc":"desc"}::::::操作日期:::::::2017-06-06 16:38:33
+操作定位:Phone/getsomething::::get{"time":"today","timetype":"d","data_type":"a","type":"gethomedata","oftype":"sale","aname":"\u897f\u5357","pname":"","cname":""}::::::操作日期:::::::2017-06-06 16:38:42
+操作定位:Phone/getsomething::::get{"time":"today","timetype":"d","data_type":"a","type":"gethomedata","oftype":"count","aname":"\u897f\u5357","pname":"","cname":""}::::::操作日期:::::::2017-06-06 16:38:55
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-06-06 16:39:30
+操作定位:Phone/getsomething::::get{"type":"getdataofsales","time":"today","time_type":"d","data_type":"count","pname":"","cname":""}::::::操作日期:::::::2017-06-06 16:39:34
+操作定位:Public/godata::::{"account":"admin","password":"123","timestamp":"149674408ato_553c323ee7f52d61f22c76ebc7bfc80b","sign":"e2c0ae947f3b2d75d4b8d64e7139c297","type":"s"}::::::操作日期:::::::2017-06-06 18:14:42
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-06-06 18:14:45
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-06-06 18:14:52
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-06-06 18:14:53
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-06-06 18:14:54
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-06-06 18:14:56
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-06-06 18:14:56
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-06-06 18:14:57
+操作定位:Phone/getsomething::::get{"type":"linetypes","time":"today","time_type":"d","data_type":"online","pname":"","cname":""}::::::操作日期:::::::2017-06-06 18:15:00
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-06-06 18:45:33

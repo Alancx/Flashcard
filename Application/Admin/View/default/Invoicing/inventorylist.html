@@ -1,0 +1,95 @@
+<include file="Common:top" />
+<link href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css" rel="stylesheet">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12" style="padding:0px;">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>盘点信息检索<small class="text-danger">仅支持单个盘点单据查询</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-inline" method="post">
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-btn open">
+                                    <select class="form-control" style="font-size:12px;" id="Warehouse" name="Warehouse">
+                                        <foreach name="warehouseList" item="vo">
+                                            <option value="{$vo.WarehouseCard}">{$vo.WarehouseName}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                 <select data-placeholder="请选择盘点日期/盘点单号" class="chosen-select" name="inDate" id="inDate" tabindex="2">
+                                    <option value="-1">请选择盘点日期/盘点单号</option>
+                                    <foreach name="dataIddate" item="vo">
+                                        <if condition="$vo['WarehouseCard'] eq $warehouseList[0]['WarehouseCard'] ">
+                                            <option value="{$vo.InventoryId}">{$vo.Date}___{$vo.InventoryId}___{$vo.Status}</option>
+                                        </if>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-outline btn-primary btnselect" type="button" style="margin-bottom: 0px;width:80px;" id="btnSeloK"><i class="fa fa-search"></i>&nbsp;&nbsp;检索
+                            </button>
+                             <button class="btn btn-outline btn-default btnselect" type="button"
+                                style="margin-bottom: 0px;width:80px;" id="exportKC"><i class="fa fa-download"></i>&nbsp;&nbsp;导出
+                        </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- <div class="chat-discussion"> -->
+                <!-- 查询数据 -->
+                <div class="ibox-content timeline">
+
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Chosen -->
+<script src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="__PUBLIC__/Admin/Admin/common/js/validaterReg.js"></script>
+
+<script src="__PUBLIC__/Admin/Admin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<!-- artDialog -->
+<script src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.source.js"></script>
+<script>
+    var bindinfo = {
+        postUrl: "{:U('Invoicing/getInventoryList')}",
+        postDelURl: "{:U('Invoicing/saveInventory')}",
+        postcontinueUrl: "{:U('Invoicing/inventory')}",
+        emptyinfo: "未检索到查询条件数据...",
+        infoerror: "查询出现异常数据，输出失败！"
+    };
+    var tempdata = [];
+    var num = 0;
+</script>
+<notempty name="num">
+<script>
+    num={$num};
+    tempdata={$dataiddate};
+</script>
+</notempty>
+<script src="__PUBLIC__/Admin/Admin/common/js/inventorylist.js?v=1"></script>
+</body>
+</html>

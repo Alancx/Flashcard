@@ -1,0 +1,315 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usermyoders.css?v=1.2">
+
+<script src="__PUBLIC__/theme2/js/usermyoders.js?v=3.5"></script>
+<script src="__PUBLIC__/Plugins/qrcode/jquery.qrcode.min.js"></script>
+<script>
+    var otatus = "{:U('User/setMyOrderStatus')}";//订单状态修改
+    var tkurlvar="{$tkUrl}";
+    var zturlvar="{$ztUrl}";
+    var noworderid='';
+    var showorder="{:U('User/orderinfos')}?oid=";//查看订单详情
+    var stopGetOrderStatus=false;
+    var lockNowTask=false;
+    var checkOrderUrl="{:U('Public/KeepLongConn')}";
+    var gomyorder="{:U('Home/User/usermyoders')}";
+    var cservice_url="{:U('User/cservice',array('userid'=>'SELUSERID'))}";
+    var eval_url="{:U('user/userproevaluat')}";
+</script>
+<div class="myoderstitle" datype="{$type}">
+    <div class="odersel sel-1 oderselactive" onclick="seloderlx(this)">
+        <label>全部</label>
+    </div>
+    <div class="odersel sel-2" onclick="seloderlx(this)">
+        <label>待付款</label>
+    </div>
+    <div class="odersel sel-3" onclick="seloderlx(this)">
+        <label>待发货</label>
+    </div>
+    <div class="odersel sel-4" onclick="seloderlx(this)">
+        <label>待收货</label>
+    </div>
+    <div class="odersel sel-5" onclick="seloderlx(this)">
+        <label>待评价</label>
+    </div>
+</div>
+<div style="height: 50px"></div>
+<!--所有订单-->
+<div class="alloder">
+    <img src="__PUBLIC__/theme2/Images/wudingdan.jpg" class="isshow" style="width:100%;display:none;margin-top:15px;">
+    <?php $nowOrder=""; $nextOrder=true;$index=1;$allOrder=sizeof($orderList);$prevOrderObj=array();  ?>
+
+    <foreach name="orderList" item="oli">
+        <?php $st=0; ?>
+        <if condition="$nowOrder eq $oli['oid']">
+
+            <?php $nextOrder=false;$nowOrder=$oli['oid'];  ?>
+
+            <else/>
+
+            <?php $nextOrder=true;$nowOrder=$oli['oid'];  ?>
+
+        </if>
+
+        <if condition="$index eq 1">
+
+            <!--头 start-->
+            <div class="useroders {$oli['oid']} " dataoid="{$oli['oid']}" datastatus="{$oli['status']}" data-evl="{$oli['isevaluation']}" data-stoken="{$oli['stoken']}" data-tel="{$oli['tel']}">
+
+                <if condition="$oli['status'] eq 1">
+                    <label class="oderdata">订单号:{$oli['oid']}<span>未付款</span></label>
+                    <elseif condition="$oli['status'] eq 2"/>
+                    <label class="oderdata">订单号:{$oli['oid']}<span>已付款</span></label>
+                    <elseif condition="$oli['status'] eq 3"/>
+
+                    <if condition="$oli['stype'] eq 'ZT'">
+                        <label class="oderdata">订单号:{$oli['oid']}<span>到店提货</span></label>
+                        <else/>
+                        <label class="oderdata">订单号:{$oli['oid']}<span>快递送货</span></label>
+                    </if>
+
+                    <elseif condition="$oli['status'] eq 4"/>
+                    <label class="oderdata">订单号:{$oli['oid']}<span>交易完成</span></label>
+                    <elseif condition="$oli['status'] eq 5"/>
+                    <label class="oderdata">订单号:{$oli['oid']}<span>正在退款</span></label>
+                    <elseif condition="$oli['status'] eq 6"/>
+                    <label class="oderdata">订单号:{$oli['oid']}<span>正在退款</span></label>
+                    <elseif condition="$oli['status'] eq 7"/>
+                    <label class="oderdata">订单号:{$oli['oid']}<span>正在退款</span></label>
+                    <elseif condition="$oli['status'] eq 8"/>
+                    <label class="oderdata">订单号:{$oli['oid']}<span>退款成功</span></label>
+                    <elseif condition="$oli['status'] eq 9"/>
+                    <label class="oderdata">订单号:{$oli['oid']}<span>订单取消</span></label>
+                </if>
+                <!--头 end-->
+                <!--商品 start-->
+                <div class="oderspro">
+
+                    <else/>
+
+
+
+                    <if condition="$nextOrder eq true">
+
+                    </div>
+                    <!--商品 end-->
+                    <!--上一个尾 start-->
+                    <label class="odertotelprice">共{$prevOrderObj['acount']}件商品 合计:<span>￥{:number_format($prevOrderObj['aprice'],2)}</span>(含运费￥{:number_format($prevOrderObj['freight'],2)})</label>
+                    <div class="btn-groups">
+                      <button class="getkefu btnprored" style="float:left;margin-left:15px;" data-stoken="{$prevOrderObj['stoken']}" data-tel="{$prevOrderObj['tel']}">联系客服</button>
+                      <if condition="$prevOrderObj['LogisticsId'] neq ''">
+                        <if condition="$prevOrderObj['LogisticsCom'] neq ''">
+                          <button class="express" RPath="{:U('User/express',array('expid'=>$prevOrderObj['LogisticsId'],'expcom'=>$prevOrderObj['LogisticsCom']))}" datakdid="{$prevOrderObj.LogisticsId}" datakdcom="{$prevOrderObj.LogisticsCom}">查看物流</button>
+                       </if>
+                      </if>
+                        <if condition="$prevOrderObj['status'] eq 1">
+                            <button type="button" class="btnprored" RPath="{:U('Payment/Index').'?oid='.$prevOrderObj['oid']}">立即支付</button>
+                            <button type="button" onclick="orderbtn('qx','{$prevOrderObj['oid']}')">取消订单</button>
+                        <elseif condition="$prevOrderObj['status'] eq 2"/>
+
+                            <button type="button" onclick="orderbtn('tk-{$prevOrderObj['ptype']}','{$prevOrderObj['oid']}')">退款</button>
+
+                            <if condition="$prevOrderObj['stype'] eq 'ZT'">
+                                <button type="button" class="btnprored" onclick="tkqr('{$prevOrderObj['oid']}','{$prevOrderObj['rname']}','zt')">提货码</button>
+                            </if>
+
+
+                        <elseif condition="$prevOrderObj['status'] eq 3"/>
+
+                            <button type="button" class="btnprored" onclick="orderbtn('sh','{$prevOrderObj['oid']}')">确认收货</button>
+
+                        <elseif condition="$prevOrderObj['status'] eq 4"/>
+                            <?php if ($prevOrderObj['isevaluation']==0) {  ?>
+                                <?php if ($prevOrderObj['ecantk']==1) { ?>
+                                    <button type="button" onclick="orderbtn('tk-{$prevOrderObj['ptype']}','{$prevOrderObj['oid']}')">退款</button>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <button type="button" onclick="orderbtn('sc','{$prevOrderObj['oid']}')">删除订单</button>
+                            <?php } ?>
+
+                        <elseif condition="$prevOrderObj['status'] eq 5"/>
+
+                        <elseif condition="$prevOrderObj['status'] eq 6"/>
+
+                        <elseif condition="$prevOrderObj['status'] eq 7"/>
+
+                        <elseif condition="($prevOrderObj['status'] eq 8)"/>
+                            <button type="button" onclick="orderbtn('sc','{$prevOrderObj['oid']}')">删除订单</button>
+            </if>
+        </div>
+        <!--上一个尾 end-->
+    </div>
+
+
+
+    <!--下一个头 start-->
+    <div class="useroders {$oli['oid']} " dataoid="{$oli['oid']}" datastatus="{$oli['status']}"  data-evl="{$oli['isevaluation']}" data-stoken="{$oli['stoken']}" data-tel="{$oli['tel']}">
+
+        <if condition="$oli['status'] eq 1">
+            <label class="oderdata">订单号:{$oli['oid']}<span>未付款</span></label>
+            <elseif condition="$oli['status'] eq 2"/>
+            <label class="oderdata">订单号:{$oli['oid']}<span>已付款</span></label>
+            <elseif condition="$oli['status'] eq 3"/>
+
+            <if condition="$oli['stype'] eq 'ZT'">
+                <label class="oderdata">订单号:{$oli['oid']}<span>到店提货</span></label>
+                <else/>
+                <label class="oderdata">订单号:{$oli['oid']}<span>快递送货</span></label>
+            </if>
+
+            <elseif condition="$oli['status'] eq 4"/>
+            <label class="oderdata">订单号:{$oli['oid']}<span>交易完成</span></label>
+            <elseif condition="$oli['status'] eq 5"/>
+            <label class="oderdata">订单号:{$oli['oid']}<span>正在退款</span></label>
+            <elseif condition="$oli['status'] eq 6"/>
+            <label class="oderdata">订单号:{$oli['oid']}<span>正在退款</span></label>
+            <elseif condition="$oli['status'] eq 7"/>
+            <label class="oderdata">订单号:{$oli['oid']}<span>正在退款</span></label>
+            <elseif condition="$oli['status'] eq 8"/>
+            <label class="oderdata">订单号:{$oli['oid']}<span>退款成功</span></label>
+            <elseif condition="$oli['status'] eq 9"/>
+            <label class="oderdata">订单号:{$oli['oid']}<span>订单取消</span></label>
+        </if>
+        <!--下一个头 end-->
+        <!--商品 start-->
+        <div class="oderspro">
+
+        </if>
+
+    </if>
+
+
+</if>
+
+<div class="oderpro" dataproid="{$oli.proid}" dataisivaluation="$oli['IsEvaluation']">
+    <img src="{:C('RESOURCE_URL')}{$oli['pimg']}" alt="商品图片">
+    <label>{$oli['pname']}<br><span>{$oli.title}</span></label>
+    <label class="oderproprice">{:number_format($oli['plprice'],2)}<br><span>×{$oli['plcount']}</span></label>
+    <if condition="$oli['status'] eq 4">
+      <!-- <php>var_dump($oli['olisevaluation'])</php> -->
+      <if condition="$oli['olisevaluation'] eq 0">
+        <!-- <button type="button" class="btnpropj" RPath="{:U('user/userproevaluat')}?proid={$oli.proid}&oid={$oli.oid}">评价
+        </button> -->
+        <button type="button" class="btnpropj">评价
+        </button>
+        <else/>
+        <?php $st=1; ?>
+        <button type="button" class="btnproypj"
+        RPath="{:U('user/userproevaluat')}?proid={$oli.proid}&oid={$oli.oid}"
+        disabled>已评价
+    </button>
+</if>
+</if>
+</div>
+
+
+
+<if condition="$index eq $allOrder">
+
+</div>
+<!--商品 end-->
+
+<!--尾 start-->
+<label class="odertotelprice">共{$oli['acount']}件商品 合计:<span>￥{:number_format($oli['aprice'],2)}</span>(含运费￥{:number_format($oli['freight'],2)})</label>
+<div class="btn-groups">
+  <button class="getkefu btnprored" style="float:left;margin-left:15px;" data-stoken="{$oli['stoken']}" data-tel="{$oli['tel']}">联系客服</button>
+  <if condition="$oli['LogisticsId'] neq ''">
+    <if condition="$oli['LogisticsCom'] neq ''">
+     <button class="express" RPath="{:U('User/express',array('expid'=>$oli['LogisticsId'],'expcom'=>$oli['LogisticsCom']))}" datakdid="{$oli.LogisticsId}" datakdcom="{$oli.LogisticsCom}">查看物流</button>
+   </if>
+  </if>
+    <if condition="$oli['status'] eq 1">
+            <button type="button" class="btnprored" RPath="{:U('Payment/Index').'?oid='.$oli['oid']}">立即支付</button>
+            <button type="button" onclick="orderbtn('qx','{$oli['oid']}')">取消订单</button>
+    <elseif condition="$oli['status'] eq 2"/>
+
+        <button type="button" onclick="orderbtn('tk-{$oli['ptype']}','{$oli['oid']}')">退款</button>
+
+        <if condition="$oli['stype'] eq 'ZT'">
+            <button type="button" class="btnprored" onclick="tkqr('{$oli['oid']}','{$oli['rname']}','zt')">提货码</button>
+        </if>
+
+
+    <elseif condition="$oli['status'] eq 3"/>
+
+        <button type="button" class="btnprored" onclick="orderbtn('sh','{$oli['oid']}')">确认收货</button>
+
+    <elseif condition="$oli['status'] eq 4"/>
+
+
+                            <?php if ($oli['isevaluation']==0) {  ?>
+                                <?php if ($oli['ecantk']==1) { ?>
+                                    <button type="button" onclick="orderbtn('tk-{$oli['ptype']}','{$oli['oid']}')">退款</button>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <button type="button" onclick="orderbtn('sc','{$oli['oid']}')">删除订单</button>
+                            <?php } ?>
+
+    <elseif condition="$oli['status'] eq 5"/>
+
+    <elseif condition="$oli['status'] eq 6"/>
+
+    <elseif condition="$oli['status'] eq 7"/>
+
+    <elseif condition="($oli['status'] eq 8)"/>
+                <button type="button" onclick="orderbtn('sc','{$oli['oid']}')">删除订单</button>
+    </if>
+        </div>
+        <!--尾 end-->
+    </div>
+
+</if>
+
+
+<?php $index++;$prevOrderObj=$oli ?>
+
+<!--end-->
+
+</foreach>
+
+
+</div>
+
+<div class="odselmdcover">
+    <div class="odselmd">
+        <label class="seltitle">请选择退回门店</label>
+        <div class="selmd">
+            <foreach name="storeList" item="mdli">
+                <label class="selmdli" datamdid="{$mdli.id}" onclick="selectmd(this)">{$mdli.storename}</label>
+            </foreach>
+        </div>
+        <div class="selbtn">
+            <div>
+                <label onclick="backod(this)">取消</label>
+            </div>
+            <div>
+                <label id="suremd" onclick="mdsure(this)">确定</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="coverqrcode">
+    <label class="qr-codesmy"></label>
+    <div id="tkqrcodediv"></div>
+    <label class="qr-codess">请核销员扫二维码</label>
+    <label class="qr-codegb" onclick="closerewm(this)"
+    style="cursor: pointer;">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闭</label>
+</div>
+<div class="cusercover">
+  <div class="cuserlist">
+    <label class="seltitle">请选择客服</label>
+    <div class="selkf">
+      <foreach name='service' item='kf'>
+          <label class="selkfli" onclick="selectkf(this)" data-userid="{$kf.id}">{$kf.userName}</label>
+      </foreach>
+    </div>
+    <div class="selbtn">
+        <div>
+            <label id="cancelkf">取消</label>
+        </div>
+        <div>
+            <label id="surekf">确定</label>
+        </div>
+    </div>
+  </div>
+</div>

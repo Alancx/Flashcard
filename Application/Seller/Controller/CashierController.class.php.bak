@@ -1,0 +1,878 @@
+<?php
+namespace Admin\Controller;
+use Think\Controller;
+header('content-type:text/html;charset=utf-8');
+class CashierController extends CommonController{
+	public function _initialize(){
+		parent::_initialize();
+	}
+
+	public function Index()
+	{
+
+		$this->display();
+	}
+
+	public function Cashier()
+	{
+		//$url='http://'.$_SERVER['HTTP_HOST'];
+
+		//ob_clean();
+		//vendor('PHPQR.phpqrcode');
+		$url='http://'.$_SERVER['HTTP_HOST'];
+		//.U('Home/Account/QrCodeHandle',array('tp'=>'3','gid'=>$_GET['pid'],'sid'=>$_GET['sid']));
+		//$level="L";
+		//$size=4;
+		//$qrcodeStr="<img src='".\QRcode::png($url,false,$level,$size,'2')."' >";
+		//\QRcode::png($url,false,$level,$size,'2');
+		//$this->assign('qrcodeStr','\''.$qrcodeStr.'\'');
+		$this->assign('qrcodeUrl',$url);
+		$this->assign('orderId',"E".date("YmdHis",time()).rand(1000,9999));
+		$this->display();
+	}
+
+	public function getGoodsPrice()
+	{
+
+		$data=$_POST;
+
+		$tempGid=parse_url($data['pid']);
+		$tempGid=$tempGid['path'];
+		$tempGid=explode('/', $tempGid);
+
+// array(3) {
+//   ["scheme"]=>
+//   string(4) "http"
+//   ["host"]=>
+//   string(12) "wx.58ate.com"
+//   ["path"]=>
+//   string(64) "/Home/Account/QrCodeHandle/tp/3/gid/pro0516501471_39/sid/11.html"
+// }
+
+//http://wx.58ate.com/Home/Account/QrCodeHandle/tp/3/gid/pro0516501471_39/sid/11.html
+
+
+		$zpSign=0;
+
+		if (count($tempGid)==1) 
+		{
+			$data['pid']=$tempGid[0];
+		}
+		else
+		{
+			$tempGidIndex=array_search('gid',$tempGid);
+			$data['pid']=$tempGid[$tempGidIndex+1];
+
+			$tempZPIndex=array_search('zp',$tempGid);
+
+
+			$gInfoCondition="";
+			if ($tempZPIndex) 
+			{
+				$gInfoCondition="(pl.ProIdCard='".$data['pid']."' OR pl.ProIdInputCard='".$data['pid']."') AND pl.Iszp='1'";
+				$zpSign=str_replace('.html','',$tempGid[$tempZPIndex+1]);
+			}
+			else
+			{
+				$gInfoCondition="(pl.ProIdCard='".$data['pid']."' OR pl.ProIdInputCard='".$data['pid']."')";
+				$zpSign=0;
+			}
+		}
+
+		$gInfo=M()->table(C('DB_BASE')['DB_PREFIX']."product p")->join(C('DB_BASE')['DB_PREFIX']."productlist pl ON p.ProId=pl.ProId","LEFT")->join(C('DB_BASE')['DB_PREFIX']."productonsale pos ON pos.ProId=pl.ProIdCard AND pos.Ison=1 AND (GETDATE() BETWEEN pos.stime AND pos.etime)","LEFT")->where($gInfoCondition)->field("pl.ProIdCard AS pid,p.ProName AS pname,pl.Price AS price,pos.sprice AS sprice")->find();
+
+		if ($gInfo) 
+		{
+
+			if ($zpSign==1) {
+				$gInfo['sprice']=0;
+				$gInfo['price']=0;
+			}
+			else
+			{
+				if (!$gInfo['sprice']) {
+					$gInfo['sprice']=0;
+				}
+				else
+				{
+					$gInfo['sprice']=$gInfo['price']-$gInfo['sprice'];
+					$gInfo['price']=$gInfo['price']-$gInfo['sprice'];
+				}
+			}
+			$gInfo['num']=1;
+
+
+			$gInfoArray=cookie("sy_GoodsList");
+			$gInfoArray=json_decode($gInfoArray,true);
+
+// array(
+
+// 	'编号'=>array(
+// 		'oid'=>'编号',
+// 		'nums'=>'1',
+// 		'money'=>'9',
+// 		'discount'=>'1',
+
+// 		'goods'=>array(
+//			'pid'=>array(
+// 				'pid'=>'',
+// 				'pname'=>'',
+// 				'price'=>'',
+// 				'sprice'=>'',
+//				'num'=>'0',
+//				'money'=>'10',
+//				),
+// 			),
+// 		),
+
+// 		'zpgoods'=>array(
+//			'pid'=>array(
+// 				'pid'=>'',
+// 				'pname'=>'',
+// 				'price'=>'',
+// 				'sprice'=>'',
+//				'num'=>'0',
+//				'money'=>'10',
+//				),
+// 			),
+// 		),
+
+// 	);
+			//$gInfoArray['Goods']=array('"'.$gInfo['pid'].'"'=>$gInfo);
+
+			$nowOrderArray=$gInfoArray[$data['oid']];
+
+			$nowOrderArray['oid']=$data['oid'];
+			$nowOrderArray['nums']=$nowOrderArray['nums']+$gInfo['num'];
+			$nowOrderArray['money']=$nowOrderArray['money']+$gInfo['price'];
+			$nowOrderArray['discount']=$nowOrderArray['discount']+($gInfo['sprice']*$gInfo['num']);
+
+			$gpid='';
+			if ($zpSign==1) {
+				$nowGoodsArray=$nowOrderArray['zpgoods'][$gInfo['pid']];
+				$nowGoodsArray['pid']=$gInfo['pid'];
+				$nowGoodsArray['pname']=$gInfo['pname'];
+				$nowGoodsArray['price']=$gInfo['price'];
+				$nowGoodsArray['sprice']=$gInfo['sprice'];
+				$nowGoodsArray['num']=$nowGoodsArray['num']+$gInfo['num'];
+				$nowGoodsArray['money']=$nowGoodsArray['price']*$nowGoodsArray['num'];
+
+				$nowOrderArray['zpgoods'][$gInfo['pid']]=$nowGoodsArray;
+				$gInfoArray[$data['oid']]=$nowOrderArray;
+
+				$gpid='xzp'.$nowGoodsArray['pid'];
+			}
+			else
+			{
+				$nowGoodsArray=$nowOrderArray['goods'][$gInfo['pid']];
+				$nowGoodsArray['pid']=$gInfo['pid'];
+				$nowGoodsArray['pname']=$gInfo['pname'];
+				$nowGoodsArray['price']=$gInfo['price'];
+				$nowGoodsArray['sprice']=$gInfo['sprice'];
+				$nowGoodsArray['num']=$nowGoodsArray['num']+$gInfo['num'];
+				$nowGoodsArray['money']=$nowGoodsArray['price']*$nowGoodsArray['num'];
+
+				$nowOrderArray['goods'][$gInfo['pid']]=$nowGoodsArray;
+				$gInfoArray[$data['oid']]=$nowOrderArray;
+
+				$gpid=$nowGoodsArray['pid'];
+			}
+
+			
+			$gInfo=array(
+				'pid'=>$gpid,
+				'pname'=>$nowGoodsArray['pname'],
+				'price'=>$nowGoodsArray['price'],
+				'sprice'=>$nowGoodsArray['sprice'],
+				'num'=>$nowGoodsArray['num'],
+				'money'=>$nowGoodsArray['money'],
+				'zp'=>$zpSign,
+				'oInfo'=>array(
+					'count'=>$nowOrderArray['nums'],
+					'money'=>$nowOrderArray['money'],
+					'discount'=>$nowOrderArray['discount']
+					),
+			);
+
+			$this->saveCooies('GoodsList',json_encode($gInfoArray),'sy');
+			$this->ajaxReturn(array('status'=>'true','info'=>$gInfoArray,'data'=>$gInfo,'promotion'=>$this->getPromotion($nowOrderArray['money'])),'JSON');
+		}
+		else
+		{
+			$this->ajaxReturn(array('status'=>'false','info'=>'CantFindGoods','data'=>M()->_sql()),'JSON');
+		}
+	}
+
+	public function delGoods()
+	{
+		$data=$_POST;
+		$orderInfoArray=cookie("sy_GoodsList");
+		$orderInfoArray=json_decode($orderInfoArray,true);
+
+		//$orderInfoArray[$data['oid']]['goods'][$data['gid']]
+		$gid='';
+		if (substr($data['gid'], 0,3)=='xzp') 
+		{
+			$gid=substr($data['gid'],3);
+			$nowGoodsInfo=$orderInfoArray[$data['oid']]['zpgoods'][$gid];
+			$orderInfoArray[$data['oid']]['money']=$orderInfoArray[$data['oid']]['money']-$nowGoodsInfo['money'];
+			$orderInfoArray[$data['oid']]['nums']=$orderInfoArray[$data['oid']]['nums']-$nowGoodsInfo['num'];
+			$orderInfoArray[$data['oid']]['discount']=$orderInfoArray[$data['oid']]['discount']-($nowGoodsInfo['sprice']*$nowGoodsInfo['num']);
+
+			unset($orderInfoArray[$data['oid']]['zpgoods'][$gid]);		
+		}
+		else
+		{
+			$gid=$data['gid'];
+			$nowGoodsInfo=$orderInfoArray[$data['oid']]['goods'][$gid];
+			$orderInfoArray[$data['oid']]['money']=$orderInfoArray[$data['oid']]['money']-$nowGoodsInfo['money'];
+			$orderInfoArray[$data['oid']]['nums']=$orderInfoArray[$data['oid']]['nums']-$nowGoodsInfo['num'];
+			$orderInfoArray[$data['oid']]['discount']=$orderInfoArray[$data['oid']]['discount']-($nowGoodsInfo['sprice']*$nowGoodsInfo['num']);
+
+			unset($orderInfoArray[$data['oid']]['goods'][$gid]);
+		}
+
+
+
+
+
+
+		$this->saveCooies('GoodsList',json_encode($orderInfoArray),'sy');
+
+		$this->ajaxReturn(array('status'=>'true','info'=>'success','data'=>$orderInfoArray[$data['oid']],'promotion'=>$this->getPromotion($orderInfoArray[$data['oid']]['money'])),'JSON');
+	}
+
+	public function changeNum()
+	{
+		$data=$_POST;
+		$orderInfoArray=cookie("sy_GoodsList");
+		$orderInfoArray=json_decode($orderInfoArray,true);
+
+		//$orderInfoArray[$data['oid']]['goods'][$data['gid']]
+		$gid='';
+		if (substr($data['gid'], 0,3)=='xzp')
+		{
+			$gid=substr($data['gid'],3);
+			$nowGoodsInfo=$orderInfoArray[$data['oid']]['zpgoods'][$gid];
+			$orderInfoArray[$data['oid']]['money']=$orderInfoArray[$data['oid']]['money']-$nowGoodsInfo['money'];
+			$orderInfoArray[$data['oid']]['nums']=$orderInfoArray[$data['oid']]['nums']-$nowGoodsInfo['num'];
+			$orderInfoArray[$data['oid']]['discount']=$orderInfoArray[$data['oid']]['discount']-($nowGoodsInfo['sprice']*$nowGoodsInfo['num']);
+
+	// money: 1
+	// num: 1
+	// pid: "pro0516656563_39"
+	// pname: "蜂之巢洋槐蜜"
+	// price: "1.00"
+	// sprice: 0
+			$nowGoodsInfo['num']=$data['num'];
+			$nowGoodsInfo['money']=$data['num']*$nowGoodsInfo['price'];
+
+			$orderInfoArray[$data['oid']]['money']=$orderInfoArray[$data['oid']]['money']+$nowGoodsInfo['money'];
+			$orderInfoArray[$data['oid']]['nums']=$orderInfoArray[$data['oid']]['nums']+$nowGoodsInfo['num'];
+			$orderInfoArray[$data['oid']]['discount']=$orderInfoArray[$data['oid']]['discount']+($nowGoodsInfo['sprice']*$nowGoodsInfo['num']);
+
+			$orderInfoArray[$data['oid']]['zpgoods'][$gid]=$nowGoodsInfo;
+
+		}
+		else
+		{
+			$gid=$data['gid'];
+			$nowGoodsInfo=$orderInfoArray[$data['oid']]['goods'][$gid];
+			$orderInfoArray[$data['oid']]['money']=$orderInfoArray[$data['oid']]['money']-$nowGoodsInfo['money'];
+			$orderInfoArray[$data['oid']]['nums']=$orderInfoArray[$data['oid']]['nums']-$nowGoodsInfo['num'];
+			$orderInfoArray[$data['oid']]['discount']=$orderInfoArray[$data['oid']]['discount']-($nowGoodsInfo['sprice']*$nowGoodsInfo['num']);
+
+	// money: 1
+	// num: 1
+	// pid: "pro0516656563_39"
+	// pname: "蜂之巢洋槐蜜"
+	// price: "1.00"
+	// sprice: 0
+			$nowGoodsInfo['num']=$data['num'];
+			$nowGoodsInfo['money']=$data['num']*$nowGoodsInfo['price'];
+
+			$orderInfoArray[$data['oid']]['money']=$orderInfoArray[$data['oid']]['money']+$nowGoodsInfo['money'];
+			$orderInfoArray[$data['oid']]['nums']=$orderInfoArray[$data['oid']]['nums']+$nowGoodsInfo['num'];
+			$orderInfoArray[$data['oid']]['discount']=$orderInfoArray[$data['oid']]['discount']+($nowGoodsInfo['sprice']*$nowGoodsInfo['num']);
+
+			$orderInfoArray[$data['oid']]['goods'][$gid]=$nowGoodsInfo;
+
+		}
+
+
+		//$orderInfoArray[$data['oid']]['goods'][$data['gid']]
+
+
+		$this->saveCooies('GoodsList',json_encode($orderInfoArray),'sy');
+
+		$this->ajaxReturn(array('status'=>'true','info'=>'success','data'=>$orderInfoArray[$data['oid']],'goodsInfo'=>$nowGoodsInfo,'promotion'=>$this->getPromotion($orderInfoArray[$data['oid']]['money'])),'JSON');
+	}
+
+	public function storeCashier()
+	{
+			$data=$_POST;
+
+			$casherInfo=session('userinfo');
+
+
+			$orderInfoStr=cookie("sy_GoodsList");
+    		
+    		
+	        $addInfo=M('store')->where(array('id'=>$casherInfo['userShop'],'token'=>$this->token))->find();
+
+            $orderData["RecevingName"]=$addInfo["id"].'';
+            $orderData["RecevingArea"]=$addInfo["area"].'';
+            $orderData["RecevingCity"]=$addInfo["city"].'';
+            $orderData["RecevingProvince"]=$addInfo["province"].'';
+            $orderData["RecevingAddress"]=$addInfo["addr"].'';
+            $orderData["RecevingPost"]='ZT';
+            $orderData["RecevingPhone"]=$addInfo["tel"].'';
+
+    		$orderData["OrderId"]=$data["oid"];
+    		$orderData["MemberId"]=$data['memberId'];
+    		$orderData["Freight"]=0;
+    		$orderData["Count"]=0;
+    		
+			$orderData["SceneMember"]="STOREID";
+			$orderData["SceneId"]='STOREID';
+			$orderData["SceneContent"]="STOREID";
+
+
+
+
+
+
+
+
+
+
+
+
+
+    		//$orderData["Count"]=$data["orderid"];
+    		// $SceneStr=cookie('user_Scene');
+    		// if(!(empty($SceneStr)||$SceneStr=='NULLVALUE'))
+    		// {
+      //           //有场景
+      //           $SceneArray=json_decode($SceneStr,true);
+      //           foreach($SceneArray as $key => $item)
+      //           {
+
+      //               switch ($key)
+      //               {
+      //                  case 'uid':
+      //                       $orderData['SceneMember']= $item;
+      //                       break;
+      //                  case 'sid':
+      //                       $orderData['SceneId']=$item;
+      //                       break;
+      //                  case 'ct':
+      //                       $orderData['SceneContent']=$item;
+      //                       break;
+      //                  default:
+      //                       break;
+      //               }
+      //           }
+    		// }
+    		// else
+    		// {
+    		// 	$orderData["SceneMember"]="";
+    		// 	$orderData["SceneId"]="";
+    		// 	$orderData["SceneContent"]="";
+    		// }
+
+            $orderInfoListArray=json_decode($orderInfoStr,true);
+
+            $orderInfoList=$orderInfoListArray[$data['oid']];
+
+            $gidList=array();
+            foreach ($orderInfoList["goods"] as $key => $value) {
+                array_push($gidList,$key);
+            }
+
+            $cInfo=M()->table(C('DB_BASE')['DB_PREFIX']."Product p")->join(C('DB_BASE')['DB_PREFIX']."ProductList pl ON p.ProId=pl.ProId","LEFT")->join(C('DB_BASE')['DB_PREFIX']."ProductOnsale pos ON p.ProId=pos.ProId","LEFT")->where(array('pl.ProIdCard'=>array('in',implode($gidList, ','))))->field("p.ProName,p.ProId,pl.ProIdCard,pl.Price,p.PageUrl,p.ProLogoImg,p.Cut,p.Cut2,p.Cut3,pl.ProSpec1,pl.ProSpec2,pl.ProSpec3,pl.ProSpec4,pl.ProSpec5,p.Weight,pos.sprice,0 AS nums")->select();
+
+
+            $gidList=array();
+            foreach ($orderInfoList["zpgoods"] as $key => $value) {
+                array_push($gidList,$key);
+            }
+
+            $zpInfo=M()->table(C('DB_BASE')['DB_PREFIX']."Product p")->join(C('DB_BASE')['DB_PREFIX']."ProductList pl ON p.ProId=pl.ProId","LEFT")->join(C('DB_BASE')['DB_PREFIX']."ProductOnsale pos ON p.ProId=pos.ProId","LEFT")->where(array('pl.ProIdCard'=>array('in',implode($gidList, ','))))->field("p.ProName,p.ProId,pl.ProIdCard,pl.Price,p.PageUrl,p.ProLogoImg,p.Cut,p.Cut2,p.Cut3,pl.ProSpec1,pl.ProSpec2,pl.ProSpec3,pl.ProSpec4,pl.ProSpec5,p.Weight,pos.sprice,0 AS nums")->select();
+
+
+
+
+			
+            $TicketArray=array(
+            	'orderid'=>$data['oid'],
+            	'memberid'=>$data['memberId'],
+            	'count'=>0,
+            	'money'=>0,
+            	'oldmoney'=>0,
+            	'offmoney'=>0,
+            	'casher'=>$casherInfo['TrueName'],
+            	'company'=>'',
+            	'shop'=>$addInfo['storename'],
+            	'phone'=>$addInfo['tel'],
+            	'goods'=>array(),
+            	'date'=>date('Y-m-d H:i:s',time()),
+            	);
+
+
+            $CutMoneys = array(0,0,0);
+            //处理方法
+    		foreach ($cInfo as $key => $value) 
+            {
+
+                $cInfo[$key]['nums']=(int)$orderInfoList['goods'][$value['ProIdCard']]['num'];
+                $value["nums"]=(int)$cInfo[$key]['nums'];
+
+    			$goodList["OrderId"]=$orderData["OrderId"];
+    			$goodList["ProId"]=$value["ProId"];
+    			$goodList["ProIdCard"]=$value["ProIdCard"];
+    			$goodList["Price"]=(float)$value["Price"];
+
+    			$goodList["Count"]=(int)$value["nums"];
+
+
+
+   				$TicketArray['goods'][$value['ProIdCard']]=array(
+    				'name'=>$value['ProName'],
+    				'price'=>0,
+    				'count'=>$goodList['Count'],
+    				'money'=>0,
+    				);
+
+
+                if (empty($value['sprice'])&&$value['sprice']==0) {
+                    $goodList["Money"]=(float)$value["Price"]*$value["nums"];
+                    $TicketArray['goods'][$value['ProIdCard']]['price']=$value["Price"];
+                }
+                else
+                {
+                    $goodList["Money"]=(float)$value["sprice"]*$value["nums"];
+                    $TicketArray['offmoney']=$TicketArray['offmoney']+((float)$value['price']-(float)$value['sprice'])*$value["nums"];
+                    $TicketArray['goods'][$value['ProIdCard']]['price']=$value["sprice"];
+                }
+
+                $TicketArray['oldmoney']=$TicketArray['oldmoney']+(float)$value["Price"]*$value["nums"];
+                $TicketArray['goods'][$value['ProIdCard']]['money']=$goodList["Money"];
+
+                //提成信息
+                $CutMoneys[0]+=floatval($value['Money'])*floatval($value['Cut'])/100;
+			    $CutMoneys[1]+=floatval($value['Money'])*floatval($value['Cut2'])/100;
+			    $CutMoneys[2]+=floatval($value['Money'])*floatval($value['Cut3'])/100;
+
+
+    			$goodList["Cut"]=$value["Cut"];
+    			$goodList["Cut2"]=$value["Cut2"];
+    			$goodList["Cut3"]=$value["Cut3"];
+    			$goodList["Spec"]=$value["ProSpec1"]."_".$value["ProSpec2"]."_".$value["ProSpec3"]."_".$value["ProSpec4"]."_".$value["ProSpec5"];
+    			$goodList["IsDelete"]=false;
+    			$goodList["LastUpdateDate"]=date("Y-m-d H:i:s",time());
+    			$goodList["IsEvaluation"]=0;
+    			$goodList['Iszp']=0;
+    			
+    			$res=M("orderlist")->add($goodList);
+
+                $orderData["Price"]=((float)$orderData["Price"]+$goodList["Money"]);
+                $orderData["Count"]=($orderData["Count"]+$value["nums"]);
+
+                $goodList=array();
+    			if(!$res)
+    			{
+    				M()->rollback();
+    				$this->ajaxReturn(array('status'=>'false','info'=>'saveError_orderlist'),'JSON');
+                    return;
+    			}
+
+    		}
+
+
+    		foreach ($zpInfo as $key => $value) 
+            {
+
+                $zpInfo[$key]['nums']=(int)$orderInfoList['zpgoods'][$value['ProIdCard']]['num'];
+                $value["nums"]=(int)$zpInfo[$key]['nums'];
+
+    			$goodList["OrderId"]=$orderData["OrderId"];
+    			$goodList["ProId"]=$value["ProId"];
+    			$goodList["ProIdCard"]=$value["ProIdCard"];
+    			$goodList["Price"]=0;
+    			$goodList["Money"]=0;
+    			$goodList["Count"]=(int)$value["nums"];
+
+
+
+   				// $TicketArray['goods'][$value['ProIdCard']]=array(
+    			// 	'name'=>$value['ProName'],
+    			// 	'price'=>0,
+    			// 	'count'=>$goodList['Count'],
+    			// 	'money'=>0,
+    			// 	);
+
+
+                // if (empty($value['sprice'])&&$value['sprice']==0) {
+                //     $goodList["Money"]=(float)$value["Price"]*$value["nums"];
+                //     //$TicketArray['goods'][$value['ProIdCard']]['price']=$value["Price"];
+                // }
+                // else
+                // {
+                //     $goodList["Money"]=(float)$value["sprice"]*$value["nums"];
+                //     //$TicketArray['offmoney']=$TicketArray['offmoney']+((float)$value['price']-(float)$value['sprice'])*$value["nums"];
+                //     //$TicketArray['goods'][$value['ProIdCard']]['price']=$value["sprice"];
+                // }
+
+                //$TicketArray['oldmoney']=$TicketArray['oldmoney']+(float)$value["Price"]*$value["nums"];
+                //$TicketArray['goods'][$value['ProIdCard']]['money']=$goodList["Money"];
+
+                //提成信息
+                $CutMoneys[0]+=floatval($value['Money'])*floatval($value['Cut'])/100;
+			    $CutMoneys[1]+=floatval($value['Money'])*floatval($value['Cut2'])/100;
+			    $CutMoneys[2]+=floatval($value['Money'])*floatval($value['Cut3'])/100;
+
+
+    			$goodList["Cut"]=$value["Cut"];
+    			$goodList["Cut2"]=$value["Cut2"];
+    			$goodList["Cut3"]=$value["Cut3"];
+    			$goodList["Spec"]=$value["ProSpec1"]."_".$value["ProSpec2"]."_".$value["ProSpec3"]."_".$value["ProSpec4"]."_".$value["ProSpec5"];
+    			$goodList["IsDelete"]=false;
+    			$goodList["LastUpdateDate"]=date("Y-m-d H:i:s",time());
+    			$goodList["IsEvaluation"]=0;
+    			$goodList['Iszp']=1;
+
+    			$res=M("orderlist")->add($goodList);
+
+                //$orderData["Price"]=((float)$orderData["Price"]+$goodList["Money"]);
+                $orderData["Count"]=($orderData["Count"]+$value["nums"]);
+
+                $goodList=array();
+    			if(!$res)
+    			{
+    				M()->rollback();
+    				$this->ajaxReturn(array('status'=>'false','info'=>'saveError_orderlist'),'JSON');
+                    return;
+    			}
+
+    		}
+
+
+
+
+
+    		$TicketArray['count']=$orderData["Count"];
+    		$TicketArray['money']=$orderData["Price"];
+
+
+    		//$data['memberId']
+            
+    		$getPromotion=$this->getPromotion($orderData["Price"]);
+//
+    		if ($data['memberId']) {
+    			if ($getPromotion['p2m']>0) {
+	    			$couponPromotion=M('coupon')->where(array('CouponId'=>$getPromotion['p2']['CouponId']))->find();
+	    			if ($couponPromotion) {
+	    				$orderData['getcoupon']=$getPromotion['p2']['CouponId'];
+	    				$MemberCoupon=M('membercoupon')->where(array('token'=>$this->token,'MemberId'=>$data['memberId'],'CouponId'=>$getPromotion['p2']['CouponId']))->find();
+	    				$resp=0;
+	    				if ($MemberCoupon) {
+	    					$resp=M('membercoupon')->where(array('ID'=>$MemberCoupon['ID']))->setInc('CouponCount');
+	    				}
+	    				else
+	    				{
+	    					$resp=M('membercoupon')->where(array('ID'=>$MemberCoupon['ID']))->add(
+	    						array(
+	    							'MemberId'=>$data['memberId'],
+	    							'CouponId'=>$getPromotion['p2']['CouponId'],
+	    							'GetTime'=>date('Y-m-d H:i:s',time()),
+	    							'CouponCount'=>1,
+	    							'LastUpdateTime'=>date('Y-m-d H:i:s',time()),
+	    							'token'=>$this->token,
+	    							)
+	    						);
+	    				}
+	    				if (!$resp) {
+	    					M()->rollback();
+		    				$this->ajaxReturn(array('status'=>'false','info'=>'saveError_addCoupon'),'JSON');
+		                    return;
+	    				}
+	    			}
+	    			else
+	    			{
+
+	    			}
+    			}
+    		}
+    		else
+    		{
+
+    		}
+
+    		$TicketArray['offmoney']=$TicketArray['offmoney']+$getPromotion['p1m'];
+    		$TicketArray['money']=$TicketArray['money']-$getPromotion['p1m'];
+
+
+    		$orderData["Price"]=($orderData["Price"]+$orderData["Freight"]-$getPromotion['p1m']);
+    		$orderData["Coupon"]=$getPromotion['p1m'];
+
+
+
+    		//$orderData["Price"]=($orderData["Price"]+$orderData["Freight"]);
+    		//$orderData["TotlePrice"]=$orderData["Price"];
+    		//$orderData["Coupon"]=0;
+    		$orderData["CouponListId"]="0";
+
+    		$orderData["PayName"]='XJ';
+
+    		$orderData["IsEvaluation"]=0;
+    		$orderData["Status"]=4;
+    		$orderData["MessageBySeller"]="";
+    		$orderData["MessageByBuy"]="";
+    		$orderData["NewStatusId"]=0;
+    		$orderData["OutWarehouseId"]="";
+    		$orderData["Logistics"]="";
+    		$orderData["LogisticsId"]="";
+
+    		$orderData["CreateDate"]=date("Y-m-d H:i:s",time());
+    		$orderData["PayDate"]=date("Y-m-d H:i:s",time());
+    		$orderData["GetDate"]=date("Y-m-d H:i:s",time());
+    		$orderData["BackMoneyDate"]=date("Y-m-d H:i:s",time());
+
+    		$orderData["ValidDate"]=date('Y-m-d H:i:s',strtotime('+1 day'));
+
+    		$orderData["LastUpdateDate"]=date("Y-m-d H:i:s",time());
+    		$orderData["IsLogisticsDown"]=0;
+    		$orderData["TransactionId"]="";
+    		$orderData["BackMoneyReason"]="";
+            $orderData["token"]=$this->token;
+
+
+			// $tichengGrade=C('tichengGrade');
+			//$ordermaps=M('order')->where($orderMaps)->find();
+			$mem=M('member')->where(array("MemberId"=>$data['memberId']))->find();
+
+			$memberData['OrderMoney']=floatval($mem['OrderMoney'])+floatval($orderData['Price']);
+
+			$memberData['Cut']=floatval($mem['Cut'])+$CutMoneys[0];
+			$memberData['Cut2']=floatval($mem['Cut2'])+$CutMoneys[1];
+			$memberData['Cut3']=floatval($mem['Cut3'])+$CutMoneys[2];
+			$memberData['LastUpdateDate']=$nowtime;
+
+			// 上1级推广人 金额设置
+			if(!empty($mem['SceneMember'])){
+
+			    M()->execute("update rs_member set cutmoney=cutmoney+{$CutMoneys[0]},cuttotalmoney=cuttotalmoney+{$CutMoneys[0]},LastUpdateDate='{$nowtime}' where memberid='{$mem["SceneMember"]}'");
+
+			    $comm1["MemberId"]=$data['memberId'];
+			    $comm1["OrderId"]=$data['oid'];
+			    $comm1["CreateDate"]=$nowtime;
+			    $comm1["Type"]="";
+			    $comm1["Remarks"]="";
+			    $comm1["FromMemberId"]=$mem['SceneMember'];
+			    $comm1["FromMemberGrade"]=1;
+			    $comm1["Money"]=$CutMoneys[0];
+			    $comm1['token']=$this->token;
+			    $this->M('membercommission')->add($comm1);
+			}
+			// 上2级推广人 金额设置
+			if(!empty($mem['TcMember2'])){
+			    M()->execute("update rs_member set cutmoney=cutmoney+{$CutMoneys[1]},cuttotalmoney=cuttotalmoney+{$CutMoneys[1]},LastUpdateDate='{$nowtime}' where memberid='{$mem["TcMember2"]}'");
+
+			    $comm2["MemberId"]=$data['memberId'];
+			    $comm2["OrderId"]=$data['oid'];
+			    $comm2["CreateDate"]=$nowtime;
+			    $comm2["Type"]="";
+			    $comm2["Remarks"]="";
+			    $comm2["FromMemberId"]=$mem['TcMember2'];
+			    $comm2["FromMemberGrade"]=2;
+			    $comm2["Money"]=$CutMoneys[1];
+			    $comm2['token']=$this->token;
+			    $this->M('membercommission')->add($comm2);
+			}
+			// 上3级推广人 金额设置
+			if(!empty($mem['TcMember3'])){
+			    M()->execute("update rs_member set cutmoney=cutmoney+{$CutMoneys[2]},cuttotalmoney=cuttotalmoney+{$CutMoneys[2]},LastUpdateDate='{$nowtime}' where memberid='{$mem["TcMember3"]}'");
+
+			    $comm3["MemberId"]=$data['memberId'];
+			    $comm3["OrderId"]=$data['oid'];
+			    $comm3["CreateDate"]=$nowtime;
+			    $comm3["Type"]="";
+			    $comm3["Remarks"]="";
+			    $comm3["FromMemberId"]=$mem['TcMember3'];
+			    $comm3["FromMemberGrade"]=3;
+			    $comm3["Money"]=$CutMoneys[2];
+			    $comm3['token']=$this->token;
+			    M('membercommission')->add($comm3);
+			}
+
+//$orderData["Price"]
+
+			//$couponInfo=M('discount')->where(array('token'=>$this->token))->select();
+
+
+            // $offCoupon=M()->table(C('DB_BASE')['DB_PREFIX'].'MemberCoupon mc')->join(C('DB_BASE')['DB_PREFIX'].'Coupon c ON c.CouponId=mc.CouponId','LEFT')->where(array('mc.MemberId'=>cookie('user_UserID'),'mc.token'=>$this->token,'mc.CouponCount'=>array('GT',0),'mc.CouponId'=>$_POST['cid'],'c.IsEnable'=>1,'c.token'=>$this->token,'c.ExpiredDate'=>array('EGT',date('Y-m-d H:i:s',time()))))->field('c.CouponId AS cid,c.CouponName AS cname,c.Rules AS rules,c.Type AS tp')->find();
+            // //NONE是没有使用 配合查询为空 以后做安全性校验
+            // if ($offCoupon) 
+            // {
+            //     //M('membercoupon')->where(array('CouponId'=>$_POST['cid'],'MemberId'=>cookie('user_UserID'),'token'=>$this->token))->setDec('CouponCount',1)  确认订单再校验
+            //     if (true) 
+            //     {
+                    
+            //         $orderData["CouponListId"]=$offCoupon['cid'];    
+            //         switch ($offCoupon['tp']) {
+            //             case 0:
+            //                 //现金抵扣
+            //                 $orderData["Coupon"]=$offCoupon['rules'];
+            //                 $orderData["Price"]=$orderData["Price"]-$orderData["Coupon"];
+            //                 if ($orderData['Price']<0) {
+            //                     $orderData["Coupon"]=$orderData['Price']+$orderData["Coupon"];
+            //                     $orderData['Price']=0;
+            //                 }
+            //                 //$orderData["Price"]+$orderData["Freight"]
+            //                 break;
+
+            //             case 1:
+            //                 //折扣券
+            //                 $orderData["Coupon"]=($orderData["Price"]-$orderData["Freight"])*(1-$offCoupon['rules']);
+            //                 $orderData["Price"]=($orderData["Price"]-$orderData["Freight"])*$offCoupon['rules'];
+            //                 break;
+
+            //             case 2:
+            //                 //满减券
+            //                 $tempTypeTwoCoupon=explode('/',$offCoupon['rules']);
+            //                 if ($tempTypeTwoCoupon[0]<($orderData["Price"]-$orderData["Freight"])) {
+            //                     $orderData["Coupon"]=$tempTypeTwoCoupon[1];
+            //                     $orderData["Price"]=$orderData["Price"]-$tempTypeTwoCoupon[1];
+            //                     if ($orderData['Price']<0) 
+            //                     {
+            //                         $orderData["Coupon"]=$orderData['Price']+$orderData["Coupon"];
+            //                         $orderData['Price']=0;
+            //                     }
+            //                 }
+            //                 else
+            //                 {
+            //                     //这里需要做安全性校验
+            //                     M()->rollback();
+            //                     $this->ajaxReturn(array('status'=>'false','info'=>($orderData["Price"])),'JSON');
+            //                 }
+            //                 break;
+
+            //             case 3:
+            //                 //余留给包邮卡
+            //                 $orderData["Price"]=$orderData["Price"]-$orderData["Freight"];
+            //                 $orderData["Coupon"]=$orderData['Freight'];
+            //                 break;
+
+            //             default:
+            //                 break;
+            //         }
+            //     }
+            //     else
+            //     {
+            //         M()->rollback();
+            //         $this->ajaxReturn(array('status'=>'false','info'=>M()->_sql()),'JSON');
+            //     }
+            // }
+            // else
+            // {
+            //     if ($_POST['cid']!='NONE') {
+            //         //安全性校验
+            //         M()->rollback();
+            //         $this->ajaxReturn(array('status'=>'false','info'=>'CouponError.'),'JSON');
+            //     }
+            // }
+
+    		$res=M("order")->add($orderData);
+    		if($res)
+    		{
+    			unset($orderInfoListArray[$data['oid']]);
+    			cookie("sy_GoodsList",json_encode($orderInfoListArray));
+
+    			M()->commit();
+    			$this->ajaxReturn(array('status'=>'true','info'=>$orderInfoListArray,'ticket'=>$TicketArray,'data'=>array('nextOid'=>"E".date("YmdHis",time()).rand(1000,9999))),'JSON');
+    		}
+    		else
+    		{
+    			M()->rollback();
+    			$this->ajaxReturn(array('status'=>'false','info'=>M("order")->_sql()),'JSON');
+    		}
+
+
+	}
+
+
+	private function getPromotion($money)
+	{
+		$canUsePromotion=array(
+			'p1'=>array(),
+			'p2'=>array(),
+			'p1m'=>0,
+			'p2m'=>0,
+			//'temp'=>'',
+			);
+
+		$tempMoney=0;
+		$tempT2=array();
+
+		$PromotionInfo=M('discount')->where(array('token'=>$this->token,'DiscountType'=>array('NEQ','2'),'Consume'=>array('ELT',$money),'stime'=>array('ELT',date('Y-m-d H:i:s',time())),'etime'=>array('EGT',date('Y-m-d H:i:s',time()))))->select();
+
+		foreach ($PromotionInfo as $key => $value) {
+			//$canUsePromotion['p1']=$value;
+			if ($value['DiscountType']==0) {
+				if ($canUsePromotion['p1']['Consume']<$value['Consume']) {
+					$canUsePromotion['p1']=$value;
+					$tempMoney=$money-$value['Discount'];
+				}
+			}
+			else if ($value['DiscountType']==1) {
+				$tempT2['T'.$value['id']]=$value;
+			}
+		}
+
+		foreach ($tempT2 as $key => $value) 
+		{
+			if ($tempMoney>=$value['Consume']) 
+			{
+				$canUsePromotion['p2']=$value;
+			}
+		}
+
+		if ($canUsePromotion['p1']['Discount']) {
+			$canUsePromotion['p1m']=$canUsePromotion['p1']['Discount'];
+		}
+
+		if ($canUsePromotion['p2']['Discount']) {
+			$canUsePromotion['p2m']=$canUsePromotion['p2']['Discount'];
+		}
+
+//$canUsePromotion['temp']=$tempMoney;
+		return $canUsePromotion;
+	}
+
+	// public function shopQrcode()
+	// {
+	// 	ob_clean();
+	// 	vendor('PHPQR.phpqrcode');
+	// 	$url='http://'.$_SERVER['HTTP_HOST'];
+	// 	//.U('Home/Account/QrCodeHandle',array('tp'=>'3','gid'=>$_GET['pid'],'sid'=>$_GET['sid']));
+	// 	$level="L";
+	// 	$size=4;
+	// 	echo "<img src='".\QRcode::png($url,false,$level,$size,'2')."' >";;
+	// }
+
+	public function getMemberInfo()
+	{
+		$data=$_POST;
+		$member=M('member')->where(array('MemberId'=>$data['uid'],'token'=>$this->token))->find();
+		if ($member) {
+			$member['orderid']="E".date("YmdHis",time()).rand(1000,9999);
+			$this->ajaxReturn(array('status'=>'true','info'=>'success','data'=>$member),'JSON');
+		}
+		else
+		{
+			$this->ajaxReturn(array('status'=>'false','info'=>'noUser'),'JSON');
+		}
+	}
+
+}

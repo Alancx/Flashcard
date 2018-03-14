@@ -1,0 +1,37 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/Factoryproadd.css?v=1.0">
+<div class="Factoryproaddcontent">
+  <div class="prodata">
+    <img src="{$proinfo[ProLogoImg]}" alt="">
+    <label class="proname">{$proinfo['ProName']}{$proinfo['ProTitle']}</label>
+  </div>
+  <div class="proattr">
+    <label class="attrprice">价格设置</label>
+    <foreach name="proinfo['prolist']" item="proattr">
+      <div class="pro_attr">
+        <div class="attr_item">
+          <label>商品规格:</label>
+          <input type="text" name="" value="{$proattr['ProSpec1']}" readonly="true">
+        </div>
+        <div class="attr_item">
+          <label>工厂售价:</label>
+          <input type="text" name="" value="{$proattr['Price']}" readonly="true">
+        </div>
+        <div class="attr_item setattr_price" data-proidcode="{$proattr['ProIdCard']}">
+          <label>设置售价:</label>
+          <input type="number" name="" value="{$proattr['setprice']}" class="setprice" placeholder="设置销售价格">
+        </div>
+      </div>
+    </foreach>
+  </div>
+  <div style="height:50px;"></div>
+  <div class="btn_grup">
+    <label class="saveselpro" data-proid="{$proinfo['ProId']}">保存到我的小店</label>
+  </div>
+</div>
+<script type="text/javascript">
+  var savefactorypro_url="{:U('Products/savefactorypro')}";
+  var factorypro_url="{:U('Products/prolist')}";
+  var factype="{$factype}";
+</script>
+<script src="__PUBLIC__/Sellermobile/JS/Factoryproadd.js?v=1.0" charset="utf-8"></script>

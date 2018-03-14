@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>抢单结果</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+        <style type="text/css">
+        body,dd,div,dl,dt,h1,h2,h3,h4,h5,h6,img,li,p,span,table,td,th,tr,ul{margin:0;padding:0;list-style-type:none}
+a{text-decoration:none;color:#444;margin:0;padding:0}
+.suc{position:absolute;width:100%;height:100%;background:url(__PUBLIC__/Admin/Admin/img/suc.png) no-repeat 90% 460px,-webkit-linear-gradient(top,transparent 1px,#ff6c00 1px),-webkit-linear-gradient(left,transparent 1px,#ff6c00 1px);background-size:100px,8px 8px,8px 8px;display:flex;flex-direction:column;align-items:center;color:#fff;padding-top:0}
+.suc>div{width:80%;height:200px;background:#ff6c00;margin-top:60px;padding:10px}
+.suc>div>header h3{text-align:center;color:#ff0}
+.suc>div>header span{background:#fff;color:#ff6c00}
+.sp{display:inline-block;width:calc(100% - 80px);vertical-align:top}
+footer{margin-top:20px}
+footer .addr{display:inline-block;width:calc(100% - 80px);vertical-align:top}
+.suc>ul{background:#ff6c00;width:calc(80% + 20px);border:1px solid #ff0;height:40px}
+.suc>ul li{float:left;height:100%}
+.suc>ul li:first-child{width:70%}
+.suc>ul li:last-child{background:#ff0;width:30%;color:#ff6c00;text-align:center;line-height:40px}
+.suc>ul input{width:100%;height:100%;background:0 0;border:none;outline:0;color:#fff;padding-left:10px}
+.suc>ul input::-webkit-input-placeholder{color:#fff}
+.def{position:absolute;width:100%;height:100%;background:url(__PUBLIC__/Admin/Admin/img/def.png) no-repeat calc(50% + 110px) calc(50% - 130px),-webkit-linear-gradient(top,transparent 1px,#ff6c00 1px),-webkit-linear-gradient(left,transparent 1px,#ff6c00 1px);background-size:100px,8px 8px,8px 8px;display:flex;align-items:center;justify-content:center;color:#fff}
+.def>div{background:#ff6c00;padding:10px}
+.def>div h3{border-bottom:1px solid #fff;padding-bottom:10px;text-align:center}
+.def>div p{text-align:center}
+</style>
+	</head>
+
+	<body>
+		
+		<?php if ($type=='fail'): ?>
+			<div class="def">
+				<div class="">
+					<h3>抢单失败！</h3>
+				</div>
+			</div>
+		<?php else: ?>
+			<div class="suc">
+				<div>
+					<header style='text-align:center'>
+						<if condition="$type eq 'end'">
+						<h3>订单已完成</h3>
+						<elseif condition="$type eq 'success'" />
+						<h3>恭喜您，抢单成功了！</h3>
+						<elseif condition="$type eq 'geting'"/>
+						<h3>请尽快取货配送</h3>
+						<else/>
+						<h3>请尽快配送</h3>
+						</if>
+						<span>{$goinfo.GetDate}</span>
+						<br /><br />
+					</header>
+					<div>
+						<br />
+						<!-- <p>商品名称：<span class="sp">徽记食品】开心果椒盐口味500g徽记食品】开心果椒盐口味500g</span></p> -->
+					</div>
+					<footer>
+						<p><span>订单号&nbsp;：</span><span class="name">{$oinfo.OrderId}</span></p>
+						<p><span>收货人&nbsp;：</span><span class="name">{$oinfo.RecevingName}</span></p>
+						<p><span>联系方式：</span><span class="phone"><a href="tel:{$oinfo.RecevingPhone}">{$oinfo.RecevingPhone}</a></span></p>
+						<p><span>收货地址：</span><span class="addr">{$oinfo.Addr}</span></p>
+					</footer>
+				</div>
+				<br /><br />
+				<if condition="$type eq 'geting'">
+					<ul>
+						<li style="width:100%;">
+							<span id="geting">确认提货</span>
+						</li>
+					</ul>
+				</if>
+				<if condition="$type eq 'geted'">
+					<ul>
+						<li>
+							<input type="text" name="verify" id="verify" placeholder='请输入验证码'  required autofocus placeholder="请输入验证码" title="请输入验证码" />
+						</li>
+						<li>
+							<span id="getover">完成配送</span>
+						</li>
+					</ul>
+				</if>
+			</div>
+		<?php endif ?>
+		
+		
+		
+		
+		
+	</body>
+<script type="text/javascript">
+	$('#geting').click(function(){
+		if (confirm('确定已经提货吗？')) {
+			$.ajax({
+				url:"{:U('Home/Distribution/savesendorder')}",
+				type:"post",
+				data:"type=0&oid={$oinfo.OrderId}",
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='true') {
+						geting.innerHTML='处理成功';
+						location.reload();
+					}else{
+						alert('处理失败');
+					}
+				}
+			})
+		};
+	})
+	$('#getover').click(function(){
+		var verify=document.getElementById('verify').value;
+		if (verify) {
+			if (confirm('确定完成配送了吗？')) {
+				var url="{:U('Base/getover')}?oid={$oinfo.OrderId}&verify="+verify;
+				window.location.href=url;
+			};
+		}else{
+			alert('请填写验证码');
+		}
+	})
+</script>
+</html>

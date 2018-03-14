@@ -1,0 +1,313 @@
+<layout name="Public/PageModel"/>
+<link href="__PUBLIC__/theme2/plugins/weui/weui.css" rel="stylesheet">
+<link href="__PUBLIC__/theme2/css/orderinfo.css?v={$VERSION_NO}" rel="stylesheet">
+<script type="text/javascript">
+    var imgurl = "__PUBLIC__/theme2/Images/";
+    var saveorder="{:U('Payment/CreateNewOrder')}"; //生成订单时只删除购物车内选中的商品
+    var payurl="{$payurl}";
+    var fjson={$fjson};
+    var saveaddr="{:U('Public/AddAddress')}";
+    var cdeladdr= "{:U('User/deladdr')}";//删除地址
+    var getFreightURL="{:U('Home/Public/getFreight')}";//获取运费
+</script>
+<script src="__PUBLIC__/theme2/js/orderinfo.js?v={$VERSION_NO}"></script>
+<script src="__PUBLIC__/JS/plugins/address/provincesdata.js?v={$VERSION_NO}"></script>
+<script src="__PUBLIC__/JS/plugins/address/provinces.js?v={$VERSION_NO}"></script>
+<script src="__PUBLIC__/theme2/js/common.js"></script>
+
+<!--邮寄地址-->
+<div class="orderaddr">
+    <div class="oraddrs" data-s='{$add.ReceivingId}' onclick="selectaddr(this)" data-prov='{$add.Province}'>
+        <if condition="$hasAdd eq '1'">
+            <label class="address-name">{$add.Name}</label>
+            <label class="address-addr">{$add.Province}{$add.City}{$add.Area}{$add.Address}</label>
+            <label class="telephone">{$add.Phone}</label>
+        <else/>
+            <label class="address-name">点击添加收货地址</label>
+            <label class="address-addr"></label>
+            <label class="telephone"></label>
+        </if>
+    </div>
+</div>
+<!--end 邮寄地址-->
+
+<div class="division"></div>
+
+<!--end 商品列表-->
+<div class="details">
+    <div class="orderdetails">
+
+        <div class="ordertitle">
+        </div>
+
+        <foreach name="gInfo" item='pro'>
+            <div class="ordercontent">
+                <img src="{:C('RESOURCE_URL')}{$pro.ProLogoImg}">
+                <div class="ordercontents">
+                    <label class="ordername">{$pro.ProName}</label>
+                    <label class="orderspec">规格:{$pro.ProSpec1}</label>
+                    <!-- <label class="orderftime">发货时间:111</label> -->
+                    <label class="orderprice">￥<?php echo (float)$pro['Price'] ?><label>×{$pro.nums}</label></label>
+                </div>
+            </div>
+        </foreach>
+
+    </div>
+</div>
+
+<!--商品列表-->
+
+
+<!--配送优惠以及金额-->
+    <div class="ordersdis">
+
+        <label class="distr">配送方式</label>
+
+        <if condition="$isstore eq '0'">
+
+            <label class="seldistr" datamd="0" onclick="seldistr(this)">快递
+                <!-- <span>免邮</span> --></label>
+        <else/>
+
+            <label class="seldistr" datamd="0" onclick="seldistr(this)">配送
+                <!-- <span>免邮</span> --></label>
+        </if>
+
+    </div>
+
+
+    <div class="ordersdis" onclick="selyhxx(this)">
+        <label class="distr">优惠<if condition="$couponList"><span class="selectyhj">点击选择优惠券</span><else/></if></label>
+        <label class="selyh selyhs" data-s='{$lessprice}' data-old='0.00' data-cid='NONE'>￥-{$lessprice}</label>
+    </div>
+
+
+    <div class="ordersdis">
+        <label class="distr">运费/配送费</label>
+        <label class="selyh" id="freight" data-s='{$freight}' data-st='0'>￥{$freight}</label>
+    </div>
+
+    <div class="ordersdis">
+        <!-- <label class="distr">共2件商品</label> -->
+        <label class="ordertotal" datatotal="{$totlePrice-$lessprice+$freight}" data-allprice="{$totlePrice-$lessprice+$freight}">合计:￥<b id="price-box">{$totlePrice-$lessprice+$freight}</b></label>
+    </div>
+    <!--end配送优惠以及金额-->
+
+    <!--支付方式-->
+    <div class="payments">
+
+        <div class="payment paywechatcheck payactive" onclick="payment(this)">
+            <label class="paywechat">微信支付<br><span>推荐安装微信5.0及以上版本的使用</span></label>
+            <img src="__PUBLIC__/theme2/Images/xuanze2.png">
+        </div>
+
+<!--         <div>
+            <div class="payment payrccheck" onclick="payment(this)">
+                <label class="payrc">会员余额<br><span>线上支付线下服务</span></label>
+                <img src="__PUBLIC__/theme2/Images/weixuanze.png">
+            </div>
+            <div class="payrcs">
+                <label class="czye payrcsactive" onclick="paymentrcs(this)">充值余额</label>
+                <label class="jlye" onclick="paymentrcs(this)">奖励余额</label>
+            </div>
+        </div> -->
+
+        <div class="payment paycashcheck" onclick="payment(this)">
+            <label class="paycash">现金支付<br><span>提货付款</span></label>
+            <img src="__PUBLIC__/theme2/Images/weixuanze.png">
+
+        </div>
+
+    </div>
+    <!--end支付方式-->
+
+    <!--地址选择-->
+    <div class="coversel">
+        <div class="addrselect">
+            <foreach name="addrs" item='adr'>
+                <div id="{$adr.ReceivingId}" class="addr-box" data-s='{$adr.ReceivingId}' onclick="sueraddr(this)" data-prov="{$adr.Province}">
+                    <label class="addrname">{$adr.Name}</label>
+                    <label class="addraddr" data-province="{$adr.Province}" data-city="{$adr.City}" data-area="{$adr.Area}"
+                           data-address="{$adr.Address}">{$adr.Province}{$adr.City}{$adr.Area}{$adr.Address}</label>
+                    <label class="addrphone">{$adr.Phone}</label>
+                    <div class="addrsedit">
+                        <if condition="$adr['IsDefault'] eq '1'">
+                            <label class="addrdefault schecked">默认地址</label>
+                            <else/>
+                            <label class="addrdefault">默认地址</label>
+                        </if>
+                        <label class="addrdel" addrsID="{$adr.ReceivingId}" onclick="addressdel(this)">删除</label>
+                        <label class="addredit" onclick="addressedit(this)">编辑</label>
+                    </div>
+                </div>
+            </foreach>
+            <div style="height: 55px"></div>
+        </div>
+        <div class="but-address">
+            <label class="addrback" onclick="csback(this)">返回</label>
+            <label class="add-address" onclick="addressadd(this)">添加新地址</label>
+        </div>
+    </div>
+    <!--end地址选择-->
+
+    <!--地址编辑-->
+    <div class="coveredit">
+        <div class="addressedit" data-s=''>
+            <div class="conters">
+                <label>收货人</label>
+                <input type="text" class="shnames" name="shnames" placeholder="请填写姓名">
+            </div>
+            <div class="conters">
+                <label>联系电话</label>
+                <input type="text" class="shphones" name="shphones" placeholder="请填写联系电话">
+            </div>
+            <div class="conters">
+                <label>所在地区</label>
+                <label class="shshregions" data-province='' data-city='' data-area=''></label>
+                <input type="hidden" class="shregion" name="shregion">
+                <label class="region" onclick="selregion(this)">请选择</label>
+            </div>
+            <div class="contersxx">
+                <label>详细地址</label>
+                <textarea class="xxaddr" rows="3"></textarea>
+            </div>
+            <div class="mraddr">
+                <label>设为默认</label>
+                <div class="addrcheck">
+                    <input type="checkbox" id="checkbox_c1" class="chk_3" data-s='0' />
+                    <label for="checkbox_c1"></label>
+                </div>
+            </div>
+            <div style="height: 55px"></div>
+        </div>
+        <div class="but-address">
+            <label class="addrback" onclick="ceback(this)">返回</label>
+            <label class="add-address" onclick="addresssave(this)">保存</label>
+        </div>
+    </div>
+    <!--end地址编辑-->
+
+    <!--地区选择-->
+    <div class="coverregion">
+        <div class="selectregion">
+            <div style="height: 40px;background-color: #ffffff">
+                <label class="regionback" onclick="gbselregion(this)">取消</label>
+                <label class="regionsure" onclick="wcselregion(this)">完成</label>
+            </div>
+            <div id="addressPCD"></div>
+        </div>
+    </div>
+    <!--end地区选择-->
+
+    <!--配送方式-->
+    <div class="coverdistr">
+        <div class="distrdiv">
+            <label class="distrtitle">配送方式</label>
+
+
+            <if condition="$isstore eq '0'">
+
+                <div class="psTypeDiv distrkd distractive" data-s="KD" onclick="seldistrs(this,'KD')">
+                    <label>快递 </label>
+                </div>
+
+            <else/>
+
+                <div class="psTypeDiv distrps distractive" data-s="PS" onclick="seldistrs(this,'PS')">
+                    <label>配送 </label>
+                </div>
+
+                <div class="psTypeDiv distrzt" data-s="ZT" onclick="seldistrs(this,'ZT')">
+                    <label>自提</label>
+                </div>
+
+            </if>
+
+
+        </div>
+        <div class="but-address">
+            <label class="add-address" id="chosestore" style="width: 100%" onclick="gbseldistr()">确认</label>
+        </div>
+    </div>
+    <!--end配送方式-->
+
+    <!--优惠方式-->
+     <div class="coveryouhui">
+        <div class="distrdivs">
+            <div class="yhcards">
+
+                <foreach name='couponList' item='cl'>
+                    <label class="cards" onclick="selectyhcard(this)" data-couponid='{$cl["CouponId"]}' data-rules='{$cl["Rules"]}' data-type='{$cl["Type"]}' data-stoken='{$cl["stoken"]}'>
+                    <if condition="$cl['Type'] eq 0">
+                        现金抵扣券<br>
+                        <span>使用抵扣<span class="yhcprice">{$cl['Rules']}元</span></span>
+                    </if>
+                    <if condition="$cl['tp'] eq 1">
+                        折扣券<br>
+                        <span>享受<span class="yhcprice">{$cl['rules']*10}折</span>折扣</span>
+                    </if>
+                    <if condition="$cl['tp'] eq 2">
+                        满减券<br>
+                        <span>满{$cl.srules.0}减<span class="yhcprice">{$cl.srules.1}元</span></span>
+                    </if>
+                        <span class="vouxz"></span>
+                    </label>
+                </foreach>
+
+                <label class="cards yhcardactive" onclick="selectyhcard(this)" data-couponid='NONE' data-rules='0' data-type='0' style="cursor: pointer;">
+                    不使用<br>
+                    <span class="vouxz"></span>
+                </label>
+            </div>
+            <div style="height: 58px"></div>
+        </div>
+
+        <div class="but-address">
+            <label class="add-address" style="width: 100%" onclick="gbyhxx(this)">关闭</label>
+        </div>
+
+    </div>
+    <!--end优惠方式-->
+
+    <!--确认付款-->
+    <div class="coverpayer">
+        <div class="payerdiv">
+            <label style="text-align: center;font-size: 16px">付款详情<span class="payergb" onclick="gbdd(this)"></span></label>
+            <label>订单信息 <span class="payddh" id="oldOrder" data-s='{$isOldOrder}'>订单号-<span
+                id="orderid">{$orderid}</span></span></label>
+                <label>付款方式<span class="paylx" data-s=''></span></label>
+                <label>需付款<span class="payerje"></span></label>
+                <div class="btn-sure"><button class="btn btn-warning disabled" id="gopay">确认付款</button></div>
+        </div>
+    </div>
+    <!--end确认付款-->
+
+    <div style="height:55px;"></div>
+    <div class="footeroder">
+        <div class="footeroderg">
+            <label onclick="tjdd(this)">提交订单</label>
+        </div>
+    </div>
+
+<div id="OrderInfo">
+
+    
+    <input type="hidden" id="totleMoney" name="totleMoney" value="{$totlePrice}" />
+    <input type="hidden" id="lessMoney" name="lessMoney" value="{$lessprice}" />
+
+    <input type="hidden" id="hjMoney" name="hjMoney" value="{$hjMoney}" />
+    <input type="hidden" id="sMoney" name="sMoney" value="{$sMoney}" />
+
+    <input type="hidden" id="CouponId" name="CouponId" value="{$myCouponId}" />
+    <input type="hidden" id="couponmoney" name="couponmoney" value="0" />
+
+    <input type="hidden" id="freightMoney" name="freightMoney" value="{$freight}" />
+    <input type="hidden" id="proWeight" name="proWeight" value="{$weight}" />
+
+    <input type="hidden" id="psType" name="psType" value="{$wawasJCB}" />
+    <input type="hidden" id="psMoney" name="psMoney" data-s="{$psMoney}" value="{$psMoney}" />
+    
+    <input type="hidden" id="isOther" name="isOther" value="{$isOther}" />
+    <input type="hidden" id="oStoken" name="oStoken" value="{$oStoken}" />
+
+</div>

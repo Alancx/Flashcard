@@ -1,0 +1,43 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/sqWarehouse.css?v=1.0">
+
+<div class="allconternts">
+  <div class="part part_top">
+    <label>订货申请单</label>
+    <div class="orderinfo">
+      <div class="infoitem">
+        <label>系统单号:</label><span>{$warhouse['InWarehouseId']}</span>
+      </div>
+      <div class="infoitem">
+        <label>订货仓库:</label><span>{$warhouse['InStorehouseName']}</span>
+      </div>
+      <div class="infoitem">
+        <label>订货人员:</label><span>{$warhouse['InputName']}</span>
+      </div>
+      <div class="infoitem">
+        <label class="odate">订货日期:</label><span>{$warhouse['oDate']}</span>
+      </div>
+      <div class="infoitem">
+        <label class="otype">订货类型:</label><span>订货申请</span>
+      </div>
+    </div>
+  </div>
+  <div class="part pro_list">
+    <label class="proinfo">订货商品</label>
+  </div>
+  <div class="prolist">
+    <foreach name="warhouselist" item="litem">
+      <div class="proitem">
+        <img src="{$litem['ProLogoImg']}" alt="">
+        <div class="pcontent">
+          <label class="pname">{$litem['ProName']}</label>
+          <label class="pattr">{$litem['ProSpec1']}</label>
+          <label class="pprice">售价:<span>￥<?php echo $litem['Price']?sprintf("%.2f",$litem['Price']):'0.00' ?></span>&emsp;进价:<span>￥<?php echo $litem['cosp']?sprintf("%.2f",$litem['cosp']):'0.00' ?></span>&emsp;数量:<span>{$litem['Count']}</span></label>
+        </div>
+      </div>
+    </foreach>
+  </div>
+<script type="text/javascript">
+$('.prolist').css('height',$('.allconternts').height()-$('.part_top').outerHeight()-$('.pro_list').outerHeight()+'px');
+$('.proitem>.pcontent').css('right','10px');
+</script>

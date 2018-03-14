@@ -1,0 +1,118 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<include file="$headername" />
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>会员等级设置</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>会员等级设置</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			</div>
+			<div class="ibox-content">
+				<div class="col-lg-3 col-md-4 col-lg-offset-8 col-md-offset-8 pull-right" style="height:180px;border:0px solid red;position:absolute;top:5px;right:5px;">
+					<div class="panel">
+						<div class="panel-heading">
+							<i class="fa fa-warning"></i> 提示信息
+						</div>
+						<div class="panel-body">
+							<div class="alert alert-warning">
+								?1、等级从1向后排列，1是最低等级，数字越大代表等级越高<br>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+					<h5>等级设置</h5>
+							<form role="form" class="form-inline" method="post" action="">
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">用户名</label>
+									<input name="Sort" type="number" placeholder="等级" id="Sort" class="form-control" onblur="checks();">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">用户名</label>
+									<input name="Value" type="number" placeholder="等级条件/消费额" id="Value"   class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">用户名</label>
+									<input name="Name" type="text" placeholder="等级名称" id="Name" class="form-control">
+								</div>
+									<input type="hidden" name="GradeId" id="GradeId" value="">
+									<button class="btn btn-white" type="submit">保存设置</button>
+								</form>
+						</div>
+					</div>
+					<table class="table table-bordered">
+						<tr>
+							<td>等级</td>
+							<td>等级名称</td>
+							<td>等级条件</td>
+							<td>操作</td>
+						</tr>
+						<foreach name="levels" item="level">
+						<tr>
+							<td>{$level.Sort}</td>
+							<td>{$level.Name}</td>
+							<td>{$level.Value}</td>
+							<td><a href="###" onclick="edit({$level.GradeId});">修改 </a>| <a href="###" onclick="del({$level.GradeId});"> 删除</a></td>
+						</tr>
+						</foreach>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var ldata={$ldata};
+	function checks(){
+		var sort=$("#Sort").val();
+		$.each(ldata,function(index,item){
+			if (item.Sort==sort) {
+				$("#Sort").val('');
+				art.dialog.tips('该等级已存在');
+				return false;
+			};
+		})
+	}
+
+	function edit(id){
+		$.each(ldata,function(index,item){
+			if (item.GradeId==id) {
+				$("#Sort").val(item.Sort);
+				$("#Value").val(item.Value);
+				$("#Name").val(item.Name);
+				$("#GradeId").val(item.GradeId);
+			};
+		})
+	}
+
+	function del(id){
+		art.dialog.confirm('确定要删除吗？',function(){
+			window.location.href="{:U('Users/delL')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作',1);
+		})
+	}
+	</script>
+	<include file="Common:footer" />

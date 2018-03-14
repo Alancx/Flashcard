@@ -1,0 +1,104 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>商户相关设置</h5>
+	</div>
+	<div class="col-sm-12">
+		<table class="table table-hover table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>门店名称</th>
+					<th>联系电话</th>
+					<th>门店地址</th>
+					<th>扣点</th>
+					<th>免扣点时段</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="stores" item="emp" >
+					<tr>
+						<td>{$emp.storename}</td>
+						<td>{$emp.tel}</td>
+						<td>{$emp.province}{$emp.city}{$emp.area}{$emp.addr}</td>
+						<td><div class="input-group">
+							<input type="text" name="CutNum" id="CutNum{$emp.id}" class="form-control input-xs" placeholder='5%扣点 填写5即可' value="{$emp.CutNum}">
+							<span class='input-group-addon'>%</span>
+						</div></td>
+						<td>
+						<div style="text-align:center;margin-bottom:10px;">
+							<label class="radio-inline">
+							  <input type="radio" name="IsFreeCut{$emp.id}" <if condition="$emp['IsFreeCut'] eq 1">checked="checked"</if> id="IsFreeCut{$emp.id}" value="1"> 开启
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="IsFreeCut{$emp.id}" <if condition="$emp['IsFreeCut'] eq 0">checked="checked"</if> id="NoFreeCut{$emp.id}" value="0"> 关闭
+							</label>
+						</div>
+						<div class="input-group">
+							<input type="text" name="FreeStime" id="FreeStime{$emp.id}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:00:00'})" value="{$emp.FreeStime}" style="width:160px;" class="form-control">
+							<span class="input-group-addon">至</span>
+							<input type="text" name="FreeEtime" id="FreeEtime{$emp.id}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:00:00'})" value="{$emp.FreeEtime}" style="width:160px;" class="form-control">
+						</div></td>
+						<td><button class="btn btn-xs btn-primary btn-outline savekd" data-id='{$emp.id}'>保存设置信息</button></td>
+					</td>
+				</tr>
+			</foreach>
+		</tbody>
+	</table>
+	<div style="text-align:right;">{$page}</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.savekd').click(function(){
+			var id=$(this).attr('data-id');
+			var CutNum=$("#CutNum"+id).val();
+			var IsFreeCut=$("input:radio[name='IsFreeCut"+id+"']:checked").val();
+			var FreeEtime=$('#FreeEtime'+id).val();
+			var FreeStime=$('#FreeStime'+id).val();
+			var Fpsper='0';
+			if (CutNum>=0 && CutNum<100) {
+				if (IsFreeCut==1) {
+					if (FreeStime && FreeEtime && FreeStime<FreeEtime) {
+						$.ajax({
+							url:"{:U('Storers/mercutinfo')}",
+							type:"post",
+							data:"id="+id+"&CutNum="+CutNum+"&IsFreeCut="+IsFreeCut+"&FreeStime="+FreeStime+"&FreeEtime="+FreeEtime,
+							dataType:"json",
+							success:function(msg){
+								if (msg.status=='success') {
+									art.dialog.tips('保存成功');
+								}else{
+									art.dialog.tips(msg.info);
+								}
+							}
+						})
+					}else{
+						art.dialog.tips('请完善免扣点时间段信息');
+					}
+				}else{
+					$.ajax({
+						url:"{:U('Storers/mercutinfo')}",
+						type:"post",
+						data:"id="+id+"&CutNum="+CutNum+"&IsFreeCut="+IsFreeCut,
+						dataType:"json",
+						success:function(msg){
+							if (msg.status=='success') {
+								art.dialog.tips('保存成功');
+							}else{
+								art.dialog.tips(msg.info);
+							}
+						}
+					})
+				}
+			}else{
+				art.dialog.tips('不合理的扣点数值');
+				$('#CutNum'+id).val('').focus();
+			}
+		})
+	})
+</script>
+<include file="Common:footer" />

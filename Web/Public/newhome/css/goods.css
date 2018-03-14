@@ -1,0 +1,830 @@
+.propart{
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+}
+.proinfo{
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 50px;
+  width: 100%;
+  background-color: #FFFFFF;
+  overflow: auto;
+}
+.proimg{
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.proimg>img{
+  display: block;
+  width: 100%;
+}
+.eatmore{
+  position:absolute;
+  left: 5px;
+  bottom: 5px;
+  width: 100px;
+  border-radius: 3px;
+  background-color: rgba(255,132,0,0.7);
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+  height: 40px;
+  line-height: 40px;
+}
+.pro_info{
+  display: block;
+  background-color: #FFFFFF;
+  overflow: hidden;
+  border-bottom: #eeeeee solid 3px;
+  padding: 5px 10px 0px 10px;
+  position: relative;
+}
+.pro_info>.pname{
+  display: block;
+  height: 20px;
+  width: 50%;
+  line-height: 20px;
+  font-size: 16px;
+  color:  #000000;
+  font-weight: 600;
+}
+.pro_info>.showinfo{
+  display: block;
+  width: 50%;
+  height: 22px;
+  padding: 3px 0px 0px 0px;
+}
+.pro_info>.showinfo>.ljinfo{
+  float: left;
+  height:16px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #FF8500;
+  border: #FF8500 solid 1px;
+  padding: 0px 5px 0px 5px;
+}
+.pro_info>.showinfo>.selesnums{
+  float: left;
+  height:16px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #999999;
+  padding: 0px 0px 0px 10px;
+}
+.bottomprice{
+  display: block;
+  width: 50%;
+  height: 30px;
+  line-height: 30px;
+}
+.bottomprice>.price{
+  float: left;
+  font-size: 18px;
+  color: #ff0000;
+}
+.bottomprice>.price>span{
+  font-size: 14px;
+  color: #999999;
+}
+.bottomprice>.price::before{
+  content: "￥";
+  font-size: 14px;
+}
+.bottomprice>del{
+  float: left;
+  font-size: 14px;
+  color: #999999;
+  margin: 0px 0px 0px 10px;
+}
+.bottomprice>del::before{
+  content: "￥";
+}
+.prosetcolnum{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 49%;
+  bottom: 0px;
+}
+.setcollect{
+  float: right;
+  height: 40px;
+  width: 40px;
+  margin: 0px 5px 0px 0px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 30px;
+  color: #666666;
+}
+.prosetcolnum>.shownumbtn{
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  height: 30px;
+  line-height: 30px;
+  width: 80px;
+}
+.prosetcolnum>.shownumbtn>.minusbtn{
+  float: left;
+  display: none;
+  width: 28px;
+  height: 28px;
+  color: #999999;
+  font-size: 28px;
+  text-align: center;
+}
+.prosetcolnum>.shownumbtn>.plusbtn{
+  float: right;
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: #FF8400;
+  font-size: 28px;
+  text-align: center;
+}
+.prosetcolnum>.shownumbtn>.showselnum{
+  display: none;
+  width: calc(100% - 56px);
+  height: 28px;
+  font-size: 14px;
+  line-height: 28px;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 28px;
+}
+.proweight{
+  width: 50%!important;
+  height: 100%!important;
+  margin: 0px 0px 0px 50%!important;
+  padding: 0px 0px 0px 0px!important;
+  font-size: 14px;
+  color: #333333;
+  text-align: center;
+}
+.prottitle{
+  display: block;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: #eeeeee solid 10px;
+  overflow: hidden;
+}
+.prottitle>.ptitle{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 31px;
+  border-bottom: #eeeeee solid 1px;
+  padding: 0px 10px 0px 10px;
+}
+.prottitle>.ptitle>span:first-child{
+  float: left;
+  width: 20px;
+  height: 20px;
+  color: #1CDC2C;
+  border:#1CDC2C solid 1px;
+  margin: 4px 0px 0px 0px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+}
+.prottitle>.ptitle>span:last-child{
+  float: left;
+  width: calc(100%- 30px);
+  margin: 0px 0px 0px 10px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.prottitle>.pstitle{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 30px;
+  padding: 0px 10px 0px 10px;
+}
+.prottitle>.pstitle>span:first-child{
+  float: left;
+  width: 20px;
+  height: 20px;
+  color: #FF8500;
+  border:#FF8500 solid 1px;
+  margin: 4px 0px 0px 0px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+}
+.prottitle>.pstitle>span:last-child{
+  float: left;
+  width: calc(100%- 30px);
+  margin: 0px 0px 0px 10px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.shopinfo{
+  display: block;
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: #eeeeee solid 10px;
+  overflow: hidden;
+}
+.shopinfo>img{
+  float: left;
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 0px 10px 0px 10px;
+}
+.shopinfo>.sname{
+  float: left;
+  display: block;
+  width:auto;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+}
+.shopinfo>.sgznum{
+  float: right;
+  display: block;
+  width:auto;
+  height: 50px;
+  line-height: 50px;
+  font-size: 12px;
+  text-align: right;
+  color: #999999;
+  margin: 0px 10px 0px 0px;
+}
+.evaluatetitle{
+  display: block;
+  overflow: hidden;
+  height: 41px;
+  border: #dddddd solid 1px;
+  padding: 0px 10px 0px 10px;
+}
+.evaluatetitle>span:first-child{
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #333333;
+}
+.evaluatetitle>span:last-child{
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #999999;
+}
+.evaluate_list{
+  display: block;
+  overflow: hidden;
+  padding: 10px 0px 0px 10px;
+}
+.evaluate_list>.userhead{
+  float: left;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.evaluate_list>.righteval{
+  float: right;
+  width: calc(100% - 40px);
+  height: auto;
+  padding: 0px 15px 10px 10px;
+  border-bottom: #dddddd solid 1px;
+}
+.evaluate_list>.righteval>.userinfo{
+  display: block;
+  height: 50px;
+  position: relative;
+}
+.evaluate_list>.righteval>.userinfo>.username{
+  float: left;
+  font-size: 14px;
+  height: 20px;
+  line-height: 20px;
+  color: #000000;
+}
+.evaluate_list>.righteval>.userinfo>.usertime{
+  font-size: 14px;
+  height: 30px;
+  line-height: 28px;
+  color: #666666;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+.evaluate_list>.righteval>.userinfo>.setstarts{
+  float: left;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+}
+.evaluate_list>.righteval>.userinfo>.setstarts{
+  float: left;
+  width: 100%;
+  height: 30px;
+  line-height: 28px;
+}
+.evaluate_list>.righteval>.userinfo>.setstarts>.setstartactive{
+  font-size: 20px;
+  color: #FB9530!important;
+}
+.evaluate_list>.righteval>.userinfo>.setstarts>.xing_icon{
+  font-size: 20px;
+  color: #EEEEEE;
+}
+.evaluate_list>.righteval>.usersetevaluate{
+  font-size: 14px;
+  color: #000000;
+  line-height: 18px;
+  margin: 5px 0px 0px 0px;
+}
+.evaluate_list>.righteval>.usersetimglist{
+  display: block;
+  overflow: hidden;
+  padding: 3px 0px 0px 0px;
+}
+.evaluate_list>.righteval>.usersetimglist>img{
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin: 5px 5px 0px 0px;
+}
+
+
+
+
+/*底部结算区域*/
+.bottompart{
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  background-color: #E5E5E5;
+  z-index: 10;
+}
+.showgetpronum{
+  float: left;
+  width: 90px;
+  height: 40px;
+  background-color: #C7C6C5;
+  border-radius: 20px;
+  margin: -12px auto auto 15px;
+  position: relative;
+  z-index: 2;
+}
+.showgetpronum>span:first-child{
+  float: left;
+  width:50px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-align: center;
+}
+.showgetpronum>span:last-child{
+  float: right;
+  width:30px;
+  height: 30px;
+  line-height: 28px;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-align: center;
+  border: #FFFFFF solid 1px;
+  border-radius: 50%;
+  margin: 5px 5px 0px 0px;
+}
+.gotopay{
+  float: right;
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  text-align: center;
+  color: #FFFFFF;
+  background-color:#FF8500;
+}
+.showtotal{
+  float: right;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 10px 0px 0px;
+  width: calc(100% - 205px);
+  color: #333333;
+  font-size: 14px;
+  text-align: right;
+}
+.totalprice::before{
+  content: "￥";
+}
+.totalprice{
+  margin: 0px 0px 0px 5px;
+  font-size: 16px;
+  color: #FD0107;
+}
+/*已选的列表*/
+.hasselprosmark{
+  display: none;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  bottom: 50px;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+.hasselpros{
+  position: absolute;
+  bottom: 0px;
+  height: 70%;
+  width: 100%;
+  left: 0px;
+  background-color: #ffffff;
+}
+.hasselprostop{
+  display: block;
+  overflow: hidden;
+  height: 41px;
+  border-bottom: #eeeeee solid 1px;
+}
+.cleanselpros{
+  float: left;
+  width: auto;
+  padding: 0px 15px 0px 15px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
+}
+.downcarts{
+  float: right;
+  width: auto;
+  padding: 0px 15px 0px 15px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #666666;
+}
+.selproslist{
+  display: block;
+  height: calc(100% - 41px);
+  width: 100%;
+  overflow: auto;
+}
+.inproinfo{
+  height: 70px;
+  padding: 5px!important;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.inproinfo>img{
+  width: 70px;
+  height: 60px;
+  display: block;
+  float: left;
+}
+.inproinfo>div{
+  padding: 0px 10px!important;
+  height: 60px;
+  width: calc(100% - 70px);
+  float: left;
+  position: relative;
+}
+.inproinfo>div>.selpronameinfo{
+  float: left;
+  height: 60px;
+  margin: 0px!important;
+  width: 30%;
+  padding: 5px 0px 5px 0px!important;
+}
+.inproinfo>div>.selpronameinfo>.selproname{
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #333333;
+}
+.inproinfo>div>.selpronameinfo>.selprospec{
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #999999;
+}
+.inproinfo>div>.jiage{
+  float: left;
+  height: 70px;
+  line-height: 60px;
+  padding: 0px!important;
+  margin: 0px!important;
+  width: 30%;
+  text-align: center;
+  color: #ff0000;
+}
+.inproinfo>div>.jiage>span{
+  font-size: 14px;
+  color: #999999;
+}
+.inproinfo>div>.jiage:before{
+  content: "￥";
+}
+.inproinfo>div>.shownumbtn{
+  height: 28px;
+  display: block;
+  position: absolute;
+  background: none;
+  width: 80px!important;
+  top: 16px!important;
+  right: 15px!important;
+}
+.inproinfo>div>.shownumbtn>.minusbtn{
+  float: left;
+  display: none;
+  width: 28px;
+  height: 28px;
+  color: #999999;
+  font-size: 28px;
+  text-align: center;
+}
+.inproinfo>div>.shownumbtn>.plusbtn{
+  float: right;
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: #FF8400;
+  font-size: 28px;
+  text-align: center;
+}
+.inproinfo>div>.shownumbtn>.showselnum{
+  display: none;
+  width: calc(100% - 56px);
+  height: 28px;
+  font-size: 14px;
+  line-height: 28px;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 28px;
+}
+.inproinfo>div>.shownumbtn>span{
+  display: block!important;
+}
+.showgetpronumactive{
+  background-color: #FF8500;
+}
+.setcollectactive{
+  color: #ff0000!important;
+}
+.selSpec{
+  float: right;
+  display: block;
+  height: 28px;
+  line-height: 28px;
+  width: auto;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  background-color: #FF8400;
+  padding:0px 8px 0px 8px;
+  border-radius: 14px;
+}
+
+/* 规格属性选择区域 */
+.prospecmark{
+  display: none;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 140!important;
+  overflow: hidden;
+}
+.prospecinfo{
+  display: block;
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  top: calc(50% - 100px);
+  left: calc(50% - 150px);
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0px 8px 0px 8px;
+}
+.prospec_top{
+  display: block;
+  height: 40px;
+  position: relative;
+}
+.prospec_top>.pspecname{
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0px 45px 0px 45px;
+}
+.prospec_top>.closeselprospec{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  top: 0px;
+  right: 0px;
+  font-size:36px;
+  font-weight: 600;
+}
+.prospec_list{
+  display: block;
+  height: 100px;
+  overflow: hidden;
+}
+.prospec_info_list{
+  display: block;
+  width: 100%;
+  height: 60px;
+}
+.prospec_list>span:first-child{
+  display: block;
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  padding: 0px 0px 0px 20px;
+  font-size: 14px;
+  color: #666666;
+  margin: 20px 0px 0px 0px;
+}
+.prospec_info_list>.pspec_info{
+  float: left;
+  width: 71px;
+  height: 30px;
+}
+.prospec_info_list>.pspec_info>span{
+  display: block;
+  width: 61px;
+  height: 26px;
+  line-height: 24px;
+  text-align: center;
+  margin: 2px 5px 0px 5px;
+  border: #dddddd solid 1px;
+  font-size: 14px;
+  color: #333333;
+  border-radius: 3px;
+}
+.pspec_infoactive>span{
+  border: #ff5e0d solid 1px!important;
+  background-color: #ffc17f!important;
+  color: #ff5e0d!important;
+}
+.prospec_bottom{
+  display: block;
+  height: 50px;
+  margin: 10px -8px 0px -8px;
+  background-color: #e5e5e5;
+  position: relative;
+}
+.prospec_bottom>.prospecprice{
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  margin: 0px 5px 0px 20px;
+  font-size: 18px;
+  color: #ff0000;
+}
+.prospec_bottom>.prospecprice>span{
+  font-size: 14px;
+  color: #999999;
+}
+.prospec_bottom>.prospecprice::before{
+  content: "￥";
+}
+.prospec_bottom>.prospechas{
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  color: #666666;
+}
+.prospec_bottom>.shownumbtn{
+  height: 28px;
+  display: block;
+  position: absolute;
+  right: 10px!important;
+  bottom: 11px!important;
+  width: 100px!important;
+}
+.prospec_bottom>.shownumbtn>.minusbtn{
+  float: left;
+  display: none;
+  width: 28px;
+  height: 28px;
+  color: #999999;
+  font-size: 28px;
+  text-align: center;
+}
+.prospec_bottom>.shownumbtn>.showselnum{
+  display: none;
+  width: calc(100% - 56px);
+  height: 28px;
+  font-size: 14px;
+  line-height: 28px;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 28px;
+}
+.prospec_bottom>.shownumbtn>.plusbtn{
+  float: right;
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: #FF8400;
+  font-size: 28px;
+  text-align: center;
+}
+.tabproinfo{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 45px;
+  border-bottom: #eeeeee solid 5px;
+}
+.tabproinfo>div{
+  float: left;
+  width: 50%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: #333333;
+  position: relative;
+}
+.tabproactive{
+  color: #FF8500!important;
+}
+.tabproactive>.linepro{
+  height: 1px;
+  position: absolute;
+  width: 60%;
+  bottom: 0px;
+  left: 20%;
+  background-color: #FF8500;
+}
+.proinfo_content{
+  display: block;
+  padding: 5px 5px 5px 5px;
+}
+.proinfo_content p{
+  color: #333333;
+  margin: 0px 0px 0px 0px;
+}
+.proinfo_content img{
+  width: 100%!important;
+}
+.eval_list{
+  display: none;
+}
+.showdianzan{
+    float: right;
+    height: 40px;
+    width: 40px;
+    margin: 0px 5px 0px 0px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 30px;
+    color: #ff0000;
+}
+.sharemark{
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 200;
+}
+.sharemark>img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}

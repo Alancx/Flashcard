@@ -1,0 +1,65 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/CSS/districash.css?v=1.0">
+<div class="partdis">
+  <div class="parttop">
+    <label class="seltopactive" data-type="1">待审核<span></span></label>
+    <label data-type="2">已审核<span></span></label>
+    <label data-type="3">已完成<span></span></label>
+    <label data-type="4">已拒绝<span></span></label>
+  </div>
+  <div class="partcontents">
+    <div class="pctitle">
+      <label>申请时间</label>
+      <label>配送员</label>
+      <label>金额/元</label>
+      <label>状态/操作</label>
+    </div>
+    <div class="discashlist">
+      <div class="districash_list_1">
+        <foreach name="dshdata" item="info">
+          <div class="part_list">
+            <label>{$info['CDate']}<br>{$info['Ctime']}</label>
+            <label>{$info['TrueName']}</label>
+            <label>{$info['Money']}</label>
+            <label data-id="{$info['ID']}"><span onclick="agreeclick(this)">同意</span><span onclick="refuseclick(this)">拒绝</span></label>
+          </div>
+        </foreach>
+      </div>
+      <div class="districash_list_2">
+        <foreach name="yshdata" item="info">
+          <div class="part_list">
+            <label>{$info['CDate']}<br>{$info['Ctime']}</label>
+            <label>{$info['TrueName']}</label>
+            <label>{$info['Money']}</label>
+            <label>已审核</label>
+          </div>
+        </foreach>
+      </div>
+      <div class="districash_list_3">
+        <foreach name="ywcdata" item="info">
+          <div class="part_list">
+            <label>{$info['CDate']}<br>{$info['Ctime']}</label>
+            <label>{$info['TrueName']}</label>
+            <label>{$info['Money']}</label>
+            <label>已完成</label>
+          </div>
+        </foreach>
+      </div>
+      <div class="districash_list_4">
+        <foreach name="yjjdata" item="info">
+          <div class="part_list">
+            <label>{$info['CDate']}<br>{$info['Ctime']}</label>
+            <label>{$info['TrueName']}</label>
+            <label>{$info['Money']}</label>
+            <label>已拒绝</label>
+          </div>
+        </foreach>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript">
+  var setpscheckurl="{:U('User/setpscheck')}";
+</script>
+<script src="__PUBLIC__/Sellermobile/JS/districash.js?v=1.0" charset="utf-8"></script>

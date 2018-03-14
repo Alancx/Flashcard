@@ -1,0 +1,197 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+	.spl .chosen-container{
+		width: 200px;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			                            <div class="alert alert-warning" style="color:red;">
+                               1、设置进阶商品后请设置该商品的三级提成  <b><金额></b> ，原有提成比例失效<br>
+                               2、更换进阶商品后，前往商品编辑将更换前商品三级提成修改为百分比<br>
+                           </div>
+
+			</div>
+			<div class="ibox-content">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<h5>设置限购商品</h5>
+						<form role="form" class="form-inline" id="savebuy"  method="post" action="">
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only">选择商品</label>
+								<select name="ProId" id="chosen" class="form-control" style="width:100%;" value="">
+									<option value="">请选择商品</option>
+									<foreach name="pros" item="pro">
+										<option value="{$pro.ProId}">{$pro.ProName}</option>
+									</foreach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only"></label>
+								<input type="text" name="strtime" id="strtime" class="form-control" placeholder='请选择开始时间'  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only">选择商品</label>
+								<input type="text" name="endtime" id="endtime" class="form-control" placeholder='请选择结束时间'  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only">选择商品</label>
+								<input type="number" name="buynum" id="buynum" class="form-control" placeholder='请填写限购数量'>
+							</div>
+							<button class="btn btn-primary btn-outline"  type="submit">保存设置</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-12">
+					<table class="table bordered">
+						<thead>
+							<tr>
+								<td>当前商品</td>
+								<td>限购时间</td>
+								<td>限购数量</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+						<foreach name='limits' item='li'>
+							<tr>
+								<td>{$li.ProName}<br><img src="{$li.ProLogoImg}" style="width:100px;height:100px;" alt=""></td>
+								<td>{$li.StrDate}--{$li.EndDate}</td>
+								<td>{$li.Num}</td>
+								<td><button class="btn btn-danger btn-xs clelimit" data-pid='{$li.ProId}'>取消限购</button></td>
+							</tr>
+						</foreach>
+						</tbody>
+					</table>
+					{$page}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal inmodal fade" id="order_message" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:428px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				提成设置
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<div class="input-group">
+					<span class='input-group-addon'>一级提成</span>
+					<input type="text" name="Cut" id="Cut" class="form-control">
+					<span class='input-group-addon'>元</span>
+				</div>
+				<div class="input-group">
+					<span class='input-group-addon'>二级提成</span>
+					<input type="text" name="Cut2" id="Cut2" class="form-control">
+					<span class='input-group-addon'>元</span>
+				</div>
+				<div class="input-group">
+					<span class='input-group-addon'>三级提成</span>
+					<input type="text" name="Cut3" id="Cut3" class="form-control">
+					<span class='input-group-addon'>元</span>
+				</div>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+				<button type="button" class="btn btn-w-m btn-success input-sm" data-pid='' id="btn_message" data-dismiss="modal">提交</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal inmodal fade" id="order_messages" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:428px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				设置礼包内容 <span class='notice' style='color:red;font-weight:bold'></span>
+				<button type="button" class="close" data-dismiss="modal" id="lbclo">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<div class="input-group spl">
+					<span class='input-group-addon'>选择商品</span>
+					<select name="" id="ProIdCard" class="form-control">
+						<option value="-1">请选择商品</option>
+						<foreach name="pross" item='pro'>
+						<option value="{$pro.ProId}" class="{$pro.ProId}">{$pro.ProName}</option>
+						</foreach>
+					</select>
+					<input type="number" name="Num" id="Num" class="form-control" placeholder='请输入商品数量'>
+				</div>
+				<div style="text-align:right"><button class="btn btn-xs btn-danger addpro">添&emsp;加</button></div>
+				<form id="prodata">
+					<foreach name='spdata' item='sp'>
+					<div id='{$sp.ProIdCard}' style='margin-top:5px;'><input type='hidden' name='pros[]' value='{$sp.ProIds}'>{$sp.ProName}/数量：{$sp.Num}&emsp;&emsp;<button class='btn btn-danger btn-xs del' data-pid='{$sp.ProIdCard}'>删除</button>	</div>
+					</foreach>
+				</form>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+				<button type="button" class="btn btn-w-m btn-success input-sm" data-pid='' id="btn_messagess">保存内容</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#chosen').chosen();
+	$('#savebuy').submit(function(){
+		var strtime=$('#strtime').val();
+		var endtime=$('#endtime').val();
+		var buynum=$('#buynum').val();
+		var pid=$('#chosen').val();
+		if (strtime && endtime && buynum && pid) {
+			if (strtime>endtime) {
+				art.dialog.tips('无效的时间区间');
+				return false;
+			}else if (buynum<=0) {
+				art.dialog.tips('限购数量需大于1');
+				return false;
+			}else{
+				art.dialog.tips('正在提交...');
+				return true;
+			}
+		}else{
+			art.dialog.tips('请完善限购信息');
+			return false;
+		}
+	})
+	$(document).on('click','.clelimit',function(){
+		var _this=$(this);
+		var pid=_this.attr('data-pid');
+		art.dialog.confirm('确定要取消此商品限购设置吗？',function(){
+			$.ajax({
+				url:"{:U('Products/delprolimit')}",
+				type:"post",
+				data:"pid="+pid,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						art.dialog.tips('操作成功');
+						_this.parent().parent().remove();
+					}else{
+						art.dialog.tips('操作失败');
+					}
+				}
+			})
+		})
+	})
+})
+</script>
+<include file="Common:footer" />

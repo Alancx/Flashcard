@@ -1,0 +1,47 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.recordpart {
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.recordpart > div {
+    height: 60px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    overflow: hidden;
+}
+
+.recordpart > div > label:first-child {
+    float: left;
+    height: 100%;
+    font-size: 16px;
+    color: #333333;
+    line-height: 25px;
+    margin: 0px;
+    padding: 5px 0px 0px 15px;
+}
+.recordpart > div > label:first-child span {
+    font-size: 14px;
+    color: #999999;
+
+}
+.recordpart > div > label:last-child {
+    float: right;
+    height: 100%;
+    font-size: 16px;
+    color: #ffb222;
+    line-height: 25px;
+    margin: 0px;
+    padding: 5px 15px 0px 0px;
+}
+.recordpart > div > label:last-child span {
+    font-size: 14px;
+}

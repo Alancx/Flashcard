@@ -1,0 +1,167 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.accountpart {
+    margin: 15px 0px 0px 0px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.accountye {
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 49px;
+    color: #333333;
+    padding: 0px 20px 0px 10px;
+    margin: 0px;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+
+}
+
+.accountye > span {
+    float: right;
+}
+
+.accountyexx {
+    padding: 0px 0px 0px 20px;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    overflow: hidden;
+}
+
+.accounttu {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 10px 0px 10px 0px;
+    background-color: #FFb200;
+    border-radius: 50%;
+}
+
+.accounttu > div {
+    width: 40px;
+    height: 40px;
+    margin: 30px 30px 30px 30px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.accountever {
+    float: right;
+    width: 170px;
+    height: 80px;
+    margin: 20px 20px 20px 0px;
+}
+
+.accountever > label {
+    width: 100%;
+    margin: 0px;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    color: #999999;
+    padding: 0px 0px 0px 20px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+    text-align: justify;
+}
+
+.accountever > label > span {
+    float: right;
+    color: #333333;
+}
+
+.acchyye {
+    background-image: url("../Images/01.png");
+}
+
+.accjlye {
+    background-image: url("../Images/02.png");
+}
+
+.accxfje {
+    background-image: url("../Images/03.png");
+}
+
+.accsy {
+    background-image: url("../Images/04.png");
+}
+
+.parttwo > div {
+    height: 50px;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+.accczzx {
+    background-image: url("../Images/chongzhizhongxin.png");
+}
+
+.accczjl {
+    background-image: url("../Images/chongzhijilu.png");
+}
+
+.acctx {
+    background-image: url("../Images/tixian.png");
+}
+.acctxjl {
+    background-image: url("../Images/tixianjilu.png");
+}
+.parttwo >div>a>label{
+    width: 95%;
+    height: 100%;
+    font-size: 14px;
+    color: #333333;
+    line-height: 49px;
+    margin: 0px;
+    padding: 0px 0px 0px 50px;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+.accountpart-1{
+  margin: 20px 0px 0px 0px;
+  border-top-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  background-color: #ffffff;
+}
+.accountpart-1>table{
+  width: 100%;
+}
+.accountpart-1>table>tbody>tr>td{
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  text-align: center;
+  padding: 10px;
+}
+.accountpart-1>table>tbody>tr>td:nth-child(even){
+  border-left-style: solid;
+  border-right-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+.tdpart>img{
+  height: 30px;
+}
+.tdpart>label{
+  width: 100%;
+  margin: 6px 0px 0px 0px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #1a1a1a;
+}

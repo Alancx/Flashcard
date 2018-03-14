@@ -1,0 +1,342 @@
+<layout name="Public/PageModel"/>
+
+<style type="text/css">
+    
+.proinfo{
+    height:65%;
+    width:100%;
+    overflow: auto;
+}
+
+.proinfo .title{
+    position: fixed;
+    width:100%;
+    height:30px;
+    line-height:30px;
+    margin:auto;
+    background-color: #FAFAFC;
+}
+
+.proinfo .prodiv{
+    display: table;
+    width:98%;
+    height:30px;
+    line-height:30px;
+    margin:auto;
+}
+
+.prodiv div{float:left;}
+.prodiv div:nth-child(1){width:5%;}
+.prodiv div:nth-child(2){width:60%;}
+.prodiv div:nth-child(3){width:18%;}
+.prodiv div:nth-child(4){width:17%;}
+
+
+.attrs-info {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 15px;
+}
+
+.attrs-info b {
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+    display: block;
+}
+
+.attrs-info span{
+    float: left;
+    font-size: 14px;
+    width: 80px;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin: 5px 8px 5px auto;
+    text-align: center;
+}
+
+.attrs-info .atr{
+  background-color: #ccc;
+}
+
+.attrs-info .atr-select {
+    background-color: #ffb222;
+}
+
+
+
+</style>
+
+
+<div class="wrapper wrapper-content animated fadeInRight" style="padding-bottom: 0px;">
+    <div>
+        <div class="col-lg-7">
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-title">
+                    <h5>入库单录入</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-card">
+                            <i style="font-style: italic;" id="InWarehouseId"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ibox-content" style="padding-bottom: 10px">
+
+                    <form class="form-horizontal m-t" id="commentForm" novalidate="novalidate">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">入库单号：</label>
+                            <div class="col-sm-8">
+                                <input id="InWarehouseNumber" type="text" class="form-control" value="" name="InWarehouseNumber">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><i class="fa fa-bookmark" style="color:red"></i>入库仓库：</label>
+                            <div class="col-sm-8">
+                                <select tabindex="1" class="form-control" id="inputWarehouse">
+                                    <option value="wh62596121">主仓库</option>
+                                    <option value="wh62596121_15">圣诞快乐</option>                            
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">入库人：</label>
+                            <div class="col-sm-8">
+                                <select data-placeholder="请选择入库人..." class="form-control" id="inputName">
+                                    <option value="-1">请选择入库人</option>
+                                    <option value="" selected="selected">徽记</option>                             
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">入库日期：</label>
+                            <div class="col-sm-8">
+                                <input id="inDate" type="text" class="form-control Wdate" value="" name="inDate" required="" aria-required="true" onfocus="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm'})" style="width:200px;display: inline-block;">
+                                <a type="button" data-container="body" data-toggle="popover" data-placement="right" data-content="如：2015-06-05 15:30" data-original-title="" title="" aria-describedby="popover481307">格式提示</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">入库类型：</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="inType">
+                                    <option value="0" selected="selected">采购入库</option>
+                                    <option value="1">调拨入库</option>
+                                    <option value="2">退货入库</option>
+                                    <option value="3">差错入库</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注说明：</label>
+                            <div class="col-sm-8">
+                                <textarea id="Remarks" name="comment" value="" class="form-control" required="" aria-required="true"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <button class="btn btn-block btn-outline btn-primary" type="button" id="SelectPro" onclick="selectProFun();">添加入库商品</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <p>
+                                <button class="btn btn-block btn-outline btn-primary" type="button" id="btnOkIn">提交入库单据</button>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addpro" style="display:none;">
+    <div id="addprobg" style="position: fixed;z-index: 50;top: 0;left: 0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.6);">
+        
+    </div>
+
+    <div style="position: fixed;z-index: 51;width: 95%;height:90%;top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);background-color: #FAFAFC;border-radius: 3px;">
+
+        <div style="padding:15px;font-size:16px;"><strong>添加入库商品</strong></div>
+
+        <div class="form-group">
+
+                <label class="control-label" style="padding-left:20px;">选择分类：</label>
+
+                <select class="form-control" style="width:150px;display:inline;" id="addproclass">
+                    <option value="0" selected="selected">采购入库</option>
+                    <option value="1">调拨入库</option>
+                    <option value="2">退货入库</option>
+                    <option value="3">差错入库</option>
+                </select>
+
+        </div>
+
+        <div class="form-group">
+                <label class="control-label" style="padding-left:20px;">选择商品：</label>
+
+                <select class="form-control" style="width:150px;display:inline;" id="addpropro">
+                    <option value="0" selected="selected">采购入库</option>
+                    <option value="1">调拨入库</option>
+                    <option value="2">退货入库</option>
+                    <option value="3">差错入库</option>
+                </select>
+
+        </div>
+
+        <div class="proinfo">
+            <div class="title">
+                <div style="float:left;width:5%;">&nbsp;</div>
+                <div style="float:left;width:60%;">&nbsp;商品</div>
+                <div style="float:left;width:18%;">价格</div>
+                <div style="float:left;width:17%;">数量</div>
+            </div>
+            <div style="width:100%;height:30px;"></div>
+
+            <div id="prolist">
+
+                <div class="prodiv" data-id="0" data-price="0" data-nums="0">
+                    <div><span class="removepro glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                    <div>
+                     商品名
+                    </div>
+                    <div><input type="text" class="form-control input-innum price" style="width:80%;padding: 6px 6px;" value="0"></div>
+                    <div><input type="text" class="form-control input-innum nums" style="width:80%;padding: 6px 6px;" value="1"></div>
+                </div>
+
+                <div class="prodiv" data-id="1" data-price="0" data-nums="0">
+                    <div><span class="removepro glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+                    <div>
+                     商品名
+                    </div>
+                    <div><input type="text" class="form-control input-innum price" style="width:80%;padding: 6px 6px;" value="0"></div>
+                    <div><input type="text" class="form-control input-innum nums" style="width:80%;padding: 6px 6px;" value="1"></div>
+                </div>
+
+            <div>
+
+
+            <div style="line-height:40px;line-height:40px;position: fixed;bottom: 0px;height: 40px;width: 100%; background-color:#FAFAFC;">
+                <div style="float:left;width:100%;text-align:center;" onclick="subPro();"><span>确定</span></div>
+            </div>
+
+        </div>
+
+
+        <div id="proattr" style="background-color:#FAFAFC;border:1px solid #333333;height:60%;width:100%;bottom:0px;position:fixed;overflow: auto; display:none;">
+           
+            <div style="line-height:40px;line-height:40px;position: fixed;height: 40px;width: 100%; background-color:#FAFAFC;">
+                选择商品属性
+            </div>
+            <div style="height: 40px;width: 100%;"></div>
+
+           <div class="attrs-info">
+            <b>重量</b>
+                <div style="word-wrap: break-word;display: inline-table;">
+                    <span class="attr atr" data-s="1">375g</span>
+                    <span class="attr atr" data-s="2">375g</span>
+                </div>
+            </div>
+
+            <div class="attrs-info">
+            <b>重量</b>
+                <div style="word-wrap: break-word;display: inline-table;">
+                    <span class="attr atr" data-s="3">375g</span>
+                    <span class="attr atr" data-s="4">375g</span>
+                </div>  
+            </div>
+
+            <div class="attrs-info">
+            <b>重量</b>
+                <div style="word-wrap: break-word;display: inline-table;">
+                    <span class="attr atr" data-s="5">375g</span>
+                    <span class="attr atr" data-s="6">375g</span>
+                </div>  
+            </div>
+
+            <div class="attrs-info">
+            <b>重量</b>
+                <div style="word-wrap: break-word;display: inline-table;">
+                    <span class="attr atr" data-s="7">375g</span>
+                    <span class="attr atr" data-s="8">375g</span>
+                </div>  
+            </div>
+
+            <div style="height: 40px;width: 100%;"></div>
+            
+            <div style="line-height:40px;line-height:40px;position: fixed;bottom: 0px;height: 40px;width: 100%; background-color:#FAFAFC;">
+                <div style="float:left;width:50%;text-align:center;" onclick="subAttr();"><span>确定</span></div>
+                <div style="float:left;width:50%;text-align:center;" onclick="escAttr();"><span>取消</span></div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+<script type="text/javascript">
+
+var pageObj={addproclass:$("#addproclass"),addpropro:$("#addpropro"),proinfo:$("#proinfo"),addpro:$("#addpro"),proattr:$("#proattr")};
+
+
+    var selectedAttrObj=null;
+    $(".attr").click(function(){
+        selectedAttrObj=$(this);
+        selectedAttrObj.parent().find(".attr").removeClass("atr-select").removeClass("atr").addClass("atr");
+        selectedAttrObj.addClass("atr-select");
+        selectedAttrObj=null;
+    });
+
+    $(".removepro").click(function(){
+        $(this).parents('.prodiv').remove();
+    });
+
+    function subAttr()
+    {
+        if ($(".attrs-info").length!=pageObj.proattr.find(".atr-select").length) {
+            alert("请选择商品属性");
+            return false;
+        }
+        else
+        {
+            //添加商品到商品列表
+
+
+            pageObj.proattr.hide(300);
+        }
+
+    }
+
+    var proinfoStr='<div class="prodiv Pro-[PROIDREPLACE]" data-id="[PROIDREPLACE]" data-price="0" data-nums="0"><div><span class="removepro glyphicon glyphicon-remove" aria-hidden="true"></span></div><div>[PRONAMEREPLACE]</div><div><input type="text" class="form-control input-innum price" style="width:80%;padding: 6px 6px;" value="0"></div><div><input type="text" class="form-control input-innum nums" style="width:80%;padding: 6px 6px;" value="0"></div></div>';
+
+    function escAttr()
+    {
+        pageObj.addpropro.get(0).selectedIndex=0;
+        pageObj.proattr.hide(300);
+    }
+    
+    function selectProFun()
+    {
+        pageObj.addpro.show(100);
+    }
+    function subPro()
+    {
+        pageObj.addpro.hide(100);
+    }
+
+</script>

@@ -1,0 +1,11 @@
+操作定位:Public/godata::::{"account":"duhu","password":"123","timestamp":"149922200","sign":"13ef1f7a7d2abbd18575d5bd495df9bf","type":"f"}::::::操作日期:::::::2017-07-05 10:33:42
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-07-05 10:33:44
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-07-05 10:33:57
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-07-05 10:33:59
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"fcsales","desc":"desc"}::::::操作日期:::::::2017-07-05 10:34:05
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-07-05 10:34:08
+操作定位:Phone/getsomething::::get{"data_type":"p","type":"dataofareas"}::::::操作日期:::::::2017-07-05 10:34:11
+操作定位:Phone/getsomething::::get{"time":"2017-07-05","timetype":"d","data_type":"a","type":"gethomedata","oftype":"sale","aname":"","pname":"","cname":""}::::::操作日期:::::::2017-07-05 10:34:20
+操作定位:Phone/getsomething::::get{"time":"2017-07-05","timetype":"d","data_type":"a","type":"gethomedata","oftype":"count","aname":"","pname":"","cname":""}::::::操作日期:::::::2017-07-05 10:34:22
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-07-05 10:34:27
+操作定位:Phone/getsomething::::get{"type":"getdataofsales","time":"today","time_type":"d","data_type":"sales","pname":"","cname":""}::::::操作日期:::::::2017-07-05 10:34:30

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chats>
+  <chat>
+    <type>to</type>
+    <datetime>2016-09-02 11:27:30</datetime>
+    <content>你好</content>
+  </chat>
+<chat><type>from</type><datetime>2016-09-02 11:27:35</datetime><content>发的</content></chat><chat><type>to</type><datetime>2016-09-02 11:28:02</datetime><content>怎么好饿</content></chat></chats>

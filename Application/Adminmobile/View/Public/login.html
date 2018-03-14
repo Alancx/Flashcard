@@ -1,0 +1,59 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/login.css?v=3">
+
+<div class="shopimg">
+<img src="__PUBLIC__/Adminmobile/img/logo.png" class="shopimage">
+</div>
+
+<div class="imputlogin">
+  <input type="text" class="username loginedit" name="username" placeholder="请输入帐号">
+  <input type="password" class="passwords loginedit" name="password" placeholder="请输入密码">
+</div>
+<div class="butlogin">
+  <button type="button" class="btn btn-danger  btn-block btnlogin" id="login" disabled="true" >登录</button>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(btnsuer,100);
+  $("#login").click(function(){
+    var username=$(".username").val();
+    var password=$(".passwords").val();
+    tips('waiting', '正在登录...', 15000);
+    $.ajax({
+      type:"post",
+      url:"{:U('Public/logining')}",
+      data:"username="+username+"&password="+password,
+      dateType:"json",
+      complete: function (e) {
+        hidetips('waiting');
+      },
+      success:function(msg){
+        if (msg.status == 'true') {
+          tips('notice', '登录成功!', 1500, 'weui_icon_toast');
+          window.location.href="{:U('Index/Index')}";
+        } else {
+          if(msg.info=='error-1'){
+            tips('notice', '没有登录权限!', 1500, 'weui_icon_notice');
+          } else{
+            tips('notice', '用户名或密码错误!', 1500, 'weui_icon_notice');
+          }
+        }
+      }
+    })
+  })
+  $(".loginedit").keydown(function(event){
+    var username=$(".username").val();
+    var password=$(".passwords").val();
+    if((username!='') && (password!='')){
+      $("#login").attr("disabled",false);
+    } else{
+      $("#login").attr("disabled",true);
+    }
+  })
+})
+function btnsuer() {
+  if(($(".username").val()!='') && ($(".username").val()!='')){
+      $("#login").attr("disabled",false);
+  }
+}
+</script>

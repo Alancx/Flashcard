@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/GroupBuy/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/mui.picker.min.css"/>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/mui.poppicker.css"/>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/Submit.css?v=1"/>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/Cfonts.css"/>
+	</head>
+	
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">提交订单</h1>
+		</header>
+		<div class="content mui-scroll-wrapper">
+		    <div class="mui-scroll">
+		    	<!--收货地址-->
+		    	<ul class="address mui-table-view">
+		    	        <li class="mui-table-view-cell">
+		    	            <a class="mui-navigate-right addrinfo">
+		    	                <if condition="$addr eq 0">
+									<div class="newadd newa">
+										<small class="cfonts jiahao"></small>
+										新建地址
+									</div>		
+								<else/>
+									<div class="namephone">
+			    	                	<span class="name">{$addr.0.Name}</span>&nbsp;&nbsp;&nbsp;<span class="phone">{$addr.0.Phone}</span>
+			    	                </div>
+			    	                <div class="ad">
+			    	                	{$addr.0.Province}{$addr.0.City}{$addr.0.Area}{$addr.0.Address}
+			    	                	<input type="hidden" name="" id="addressid" value="{$addr.0.ReceivingId}">
+			    	                </div>								
+		    	                </if>
+		    	            </a>
+		    	        </li>
+		    	    </ul>
+		    	    <div class="bg"></div>
+		    	<!--商品详情-->
+				<div class="goodsinfor">
+					<div class="title">
+						<!-- <span>雨后新味主营店</span><small class="mui-icon mui-icon-arrowright"></small> -->
+					</div>
+					<!--商品-->
+					<ul class="goods">
+						<li>
+							<img src="{:C('RESOURCE_URL')}{$info.ProLogoImg}" />
+							<div>
+								<span>{$info.ProName}</span>
+								<br />
+								<span class="guige"><small>规格：</small><small>{$info.ProSpec1}</small></span>
+								<span class="jiage">￥{$info.Price}<small class="number">*{$info.count}</small></span>
+							</div>
+						</li>
+					</ul>
+					<div class="xiaoji">
+						<span>共</span><span>{$info.count}</span>件商品，小计<span>￥ {$info.Money}</span>
+					</div>
+				</div>
+				<!---->
+					<ul class="mui-table-view">
+					        
+					        <li id="PS" class="mui-table-view-cell">
+					            <a class="mui-navigate-right">
+					                <span>配送方式</span>
+					                <span id="Pstext" class="righttext">快递</span>
+					            </a>
+					        </li>
+					        <li class="mui-table-view-cell">
+					            <a class="">
+					                 <span>运费</span>
+					                 <span class="righttext redtext">￥0.0</span>
+					            </a>
+					        </li>
+					    </ul>
+					
+					<div class="heji">
+						合计：<span id="zongjia" class="redtext">￥<if condition="$info['IsFeright'] eq '0'">{$info.Money}<else/>算算运费先</if></span>
+					</div>
+					
+					<br /><br /><br /><br /><br /><br /><br /><br />
+
+		    </div>
+		</div>
+		
+		<button type="button" id="subtn" class="mui-btn mui-btn-red mui-btn-block">提交</button>
+		
+	<!--支付方式-->	
+		<div class="mask" hidden="hidden"></div>
+		<ul class="zhifufangshi" hidden="hidden">
+			<li>
+				<small class="cfonts wxzf"></small>
+				微信支付
+			</li>
+		</ul>
+		
+<!--地址管理-->	
+<div id="AddrG" class="" hidden="hidden">
+	<div id="AddrTitle" class="mui-bar mui-bar-nav">
+		    <span id="AddrClose">关闭</span>
+		    <span id="AddrOk">确定</span>
+		    <h1 class="mui-title">地址管理</h1>
+	</div>
+	<div class="SubAddr mui-scroll-wrapper">
+		    <div id="SubScroll" class="mui-scroll">
+		    </div>
+		</div>
+		
+		
+		<div class="newadd">
+			<small class="cfonts jiahao"></small>
+			新建地址
+		</div>		
+</div>
+	
+<!--新建地址   编辑-->	
+	<div id="AddrEdit" class="" hidden="hidden">
+		<div id="EditTitle" class="mui-bar mui-bar-nav">
+		<span id="EditClose">取消</span>
+			<h1 class="mui-title">编辑收货人</h1>
+		</div>
+
+		<div class="AddrE mui-scroll-wrapper">
+			<div class="mui-scroll">
+
+				<div class="mui-input-row">
+					<label>收货人：</label>
+					<input type="text" class="mui-input-clear" id='RecevingName' placeholder="收货人姓名">
+				</div>
+				<div class="mui-input-row">
+					<label>联系方式：</label>
+					<input type="tel" class="mui-input-clear" id='RecevingPhone' placeholder="收货人联系方式">
+				</div>
+				<ul id="diqu" class="mui-table-view">
+				        <li class="mui-table-view-cell">
+				            <a class="mui-navigate-right">
+				               <small>所在地区：</small><small id="sheng"></small><small id="shi"></small><small id="qu"></small>
+				            </a>
+				        </li>
+				</ul>
+				  <div class="mui-input-row">
+					<label>详细地址：</label>
+					<textarea id='address'></textarea>
+				</div>  
+				<input type="hidden" name="rid" id='rid'>
+			</div>
+		</div>
+
+		<div class="save" id='saveaddr' data-type=''>
+			保存
+		</div>	
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</body>
+		<script src="__PUBLIC__/GroupBuy/js/mui.min.js"></script>
+		<script src="__PUBLIC__/GroupBuy/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var saveaddrurl="{:U('GroupBuy/saveaddr')}";
+			var getaddrdata="{:U('GroupBuy/getaddrdata')}";
+			var deleteaddr="{:U('GroupBuy/deleteaddr')}";
+			var setmr="{:U('GroupBuy/setmr')}";
+			var saveorder="{:U('GroupBuy/tmpfororder')}";
+			var mygroup="{:U('GroupBuy/MyGroup')}";
+			var ttype="{$type}";
+			var addrbox='';
+			var count="{$info.count}";
+			var glid="{$glid}";
+			var gyid="{$gyid}";
+			var gopaying="{:U('Payment/grouppay')}";
+		</script>
+		<script src="__PUBLIC__/GroupBuy/js/Submit.js?v=1.11" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/GroupBuy/js/mui.picker.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/GroupBuy/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init()
+			//图片轮播
+		//获得slider插件对象
+		var gallery = mui('.mui-slider');
+		gallery.slider({
+			interval: 1000 //自动轮播周期，若为0则不自动播放，默认为0；
+		});
+			//初始化滚动组件***
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+		//初始化页面  ***
+		mui.plusReady(function() {});
+		</script>
+		<script type="text/javascript">
+			// var Picker = new mui.PopPicker(); 
+			// Picker.setData([{
+			// 	value:"peisong",
+			// 	text:"配送"
+			// },{
+			// 	value:"ziti",
+			// 	text:"自提"
+			// }])
+			
+			// var btn=document.getElementById('PS');
+			// var pstext=document.getElementById('Pstext');
+			// btn.addEventListener('tap',function(){
+			// 	Picker.show(function(item){
+			// 		pstext.innerText=item[0].text;
+			// 	});
+			// })
+			
+			
+			
+			
+			
+		</script>
+		<script type="text/javascript">
+		
+		//					//级联示例
+					var cityPicker3 = new mui.PopPicker({
+						layer: 3
+					});
+					cityPicker3.setData(cityData3);
+					var showCityPickerButton = document.getElementById('diqu');
+					//省
+					var citysheng = document.getElementById('sheng');
+					//市
+					var cityshi = document.getElementById('shi');
+					//区
+					var cityqu = document.getElementById('qu');
+					showCityPickerButton.addEventListener('tap', function(event) {
+						cityPicker3.show(function(items) {
+							citysheng.innerText = (items[0] || {}).text ;
+							cityshi.innerText = (items[1] || {}).text ;
+							cityqu.innerText = (items[2] || {}).text ;
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false); 
+	</script>
+</html>

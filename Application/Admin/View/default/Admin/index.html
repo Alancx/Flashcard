@@ -1,0 +1,116 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+
+<div class="row  wrapper  white-bg" style="margin:0px;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>员工管理</h5>
+	</div>
+	<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="{:U('Admin/search')}" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<input type="text" name="EmployeeId" placeholder="请填写员工账号" id="EmployeeId" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="text" name="TrueName" id="TrueName" class="form-control" placeholder="请填写真实姓名(选填)">
+			</div>
+			<button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button> <button class="btn btn-default btn-outline btn-md" type="button" id="import"><span class="glyphicon glyphicon-import"></span>导出员工信息</button>
+		</form>
+
+	</div>
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<if condition="$employees['msg']">
+		<h3>{$employees.msg}</h3>
+		<else/>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>账号</th>
+					<th>真实姓名</th>
+					<th>性别</th>
+					<th>邀请码</th>
+					<th>最后登录时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="employees" item="emp" >
+					<tr>
+						<td>{$emp.id}</td>
+						<td><a href="###" onclick="getQr('{$emp.EmployeeId}');">{$emp.userName}</a></td>
+						<td>{$emp.TrueName}</td>
+						<td><if condition="$emp['Sex'] eq '0'">保密</if><if condition="$emp['Sex'] eq '1'">男</if><if condition="$emp['Sex'] eq '2'">女</if></td>
+						<td>{$emp.Invcode}</td>
+						<td>{$emp.LastLoginDate|date="Y-m-d H:i:s",###}</td>
+						<td><button class="btn btn-xs btn-warning" href="###" onclick="edit('{$emp.id}')">编辑</button> &emsp; <button class="btn btn-xs btn-danger" href="###" onclick="del('{$emp.id}');">删除</button></td>
+						<!-- &emsp;<button class="btn btn-default btn-xs empofstore" data-id='{$emp.id}'>设置管理门店</button> &emsp; <button class="btn btn-default btn-xs empofarea" data-id='{$emp.id}'>设置管理区域</button> &emsp; <if condition="$IsLeader eq '1'"><button class="btn btn-xs btn-white showstore" data-uid='{$emp.id}'>查看管理门店</button></if> -->
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		</if>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function edit(id){
+		window.location.href="{:U('Admin/edit')}?id="+id;
+	}
+
+	function del(id){
+		art.dialog.confirm('确定要删除吗？请慎重操作', function () {
+			window.location.href="{:U('Admin/del')}?id="+id;
+			// alert('hahaha')
+		}, function () {
+			art.dialog.tips('取消操作');
+		});
+	}
+
+	function getQr(id){
+		art.dialog.open("{:U('ArtDialog/AQr')}?mid="+id);
+	}
+	$(document).ready(function(){
+		$('.showstore').click(function(){
+			var uid=$(this).attr('data-uid');
+			window.location.href="{:U('Statcenter/EmpOfStore')}?uid="+uid;
+		})
+		$("#search").submit(function(){
+			var EmployeeId=$("#EmployeeId").val();
+			var TrueName=$("#TrueName").val();
+			var DepartmentName=$("#DepartmentName").val();
+			if (!EmployeeId && !TrueName && !DepartmentName) {
+				art.dialog.alert('请输入您要查询的信息');
+				return false;
+			}else{
+				art.dialog({content:'正在查询....',lock:true});
+				return true;
+			}
+		})
+		$('#import').click(function(){
+			var EmployeeId=$("#EmployeeId").val();
+			var TrueName=$("#TrueName").val();
+			var DepartmentName=$("#DepartmentName").val();
+			// if (!EmployeeId && !TrueName && !DepartmentName) {
+			// 	art.dialog.alert('请输入您要查询的信息');
+			// 	return false;
+			// }else{
+				art.dialog.tips('正在处理...',3);
+				window.location.href="{:U('Admin/empOut')}?EmployeeId="+EmployeeId+"&TrueName="+TrueName+"&DepartmentName="+DepartmentName;
+				return true;
+			// }
+		})
+
+		$('.empofstore').click(function(){
+			var id=$(this).attr('data-id');
+			window.location.href="{:U('Admin/EmpOfStore')}?id="+id;
+		})
+		$('.empofarea').click(function(){
+			var id=$(this).attr('data-id');
+			window.location.href="{:U('Admin/EmpOfArea')}?id="+id;
+		})
+	})
+
+</script>
+<include file="Common:footer" />

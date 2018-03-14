@@ -1,0 +1,36 @@
+h5{
+	/*display: inline;*/
+	/*width: 30%;*/
+	/*float: left;*/
+}
+h5 input{
+	text-align: right;
+	height: 26px;
+}
+h5 select{
+	height: 26px;
+}
+h5 button{
+	/*text-align: right;*/
+}
+.input-info{
+	text-align: right;
+}
+.downnum{
+	color: red;
+}
+a:hover{
+  text-decoration: none;
+}
+a:visited{
+  text-decoration: none;
+}
+a:link{
+  text-decoration: none;
+}
+.pro-img img{
+	width: 75px;
+}
+.pro-img span{
+	margin-left: 10px;
+}

@@ -1,0 +1,116 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/setup.css" />
+<script src="__PUBLIC__/Sellermobile/js/base.js"></script>
+	<div class="top">红包设置</div>
+	<div class="zhong">
+		<div class="type">
+			<label>红包类型</label>
+			<select id="se">
+				<option value="2">满减券</option>
+			</select>
+		</div>
+		<div class="price">
+			<label>需要金额</label>
+			<input type="text" id='totalmoney' value="{$list['Totalrules']}"/>
+		</div>
+		<div class="price">
+			<div class="left">
+				<label >红包金额</label>
+				<if condition="$type eq 'add'">
+					<input type="text" id='money' />
+				<else/>
+					<input type="text" id='money' value="{$list['Rules']}"/>
+				</if>
+			</div>
+			<div class="right">
+				<label>红包数量</label>
+				<if condition="$type eq 'add'">
+					<input type="text" id='number'/>
+				<else/>
+					<input type="text" id='number' value="{$list['Count']}"/>
+				</if>
+			</div>
+		</div>
+		<div class="time">
+			<label >开始时间</label>
+			<if condition="$type eq 'add'">
+				<input type="date" id='start'/>
+			<else/>
+				<input type="date" id='start' value="{$list['StartDate']}"/>
+			</if>
+		</div>
+		<div class="time">
+			<label >结束时间</label>
+			<if condition="$type eq 'add'">
+				<input type="date" id='end'/>
+			<else/>
+				<input type="date" id='end' value="{$list['ExpiredDate']}"/>
+			</if>
+		</div>
+	</div>
+	<div class="bottom" data-type="{$type}">添加到卡券</div>
+	<script>
+	// $(document).on('click','.bottom',function(){
+		$('.bottom').click(function(){
+		var name=$('#se').val();
+		var money=$('#money').val();
+		var totalmoney=$('#totalmoney').val();
+		var number=$('#number').val();
+		var start=$('#start').val();
+		var end=$('#end').val();
+		var type=$(this).attr('data-type');
+		// console.log(money);return false;
+		if ($.trim(totalmoney)=='' || parseFloat(totalmoney) <= 0) {
+			tips('notice','填写需要金额!', 1500, 'weui_icon_notice');
+			return false;
+		}
+		if ($.trim(money)=='' || parseFloat(money) <= 0) {
+			tips('notice','填写红包金额!', 1500, 'weui_icon_notice');
+			return false;
+		}
+		if (parseFloat(totalmoney) < parseFloat(money)) {
+			tips('notice','红包金额不能大于需要金额!', 1500, 'weui_icon_notice');
+			return false;
+		}
+		if ($.trim(number)=='' || parseFloat(number) <= 0) {
+			tips('notice','填写红包数量!', 1500, 'weui_icon_notice');
+			return false;
+		}
+		if ($.trim(start)=='') {
+			tips('notice','选择开始时间!', 1500, 'weui_icon_notice');
+			return false;
+		}
+		if ($.trim(end)=='') {
+			tips('notice','选择结束时间!', 1500, 'weui_icon_notice');
+			return false;
+		}
+		var senddata = {
+			name:name,
+			totalmoney:totalmoney,
+			money:money,
+			number:number,
+			start:start,
+			end:end,
+			type:type,
+		}
+		tips('waiting','正在保存中···');
+		$.ajax({
+			url:"{:U('Envelopes/doadd')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+					setTimeout( window.location.reload(),1500);
+				}else{
+					tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+		// console.log(senddata);
+	})
+	</script>

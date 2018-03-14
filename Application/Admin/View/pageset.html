@@ -1,0 +1,250 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<script src="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.min.css">
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/page.js?v=1.1"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/page.css?v=1.2">
+<include file="$headername" />
+
+<div class="row pagehomeset">
+	<div class="col-lg-4 col-md-4 col-sm-4 pull-left page">
+    <div class="showhome">
+			<!-- 轮播图区域 -->
+		  <div class="swiper-container swiper-container-home">
+				<div class="overburden">轮播图设置区域</div>
+		    <div class="swiper-wrapper">
+		      <div class="swiper-slide">
+		        <img src="http://placehold.it/300x120" class="imgslide">
+		      </div>
+		      <div class="swiper-slide">
+		        <img src="http://placehold.it/300x120" class="imgslide">
+		      </div>
+		      <div class="swiper-slide">
+		        <img src="http://placehold.it/300x120" class="imgslide">
+		      </div>
+		      <div class="swiper-slide">
+		        <img src="http://placehold.it/300x120" class="imgslide">
+		      </div>
+		    </div>
+		    <!-- Add Pagination -->
+		    <div class="swiper-pagination swiper-pagination-home"></div>
+		  </div>
+		  <!-- 轮播图区域end -->
+			<!-- 产品区域一 -->
+		  <div class="propart">
+		    <div class="pro-title">
+		      <img src="http://placehold.it/300x30" alt="">
+		    </div>
+		    <div class="pro-line-1">
+		      <div class="pro-line-1-left">
+		        <img src="http://placehold.it/100x100" alt="">
+		      </div>
+		      <div class="pro-line-1-right">
+		        <img src="http://placehold.it/100x50" alt="">
+		      </div>
+		      <div class="pro-line-1-right">
+		        <img src="http://placehold.it/100x50" alt="">
+		      </div>
+		    </div>
+		    <div class="pro-line-2">
+		      <div>
+		        <img src="http://placehold.it/100x130" alt="">
+		      </div>
+		      <div>
+		        <img src="http://placehold.it/100x130" alt="">
+		      </div>
+		      <div>
+		        <img src="http://placehold.it/100x130" alt="">
+		      </div>
+		    </div>
+		  </div>
+		  <!-- 产品区域一end -->
+		  <!-- 产品区域二 -->
+		  <div class="propart">
+		    <div class="pro-title">
+		      <img src="http://placehold.it/300x30" alt="">
+		    </div>
+		    <div class="pro-line-3">
+		      <div>
+		        <img src="http://placehold.it/370x180" alt="">
+		      </div>
+		      <div>
+		        <img src="http://placehold.it/370x180" alt="">
+		      </div>
+		      <div>
+		        <img src="http://placehold.it/370x180" alt="">
+		      </div>
+		      <div>
+		        <img src="http://placehold.it/370x180" alt="">
+		      </div>
+		    </div>
+		  </div>
+		  <!-- 产品区域二end -->
+    </div>
+	</div>
+	<div class="col-lg-8 col-md-8 col-sm-8 editpage">
+    <div>
+    <!-- 轮播图设置区域 -->
+    <div class="editqy">
+      <label>轮播图设置</label>
+      <div class="input-group">
+        <input type="text" name="lb_img" id="lb_img" class="form-control">
+        <div class="input-group-addon" onclick="upimg('lb_img')">上传</div>
+        <div class="input-group-addon lbimgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+        <!-- <div class="input-group-addon" onclick="show('lb_img')">预览</div> -->
+      </div>
+      <table class="table tabel-hovered table-bordered table-lb" style="margin:5px 0px 0px 0px">
+        <!-- {$info['lbdata'][0]} -->
+        <tbody>
+          <foreach name="info.lbdata" item='ci'>
+            <tr class="lbimgurl" data-iurl="{$ci}">
+              <td><img src="{$ci}" alt="" style="width:150px;"/></td>'
+              <td>{$ci}</td>
+              <td style="width:50px;"><button type="button" class="btn btn-danger btn-xs" onclick="delmsghome(this)">删除</button></td>
+            </tr>
+          </foreach>
+        </tbody>
+      </table>
+    </div>
+    <!-- 轮播图设置区域end -->
+		<!-- 热卖标题图图片设置 -->
+		<div class="editqy">
+			<label>热卖商品标题图设置</label>
+			<div class="input-group">
+				<input type="text" name="hotfg_img" id="hotfg_img" class="form-control">
+				<div class="input-group-addon" onclick="upimg('hotfg_img')">上传</div>
+				<div class="input-group-addon hotfgimgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+				<!-- <div class="input-group-addon" onclick="show('hotfg_img')">预览</div> -->
+			</div>
+			<table class="table tabel-hovered table-bordered table-hotfg" style="margin:5px 0px 0px 0px">
+				<tbody>
+					<tr class="hotfginfo" data-iurl="{$info.hotfgurl}">
+            <td><img src="{$info.hotfgurl}" alt="" style="width:150px;"/></td>
+            <td>{$info.hotfgurl}</td>
+            <td style="width:50px;"><button type="button" class="btn btn-danger btn-xs" onclick="delmsghome(this)">删除</button></td>
+          </tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- 热卖标题图图片设置end -->
+    <!-- 热卖设置区域 -->
+    <div class="editqy">
+			<label>热卖商品信息设置</label>
+      <div class="seltype" style="margin:0px 0px 5px 0px;">
+				<label>热卖商品</label>
+				<select name="pro-hot" id="pro-hot" class="form-control">
+					<option value="">请选择</option>
+					<foreach name="hotproinfo" item='pro'>
+					<option value="{$pro.ProId}">{$pro.ProName}</option>
+					</foreach>
+				</select>
+			</div>
+			<div class="input-group">
+        <input type="text" name="prohot_img" id="prohot_img" class="form-control" >
+        <div class="input-group-addon" onclick="upimg('prohot_img')">上传</div>
+        <div class="input-group-addon prohot_imgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+        <!-- <div class="input-group-addon" onclick="show('pro1_img')">预览</div> -->
+      </div>
+			<table class="table tabel-hovered table-bordered table-pro-hot" style="margin:5px 0px 0px 0px">
+        <tbody>
+					<foreach name="info.hotprodata" item='pi'>
+						<tr class="hotproinfo" data-iurl="{$pi.imgurl}" data-pid="{$pi.proid}" data-pname="{$pi.proname}">
+							<td>{$pi.proid}</td>
+							<td>{$pi.proname}</td>
+							<td><img src="{$pi.imgurl}" alt="" style="width:150px;"/></td>
+							<td>{$pi.imgurl}</td>
+							<td style="width:50px;"><button type="button" class="btn btn-danger btn-xs" onclick="delmsghome(this)">删除</button></td>
+						</tr>
+					</foreach>
+        </tbody>
+      </table>
+    </div>
+    <!-- 热卖设置区域end -->
+		<!-- 新品标题图图片设置 -->
+		<div class="editqy">
+			<label>新品商品标题图设置</label>
+			<div class="input-group">
+				<input type="text" name="newfg_img" id="newfg_img" class="form-control">
+				<div class="input-group-addon" onclick="upimg('newfg_img')">上传</div>
+				<div class="input-group-addon newfgimgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+				<!-- <div class="input-group-addon" onclick="show('hotfg_img')">预览</div> -->
+			</div>
+			<table class="table tabel-hovered table-bordered table-newfg" style="margin:5px 0px 0px 0px">
+				<tbody>
+					<tr class="newfginfo" data-iurl="{$info.newfgurl}">
+            <td><img src="{$info.newfgurl}" alt="" style="width:150px;"/></td>
+            <td>{$info.newfgurl}</td>
+            <td style="width:50px;"><button type="button" class="btn btn-danger btn-xs" onclick="delmsghome(this)">删除</button></td>
+          </tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- 新品标题图图片设置end -->
+		<!-- 新品设置区域 -->
+		<div class="editqy">
+			<label>新品商品信息设置</label>
+			<div class="seltype" style="margin:0px 0px 5px 0px;">
+				<label>新品商品</label>
+				<select name="pro-new" id="pro-new" class="form-control">
+					<option value="">请选择</option>
+					<foreach name="newproinfo" item='pro'>
+					<option value="{$pro.ProId}">{$pro.ProName}</option>
+					</foreach>
+				</select>
+			</div>
+			<div class="input-group">
+				<input type="text" name="pronew_img" id="pronew_img" class="form-control" >
+				<div class="input-group-addon" onclick="upimg('pronew_img')">上传</div>
+				<div class="input-group-addon pronew_imgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+				<!-- <div class="input-group-addon" onclick="show('pro1_img')">预览</div> -->
+			</div>
+			<table class="table tabel-hovered table-bordered table-pro-new" style="margin:5px 0px 0px 0px">
+				<tbody>
+					<foreach name="info.newprodata" item='pi'>
+						<tr class="newproinfo" data-iurl="{$pi.imgurl}" data-pid="{$pi.proid}" data-pname="{$pi.proname}">
+							<td>{$pi.proid}</td>
+							<td>{$pi.proname}</td>
+							<td><img src="{$pi.imgurl}" alt="" style="width:150px;"/></td>
+							<td>{$pi.imgurl}</td>
+							<td style="width:50px;"><button type="button" class="btn btn-danger btn-xs" onclick="delmsghome(this)">删除</button></td>
+						</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+		<!-- 新品设置区域end -->
+
+		<!-- 底部按钮菜单栏 -->
+    <div class="bottom-btn">
+    <!-- <button type="button" name="lookhome" id="lookhome" class="btn btn-warning">查看预览</button> -->
+    <button type="button" name="savehome" id="savehome" class="btn btn-danger">保&emsp;&emsp;存</button>
+    </div>
+    <!-- 底部按钮菜单栏end -->
+      </div>
+
+	</div>
+</div>
+<script type="text/javascript">
+  var savehomeurl="{:U('BaseSetting/pageset')}";
+    //轮播图数据
+		var swiper = new Swiper('.swiper-container', {
+		  autoplay: 3000,//可选选项，自动滑动
+		  pagination: '.swiper-pagination',
+		  paginationClickable: true,
+		  autoHeight: true, //enable auto height
+		  loop:true,
+		});
+</script>
+<script type="text/javascript">
+	function upimg(id){
+		art.dialog.data('domid',id);
+		art.dialog.open('{:U('Upimg/spceil')}');
+	};
+	function show(id){
+		art.dialog({title:'图片预览',content:'<img src="__ROOT__'+$('#'+id).val()+'" style="width:600px;min-width:50%;" />',lock:true,background: '#000',opacity: 0.45})
+	}
+</script>
+<include file="Common:footer" />

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html style="height:auto">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit">
+
+  <title>store</title>
+
+  <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/Admin/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+  <!-- Morris -->
+  <link href="__PUBLIC__/Admin/Admin/css/animate.css" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/Admin/css/style.css?v=2.2.0" rel="stylesheet">
+  <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+
+  <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+  <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+</head>
+
+<body style="background-color:#fff;height:auto;">
+
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-2"></div>
+  </div>
+  <div class="row  wrapper  white-bg" style="margin:0 1%;">
+    <div class="col-sm-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="5" style="text-align:center;">{$MemberId}的卡券</th>
+          </tr>
+          <tr>
+            <th>卡券类型</th>
+            <th>卡券信息</th>
+            <th>有效期</th>
+            <th>数量</th>
+            <th>领取时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <if condition="$coupons">
+            <foreach name='coupons' item='cp'>
+              <tr>
+                <td>{$cp.CouponName}</td>
+                <td><if condition="$cp['Type'] eq 0">{$cp.Rules}元<elseif condition="$cp['Type'] eq 1" /><?php echo $cp['Rules']*10; ?>折<elseif condition="$cp['Type'] eq 2" />满 <?php echo explode('/', $cp['Rules'])[0]; ?>元，减 <?php echo explode('/', $cp['Rules'])[1]; ?>元</if></td>
+                <td>{$cp.CreateDate}--{$cp.ExpiredDate}</td>
+                <td>{$cp.CouponCount}</td>
+                <td>{$cp.GetTime}</td>
+              </tr>
+            </foreach>
+            <else/>
+            <tr>
+              <td colspan="5">该用户暂无卡券</td>
+            </tr>
+          </if>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Mainly scripts -->
+  <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+</body>
+</html>

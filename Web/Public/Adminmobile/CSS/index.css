@@ -1,0 +1,108 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+.part-1{
+	display: block;
+	height: 125px;
+	background-color: #f34235;
+	overflow: hidden;
+}
+.showtop{
+  display: block;
+	margin: 10px 10px 0px 10px;
+	overflow: hidden;
+}
+.tmoney{
+	float: left;
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 26px;
+}
+.tmoney>span{
+	font-size: 24px;
+}
+.shopmoney{
+	float: right;;
+	font-size: 14px;
+	color: #ffffff;
+	line-height: 26px;
+	padding: 0px 10px 0px 0px;
+
+	background-image: url("../icon/Arrow.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-size: 7px;
+}
+.part-2{
+	display: block;
+	height: 61px;
+	overflow: hidden;
+	background-color: #ffffff;
+	border-bottom-style: solid;
+	border-width:1px;
+	border-color: #dddddd;
+}
+.part-2>div{
+	float: left;
+	height: 40px;
+	width: 33.3%;
+	margin: 10px 0px 0px 0px;
+}
+.part-2>div:nth-child(2){
+	width: 33.4%;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-width:1px;
+	border-color: #dddddd;
+}
+.part-2>div>label{
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+	color: #333333;
+	text-align: center;
+	line-height: 20px;
+}
+.part-2>div>label>span{
+	font-size: 12px;
+	color: #999999;
+}
+.part-3{
+	margin: 10px 0px 0px 0px;
+	background-color: #ffffff;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-width:1px;
+	border-color: #dddddd;
+}
+.table-1{
+	width: 100%;
+	margin: 10px 0px 10px 0px;
+	border: none;
+}
+.table-1>tbody>tr>td{
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+}
+.table-1>tbody>tr>td>img{
+	height: 30px;
+	width: 30px;
+}
+.table-1>tbody>tr>td>label{
+	width: 100%;
+	font-size: 12px;
+	color: #666666;
+	margin: 10px 0px 0px 0px;
+}
+.table-1>tbody>tr>td>a>img{
+	height: 30px;
+	width: 30px;
+}
+.table-1>tbody>tr>td>a>label{
+	width: 100%;
+	font-size: 12px;
+	color: #666666;
+	margin: 10px 0px 0px 0px;
+}

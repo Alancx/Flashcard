@@ -1,0 +1,92 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/artDialog/plugins/iframeTools.js"></script>
+<include file="$headername" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>平台用户管理</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>平台用户管理</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<!-- <h5></h5> -->
+		<button class="btn btn-primary btn-md">平台用户管理</button>
+		<a href="{:U('SysUser/addUser')}"><button class="btn btn-primary btn-md btn-outline">添加新用户</button></a>
+	</div>
+	<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+<!-- 		<form action="{:U('Admin/search')}" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<input type="text" name="EmployeeId" placeholder="请填写员工账号" id="EmployeeId" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="text" name="TrueName" id="TrueName" class="form-control" placeholder="请填写真实姓名(选填)">
+			</div>
+			<div class="form-group">
+				<select name="DepartmentName" id="DepartmentName" class="form-control">
+					<option value="">请选择部门</option>
+					<foreach name="allparts" item="part">
+						<if condition="$part['Grade'] eq '1'">
+							<option value="{$part.ID}" style="color:green;font-size:1.1em;">{$part.Name}</option>
+							<else/>
+							<option value="{$part.ID}">&nbsp;&nbsp;&nbsp;&nbsp;{$part.Name}</option>
+						</if>
+					</foreach>
+				</select>
+			</div>
+			<button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button> <!-- <button class="btn btn-primary btn-outline btn-md" type="button" onclick="import();"><span class="glyphicon glyphicon-import"></span>导出员工信息</button>
+		</form>
+ -->
+	</div>
+	<div class="col-sm-12">
+		<if condition="$employees['msg']">
+		<h3>{$employees.msg}</h3>
+		<else/>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>用户名</th>
+					<th>绑定域名</th>
+					<th>token</th>
+					<th>添加时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="users" item="user" >
+					<tr>
+						<td>{$user.id}</td>
+						<td><a href="###" onclick="getQr('{$emp.EmployeeId}');">{$user.userName}</a></td>
+						<td>{$user.userUrl}</td>
+						<td>{$user.token}</td>
+						<td>{$user.registerTime|date="Y-m-d H:i:s",###}</td>
+						<td><a href="###" onclick="edit('{$user.token}')">编辑</a> | <a href="###" onclick="del('{$user.token}');">删除</a></td>
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		</if>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function del(token){
+		art.dialog.confirm('确定要删除吗？',function(){
+			window.location.href="{:U('SysUser/delUser')}?token="+token;
+		},function(){
+			art.dialog.tips('取消操作',1);
+		})
+	}
+</script>
+<include file="Common:footer" />

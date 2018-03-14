@@ -1,0 +1,20 @@
+操作定位:Order/refund::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[OBg53xr9Nq3y7ko3]]></nonce_str>
+<sign><![CDATA[91932B870F0E68C14ED0ACE9356E7D4E]]></sign>
+<result_code><![CDATA[FAIL]]></result_code>
+<err_code><![CDATA[REFUND_FEE_MISMATCH]]></err_code>
+<err_code_des><![CDATA[订单金额或退款金额与之前请求不一致，请核实后再试]]></err_code_des>
+</xml>::::::操作日期:::::::2018-01-24 16:14:33
+操作定位:Order/refund::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[XIkWeCMgXhRWU5yK]]></nonce_str>
+<sign><![CDATA[D15B0FA7FBE876F87A0DDE5722890996]]></sign>
+<result_code><![CDATA[FAIL]]></result_code>
+<err_code><![CDATA[REFUND_FEE_MISMATCH]]></err_code>
+<err_code_des><![CDATA[订单金额或退款金额与之前请求不一致，请核实后再试]]></err_code_des>
+</xml>::::::操作日期:::::::2018-01-24 16:14:42

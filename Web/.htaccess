@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+  RewriteEngine On
+  RewriteCond %{SERVER_PORT} !^443$
+  RewriteCond %{HTTP_HOST}  www.huijistore.com
+  RewriteCond %{REQUEST_URI}  ^/awstats/awstats\.pl
+  RewriteCond %{QUERY_STRING}  config=www\.huijistore\.com
+  RewriteRule ^(.*)  https://%{HTTP_HOST}/awstats/awstats.pl?config=%{HTTP_HOST} [R=301,L]
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php?s=$1 [QSA,PT,L] 
+</IfModule>

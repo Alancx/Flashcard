@@ -1,0 +1,76 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.billtitle {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 40px;
+    width: 100%;
+    background-color: #f3f3f3;
+    padding: 0px 15px 0px 15px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.billtitle >div{
+    float: left;
+    width: auto;
+    height: 100%;
+    padding: 7px 0px 0px 0px;
+}
+.billtitle >div> select {
+    font-size: 14px;
+    font-weight: 600;
+    height: 25px;
+    border:none!important;
+    background-color: #f3f3f3;
+    outline: medium;
+}
+.billtitle >div> select:first-child {
+    width: 90px;
+}
+.billtitle >div> select:last-child {
+    width: 70px;
+}
+.billtitle>label{
+    float: right;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    color: #999999;
+    line-height: 39px;
+}
+.billlb{
+    height: 55px;
+    padding: 0px 15px 0px 15px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.billlb-1{
+    float: left;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    padding: 10px 0px 0px 0px ;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+}
+.billlb-1>span{
+    font-size: 12px;
+    color: #999999;
+}
+.billlb-2{
+    float: right;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    font-size: 16px;
+    line-height: 54px;
+    color: #FF4200;
+}

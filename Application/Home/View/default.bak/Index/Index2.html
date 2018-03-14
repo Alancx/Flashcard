@@ -1,0 +1,183 @@
+<layout name="Public/PageModel"/>
+<script src="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/index2.css?v=1.5">
+<!-- 腾讯地图前端定位组件 -->
+<script type="text/javascript" src="http://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+
+<div class="home-contents">
+  <!-- 轮播图区域 -->
+  <div class="swiper-container swiper-container-home">
+    <div class="swiper-wrapper">
+      <foreach name="homeinfo.lbdata" item='ci'>
+        <div class="swiper-slide">
+          <img src="{:C('RESOURCE_URL')}{$ci}" class="imgslide">
+        </div>
+      </foreach>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination-home"></div>
+  </div>
+  <!-- 轮播图区域end -->
+  <!-- 产品区域一 -->
+  <div class="propart">
+    <div class="pro-title" RPath="{:U('Index/GoodsList',array('type'=>'hot'))}">
+      <img src="{:C('RESOURCE_URL')}{$homeinfo.hotfgurl}" alt="">
+    </div>
+    <div class="pro-line-1">
+      <div class="pro-line-1-left" RPath="{:U('Product/Goods',array('pid'=>$homeinfo['hotprodata']['0']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.hotprodata.0.imgurl}" alt="">
+      </div>
+      <div class="pro-line-1-right" RPath="{:U('Product/Goods',array('pid'=>$homeinfo['hotprodata']['1']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.hotprodata.1.imgurl}" alt="">
+      </div>
+      <div class="pro-line-1-right" RPath="{:U('Product/Goods',array('pid'=>$homeinfo['hotprodata']['2']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.hotprodata.2.imgurl}" alt="">
+      </div>
+    </div>
+    <div class="pro-line-2">
+      <div RPath="{:U('Product/Goods',array('pid'=>$homeinfo['hotprodata']['3']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.hotprodata.3.imgurl}" alt="">
+      </div>
+      <div RPath="{:U('Product/Goods',array('pid'=>$homeinfo['hotprodata']['4']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.hotprodata.4.imgurl}" alt="">
+      </div>
+      <div RPath="{:U('Product/Goods',array('pid'=>$homeinfo['hotprodata']['5']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.hotprodata.5.imgurl}" alt="">
+      </div>
+    </div>
+  </div>
+  <!-- 产品区域一end -->
+  <!-- 产品区域二 -->
+  <div class="propart">
+    <div class="pro-title" RPath="{:U('Index/GoodsList',array('type'=>'new'))}">
+      <img src="{:C('RESOURCE_URL')}{$homeinfo.newfgurl}" alt="">
+    </div>
+    <div class="pro-line-3">
+      <div RPath="{:U('Product/Goods',array('pid'=>$homeinfo['newprodata']['0']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.newprodata.0.imgurl}" alt="">
+      </div>
+      <div RPath="{:U('Product/Goods',array('pid'=>$homeinfo['newprodata']['1']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.newprodata.1.imgurl}" alt="">
+      </div>
+      <div RPath="{:U('Product/Goods',array('pid'=>$homeinfo['newprodata']['2']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.newprodata.2.imgurl}" alt="">
+      </div>
+      <div RPath="{:U('Product/Goods',array('pid'=>$homeinfo['newprodata']['3']['proid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo.newprodata.3.imgurl}" alt="">
+      </div>
+    </div>
+  </div>
+  <!-- 产品区域二end -->
+  <!-- 产品区域三 -->
+  <div class="propart">
+    <div class="pro-part-3">
+      <foreach name="bottompro" item='pro'>
+        <div>
+          <a href="{:U('Product/Goods',array('pid'=>$pro['ProId']))}">
+            <img class="bproimg" src="{:C('RESOURCE_URL')}{$pro.ProLogoImg}" alt="">
+            <label class="proname">{$pro.ProName}</label>
+            <label class="proprice"><span>￥</span><?php echo number_format(($pro['PriceRange']),2); ?>
+            </label>
+          </a>
+        </div>
+      </foreach>
+    </div>
+  </div>
+  <!-- 产品区域三 end-->
+  <div class="lookpro"><label data-page="1" onclick="getmorepro(this)">查看更多</label></div>
+</div>
+<script type="text/javascript">
+var swiper = new Swiper('.swiper-container', {
+  autoplay: 3000,//可选选项，自动滑动
+  pagination: '.swiper-pagination',
+  paginationClickable: true,
+  autoHeight: true, //enable auto height
+  loop:true,
+});
+$('.bproimg').height($('.bproimg').width());
+function getmorepro(label){
+  if($(label).html()=='已全部加载'){
+    return false;
+  }
+  if($(label).html()=='正在加载…'){
+    return false;
+  }
+  var _page=$(label).attr('data-page');
+  $(label).html('正在加载…');
+  $.ajax({
+    type: "POST",
+    url: "{:U('Index/getmorehomepro')}",
+    data: {page: _page},
+    datatype: "json",
+    complete: function (XMLHttpRequest, textStatus) {
+
+    },
+    success: function (data) {
+      if (data.status == 'true') {
+        var htmls='';
+        $.each(data.data, function(index,item){
+          htmls+='<div><a href="{:U("Product/Goods",array("pid"=>"REPLACESTR"))}">'+
+          '<img class="bproimg" src="{:C("RESOURCE_URL")}'+item.ProLogoImg+'" alt="">'+
+          '<label class="proname">'+item.ProName+'</label>'+
+          '<label class="proprice"><span>￥</span>'+parseFloat(item.PriceRange).toFixed(2)+''+
+          '</label></a>'+
+          '</div>';
+          htmls=htmls.replace(/REPLACESTR/g,item.ProId);
+        })
+        $('.pro-part-3').append(htmls);
+        $(label).attr('data-page',parseInt(_page)+1);
+        $(label).html('加载更多');
+        $('.bproimg').height($('.bproimg').width());
+      }
+      else if (data.status == "false") {
+        $(label).html('已全部加载');
+      }
+      else {
+        $(label).html('已全部加载');
+      }
+    },
+    error: function () {
+      $(label).html('已全部加载');
+    }
+  })
+}
+</script>
+<!-- 定位信息 -->
+<script type="text/javascript">
+//腾讯地图获取当前位置
+var geolocation = new qq.maps.Geolocation("NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4", "web商店");
+var options = {timeout: 6000};
+window.onload = function(){
+    geolocation.getLocation(showPosition, showErr, options);  
+}
+///////定位成功返回函数///////
+function showPosition(position) {  
+  var mycenter=new qq.maps.LatLng(position.lat, position.lng);
+  var mylat=position.lat;
+  var mylng=position.lng;
+  var mycity=position.city;
+  var senddata={
+    slat:mylat,
+    slng:mylng,
+    scity:mycity,
+  }  
+  $.ajax({
+    type: "post", //请求的方式
+    dataType: "json", //数据的格式 建议大家使用json格式
+    data: senddata, //请求的数据
+    url: "{:U('LBS/getchildshop')}", //请求的url地址
+    success: function (data) { //请求成功时，处理返回来的数据
+      if (data.status=='true') {
+         window.location.href="{:U('Index/Index')}";
+
+      }
+    }
+  })
+   console.log('定位成功');
+}
+///////定位失败返回函数////////
+function showErr() {
+  console.log('定位失败');
+};
+</script>

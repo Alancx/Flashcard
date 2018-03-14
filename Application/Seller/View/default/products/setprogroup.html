@@ -1,0 +1,184 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+	.spl .chosen-container{
+		width: 200px;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			                            <div class="alert alert-warning" style="color:red;">
+                               组合内容为上传商品时类型为组合商品的详细内容，仅作为发货和减少库存使用，不影响前端显示和价格
+                           </div>
+
+			</div>
+			<div class="ibox-content">
+				<div class="col-sm-12 col-md-12">
+					<table class="table bordered">
+						<thead>
+							<tr>
+								<td>商品信息</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+						<foreach name='pros' item='li'>
+							<tr>
+								<td>{$li.ProName} / ￥{$li.Price}<br><img src="{$li.ProLogoImg}" style="width:100px;height:100px;" alt=""></td>
+								<td><button class="btn btn-danger btn-xs clelimit" data-toggle="modal" data-target="#order_messages" data-pid='{$li.ProId}' data-plid="{$li.ProIdCard}">设置/查看组合内容</button></td>
+							</tr>
+						</foreach>
+						</tbody>
+					</table>
+					{$page}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal inmodal fade" id="order_messages" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:428px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				设置礼包内容 <span class='notice' style='color:red;font-weight:bold'></span>
+				<button type="button" class="close" data-dismiss="modal" id="lbclo">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<div class="input-group spl">
+					<span class='input-group-addon'>选择商品</span>
+					<select name="" id="ProIdCard" class="form-control">
+						<option value="-1">请选择商品</option>
+						<foreach name="chosepros" item='pro'>
+						<option value="{$pro.ProIdCard}" class="{$pro.ProIdCard}" data-pid="{$pro.ProId}">{$pro.ProName} / {$pro.Price}</option>
+						</foreach>
+					</select>
+					<input type="number" name="Num" id="Num" class="form-control" placeholder='请输入商品数量'>
+				</div>
+				<div style="text-align:right"><button class="btn btn-xs btn-danger addpro">添&emsp;加</button></div>
+				<form id="prodata">
+					<foreach name='spdata' item='sp'>
+					<div id='{$sp.ProIdCard}' style='margin-top:5px;'><input type='hidden' name='pros[]' value='{$sp.ProIds}'>{$sp.ProName}/数量：{$sp.Num}&emsp;&emsp;<button class='btn btn-danger btn-xs del' data-pid='{$sp.ProIdCard}'>删除</button>	</div>
+					</foreach>
+				</form>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+				<button type="button" class="btn btn-w-m btn-success input-sm" data-plid='' id="btn_messagess">保存内容</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+var pidstr='';
+$(document).ready(function(){
+	$('#chosen').chosen();
+	$('#savebuy').submit(function(){
+		var strtime=$('#strtime').val();
+		var endtime=$('#endtime').val();
+		var buynum=$('#buynum').val();
+		var pid=$('#chosen').val();
+		if (strtime && endtime && buynum && pid) {
+			if (strtime>endtime) {
+				art.dialog.tips('无效的时间区间');
+				return false;
+			}else if (buynum<=0) {
+				art.dialog.tips('限购数量需大于1');
+				return false;
+			}else{
+				art.dialog.tips('正在提交...');
+				return true;
+			}
+		}else{
+			art.dialog.tips('请完善限购信息');
+			return false;
+		}
+	})
+	$(document).on('click','.clelimit',function(){
+		pidstr='';
+		var _this=$(this);
+		var pid=_this.attr('data-plid');
+		$('#btn_messagess').attr('data-plid',pid);
+		$.ajax({
+			url:"{:U('Products/getgroupinfo')}",
+			type:"post",
+			data:"pid="+pid,
+			dataType:"json",
+			success:function(msg){
+				if (msg.status=='success') {
+					var pdata=msg.data;
+					var _html='';
+					$.each(pdata,function(index,item){
+						_html+="<div id='"+item.ProIdCard+"' style='margin-top:5px;'><input type='hidden' name='pros[]' value='"+item.ProIdCard+"^"+item.Num+"'>"+item.ProName+"/"+item.Price+"/数量："+item.Num+"&emsp;&emsp;<button class='btn btn-danger btn-xs del' data-pid='"+item.ProIdCard+"'>删除</button>	</div>";
+						pidstr+=item.ProIdCard;
+					})
+					$('#prodata').html(_html);
+				}else{
+					$('.notice').html('未查找到组合商品');
+					$('#prodata').html('');
+				}
+			}
+		})
+
+
+	})
+	$('.addpro').click(function(){
+		$('.notice').html('');
+		var ProId=$('#ProIdCard').val();
+		var Num=$('#Num').val();
+		var ProName=$('.'+ProId).html();
+		if (ProId && Num) {
+			if (pidstr.indexOf(ProId)=='-1') {
+				$('#prodata').append("<div id='"+ProId+"' style='margin-top:5px;'><input type='hidden' name='pros[]' value='"+ProId+"^"+Num+"'>"+ProName+"/数量："+Num+"&emsp;&emsp;<button class='btn btn-danger btn-xs del' data-pid='"+ProId+"'>删除</button>	</div>");
+				$('#ProIdCard').chosen();
+				$('#Num').val('');
+				pidstr+=ProId;
+			}else{
+				$('.notice').html('该商品已存在');
+				$('#ProIdCard').chosen();
+				$('#Num').val('');
+			}
+		}else{
+			$('.notice').html('请填写完整信息(商品/数量)');
+		}
+	})
+
+	$(document).on('click','.del',function(){
+		var pid=$(this).attr('data-pid');
+		$('#'+pid).remove();
+	})
+	$('#btn_messagess').click(function(){
+		$('#btn_messagess').addClass('disabled').html('保存中...');
+		$.ajax({
+			url:"{:U('Products/setprogroup')}",
+			type:"post",
+			data:$('#prodata').serialize()+"&plid="+$(this).attr('data-plid'),
+			dataType:"json",
+			success:function(msg){
+				if (msg.status=='success') {
+					art.dialog.tips('处理成功');
+					$('#lbclo').click();
+					$('#btn_messagess').removeClass('disabled').html('保存内容');
+				}else{
+					$('.notice').html('处理失败');
+					$('#btn_messagess').removeClass('disabled').html('保存内容');
+				}
+			}
+		})
+	})
+})
+</script>
+<include file="Common:footer" />

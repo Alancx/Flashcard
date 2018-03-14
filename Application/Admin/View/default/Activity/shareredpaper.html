@@ -1,0 +1,241 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+	.card{
+		width: 200px;
+		height: 110px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		margin:auto;
+		position: relative;
+		background: linear-gradient(to left,#fff,#999);
+		box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
+		color: black;
+	}
+	.left-card{
+		margin-left: 20px;
+		margin-bottom: 20px;
+		float: left;
+		/*padding-left: 20px;*/
+		padding-top: 15px;
+		/*padding-bottom: 15px;*/
+		width: 200px;
+		height: 110px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		position: relative;
+		background: linear-gradient(to left,#fff,#999);
+		box-shadow: 2px 2px 2px rgba(0,0,0,0.7);
+		color: black;
+	}
+	.card_title{
+		text-align: center;
+		font-size: 1.2em;
+		height: 20px;
+		margin-bottom: 15px;
+		margin-top: 10px;
+		color: black;
+	}
+	.card_rules{
+		font-size: .6em;
+		line-height: 32px;
+		text-align: center;
+		color: black;
+	}
+	.checked .card_title,.checked .card_rules{
+		color: #fff;
+	}
+	.card_bot{
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		bottom: 0px;
+		height: 10px;    
+		text-align: center;
+		font-size: .8em;
+		color: black;
+	}
+	.vip{
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		color: #ccc;
+		font-size: 1.5em;
+	}
+	.checked{
+		background: linear-gradient(to left,#FF0000,#000000);
+		box-shadow: 15px 15px 15px rgba(0,0,0,0.7);
+		-webkit-transition: all .5s;
+		-moz-transition: all .5s;
+		-ms-transition: all .5s;
+		-o-transition: all .5s;
+		transition: all .5s;
+
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<div class="alert alert-warning" style="color:red;">
+					1、优惠券管理
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class='row'>
+					<table class='table table-hover'>
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>#</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>商品分享红包</td>
+								<td class="proshare"><if condition="$proshare"><div class='card'>
+									<span class='vip'>VIP</span>
+									<div class='card_title'>{$proshare.CouponName}</div>
+									<div class='card_rules'>
+											下单立减{$proshare.Rules}元
+									</div>
+								</div><else/>暂无</if></td>
+								<td><button class="btn btn-xs btn-warning btn-outline change" data-id="{$proshare.CouponId}" data-type="proshare" data-toggle="modal" data-target="#changcard">变更</button>&emsp;<button class="btn btn-xs btn-danger btn-outline delete" data-type="proshare" data-id="{$proshare.CouponId}">删除</button></td>
+							</tr>
+							<tr>
+								<td>店铺分享红包</td>
+								<td class="storeshare"><if condition="$storeshare"><div class='card'>
+									<span class='vip'>VIP</span>
+									<div class='card_title'>{$storeshare.CouponName}</div>
+									<div class='card_rules'>
+											下单立减{$storeshare.Rules}元
+									</div>
+								</div><else/>暂无</if></td>
+								<td><button class="btn btn-xs btn-warning btn-outline change" data-id="{$storeshare.CouponId}" data-type="storeshare" data-toggle="modal" data-target="#changcard">变更</button>&emsp;<button class="btn btn-xs btn-danger btn-outline delete" data-type="storeshare" data-id="{$storeshare.CouponId}">删除</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal inmodal fade" id="changcard" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-md" style="width:720px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				选择卡券 <span class='notice' style='color:red;font-weight:bold'></span>
+				<button type="button" class="close" data-dismiss="modal" id="lbclo">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				
+
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+				<button type="button" class="btn btn-w-m btn-success input-sm" data-type='' id="btn_messagess">保存设置</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(document).on('click','.change',function(){
+		var _this=$(this);
+		layer.msg('加载中...');
+		$.ajax({
+			url:"{:U('Activity/getcoupons')}",
+			type:"post",
+			data:"type=share",
+			dataType:"json",
+			success:function(msg){
+				if (msg.status=='success') {
+					var _html='';
+					$.each(msg.data,function(index,item){
+						if (item.CouponId==_this.attr('data-id')) {
+							_html+='<div class="left-card checked" data-id="'+item.CouponId+'"> <span class="vip">VIP</span> <div class="card_title">'+item.CouponName+'</div> <div class="card_rules">  下单立减'+item.Rules+'元 </div> </div>';
+						}else{
+							_html+='<div class="left-card" data-id="'+item.CouponId+'"> <span class="vip">VIP</span> <div class="card_title">'+item.CouponName+'</div> <div class="card_rules">  下单立减'+item.Rules+'元 </div> </div>';
+						}
+					});
+					_html+='<div style="clear:both"></div>';
+					$('.modal-body').html(_html);
+					$('#btn_messagess').attr('data-type',_this.attr('data-type'));
+				}else{
+					layer.msg(msg.info);
+					$('.close').click();
+				}
+			}
+		})
+	})
+	$(document).on('click','.left-card',function(){
+		var _this=$(this);
+		$('.left-card').removeClass('checked');
+		_this.addClass('checked');
+
+	})
+
+	$(document).on('click','.delete',function(){
+		var _this=$(this);
+		layer.confirm('确定要取消分享红包吗？',{
+			btn:['确定','取消'],
+			shade:false
+		},function(){
+			layer.msg('处理中');
+			$.ajax({
+				url:"{:U('Activity/shareredpaper')}",
+				type:"post",
+				data:"type=del&s="+_this.attr('data-type'),
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						layer.msg('处理成功');
+						$('.'+_this.attr('data-type')).html('暂无');
+						_this.parent().children('.change').attr('data-id','');
+					}else{
+						layer.msg(msg.info);
+					}
+				}
+			})
+		})
+	})
+
+	$(document).on('click','#btn_messagess',function(){
+		if ($('.checked').length>0) {
+			var _this=$(this);
+			var type=_this.attr('data-type');
+			var cid=$('.checked').attr('data-id');
+			var _html=$('.checked');
+			_this.addClass('disabled').html('处理中...');
+			$.ajax({
+				url:"{:U('Activity/shareredpaper')}",
+				type:"post",
+				data:{
+					type:type,
+					cid:cid
+				},
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						layer.msg('保存成功');
+						$('.close').click();					
+						$('.'+type).html(_html);
+						$('.'+type).children('.left-card').attr('class','card');
+					}else{
+						layer.msg(msg.info);
+					}
+					_this.removeClass('disabled').html('保存设置');
+				}
+			})
+		}else{
+			layer.msg('未选择卡券');
+		}
+	})
+})
+</script>
+<include file="Common:footer" />

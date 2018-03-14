@@ -1,0 +1,1 @@
+操作定位:Public/UserInfo::::---方法:getshopinfo---数据:{"apptoken":"NaN","timetemp":"1498387978","type":"getshopinfo","sign":"c377befed2a727c7b9b2e5b98dd9505f"}::::::操作日期:::::::2017-06-25 18:52:58

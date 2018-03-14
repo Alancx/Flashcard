@@ -1,0 +1,20 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/newmember.css?v=1.0">
+<div class="partmember">
+  <!-- <div class="member">
+    <img src="__PUBLIC__/Adminmobile/img/peitu.png">
+    <label class="mname">昵称:大家好</label>
+    <label class="mnum">账号:13711555815<span>12:12:12</span></label>
+  </div> -->
+  <foreach name="ymember" item="mem">
+    <div class="member">
+      <if condition="$mem['HeadImgUrl'] eq ''">
+            <img src="__PUBLIC__/theme2/Images/touxiang.png">
+        <else/>
+          <img src="{$mem['HeadImgUrl']}">
+      </if>
+      <label class="mname">昵称:{$mem['MemberName']}</label>
+      <label class="mnum">账号:{$mem['MemberId']}<span>{$mem['RegisterDate']}</span></label>
+    </div>
+  </foreach>
+</div>

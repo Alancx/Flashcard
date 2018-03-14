@@ -1,0 +1,14 @@
+.Wdate{
+	border: 1px solid #e5e6e7;
+	height:30px;
+	line-height:21px;
+	background:#fff url(datePicker.gif) no-repeat right;
+	width:85px;
+	font-size:12px;	
+	font-family:"Arial","Helvetica";
+}
+
+.WdateFmtErr{
+	font-weight:bold;
+	color:red;
+}

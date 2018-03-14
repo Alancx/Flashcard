@@ -1,0 +1,249 @@
+<include file="Common:top" />
+<link href="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager_blue.css" rel="stylesheet">
+<link href="__PUBLIC__/Admin/Admin/common/css/order.style.css" rel="stylesheet">
+<style type="text/css">
+ul,ol,li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+</style>
+<include file="$headername" />
+<!--面包屑 标题栏-->
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>订单商品统计</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:U('Index/index')}">主页</a>
+            </li>
+            <li class="active">
+                <strong>订单商品统计</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!--主体部分-->
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>条件检索
+                        <small class='text-info'>订单状态为：交易完成</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- 条件检索 -->
+                <div class="ibox-content">
+                    <form role="form" class="form-inline" method="post">
+                        <div class="form-group">
+                                <label class="control-label">下单时间：</label>
+                                <input type="text" name="start_time" id="start_time" onfocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true,maxDate:'%y-%M-{%d-0}'})" class="Wdate form-control input-sm" style="width:150px;display:inline-block;" value="{$stime}">
+                                <span>至</span>
+                                <input type="text" name="end_time" id="end_time" onfocus="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',autoPickDate:true,maxDate:'%y-%M-{%d}'})" class="Wdate form-control input-sm" style="width:150px;display:inline-block;" value="{$etime}">
+                                &nbsp;&nbsp;
+                                <a class="btn btn-xs" data-day="6">最近7天</a>
+                                &nbsp;
+                                <a class="btn btn-xs" data-day="29">最近30天</a>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="proName" name="proName" class="form-control" placeholder="请输入商品名称或编号...">
+                        </div>
+                        <button class="btn btn-outline btn-primary btnselect" type="button"
+                                style="margin-bottom: 0px;width:80px;" id="selectKC"><i class="fa fa-search"></i>&nbsp;&nbsp;检索
+                        </button>
+                        <button class="btn btn-outline btn-default btnselect" type="button"
+                                style="margin-bottom: 0px;width:80px;" id="exportKC"><i class="fa fa-download"></i>&nbsp;&nbsp;导出
+                        </button>
+                    </form>
+                </div>
+                <!-- 内容信息 -->
+                <div class="ibox-content">
+                    <table class="table table-hover table-striped" id="data-example">
+                        <thead>
+                        <tr style="background-color:#eaeaea;">
+                            <th>#</th>
+                            <th>商品分类</th>
+                            <th>商品名称</th>
+                            <th>商品编号</th>
+                            <th>订单销售额</th>
+                            <th>订单销量</th>
+                        </tr>
+                        </thead>
+                        <tbody id="data-tbody">
+                            <foreach name="dataOrder" item="vo" key="k">
+                                <tr>
+                                    <td>{$vo.RowNumber}</td>
+                                    <td>{$vo.ClassName}</td>
+                                    <td title="点击查看订单明细"><a class="dialoginfo" data-id="{$vo.ProId}">{$vo.ProName}</a></td>
+                                    <td>{$vo.ProNumber}</td>
+                                    <td>{$vo.Money|round=2}</td>
+                                    <td>{$vo.Count}</td>
+                                </tr>
+                            </foreach>
+                        </tbody>
+                    </table>
+                    <if condition="$pageCount eq 0">
+                        <div class="alert alert-warning" id="alert_message" style="display:block;">还没有相关数据！</div>
+                    <else/>
+                        <div class="alert alert-warning" id="alert_message" style="display:none;"></div>
+                    </if>
+                    <div id="kkpager"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- WdatePicker -->
+<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/Admin/Admin/common/js/validaterReg.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/toastr/toastr.min.js"></script>
+<!-- artDialog -->
+<script src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.source.js"></script>
+<!-- 分页 -->
+<script src="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager.min.js"></script>
+<script>
+var binddefaultinfo={
+    postUrl:"{:U('orderproinfo')}",
+    postSonUrl:"{:U('orderproinfo_page')}",
+    pno:1,         // 当前显示的页码
+    pageCount:"{$pageCount}",
+    totalPage:"{$totalPage}"
+};
+$(function() {
+    var start_time = $("#start_time");
+    var end_time = $("#end_time");
+    var alert_message=$("#alert_message");
+    var wid=$("#Warehouse");
+    var proName=$("#proName");
+    var data_tbody=$("#data-tbody");
+    var proinfo_table=$("#proinfo_table");
+
+    toastr.options={"closeButton":true,"debug":false,"progressBar":false,"positionClass":"toast-top-center","onclick":null,"showDuration":"300","hideDuration":"1000","timeOut":"1500","extendedTimeOut":"0","showEasing":"swing","hideEasing":"linear","showMethod":"fadeIn","hideMethod":"fadeOut"};
+
+    $(".btn-xs").bind("click",function(){var _that=$.trim($(this).attr("data-day"));if(_that=="0"){start_time.val("");end_time.val("")}else{var nowtime=addDate(CurentTime("dd"),-1);var temp_start_time=addDate(nowtime,-parseInt(_that));start_time.val(temp_start_time+" 00:00:00");end_time.val(nowtime+" 23:59:59")}});
+
+    var SetPager=function(){
+        kkpager.generPageHtml({
+            pno:binddefaultinfo.pno,
+            total:binddefaultinfo.totalPage,
+            totalRecords:binddefaultinfo.pageCount,
+            isShowTotalRecords:true,
+            isShowTotalPage:false,
+            mode:"click",
+            click:function(n){
+                NProgress.start();
+                binddefaultinfo.pno=n;
+                getDatapager();
+                this.selectPage(n);
+                NProgress.done();
+                return false
+            }
+        },true);
+        NProgress.done()
+    };
+
+    var getDatapager = function() {
+        data_tbody.html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: binddefaultinfo.postUrl,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data: {
+                "ty":"0",
+                "stime": $.trim(start_time.val()),
+                "etime": $.trim(end_time.val()),
+                "pindex": binddefaultinfo.pno,
+                "proname":proName.val(),
+                "r": (Math.random() * Math.random())
+            },
+            dataType: "json",
+            timeout: 20000,
+            success: function(data) {
+                if (data.code == "0") {
+                    alert_message.css("display", "none");
+                    binddefaultinfo.pageCount = data.pageCount;
+                    binddefaultinfo.totalPage = data.totalPage;
+                    var _html = "";
+                    var rowspan = "";
+                    $(data.dataOrder).each(function(index, vo) {
+                        data_tbody.append('<tr><td>' + vo.RowNumber + '</td><td>' + vo.ClassName + '</td><td title="点击查看订单明细"><a class="dialoginfo" data-id="'+vo.ProId+'">' + vo.ProName + '</a></td><td>' + vo.ProNumber + '</td><td>' + Number(vo.Money).toFixed(2) + '</td><td>' + vo.Count + '</td></tr>');
+                    })
+                } else {
+                    alert_message.css("display", "block");
+                    alert_message.html("还没有相关数据！")
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, thrownError) {
+                 alert(4);
+                if (textStatus == "timeout") {
+                    alert_message.css("display", "block");
+                    alert_message.html("请求超时!")
+                } else {
+                    alert_message.css("display", "block");
+                    alert_message.html("发生未知异常错误!")
+                }
+            }
+        });
+    };
+
+    $(document).on("click", ".dialoginfo", function() {
+        var _that=$(this);
+        art.dialog.open(binddefaultinfo.postSonUrl+"?stime=" + $.trim(start_time.val()) + "&etime=" + $.trim(end_time.val())+"&proname="+_that.attr("data-id"), {
+            title: "商品：" + $.trim(_that.html()) +"~订单明细",
+            lock: true,
+            width:1000,
+        });
+    });
+
+    $("#selectKC").bind("click", function() {
+        var s = $.trim(start_time.val());
+        var e = $.trim(end_time.val());
+        if ((validateRules.isNull(s) && !validateRules.isNull(e)) || (!validateRules.isNull(s) && validateRules.isNull(e))) {
+            toastr.warning("日期两个都不能为空！");
+            return false;
+        }
+        if (Date.parse(s) > Date.parse(e)) {
+            toastr.warning("开始日期小于结束日期 ");
+            return false;
+        }
+        NProgress.start();
+        binddefaultinfo.pno = 1;
+        binddefaultinfo.pageCount = 0;
+        binddefaultinfo.totalPage = 1;
+        getDatapager();
+        SetPager();
+    });
+
+    SetPager();
+
+});
+$(document).ready(function(){
+    $('#exportKC').click(function(){
+        var s = $.trim($('#start_time').val());
+        var e = $.trim($('#end_time').val());
+        art.dialog.tips('正在处理....');
+        window.location.href="{:U('Order/orderproinfo')}?type=import&stime="+s+"&etime="+e+"&proname="+$('#proName').val();
+    })
+})
+</script>
+</body>
+</html>

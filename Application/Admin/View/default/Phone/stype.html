@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>生意参谋</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.top_btn,.top_top{
+			width: 25%;
+			float: left;
+			text-align: center;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		.active{
+			background-color: #434343;
+			color: #fff;
+		}
+		#notice_box{
+			position:fixed;top:200px;left:30%;width:40%;padding:10px 5px;max-height:50px;border:2px solid red;text-align:center;z-index:1;
+			background-color: rgba(255,13,13,.54);
+			font-weight: bold;
+			color: #fff;
+		}
+		#btn_pre{
+			position: fixed;
+			right: 5px;
+			top: 40px;
+
+		}
+		.cos{
+			text-align: center;
+			padding-top: 5px;
+			float: left;
+			width: 30%;
+		}
+		.cos select{
+			width: 100%;
+			text-align: center;
+			border: 0px solid #ccc;
+		}
+	</style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+		<div class="col-xs-12 col-sm-12" style="padding:0px;text-align:center">
+			<div class="top_btn active" style="" data-st='d' id="defualt">日</div>
+			<input type="hidden" name="" id="date_d" onclick="WdatePicker({el:'date_d',onpicked:function(){getdatabypost(this);}})" data-st='d'>
+			<div class="top_btn" style="" data-st='w'>周</div>
+			<input type="hidden" name="" id="date_w" onclick="WdatePicker({el:'date_w',onpicked:function(){getdatabypost(this);},disabledDays:[0,2,3,4,5,6]})" data-st='w'>
+			<div class="top_btn" style="" data-st='m'>月</div>
+			<input type="hidden" name="" id="date_m" onclick="WdatePicker({el:'date_m',onpicked:function(){getdatabypost(this)},dateFmt:'yyyy-MM'})" data-st='m'>
+			<div class="top_btn" style="" data-st='y'>年</div>
+			<input type="hidden" name="" id="date_y" onclick="WdatePicker({el:'date_y',onpicked:function(){getdatabypost(this);},dateFmt:'yyyy'})" data-st='y'>
+			<div class="cos" style="margin-left:20%">
+				<select name="province" id="province">
+				</select>
+			</div>
+			<div class="cos">
+				<select name="city" id="city">
+				<option value="-1">请选择</option>
+				</select>
+			</div>
+			<button class="btn btn-white btn-xs pull-right" style="margin-top:5px;" id="sure">确定</button>
+		</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;border-bottom:5px solid #ccc;border-top:5px solid #ccc;">
+				<div id="piecharts" style="height:200px;width:100%"></div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<!-- <td>#</td> -->
+							<td>店铺名称</td>
+							<td>线上/线下（金额）</td>
+						</tr>
+					</thead>
+					<tbody id="stcontet">
+					<foreach name='tb_data' item='stm'>
+						<tr>
+							<!-- <td>{$stm.stoken}</td> -->
+							<td>{$stm.storename}</td>
+							<td><if condition="$stm['havemoney'] eq 'yes'">{$stm.Paying}/{$stm.Cash}<else/>0/0</if></td>
+						</tr>
+					</foreach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+	<div id="notice_box" style="display:none;">提示信息</div>
+	<!-- <button id="btn_pre" class="btn btn-xs btn-white"><span class='glyphicon glyphicon-arrow-left'></span></button> -->
+  </body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/Admin/js/echarts.min.js"></script>
+	<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/greenWdatePicker.js"></script>
+    <script type="text/javascript">var PCAD="{$A}"</script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/Admin/SimpleArea.js"></script>
+<script type="text/javascript">
+	var piecharts='';
+	var px={$pie_x};
+	var py={$pie_data};//{$py};
+	var pz={$pie_info};
+	var pname='';
+	var data_type='A'; //A区域  P省份  C城市  S
+	var cname='';
+	var aname='';
+	var nowtime='{$today}';
+	$(document).ready(function(){
+		new PCAS('province','city');
+		pie(px,py,pz);
+		$('.top_btn').click(function(){
+			$('.top_btn').removeClass('active');
+			$(this).addClass('active');
+			var get_type=$(this).attr('data-st');
+			$('#date_'+get_type).click();
+		})
+		piecharts.on('click',function(params){
+			// getdetail(params);
+		})
+		$('.jump').click(function(){
+			window.location.href=$(this).attr('data-url');
+		})
+
+		$('#btn_pre').click(function(){
+			if (data_type=='P') {
+				pname='';
+				cname='';
+				aname='';
+				data_type='A';
+			}else if (data_type=='C') {
+				cname='';
+				pname='';
+				data_type='P';
+			}else if (data_type=='S') {
+				data_type='C';
+				cname='';
+			};
+			$('.active').click();
+		})
+		$('#sure').click(function(){
+			pname=$('#province').val();
+			cname=$('#city').val();
+			getdatabypost_noparam();
+		})
+
+	})
+
+function getdatabypost_noparam(){
+	var get_type=$('.active').attr('data-st');
+	piecharts.showLoading();
+	$.ajax({
+		url:"{:U('Phone/stype')}",
+		type:"post",
+		data:"get_type="+get_type+"&data_type="+data_type+"&aname="+aname+"&pname="+pname+"&cname="+cname+"&nowtime="+nowtime,
+		dataType:"json",
+		success:function(msg){
+			if (msg.status=='success') {
+				pie(msg.pie_x,msg.pie_data,msg.pie_info)
+				var data=msg.tb_data;
+				var _html='';
+				$.each(data,function(index,item){
+					var td='';
+					if (item.havemoney=='yes') {
+
+						if (item.Paying && item.Cash) {
+							td=item.Paying+'/'+item.Cash;
+						}else{
+							if (item.Paying) {
+								td=item.Paying+'/0';
+							}
+							if (item.Cash) {
+								td='0/'+item.Cash;
+							};
+						}
+					}else{
+						td='0/0';
+					}
+					_html+="<tr><td>"+item.storename+"</td><td>"+td+"</td></tr>";
+				})
+				$('#stcontet').html(_html);
+				// piecharts.on('click',function(params){
+				// 	getdetail(params);
+				// })
+				//更新图表数据
+			}else{
+				notice('暂未查询到数据',3000);
+				// pie(px,py,pz);
+				// line(lx,ly,lz);
+				// $('#active').click();
+			}
+			// data_type='A';
+			piecharts.hideLoading();
+		}
+	})
+
+}
+
+function getdatabypost(_me){
+	// console.log($(_me).val());
+	if ($(_me).val()) {
+		nowtime=$(_me).val();
+	}else{
+		// nowtime=$(_me).val();
+	}
+	var get_type=$(_me).attr('data-st');
+	// $('#date_'+get_type).click();
+	piecharts.showLoading();
+	$.ajax({
+		url:"{:U('Phone/stype')}",
+		type:"post",
+		data:"get_type="+get_type+"&data_type="+data_type+"&aname="+aname+"&pname="+pname+"&cname="+cname+"&nowtime="+nowtime,
+		dataType:"json",
+		success:function(msg){
+			if (msg.status=='success') {
+				pie(msg.pie_x,msg.pie_data,msg.pie_info)
+				var data=msg.tb_data;
+				var _html='';
+				$.each(data,function(index,item){
+					var td='';
+					if (item.havemoney=='yes') {
+
+						if (item.Paying && item.Cash) {
+							td=item.Paying+'/'+item.Cash;
+						}else{
+							if (item.Paying) {
+								td=item.Paying+'/0';
+							}
+							if (item.Cash) {
+								td='0/'+item.Cash;
+							};
+						}
+					}else{
+						td='0/0';
+					}
+					_html+="<tr><td>"+item.storename+"</td><td>"+td+"</td></tr>";
+				})
+				$('#stcontet').html(_html);
+				// piecharts.on('click',function(params){
+				// 	getdetail(params);
+				// })
+				//更新图表数据
+			}else{
+				notice('暂未查询到数据',3000);
+				// pie(px,py,pz);
+				// line(lx,ly,lz);
+				// $('#active').click();
+			}
+			// data_type='A';
+			piecharts.hideLoading();
+		}
+	})
+
+}
+
+function getdetail(params){
+	var tmp='';
+	var type=$('.top_top').attr('data-type');
+	var get_type=$('.active').attr('data-st');
+	if (data_type=='A') {
+		tmp='P';
+		aname=params.name;
+	}else if (data_type=='P') {
+		tmp='C';
+		pname=params.name;
+	}else if (data_type=='C') {
+		tmp='S';
+		cname=params.name;
+		console.log(params.name);
+	};
+	$.ajax({
+		url:"{:U('Phone/index')}",
+		type:"post",
+		data:"get_type="+get_type+"&type="+type+"&data_type="+tmp+"&aname="+aname+"&pname="+pname+"&cname="+cname,
+		dataType:"json",
+		success:function(msg){
+			if (msg.status=='success') {
+				pie(msg.px,msg.py,msg.pz);
+				data_type=tmp;
+				if (tmp!='S') {
+					piecharts.on('click',function(params){
+						getdetail(params);
+					})
+				};
+			}else{
+				notice('暂未查询到数据',3000);
+				// pie(px,py,pz);
+				// line(lx,ly,lz);
+				// $('.active').click();
+			}
+		}
+	})
+	console.log(params.name);
+
+}
+
+function pie(x,y,z){
+	piecharts=echarts.init(document.getElementById('piecharts'));
+	var pieOptions= {
+	    title : {
+	        text: z.title,
+	        subtext: z.subtitle,
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        left: 'left',
+	        data: x
+	    },
+	    series : [
+	        {
+	            name: z.type,
+	            type: 'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	            data:y,
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                },
+	                normal:{ 
+	                  label:{ 
+	                    show: true, 
+	                    formatter: '{c} ({d}%)' 
+	                  }, 
+	                  labelLine :{show:true} 
+	                } 
+	            }
+	        }
+	    ]
+	};
+	piecharts.setOption(pieOptions);
+}
+
+function notice(a,b){
+	$('#notice_box').fadeIn().html(a);
+	setTimeout("$('#notice_box').fadeOut()",b);
+}
+</script>
+</html>

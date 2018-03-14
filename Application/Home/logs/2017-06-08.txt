@@ -1,0 +1,1 @@
+操作定位:GroupBuy/Group::::SELECT p.ProName,p.ProLogoImg,gb.GroupId,(SELECT min(Price) FROM RS_GroupBuyList WHERE GroupId=gb.GroupId) as sprice FROM RS_GroupBuy gb LEFT JOIN RS_Product p ON gb.ProId=p.ProId WHERE gb.StartDate<GETDATE() AND gb.EndDate>GETDATE() AND gb.token='rhbnja145862596121' and gb.stoken='nPyEo49507333966' and gb.IsDelete='0'::::::操作日期:::::::2017-06-08 10:31:17

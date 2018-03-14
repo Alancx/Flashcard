@@ -1,0 +1,148 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/sqWarehouselist.css?v=1.2">
+<div class="whlist">
+  <foreach name="wahouselist" item="whitem">
+    <if condition="$whitem['IsPay'] eq '0' ">
+      <div class="whinfo">
+        <switch name="whitem['Status']">
+          <case value="0"><label class="whid">{$whitem['InWarehouseId']}<span>未支付(待提交)</span></label></case>
+          <case value="2"><label class="whid">{$whitem['InWarehouseId']}<span>未支付(待审核)</span></label></case>
+          <case value="3"><label class="whid">{$whitem['InWarehouseId']}<span>未支付(已审核)</span></label></case>
+          <case value="4"><label class="whid">{$whitem['InWarehouseId']}<span>未支付(已拒绝)</span></label></case>
+        </switch>
+        <label class="whrh">采购人员:<span>{$whitem['InputName']}</span></label>
+        <label class="whprice">商品金额:<span>￥<?php echo $whitem['Money']?sprintf("%.2f",$whitem['Money']):'0.00' ?></span></label>
+        <label class="whnum">商品数量:<span>{$whitem['Count']}</span></label>
+        <div class="btngroup">
+          <switch name="whitem['Status']">
+            <case value="0">
+              <label class="sendnow" data-whid="{$whitem['InWarehouseId']}" data-tprice="<?php echo $whitem['Money']?sprintf("%.2f",$whitem['Money']):'0.00' ?>">立即提交</label>
+              <a href="{:U('UMWareHouse/sqWarehouse',array('whid'=>$whitem['InWarehouseId']))}">
+                <label class="updatenow" data-whid="{$whitem['InWarehouseId']}">编辑</label>
+              </a>
+              <label class="delnow" data-whid="{$whitem['InWarehouseId']}">删除</label>
+            </case>
+            <case value="2">
+              <label class="paynow" data-whid="{$whitem['InWarehouseId']}" data-tprice="<?php echo $whitem['Money']?sprintf("%.2f",$whitem['Money']):'0.00' ?>">立即支付</label>
+              <label class="delnow" data-whid="{$whitem['InWarehouseId']}">删除</label>
+            </case>
+            <default />
+            <a href="{:U('UMWareHouse/looksqWarehouse',array('whid'=>$whitem['InWarehouseId']))}">
+              <label class="looknow" data-whid="{$whitem['InWarehouseId']}">查看详情</label>
+            </a>
+          </switch>
+        </div>
+      </div>
+      <elseif condition="$whitem['IsPay'] eq '1'" />
+      <div class="whinfo">
+        <switch name="whitem['Status']">
+          <case value="0"><label class="whid">{$whitem['InWarehouseId']}<span>已支付(待提交)</span></label></case>
+          <case value="2"><label class="whid">{$whitem['InWarehouseId']}<span>已支付(待审核)</span></label></case>
+          <case value="3"><label class="whid">{$whitem['InWarehouseId']}<span>已支付(已审核)</span></label></case>
+          <case value="4"><label class="whid">{$whitem['InWarehouseId']}<span>已支付(已拒绝)</span></label></case>
+        </switch>
+        <label class="whrh">采购人员:<span>{$whitem['InputName']}</span></label>
+        <label class="whprice">商品金额:<span>￥<?php echo $whitem['Money']?sprintf("%.2f",$whitem['Money']):'0.00' ?></span></label>
+        <label class="whnum">商品数量:<span>{$whitem['Count']}</span></label>
+        <div class="btngroup">
+          <a href="{:U('UMWareHouse/looksqWarehouse',array('whid'=>$whitem['InWarehouseId']))}">
+            <label class="looknow" data-whid="{$whitem['InWarehouseId']}">查看详情</label>
+          </a>
+        </div>
+      </div>
+      <else />
+      <div class="whinfo">
+        <label class="whid">{$whitem['InWarehouseId']}<span>已支付</span></label>
+        <label class="whrh">采购人员:<span>{$whitem['InputName']}</span></label>
+        <label class="whprice">商品金额:<span>￥<?php echo $whitem['Money']?sprintf("%.2f",$whitem['Money']):'0.00' ?></span></label>
+        <label class="whnum">商品数量:<span>{$whitem['Count']}</span></label>
+        <div class="btngroup">
+          <a href="{:U('UMWareHouse/looksqWarehouse',array('whid'=>$whitem['InWarehouseId']))}">
+            <label class="looknow" data-whid="{$whitem['InWarehouseId']}">查看详情</label>
+          </a>
+        </div>
+      </div>
+    </if>
+  </foreach>
+</div>
+<div class="addwarehouse">
+  <a href="{:U('UMWareHouse/sqWarehouse')}">
+    <label class="addwh">新增订货申请</label>
+  </a>
+</div>
+<script type="text/javascript">
+var InWarehouseId='';
+var delwh_url="{:U('UMWareHouse/delsqWarehouse')}";
+var paywh_url="https://<?php echo $_SERVER['HTTP_HOST']; ?>{:U('UMWareHouse/paysqWarehouse')}";
+var sendwh_url="{:U('UMWareHouse/sendsqWarehouse')}";
+var payend_url="{:U('UMWareHouse/sqWarehouselist',array('whid'=>'INWAREHOUSEID'))}";
+</script>
+<script type="text/javascript">
+var payLock=false;
+var paydata='';
+function jsApiCall()
+{
+  // console.log(data['package']);
+  WeixinJSBridge.invoke('getBrandWCPayRequest',{
+    "appId":paydata['appId'],
+    "timeStamp":paydata['timeStamp'],
+    "nonceStr":paydata['nonceStr'],
+    "package":paydata['package'],
+    "signType":paydata['signType'],
+    "paySign":paydata['paySign']
+  },
+  function (res)
+  {
+    if(res.err_msg == "get_brand_wcpay_request:cancel")
+    {
+      payLock=false;
+      paydata='';
+      alert("您取消了支付");
+    }
+    else if(res.err_msg == "get_brand_wcpay_request:fail")
+    {
+      payLock=false;
+      paydata='';
+      alert("支付失败,错误信息："+res.err_desc);
+    }
+    else if(res.err_msg == "get_brand_wcpay_request:ok")
+    {
+      alert("支付成功");
+      payend_url=payend_url.replace(/INWAREHOUSEID/g,InWarehouseId);
+      setTimeout(function() { window.location.href=payend_url;}, 1000);
+    }
+    else
+    {
+      payLock=false;
+      paydata='';
+      alert("支付遇到未知错误。");
+    }
+  }
+);
+}
+
+function callpay()
+{
+  if (payLock) {
+    return;
+  }
+  payLock=true;
+  if (typeof WeixinJSBridge == "undefined")
+  {
+    if (document.addEventListener)
+    {
+      document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+    }
+    else if (document.attachEvent)
+    {
+      document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+      document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+    }
+  }
+  else
+  {
+    jsApiCall();
+  }
+}
+</script>
+<script src="__PUBLIC__/Sellermobile/js/sqWarehouselist.js?v=1.1" charset="utf-8"></script>

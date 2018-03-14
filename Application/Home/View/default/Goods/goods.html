@@ -1,0 +1,367 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/goods.css?v=1.5" />
+<div class="propart">
+  <div class="proinfo">
+    <div class="proimg">
+      <img src="{$pinfo['ProLogoImg']}" alt="">
+      <if condition="$pinfo['Level'] neq ''">
+        <span class="eatmore">越用越便宜</span>
+      </if>
+    </div>
+    <div class="pro_info">
+      <span class="pname">{$pinfo['ProName']}</span>
+      <div class="showinfo">
+        <span class="ljinfo">力荐</span>
+        <span class="selesnums">已售 {$pinfo.SalesCount}</span>
+      </div>
+      <div class="bottomprice">
+        <if condition="$pinfo['NumType'] eq '1' ">
+          <span class="price">{$pinfo.Price}<span>/份</span></span>
+          <else/>
+          <span class="price">{$pinfo.Price}<span>/份</span></span>
+        </if>
+        <if condition="$pinfo['Price'] neq $pinfo['OldPrice'] ">
+          <del>{$pinfo.OldPrice}</del>
+        </if>
+      </div>
+      <div class="prosetcolnum" data-pid="{$pinfo.ProId}">
+        <span class="ggg dian_icon showdianzan"></span>
+        <if condition="$colltype eq 0 ">
+          <span class="ggg xin_icon setcollect" data-type="0" data-pid="{$pinfo.ProId}"></span>
+          <else />
+          <span class="ggg xin_fillicon setcollect setcollectactive" data-type="1" data-pid="{$pinfo.ProId}"></span>
+        </if>
+        <if condition="$pinfo['plcount'] gt 1 ">
+          <div class="shownumbtn"  data-pid="{$pinfo.ProId}" data-cid="{$pinfo.ClassType}" data-pname="{$pinfo.ProName}" data-pimg="{$pinfo.ProLogoImg}" data-price="{$pinfo.Price}" data-plcount="{$pinfo.plcount}" data-numtype="{$pinfo['NumType']}">
+            <span class="selSpec">选规格</span>
+          </div>
+          <else/>
+          <div class="shownumbtn"  data-pid="{$pinfo.ProId}" data-cid="{$pinfo.ClassType}" data-pname="{$pinfo.ProName}" data-pimg="{$pinfo.ProLogoImg}" data-price="{$pinfo.Price}" data-plcount="{$pinfo.plcount}" data-plid="{$pinfo['ProIdCard']}" data-plspec="{$pinfo['ProSpec1']}" data-numtype="{$pinfo['NumType']}">
+            <if condition="$pinfo['NumType'] eq '1'">
+              <span class="minusbtn ggg minus_icon"></span>
+              <span class="showselnum">0</span>
+              <span class="plusbtn ggg plus_icon"></span>
+              <else/>
+              <input type="text" name="proweight" class="proweight" value="0">
+            </if>
+          </div>
+        </if>
+      </div>
+    </div>
+    <div class="prottitle">
+      <div class="ptitle">
+        <span>鲜</span>
+        <span class="mui-ellipsis">{$pinfo.ProTitle}</span>
+      </div>
+      <div class="pstitle" style="display:none;">
+        <span>靓</span>
+        <span class="mui-ellipsis">{$pinfo.ProSubtitle}</span>
+      </div>
+    </div>
+    <div class="shopinfo" RPath="{:U('Index/Index')}">
+      <img src="{$sinfo['Slogo']}" alt="">
+      <span class="sname">{$sinfo['storename']}</span>
+      <span class="sgznum">{$scnums}人关注</span>
+    </div>
+    <div class="tabproinfo">
+      <div class="proinfocontent tabproactive" data-type="0">
+        商品详情
+        <span class="linepro"></span>
+      </div>
+      <div class="evallist" data-type="1">
+        用户评论({$pevalnum}条)
+        <span class="linepro"></span>
+      </div>
+    </div>
+    <ul class="tab_pro_info proinfo_content" data-type='0'>
+      {$pinfo['ProContent']|htmlspecialchars_decode}
+    </ul>
+    <ul class="tab_pro_info eval_list" data-type='1'>
+      <!-- <li class="evaluatetitle">
+        <span>用户评论</span>
+        <span>{$pevalnum}条</span>
+      </li> -->
+      <foreach name="proeval" item="pv">
+        <li class="evaluate_list">
+          <img class="userhead" src="{$pv.HeadImgUrl}" alt="">
+          <div class="righteval">
+            <span class="userinfo">
+              <span class="username">{$pv.MemberName}</span>
+              <span class="setstarts">
+                <for start="1" end="6">
+                  <if condition="$pv['ClassScore'] egt $i">
+                    <span class="ggg xing_icon setstartactive"></span>
+                    <else />
+                    <span class="ggg xing_icon"></span>
+                  </if>
+                </for>
+              </span>
+              <span class="usertime">{$pv.cdate}</span>
+            </span>
+            <span class="usersetevaluate mui-ellipsis-2">{$pv.Content}</span>
+            <div class="usersetimglist">
+              <!-- <img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+              <img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+              <img src="__PUBLIC__/newhome/img/spimg.jpg" alt=""> -->
+            </div>
+          </div>
+        </li>
+      </foreach>
+      <!-- <li class="evaluate_list">
+      <img class="userhead" src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+      <div class="righteval">
+      <span class="userinfo">
+      <span class="username">用户昵称</span>
+      <span class="setstarts">
+      <span class="ggg xing_icon setstartactive"></span>
+      <span class="ggg xing_icon setstartactive"></span>
+      <span class="ggg xing_icon setstartactive"></span>
+      <span class="ggg xing_icon"></span>
+      <span class="ggg xing_icon"></span>
+    </span>
+    <span class="usertime">2017-12-12</span>
+  </span>
+  <span class="usersetevaluate mui-ellipsis-2">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</span>
+  <div class="usersetimglist">
+  <img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+  <img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+  <img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+</div>
+</div>
+</li>
+<li class="evaluate_list">
+<img class="userhead" src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<div class="righteval">
+<span class="userinfo">
+<span class="username">用户昵称</span>
+<span class="setstarts">
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon"></span>
+<span class="ggg xing_icon"></span>
+</span>
+<span class="usertime">2017-12-12</span>
+</span>
+<span class="usersetevaluate mui-ellipsis-2">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</span>
+<div class="usersetimglist">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+</div>
+</div>
+</li>
+<li class="evaluate_list">
+<img class="userhead" src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<div class="righteval">
+<span class="userinfo">
+<span class="username">用户昵称</span>
+<span class="setstarts">
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon"></span>
+<span class="ggg xing_icon"></span>
+</span>
+<span class="usertime">2017-12-12</span>
+</span>
+<span class="usersetevaluate mui-ellipsis-2">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</span>
+<div class="usersetimglist">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+</div>
+</div>
+</li>
+<li class="evaluate_list">
+<img class="userhead" src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<div class="righteval">
+<span class="userinfo">
+<span class="username">用户昵称</span>
+<span class="setstarts">
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon setstartactive"></span>
+<span class="ggg xing_icon"></span>
+<span class="ggg xing_icon"></span>
+</span>
+<span class="usertime">2017-12-12</span>
+</span>
+<span class="usersetevaluate mui-ellipsis-2">评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</span>
+<div class="usersetimglist">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+<img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+</div>
+</div>
+</li> -->
+</ul>
+
+
+</div>
+
+<!-- 底部结算区域 -->
+<div class="bottompart">
+  <div class="showgetpronum">
+    <span>已点</span>
+    <span>0</span>
+  </div>
+  <span class="gotopay">去结算</span>
+  <span class="showtotal mui-ellipsis"><span class="totalprice">0.00</span></span>
+  <div class="hasselprosmark">
+    <div class="hasselpros">
+      <div class="hasselprostop">
+        <span class="cleanselpros">清空菜单</span>
+        <span class="downcarts">收起</span>
+      </div>
+      <div class="selproslist">
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 选择规格属性 -->
+<div class="prospecmark">
+  <div class="prospecinfo">
+    <div class="prospec_top">
+      <span class="pspecname mui-ellipsis"></span>
+      <span class="closeselprospec mui-icon mui-icon-closeempty"></span>
+    </div>
+    <div class="prospec_list">
+      <span>规格:</span>
+      <div class="prospec_info_list">
+
+      </div>
+    </div>
+    <div class="prospec_bottom">
+      <span class="prospecprice">0</span>
+      <span class="prospechas"></span>
+      <div class="shownumbtn"  data-pid="" data-pname="" data-pimg="" data-price="" data-cid="" data-plid="" data-plspec="" data-numtype="">
+        <!-- <span class="minusbtn ggg minus_icon"></span>
+        <span class="showselnum">0</span>
+        <span class="plusbtn ggg plus_icon"></span> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 选择规格属性end -->
+<!-- 立即分享提示信息 -->
+<div class="sharemark">
+  <img src="__PUBLIC__/newhome/img/shareinfoimg.png" alt="">
+</div>
+<!-- 立即分享提示信息end -->
+
+</div>
+<script src="__PUBLIC__/newhome/js/goods.js?v=1.5" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var updatecart_url = "{:U('Public/updatecart')}";
+var cartslist = '{$cartinfo}';
+var order_url = "{:U('Orders/submitorder')}";
+var setshopcollect_url = "{:U('Goods/setprocollect')}";
+var plinfo='{$plinfo}';
+</script>
+<!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+<!-- <script type="text/javascript">
+var SID;//分享预处理ID
+$(document).ready(function() {
+$.ajax({
+url: "{:U('Goods/shareinfo')}",
+type: "post",
+data: {
+Type: "P",
+//分享类型 商品分享
+Sharer: '{$MemberId}',
+ShareId: "{$pinfo.ProId}",
+s: "preshare"
+},
+dataType: "json",
+success: function(msg) {
+if (msg.status == 'success') {
+SID = msg.ID;
+} else {
+
+}
+}
+})
+wx.config({$wxJSSDKConfigStr});
+wx.ready(function() {
+wx.onMenuShareTimeline({
+
+title: '{$pinfo.ProName}',
+// 分享标题
+
+link: window.location.href + '&SID=' + SID+'&stoken={$shopstoken}',
+// 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+
+imgUrl: window.location.protocol + '//' + window.location.host + '{$pinfo.ProLogoImg}',
+// 分享图标
+
+success: function() {
+// 用户确认分享后执行的回调函数
+sharesuccess();
+
+},
+});
+wx.onMenuShareAppMessage({
+
+title: '{$pinfo.ProName}',
+// 分享标题
+
+desc: '{$pinfo.ProTitle}',
+// 分享描述
+
+link: window.location.href + '&SID=' + SID+'&stoken={$shopstoken}',
+// 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+
+imgUrl: window.location.protocol + '//' + window.location.host + '{$pinfo.ProLogoImg}',
+// 分享图标
+
+type: '',
+// 分享类型,music、video或link，不填默认为link
+
+dataUrl: '',
+// 如果type是music或video，则要提供数据链接，默认为空
+
+success: function() {
+
+sharesuccess();
+
+},
+
+cancel: function() {
+
+// 用户取消分享后执行的回调函数
+
+}
+
+});
+})
+})
+function sharesuccess(){
+$.ajax({
+url:"{:U('Goods/shareinfo')}",
+type:"post",
+data:{
+s:"shareout",
+ID:SID
+},
+dataType:"json",
+success:function(msg){
+console.log(msg);
+if (msg.status=='success') {
+//成功信息  判断是否有红包
+if (msg.redpaper=='yes') {
+//有红包处理一下
+$('.maskpacket').css('display','block');
+$('.showgetpacket').text(msg.red_rule);
+setTimeout(function(){$('.maskpacket').css('display','none');},3000);
+}else{
+//没红包，普通的分享
+}
+}else{
+//错误信息
+}
+}
+})
+}
+</script> -->

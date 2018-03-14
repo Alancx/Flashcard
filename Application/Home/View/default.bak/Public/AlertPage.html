@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>{$Title}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <link href="__PUBLIC__/Plugins/bootstrap/CSS/bootstrap.min.css" rel="stylesheet">
+    <script src="__PUBLIC__/JS/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Plugins/bootstrap/JS/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+
+        setTimeout(function(){window.location.href='{$ToPage}';},{$Timeout}*1000);
+
+      
+    </script>
+</head>
+<body class="jumbotron">
+
+  <div style="top: 25%;position: absolute;text-align: center;width: 100%;margin: 0px -15px;">
+
+    <if condition="$type eq 1">
+      <p class="glyphicon glyphicon-ok-circle" style="font-size:60px;color:#26d029;"></p>
+    <elseif condition="$type eq 2"/>
+      <p class="glyphicon glyphicon-remove-circle" style="font-size:60px;color:#d02626;"></p>
+    <else/>
+      <p class="glyphicon glyphicon-warning-sign" style="font-size:60px;color:#8c8c8c;"></p>
+    </if>
+
+    <p style="font-size:18px;">{$Content}</p>
+
+    
+    <if condition="$ToPage neq 0">
+        <p style="font-size:12px;">{$Timeout}秒后跳转</p>
+        <p><a class="btn btn-lg" href="{$ToPage}" role="button">立即跳转</a></p>
+    </if>
+
+  </div>
+
+</body>
+</html>

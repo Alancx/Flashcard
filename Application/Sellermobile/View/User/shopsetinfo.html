@@ -1,0 +1,22 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/shopsetinfo.css?v=1.0">
+<script type="text/javascript">
+var shopimagesave= "{:U('User/shopimage')}";//图片保存地址
+var shopimgurl ="{:U('User/shopimagesave')}";
+</script>
+<div class="showshopimgspart">
+  <div class="shopimgslist">    
+    <foreach name="shopimgs" item="vo" >
+      <img src="{$vo}" class="imglist">
+    </foreach>
+    <div class="addbtn">
+      <img src="__PUBLIC__/Sellermobile/icon/addimg.png" id="addimg">
+      <input type="file"  id="selswimg" name="selimg" onchange="selsimage(this)">
+    </div>
+  </div>
+  <div class="savebtn">
+    <span>保 存</span>
+  </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/shopsetinfo.js?v=1.0"></script>

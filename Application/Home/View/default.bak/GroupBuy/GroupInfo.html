@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>徽记_商品详情</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="__PUBLIC__/GroupBuy/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/GroupBuy/js/mui.min.js"></script>
+		<script type="text/javascript">
+			var intDiff={$time};
+			var gofororder="{:U('GroupBuy/gofororder')}";
+			var grouplist="{:U('GroupBuy/GroupList')}";
+			var gid="{$gid}";
+			var myinfo={$myinfo};
+		</script>
+		<script src="__PUBLIC__/GroupBuy/js/GroupDetails.js?v=1.15" type="text/javascript" charset="utf-8"></script>
+
+		<link href="__PUBLIC__/GroupBuy/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/icons-extra.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/Cfonts.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/GroupDetails.css?v=1" />
+		<style type="text/css">
+		.spcs img{
+			max-width: 100%;
+		}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" >
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<!-- <a class="cfonts share mui-icon mui-icon-right-nav mui-pull-right"></a> -->
+			<div class="divtab">
+				<ul class="ultab">
+					<li class="tab1">
+						<span>商品</span>
+					</li>
+					<li class="tab2" id="tab2">
+						<span>详情</span>
+					</li>
+					<li class="tab3" id="tab3">
+						<span>好评99+</span>
+					</li>
+				</ul>
+				<div class="tabnav"></div>
+			</div>
+		</header>
+		<!--内容-->
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--商品-->
+				<div id="" data-oo="tab">
+					<!--轮播图-->
+					<div id="slider" class="mui-slider">
+						<div class="mui-slider-group mui-slider-loop">
+							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#"><img src="{:C('RESOURCE_URL')}<?php echo $Proinfo['imgs'][count($Proinfo['imgs'])-1]; ?>"></a>
+							</div>
+							<foreach name='Proinfo.imgs' item='img'>
+							<!-- 第一张 -->
+							<div class="mui-slider-item">
+								<a href="#"><img src="{:C('RESOURCE_URL')}{$img}"></a>
+							</div>
+							</foreach>
+							<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<a href="#"><img src="{:C('RESOURCE_URL')}<?php echo $Proinfo['imgs'][0]; ?>"></a>
+							</div>
+						</div>
+						<div class="mui-slider-indicator">
+							<div class="mui-indicator mui-active"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+							<div class="mui-indicator"></div>
+						</div>
+					</div>
+					<!--限时抢购-->
+					<div class="time">
+						<div class="timeleft">
+							<small>限时<br />团购</small>
+							<small>低至{$Ginfo.price}元/件</small>
+						</div>
+						<div class="timeright">
+							<small>活动剩余时间</small>
+							<div class="time-item">
+								<span id="days_show"></span>天
+								<span id="hour_show"></span>时
+								<span id="minute_show"></span>分
+								<span id="second_show"></span>秒
+							</div>
+						</div>
+					</div>
+					<!--价格-->
+					<div class="biaoti">
+						<span>{$Proinfo.ProName}</span>
+
+					</div>
+					<div class="yuanjia"><small>原价：</small>￥<span>{$Proinfo.PriceRange}</span></div>
+					<div class="tuanjia">
+						<span>团购价：￥<span id="jiawei">{$Ginfo.price}-{$Ginfo.bprice}</span></span>
+						<small>已有 {$Gnum} 人参团<br />库存 <?php echo intval($Ginfo['ProductNum'])-intval($Ginfo['ProductSnum']); ?> 件</small>
+					</div>
+					<!--行-->
+					<ul class="mui-table-view" id="hang">
+						<li class="mui-table-view-cell">
+							<a class="">
+								<span class="cfonts xuanzhong"></span>
+								<span>7天包退</span>&nbsp&nbsp
+<!-- 								<span class="cfonts xuanzhong"></span>
+								<span>退货返运费</span>
+ -->							</a>
+						</li>
+<!-- 						<li class="mui-table-view-cell">
+							<a class="">
+								<small class="c">优惠</small>
+								<span>100元店铺优惠券</span>
+							</a>
+						</li>
+						<li class="mui-table-view-cell">
+							<a class="">
+								<small class="c">积分</small>
+								<span>购买可得99积分</span>
+							</a>
+						</li>
+ -->						<li class="mui-table-view-cell" id="cpcs">
+							<a class="mui-navigate-right">
+								<span>产品参数</span>
+							</a>
+						</li>
+<!-- 						<li class="mui-table-view-cell" id="xzgg">
+							<a class="mui-navigate-right">
+								<span>选择规格</span>
+							</a>
+						</li>
+ -->					</ul>
+					<hr style="border: none; height: 10px ; background: #eee; margin: 0; padding: 0;" />
+
+					<!---凑团-->
+					<ul class="mui-table-view" id="titleul">
+						<li class="mui-table-view-cell">
+							<a class="mui-navigate-right">
+								<small class="cfonts tuangou mui-pull-left"></small>
+								<span>团购列表</span>
+								<small class="gengduo">查看更多</small>
+							</a>
+						</li>
+					</ul>
+					<ul class="mui-table-view" id="tuanlist">
+						<foreach name='Groups' item='gps'>
+						<li class="mui-table-view-cell mui-media">
+							<a href="{:U('GroupBuy/InGroup',array('gbyid'=>$gps[GroupBuyerId]))}">
+								<img class="mui-media-object mui-pull-left" src="{:C('RESOURCE_URL')}{$gps.HeadImgUrl}">
+								<div class="mui-media-body">
+									<span>{$gps.MemberName}</span>
+									<p class="mui-ellipsis"><span class="red">{$gps.PeopleNum}</span>人团，仅差<span class="red">{$gps.DifPeople}</span>人</p>
+								</div>
+								<if condition="$gps['IsMe'] eq '1'">
+								<small class="myt">我的团</small>
+								<else/>
+								<small class="quct">去参团</small>
+								</if>
+							</a>
+						</li>
+						</foreach>
+					</ul>
+					<hr style="border: none; height: 10px ; background: #eee; margin: 0; padding: 0;" />
+
+					<br /><br /><br /><br /><br />
+				</div>
+				<!--商品 end-->
+				<!--详情-->
+				<div id="" class="xq" data-oo="tab" hidden="hidden">
+					<div class="spcs">
+						<br />
+						<?php echo htmlspecialchars_decode($Proinfo['ProContent']); ?>
+					</div>
+					<br /><br /><br /><br />
+				</div>
+				<!--评价-->
+				<div id="" class="pj" data-oo="tab" hidden="hidden">
+					<div class="pingj">
+						<div class="">商品评价(<span>2500</span>)</div>
+						<br />
+						<br />
+						<div class="People">
+							<div>
+								<img src="images/Class/xingbaogu1.png" class="PeoplePhoto" />
+								<span class="PeopleName">浅浅***</span>
+								<small class="PJdate mui-pull-right">2017.5.31</small>
+							</div>
+							<small>开心果质量很好，全都是饱满的，没有苦的坏的；商家服务很是热情，四海八荒仅此一家；</small>
+							<div>
+								<small class="Sp">口味：椒盐</small>
+							</div>
+						</div>
+						<div class="People">
+							<div>
+								<img src="images/Class/xingbaogu1.png" class="PeoplePhoto" />
+								<span class="PeopleName">浅浅***</span>
+								<small class="PJdate mui-pull-right">2017.5.31</small>
+							</div>
+							<small>开心果质量很好，全都是饱满的，没有苦的坏的；商家服务很是热情，四海八荒仅此一家；</small>
+							<div>
+								<small class="Sp">口味：椒盐</small>
+							</div>
+						</div>
+						<div class="People">
+							<div>
+								<img src="images/Class/xingbaogu1.png" class="PeoplePhoto" />
+								<span class="PeopleName">浅浅***</span>
+								<small class="PJdate mui-pull-right">2017.5.31</small>
+							</div>
+							<small>开心果质量很好，全都是饱满的，没有苦的坏的；商家服务很是热情，四海八荒仅此一家；</small>
+							<div>
+								<small class="Sp">口味：椒盐</small>
+							</div>
+						</div>
+						<div class="People">
+							<div>
+								<img src="images/Class/xingbaogu1.png" class="PeoplePhoto" />
+								<span class="PeopleName">浅浅***</span>
+								<small class="PJdate mui-pull-right">2017.5.31</small>
+							</div>
+							<small>开心果质量很好，全都是饱满的，没有苦的坏的；商家服务很是热情，四海八荒仅此一家；</small>
+							<div>
+								<small class="Sp">口味：椒盐</small>
+							</div>
+						</div>
+						<div class="People">
+							<div>
+								<img src="images/Class/xingbaogu1.png" class="PeoplePhoto" />
+								<span class="PeopleName">浅浅***</span>
+								<small class="PJdate mui-pull-right">2017.5.31</small>
+							</div>
+							<small>开心果质量很好，全都是饱满的，没有苦的坏的；商家服务很是热情，四海八荒仅此一家；</small>
+							<div>
+								<small class="Sp">口味：椒盐</small>
+							</div>
+						</div>
+						<div class="ppp"><span>加载更多</span></div>
+						<br /><br /><br /><br />
+					</div>
+				</div>
+				<!---->
+			</div>
+		</div>
+
+		<nav class="mui-bar mui-bar-tab">
+			<ul>
+<!-- 				<li class="dp">
+					<span class="cfonts shopico"></span>
+				</li>
+				<li class="sc">
+					<span class="mui-icon-extra mui-icon-extra-heart"></span>
+				</li>
+				<li id="DanMai">
+					我要单买
+				</li>
+				
+ --> 				<if condition="$myinfo gt 0">
+ 				<li id="overBtn">
+					已参与
+				</li>
+				<else/>
+ 				<li id="KaiTuan">
+					立即开团
+				</li>
+				</if>
+			</ul>
+		</nav>
+
+		<!--属性选择-->
+		<div class="Spshuxing">
+			<br>
+			<br />
+			<div id="" class="kouwei">
+				<div>可选团</div><br />
+				<foreach name='Ginfo.RuleList' item='rl'>
+				<small class="un" data-rid="{$rl.GroupListId}" data-max='{$rl.BuyNum}'>{$rl.PeopleNum}人团/￥{$rl.Price}元 /限购{$rl.BuyNum}件</small>
+				</foreach>
+			</div>
+			
+			<br /><br /><br />
+			<label>数量：</label>
+			<div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='0'>
+  				<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+ 				 <input class="mui-numbox-input" type="number" readonly='true' id='chosenumber' />
+  				<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+			</div>
+			<br /><br />
+			<button type="button" class="mui-btn mui-btn-red mui-btn-block" id='gofororder'>确定</button>
+			<small id="close" class="mui-icon mui-icon-closeempty"></small>
+		</div>
+<!--遮罩-->
+<div id="mask" hidden="hidden">
+	
+</div>
+	</body>
+	<script type="text/javascript">
+		mui.init()
+			//图片轮播
+			//获得slider插件对象
+		var gallery = mui('.mui-slider');
+		gallery.slider({
+			interval: 3000 //自动轮播周期，若为0则不自动播放，默认为0；
+		});
+		//初始化滚动插件
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+	</script>
+
+</html>

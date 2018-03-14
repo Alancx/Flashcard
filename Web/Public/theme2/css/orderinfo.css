@@ -1,0 +1,914 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+div {
+    overflow: hidden;
+}
+
+.orderaddr {
+    position: relative;
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    background-image: url("../Images/dingwei.png");
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.oraddrs {
+    position: relative;
+    height: 100%;
+    margin: 10px 20px 10px 50px;
+    padding: 0px 20px 0px 0px;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+.division {
+    height: 10px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    background-image: url("../Images/dizhi01.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+label {
+    width: 100%;
+    font-size: 14px!important;
+}
+
+.telephone {
+    width: auto;
+    position: absolute;
+    top: 0px;
+    right: 30px;
+}
+
+.details {
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.orderdetails {
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.ordertitle {
+    padding: 15px 15px 0px 15px;
+}
+
+.ordertitle img {
+    float: left;
+    width: 30px;
+    border-radius: 100%;
+}
+
+.ordertitle label {
+    float: left;
+    width: auto;
+    font-size: 16px;
+    line-height: 30px;
+    text-indent: 10px;
+}
+
+.ordercontent {
+    background-color: #f8f8f8;
+    margin: 5px 0px 0px 0px;
+    padding: 5px 5px 5px 5px;
+}
+
+.ordercontent img {
+    position: relative;
+    float: left;
+    width: 30%;
+}
+
+.ordercontents {
+    width: 70%;
+    float: left;
+    padding: 0px 15px 0px 15px;
+}
+
+.ordercontents label {
+    margin: 0px;
+}
+
+.ordername {
+    color: #333333;
+    font-size: 14px;
+    line-height: 15px;
+}
+
+.orderspec {
+    color: #999999;
+}
+
+.orderftime {
+    display: none;
+    color: #ffb222;
+}
+
+.orderprice {
+    font-size: 16px;
+    color: #ff4200;
+}
+
+.orderprice label {
+    width: auto;
+    float: right;
+    font-size: 16px;
+    color: #333333;
+}
+
+.ordersdis {
+    height: 40px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.distr {
+    width: auto;
+    float: left;
+    font-size: 14px;
+    line-height: 40px;
+    text-indent: 15px;
+}
+
+.seldistr {
+    width: auto;
+    float: right;
+    font-size: 14px;
+    line-height: 40px;
+    margin: 0px 15px 0px 0px;
+    padding: 0px 15px 0px 0px;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 8px;
+}
+
+.seldistr > span {
+    color: #ff4200;
+}
+
+.selyh {
+    width: auto;
+    color: #ff4200;
+    font-size: 14px;
+    float: right;
+    line-height: 40px;
+    margin: 0px 5px 0px 0px;
+    padding: 0px 15px 0px 0px;
+}
+.selyhs{
+    margin: 0px 15px 0px 0px;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 8px;
+}
+
+.ordertotal {
+    width: auto;
+    font-size: 14px;
+    float: right;
+    line-height: 40px;
+    margin: 0px 5px 0px 0px;
+    padding: 0px 15px 0px 0px;
+}
+
+.ordertotal label {
+    width: auto;
+    font-size: 14px;
+    color: #ff4200;
+}
+
+.payments {
+    /* height: 100px;*/
+    margin: 10px 0px 20px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.payment {
+    height: 50px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.payment label {
+    float: left;
+    height: 100%;
+    width: auto;
+    padding: 5px 0px 0px 50px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 20px;
+}
+
+.paywechat {
+    background-image: url("../Images/weixinzhifu.png");
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.paycash {
+    background-image: url("../Images/xiajinzhifu.png");
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.payrc {
+    background-image: url("../Images/huyuanyue.png");
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.payment label > span {
+    font-size: 12px;
+    color: #999999;
+}
+
+.payment img {
+    float: right;
+    width: 40px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.payrcs {
+    display: none;
+    height: 40px;
+    border-top-style: dashed;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.czye {
+    float: left;
+    height: 100%;
+    width: 80px;
+    margin: 0px 0px 0px 70px;
+    font-size: 13px;
+    color: #333333;
+    line-height: 40px;
+    background-image: url("../Images/xuanze2.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.jlye {
+    float: right;
+    height: 100%;
+    width: 80px;
+    margin: 0px 70px 0px 0px;
+    font-size: 13px;
+    color: #333333;
+    line-height: 40px;
+    background-image: url("../Images/weixuanze.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+
+.payrccheck {
+    border-width: 1px;
+}
+
+/*地址选择编辑*/
+.coversel, .coveredit, .coverregion, .coverdistr,
+.coverpayer,.coveryouhui {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.51);
+    z-index: 100;
+}
+
+.addrselect, .addressedit {
+    position: absolute;
+    overflow: auto;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 80%;
+    background-color: #f3f3f3;
+}
+
+.but-address {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 55px;
+    z-index: 101;
+}
+
+.but-address > label {
+    color: #ffffff;
+    line-height: 55px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.addrback {
+    float: left;
+    height: 100%;
+    width: 30%;
+    background-color: #ff2222;
+}
+
+.add-address {
+    float: left;
+    height: 100%;
+    width: 70%;
+    background-color: #ffb222;
+}
+
+.addr-box {
+    position: relative;
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.addrname {
+    padding: 15px 10px 0px 10px;
+    font-size: 16px;
+}
+
+.addrphone {
+    position: absolute;
+    width: auto;
+    top: 15px;
+    right: 25px;
+    font-size: 16px;
+}
+
+.addraddr {
+    padding: 0px 10px 0px 10px;
+    font-size: 16px;
+}
+
+.addrsedit {
+    height: 40px;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.addrdefault {
+    float: left;
+    width: auto;
+    height: 100%;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0px 0px 0px 45px;
+    background-image: url("../Images/weixuanze.png");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.schecked {
+    background-image: url("../Images/xuanze2.png") !important;
+
+}
+
+.addredit {
+    float: right;
+    width: auto;
+    height: 100%;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0px 0px 0px 35px;
+    background-image: url("../Images/bianji.png");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+}
+
+.addrdel {
+    float: right;
+    width: auto;
+    height: 100%;
+    font-size: 14px;
+    line-height: 40px;
+    padding: 0px 0px 0px 35px;
+    margin: 0px 30px 0px 0px;
+    background-image: url("../Images/shanchu.png");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+}
+
+.addressedit {
+    padding: 10px 0px 0px 0px;
+}
+
+.conters, .contersxx {
+    height: 50px;
+    padding: 0px 10px 0px 10px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.conters label {
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 50px;
+}
+
+.shshregions {
+    width: auto !important;
+}
+
+.shnames, .shphones {
+    float: right;
+    width: 70%;
+    border: none;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+    outline: medium;
+}
+
+.conters > .region {
+    float: right;
+    width: auto;
+    height: 100%;
+    padding: 0px 15px 0px 0px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 50px;
+    color: #999999;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+.contersxx {
+    height: 80px;
+    border-bottom-style: solid;
+}
+
+.xxaddr {
+    float: right;
+    width: 70%;
+    height: 68px;
+    margin: 5px 0px 5px 0px;
+    font-size: 16px;
+    font-weight: 400;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+.contersxx > label {
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 50px;
+}
+
+.mraddr {
+    height: 50px;
+    background-color: #ffffff;
+}
+
+.mraddr > label {
+    float: left;
+    padding: 0px 0px 0px 10px;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 50px;
+}
+
+.addrcheck {
+    float: right;
+    width: 20%;
+    height: 100%;
+    margin: 6px 0px 0px 0px;
+    padding: 3px;
+}
+
+/*******STYLE 3*******/
+.chk_3 {
+    display: none;
+}
+
+.chk_3 + label {
+    background-color: #fafbfa;
+    border-radius: 50px;
+    display: inline-block;
+    position: relative;
+    -webkit-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    width: 58px;
+    height: 33px;
+}
+
+.chk_3 + label:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    -webkit-transition: box-shadow 0.1s ease-in;
+    transition: box-shadow 0.1s ease-in;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    box-shadow: inset 0 0 0 0 #eee, 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.chk_3 + label:before {
+    content: ' ';
+    position: absolute;
+    background: white;
+    top: 1px;
+    left: 1px;
+    z-index: 100;
+    width: 31px;
+    -webkit-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    height: 31px;
+    border-radius: 100px;
+    box-shadow: 0 3px 1px rgba(0, 0, 0, 0.05), 0 0px 1px rgba(0, 0, 0, 0.3);
+}
+
+.chk_3:active + label:after {
+    box-shadow: inset 0 0 0 20px #eee, 0 0 1px #eee;
+}
+
+.chk_3:active + label:before {
+    width: 37px;
+}
+
+.chk_3:checked:active + label:before {
+    width: 37px;
+    left: 20px;
+}
+
+.chk_3 + label:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chk_3:checked + label:before {
+    content: ' ';
+    position: absolute;
+    left: 26px;
+    border-radius: 100px;
+}
+
+.chk_3:checked + label:after {
+    content: ' ';
+    font-size: 1.5em;
+    position: absolute;
+    background: #4cda60;
+    box-shadow: 0 0 1px #4cda60;
+}
+
+/*地区选择*/
+.selectregion {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 130px;
+    background-color: #f3f3f3;
+}
+
+.regionback {
+    width: auto;
+    margin: 0px 0px 0px 10px;
+    float: left;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    color: #0a9dcc;
+}
+
+.regionsure {
+    width: auto;
+    margin: 0px 10px 0px 0px;
+    float: right;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    color: #0a9dcc;
+}
+
+#addressPCD {
+    margin: 20px 0px 0px 0px;
+}
+
+#addressPCD > select {
+    width: 23%;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px 5% 0px 5%;
+}
+
+.distrdiv {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+    background-color: #ffffff;
+}
+
+.distrtitle, .distrkd > label, .distrzt > label,.distrps > label {
+    margin: 0px;
+    height: 50px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 50px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.distrkd, .distrzt,.distrps {
+    position: relative;
+    padding: 0px 15px 0px 15px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.distrkd > label {
+    text-align: left;
+    border-width: 0px;
+    background-image: url("../Images/xuanze2.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+}
+
+.distrkd > label > span {
+    color: #999999;
+}
+
+.distrzt > label {
+    text-align: left;
+    border-width: 0px;
+    background-image: url("../Images/weixuanze.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+}
+
+.distrps > label {
+    text-align: left;
+    border-width: 0px;
+    background-image: url("../Images/weixuanze.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+}
+
+.xzmd {
+    position: absolute;
+    top: 12px;
+    left: 55px;
+    width: auto;
+    font-size: 16px;
+    color: #999999;
+    font-weight: 600;
+    border-width: 0px;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.payerdiv {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+    background-color: #ffffff;
+}
+
+.payerdiv > label {
+    margin: 0px;
+    height: 50px;
+    font-size: 14px;
+    line-height: 50px;
+    padding: 0px 10px 0px 10px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.payerdiv > label > span {
+    float: right;
+    color: #999999;
+}
+
+.payergb {
+    margin: 5px 0px 0px 0px;
+    width: 40px;
+    height: 40px;
+    background-image: url("../Images/guanbi.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+}
+
+.payerje {
+    font-size: 16px;
+    color: #333333 !important;
+}
+
+.payerdivs {
+    height: 40px;
+    margin: 15px 15px 0px 15px;
+    background-color: #ffb222;
+    border-radius: 5px;
+}
+
+.payerdivs > a > label {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.completetitle {
+    height: 50px;
+}
+
+.completetitle > label {
+    height: 100%;
+    line-height: 50px;
+    font-size: 18px;
+    padding: 0px 0px 0px 55px;
+    color: #ffb222;
+    background-image: url("../Images/xuanze2.png");
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 30px;
+}
+
+.completexx {
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.completexx > label {
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    color: #333333;
+    text-align: center;
+    margin: 15px 0px 0px 0px;
+}
+
+.totalprice {
+    font-size: 22px !important;
+    margin: 5px 0px 15px 0px !important;
+}
+
+.linebottom {
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    margin: 0px 15px 0px 15px;
+}
+.linebottom>label{
+    line-height: 30px;
+    font-size: 14px;
+    color: #999999;
+}
+.linebottom>label>span{
+    float: right;
+}
+
+.distrdivs{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50%;
+    background-color: #ffffff;
+    overflow: auto;
+}
+.yhcards{
+    margin: 0px 10px 0px 10px;
+    overflow: hidden;
+}
+.yhcards>label{
+    position: relative;
+    float: left;
+    width: 46%;
+    height: 60px;
+    font-size: 14px;
+    padding: 0px 25px 0px 12px;
+    line-height: 30px;
+    color: #333333;
+    margin: 15px 2% 0px 2%;
+    border-style: solid;
+    border-color: #ffb222;
+    border-width: 1px;
+    border-radius: 8px;
+}
+.yhcards>label>span{
+    font-size:12px;
+    color: #999999;
+}
+.yhcprice{
+    float: right;
+    font-size:14px;
+    color: #ff4200;
+}
+.yhcardactive>.vouxz{
+    position: absolute;
+    right: 0px;
+    top: 2px;
+    height: 18px;
+    width: 18px;
+    background-image: url("../Images/xuanze2.png");
+    background-repeat: no-repeat;
+    background-size: 15px;
+}
+.selectyhj{
+    padding: 0px 0px 0px 30px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #999999;
+}
+#price-box{
+    color: #ff4200;
+}
+.btn-sure{
+    /*padding-right:15px;*/
+    margin-top: 20px;
+}
+
+.distractive label{
+    background-image:url('../Images/xuanze2.png');
+}
+
+
+.btn-sure button{
+    width: 100%;
+    color: #fff;
+    font-size: 16px;
+    background-color: #ffb222;
+}
+/*解决weui提示框样式冲突问题*/
+#waiting div{
+  overflow: visible!important;
+}

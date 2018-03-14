@@ -1,0 +1,146 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+    .attrvalues{
+        border: 1px solid green;
+        margin:auto 2px;
+        border-radius: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .attrvalues:hover{
+        cursor: pointer;
+        border: 1px solid red;
+        border-radius: 2px;
+        background: red;
+    }
+    body{
+        background-color: #fff!important;
+    }
+</style>
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+<div class="col-lg-12">
+	<div class="col-lg-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>添加属性</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <form role="form" class="form-inline" action="{:U('Products/saveAttrs')}" method="post" id="save">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail2" class="sr-only">属性名称</label>
+                                        <input type="text" name="AttributeName" placeholder="请填写属性名称"  class="form-control" id="AttributeName">
+                                    </div>
+                                    <div class="checkbox m-l m-r-xs">
+                                        <label class="i-checks">
+                                            <input type="radio" name="IsEnable" id="IsEnable" value="1" ><i></i> 启用</label>
+                                    </div>
+                                    <div class="checkbox m-l m-r-xs">
+                                        <label class="i-checks">
+                                            <input type="radio" name="IsEnable" id="DisEnable" value="0" checked="checked"><i></i> 不启用</label>
+                                    </div>
+                                    <input type="hidden" name="AttributeId" id="AttributeId" value="">
+                                    <button class="btn btn-white" type="submit" id="saveNotice">保 存</button>
+                                </form>
+                            </div>
+                <div class="alert alert-warning">
+                                         1、属性添加请按照名对应值的方式添加 ，例如属性名称为颜色，属性值有 红色 绿色....<br>
+                                     </div>
+                        </div>
+                    </div>
+
+<div class="col-lg-10">
+<h3>分类管理</h3>
+	<table class="table">
+		<tr>
+			<td>ID</td>
+			<td>属性名称</td>
+			<td>属性值----<small><操作提示：*点击属性值，可以删除该属性值></small></td>
+			<td>是否启用</td>
+			<td>删除</td>
+		</tr>
+        <foreach name="attrs" item="attr">
+		<tr>
+			<td>{$attr.AttributeId}</td>
+			<td>{$attr.AttributeName}</td>
+			<td > <div id="avalue{$attr.AttributeId}"> <foreach name="attr.values" item="value"><span class="attrvalues" id="v{$value.AttributeValueId}" onclick="delValue('{$value.AttributeValueId}')">{$value.AttributeValue}</span></foreach></div><button class="btn btn-primary btn-outline btn-xs" onclick="setValue('{$attr.AttributeId}','{$attr.AttributeName}');" style="margin-top:2px;">添加</button></td>
+			<td><if condition="$attr['IsEnable'] eq '1'">是</if><if condition="$attr['IsEnable'] eq '0'">否</if></td>
+			<td><a href="###" onclick="edit('{$attr.AttributeId}');">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="###" onclick="del('{:U('Products/delAttribute',array('id'=>$attr['AttributeId']))}');">删除</a></td>
+		</tr>
+        </foreach>
+	</table>
+    <div style="text-align:right;">{$page}</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	function del(url){
+        art.dialog.confirm('该属性下的值也将全部被删除，确定要删除吗？',function(){
+            art.dialog({content:'正在处理，请勿重复操作...',lock:true});
+            window.location.href=url;
+        },function(){
+            art.dialog.tips('取消操作');
+        })
+	}
+
+	function setValue(id,name){
+		// alert(id);
+		art.dialog.data('attrid',id);
+		art.dialog.data('atrname',name);
+		art.dialog.open("{:U('ArtDialog/setAttrValue')}");
+	}
+
+    function delValue(id){
+        art.dialog.confirm('您确定要删除此属性值吗？',function(){
+            if (id) {
+                $.ajax({
+                    type:'post',
+                    url:'{:U('Products/delAttrValue')}',
+                    data:'id='+id,
+                    dateType:'json',
+                    success:function(msg){
+                        if (msg=='success') {
+                            art.dialog.tips('删除成功');
+                            $("#v"+id).hide();
+                        };
+                        if (msg=='error') {
+                            art.dialog.tips('删除失败');
+                        };
+                    }
+                })
+            }else{
+                art.dialog.tips('请刷新页面后删除新添加属性值');
+            }
+
+        },function(){
+            art.dialog.tips('取消操作');
+        })
+    }
+
+    function edit(id){
+        var attrdata={$attrjson};
+        $.each(attrdata,function(index,item){
+            if (item.AttributeId==id) {
+                $("#AttributeId").val(item.AttributeId);
+                $("#AttributeName").val(item.AttributeName);
+            };
+        })
+    }
+    $("#save").submit(function(){
+        var AttributeName=$("#AttributeName").val();
+        if (!AttributeName) {
+            alert('请填写属性名称');
+            return false;
+        } else{
+            art.dialog({content:'正在提交数据...',lock:true});
+            return true;
+        }
+    })
+</script>
+<include file="Common:footer" />

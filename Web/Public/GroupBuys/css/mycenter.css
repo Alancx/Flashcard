@@ -1,0 +1,143 @@
+*{margin: 0; padding: 0;list-style: none;}
+body,html{background: #EFEFF4;font-size: 14px;}
+
+
+.shopinfor{
+	overflow: hidden;
+	padding: 10px;
+	background: #fff;
+	margin-bottom: 5px;
+	height: 100px;
+	box-sizing: border-box;
+}
+.shopinfor img{
+	width: 40px;
+	height: 40px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+	border-radius:100px ;
+}
+.shopinfor>div{
+	float: left;
+	width: calc(100% - 100px);
+	font-size: 18px;
+}
+.shopinfor>div>div{
+	margin-bottom: 10px;
+}
+.shopinfor>div p{
+	color: #999;
+	font-size: 14px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	line-height: 16px;
+	/* height: 32px; */
+}
+.shopinfor>div p.phone{
+	color: #FF0000;
+	margin-top: 4px;
+}
+/**/
+.content{
+	display: block;
+	width: 100%;
+	position:fixed;
+	top: 105px;
+	left: 0px;
+	bottom: 0px;
+	overflow: hidden;
+
+}
+.tabul{
+	background: #fff;
+	overflow: hidden;
+	border-bottom: 1px solid #eee;
+	height: 53px;
+}
+.tabul li{
+	width: 50%;
+	float: left;
+	text-align: center;
+	padding: 18px 0;
+	color: #999;
+}
+.tabul li.click span{
+	background: #ddd;
+	padding: 4px 10px;
+	border-radius:20px ;
+	color: #FF0000;
+}
+.showinfo{
+	box-sizing: border-box;
+	position: absolute;
+	top:53px;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	overflow: auto;
+}
+/**/
+.itinfor{
+	overflow: hidden;
+	padding: 10px;
+	position: relative;
+	background: #fff;
+}
+.itinfor:after{
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 10px;
+	background: #eee;
+	width: 100%;
+	height: 1px;
+
+}
+.itinfor img{
+	width: 80px;
+	height: 80px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+}
+.itinfor>div{
+	float: left;
+	width: calc(100% - 100px);
+}
+.itinfor>div>div{
+	margin-bottom: 10px;
+}
+.itinfor>div p{
+	color: #999;
+}
+/**/
+.hongbao{
+	height: 40px;
+	background: #fff;
+	padding: 15px 10px;
+}
+.hongbao>img{
+	width: 40px;
+	display: block;
+	float: left;
+}
+.hongbao>.hbinfor{
+	float: left;
+	width: calc(100% - 150px);
+}
+.hongbao>.hbinfor>p{
+	margin-bottom: 4px;
+}
+.hongbao>.hbinfor>span{
+	color: #999;
+}
+.color{
+	color: #FF0000 !important;
+}
+.hongbao>.time{
+	float: right;
+	text-align: right;
+}

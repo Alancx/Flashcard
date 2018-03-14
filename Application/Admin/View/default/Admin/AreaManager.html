@@ -1,0 +1,101 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<div class="row  wrapper  white-bg" style="margin:0px;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>区域管理</h5>
+			</div>
+			<div class="ibox-content">
+				<div class="col-md-12 col-lg-12" style="margin-bottom:15px;">
+					<form class="form-inline" method="post" id="saveArea">
+					  <div class="form-group">
+					    <label for="exampleInputName2">区域名称</label>
+					    <input type="text" class="form-control" name="AreaName" id="AreaName" placeholder="请填写区域名称">
+					  </div>
+					  <input type="hidden" name="ID" value="" id="OID">
+					  <button type="submit" class="btn btn-primary btn-outline"> 保 存 </button>
+					</form>
+				</div>
+				<div class="col-md-12 col-lg-12">
+					<table class="table table-bordered table-hovered">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>区域名称</th>
+								<th>包含地区</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<foreach name="areas" item='as'>
+							<tr>
+								<td>{$as.ID}</td>
+								<td>{$as.AreaName}</td>
+								<td>
+									<foreach name='as.sons' item='so'>
+									{$so.Area} 、
+									</foreach>
+								</td>
+								<td><button class="btn btn-warning btn-xs edit" data-id="{$as.ID}">编辑</button>&emsp;<button class="btn btn-outline btn-xs btn-danger delete" data-id="{$as.ID}">删除</button>&emsp;<button class="btn btn-xs btn-default setarea" data-id="{$as.ID}">设置地区</button></td>
+							</tr>
+						</foreach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+var jsdata={$jsondata};
+$(document).ready(function(){
+	$('#saveArea').submit(function(){
+		if ($('#AreaName').val()) {
+			return true;
+		}else{
+			art.dialog.tips('请填写区域名称');
+			$('#AreaName').focus();
+			return false;
+		}
+	})
+	$('.delete').click(function(){
+		var _this=$(this);
+		var id=$(this).attr('data-id');
+		art.dialog.confirm('确定要删除此区域吗？区域内所有地区将一同删除',function(){
+			$.ajax({
+				url:"{:U('Admin/delarea')}",
+				type:"post",
+				data:"id="+id,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						_this.parent().parent().remove();
+						art.dialog.tips('处理成功');
+					}else{
+						art.dialog.tips('处理失败');
+					}
+				}
+			})
+		})
+	})
+	$('.edit').click(function(){
+		var _this=$(this);
+		var id=_this.attr('data-id');
+		$.each(jsdata,function(index,item){
+			if (id==item.ID) {
+				$('#OID').val(item.ID);
+				$('#AreaName').val(item.AreaName);
+			};
+		})
+	})
+	$('.setarea').click(function(){
+		window.location.href="{:U('Admin/SetAreaInfo')}?id="+$(this).attr('data-id');
+	})
+})
+</script>
+
+<include file="Common:footer" />

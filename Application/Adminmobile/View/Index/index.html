@@ -1,0 +1,73 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/index.css">
+
+<div class="part-1">
+	<div class="showtop">
+		<label class="tmoney">近30天的收入(元)<br><span><?php echo $sdrevenue?sprintf("%.2f",$sdrevenue):'0.00' ?></span></label>
+		<label class="shopmoney">店铺营收</label>
+	</div>
+</div>
+
+<!-- <div class="part-2">
+<div>
+<label>1<br><span>今日访客</span></label>
+</div>
+<div>
+<label>12<br><span>昨日新增客户</span></label>
+</div>
+<div>
+<label>17<br><span>七日订单</span></label>
+</div>
+</div> -->
+
+<div class="part-3">
+	<table class="table-1">
+		<tbody>
+			<tr>
+				<td>
+					<!-- <img src="__PUBLIC__/Adminmobile/icon/scgl.png">
+					<label>店铺管理</label> -->
+					<a href="{:U('Products/prolist')}">
+						<img src="__PUBLIC__/Adminmobile/icon/spgl.png">
+						<label>商品管理</label>
+					</a>
+				</td>
+				<td>
+					<!-- <a href="{:U('Products/prolist')}">
+					<img src="__PUBLIC__/Adminmobile/icon/spgl.png">
+					<label>商品管理</label> -->
+					<a href="{:U('Orders/orders')}">
+						<img src="__PUBLIC__/Adminmobile/icon/ddgl.png">
+						<label>订单管理</label>
+					</a>
+				</td>
+				<td>
+					<a href="{:U('Record/record')}">
+						<img src="__PUBLIC__/Adminmobile/icon/sjtj.png">
+						<label>数据统计</label>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="{:U('UMWareHouse/whmage')}">
+						<img src="__PUBLIC__/Adminmobile/icon/sygl.png">
+						<label>仓库管理</label>
+					</a>
+				</td>
+				<td>
+					<a href="{:U('Staff/staff')}">
+						<img src="__PUBLIC__/Adminmobile/icon/stm.png">
+						<label>员工管理</label>
+					</a>
+				</td>
+				<td>
+					<a href="{:U('Store/index')}">
+						<img src="__PUBLIC__/Adminmobile/icon/scgl.png">
+						<label>店铺管理</label>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

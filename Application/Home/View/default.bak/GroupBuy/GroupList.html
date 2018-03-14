@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>团购列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/GroupBuy/css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<style type="text/css">
+		body,
+		div,
+		ul,
+		li,
+		dt,
+		dd,
+		dl,
+		table,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		span,
+		tr,
+		th,
+		td,
+		img {
+			margin: 0px;
+			padding: 0px;
+			list-style-type: none;
+		}
+		
+		a {
+			text-decoration: none;
+			color: #444;
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			font-family: "微软雅黑", arial;
+			background: #fff !important;
+			overflow: hidden;
+		}
+		
+		header {
+			background: rgba(255, 255, 255, .95) !important;
+		}
+		
+		.mui-scroll-wrapper {
+			margin-top: 44px;
+		}
+		
+		#tuanlist li a {
+			display: flex !important;
+			align-items: center;
+		}
+		
+		#tuanlist .mui-media-body {
+			width: 100%;
+		}
+		
+		.mui-media-object.mui-pull-left {
+			width: 42px !important;
+			height: 42px !important;
+			max-width: none !important;
+		}
+		
+		#tuanlist li img {
+			border-radius: 50%;
+		}
+		/*红色字体*/
+		
+		.red {
+			color: #D00D00;
+		}
+		
+		.myt {
+			width: 66px;
+		}
+		/*去参团*/
+		
+		.quct {
+			background: #DD524D;
+			width: 66px;
+			color: #fff;
+			border-radius: 100px;
+			padding: 4px 8px;
+		}
+		/*加载更多*/
+		
+		.LoadMore {
+			text-align: center;
+			padding: 15px 0;
+			font-size: 14px;
+			color: #666;
+		}
+		
+		.LoadMore:active {
+			color: #DD0000;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">团购列表</h1>
+		</header>
+
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--这里放置真实显示的DOM内容-->
+				<ul class="mui-table-view" id="tuanlist">
+					<foreach name='data' item='da'>
+					<li class="mui-table-view-cell mui-media">
+						<a href="{:U('GroupBuy/InGroup',array('gbyid'=>$da[GroupBuyerId]))}">
+							<img class="mui-media-object mui-pull-left" src="{:C('RESOURCE_URL')}{$da.HeadImgUrl}">
+							<div class="mui-media-body">
+								<span>{$da.MemberName}</span>
+								<p class="mui-ellipsis"><span class="red">{$da.PeopleNum}</span>人团，仅差<span class="red">{$da.DifPeople}</span>人</p>
+							</div>
+							<if condition="$da['IsMe'] eq '1'">
+							<small class="myt">我的团</small>
+							<else/>
+							<small class="quct">去参团</small>
+							</if>
+						</a>
+					</li>
+					</foreach>
+				</ul>
+				<div class="LoadMore">加载更多</div>
+
+			</div>
+		</div>
+
+	</body>
+	<script src="__PUBLIC__/GroupBuy/js/mui.min.js"></script>
+	<script src="__PUBLIC__/GroupBuy/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.init()
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+	</script>
+	<script type="text/javascript">
+	</script>
+</html>

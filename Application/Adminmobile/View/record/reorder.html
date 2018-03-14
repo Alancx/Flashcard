@@ -1,0 +1,57 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/revenue.css?v=1.2">
+<script type="text/javascript" src="__PUBLIC__/Adminmobile/js/echarts.common.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Adminmobile/js/reorder.js"></script>
+<div class="reheard reheardo">
+  <div id="scharts" class="reheard-1">
+  </div>
+  <div class="reheard-2">
+    <div>
+      <label><?php echo $sdordercount?sprintf("%.0f",$sdordercount):'0' ?><br><span>下单笔数</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdorderpcount?sprintf("%.0f",$sdorderpcount):'0' ?><br><span>待付订单</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdorderfcount?sprintf("%.0f",$sdorderfcount):'0' ?><br><span>发货订单</span></label>
+    </div>
+  </div>
+  <div class="reheard-2 reheardo-2 ">
+    <div>
+      <label><?php echo $sdorderypcount?sprintf("%.0f",$sdorderypcount):'0' ?><br><span>付款人数</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdordercount!='0'?(sprintf("%.2f",1-($sdorderpcount/$sdordercount))*100).'%':'0.00%' ?><br><span>购买转化率</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdorderypcount!='0'?sprintf("%.2f",$sdorderpmcount/$sdorderypcount):'0.00' ?><br><span>平均客单价</span></label>
+    </div>
+  </div>
+</div>
+<div class="part" style="display:none">
+  <label>订单管理</label>
+</div>
+<div class="part-con" data-page="-1">
+  <!-- <div class="sorder">
+    <label class="soderoid">订单号:201405062013545<span>未付款</span></label>
+    <div class="prooders">
+      <div class="prooder">
+        <img src="/Upload/Uoloads/2016-07-27/5798943babced.jpg">
+        <label class="protitle">香辣金针菇<br><span>香辣金针菇258gx2袋</span></label>
+        <label class="proprice">10.00<br><span>x2</span></label>
+      </div>
+      <div class="prooder">
+        <img src="/Upload/Uoloads/2016-07-27/5798943babced.jpg">
+        <label class="protitle">香辣金针菇<br><span>香辣金针菇258gx2袋</span></label>
+        <label class="proprice">10.00<br><span>x2</span></label>
+      </div>
+    </div>
+      <label class="totalprice">共2件商品 合计:<span>￥25.00</span>(含运费￥0)</label>
+  </div> -->
+  <label class="proder">加载更多</label>
+</div>
+<script type="text/javascript">
+var dataday={$dataday};
+var daymon={$daymon};
+var yesorder_url="{:U('Record/yesorders')}"; //加载昨日的订单
+</script>

@@ -1,0 +1,6 @@
+操作定位:Stores/cuted::::os= && ms=1 && mms=2 && ts=1 && tms=1::::::操作日期:::::::2017-12-26 15:28:49
+操作定位:Stores/cuted::::os= && ms=1 && mms=3 && ts=1 && tms=2::::::操作日期:::::::2017-12-26 15:30:11
+操作定位:Stores/cuted::::UPDATE RS_Order o SET o.Pstoken='2' WHERE ( o.stoken='nPyEo49507333966' and o.Status in (4,10) and o.Pstoken=1 and o.CreateDate BETWEEN '2017-12-12 15:29:52' and '2017-12-26 15:29:55' )::::::操作日期:::::::2017-12-26 15:32:20
+操作定位:Stores/cuted::::os= && ms=1 && mms=4 && ts=1 && tms=3::::::操作日期:::::::2017-12-26 15:32:20
+操作定位:Stores/cuted::::UPDATE [RS_Order] SET [Pstoken]='2' WHERE ( stoken='nPyEo49507333966' and Status in (4,10) and Pstoken=1 and CreateDate BETWEEN '2017-12-12 15:29:52' and '2017-12-26 15:29:55' )::::::操作日期:::::::2017-12-26 15:35:19
+操作定位:Stores/cuted::::UPDATE [RS_Order] SET [Pstoken]='2' WHERE ( stoken='nDBeV51418280858' and Status in (4,10) and Pstoken=1 and CreateDate BETWEEN '2017-12-01 15:49:14' and '2017-12-26 15:49:16' )::::::操作日期:::::::2017-12-26 15:47:59

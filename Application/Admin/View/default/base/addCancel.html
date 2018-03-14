@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
+    <title>添加核销员</title>
+	<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container-full">
+		<div class="row">
+			<div class="col-sm-12 col-xs-12">
+			<form action="{:U('Base/saveCancel')}" method="post" id="saveinfo" class="form" style="margin-top:50px;">
+				<div class="input-group">
+					<span class='input-group-addon'>姓&emsp;名</span>
+					<input type="text" name="username" id="username" class="form-control">
+				</div>
+				<div class="input-group">
+					<span class='input-group-addon'>验证码</span>
+					<input type="text" name="verify" id="verify" class="form-control">
+				</div>
+				<div style="text-align:center;margin-top:10px;">
+					<button class="btn btn-sm btn-primary">提&emsp;交</button>
+				</div>
+				<input type="hidden" name="stoken" value="{$stoken}">
+				<input type="hidden" name="token" value="{$token}">
+				<input type="hidden" name="vy" value="{$verify}">
+				<input type="hidden" name="type" value="{$type}">
+				<input type="hidden" name="openid" value="{$openid}">
+				<input type="hidden" name="storeid" value="{$storeid}">
+
+			</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js?v=1"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#saveinfo').submit(function(){
+			var verify=$('#verify').val();
+			var username=$('#username').val();
+			if (verify && username) {
+				return true;
+			}else{
+				alert('请填写姓名/验证码');
+				return false;
+			}
+		})
+	})
+</script>
+</html>

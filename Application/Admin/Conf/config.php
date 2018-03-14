@@ -1,0 +1,57 @@
+<?php
+return array(
+	'DEFAULT_CONTROLLER'=>'Public',
+	'DEFAULT_ACTION'=>'login',
+	'URL_MODEL'=>2,
+	'SESSION_PREFIX'=>'admin',
+    'TMPL_DETECT_THEME'     =>  true,       // 自动侦测模板主题
+    'DEFAULT_THEME'         =>  'default',	// 默认模板主题名称
+	//'配置项'=>'配置值'
+	// "SHOW_PAGE_TRACE"=>true,
+
+	//数据库配置项
+	'DB_TYPE'=>'sqlsrv',
+	'DB_HOST'=>'127.0.0.1',
+	'DB_NAME'=>'FlashCard',
+	'DB_PORT'  => '1433',
+	'DB_USER'=>'sa',
+	'DB_PWD'=>'Cc123',
+	'DB_PREFIX'=>'RS_',
+	'DB_CHARSET'=>'utf8',
+	'WEBURL'=>'http://wx.58ate.com',
+	'ADMINURL'=>'http://wx.58ate.com',
+	'STATICPATH'=>'/HTML/',
+	'SHOPWEBROOT' => 'http://wx.58ate.com',
+	'AREA'=>array('北京','上海','天津','重庆','河北','河南','湖北','湖南','山西','陕西','辽宁','黑龙', '吉林','江苏','浙江','安徽','福建','江西','山东','广东','海南','四川','云南','贵州','甘肃','青海','台湾','广西','内蒙', '西藏','宁夏','新疆','香港','澳门'),
+	'FULLAREA'=>array('北京市','上海市','天津市','重庆市','河北省','河南省','湖北省','湖南省','山西省','陕西省','辽宁省','黑龙江省', '吉林省','江苏省','浙江省','安徽省','福建省','江西省','山东省','广东省','海南省','四川省','云南省','贵州省','甘肃省','青海省','台湾省','广西壮族自治区','内蒙古自治区', '西藏自治区','宁夏回族自治区','新疆维吾尔自治区','香港特别行政区','澳门特别行政区'),
+	'BAIDU_TONGJI_URL'=>'http://tongji.baidu.com/web/welcome/ico?s=5fe6394d7eb4d1c46a81d464d46db432',
+	'BAIDU_TONGJI_PWD'=>'passwd=gg123456',
+	"WXAPPID"=>'wx3dd28eb27ded279b',
+	"WXAPPSECRET"=>'9b7c0e147107c71f367ebb92573f18d5',
+	"CRET_URL"=>'D:/WWW/Lib/ThinkPHP/Library/Vendor/WxPayPubHelper/cert',
+	"MCHID"=>1219664101,
+	"WXKEY"=>'0d5ab00b3fabb5a446d10daf12a05f4e',
+	'MYSQL'=>array(
+		'DB_TYPE'=>'mysql',
+		'DB_HOST'=>'localhost',
+		'DB_NAME'=>'flashcard',
+		'DB_PWD'=>'root',
+		'DB_USER'=>'root',
+		'DB_PREFIX'=>'tb_',
+		),
+	'SQLHOUSE'=>array(
+		'DB_TYPE'=>'sqlsrv',
+		'DB_HOST'=>'localhost',
+		'DB_NAME'=>'FlashCardwh',
+		'DB_USER'=>'sa',
+		'DB_PWD'=>'Cc123',
+		'DB_PREFIX'=>'tb_',
+		'DB_CHARSET'=>'utf8',
+	),
+	'CKname'=>'FlashCardwh',
+	'MainData'=>'FlashCard',
+	'merchantNo'=>'TX0001455',
+	'TXkey'=>'d80efe63192b4b7ebf9a30d78075b8fa',
+	// 'PICURL'=>'https://hmallresource.oss-cn-shanghai.aliyuncs.com',
+	'PICURL'=>'http://www.zgxiongdimeng.com',
+);

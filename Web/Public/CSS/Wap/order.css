@@ -1,0 +1,49 @@
+.o-box{
+	background: #fff;
+	margin-bottom: 15px;
+}
+.o-box .orderid{
+	line-height: 30px;
+	text-align: left;
+	padding: 0px;
+	border-bottom: 1px solid #F8F8F8;
+}
+.o-box .allprice{
+	line-height: 30px;
+	text-align: left;
+	padding: 0px;
+	border-top: 1px solid #F8F8F8;
+}
+.o-box .allprice span{
+	color: #FF6600;
+	font-weight: bold;
+}
+.o-box div{
+	/*padding: 0px;*/
+}
+.oinfo{
+}
+.oinfo img{
+	width: 100%;
+	padding-bottom: 10px;
+}
+.oinfo div{
+	padding: 5px 0 0 0;
+}
+.oinfo .titles{
+	text-indent: 1em;
+}
+.oinfo .nums{
+	text-align: right;
+}
+#pj-box{
+	position: absolute;
+	top: 70px;
+	left: 5%;
+	width: 90%;
+	border:2px solid #bbb;
+	border-radius: 5px;
+	z-index: 999;
+	background-color: #ccc;
+	box-shadow: 5px 5px 5px #bbb;
+}

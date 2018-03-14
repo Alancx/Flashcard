@@ -1,0 +1,237 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+</style>
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			</div>
+			<div class="ibox-content">
+				<div class="col-lg-3 col-md-4 col-lg-offset-8 col-md-offset-8 pull-right" style="height:300px;border:0px solid red;position:absolute;top:5px;right:5px;">
+					<div class="panel">
+						<div class="panel-heading">
+							<i class="fa fa-warning"></i> 提示信息
+						</div>
+						<div class="panel-body">
+							<div class="alert alert-warning">
+							<span style='color:red;font-weight:bolder'>*所有二维码仅支持微信扫一扫</span> <br>
+								?1、收银台入口，只能在微信浏览器中打开<br>
+								?2、消息窗入口，可在微信/浏览器中打开 <br>
+								?3、绑定门店收银信息接收人，每个门店只能绑定一个微信用户，每次绑定将覆盖上次绑定的用户<br>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<h5>收银台入口  ?1</h5>
+						选择门店 <select name="store" id="Store">
+							<option value="">请选择门店</option>
+							<foreach name='stores' item='store'>
+							<option value="{$store.id}">{$store.storename}</option>
+							</foreach>
+						</select>
+						选择员工 <select name="emp1" id="emp1">
+							<option value="">请选择员工</option>
+							<foreach name="emps" item='emp'>
+							<option value="{$emp.id}">{$emp.userName}</option>
+							</foreach>
+						</select>
+						<button class="btn btn-default btn-xs" id="pay-show">确定</button>
+						<a id="paya" href="" target='_blank'></a>
+						<br>
+						<img id="payimg" src="" alt="" style="width:150px;height:150px;">
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<h5>消息窗入口  ?2</h5>
+						选择门店 <select name="mstore" id="mstore">
+							<option value="">请选择门店</option>
+							<foreach name='stores' item='store'>
+							<option value="{$store.id}">{$store.storename}</option>
+							</foreach>
+						</select>
+						选择员工 <select name="emp2" id="emp2">
+							<option value="">请选择员工</option>
+							<foreach name='emps' item='emp'>
+							<option value="{$emp.id}">{$emp.userName}</option>
+							</foreach>
+						</select>
+						<button class="btn btn-default btn-xs" id="msg-show">确定</button>
+						<a id="msga" href=""  target='_blank'></a>
+						<br>
+						<img src="" id="msgimg" alt="" style="width:150px;height:150px;">
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<h5>绑定门店消息接收人  ?3</h5>
+						选择门店 <select name="resid" id="resid">
+							<option value="">请选择门店</option>
+							<foreach name='stores' item='store'>
+							<option value="{$store.id}">{$store.storename}</option>
+							</foreach>
+						</select>
+						<button class="btn btn-default btn-xs" id="msg-recever">确定</button>
+						<!-- <a id="recever" href=""  target='_blank'></a> -->
+						<br>
+						<img src="" id="msgrecever" alt="" style="width:150px;height:150px;">
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<h5>收银台商品添加 ?</h5>
+						<form role="form" class="form-inline"  method="post" action="{:U('Warehouse/saveScanPro')}" id="save">
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only">选择商品</label>
+								<select name="ProId" id="chosen" class="form-control" value="">
+									<option value="">请选择商品</option>
+									<foreach name="pros" item="pinfo">
+										<option value="{$key}">{$pinfo}</option>
+									</foreach>
+								</select>
+							</div>
+							<input type="hidden" name="type" value="add">
+							<button class="btn btn-white btn-outline"  type="submit">添加商品</button>
+						</form>
+					</div>
+					<div class="col-sm-12">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>商品名称</th>
+									<th>img</th>
+									<th>价格</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							<foreach name='cpros' item='cp'>
+								<tr id="{$cp.ProId}">
+									<td>{$cp.ProName}</td>
+									<td><img src="{$cp.ProLogoImg}" alt="" width="100" height="100"></td>
+									<td>{$cp.PriceRange}</td>
+									<td><button class="btn btn-danger btn-xs" onclick="del('{$cp.ProId}')">删 除</button></td>
+								</tr>
+							</foreach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+        $("#chosen").chosen();
+        $('#pay-show').click(function(){
+        	var sid=$('#Store').val();
+        	var emp=$('#emp1').val();
+        	if (sid && emp) {
+	        	$('#payimg').attr('src','{:U('Warehouse/showQr')}?type=scanpay&sid='+sid+"&mid="+emp);
+	        	var src="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/Smodel/Base/?token='.$token; ?>&sid="+sid+"&mid="+emp;
+	        	$('#paya').attr('href',src);
+        	}else{
+        		if (!sid) {
+        			art.dialog.tips('请选择门店');
+        			$('#Store').focus();
+        			return false;
+        		};
+        		if (!emp) {
+        			art.dialog.tips('请选择员工');
+        			$('#emp1').focus();
+        			return false;
+        		};
+        	}
+        })
+        $('#msg-show').click(function(){
+        	var sid=$('#mstore').val();
+        	var emp=$('#emp2').val();
+        	if (sid && emp) {
+	        	$('#msgimg').attr('src','{:U('Warehouse/showQr')}?type=msg&sid='+sid+"&mid="+emp);
+	        	var src="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/Smodel/Base/msg.html?token='.$token; ?>&sid="+sid+"&mid="+emp;
+	        	$('#msga').attr('href',src);
+        	}else{
+        		if (!sid) {
+        			art.dialog.tips('请选择门店');
+        			$('#mstore').focus();
+        			return false;
+        		};
+        		if (!emp) {
+        			art.dialog.tips('请选择员工');
+        			$('#emp2').focus();
+        			return false;
+        		};
+        	}
+        })
+        $('#msg-recever').click(function(){
+        	var sid=$('#resid').val();
+        	if (!sid) {
+        		art.dialog.tips('请选择门店');
+        		$('#resid').focus();
+        	}else{
+        		$('#msgrecever').attr('src','{:U('Warehouse/showQr')}?type=setrecever&sid='+sid);
+        	}
+        })
+        // $('#Store').change(function(){
+        // 	if ($(this).val()) {
+	       //  	$('#payimg').attr('src','{:U('Warehouse/showQr')}?type=scanpay&sid='+$(this).val());
+	       //  	var src="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/Smodel/Base/?token='.$token; ?>&sid="+$(this).val();
+	       //  	$('#paya').attr('href',src);
+        // 	}else{
+        // 		art.dialog.tips('请选择门店');
+        // 	}
+        // })
+        // $('#mstore').change(function(){
+        // 	if ($(this).val()) {
+	       //  	$('#msgimg').attr('src','{:U('Warehouse/showQr')}?type=msg&sid='+$(this).val());
+	       //  	var src="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/Smodel/Base/msg.html?token='.$token; ?>&sid="+$(this).val();
+	       //  	$('#msga').attr('href',src);
+        // 	}else{
+        // 		art.dialog.tips('请选择门店');
+        // 	}
+        // })
+        $('#save').submit(function(){
+        	var pid=$('#chosen').val();
+        	if (pid) {
+        		return true;
+        	}else{
+        		art.dialog.tips('请选择商品');
+        		$('#chosen').focus();
+        		return false;
+        	}
+        })
+	})
+    function del(id){
+    	art.dialog.confirm('确定要删除吗？',function(){
+    		$.ajax({
+    			url:"{:U('Warehouse/saveScanPro')}",
+    			type:"post",
+    			data:"ProId="+id,
+    			dataType:"json",
+    			success:function(msg){
+    				if (msg=='success') {
+    					art.dialog.tips('删除成功');
+    					$('#'+id).remove();
+    				}else{
+    					art.dialog.tips('删除失败');
+    				}
+    			}
+    		})
+    	},function(){
+    		art.dialog.tips('取消操作');
+    	})
+    }
+</script>
+<include file="Common:footer" />

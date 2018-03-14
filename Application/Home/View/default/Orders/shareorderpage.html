@@ -1,0 +1,41 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/shareorderpage.css?v=1.1" />
+<div class="bgimgpart">
+  <img src="__PUBLIC__/newhome/img/bbg.png" alt="">
+</div>
+<div class="hbinfo">
+  <div class="cont">
+    <div class="shopinfo">
+      <img src="{$sinfo.Slogo}" alt="">
+      <span class="mui-ellipsis">{$sinfo.storename}</span>
+    </div>
+  			<!--红包-->
+  			<div class="cardit">
+          <if condition="$coninfo eq 1">
+            <span class="noinfo">无红包信息</span>
+            <else />
+            <span>
+    					<span class="jine">{$coninfo.Rules}</span>
+    					<small>{$coninfo.CouponName}</small>
+    				</span>
+          </if>
+  				<span class="shiyong"><span RPath="{:U('Index/Index',array('SID'=>$SID,'stoken'=>$sinfo['stoken'],'once'=>'1'))}">进入店铺</span></span>
+  				<!-- <p>2天后过期</p> -->
+  			</div>
+  			<!--谁领了红包-->
+  			<div class="who">
+          <if condition="$coninfo neq 1">
+            <div class="whotitle"><span>谁领了红包</span></div>
+    				<div class="whoitem">
+    					<img src="{$minfo['HeadImgUrl']}" />
+    					<div style="line-height:40px;">
+    						<span>{$minfo['MemberName']}</span>
+    						<!-- <p>1小时前领取</p> -->
+    					</div>
+    					<span>{$coninfo.Rules}元</span>
+    				</div>
+          </if>
+
+  			</div>
+  		</div>
+</div>

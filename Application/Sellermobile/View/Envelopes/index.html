@@ -1,0 +1,234 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/envelopes.css?v=1.1" />
+<script src="__PUBLIC__/Sellermobile/js/base.js"></script>
+	<div class="top">红包</div>
+	<div class="shang">
+		<div class="showinshop">
+			<span>进店红包</span>
+			<input class="inputinred" type="number" name="" value="{$inredprice}" placeholder="红包金额">
+			<span class="saveinred">保存</span>
+		</div>
+		<if condition="$result eq ''">
+			<div class="shang-top">
+				<span>分享人</span>
+				<div class="text">
+					从下方选择一个红包
+				</div>
+			</div>
+		<else/>
+			<div class="shang-top">
+				<span>分享人</span>
+				<div class="zhong">
+					<div class="zhogn-left">￥{$result['Rules']} <span>{$result['CouponName']}</span></div>
+					<div class="time" style="margin-left:10px;"><span >{$result['StartDate']}至{$result['ExpiredDate']}</span></div>
+				</div>
+				<div class="left"></div>
+				<div class="right"></div>
+				 <a class="updata" data-id="{$result['CouponId']}">删除</a>
+			</div>
+		</if>
+		<if condition="$row eq ''">
+			<div class="shang-bottom">
+				<span>被分享人</span>
+				<div class="text">
+					从下方选择一个红包
+				</div>
+			</div>
+		<else/>
+			<div class="shang-top">
+				<span>被分享人</span>
+				<div class="zhong">
+					<div class="zhogn-left">￥{$row['Rules']} <span>{$row['CouponName']}</span></div>
+					<div class="time" style="margin-left:10px;"><span >{$row['StartDate']}至{$row['ExpiredDate']}</span></div>
+
+				</div>
+				<div class="left"></div>
+				<div class="right"></div>
+				 <a class="update" data-id="{$row['CouponId']}">删除</a>
+			</div>
+		</if>
+
+	</div>
+	<div class="middle">红包列表 <a href="{:U('Envelopes/add',array('id'=>'add'))}">添加红包</a></div>
+	<foreach name="list" item="row">
+	<div class="xia">
+
+		<div class="xia-top">
+			<div class="zhong">
+				<div class="zhogn-left">￥{$row['Rules']} <span>{$row['CouponName']}</span></div>
+				<div class="time" style="margin-left:10px;"><span >{$row['StartDate']}至{$row['ExpiredDate']}</span></div>
+			</div>
+			<div class="left"></div>
+			<div class="right"></div>
+			<div class="link"><a href="{:U('Envelopes/add',array('id'=>$row['CouponId']))}">编辑</a> <a data-id="{$row['CouponId']}" class="delete">删除</a><a class="edit" >设置</a></div>
+			<div class="eject">
+				<div class="up" data-id="{$row['CouponId']}">设为分享人红包</div>
+				<div class="lower" data-id="{$row['CouponId']}">设为被分享人红包</div>
+				<div class="aa"></div>
+			</div>
+		</div>
+
+	</div>
+		</foreach>
+</body>
+<script src="__PUBLIC__/Sellermobile/js/setup.js?v1.3"></script>
+<script>
+	// $(document).on('click','.delete',function(){
+	$('.delete').click(function(){
+		var id=$(this).attr('data-id');
+		var senddata = {
+			id:id,
+		}
+		// console.log('sss');
+		tips('waiting','正在删除中···');
+		$.ajax({
+			url:"{:U('Envelopes/deleta')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+					setTimeout( window.location.reload(),1500);
+				}else{
+					tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+	})
+	// $(document).on('click','.up',function(){
+    $('.up').click(function(){
+		var id=$(this).attr('data-id');
+		var senddata = {
+			id:id,
+		}
+		tips('waiting','正在设置中···');
+		$.ajax({
+			url:"{:U('Envelopes/up')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+					setTimeout( window.location.reload(),1500);
+				}else{
+					tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+	})
+	// $(document).on('click','.lower',function(){
+		$('.lower').click(function(){
+		var id=$(this).attr('data-id');
+		var senddata = {
+			id:id,
+		}
+		tips('waiting','正在处理中···');
+		$.ajax({
+			url:"{:U('Envelopes/data')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+					setTimeout( window.location.reload(),1500);
+				}else{
+					tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+
+	})
+	// $(document).on('click','.updata',function(){
+		$('.updata').click(function(){
+		var id=$(this).attr('data-id');
+		var senddata = {
+			id:id,
+		}
+		tips('waiting','正在删除中···');
+		$.ajax({
+			url:"{:U('Envelopes/updata')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+					setTimeout( window.location.reload(),1500);
+				}else{
+					tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+		// console.log(id);
+	})
+	// $(document).on('click','.update',function(){
+		$('.update').click(function(){
+		var id=$(this).attr('data-id');
+		var senddata = {
+			id:id,
+		}
+		tips('waiting','正在删除中···');
+		$.ajax({
+			url:"{:U('Envelopes/update')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+					setTimeout( window.location.reload(),1500);
+				}else{
+					tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+	});
+	// 保存进店红包
+	$('.saveinred').click(function(){
+		var inredprice = $('.inputinred').val();
+		var reg = /^[0-9]+.?[0-9]*$/;
+		if (reg.test(inredprice)) {
+			var senddata = {
+				redprice:inredprice,
+			}
+			tips('waiting','正在保存中···');
+			$.ajax({
+				url:"{:U('Envelopes/saveinred')}",
+				type:"post",
+				data:senddata,
+				dataType:"json",
+				complete: function(e){
+					hidetips('waiting');
+				},
+				success:function(msg){
+					if(msg.status=='true'){
+						tips('notice', '保存成功!', 1500, 'weui_icon_toast');
+					}else{
+						tips('notice', '保存失败!', 1500, 'weui_icon_notice');
+					}
+				}
+			})
+		} else {
+			tips('notice', '填写有效的金额!', 1500, 'weui_icon_notice');
+		}
+	})
+</script>
+</html>

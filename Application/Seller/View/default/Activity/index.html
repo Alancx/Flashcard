@@ -1,0 +1,158 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+    .card{
+        width: 200px;
+        height: 110px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin:auto;
+        position: relative;
+        background: linear-gradient(to left,#fff,#999);
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
+        color: black;
+    }
+    .card_title{
+        text-align: center;
+        font-size: 1.2em;
+        height: 20px;
+        margin-bottom: 15px;
+        margin-top: 10px;
+        color: black;
+    }
+    .card_rules{
+        font-size: .6em;
+        line-height: 32px;
+        text-align: center;
+        color: black;
+    }
+    .card_bot{
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        bottom: 0px;
+        height: 10px;
+        text-align: center;
+        font-size: .8em;
+        color: black;
+    }
+    .vip{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        color: #ccc;
+        font-size: 1.5em;
+    }
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <div class="alert alert-warning" style="color:red;">
+                    1、优惠券管理
+                </div>
+                <button class='btn btn-default addcoupon' >添加优惠券</button>
+            </div>
+            <div class="ibox-content">
+                <div class='row'>
+                    <table class='table table-hover table-bordered'>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>卡片信息</th>
+                            <th>有效时间/数量信息</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <foreach name='cards' item='card'>
+                            <tr>
+                                <td>{$card.CouponId}</td>
+                                <td>
+                                    <div class='card'>
+                                        <span class='vip'>VIP</span>
+                                        <div class='card_title'>{$card.CouponName}</div>
+                                        <div class='card_rules'>
+                                            <if condition="$card['Type'] eq '0'">
+                                                平台商品使用立减{$card.Rules}元
+                                            <elseif condition="$card['Type'] eq '2'" />
+                                                <?php $rs=explode('/', $card['Rules']); ?>
+                                                订单满 {$rs[0]} 立减 {$rs[1]}
+                                            </if>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{$card.StartDate}--{$card.ExpiredDate} <br> 发布量：{$card.Count} <br> 剩余量：{$card.AfterCount}  </td>
+                                <td><if condition="$card['IsShow'] eq '1'"><button class='btn btn-xs btn-warning disabled'>已发布</button> &emsp; <button class='btn btn-xs btn-danger delcoupon' data-cid='{$card.CouponId}' data-id="{$card.ID}">删除</button><else/>&emsp; <button class='btn btn-xs btn-warning editing' data-id='{$card.ID}'>编辑</button>&emsp;<button class='btn btn-xs btn-danger delcoupon' data-cid='{$card.CouponId}' data-id="{$card.ID}">删除</button> </if></td>
+                            </tr>
+                        </foreach>
+                        </tbody>
+                    </table>
+                    {$page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var cardtype='';
+    $(document).ready(function(){
+        $('.addcoupon').click(function(){
+            window.location.href="{:U('Activity/addCoupon')}";
+        })
+        $('.showing').click(function(){
+            var _this=$(this);
+            var cid=_this.attr('data-cid');
+            var id=_this.attr('data-id');
+            art.dialog.confirm('确定要发布此优惠券吗？',function(){
+                _this.addClass('disabled').html('处理中...');
+                $.ajax({
+                    url:"{:U('Activity/setCoupon')}",
+                    type:"post",
+                    data:"type=show&cid="+cid+'&id='+id,
+                    dataType:"json",
+                    success:function(msg){
+                        if (msg.status=='success') {
+                            art.dialog.tips('已发布');
+                            _this.parent().html("<button class='btn btn-xs btn-warning disabled'>已发布</button> &emsp; <button class='btn btn-xs btn-danger delcoupon' data-cid='"+cid+"' data-id='"+id+"'>删除</button>");
+                        }else{
+                            art.dialog.tips(msg.info);
+                            _this.removeClass('disabled').html('发布');
+                        }
+                    }
+                })
+            })
+        })
+        $(document).on('click','.delcoupon',function(){
+            var _this=$(this);
+            var cid=_this.attr('data-cid');
+            var id=_this.attr('data-id');
+            art.dialog.confirm('确定要删除此优惠券吗？',function(){
+                _this.addClass('disabled').html('处理中...');
+                $.ajax({
+                    url:"{:U('Activity/setCoupon')}",
+                    type:"post",
+                    data:"type=del&cid="+cid+"&id="+id,
+                    dataType:"json",
+                    success:function(msg){
+                        if (msg.status=='success') {
+                            art.dialog.tips('删除成功');
+                            _this.parent().parent().remove();
+                        }else{
+                            art.dialog.tips(msg.info);
+                        }
+                    }
+                })
+            })
+        })
+        $('.editing').click(function(){
+            window.location.href="{:U('Activity/addCoupon')}?id="+$(this).attr('data-id');
+
+        })
+
+    })
+</script>
+<include file="Common:footer" />

@@ -1,0 +1,227 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager_blue.css">
+<include file="$headername" />
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>会员管理</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>会员管理</strong>
+			</li>
+			<li><small style="color:red;">提示信息：点击会员账号可生成推广二维码</small></li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="ibox-title">
+		<h5>会员推广佣金查询</h5>
+	</div>
+
+	<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="{:U('Users/extendcutS')}" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<input type="text" name="strtime" id="stime" class="form-control" placeholder="请选择起始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+			</div>
+			<div class="form-group">
+				<input type="text" name="endtime" id="etime" class="form-control" placeholder="请选择查询结束时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+			</div>
+			<div class="form-group">
+				<input type="text" name="Member" placeholder="请填写会员账号(选填)" id="member" class="form-control">
+			</div>
+			<button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button>
+		</form>
+
+	</div>
+
+	<div class="col-sm-10 col-sm-offset-1">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>账号</td>
+						<td>昵称</td>
+						<td>消费额</td>
+						<td>推广佣金</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<if condition="$mps['msg']">
+				<h3>{$mps.msg}</h3>
+				<else/>
+				<tbody id="tbody">
+					<foreach name="mps" item="mber" >
+						<tr>
+							<td>{$mber.ID}</td>
+							<td><a href="###" onclick="getQr('{$mber.MemberId}')">{$mber.MemberId}</a></td>
+							<td>{$mber.MemberName}</td>
+							<td>{$mber.OrderMoney}</td>
+							<td>{$mber.tTotalMoney}</td>
+							<td><a href="###" onclick="look('{$mber.ID}')">查看详细信息</a> | <a href="###" onclick="showfans('{$mber.MemberId}');">查看佣金明细</a>| <a href="###"  data-toggle="modal" data-target="#myModal6" onclick="Rmk('{$mber.ID}')">备注</a> <input type="hidden" name="remarks" id="id{$mber.ID}" value="{$mber.Remarks}"> </td>
+						</tr>
+					</foreach>
+				</tbody>
+				</if>
+
+			</table>
+
+		<div id="kkpager"></div>
+	</div>
+</div>
+
+
+<!-- model -start -->
+                            <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">会员信息备注</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="##" class="form">
+                                            	<div class="form-group" class="col-sm-12">
+                                            		<label>备注信息</label>
+                                            		<textarea name="Remarks" cols="30" rows="10" style="width:100%;" id="content" value=""></textarea>
+                                            		<input type="hidden" name="hid" id="hid" value="">
+                                            	</div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveRemarks">保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+<!-- model -end -->
+<script type="text/javascript">
+
+	function look(id){
+		// alert(id);
+		art.dialog.open('{:U('Users/show')}?id='+id,{width:600,height:800});
+	}
+	function del(id){
+		art.dialog.confirm('确定要删除此会员吗？请慎重操作', function () {
+			window.location.href="{:U('Users/del')}?id="+id;
+			// alert('hahaha')
+		}, function () {
+			art.dialog.tips('取消操作');
+		});
+	}
+
+	function Rmk(id){
+		var remarks=$("#id"+id).val();
+		$("#hid").val(id);
+		$("#content").val(remarks);
+	}
+
+	function getQr(id){
+		art.dialog.open('{:U('ArtDialog/MQr')}?mid='+id);
+	}
+
+	function showfans(mid){
+		art.dialog.open('{:U('Users/showtk')}?mid='+mid+"&stime="+$('#stime').val()+"&etime="+$('#etime').val(),{width:800,height:600});
+	}
+	function imports(mid){
+		window.location.href='{:U('Users/expUser')}?mid='+mid;
+	}
+
+
+	$(document).ready(function(){
+		$("#search").submit(function(){
+			var stime=$("#stime").val();
+			var etime=$("#etime").val();
+			var member=$("#member").val();
+			if (!stime && !etime) {
+				if (!member) {
+					art.dialog.alert('请输入查询信息');
+					return false;
+				}else{
+					return true;
+				}
+			};
+			if (!stime) {
+				art.dialog.alert('请输入查询起始时间');
+				return false;
+			};
+			if (!etime) {
+				art.dialog.alert('请输入查询结束时间');
+				return false;
+			}else{
+				// alert('hi');
+				return true;
+			}
+		})
+
+
+		$("#saveRemarks").click(function(){
+			var id=$("#hid").val();
+			var text=$("#content").val();
+			console.log(text);
+			$.ajax({
+				type:"post",
+				url:"{:U('Users/setRmks')}",
+				data:"id="+id+"&text="+text,
+				dateType:"json",
+				success:function(msg){
+					if (msg=='success') {
+						art.dialog.tips('备注成功');
+						$("#id"+id).val(text);
+					};
+					if (msg=='error') {
+						art.dialog.tips('备注失败');
+					};
+				}
+			})
+		})
+
+					//生成分页控件
+				var data={$members};
+				var pageCount={$pageCount};
+			kkpager.generPageHtml({
+				pno : '1',
+				mode : 'click', //设置为click模式
+				//总页码
+				total : '{$page}',
+				//总数据条数
+				totalRecords : '{$count}',
+				//点击页码、页码输入框跳转、以及首页、下一页等按钮都会调用click
+				//适用于不刷新页面，比如ajax
+				click : function(n){
+					$("#tbody").html('');
+					var str='';
+					var j=n-1;
+					var i=j*pageCount;
+					var k=i+pageCount
+					for (i; i < k; i++) {
+						// alert(data[i].MemberId);
+						if (data[i]) {
+							// alert(data[i]);
+							str+="<tr><td>"+data[i].ID+"</td><td><a href=\"###\" onclick=\"getQr('"+data[i].MemberId+"')\">"+data[i].MemberId+"</a></td><td>"+data[i].MemberName+"</td><td>"+data[i].OrderMoney+"</td><td>"+data[i].tTotalMoney+"</td><td><a href=\"###\" onclick=\"look('"+data[i].ID+"')\">查看详细信息</a> | <a href=\"###\" onclick=\"showfans('"+data[i].MemberId+"');\">查看佣金明细</a>| <a href=\"###\"  data-toggle=\"modal\" data-target=\"#myModal6\" onclick=\"Rmk('"+data[i].ID+"')\">备注</a> <input type=\"hidden\" name=\"remarks\" id=\"id"+data[i].ID+"\" value=\""+data[i].Remarks+"\"></td></tr>";
+						};
+					};
+					//这里可以做自已的处理
+					//...
+					//处理完后可以手动条用selectPage进行页码选中切换
+					// alert(n);
+					$("#tbody").html(str);
+					this.selectPage(n);
+				},
+				//getHref是在click模式下链接算法，一般不需要配置，默认代码如下
+				getHref : function(n){
+					return '#';
+				}
+
+			});
+
+	})
+</script>
+<include file="Common:footer" />

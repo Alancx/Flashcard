@@ -1,0 +1,47 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usermyprofit.css">
+
+<div class="usermempart">
+  <img src="__PUBLIC__/theme2/Images/wushuju.jpg" class="isshow" style="width: 100%; display: none;">
+    <foreach name='userprofit' item='ui'>
+        <div class="mymember">
+            <if condition="empty($ui['hiu'])">
+                <img src="__PUBLIC__/theme2/Images/touxiang.png">
+                <else/>
+                <img src="{:C('RESOURCE_URL')}{$ui.hiu}"/>
+            </if>
+            <label class="memnc">{$ui['mname']}<br><span>{$ui['sdate']}</span></label>
+            <if condition="$ui['sytype']==0">
+            <label class="memsy">+<span>{:empty($ui['Money'])?'0':$ui['Money']}</span></label>
+             <else/>
+             <label class="memsys">+<span>{:empty($ui['Money'])?'0':$ui['Money']}</span></label>
+            </if>
+        </div>
+    </foreach>
+   <!-- <div class="mymember">
+        <img src="__PUBLIC__/theme2/Images/touxiang.png">
+        <label class="memnc">郭艳彬<br><span>13711555815</span></label>
+        <label class="memsy">收益:<span>100.00</span></label>
+    </div> -->
+</div>
+<script>
+$(document).ready(function () {
+  if (ishasorder()=='true') {
+    $('.isshow').css('display','none');
+    $('body').css('background-color','#f3f3f3');
+  } else {
+    $('.isshow').css('display','block');
+    $('body').css('background-color','#f6f6f6');
+    $('.usermempart').css('border','none');
+  }
+})
+function ishasorder(){
+  var hasorder='false';
+  $(".mymember").each(function (index, item) {
+      if ($(item).css('display')!='none') {
+        hasorder='true';
+      }
+  })
+  return hasorder;
+}
+</script>

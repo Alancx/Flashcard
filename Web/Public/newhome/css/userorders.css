@@ -1,0 +1,200 @@
+.orderparts{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 51px;
+  width: 100%;
+}
+.seltoptab{
+  display: block;
+  overflow: hidden;
+  height: 70px;
+  background-color: #ffffff;
+  border-bottom: #eeeeee solid 10px;
+}
+.seltoptab>.otype{
+  float: left;
+  width: 20%;
+  height: 60px;
+  padding: 5px 0px 5px 0px;
+  text-align: center;
+}
+.seltoptab>.otype>span{
+  display: block;
+  width: 100%;
+  color: #cccccc;
+  overflow: hidden;
+}
+.seltoptab>.otype>span:first-child{
+  height: 30px;
+  line-height: 30px;
+  font-size: 24px;
+}
+.seltoptab>.otype>span:last-child{
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+}
+.getseltypeactive>span{
+  color: #ff8693!important;
+}
+.orderlist{
+  display: block;
+  width: 100%;
+  height: calc(100% - 70px);
+  overflow: auto;
+}
+.orderinfo{
+  display: block;
+  overflow: hidden;
+  background-color: #ffffff;
+  padding: 0px 0px 0px 10px;
+  margin: 0px 0px 10px 0px;
+}
+.shopinfo{
+  display: block;
+  overflow: hidden;
+  /* height: 60px; */
+  padding: 0px 0px 0px 10px;
+}
+.shopinfo>img{
+  float: left;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin: 5px 10px 0px 0px;
+}
+.shopinfo>span{
+  float: left;
+  /* height: 60px; */
+  line-height: 40px;
+  width: calc(100% - 40px);
+  border-bottom: #eeeeee solid 1px;
+}
+.shopinfo>span>.sname{
+  float: left;
+  height: 39px;
+  line-height: 39px;
+  width: calc(100% - 120px);
+  font-size: 16px;
+  color: #000000;
+}
+.shopinfo>span>.orderstatus{
+  float: right;
+  height: 39px;
+  line-height: 39px;
+  width: 80px;
+  text-align: center;
+  font-size: 14px;
+  color: #999999;
+}
+.shopinfo>span>.righticon{
+  float: left;
+  height: 39px;
+  line-height: 39px;
+  width: 39px;
+  text-align: center;
+  font-size: 24px;
+  color: #666666;
+}
+.shopinfo>span>.orderinfoid{
+  float: left;
+  /* height: 20px; */
+  line-height: 20px;
+  width: 100%;
+  font-size: 12px;
+  color: #999999;
+}
+.prosinfo{
+  display: block;
+  overflow: hidden;
+  padding: 10px 10px 0px 50px;
+  border-bottom: #eeeeee solid 1px;
+}
+.prosinfo>span{
+  display: block;
+  height: 24px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #999999;
+}
+.prosinfo>span>span:last-child{
+  float: right;
+}
+.totalprice{
+  display: block;
+  height: 30px;
+}
+.totalprice>span:first-child{
+  color: #999999;
+  font-size: 12px;
+}
+.total_price{
+  float: right;
+  font-size: 12px;
+  color: #999999;
+  height: 30px;
+  line-height: 30px;
+}
+.total_price>span::before{
+  content: "￥";
+}
+.total_price>span{
+  font-size: 14px;
+  color: #333333;
+}
+.btngroup{
+  display: block;
+  overflow: hidden;
+  height: 48px;
+  padding: 10px 0px 10px 10px;
+}
+.btngroup>span{
+  float: right;
+  height: 28px;
+  border: #888888 solid 1px;
+  color: #888888;
+  font-size: 16px;
+  line-height: 26px;
+  width: 80px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0px 10px 0px 0px;
+}
+
+/*就餐码*/
+.eatqrcodemark{
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 130;
+  padding: calc(50vh - 150px) calc(50vw - 100px) calc(50vh - 150px) calc(50vw - 100px);
+}
+.showeatcode{
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+}
+.showeatcode>img{
+  height: 190px;
+  width: 190px;
+  display: block;
+}
+.showeatcode>span{
+  display: block;
+  width: 80%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #ff0000;
+  text-align: center;
+  margin: 20px 10% 0px 10%;
+  border-radius: 3px;
+}

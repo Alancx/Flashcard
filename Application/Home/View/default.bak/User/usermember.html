@@ -1,0 +1,102 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usermember.css?v=3">
+<div class="usermempart">
+    <img src="__PUBLIC__/theme2/Images/wushuju.jpg" class="isshow" style="width: 100%; display: none;">
+  <foreach name='users' item='ui'>
+    <div class="mymember">
+      <div class="mymember-1" onclick="openinfo(this)">
+        <if condition="empty($ui['hiu'])">
+          <img src="__PUBLIC__/theme2/Images/touxiang.png">
+          <else/>
+          <img src="{:C('RESOURCE_URL')}{$ui.hiu}"/>
+        </if>
+        <label class="memnc">{$ui['mname']}<span>&emsp;&emsp;{$ui['registerdate']}</span><br><span>{$ui['mid']}</span></label>
+        <label class="memsy">收益:<span>{:empty($ui['Money'])?'0':$ui['Money']}</span></label>
+      </div>
+      <div class="memberinfo">
+        <!-- <label>昵称:<span>{$ui['mname']}</span></label>
+        <label>账号:<span>{$ui['mid']}</span></label> -->
+        <label>性别:<span>
+          <?php if ($ui['sex']=='1'): ?>
+            男
+          <?php elseif($ui['sex']=='2'): ?>
+            女
+          <?php endif ?>
+        </span></label>
+        <label>地区:<span>{$ui['province']}-{$ui['city']}</span></label>
+        <label class="remname">备注:
+          <div class="setrname">
+            <label class="showname" onclick="updatername(this)">{$ui['remname']}</label>
+            <input type="text" class="setremname" name="setremname" data-mid={$ui['mid']} onblur="blursetrname(this)">
+          </div>
+        </label>
+      </div>
+    </div>
+  </foreach>
+</div>
+<!-- /////////////// -->
+<script>
+$(document).ready(function () {
+$('.setremname').css('width',$(window).width()-30-35+"px");
+if (ishasorder()=='true') {
+  $('.isshow').css('display','none');
+  $('body').css('background-color','#f3f3f3');
+} else {
+  $('.isshow').css('display','block');
+  $('body').css('background-color','#f6f6f6');
+  $('.usermempart').css('border','none');
+}
+})
+function openinfo(div){
+  if($(div).parent().hasClass('openactive')){
+    $('.openactive>.memberinfo').css('display','none');
+    $('.openactive').removeClass('openactive');
+  } else{
+    $('.openactive>.memberinfo').css('display','none');
+    $('.openactive').removeClass('openactive');
+    $(div).parent().addClass('openactive');
+    $('.openactive>.memberinfo').css('display','block');
+  }
+}
+function ishasorder(){
+  var hasorder='false';
+  $(".mymember").each(function (index, item) {
+      if ($(item).css('display')!='none') {
+        hasorder='true';
+      }
+  })
+  return hasorder;
+}
+function updatername(label){
+  $(label).next(".setremname").val($(label).text());
+  $(label).next(".setremname").css('display','block');
+  $(label).next(".setremname").focus();
+}
+function blursetrname(text){
+  $(text).css('display','none');
+  if($(text).val()!=$(text).prev().text()){
+    var mid=$(text).attr('data-mid');
+    var remname=$(text).val();
+    $.ajax({
+      type: "POST",
+      url: "{:U('user/setremname')}",
+      data: {mid: mid, remname: remname},
+      datatype: "json",
+      success: function (data) {
+        if (data.status=='true') {
+          $(text).prev().text(remname);
+        } else {
+          //
+        }
+      },
+      error: function () {
+        //
+      },
+      complete: function (XMLHttpRequest, textStatus)
+      {
+        //
+      }
+    });
+  }
+}
+</script>

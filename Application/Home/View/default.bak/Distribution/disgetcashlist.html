@@ -1,0 +1,88 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/distribution/css/disgetcashlist.css?v=1.1">
+<script type="text/javascript">
+  var savecash_url="{:U('Distribution/savecashorder')}";
+</script>
+<div class="toptotalpart">
+  <div>
+    <label>收益总额:</label>
+    <label><?php echo $alltotalmoney?sprintf("%.2f",$alltotalmoney):'0.00' ?>元</label>
+    <label>配送数量: <?php echo $alltotalorder?sprintf("%.0f",$alltotalorder):'0' ?> 单</label>
+  </div>
+  <div>
+    <span></span>
+    <label>已提现金额:<?php echo $hadgetmoney?sprintf("%.2f",$hadgetmoney):'0.00' ?>元</label>
+    <label>提现中金额:<?php echo $hasinggetmoney?sprintf("%.2f",$hasinggetmoney):'0.00' ?>元</label>
+    <label>未提现金额: <?php echo $getmoney?sprintf("%.2f",$getmoney):'0.00' ?> 元</label>
+  </div>
+</div>
+<div class="seltype">
+  <label class="sel_type seltypeactive" data-type="1">未提现<span><?php echo count($getorder);?>单</span></label>
+  <label class="sel_type" data-type="2">提现中<span><?php echo count($gcashingorder);?>单</span></label>
+  <label class="sel_type" data-type="3">已提现<span><?php echo count($gcashendorder);?>单</span></label>
+</div>
+<div class="orderlist">
+  <div class="order_list order_list_1">
+    <foreach name="getorder" item="goitem">
+      <div class="orderinfo" data-oid="{$goitem['OrderId']}" data-price="<?php echo $goitem['PsGet']?sprintf("%.2f",$goitem['PsGet']):'0.00' ?>" data-stoken="{$goitem['stoken']}">
+        <span></span>
+        <div>
+          <div class="order_info">
+            <label>配送单号:<br>{$goitem['OrderId']}</label>
+            <label>配送时间:{$goitem['Gdate']}</label>
+            <label>完成时间:{$goitem['Odate']}</label>
+          </div>
+          <div class="getprice">
+            <label>配送费:</label>
+            <label>￥<?php echo $goitem['PsGet']?sprintf("%.2f",$goitem['PsGet']):'0.00' ?></label>
+          </div>
+        </div>
+      </div>
+    </foreach>
+  </div>
+  <div class="order_list order_list_2">
+    <foreach name="gcashingorder" item="gcashitem">
+      <div class="ordercashinfo">
+        <div>
+          <div class="ordercash_info">
+            <label>配送单号:<br>{$gcashitem['OrderId']}</label>
+            <label>配送时间:{$gcashitem['Gdate']}</label>
+            <label>完成时间:{$gcashitem['Odate']}</label>
+          </div>
+          <div class="getcashprice">
+            <label>配送费:</label>
+            <label>￥<?php echo $gcashitem['PsGet']?sprintf("%.2f",$gcashitem['PsGet']):'0.00' ?></label>
+            <if condition="$gcashitem['IsCuted'] eq 1 ">
+              <span>待审核</span>
+              <else />
+              <span>已审核</span>
+            </if>
+          </div>
+        </div>
+      </div>
+    </foreach>
+  </div>
+  <div class="order_list order_list_3">
+    <foreach name="gcashendorder" item="gendcashitem">
+      <div class="ordercashinfo">
+        <div>
+          <div class="ordercash_info">
+            <label>配送单号:<br>{$gendcashitem['OrderId']}</label>
+            <label>配送时间:{$gendcashitem['Gdate']}</label>
+            <label>完成时间:{$gendcashitem['Odate']}</label>
+          </div>
+          <div class="getcashprice">
+            <label>配送费:</label>
+            <label>￥<?php echo $gendcashitem['PsGet']?sprintf("%.2f",$gendcashitem['PsGet']):'0.00' ?></label>
+            <span>已提现</span>
+          </div>
+        </div>
+      </div>
+    </foreach>
+  </div>
+  <div class="btn_getcash">
+    <label class="getallorder"><span></span>全选</label>
+    <label class="getselcash">立即提现</label>
+  </div>
+</div>
+<script src="__PUBLIC__/distribution/js/disgetcashlist.js?v=1.1" charset="utf-8"></script>

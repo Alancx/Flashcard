@@ -1,0 +1,3 @@
+操作定位:Stores/cuted::::UPDATE [RS_Order] SET [Pstoken]='2' WHERE ( stoken='wwPkI51359026914' and Status in (4,10) and Pstoken=1 and CreateDate BETWEEN '2017-12-28 09:36:21' and '2017-12-29 09:36:25' )::::::操作日期:::::::2017-12-29 09:36:32
+操作定位:Stores/cuted::::UPDATE [RS_Order] SET [Pstoken]='2' WHERE ( stoken='wwPkI51359026914' and Status in (4,10) and Pstoken=1 and CreateDate BETWEEN '2017-12-28 09:43:40' and '2017-12-30 09:43:45' )::::::操作日期:::::::2017-12-29 09:42:41
+操作定位:Stores/cuted::::UPDATE [RS_Order] SET [Pstoken]='2' WHERE ( stoken='wwPkI51359026914' and Status in (4,10) and Pstoken=1 and CreateDate BETWEEN '2017-12-28 09:45:34' and '2017-12-29 09:45:36' )::::::操作日期:::::::2017-12-29 09:44:21

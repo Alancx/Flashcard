@@ -1,0 +1,316 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+label {
+    font-weight: 400;
+}
+
+.myoderstitle {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    z-index: 100;
+}
+
+.odersel {
+    float: left;
+    width: 33.33333%;
+    height: 100%;
+    cursor: pointer;
+
+}
+
+.odersel > label {
+    width: 100%;
+    height: 40px;
+    margin: 0px;
+    font-size: 14px;
+
+    color: #333333;
+    text-align: center;
+    line-height: 45px;
+}
+
+.alloder, .payoder, .deliveroder,
+.receiptoder, .evaluateoder {
+    display: none;
+}
+
+.alloder {
+    display: block;
+}
+
+.oderselactive {
+    border-bottom-style: solid;
+    border-color: #FFb200;
+    border-width: 3px;
+}
+
+.oderselactive > label {
+    color: #FFb200;
+}
+
+.useroders {
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+}
+
+.oderdata {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    color: #333333;
+    margin: 0px;
+    padding: 0px 15px 0px 15px;
+    line-height: 40px;
+}
+
+.oderdata > span {
+    float: right;
+    color: #ff4200;
+}
+
+.oderspro {
+    padding: 0px 15px 0px 15px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+}
+
+.oderpro {
+    position: relative;
+    height: 80px;
+    border-bottom-style: dashed;
+    border-width: 1px;
+    border-color: #dddddd;
+    margin: 0px 0px -1px 0px;
+}
+
+.oderpro > img {
+    float: left;
+    width: 70px;
+    margin: 5px 0px 4px 0px;
+}
+
+.oderpro > label {
+    float: left;
+    width: 210px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 20px;
+    margin: 0px;
+    padding: 4px 0px 0px 10px;
+}
+
+.oderpro > label > span {
+    font-size: 12px;
+    color: #999999;
+}
+
+.oderproprice {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    text-align: right;
+    width: auto !important;
+}
+
+.odertotelprice {
+    width: 100%;
+    height: 30px;
+    font-size: 12px;
+    line-height: 29px;
+    text-align: right;
+    margin: 0px;
+    color: #666666;
+    padding: 0px 10px 0px 0px;
+    border-bottom-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+}
+
+.odertotelprice > span {
+    font-size: 14px;
+    color: #333333;
+}
+
+.btn-groups {
+    height: 40px;
+    border-bottom-style: solid;
+    border-color: #DDDDDD;
+    border-width: 1px;
+}
+
+.btn-groups > button, .btn-groups > a > button {
+    float: right;
+    width: 75px;
+    height: 30px;
+    font-size: 14px;
+    color: #666666;
+    background-color: #ffffff;
+    margin: 4px 15px 0px 0px;
+    border-style: solid;
+    border-color: #666666;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.btnprored {
+    color: #ff4200 !important;
+    border-color: #ff4200 !important;
+}
+
+.btnpropj {
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+    width: 50px;
+    height: 23px;
+    font-size: 12px;
+    color: #ff4200;
+    background-color: #ffffff;
+    border-style: solid;
+    border-color: #ff4200;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.btnproypj {
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+    width: 50px;
+    height: 23px;
+    font-size: 12px;
+    color: #999999;
+    background-color: #ffffff;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.odselmdcover,.coverqrcode {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.51);
+    z-index: 100;
+}
+
+.odselmd {
+    position: absolute;
+    overflow: hidden;
+    background-color: #ffffff;
+    left: 10%;
+    top: 30%;
+    width: 80%;
+    border-radius: 8px;
+}
+
+.seltitle {
+    margin: 0px;
+    height: 50px;
+    width: 100%;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 50px;
+    background-color: #64a2ff;
+}
+.selbtn{
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: #DDDDDD;
+}
+.selbtn>div{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+.selbtn>div:first-child{
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: #DDDDDD;
+}
+.selbtn>div>label{
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    color: #227aff;
+    font-size: 16px;
+    text-align: center;
+    line-height: 49px;
+}
+.selmd{
+    overflow: auto;
+    max-height: 200px;
+    min-height: 50px;
+    margin: 0px 0px 49px 0px;
+}
+.selmd>label{
+    margin: 0px;
+    width: 100%;
+    height: 50px;
+    color: #333333;
+    font-size: 16px;
+    text-align: center;
+    line-height: 49px;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #DDDDDD;
+
+}
+.mdactive{
+    background-color: #f3f3f3;
+}
+.qr-codesmy {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #ffffff;
+    margin: 80px 0px 0px 0px;
+}
+#tkqrcodediv {
+    width: 200px;
+    margin: 10px auto 0px auto;
+}
+.qr-codess {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #ffffff;
+    margin: 10px 0px 0px 0px;
+}
+.qr-codegb {
+    width: 80%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #ffffff;
+    margin: 10px 10% 0px 10%;
+    background-color: #ffb222;
+    border-radius: 5px;
+}

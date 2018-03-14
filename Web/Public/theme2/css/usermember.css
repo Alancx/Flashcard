@@ -1,0 +1,115 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.usermempart{
+    margin: 10px 0px 0px 0px;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.mymember{
+    padding: 4px 15px 5px 15px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    overflow: hidden;
+}
+.mymember-1{
+    height: 50px;
+    overflow: hidden;
+}
+.mymember-1>img{
+    float: left;
+    width: 51px;
+    height: 51px;
+    border-radius: 50%;
+}
+.memnc{
+    float: left;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    padding: 5px 0px 0px 10px;
+    font-size: 14px;
+    color: #333333;
+}
+.memnc > span{
+    font-size: 12px;
+    color: #999999;
+}
+.memsy{
+    float:right;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    line-height: 70px;
+    font-size: 12px;
+    color: #333333;
+}
+.memsy>span{
+    font-size: 16px;
+    color: #FF4200;
+}
+.memberinfo{
+  display: none;
+  margin: 10px 0px 0px 0px;
+  border-top-style: dashed;
+  border-color: #dddddd;
+  border-width: 1px;
+  overflow: hidden;
+}
+.memberinfo>label{
+  margin: 5px 0px 0px 0px;
+  float: left;
+  width: 50%;
+  font-size: 14px;
+  color: #666666;
+}
+.memberinfo>label>span{
+  font-size: 12px;
+  color: #999999;
+}
+.openactive{
+  background-color: #fcf8e3;
+}
+.remname{
+  position: relative;
+  width: 100%!important;
+}
+.setrname{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding:0px 0px 0px 35px;
+  height: 100%;
+  width: 100%;
+}
+.showname{
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  padding:0px 0px 0px 35px;
+  line-height: 22px;
+  font-size: 12px;
+  color: #999999;
+}
+.setremname{
+  display: none;
+  position: absolute;
+  top:0px;
+  left: 0px;
+  height: 100%;
+  font-size: 12px;
+  margin-left: 35px;
+    padding:0px 0px 0px 5px;
+  color: #999999;
+  outline: medium;
+  border-style: none;;
+  border-width: 1px;
+  border-radius: 5px;
+}

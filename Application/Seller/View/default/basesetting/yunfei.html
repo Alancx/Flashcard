@@ -1,0 +1,98 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<include file="$headername" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+   <div class="col-lg-10">
+       <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>运费模板</h2>
+       <ol class="breadcrumb">
+           <li>
+               <a href="index.html">主页</a>
+           </li>
+           <li class="active">
+               <strong>运费模板设置</strong>
+           </li>
+       </ol>
+   </div>
+   <div class="col-lg-2"></div>
+</div>
+
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+    <div class="col-lg-12">
+       <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5><a href="{:U('BaseSetting/addYF')}" style="color:#000;"><button class="btn btn-white" type="button">添加运费模板</button></a></h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-xs-12">
+            <h3>运费模板管理</h3>
+            <table class="table table-bordered">
+              <tr>
+                 <td style="width:2%;">#</td>
+                 <td style="width:6%;">模板名称</td>
+                 <td style="width:6%;">物流</td>
+                 <td colspan="3" style="width:35%;">计价区一</td>
+                 <td colspan="3" style="width:35%;">计价区二</td>
+                 <td style="width:10%;">备注</td>
+                 <td style="width:7%;">操作</td>
+             </tr>
+              <tr>
+                 <td>#</td>
+                 <td>#</td>
+                 <td>#</td>
+                 <td style="width:7%">首重价格</td>
+                 <td style="width:7%">续重加价</td>
+                 <td>计费区域</td>
+                 <td style="width:7%">首重价格</td>
+                 <td style="width:7%">续重加价</td>
+                 <td>计费区域</td>
+                 <td>#</td>
+                 <td>#</td>
+             </tr>
+             <foreach name="Freights" item="fre">
+              <tr <if condition="$fre['IsSet'] eq 1">class="info"</if>>
+                 <td>{$fre.ID}</td>
+                 <td>{$fre.Name}</td>
+                 <td>{$fre.LogisticsId}</td>
+                 <td>{$fre.FirstWeight}g/{$fre.Opiece}</td>
+                 <td>{$fre.AddWeight}g/{$fre.Oadd}</td>
+                 <td><foreach name="fre.Area" item="area">&nbsp;&nbsp;/&nbsp;&nbsp;{$area}</foreach></td>
+                 <td>{$fre.FirstWeight}g/{$fre.Tpiece}</td>
+                 <td>{$fre.AddWeight}g/{$fre.Tadd}</td>
+                 <td><foreach name="fre.Area1" item="area">&nbsp;&nbsp;/&nbsp;&nbsp;{$area}</foreach></td>
+                 <td>{$fre.Remarks}</td>
+                 <td><a href="###" onclick="edit('{$fre.ID}');">编辑</a> | <a href="###" onclick="del('{$fre.ID}')">删除</a><br><br><if condition="$fre['IsSet'] eq 0"><a href="###" onclick="setMr({$fre.ID});">设为默认</a></if></td>
+             </tr>
+         </foreach>
+     </table>
+     <div style="text-align:right;">{$page}</div>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+  function edit(id){
+    window.location.href="{:U('BaseSetting/editYF')}?id="+id;
+  }
+  function del(id){
+    art.dialog.confirm('确定要删除此模板吗？',function(){
+      window.location.href="{:U('BaseSetting/delYF')}?id="+id;
+    },function(){
+      art.dialog.tips('操作取消');
+    })
+  }
+  function setMr(id){
+    window.location.href="{:U('BaseSetting/setMr')}?fid="+id;
+  }
+</script>
+<include file="Common:footer" />

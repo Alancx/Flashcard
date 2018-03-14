@@ -1,0 +1,234 @@
+<layout name="Public/PageModel"/>
+<script src="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/Indexchild4.css?v=2.2">
+<!-- 腾讯地图前端定位组件 -->
+<script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+
+<div class="home-contents">
+  <!-- 轮播图区域 -->
+  <div class="swiper-container swiper-container-home">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="{:C('RESOURCE_URL')}{$homeimg['ImgPath']}" class="imgslide">
+      </div>
+      <foreach name="lbdata" item='ci'>
+        <div class="swiper-slide">
+          <img src="{:C('RESOURCE_URL')}{$ci['ImgPath']}" class="imgslide">
+        </div>
+      </foreach>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination-home"></div>
+  </div>
+  <!-- 轮播图区域end -->
+  <div class="childshop">
+    <empty name="shopinfo['Slogo']">
+      <img src="__PUBLIC__/theme2/images/shoplogo.png" class="childshop_img" alt="">
+      <else />
+      <img src="{:C('RESOURCE_URL')}{$shopinfo.Slogo}" class="childshop_img" alt="">
+    </empty>
+    <label class="childshop_name">{$shopinfo.storename}</label>
+    <label class="childshop_title">{$shopinfo.Descinfo}</label>
+  </div>
+  <!-- 产品区域一 -->
+  <if condition="$facpro neq null">
+  <div class="propart">
+    <div class="pro-title" RPath="{:U('Index/GoodsList',array('type'=>'facpro'))}">
+      <label class="pro_hot">工厂发货<span>查看更多</span></label>
+    </div>
+    <div class="pro-line-1">
+      <div class="pro-line-1-left" RPath="{:U('Product/Goods',array('pid'=>$facpro['0']['ProId']))}">
+        <img src="{:C('RESOURCE_URL')}{$facpro['0']['ProLogoImg']}" alt="">
+        <label><span>{$facpro['0']['ProName']}</span><span>￥<?php echo number_format(($facpro[0]['PriceRange']),2); ?></span></label>
+      </div>
+      <div class="pro-line-1-right" RPath="{:U('Product/Goods',array('pid'=>$facpro[1]['ProId']))}">
+        <div>
+          <label>{$facpro[1]['ProName']}</label>
+          <label>￥<?php echo number_format(($facpro[1]['PriceRange']),2); ?></label>
+        </div>
+        <img src="{:C('RESOURCE_URL')}{$facpro[1]['ProLogoImg']}" alt="">
+      </div>
+      <div class="pro-line-1-right" RPath="{:U('Product/Goods',array('pid'=>$facpro['2']['ProId']))}">
+        <div>
+          <label>{$facpro['2']['ProName']}</label>
+          <label>￥<?php echo number_format(($facpro[2]['PriceRange']),2); ?></label>
+        </div>
+        <img src="{:C('RESOURCE_URL')}{$facpro['2']['ProLogoImg']}" alt="">
+      </div>
+    </div>
+  </div>
+</if>
+  <!-- 产品区域一end -->
+  <!-- 产品区域二 -->
+  <if condition="$shoppro neq null">
+  <div class="propart" style="border-top:solid #eeeeee 10px">
+    <div class="pro-title" RPath="{:U('Index/GoodsList',array('type'=>'shoppro'))}">
+      <label class="pro_new">小店发货<span>查看更多</span></label>
+    </div>
+    <div class="pro-line-3">
+      <foreach name="shoppro" item='pl'>
+        <div RPath="{:U('Product/Goods',array('pid'=>$pl['ProId']))}">
+          <img src="{:C('RESOURCE_URL')}{$pl['ProLogoImg']}" alt="">
+          <div>
+            <label>{$pl.ProName}</label>
+            <label>￥<?php echo number_format(($pl['PriceRange']),2); ?></label>
+          </div>
+        </div>
+      </foreach>
+    </div>
+  </div>
+</if>
+  <!-- 产品区域二end -->
+  </div>
+  <!-- 产品区域三 end-->
+  <div class="lookpro"><label id="prolook" data-page="1" onclick="getmorepro(this)">查看更多</label></div>
+</div>
+<script type="text/javascript">
+var selshop="{$selshop}";
+var enteronce="{$once}";
+var getmorepro_url="{:U('Index/getmorehomepro')}";
+var progoods_url="{:U("Product/Goods",array("pid"=>"REPLACESTR"))}";
+var swiper = new Swiper('.swiper-container-home', {
+  autoplay: 3000,//可选选项，自动滑动
+  pagination: '.swiper-pagination',
+  paginationClickable: true,
+  // autoHeight: true, //enable auto height
+  loop:true,
+});
+// var showimgurl = "{$PICURL}";
+</script>
+<!-- 定位信息 -->
+<script type="text/javascript">
+//腾讯地图获取当前位置
+var geolocation = new qq.maps.Geolocation("NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4", "web商店");
+var options = {timeout: 6000};
+window.onload = function(){
+  if ((selshop!='true')||(enteronce=='1')) {
+    geolocation.getLocation(showPosition, showErr, options);
+  }
+}
+///////定位成功返回函数///////
+function showPosition(position) {
+  var mylat=position.lat;
+  var mylng=position.lng;
+  var mycity=position.city;
+  var senddata={
+    slat:mylat,
+    slng:mylng,
+    scity:mycity,
+  }
+  $.ajax({
+    type: "post", //请求的方式
+    dataType: "json", //数据的格式 建议大家使用json格式
+    data: senddata, //请求的数据
+    url: "{:U('LBS/getchildshop')}", //请求的url地址
+    success: function (data) { //请求成功时，处理返回来的数据
+      if (data.status=='true') {
+         window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+      } else{
+        if (data.info=='noShops') {
+          window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+        }
+      }
+    }
+  })
+   console.log('定位成功');
+}
+///////定位失败返回函数////////
+function showErr() {
+  console.log('定位失败');
+};
+//////////固定轮播图高度///////////
+$('.swiper-container-home').css('height',$('.swiper-container-home').width()/8*5+'px');
+ $(".pro-line-1-left>img").height($(".pro-line-1-left>img").width());
+ $(".pro-line-1-right>img").height($(".pro-line-1-right>img").width());
+ $(".pro-line-2 img").height($(".pro-line-2 img").width());
+ $(".pro-line-3 img").height($(".pro-line-3 img").width()+'px');
+</script>
+<!-- <script src="__PUBLIC__/theme2/js/Indexchild.js?v=1.0" charset="utf-8"></script> -->
+
+<script type="text/javascript">
+$('.bproimg').height($('.bproimg').width());
+function getmorepro(label){
+  if($(label).html()=='已全部加载'){
+    return false;
+  }
+  if($(label).html()=='正在加载···'){
+    return false;
+  }
+  var _page=$(label).attr('data-page');
+  $(label).html('正在加载···');
+  $.ajax({
+    type: "POST",
+    url: "{:U('Index/getmorehomepro')}",
+    data: {page: _page},
+    datatype: "json",
+    complete: function (XMLHttpRequest, textStatus) {
+
+    },
+    success: function (data) {
+      if (data.status == 'true') {
+        var htmls='';
+        $.each(data.data, function(index,item){
+          htmls += '<div RPath="{:U("Product/Goods",array("pid"=>"REPLACESTR"))}">'+
+            '<img src="'+"{:C('RESOURCE_URL')}"+item.ProLogoImg+'" alt="">'+
+            '<div>'+
+              '<label>'+item.ProName+'</label>'+
+              '<label>￥'+parseFloat(item.PriceRange).toFixed(2)+'</label>'+
+            '</div>'+
+          '</div>';
+          htmls=htmls.replace(/REPLACESTR/g,item.ProId);
+        })
+        $('.pro-line-3').append(htmls);
+        $(label).attr('data-page',parseInt(_page)+1);
+        $(label).html('加载更多');
+        $(".pro-line-3 img").height($(".pro-line-3 img").width()+'px');
+        //绑定跳转事件
+        $("body [RPath]").click(function(){
+          $(this).css('cursor','pointer');
+          window.location.href=$(this).attr("RPath");
+        });
+      }
+      else if (data.status == "false") {
+        $(label).html('已全部加载');
+      }
+      else {
+        $(label).html('已全部加载');
+      }
+    },
+    error: function () {
+      $(label).html('已全部加载');
+    }
+  })
+}
+</script>
+<!-- 上拉加载的多 -->
+<script type="text/javascript">
+var starX; //点击时的坐标信息可视区域
+var starY;//点击时的坐标信息可视区域
+var moveX;//滑动时的坐标信息可视区域
+var moveY;//滑动时的坐标信息可视区域
+// 产品列表开始滑动时的坐标信息及产品菜单显示隐藏///////////////
+$(document.body).on('touchstart',function(event){
+  if (event.originalEvent.targetTouches.length == 1) {
+    var touch = event.originalEvent.targetTouches[0];  // 把元素放在手指所在的位置
+    starX=touch.clientX;
+    starY=touch.clientY;
+  }
+})
+
+$(document.body).on('touchmove',function(event){
+  if (event.originalEvent.targetTouches.length == 1) {
+    var touch = event.originalEvent.targetTouches[0];  // 把元素放在手指所在的位置
+    moveX=touch.clientX;
+    moveY=touch.clientY;
+    if((starY-moveY)>0){
+      if($(window).scrollTop()+$(window).height()>=document.body.scrollHeight){
+        event.preventDefault();//阻止其他事件
+        getmorepro($('#prolook')[0]);
+      }
+    }
+  }
+})
+</script>

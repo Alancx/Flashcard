@@ -1,0 +1,350 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usercenter.css?v=1.5">
+<script src="__PUBLIC__/theme2/js/usercenter.js?v=1.7"></script>
+<script src="__PUBLIC__/theme2/js/ajaxfileupload.js"></script>
+<script src="__PUBLIC__/JS/plugins/address/provincesdata.js"></script>
+<script src="__PUBLIC__/JS/plugins/address/provinces.js"></script>
+<script>
+    var cname="{:U('User/cname')}"; //修改昵称
+    var csex="{:U('User/csex')}";  //修改性别
+    var carea="{:U('User/carea')}"; //修改地区
+    var cmod="{:U('User/cmod')}"; //修改密码
+    var caddr="{:U('User/addrs')}"; //收货地址
+    var ceditaddr="{:U('Public/AddAddress')}";//保存收货地址
+    var cdeladdr= "{:U('User/deladdr')}";//删除地址
+    var coupons= "{:U('User/mycoupons')}";//查看优惠券
+    var userimg= "{:U('User/userimage')}";//修改头像
+    var goregister="{:U('User/register')}";
+    var gotophnesms="{:U('User/sendphonecode')}";
+    var savephone="{:U('User/updatephone')}";
+    var synchro_url="{:U('User/synchroinfo')}";
+    var setphone="{$setphone}";
+</script>
+
+<div class="ucenterpart">
+  <div>
+    <!-- <label onclick="updatetxxg(this)">头像</label> -->
+    <label>头像</label>
+    <if condition="$userinfo['HeadImgUrl'] eq ''">
+      <img class="usercentertx" src="__PUBLIC__/theme2/Images/touxiang.png">
+      <elseif condition="substr($userinfo['HeadImgUrl'],0,4) eq 'http'" />
+        <img class="usercentertx" src="{$userinfo['HeadImgUrl']}">
+      <else/>
+      <img class="usercentertx" src="{:C('RESOURCE_URL')}{$userinfo['HeadImgUrl']}">
+    </if>
+    <!-- <img class="usercentertx" src="{:C('RESOURCE_URL')}{$userinfo['HeadImgUrl']}"> -->
+  </div>
+    <div>
+        <!-- <label onclick="nickupdate(this)" class="nicknamesets">昵称<span>{$userinfo['MemberName']}</span></label> -->
+        <label  class="nicknamesets">昵称<span>{$userinfo['MemberName']}</span></label>
+    </div>
+    <div>
+        <label class="sexset">性别<span>
+            <?php if ($userinfo['Sex']=='1'): ?>
+            男
+            <?php elseif($userinfo['Sex']=='2'): ?>
+            女
+            <?php endif ?></span></label>
+    </div>
+    <div>
+        <label class="cityset">当前城市<span>{$userinfo['Province']}-{$userinfo['City']}</span></label>
+    </div>
+  </div>
+  <div class="ucenterpart">
+    <div>
+        <label onclick="updatephone(this)" class="phoneset">手机号码<span>{$userinfo['Phone']}</span></label>
+    </div>
+    <div>
+        <label onclick="addrupdate(this)">收货地址</label>
+    </div>
+    <!-- <div>
+        <label onclick="passwordupdate(this)">修改密码</label>
+    </div> -->
+</div>
+<div class="ucenterpart">
+<!--     <div>
+        <label onclick="opencoupons(this)">我的卡劵<span>{$cardsum}张</span></label>
+    </div>
+ -->    <div>
+        <label class="userqr-codes" onclick="openqrcode(this)">二维码</label>
+        <img class="usercenterewm" src="__PUBLIC__/theme2/Images/erweimaa.png">
+    </div>
+</div>
+<if condition="$userinfo['IsReg'] eq 1">
+<div class="ucenterpart">
+    <div>
+        <label>代注册会员<span class="register">注册会员</span></label>
+    </div>
+</div>
+</if>
+<if condition="$subscribe eq 1">
+  <div class="ucenterpart">
+    <label class="synchro">更新用户信息</label>
+  </div>
+  <else />
+  <div class="ucenterpart">
+    <label class="synchro guanzhugzh">关注公众号</label>
+  </div>
+</if>
+
+<!--呢称设置-->
+<div class="covernick">
+    <div class="nicknameset">
+      <div style="position: relative;height: 10px;background-color: #f3f3f3"></div>
+        <div>
+            <div class="conternicks">
+                <input type="text" class="nickname" name="nickname" placeholder="设置昵称">
+            </div>
+        </div>
+        <div class="butnickpasswoes">
+           <label class=" nickpasswordback" onclick="nicknameback(this)">返回</label>
+           <label class=" nickpasswordsave" onclick="nicknamesave(this)">保存</label>
+           </div>
+
+    </div>
+</div>
+<!--end呢称设置-->
+<!--手机号码-->
+<div class="coverphone">
+  <div class="phoneset">
+    <div style="position: relative;height: 10px;background-color: #f3f3f3"></div>
+    <div>
+      <div class="conterphone">
+        <label class="showtitle">手机号码</label>
+        <input type="number" class="phone" name="phone" placeholder="设置手机号">
+      </div>
+      <div class="conterphone">
+        <label class="showtitle">验证码</label>
+        <input type="text" class="phonecode" name="phone" placeholder="填写验证码">
+        <label class="getcode" data-code="" data-s="0">获取验证码</label>
+      </div>
+    </div>
+    <div class="butphonepasswoes">
+      <label class=" phonepasswordback" onclick="phoneback(this)">返回</label>
+      <label class=" phonepasswordsave" onclick="phonesave(this)">保存</label>
+    </div>
+
+  </div>
+</div>
+<!--end手机号码-->
+<!--性别选择-->
+<div class="coversex">
+    <div class="selectsex">
+        <div>
+            <img class="sexwomen" src="__PUBLIC__/theme2/Images/women.png" onclick="sexsure(this)">
+            <label>女性</label>
+        </div>
+        <div>
+            <img class="sexman" src="__PUBLIC__/theme2/Images/man.png" onclick="sexsure(this)">
+            <label>男性</label>
+        </div>
+    </div>
+</div>
+<!--end性别选择-->
+<!--地址选择-->
+<div class="coversel">
+    <div class="addrselect">
+       <!-- <div class="addr-box">
+            <label class="addrname">郭艳彬1</label>
+            <label class="addraddr" dataregion="河南省郑1郑州市金水区" dataxxaddr="文化路白庙社区恒大名都2号楼1单元802室">河南省郑1郑州市金水区文化路白庙社区恒大名都2号楼1单元802室</label>
+            <label class="addrphone">13711555815s</label>
+            <div class="addrsedit">
+                <label class="addrdefault schecked">默认地址</label>
+                <label class="addrdel">删除</label>
+                <label class="addredit" onclick="addressedit(this)">编辑</label>
+            </div>
+        </div>
+        <div class="addr-box">
+            <label class="addrname">郭艳彬2</label>
+            <label class="addraddr" dataregion="河南省郑郑州市2金水区" dataxxaddr="文化路白庙社区恒大名都2号楼1单元802室">河南省郑郑州市2金水区文化路白庙社区恒大名都2号楼1单元802室</label>
+            <label class="addrphone">213711555815</label>
+            <div class="addrsedit">
+                <label class="addrdefault">默认地址</label>
+                <label class="addrdel">删除</label>
+                <label class="addredit" onclick="addressedit(this)">编辑</label>
+            </div>
+        </div>
+        <div class="addr-box">
+            <label class="addrname">郭艳彬3</label>
+            <label class="addraddr" dataregion="河南省郑郑州市金3水区" dataxxaddr="文化路白庙社区恒大名都2号楼1单元802室">河南省郑郑州市金3水区文化路白庙社区恒大名都2号楼1单元802室</label>
+            <label class="addrphone">137131555815</label>
+            <div class="addrsedit">
+                <label class="addrdefault">默认地址</label>
+                <label class="addrdel">删除</label>
+                <label class="addredit" onclick="addressedit(this)">编辑</label>
+            </div>
+        </div>-->
+        <div style="height: 55px"></div>
+    </div>
+    <div class="but-address">
+        <label class="addrback" onclick="csback(this)">返回</label>
+        <label class="add-address" onclick="addressadd(this)">添加新地址</label>
+    </div>
+</div>
+<!--end地址选择-->
+<!--地址编辑-->
+<div class="coveredit" addrsID="">
+    <div class="addressedit">
+        <div class="conters">
+            <label>收货人</label>
+            <input type="text" class="shnames" name="shnames" placeholder="请填写姓名">
+        </div>
+        <div class="conters">
+            <label>联系电话</label>
+            <input type="text" class="shphones" name="shphones" placeholder="请填写联系电话">
+        </div>
+        <div class="conters">
+            <label>所在地区</label>
+            <label class="shshregions" data-province="" data-city="" data-area=""></label>
+            <label class="region" onclick="selregion(this)">请选择</label>
+        </div>
+        <div class="contersxx">
+            <label>详细地址</label>
+            <textarea class="xxaddr" rows="3"></textarea>
+        </div>
+        <div class="mraddr">
+            <label>设为默认</label>
+            <div class="addrcheck">
+                <input type="checkbox" id="checkbox_c1" class="chk_3"/>
+                <label for="checkbox_c1"></label>
+            </div>
+        </div>
+        <div style="height: 55px"></div>
+    </div>
+    <div class="but-address">
+        <label class="addrback" onclick="ceback(this)">返回</label>
+        <label class="add-address" onclick="addresssave(this)">保存</label>
+    </div>
+</div>
+<!--end地址编辑-->
+<!--当前城市-->
+<div class="coverregion">
+    <div class="selectregion">
+        <div style="height: 40px;background-color: #ffffff">
+            <label class="regionback" onclick="gbselregion(this)">取消</label>
+            <label class="regionsure" onclick="wcselregion(this)">完成</label>
+        </div>
+        <div id="addressPCD"></div>
+    </div>
+</div>
+<!--end当前城市-->
+<!--修改密码-->
+<div class="coverpassword">
+    <div class="passwordset">
+        <div style="background-color: #f3f3f3; height: 20px;position: relative;margin: 0px;border: none"></div>
+        <div>
+            <div class="conters">
+                <label>当前密码:</label>
+                <input type="password" class="oldpassword" name="oldpassword" placeholder="当前密码">
+            </div>
+            <div class="conters">
+                <label>新密码:</label>
+                <input type="password" class="newpassword" name="oldpassword" placeholder="新密码">
+            </div>
+            <div class="conters">
+                <label>确认密码:</label>
+                <input type="password" class="newnextpassword" name="oldpassword" placeholder="确认密码">
+            </div>
+        </div>
+        <div class="butnickpasswoes butpassword">
+              <label class=" nickpasswordback" onclick="passwordback(this)">返回</label>
+              <label class=" nickpasswordsave" onclick="passwordsave(this)">保存</label>
+          </div>
+    </div>
+</div>
+<!--end修改密码-->
+
+<!--我的二维码-->
+<div class="coverqrcode">
+    <div class="qr-codes">
+        <label class="qr-codesmy">我的二维码名片</label>
+        <img src="{:U('Public/getUserQrcode')}?openid={$userinfo['OpenId']}">
+        <label class="qr-codess">用手机扫一扫二维码</label>
+        <label class="qr-codegb" onclick="closeqrcode(this)">关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闭</label>
+    </div>
+</div>
+<!--end我的二维码-->
+
+
+<!--我的卡卷-->
+<div class="couvercoupons">
+    <div class="coupons">
+       <!-- <div class="couponpart">
+            <div class="coupondata">
+                <label class="couponprice"><span>￥</span>10<br><span>优惠券</span></label>
+                <label class="couponuse">满减券<br><span class="couponuse-1">金额满<span>100.00</span>可使用</span><br><span
+                        class="couponuse-2">领取时间:2016-03-09 12:14:25:36</span></label>
+            </div>
+            <div class="coupontime">
+                <label>有效期:2016-03-10&#45;&#45;2016-04-10</label>
+            </div>
+        </div>
+        <div class="couponpart">
+            <div class="coupondata">
+                <label class="couponprice coupxjdk "><span>￥</span>10<br><span>优惠券</span></label>
+                <label class="couponuse">现金抵扣券<br><span class="couponuse-1">使用现金满<span>100.00</span>可使用</span><br><span
+                        class="couponuse-2">领取时间:2016-03-09 12:14:25:36</span></label>
+            </div>
+            <div class="coupontime coupxjtime">
+                <label>有效期:2016-03-10&#45;&#45;2016-04-10</label>
+            </div>
+        </div>
+        <div class="couponpart">
+            <div class="coupondata">
+                <label class="couponprice coupzk">8<span>折</span><br><span>优惠券</span></label>
+                <label class="couponuse">折扣券<br><span class="couponuse-1">金额满<span>100.00</span>可使用</span><br><span
+                        class="couponuse-2">领取时间:2016-03-09 12:14:25:36</span></label>
+            </div>
+            <div class="coupontime coupzktime">
+                <label>有效期:2016-03-10&#45;&#45;2016-04-10</label>
+            </div>
+        </div>
+        <div class="couponpart">
+            <div class="coupondata">
+                <label class="couponprice"><span>￥</span>10<br><span>优惠券</span></label>
+                <label class="couponuse">满减券<br><span class="couponuse-1">金额满<span>100.00</span>可使用</span><br><span
+                        class="couponuse-2">领取时间:2016-03-09 12:14:25:36</span></label>
+            </div>
+            <div class="coupontime">
+                <label>有效期:2016-03-10&#45;&#45;2016-04-10</label>
+            </div>
+        </div>
+        <div class="couponpart">
+            <div class="coupondata">
+                <label class="couponprice coupxjdk "><span>￥</span>10<br><span>优惠券</span></label>
+                <label class="couponuse">现金抵扣券<br><span class="couponuse-1">使用现金满<span>100.00</span>可使用</span><br><span
+                        class="couponuse-2">领取时间:2016-03-09 12:14:25:36</span></label>
+            </div>
+            <div class="coupontime coupxjtime">
+                <label>有效期:2016-03-10&#45;&#45;2016-04-10</label>
+            </div>
+        </div>
+        <div class="couponpart">
+            <div class="coupondata">
+                <label class="couponprice coupzk">8<span>折</span><br><span>优惠券</span></label>
+                <label class="couponuse">折扣券<br><span class="couponuse-1">金额满<span>100.00</span>可使用</span><br><span
+                        class="couponuse-2">领取时间:2016-03-09 12:14:25:36</span></label>
+            </div>
+            <div class="coupontime coupzktime">
+                <label>有效期:2016-03-10&#45;&#45;2016-04-10</label>
+            </div>
+        </div>-->
+
+        <div style="height: 55px"></div>
+    </div>
+    <div class="but-address">
+        <label class="add-address backcoupons" onclick="backcoupons(this)">返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回</label>
+    </div>
+</div>
+<!--end我的卡卷-->
+
+<!-- 修改头像 -->
+<div class="couverxgtx">
+  <img id="txxg" src="__PUBLIC__/theme2/Images/touxiang.png" alt="">
+  <div class="txbtn">
+    <label class="seltx">选择图片<input type="file" id="iptxtp" name="iptxtp" onchange="seltxtp(this)"></label>
+    <label class="txback" onclick="gbtxxg(this)">关闭</label>
+    <label class="txsuer" onclick="qdtxxg(this)">确定</label>
+  </div>
+</div>
+<!-- end修改头像 -->

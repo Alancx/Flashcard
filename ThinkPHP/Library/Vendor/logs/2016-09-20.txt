@@ -1,0 +1,1136 @@
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:35:35
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:36:16
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:37:09
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:37:33
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:38:41
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:39:44
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[GrhMk0Nk5fdvkUnw]]></nonce_str>
+<sign><![CDATA[8DCB2BB2C58185A4B3408237B80EBD9E]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201239481a9bf4562c0439107820]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 12:39:48
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:40:10
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 12:41:30
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[95YheS36Z7Cwl3F8]]></nonce_str>
+<sign><![CDATA[DE5E38CE7AFD37A70706EC00CB71B0F7]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920125300befbca29610254484428]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 12:53:00
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[liM2tseFtRCEIbis]]></nonce_str>
+<sign><![CDATA[9E31D1F5CCD6E17719D0C8F29E81FC77]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092012540533144c3aa50350277667]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 12:54:05
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[rs3tPpCRAJwIwEmm]]></nonce_str>
+<sign><![CDATA[B6C9FF9E89CDABE2D266CE567F71A953]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920125459065f6646700559859580]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 12:54:59
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[Geuksysar7wqBP09]]></nonce_str>
+<sign><![CDATA[56732CC04FF0FDA859F0E88ADA4BD1C4]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092012552180e42b76da0070239367]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 12:55:21
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[4iOa9Axr9wJuj4Nr]]></nonce_str>
+<sign><![CDATA[691F6254C5639E2ABC16C3B2AA0CDB9F]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201257341d3b2c1c6c0543819300]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 12:57:34
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[eRyYv3DDQsnoeN7p]]></nonce_str>
+<sign><![CDATA[10B6C9A126B7CC7DBEAF4C04E3A17287]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092012574467965d5d850251528261]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 12:57:44
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid notify_url]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 13:07:21
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid notify_url]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 13:07:57
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid notify_url]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 13:08:34
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[invalid notify_url]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 13:09:17
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[FxQ8M0hhD0qzf9Ml]]></nonce_str>
+<sign><![CDATA[7250059977D5D7A9D08AE1E07004F121]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920131008cd384b236b0633585455]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:10:08
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[2ZAvXV1jXO65LgLa]]></nonce_str>
+<sign><![CDATA[F78EF5A090ECA9C1CB213B80D2F8D1DA]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201310333e28653c750918654420]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:10:33
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[iEcrdo999sZ6nC8J]]></nonce_str>
+<sign><![CDATA[5A03EF25BCBB8A38EDB4607B298017FA]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013110496abdb034b0953337741]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:11:04
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[IOAvtMw8TCgFrCpg]]></nonce_str>
+<sign><![CDATA[E7F72E50F4B46E2E68BF7C09F5E67828]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201312373ee30ce7860028393943]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:12:37
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[3dZ8kcptz9GoPzZf]]></nonce_str>
+<sign><![CDATA[8B76C13C02A6A7CE9D83E811ACF67C0C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920131332b8c908e1d40742794228]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:13:32
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[z0w8WVEDXnRpAO2r]]></nonce_str>
+<sign><![CDATA[EABDA051492D460CCEA1BA007EEB2ECD]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201314191a120d34cf0270320188]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:14:19
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[zpAPrOyH8kQoVxJI]]></nonce_str>
+<sign><![CDATA[F692EAC42821FCF75B02E07767C7E610]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013173077db40f15c0076773031]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:17:30
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[WUx9agCNkYfEZQyB]]></nonce_str>
+<sign><![CDATA[6C74FE841E0F7033BA7C940287D494EE]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920131822c457b725e50269876919]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:18:22
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[xWsvNXGxPk2C0QGa]]></nonce_str>
+<sign><![CDATA[1185676D3DB296A2AD3F41F6C9A31D27]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920131901225ed56cc60210648948]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:19:01
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[pqweow5HnZyqkueK]]></nonce_str>
+<sign><![CDATA[C04C31DA556C161378FDA15654D819C1]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920131927af09f719ad0526113398]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:19:27
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[D2jxSGSnA70iJrBb]]></nonce_str>
+<sign><![CDATA[7188BD1AC3E8BAEC98A72077C4C24CE0]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920131944b71c398acf0520133346]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:19:44
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[htBjzNbaum4FekfN]]></nonce_str>
+<sign><![CDATA[8304D30CE0DB7DE851C0999D7CB19A9D]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201320204f0a05affe0044016609]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:20:20
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[isQy2GG4wjMZvZ9o]]></nonce_str>
+<sign><![CDATA[EFC6AEC39977D77827566237A2BC9E51]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920132105910a1af8970927638292]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:21:05
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[ek4M5Dd36XjBOJgC]]></nonce_str>
+<sign><![CDATA[053A6912A28B09C117C7FD0EA3640D13]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201322316ca07769310615091631]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:22:31
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[ko8VuP1cDFi6jIZP]]></nonce_str>
+<sign><![CDATA[594C2B529E75744AB81DF17D6184C6D0]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201322479776fc9a180176060658]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:22:47
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[7ml4UklJ1tYOgM1G]]></nonce_str>
+<sign><![CDATA[D60848326F68C1810CF2F9788EAB18A7]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920132304f0a4c9b8680964143402]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:23:04
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[nbvdtDbbpEC08fQE]]></nonce_str>
+<sign><![CDATA[380AD3D1478DB5E52D910B5BB6FC6DC8]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013231753ef6e5ee50614544913]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:23:17
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[lv13T2Ai5hIhe6lc]]></nonce_str>
+<sign><![CDATA[13BA3FC3B8EC813BDAC1D2D7B4B6E35C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920132413fe219d6f8b0382802430]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:24:13
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[qmrt17RUpUnDbxrT]]></nonce_str>
+<sign><![CDATA[9A5924734513D541A368A6FD789459CD]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920133310d67f94a0e40187331951]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:33:10
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[h303dQSZqf9zbPLj]]></nonce_str>
+<sign><![CDATA[C899BE727047BC342308752697E5AC6E]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920133340f5813569150039729449]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:33:40
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[KhUJaVzow4AIuztI]]></nonce_str>
+<sign><![CDATA[A6691B680431DE5432764B5B3261367C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920133455c4dd817af10474843542]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:34:55
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[N7tN6kVd0XaIxSfc]]></nonce_str>
+<sign><![CDATA[CFB023FFAAEAA4AF4C630D17F6BC1C79]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920133509f84acd96fc0193069127]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:35:09
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 13:36:11
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[DWhiJjdgespRt3no]]></nonce_str>
+<sign><![CDATA[021288946EF97474FFBF3135243A6E7F]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920133622964970a2d60529172144]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:36:22
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[xJSw9CInLulAcsvE]]></nonce_str>
+<sign><![CDATA[40286F76D540ED5C0A053E0D358CD157]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013375639cb0d7ca10066872273]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:37:56
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[dqtS53CIBNg8yxYP]]></nonce_str>
+<sign><![CDATA[472B9FEE465701CC434F8A67D23EC939]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013391905d07b063b0494736707]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:39:19
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[3XQGVhEi7Cqr0d4W]]></nonce_str>
+<sign><![CDATA[43213299A64A2340BBB2B2F5C066A536]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920133952ca4247dcc50358737900]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:39:52
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[X7aUeWrCDGc4Mh8x]]></nonce_str>
+<sign><![CDATA[1F603B438B314D9C1C11EB9B71254073]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013422693116b7f8e0964369720]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:42:26
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[znEMevi60RfN8N46]]></nonce_str>
+<sign><![CDATA[A2A52822F2672ADB4C4FB5BE49195ACA]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920134317091fcbe3460552110633]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:43:17
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[5dpHwvMGQSRbjJwN]]></nonce_str>
+<sign><![CDATA[BFBD565B0854B7C36195E806D615E003]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201343345d62f39be30433348449]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:43:34
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[6cNkLYjgsEQeqU3G]]></nonce_str>
+<sign><![CDATA[15D62C0F0611297C1F25E455CB1F1302]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920134506cb511b91490772695690]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:45:06
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[EJfCRHsqvKUheT1w]]></nonce_str>
+<sign><![CDATA[AE1F6BAA1C43C0A7177229225E690933]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013542877285455090589668485]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:54:28
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[TsQ1XlSQmtcO73d5]]></nonce_str>
+<sign><![CDATA[862A79170B7A2E96C708392C5CA74405]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092013550252c97b2a5c0026624992]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:55:02
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[shR9alLlbufhKiOY]]></nonce_str>
+<sign><![CDATA[793626481FF29952676B5567A5C0C02A]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201356372e14df79120039310890]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:56:37
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[JaEkTdDVAFnQRVBv]]></nonce_str>
+<sign><![CDATA[CCDE2B09EC1483672FF139AA60F58CD9]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201358046d123485920296779705]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:58:04
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[1dW5VfR1wLPzGMYh]]></nonce_str>
+<sign><![CDATA[862C69BFEDC4A63FA32F3A76C4118227]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201358506886c3ac1e0163839688]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 13:58:50
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:00:29
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:01:15
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:01:41
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[epq6M0BFLnW4YN8w]]></nonce_str>
+<sign><![CDATA[1C748B73CA32C64E80114E14BA120728]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092014022229bdba65be0100601083]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:02:22
+操作定位:Index/getPay::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:02:34
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[wB1qINWbKe8oiH5U]]></nonce_str>
+<sign><![CDATA[1277D771DB5580AEE5075B05B2B7C192]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201412396881326b550130620544]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:12:39
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:12:48
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[q1alwFjkuge5AxKa]]></nonce_str>
+<sign><![CDATA[14083578E2447F1022C6996E4C4CBE77]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201413224f893bbf1f0233992072]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:13:22
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:13:32
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[6Vu7ftvyak4hF9TL]]></nonce_str>
+<sign><![CDATA[1282FD1654F156E5B94B569AC2EE5D93]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201414308c2d4294ca0211292879]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:14:30
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[AuWItCFfzFlNeSno]]></nonce_str>
+<sign><![CDATA[97CB9BE6DEFAEDCDC3D7A0845D04D641]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201414465b88143ff30599222454]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:14:46
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[i2DLHJTmCrWISiAa]]></nonce_str>
+<sign><![CDATA[0F7004DF0D5B03976089C3BAF486555D]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920141454ff3a2a18740414011578]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:14:54
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:15:38
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:15:38
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:15:39
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[096nTrd8d7tjJoVu]]></nonce_str>
+<sign><![CDATA[AA7F1C855FBE306B1FABDECE8E2B6D32]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201420252f714738ef0370545128]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:20:24
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[94HsXNHipBa54sLC]]></nonce_str>
+<sign><![CDATA[8527F35A777ADA317144DE04E599D4EE]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201422350f3fa25d210520082200]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:22:35
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[Uy5jx7T9MMTzuHu0]]></nonce_str>
+<sign><![CDATA[47419F1799CA740B15674A2E4E108A33]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201428486e4769b2c20238757881]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:28:47
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[uA82sBwy6njL6Y7N]]></nonce_str>
+<sign><![CDATA[D21C64E9BBEBCFE617E9D7E5F66399AB]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920143051fe8546174e0063364235]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:30:51
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[Y7Y02QIRxNAr1vXf]]></nonce_str>
+<sign><![CDATA[939A013802DD2F9E01117B5D2E38E4C1]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092014350100e8faa4ec0904571529]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:35:01
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[WBITiMZV4SPtKnc7]]></nonce_str>
+<sign><![CDATA[F81EE57BFB205E585799DFF648FDD38C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092014354709de287dd80029335486]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:35:47
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[dhi0aOT6AVIlbtic]]></nonce_str>
+<sign><![CDATA[D9503EA0792CB04191127317BF691518]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092014381727242bc4170279816238]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:38:17
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[QRv6dtafd21L73j7]]></nonce_str>
+<sign><![CDATA[C372737FD8E2B370AD23BDB54A26B809]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201439439600129f800684986546]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:39:43
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[HmmtCrCJSHhH9kBc]]></nonce_str>
+<sign><![CDATA[F716B5F7F3F9B66FD591FB0361BDFA7E]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201441506d81dbb1220909709204]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:41:50
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[QCzD34ZTwXFcWgpt]]></nonce_str>
+<sign><![CDATA[782FABDAF39FE0D7A3B56F45164B8986]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201442021a843211860839947395]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:42:02
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[HeNOuAe2H2uMwhuS]]></nonce_str>
+<sign><![CDATA[556A63CE8A41ECA4D44B7CFFEDC3FA59]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920144208a6491ea9280574626440]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:42:08
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[Atzg1v4ImohErdLz]]></nonce_str>
+<sign><![CDATA[531EAC338A20E2A14B3D5D24416E252E]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201442117a7861a9d20624828236]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:42:11
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[JNL3Qf6eEA5Kk2hj]]></nonce_str>
+<sign><![CDATA[4792F41D029C1E994EF1B60835503772]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092014422053664f88bc0385066072]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:42:20
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[5Tvojtdkdjvm8tLf]]></nonce_str>
+<sign><![CDATA[240A5E61517A4B5BC9B1D65914A2EC77]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920144229e71c90624c0022094140]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:42:29
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[X8kPs6WVDOczVeu0]]></nonce_str>
+<sign><![CDATA[159404705B4C7FDE880757B5CD25A97B]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920145211698b3c6ee50208432835]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:52:11
+操作定位:Index/getPay::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:52:23
+操作定位:Index/getPay::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:52:48
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[QITLxdpVUeEmyNyS]]></nonce_str>
+<sign><![CDATA[EB23D17172EE95461069B395D45A25CD]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920145306fd581c8e430264399847]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:53:06
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[wzgWv01jWHztuOhU]]></nonce_str>
+<sign><![CDATA[38C334581A658ACD23F69DC9147878CF]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920145322908d170c250604966231]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:53:22
+操作定位:Index/getPay::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:53:33
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:53:46
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:53:55
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:54:09
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:54:48
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:55:02
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:55:36
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:55:46
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[I9cXfux9QB4il1Gf]]></nonce_str>
+<sign><![CDATA[1A57E50AB063023BB451A8C30DF38126]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920145609d0f466418d0482157771]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:56:09
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:56:27
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[gUNAILu0rRJ5ITzf]]></nonce_str>
+<sign><![CDATA[7A3A86F1AACD5FC5BBEBA9168CB14648]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201456307dc57d4cf90219345219]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:56:30
+操作定位:Index/getPay::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:56:43
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:56:47
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[appid参数长度有误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:57:11
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[wGle48WjYybIM7JX]]></nonce_str>
+<sign><![CDATA[DF2DE46B3B4A3ED5DDC5A07C5CA14C10]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092014575749e9067da00750337558]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 14:57:57
+操作定位:Index/getPay::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:58:04
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 14:58:50
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 15:01:00
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 15:01:24
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[cXwW1yZeQNGhTlOR]]></nonce_str>
+<sign><![CDATA[E53D2ECF4D439E60A6296FAE4693965E]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920150437902e7aa3990743677204]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:04:37
+操作定位:Index/getPay::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[签名错误]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 15:04:46
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[tojMErGG7dARx4WI]]></nonce_str>
+<sign><![CDATA[5BA65954C2D4E1136B6A6FD235CD49AC]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201505007a03e7f72e0913427394]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:05:00
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[vreSv3MTnmNK4fRv]]></nonce_str>
+<sign><![CDATA[D9DDF7891103D6686BA9FB499698E294]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201505260e43d7ad3c0294844435]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:05:26
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[KK16NPS2ReeHK4nj]]></nonce_str>
+<sign><![CDATA[C48AA63436D23C838204B4683F168224]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201505410b918a8b130244344476]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:05:41
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[svZSrVHjeeIbfFbk]]></nonce_str>
+<sign><![CDATA[63718DFB13D9A973B792BCFAD14E00B4]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920150547ec286011330894081226]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:05:48
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[8kBB6zzkgEI0Izqk]]></nonce_str>
+<sign><![CDATA[99AFB848653C8339FA176ABF8BE3C281]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920150602098a7e4cc10145176422]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:06:02
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[vriCakcZ7yFgQUPM]]></nonce_str>
+<sign><![CDATA[C796FE16826CF1D6EF84C3C77F7184AB]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201506109cfee83cf10155594790]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:06:10
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[FgFwfuvVYbTM7ERm]]></nonce_str>
+<sign><![CDATA[F3E432E3863DDFF780BAAF003A5244E3]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151131af3151f4070730559437]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:11:31
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[YTikFIvb53Ntd8sL]]></nonce_str>
+<sign><![CDATA[C38FFB9E7615D90CB9F4CFAF763580AA]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201512185a84782e1d0886659956]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:12:18
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[r3m4Rhiip0tJYFGo]]></nonce_str>
+<sign><![CDATA[B3A5293CD2369C0A28914AC5B1A778A3]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201512264a2d7a6cfc0500589815]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:12:26
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[XcS0hHZFryP5NgyD]]></nonce_str>
+<sign><![CDATA[DDC7F947F7CC39603F772DCC10E61645]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151440a4c14291360245072661]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:14:40
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[a5I6BwjuKNUvOqmB]]></nonce_str>
+<sign><![CDATA[E7CCE13DE28B9CA80565A069712B3D9C]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151448d9f0b7f7ab0180897543]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:14:48
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[vqcsqf8LGF6oxfNu]]></nonce_str>
+<sign><![CDATA[EE0B6D7D82FF46F65748D12212529ADA]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151711f235a55b0f0320332350]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:17:12
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[vTxi1XwsFD2ZXPVp]]></nonce_str>
+<sign><![CDATA[0D565D9389E0659E248A4717F64ECA14]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092015171934dddf73b40358583778]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:17:20
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[jYqeIdUUYXOWgdZ8]]></nonce_str>
+<sign><![CDATA[6FBE5164ADD7F865B78AC4F2D5AA4CDB]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151834870cf8c4d00592480204]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:18:34
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[70hHIQTEMY1lJRJ8]]></nonce_str>
+<sign><![CDATA[93275DFFDC6B92CC6268918B220D6BBE]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151847613873c7c80791246775]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:18:47
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[FqrR7zu7INeC1ymH]]></nonce_str>
+<sign><![CDATA[63D9B39175AF8667E137F427D75E649B]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151917be41c3377a0773976857]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:19:17
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[KA7nTJuTWSSTx3hC]]></nonce_str>
+<sign><![CDATA[B30CD12BFA1B49925093B1DC1BA97940]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151925036170528e0096344312]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:19:25
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[bBlvCJGfsFKTKhdB]]></nonce_str>
+<sign><![CDATA[66DC7D021C4EE9999FD6DED0FBF589B0]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151934626dfd8e960052536674]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:19:34
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[AgoFAc3Stm6LC62Y]]></nonce_str>
+<sign><![CDATA[CFD4942BEEE1BC714BFE507A9E980379]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920151958c881069f750765763983]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:19:58
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[UDwRGKKnXvuxTaaW]]></nonce_str>
+<sign><![CDATA[6D2BBFFCB12CFD11C350D5B2AA19BB74]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092015200597056a8eb30578274795]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:20:05
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[euUML9opUCnlEBEA]]></nonce_str>
+<sign><![CDATA[C6AB4E2744F38B7272E95C20B84BC1ED]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201542343c662cacf70507221177]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:42:34
+操作定位:Index/paying::::<xml><return_code><![CDATA[FAIL]]></return_code>
+<return_msg><![CDATA[JSAPI支付必须传openid]]></return_msg>
+</xml>::::::操作日期:::::::2016-09-20 15:43:47
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[cGLi4zpx2nHOaqOx]]></nonce_str>
+<sign><![CDATA[1CF0940128E005F0B36E0BD3EBA109E3]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920154351a984fd71df0256065888]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:43:51
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[ORTS8ABwlZweHTdu]]></nonce_str>
+<sign><![CDATA[705299207757AA3A01DFB0FF84FB3C71]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920154406f85a8429760094605001]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:44:06
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[k5TOdbkKehIuoYY1]]></nonce_str>
+<sign><![CDATA[5B69E573949716A82EAB428A0E26B8F1]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092015444786acb6eb230318086376]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:44:47
+操作定位:Index/getPay::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[BS3TspPLcpeO8axn]]></nonce_str>
+<sign><![CDATA[A5854B1649D44136953BFD2272B1DD13]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx201609201544577ed3700b240871327552]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 15:44:57
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[eQVN0Z9Ou5TKJIoh]]></nonce_str>
+<sign><![CDATA[D3D8C19D49655627D8374A636D3D5574]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920170022caf9be51000923862620]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 17:00:22
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[uoY0f54RUt6F6gIU]]></nonce_str>
+<sign><![CDATA[54D84778BA7B11C5E7B028976E21EBFE]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920170259d07d5408f00250782008]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 17:02:59
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[daGkEjEZCDVpDIhJ]]></nonce_str>
+<sign><![CDATA[376B77470AC05E1D3585F27789276343]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920170308b5d1271b850472293110]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 17:03:08
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[KMV0aNjAgsKSRCj1]]></nonce_str>
+<sign><![CDATA[CD170E66EAB5D76AE50D53269317C2C9]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx2016092017041181eab1c2ab0242998055]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 17:04:11
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[HvuCaYBNfSVswlK2]]></nonce_str>
+<sign><![CDATA[8D70BC76161347730FCFF4F9379654C4]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920170434ee585ad7120406954485]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 17:04:34
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[orTzvUnzfqO4ORR2]]></nonce_str>
+<sign><![CDATA[66F78D0500732A4BF2492428C54C3386]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920170824de87381b8f0121337537]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 17:08:24
+操作定位:Index/paying::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wxb8ba6e24cc7558a1]]></appid>
+<mch_id><![CDATA[1296103901]]></mch_id>
+<nonce_str><![CDATA[kSysa6QzbDwQmWN6]]></nonce_str>
+<sign><![CDATA[86826D05AF8BFFFF90482298AA956140]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<prepay_id><![CDATA[wx20160920170841158e55248e0251866829]]></prepay_id>
+<trade_type><![CDATA[JSAPI]]></trade_type>
+</xml>::::::操作日期:::::::2016-09-20 17:08:41

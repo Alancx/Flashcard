@@ -1,0 +1,237 @@
+.showhome img{
+  width: 100%;
+}
+a,a:link,a:visited,a:hover{
+  text-decoration: none;
+  cursor:default;
+}
+li{
+  list-style-type: none;
+}
+.pagehomeset{
+  margin: 0px 0px 0px 0px;
+  display: block;
+  position: absolute;
+  top:0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 0px 0px 0px 0px;
+}
+.page{
+  height: 100%;
+  position: relative;
+  padding: 5px 5px 5px 5px;
+  background-color: #f3f3f3;
+  overflow: scroll;
+}
+/*左边区域设置*/
+.showhome{
+  display: block;
+  height: auto;
+  background-color: #eeeeee;
+}
+
+/*轮播图区域*/
+.swiper-container-home{
+  min-height: 100px;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #ffffff;
+}
+.swiper-container-class{
+  min-height: 50px;
+  background-color: #ffffff;
+}
+.swiper-container-home .swiper-slide .imgslide{
+  width: 100%!important;
+  height: 100%!important
+}
+.swiper-pagination-home{
+  bottom:4px!important;
+  padding: 0px 10px 0px 0px;
+  text-align: center;
+}
+.swiper-pagination-home>.swiper-pagination-bullet{
+  margin: 0px 3px 0px 3px!important;
+  background-color: rgba(255, 255, 255, 0.5)!important;
+  opacity: 1!important;
+}
+.swiper-pagination-home>.swiper-pagination-bullet-active{
+  width: 15px;
+  border-radius: 6px;
+  margin: 0px 3px 0px 3px!important;
+  background-color: #ffffff!important;
+}
+/*轮播图end*/
+/*分类区域*/
+.classtype{
+  width: 100%;
+  padding: 5px;
+}
+.classtype>img{
+  width: 100%;
+  border-radius: 8px;
+}
+.classtype>label{
+  display: block;
+  width: 100%;
+  font-size: 12px!important;
+  font-weight: 400!important;
+  color: #333333;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  margin: 5px 0px;
+}
+/*分类区域end*/
+/*活动banner*/
+.home_activity{
+  position: relative;
+  height: auto;
+}
+/*活动banner end*/
+/*产品区域一*/
+.product_1{
+  margin: 10px 0px 0px 0px;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+.product_1>.proinfo_1{
+  display: block;
+  overflow: hidden;
+}
+/*产品区域一end*/
+/*产品区域二*/
+.product_2{
+  margin: 10px 0px 0px 0px;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+.product_2>.proinfo_2{
+  display: block;
+  overflow: hidden;
+  float: left;
+  width: 50%;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-color: #ffffff;
+}
+.product_2>.proinfo_2:nth-child(2n){
+  border-right-style: solid;
+  border-right-width: 1px;
+}
+.product_2>.proinfo_2:nth-child(2n+1){
+  border-left-style: solid;
+  border-left-width: 1px;
+}
+/*产品区域二end*/
+/*覆盖层样式*/
+.overburden{
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%!important;
+  height: 100%!important;
+  min-height: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-style: solid;
+  border-width: 2px;
+  border-color: #ffffff;
+  z-index: 100;
+  color: #ffffff;
+  text-align: center;
+}
+.overburden>div{
+  display: table;
+  width: 100%!important;
+  height: 100%!important;
+}
+.overburden>div>span{
+  display: table-cell;
+  vertical-align: middle;
+}
+/*左侧区域设置end*/
+
+/*右侧设置区域*/
+.editpage{
+  height: 100%;
+  position: relative;
+  padding: 5px 0px 50px 15px;
+  overflow: hidden;
+}
+.editpage>div{
+  height: 100%;
+  overflow: auto;
+  padding: 0px 15px 10px 0px;
+}
+.editqy{
+  display: block;
+  position: relative;
+  width: 100%;
+}
+.editqy>label{
+  display: block;
+  height: 30px;
+  line-height: 29px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  text-align: center;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.seltype{
+  display: block;
+  position: relative;
+  padding: 0px 0px 0px 70px;
+  height: auto;
+  overflow: hidden;
+}
+.seltype>label{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 30px;
+  line-height: 30px;
+  width: 65px;
+  text-align: right;
+}
+.seltype>select{
+  float:left;
+  width: 100%;
+}
+.btn-update{
+  margin: 5px 0px 0px 0px;
+}
+.bottom-btn{
+  display: block;
+  position: absolute!important;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px!important;
+  padding: 5px 40px 4px 40px!important;
+  background-color: #dddddd;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+.bottom-btn>button:nth-child(2){
+  float: right;
+}
+#savehome{
+  /*width:100%;*/
+}
+.input-group-addon{
+  cursor: pointer;
+}
+.lbactive,.classactive,.oneproactive,.twoproactive{
+  background-color: rgba(255, 0, 0, 0.2);
+}

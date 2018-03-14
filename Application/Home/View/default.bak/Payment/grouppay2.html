@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/GroupBuy/css/mui.min.css" rel="stylesheet" />
+	  <script src="__PUBLIC__/theme2/js/jquery.1.11.3.min.js"></script>
+	  <!-- Include all compiled plugins (below), or include individual files as needed -->
+	  <script src="__PUBLIC__/theme2/js/bootstrap.min.js"></script>
+	  <script src="__PUBLIC__/Plugins/qrcode/jquery.qrcode.min.js"></script>
+	</head>
+	<style type="text/css">
+		body,
+		div,
+		ul,
+		li,
+		dt,
+		dd,
+		dl,
+		table,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		span,
+		tr,
+		th,
+		td,
+		img {
+			margin: 0px;
+			padding: 0px;
+			list-style-type: none;
+		}
+		
+		a {
+			text-decoration: none;
+			color: #444;
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			font-family: "微软雅黑", arial;
+			background: #fff !important;
+		}
+		
+		header {
+			background: rgba(255, 255, 255, .95) !important;
+		}
+		
+		.content .mui-scroll {
+			padding: 44px 0 20px 0;
+		}
+		
+		.center{
+			margin-top: 30%;
+		}
+		
+		#Pay {
+			width: calc(100% - 20px) !important;
+			height: 50px;
+			padding: 0 !important;
+			position: fixed;
+			bottom: 10px;
+			left: 10px;
+			z-index: 10;
+		}
+		
+		.title {
+			border-bottom: 1px solid #DD524D;
+			padding: 10px;
+			margin: 10px;
+			position: relative;
+		}
+		
+		.title>small {
+			display: block;
+			width: 80px;
+			height: 6px;
+			background: #DD524D;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		
+		h3 {
+			text-align: center;
+			color: #DD524D;
+			padding: 20px 0;
+		}
+		.foot{
+			border-top:1px solid #DD524D ;
+			text-align: center;
+			padding: 10px;
+			margin: 0 10px;
+			overflow: hidden;
+			position: relative;
+		}
+		.foot>small{
+			display: block;
+			width: 80px;
+			height: 6px;
+			background: #DD524D;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">支付</h1>
+		</header>
+		<div class="content mui-scroll-wrapper">
+			<div class="mui-scroll">
+
+				<div class="center">
+					<div class="title">
+						您正在支付的商品总计：
+						<small></small>
+					</div>
+					<h3>￥{$money}</h3>
+					<div class="foot">
+						<!-- <p>6.18大批高额优惠券限时领取</p> -->
+						<small></small>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<button id="Pay" type="button" class="mui-btn mui-btn-red mui-btn-block" onclick="callpay();">立即支付</button>
+
+	</body>
+<script type="text/javascript">
+          var payLock=false;
+             function jsApiCall()
+                {
+                  WeixinJSBridge.invoke('getBrandWCPayRequest',{$wxPayData},
+                    function (res)
+                    {
+                      //WeixinJSBridge.log(res.err_msg);
+                      //alert(res.err_code + res.err_desc + res.err_msg);
+                      if(res.err_msg == "get_brand_wcpay_request:cancel")
+                      {
+                        //var err_msg = "您取消了支付";
+                        payLock=false;
+                        alert("您取消了支付");
+                      }
+                      else if(res.err_msg == "get_brand_wcpay_request:fail")
+                      {
+                        //var err_msg = "支付失败<br/>错误信息："+res.err_desc;
+                        payLock=false;
+                        alert("支付失败,错误信息："+res.err_desc);
+                      }
+                      else if(res.err_msg == "get_brand_wcpay_request:ok")
+                      {
+                        alert("支付成功");
+                        setTimeout(function() { window.location.href="{:U('Home/GroupBuy/MyGroup')}";}, 1000);
+                      }
+                      else
+                      {
+                        payLock=false;
+                        alert("支付遇到未知错误。");
+                      }
+                    }
+                );
+                }
+
+                function callpay()
+                {
+                  if (payLock) {
+                    return;
+                  }
+                  payLock=true;
+                  if (typeof WeixinJSBridge == "undefined")
+                  {
+                    if (document.addEventListener)
+                    {
+                      document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    }
+                    else if (document.attachEvent)
+                    {
+                      document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                      document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+                  }
+                  else
+                  {
+                    jsApiCall();
+                  }
+                }
+
+                $(function()
+                {
+                  callpay();
+                });
+
+          </script>
+	<script src="__PUBLIC__/GroupBuy/js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init()
+			//初始化页面  ***
+		mui.plusReady(function() {});
+	</script>
+
+</html>

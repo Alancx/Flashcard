@@ -1,0 +1,306 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/index.css?v=2.1" />
+<div class="contents">
+  <!-- 顶部店铺信息 -->
+  <div class="tophead">
+    <div class="shopinfor">
+      <img src="{$sinfo.Slogo}" class="shoplogo" />
+      <div class="">
+        <div class="shopname mui-ellipsis">{$sinfo.storename}</div>
+        <span class="shopphone" RPath="tel:{$sinfo.tel}">{$sinfo.tel}</span>
+      </div>
+    </div>
+    <div class="icons">
+      <span class="setshoplx" data-sname="{$sinfo.storename}" data-lat="{$sinfo.lat}" data-lng="{$sinfo.lang}">
+        <small class="ggg address_icon"></small>
+        <span>地图</span>
+      </span>
+      <if condition="$colltype eq 0 ">
+        <span class="setshopgz" data-type='0'>
+          <small class="ggg xin_icon"></small>
+          <span>关注</span>
+        </span>
+        <else />
+        <span class="setshopgz" data-type='1'>
+          <small class="ggg xin_fillicon"></small>
+          <span>已关注</span>
+        </span>
+      </if>
+    </div>
+    <div class="text mui-ellipsis">
+      {$sinfo.city}&nbsp;{$sinfo.area}{$sinfo.addr}
+    </div>
+    <!-- <img src="" class="bgimg" /> -->
+  </div>
+  <!-- 中间区域信息 -->
+  <div class="allproinfo">
+    <div class="contentstop">
+      <if condition="$gginfo neq null ">
+        <div class="marqueeinfo">
+          <img src="" class="bgimg" />
+          <marquee scrollamount="5">【光盘客】{$gginfo}</marquee>
+        </div>
+      </if>
+      <div class="redinfopart">
+        <img src="__PUBLIC__/newhome/img/showredimg.png" alt="">
+      </div>
+      <!--红包部分-->
+      <!-- <if condition="$coupon neq null ">
+        <div class="redenvelpart">
+          <div class="redenveltitle">
+            <span>领红包</span>
+            <span>少花钱</span>
+          </div>
+          <div class="redenvellist">
+            <div class="redenvel_list">
+              <volist name="coupon" id="vo">
+                <div class="redinfo" data-id="{$vo.CouponId}" RPath="{:U('Index/redenvel',array('rid'=>$vo['CouponId']))}"><span>{$vo.Rules}</span></div>
+              </volist>
+            </div>
+          </div>
+        </div>
+      </if> -->
+      <!--活动区域部分信息-->
+      <div class="activitypart">
+        <div class="activitypart_1" RPath="{:U('Index/activity',array('type'=>TJ))}">
+          <!-- <empty name="showname.tjshowname">
+    				<span>特价</span>
+    				<else />
+            <span>{$showname.tjshowname}</span>
+    			</empty> -->
+          <if condition="$tjimg neq null ">
+            <img src="{$tjimg}"/>
+            <else/>
+            <img src="__PUBLIC__/newhome/img/activityimg.jpg" />
+          </if>
+        </div>
+        <div class="activitypart_2" RPath="{:U('Index/activity',array('type'=>TS))}">
+          <!-- <empty name="showname.tsshowname">
+    				<span>特色</span>
+    				<else />
+            <span>{$showname.tsshowname}</span>
+    			</empty> -->
+          <if condition="$tsimg neq null ">
+            <img src="{$tsimg}"/>
+            <else/>
+            <img src="__PUBLIC__/newhome/img/activityimg.jpg" />
+          </if>
+        </div>
+      </div>
+    </div>
+    <div class="tabpart">
+      <ul id="tab_part">
+        <li class="current" data-index='0'><span><span>点单</span></span><span class="tab_line"></span></li>
+        <li data-index='1'><span><span>评价({$sevalnum})</span></span><span class="tab_line"></span></li>
+        <li data-index='2'><span><span>商家</span></span><span class="tab_line"></span></li>
+      </ul>
+    </div>
+    <div class="allinfopart">
+      <div class="propart" data-oo="tab">
+        <div class="lefttab">
+          <ul>
+            <foreach name="allpros" item='ap'>
+              <li class="mui-ellipsis-2"><span class="mui-ellipsis-2">{$ap.ClassName}</span></li>
+            </foreach>
+          </ul>
+        </div>
+        <div class="righttab">
+          <ul>
+            <foreach name='allpros' item='pro'>
+              <li>
+                <div class="class-title"><span>{$pro.ClassName}</span></div>
+                <foreach name='pro.pros' item='po'>
+                  <if condition="$po['plcount'] gt 1 ">
+                    <div class="spitem outproinfo" data-pid="{$po.ProId}" data-cid="{$pro.ClassId}">
+                      <img src="{$po.ProLogoImg}" RPath="{:U('Goods/goods')}?pid={$po.ProId}"/>
+                      <div>
+                        <p class="mui-ellipsis">{$po.ProName}</p>
+                        <div class="">
+                          <span>
+                            <if condition="$po['NumType'] eq '1' ">
+                              <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/份</span></span>
+                              <else/>
+                              <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/斤</span></span>
+                            </if>
+                            <if condition="$po['Price'] neq $po['OldPrice'] ">
+                              <span class="fubiao"><del><?php echo $po['OldPrice']?sprintf("%.2f",$po['OldPrice']):'0.00' ?></del></span>
+                              <else />
+                              <span class="fubiao"></span>
+                            </if>
+                          </span>
+                          <p class="showsale">已售{$po.SalesCount}</p>
+                        </div>
+                        <div class="shownumbtn"  data-pid="{$po.ProId}" data-pname="{$po.ProName}" data-pimg="{$po.ProLogoImg}" data-price="{$po.Price}" data-cid="{$pro.ClassId}" data-plcount="{$po.plcount}" data-numtype="{$po.NumType}">
+                          <span class="selSpec">选规格</span>
+                        </div>
+                      </div>
+                      <if condition="$po['Level'] neq ''">
+                        <span class="eatmore">越来越便宜</span>
+                      </if>
+                    </div>
+                  <else/>
+                  <div class="spitem outproinfo" data-pid="{$po.ProId}" data-cid="{$pro.ClassId}" data-plid="{$po['prolist'][0]['ProIdCard']}">
+                    <img src="{$po.ProLogoImg}" RPath="{:U('Goods/goods')}?pid={$po.ProId}"/>
+                    <div>
+                      <p class="mui-ellipsis">{$po.ProName}</p>
+                      <div class="">
+                        <span>
+                          <if condition="$po['NumType'] eq '1' ">
+                            <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/份</span></span>
+                            <else/>
+                            <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/斤</span></span>
+                          </if>
+                          <if condition="$po['Price'] neq $po['OldPrice'] ">
+                            <span class="fubiao"><del><?php echo $po['OldPrice']?sprintf("%.2f",$po['OldPrice']):'0.00' ?></del></span>
+                            <else />
+                            <span class="fubiao"></span>
+                          </if>
+                        </span>
+                        <p class="showsale">已售{$po.SalesCount}</p>
+                      </div>
+                      <div class="shownumbtn"  data-pid="{$po.ProId}" data-pname="{$po.ProName}" data-pimg="{$po.ProLogoImg}" data-price="{$po.Price}" data-cid="{$pro.ClassId}" data-plcount="{$po.plcount}" data-plid="{$po['prolist'][0]['ProIdCard']}" data-plspec="{$po['prolist'][0]['ProSpec']}" data-numtype="{$po.NumType}">
+                        <if condition="$po['NumType'] eq '1' ">
+                          <span class="minusbtn ggg minus_icon"></span>
+                          <span class="showselnum">0</span>
+                          <span class="plusbtn ggg plus_icon"></span>
+                          <else/>
+                          <input type="text" name="proweight" class="proweight" value="0">
+                        </if>
+                      </div>
+                    </div>
+                    <if condition="$po['Level'] neq ''">
+                      <span class="eatmore">越来越便宜</span>
+                    </if>
+                  </div>
+                  </if>
+                </foreach>
+              </li>
+            </foreach>
+          </ul>
+        </div>
+
+      </div>
+      <div class="evaluatepart" data-oo="tab" hidden="">
+        <ul>
+          <foreach name="shopeval" item="sv">
+            <li class="evaluate_list">
+              <img class="userhead" src="{$sv.HeadImgUrl}" alt="">
+              <div class="righteval">
+                <span class="userinfo">
+                  <span class="username">{$sv.MemberName}</span>
+                  <span class="setstarts">
+                    <for start="1" end="6">
+                      <if condition="$sv['ServiceScore'] egt $i">
+                        <span class="ggg xing_icon setstartactive"></span>
+                        <else />
+                        <span class="ggg xing_icon"></span>
+                      </if>
+                    </for>
+                  </span>
+                  <span class="usertime">{$sv.cdate}</span>
+                </span>
+                <span class="usersetevaluate mui-ellipsis-2">{$sv.Content}</span>
+                <div class="usersetimglist">
+                  <!-- <img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+                  <img src="__PUBLIC__/newhome/img/spimg.jpg" alt="">
+                  <img src="__PUBLIC__/newhome/img/spimg.jpg" alt=""> -->
+                </div>
+              </div>
+            </li>
+          </foreach>
+        </ul>
+      </div>
+      <div class="businesspart" data-oo="tab" hidden="">
+        <ul>
+          <li class="business_info">
+            <span  class="ggg address_icon"></span>
+            <span class="business_addr mui-ellipsis">{$sinfo.city}{$sinfo.area}{$sinfo.addr}</span>
+            <span  class="ggg phone_icon" RPath="tel:{$sinfo.tel}"></span>
+          </li>
+          <li class="business_imgs">
+            <foreach name="simgs" item="si">
+              <img src="{$si}" alt="">
+            </foreach>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- 底部结算区域 -->
+  <div class="bottompart">
+    <div class="showgetpronum">
+      <span class="ggg car_icon"></span>
+      <span>0</span>
+    </div>
+    <span class="gotopay">去结算</span>
+    <span class="showtotal mui-ellipsis"><span class="totalprice">0.00</span></span>
+    <div class="hasselprosmark">
+      <div class="hasselpros">
+        <div class="hasselprostop">
+          <span class="cleanselpros">清空菜单</span>
+          <span class="downcarts">收起</span>
+        </div>
+        <div class="selproslist">
+          <!-- <div class="spitem inproinfo" data-pid="pro0640928931" data-cid="undefined">
+            <img src="/Upload/Uoloads/2017-11-14/5a0a8d07a5677.jpg">
+            <div>
+              <p class="selpronameinfo">
+                <span class="selproname mui-ellipsis">小盘咸鱼</span>
+                <span class="selprospec mui-ellipsis">(微辣)</span>
+              </p>
+              <span class="jiage">39</span>
+              <div class="shownumbtn" data-pid="pro0640928931" data-pname="小盘咸鱼" data-pimg="/Upload/Uoloads/2017-11-14/5a0a8d07a5677.jpg" data-price="39" data-cid="undefined" data-plid="undefined" data-plspec="undefined">
+                <span class="minusbtn ggg minus_icon"></span>
+                <span class="showselnum">1</span>
+                <span class="plusbtn ggg plus_icon"></span>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 选择规格属性 -->
+  <div class="prospecmark">
+    <div class="prospecinfo">
+      <div class="prospec_top">
+        <span class="pspecname mui-ellipsis"></span>
+        <span class="closeselprospec mui-icon mui-icon-closeempty"></span>
+      </div>
+      <div class="prospec_list">
+        <span>规格:</span>
+        <div class="prospec_info_list">
+
+        </div>
+        <!-- <span class="pspec_info mui-ellipsis"><span>微辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>重辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>变态辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>超级辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>重辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>变态辣</span></span>
+        <span class="pspec_info mui-ellipsis pspec_infoactive"><span>超级辣</span></span> -->
+      </div>
+      <div class="prospec_bottom">
+        <span class="prospecprice">0</span>
+        <span class="prospechas"></span>
+        <div class="shownumbtn"  data-pid="" data-pname="" data-pimg="" data-price="" data-cid="" data-plid="" data-plspec="" data-numtype="">
+          <!-- <span class="minusbtn ggg minus_icon"></span>
+          <span class="showselnum">0</span>
+          <span class="plusbtn ggg plus_icon"></span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 选择规格属性end -->
+
+</div>
+<script src="__PUBLIC__/newhome/js/index.js?v=2.2" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var updatecart_url = "{:U('Public/updatecart')}";
+var cartslist = '{$cartinfo}';
+var order_url = "{:U('Orders/submitorder')}";
+var setshopcollect_url = "{:U('Index/setshopcollect')}";
+var allproinfo ='{$allproinfo}';
+</script>

@@ -1,0 +1,61 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+
+<style type="text/css">
+  .head{
+  	margin:25px;
+  }
+</style>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>个人资料</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index.html">主页</a>
+                </li>
+                <li class="active">
+                    <strong>修改头像 <small>双击选中头像即可更换</small></strong>
+                </li>
+            </ol>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+
+                        <div class="ibox-content">
+                        <?php for ($i=1; $i < 58; $i++) {  ?>
+                        <label class="head">  <img src="__PUBLIC__/Admin/Admin/img/headimg/head ({$i}).png" alt="" width="100" height="100" ondblclick="editImg('head ({$i}).png')"><input type="radio" name="headimg" id="" style="display:block;margin-left:45%;"></label>
+                        <?php } ?>
+                        </div>
+                    </div>
+                    <div style="text-align:center;">{$page}</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script type="text/javascript">
+	function editImg(img){
+		// alert(img);
+		$.ajax({
+			type:"post",
+			url:"{:U('My/editImg')}",
+			data:"img="+img+"&uid="+<?php echo $_SESSION['admin']['userinfo']['ID']; ?>,
+			dateType:'json',
+			success:function(msg){
+				if (msg=='success') {
+					art.dialog.tips('修改成功 :)');
+					$("#headimg").attr('src','__PUBLIC__/Admin/Admin/img/headimg/'+img);
+				};
+				if (msg=='error') {
+					art.dialog.tips('修改失败 :(');
+				};
+			}
+		})
+	}
+</script>
+<include file="Common:footer" />

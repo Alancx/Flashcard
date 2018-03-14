@@ -1,0 +1,105 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加部门</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" class="form-inline" action="{:U('Admin/savePartment')}" method="post" id="save">
+                    <div class="form-group">
+                        <label for="exampleInputEmail2" class="sr-only">上级部门</label>
+                        <select name="ParentId" id="ParentId" class="form-control" value="" onchange="giveSort();">
+                            <option value="">请选择上级部门</option>
+                            <option value="0">顶级部门</option>
+                            <foreach name="parts" item="dc">
+                                <option value="{$dc.ID}">{$dc.Name}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2" class="sr-only">部门名称</label>
+                        <input type="text" placeholder="请填写部门名称" name="Name" id="Name" class="form-control"></div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2" class="sr-only">部门排序</label>
+                        <input type="text" placeholder="部门排序" name="Sort" id="Sort" class="form-control"></div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2" class="sr-only">备注</label>
+                        <input type="text" placeholder="备注" name="Remarks" id="Remarks" class="form-control"></div>
+                    <input type="hidden" name="id" value="" id="id">
+                    <input type="hidden" name="ParentSort" id="ParentSort" value="">
+                    <button class="btn btn-outline btn-primary" type="submit">保 存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <table class="table">
+            <tr>
+                <td>ID</td>
+                <td>部门名称</td>
+                <td>上级部门ID</td>
+                <td>排序</td>
+                <td>操作</td>
+            </tr>
+            <foreach name="allParts" item="class">
+                <tr>
+                    <td>{$class.ID}</td>
+                    <td>{$class.Name}</td>
+                    <td>{$class.ParentId}</td>
+                    <td>{$class.Sort}</td>
+                    <td>
+                        <a href="###" onclick="edit('{$class.ID}');">编辑</a>
+                        |
+                        <a href="###" onclick="del('{$class.ID}');">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+        </table>
+        <div style="text-align:right;">{$page}</div>
+    </div>
+</div>
+<script type="text/javascript">
+    function del(id){
+        art.dialog.confirm('确定要删除吗？请慎重操作', function () {
+            window.location.href="{:U('Admin/delPart')}?id="+id;
+            // alert('hahaha')
+        }, function () {
+            art.dialog.tips('取消操作');
+        });
+    }
+
+    function edit(id){
+        var data={$jsonData};
+        $.each(data,function(index,item){
+            if (item.ID==id) {
+                $("#ParentId").val(item.ParentId);
+                $("#Name").val(item.Name);
+                $("#Sort").val(item.show);
+                $("#Remarks").val(item.Remarks);
+                $("#id").val(item.ID);
+                $("#ParentSort").val(item.ParentSort);
+                // console.log(item);
+                // alert(item.Name)
+            };
+        })
+    }
+
+    function giveSort(){
+        var sid=$("#ParentId").val();
+        var pdata={$pdata};
+        $.each(pdata,function(index,item){
+            if (item.ID==sid) {
+                $("#ParentSort").val(item.Sort);
+            };
+        })
+    }
+</script>
+<include file="Common:footer" />

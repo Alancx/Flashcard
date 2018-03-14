@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chats>
+  <chat>
+    <type>to</type>
+    <kfid>114</kfid>
+    <datetime>2016-09-01 10:06:11</datetime>
+    <content>你好</content>
+  </chat>
+<chat><type>to</type><kfid>114</kfid><datetime>2016-09-01 10:06:19</datetime><content>微笑 </content></chat><chat><type>to</type><kfid>114</kfid><datetime>2016-09-01 10:06:26</datetime><content> </content></chat><chat><type>to</type><kfid>114</kfid><datetime>2016-09-01 10:06:35</datetime><content>  </content></chat><chat><type>to</type><kfid>114</kfid><datetime>2016-09-01 10:06:41</datetime><content>  </content></chat><chat><type>from</type><kfid>114</kfid><datetime>2016-09-01 10:06:54</datetime><content>   </content></chat><chat><type>from</type><kfid>114</kfid><datetime>2016-09-01 10:07:13</datetime><content>在吗</content></chat><chat><type>to</type><kfid>114</kfid><datetime>2016-09-01 10:07:24</datetime><content>你好</content></chat><chat><type>to</type><kfid>114</kfid><datetime>2016-09-01 10:07:28</datetime><content>在哪</content></chat></chats>

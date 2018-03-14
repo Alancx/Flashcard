@@ -1,0 +1,108 @@
+<include file="Common:top" />
+<link href="__PUBLIC__/Admin/Admin/common/css/order.style.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<style type="text/css">
+ul,ol,li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+</style>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+    <div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="" class="form-inline" method="post" id="saccess">
+            <div class="form-group">
+                <input type="text" name="stime" id="stime" class="form-control" placeholder="开始时间(下单)" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="{$data.stime}">
+            </div>
+            <div class="form-group">
+                <input type="text" name="etime" id="etime" class="form-control" placeholder="结束时间(下单)" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="{$data.etime}">
+            </div>
+            <button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button> <button class="btn btn-default btn-outline btn-md" type="button" id="import"><span class="glyphicon glyphicon-import"></span>导 出</button>
+        </form>
+    </div>
+        <div class="col-lg-12">
+            <div class="ibox-content dash-ibox-content">
+            	<p type="text-left" style="font-weight: bold;font-size: 12px;">总额 :&emsp;<span>{$total|number_format=###,'2'}&emsp;元</span></p>
+                <table class="table table-condensed table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th>店铺名称</th>
+                            <th>销售额</th>
+                            <th>联系人</th>
+                            <th>联系电话</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="saledata" item='ass'>
+                        <tr>
+                            <td>{$ass.storename}</td>
+                            <td>{$ass.allmoney|number_format=###,'2'}</td>
+                            <td>{$ass.TrueName}</td>
+                            <td>{$ass.tel}</td>
+                        </tr>
+                        </foreach>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align:right;">{$page}</div>
+        </div>
+    </div>
+</div>
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">NProgress.done()</script>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#saccess').submit(function(){
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime) {
+				if (stime && etime) {
+					if (stime<etime) {
+						return true;
+					}else{
+						art.dialog.tips('非法时间段');
+						return false;
+					}
+				}else{
+					art.dialog.tips('请选择完整时间段');
+					return false;
+				}
+			}else{
+				return true;
+			}
+		})
+		$('#import').click(function(){
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime) {
+				if (stime && etime) {
+					if (stime<etime) {
+						art.dialog.tips('正在处理...',3);
+						window.location.href="{:U('Storers/mersalesout')}?stime="+stime+"&etime="+etime;
+					}else{
+						art.dialog.tips('非法时间段');
+						return false;
+					}
+				}else{
+					art.dialog.tips('请选择完整时间段');
+					return false;
+				}
+			}else{
+				art.dialog.tips('正在处理...',3);
+				window.location.href="{:U('Storers/mersalesout')}";
+			}
+		})
+	})
+</script>
+</html>

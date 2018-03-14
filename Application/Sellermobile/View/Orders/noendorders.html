@@ -1,0 +1,88 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/tkorders.css?v=1.1">
+<style media="screen">
+  .order_remark{
+    display: block;
+    overflow: hidden;
+    border-bottom: 1px solid #dddddd;
+    font-size: 14px;
+    color: #666666;
+    padding: 10px;
+    line-height: 16px;
+  }
+</style>
+<empty name="orders">
+  <div class="nodata">
+    <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+  </div>
+  <else />
+  <div class="ordercontents">
+    <foreach name="orders" item="info">
+      <div class="orderinfo order_{$info['OrderId']}">
+        <label class="orderid">{$info['MemberName']}<span>待完成</span><br><span>{$info['OrderId']}</span><span>{$info['oDate']}</span><br>
+          <notempty name="info.ShortOid">
+            <span>就餐码:{$info['ShortOid']};</span>
+          </notempty>
+          <notempty name="info.TableId">
+            <span>桌号:{$info['TableId']};</span>
+          </notempty>
+        </label>
+        <notempty name="info.MessageByBuy">
+            <label class="order_remark">备注:{$info['MessageByBuy']}</label>
+        </notempty>
+        <div class="prolist">
+          <foreach name="info['prolist']" item="proinfo">
+            <div class="proinfo">
+              <img src="{$proinfo['ProLogoImg']}">
+              <label class="proname">{$proinfo['ProName']}</label>
+              <label class="proattr">{$proinfo['Spec']}</label>
+              <label class="proprice"><span>￥</span><?php echo $proinfo['Price']?sprintf("%.2f",$proinfo['Price']):'0.00' ?><span>×{$proinfo['Count']}</span></label>
+            </div>
+          </foreach>
+        </div>
+        <label class="totalprice">共{$info['Count']}件,合计:<span>￥<?php echo $info['Price']?sprintf("%.2f",$info['Price']):'0.00' ?></span></label>
+        <div class="btn_group">
+          <!-- <label class="tkorder" data-oid="{$info['OrderId']}">同意退款</label> -->
+          <label class="sureorder" data-oid="{$info['OrderId']}">确认完成</label>
+        </div>
+      </div>
+    </foreach>
+  </div>
+</empty>
+
+<script type="text/javascript">
+var sureorder_url="{:U('Orders/setendorder')}";
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.sureorder').click(function(){
+    var oid = $(this).attr('data-oid');
+    tips('waiting','正在处理···');
+    $.ajax({
+      type:"post",
+      url:sureorder_url,
+      data:"oid="+oid,
+      dateType:"json",
+      complete: function(e){
+        hidetips('waiting');
+      },
+      success: function(msg){
+        if (msg.status == 'true') {
+          tips('notice', '处理完成!', 1500, 'weui_icon_toast');
+          setTimeout(function(e){
+            window.location.reload();
+          },1000);
+        } else{
+          tips('notice', '处理失败!', 1500, 'weui_icon_notice');
+        }
+      },
+    })
+
+
+
+
+
+  })
+})
+</script>

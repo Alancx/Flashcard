@@ -1,0 +1,23 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/userbill.css">
+<script language="javascript" src="__PUBLIC__/theme2/js/YMDClass.js"></script>
+<!-- <script language="javascript" src="__PUBLIC__/theme2/JS/userbill.js"></script> -->
+<script>
+    var ubill = "{:U('User/userbill')}";//账单查询
+</script>
+<div class="billtitle">
+    <!-- <div>
+        <select id="billyear" name="billyear"></select>
+        <select id="billmonth" name="billmonth"></select>
+    </div> -->
+    <label>收益账单:{$sumdata}</label>
+</div>
+<div style="height: 40px"></div>
+<div class="billpart">
+    <foreach name="oderinfo" item="i">
+        <div class="billlb">
+            <label class="billlb-1">订单号:{$i['OrderId']}<br><span>{$i['sdate']}</span></label>
+            <label class="billlb-2">+{$i['Money']}</label>
+        </div>
+    </foreach>
+</div>

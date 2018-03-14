@@ -1,0 +1,80 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/usercenter.css?v=1.0">
+<div class="usercontent">
+  <div class="userinfo">
+    <empty name="shopinfo['Slogo']">
+      <img src="__PUBLIC__/Sellermobile/icon/logo.png" class="childshop_img" alt="">
+      <else />
+      <img src="{$shopinfo.Slogo}" class="childshop_img" alt="">
+    </empty>
+    <div class="user_info">
+      <label>{$shopinfo['storename']}</label>
+      <label>{$shopinfo['Descinfo']}</label>
+    </div>
+  </div>
+  <div class="umenu">
+    <div class="u_menu">
+      <a href="{:U('User/shopsetinfo')}">
+        <!-- <img src="__PUBLIC__/Sellermobile/icon/shopqrcode.png" alt=""> -->
+        <label>店铺展示图</label>
+      </a>
+    </div>
+    <div class="u_menu">
+      <a href="{:U('User/settable')}">
+        <!-- <img src="__PUBLIC__/Sellermobile/icon/shopbank.png" alt=""> -->
+        <label>桌号设置</label>
+      </a>
+    </div>
+     <div class="u_menu">
+      <a href="{:U('Activity/index')}">
+        <!-- <img src="__PUBLIC__/Sellermobile/icon/shopbank.png" alt=""> -->
+        <label>活动商品</label>
+      </a>
+    </div>
+    <div class="u_menu">
+     <a href="{:U('user/setremark')}">
+       <!-- <img src="__PUBLIC__/Sellermobile/icon/shopbank.png" alt=""> -->
+       <label>备注设置</label>
+     </a>
+   </div>
+    <div class="u_menu">
+      <a href="{:U('User/shopqrcode')}">
+        <!-- <img src="__PUBLIC__/Sellermobile/icon/shopqrcode.png" alt=""> -->
+        <label>店铺二维码</label>
+      </a>
+    </div>
+    <div class="u_menu">
+      <a href="{:U('User/shopsetmessage')}">
+        <!-- <img src="__PUBLIC__/Sellermobile/icon/shopqrcode.png" alt=""> -->
+        <label>消息接收人</label>
+      </a>
+    </div>
+    <div class="u_menu">
+      <a href="{:U('User/bankcards')}">
+        <!-- <img src="__PUBLIC__/Sellermobile/icon/shopbank.png" alt=""> -->
+        <label>银行卡管理</label>
+      </a>
+    </div>
+    <!-- <div class="u_menu">
+      <a href="{:U('User/pageset')}">
+        <img src="__PUBLIC__/Sellermobile/icon/shopindexset.png" alt="">
+        <label>主页设置</label>
+      </a>
+    </div> -->
+    <div class="u_menu">
+      <a href="{:U('User/Vernotes')}">
+        <!-- <img src="__PUBLIC__/Sellermobile/icon/shopindexset.png" alt=""> -->
+        <label>版本信息<span style="font-size:14px;color:#999999;padding-left:15px;">1.4版本</span></label>
+      </a>
+    </div>
+  </div>
+  <div class="outlogin">
+    <span class="out_login"><a href="{:U('public/login',array('type'=>1))}">退出登录</a></span>
+  </div>
+</div>
+<script>
+  $(document).on('click','.userinfo',function(){
+      location.href="{:U('User/logos')}"
+
+  })
+</script>

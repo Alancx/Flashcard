@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html style="height:auto">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>store</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/Admin/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="__PUBLIC__/Admin/Admin/css/animate.css" rel="stylesheet">
+    <link href="__PUBLIC__/Admin/Admin/css/style.css?v=2.2.0" rel="stylesheet">
+    <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+</head>
+
+<body style="background-color:#fff;height:auto;">
+
+ <div class="row wrapper border-bottom white-bg page-heading">
+ <div class="col-lg-2"></div>
+ </div>
+	<div class="row  wrapper  white-bg" style="margin:0 1%;">
+		<div class="col-sm-10 col-sm-offset-1">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<td>账号名</td>
+						<td>{$info.MemberId}</td>
+					</tr>
+					<tr>
+						<td>真实姓名</td>
+						<td>{$info.MemberName}</td>
+					</tr>
+					<tr>
+						<td>性别</td>
+						<td><if condition="$info['Sex'] eq '0'">保密</if><if condition="$info['Sex'] eq '1'">男</if><if condition="$info['Sex'] eq '2'">女</if></td>
+					</tr>
+					<tr>
+						<td>电话</td>
+						<td>{$info.Phone}</td>
+					</tr>
+					<tr>
+						<td>省份</td>
+						<td>{$info.Province}</td>
+					</tr>
+					<tr>
+						<td>城市</td>
+						<td>{$info.City}</td>
+					</tr>
+					<tr>
+						<td>详细地址</td>
+						<td>{$info.Address}</td>
+					</tr>
+					<tr>
+						<td>生日</td>
+						<td>{$info.BirthdayYear}-{$info.BirthdayMonth}-{$info.BirthdayDay}</td>
+					</tr>
+					<tr>
+						<td>个性签名</td>
+						<td>{$info.Signature}</td>
+					</tr>
+					<tr>
+						<td>账户余额</td>
+						<td>{$info.Money}</td>
+					</tr>
+					<tr>
+						<td>连续签到天数</td>
+						<td>{$info.ContinuedSign}</td>
+					</tr>
+					<tr>
+						<td>签到总天数</td>
+						<td>{$info.TotalSign}</td>
+					</tr>
+					<tr>
+						<td>积分</td>
+						<td>{$info.Integral}</td>
+					</tr>
+					<tr>
+						<td>会员等级</td>
+						<td>{$info.GradeId}</td>
+					</tr>
+					<tr>
+						<td>经验值</td>
+						<td>{$info.GradeValue}</td>
+					</tr>
+					<tr>
+						<td>优惠券数量</td>
+						<td>{$info.Conpons}</td>
+					</tr>
+					<tr>
+						<td>站内信数量</td>
+						<td>{$info.StationletterCount}</td>
+					</tr>
+					<tr>
+						<td>注册时间</td>
+						<td>{$info.RegisterDate}</td>
+					</tr>
+					<tr>
+						<td>注册方式</td>
+						<td><if condition="$info['RegisterType'] eq '1'">手机</if><if condition="$info['RegisterType'] eq '0'">邮箱</if></td>
+					</tr>
+					<tr>
+						<td>邮箱是否激活</td>
+						<td><if condition="$info['IsActivation'] eq '0'">未激活</if><if condition="$info['IsActivation'] eq '1'">已激活</if></td>
+					</tr>
+					<tr>
+						<td>最后修改时间</td>
+						<td>{$info.LastUpdateDate}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <!-- Mainly scripts -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+</body>
+</html>

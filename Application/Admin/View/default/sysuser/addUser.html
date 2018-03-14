@@ -1,0 +1,88 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<include file="$headername" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>平台用户管理</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>平台用户管理</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<!-- <h5></h5> -->
+		<a href="{:U('SysUser/index')}"><button class="btn btn-primary btn-md btn-outline">平台用户管理</button></a>
+		<button class="btn btn-primary btn-md">添加新用户</button>
+	</div>
+	<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+	<form method="post" action="" class="form-horizontal" id="sv">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">用户名称</label>
+
+				<div class="col-sm-4">
+					<input type="number" name="userName" id="userName" class="form-control required" >
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">登陆密码</label>
+				<div class="col-sm-4">
+					<input type="password" name="password" id="password" class="form-control required" value=""> <span class="help-block m-b-none"></span>
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">确认密码</label>
+
+				<div class="col-sm-4">
+					<input type="password" name="repass" id="repass" class="form-control required" value="">
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">绑定url</label>
+
+				<div class="col-sm-4">
+					<input type="text" name="userUrl" id="userUrl" class="form-control required">
+				</div>
+			</div>
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<div class="col-sm-4 col-sm-offset-2">
+					<button class="btn btn-primary btn-outline" type="submit">保存内容</button>
+					<button class="btn btn-outline btn-warning" type="reset">取消</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#sv").validate({
+            rules: {
+                repass:{
+                        required: true,
+                        equalTo: "#password"
+                },
+                DepartmentName: 'required'
+            }
+        });
+    })
+</script>
+
+<include file="Common:footer" />

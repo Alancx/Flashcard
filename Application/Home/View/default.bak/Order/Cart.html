@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>购物车</title>
+
+  <!-- Bootstrap -->
+  <link href="__PUBLIC__/theme2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/plugins/animate/animate.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/plugins/weui/weui.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/css/car.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/css/common.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="container">
+    <!-- 分类盒子-start -->
+
+      
+
+            <div class="pro-box">
+              <div class="box-top" id="tClass">
+                <div class="head-box">
+                  <!-- 此处id对应分类id(cid) -->
+                  <img src="__PUBLIC__/theme2/Images/weixuanze.png" alt="" class="chose tClass-all" data-s='all' data-a='tClass' data-st='0'>
+
+                  <span class="cname">全选<!-- {$pil['storename']} --></span>
+                  <img src="__PUBLIC__/theme2/Images/Arrow.png" alt="" class="leftarrow">
+                  <span class="edit" data-s='edit'>编辑</span>
+                </div>
+
+                <foreach name="newProsArray" item="pilil" key="kk">
+
+                      <div class="pro-new">
+                        <div class="p-box">
+                          <div class="p-imgs">
+                            <img src="__PUBLIC__/theme2/Images/weixuanze.png" alt="" class="chose tClass" data-s='tClass' data-a='tClass' data-st='0' data-pid='{$pilil.ProId}' data-idcard="{$pilil.ProIdCard}">
+                            <img src="{:C('RESOURCE_URL')}{$pilil.ProLogoImg}" alt="" class="pro-img p-img" data-url="{:U('Product/Goods',array('pid'=>$pilil['ProId']))}">
+                          </div>
+                          <div class="p-infos {$pilil.ProId}" id="{$pilil.ProId}" data-idcard='{$pilil.ProIdCard}'>
+                            <!-- 此处id为商品id(pid) -->
+                            <div class="base-info">
+                              <span class="pro-name">{$pilil.ProName}</span><br>
+                              <span class="pro-title">{$pilil.ProTitle}</span>
+                              <b><span class="wxprice">
+
+                                <small>￥</small>
+                                <span class="getprice" value='{$pilil["Price"]}'>{:number_format($pilil["sprice"],2,".","")}</span>
+
+                              </span></b>
+                              <span class="mkprice">￥{:number_format($pilil['oPrice'],2)}</span>
+                              <span class="nums">&times;<span class="p-nums">{$pilil.nums}</span></span>
+                            </div>
+                            <div class="edit-info">
+                              <div class="nums-info">
+                                <img src="__PUBLIC__/theme2/Images/jian.png" alt="" class="less">
+                                <input type="text" name="" id="" value="" readonly="true">
+                                <img src="__PUBLIC__/theme2/Images/jia.png" alt="" class="add">
+                                <span class='ats'>规格：{$pilil.ProSpec1}</span>
+                                <!-- <img src="__PUBLIC__/theme2/Images/gengduo.png" class="moreats" alt=""> -->
+                              </div>
+                              <div class="delete">
+                                删除
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                </foreach>
+
+
+              </div>
+            </div>
+
+
+  </div>
+  
+  <!-- 底部菜单 -->
+  <div class="car-menu">
+    <laebl id="select-all" data-st='no' data-s='allcar' style="display:none;"><img src="__PUBLIC__/theme2/Images/weixuanze.png" alt="" class='' data-st='0' data-s='allcar' ><span class="select-all" >全选</span></laebl>
+    <div class="gopay">结算<span class="car-nums" data-s='0'>(0)</span></div>
+    <div class="prices-info"><span>合计：</span><span class="clearmoney"><small>￥</small><span class="car-money" data-s='0'>0.00</span> </span><br><span>不含运费和进口税</span></div>
+  </div>
+  <!-- weui提示框 -->
+  <div id="notice" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+      <i class="weui_icon_toast"></i>
+      <p class="weui_toast_content"></p>
+    </div>
+  </div>
+
+  <div class="weui_dialog_confirm" id="confirm" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+      <div class="weui_dialog_hd"><strong class="weui_dialog_title">操作提示</strong></div>
+      <div class="weui_dialog_bd"></div>
+      <div class="weui_dialog_ft">
+        <a href="javascript:;" class="weui_btn_dialog default" id="esc">取消</a>
+        <a href="javascript:;" class="weui_btn_dialog primary" id="enter" data-s="" data-idcard=''>确定</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="weui_dialog_alert" id="alert" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+      <div class="weui_dialog_hd"><strong class="weui_dialog_title">提示信息</strong></div>
+      <div class="weui_dialog_bd"></div>
+      <div class="weui_dialog_ft">
+        <a href="javascript:;" class="weui_btn_dialog primary" id='alertenter'>确定</a>
+      </div>
+    </div>
+  </div>
+  <!-- weui提示框-end -->
+
+
+
+  <!-- 切换商品属性模态框？ -->
+  <div class="shop-car animated">
+    <div class="car-box animated">
+      <div class="pro-img"><img src="__PUBLIC__/theme2/Images/tu01.png" alt="" class="car-img"></div>
+      <div class="pro-titles"><p id='car-title'></p><span><small>￥</small> <b class="car-price">1.00</b></span></div>
+      <div class="car-close"><img src="__PUBLIC__/theme2/Images/guanbi.png" alt="" id="car-close"></div>
+      <div class="hr"></div>
+      <div class="attrs-info">
+      </div>
+      <div class="hr"></div>
+      <div class="sub-btn">
+        <button type="button" class="btn btn-warning" id="sure" data-s=''>确定</button>
+      </div>
+    </div>
+  </div>
+  <!-- 全屏遮罩/向上浮出效果，加入后隐藏 -->
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- <script src="//cdn.bootcss.com/jquery/2.0.1/jquery.min.js"></script> -->
+  <script src="__PUBLIC__/theme2/js/jquery.1.11.3.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="__PUBLIC__/theme2/js/bootstrap.min.js"></script>
+  <script src="__PUBLIC__/theme2/js/common.js"></script>
+  <script type="text/javascript">
+  var imgurl='__PUBLIC__/theme2/Images/';
+  var delcarurl="{:U('Order/DelCart')}";
+  var editcarurl="{:U('Order/EditCart')}";
+  var readAttrs="{:U('Order/readAttrs')}";
+  var orderurl="{:U('Order/CreateOrder')}";
+  </script>
+  <script src="__PUBLIC__/theme2/js/car.js?v=1.1"></script>
+  <script type="text/javascript">
+    function scheck(obj){
+      // console.log(obj);
+      // $(this).attr('class','atr-select').attr('data-st','1');
+      // console.log($(obj).parent());
+      var pobj=obj.parentNode;
+      var cobj=pobj.childNodes;
+      // console.log(cobj);
+      for (var i = 0; i < cobj.length; i++) {
+        if (i!=0) {
+          cobj[i].setAttribute('class','atr');
+          cobj[i].setAttribute('data-st','0');
+        }
+      }
+      obj.setAttribute('class','atr-select');
+      obj.setAttribute('data-st','1');
+    }
+  </script>
+</body>
+</html>

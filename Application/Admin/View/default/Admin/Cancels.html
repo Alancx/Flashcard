@@ -1,0 +1,89 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>核销员管理</h5>
+	</div>
+	<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="{:U('Admin/searchcan')}" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<input type="text" name="username" placeholder="请填写核销员姓名(选填)" id="username" class="form-control">
+			</div>
+			<div class="form-group">
+				<select name="CanType" id="CanType" class="form-control">
+					<option value="">请选择核销类型</option>
+          <option value="pay" style="color:green;font-size:1.1em;">付款</option>
+          <option value="get" style="color:orange;font-size:1.1em;">提货</option>
+				</select>
+			</div>
+			<button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button>
+		</form>
+
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<if condition="$errmsg">
+		<h3>{$errmsg}</h3>
+		<else/>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>姓名</th>
+          <th>所属门店</th>
+					<th>核销订单数 {$CanType} </th>
+					<th>核销金额 {$CanType} </th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="userlists" item="user" >
+					<tr>
+						<td>{$user.id}</td>
+						<td>{$user.username}</td>
+            <td>{$user.storename}</td>
+						<td>{$user.count}</td>
+						<td>{$user.price}</td>
+						<td><a href="###" onclick="show('{$user.openid}','{$Ctype}')">查看详情</a> | <a href="###">删除</a></td>
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		</if>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function show(id,ctype){
+		art.dialog.open('{:U('Store/show')}?sid='+id+'&CanType='+ctype,{width:'600px'});
+	}
+
+	function del(id){
+		art.dialog.confirm('确定要删除吗？请慎重操作', function () {
+			window.location.href="{:U('Admin/del')}?id="+id;
+			// alert('hahaha')
+		}, function () {
+			art.dialog.tips('取消操作');
+		});
+	}
+
+	function getQr(id){
+		art.dialog.open("{:U('ArtDialog/AQr')}?mid="+id);
+	}
+	$(document).ready(function(){
+		$("#search").submit(function(){
+			var CanType=$("#CanType").val();
+			if (!CanType) {
+				art.dialog.alert('请选择核销类型');
+				return false;
+			}else{
+				art.dialog({content:'正在查询....',lock:true});
+				return true;
+			}
+		})
+	})
+
+</script>
+<include file="Common:footer" />

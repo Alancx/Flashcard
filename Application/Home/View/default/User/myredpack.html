@@ -1,0 +1,94 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/myredpack.css?v=1.1" />
+<div class="redpackpart">
+  <div class="tit">
+    <span style="color: #ff0000; float: left;"><span style="font-weight: bolder;margin-right: 20px;">领红包</span><span>少花钱</span></span>
+    <img src="__PUBLIC__/newhome/img/hongbao3.png" />
+    <!-- <span class="mui-pull-right guize">使用规则</span> -->
+  </div>
+
+  <ul class="navt">
+    <li class="checkli"><span>未使用</span></li>
+    <li><span>已失效</span></li>
+  </ul>
+
+  <div class="" data-oo="item">
+    <foreach name="cinglist" item="cli">
+      <ul class="itembox">
+        <li>
+          <div class="">
+            <img src="{$cli.Slogo}" class="dianlogo"/>
+            <div class="mui-ellipsis">{$cli.storename}</div>
+            <small class="mui-icon mui-icon-arrowright"></small>
+          </div>
+          <p>有限期至{$cli.edate}<span>({$cli.CouponCount}个)</span></p>
+        </li>
+        <li>
+          <img src="__PUBLIC__/newhome/img/hongbao.png" height="40px"/>
+          <span class="jine">{$cli.Rules}</span>
+        </li>
+      </ul>
+    </foreach>
+    <!-- <ul class="itembox">
+      <li>
+        <div class="">
+          <img src="__PUBLIC__/newhome/img/spimg.jpg" class="dianlogo"/>
+          <div class="mui-ellipsis">百乐川烤鱼百乐川烤鱼百乐川烤鱼</div>
+          <small class="mui-icon mui-icon-arrowright"></small>
+        </div>
+        <p>有限期至2017.11.11 23:59:59</p>
+      </li>
+      <li>
+        <img src="__PUBLIC__/newhome/img/hongbao.png" height="40px"/>
+        <span class="jine">5.0</span>
+      </li>
+    </ul>
+    <ul class="itembox">
+      <li>
+        <div class="">
+          <img src="__PUBLIC__/newhome/img/spimg.jpg" class="dianlogo"/>
+          <div class="mui-ellipsis">百乐川烤鱼百乐川烤鱼百乐川烤鱼</div>
+          <small class="mui-icon mui-icon-arrowright"></small>
+        </div>
+        <p>有限期至2017.11.11 23:59:59</p>
+      </li>
+      <li>
+        <img src="__PUBLIC__/newhome/img/hongbao.png" height="40px"/>
+        <span class="jine">5.0</span>
+      </li>
+    </ul> -->
+  </div>
+  <div class="" data-oo="item" hidden="">
+    <foreach name="cendlist" item="cli">
+      <ul class="itembox">
+        <li>
+          <div class="">
+            <img src="{$cli.Slogo}" class="dianlogo"/>
+            <div class="mui-ellipsis">{$cli.storename}</div>
+            <small class="mui-icon mui-icon-arrowright"></small>
+          </div>
+          <p>有限期至{$cli.edate}<span>({$cli.CouponCount}个)</span></p>
+        </li>
+        <li class="shixiao">
+          <img src="__PUBLIC__/newhome/img/hongbao.png" height="40px"/>
+          <span class="jine">{$cli.Rules}</span>
+        </li>
+      </ul>
+    </foreach>
+    <!-- <ul class="itembox">
+      <li>
+        <div class="">
+          <img src="__PUBLIC__/newhome/img/spimg.jpg" class="dianlogo"/>
+          <div class="mui-ellipsis">百乐川烤鱼百乐川烤鱼百乐川烤鱼</div>
+          <small class="mui-icon mui-icon-arrowright"></small>
+        </div>
+        <p>有限期至2017.11.11 23:59:59</p>
+      </li>
+      <li class="shixiao">
+        <img src="__PUBLIC__/newhome/img/hongbao.png" height="40px"/>
+        <span class="jine">5.0</span>
+      </li>
+    </ul> -->
+  </div>
+</div>
+<script src="__PUBLIC__/newhome/js/myredpack.js?v=1.0" type="text/javascript" charset="utf-8"></script>

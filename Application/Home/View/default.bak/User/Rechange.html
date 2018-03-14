@@ -1,0 +1,22 @@
+<layout name="Public/PageModel"/>
+
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/uservoucher.css">
+
+<div class="voucherpart">
+    <div class="vouczlb">
+      <foreach name='discount' item='di'>
+        <label class="vouczlb-1">充值满{$di['comeny']}元<br><span>奖励{$di['dmoney']}元</span><span class="vouxz"></span></label>
+      </foreach>
+        <!-- <label class="vouczlb-2">满200元<br><span>奖励15元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-3">满300元<br><span>奖励25元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-4">满500元<br><span>奖励60元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-5">满800元<br><span>奖励100元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-6">满1000元<br><span>奖励200元</span><span class="vouxz"></span></label> -->
+    </div>
+    <div class="voupayment">
+        <label>微信支付<br><span>推荐安装微信5.0及以上版本的使用</span></label>
+    </div>
+</div>
+<div class="vousuer">
+    <label>确认支付</label>
+</div>

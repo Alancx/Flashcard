@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>noname</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .attrvalues{
+        border: 1px solid green;
+        margin:auto 2px;
+        border-radius: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="width:560px;height:380px;">
+      <div class="row">
+        <form method="post" id="saveatr" action="{:U('Users/expUser')}" class="form">
+          <table class="table table-bordered">
+            <tr>
+              <td colspan="2" align="center">
+				请选择起始时间
+              </td>
+            </tr>
+            <tr>
+             <td><input type="text" name="stime" id="stime" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
+             <td><input type="text" name="etime" id="etime" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></td>
+            </tr>
+            <tr>
+            <input type="hidden" name="mid" id="" value="{$mid}">
+              <td colspan="2" align="center"><button type="submit" class="btn btn-success btn-md">导出</button></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  </body>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  	$("#saveatr").submit(function(){
+  		var st=$("#stime").val();
+  		var et=$("#etime").val();
+  		if (st && et) {
+  			if (st>et) {
+  				art.dialog.tips('非法时间段');
+  				return false;
+  			}else{
+  				return true;
+  			}
+  		}else if(!st){
+  			art.dialog.tips('请选择开始时间');
+  			return false;
+  		}else{
+  			art.dialog.tips('请选择结束时间');
+  			return false;
+  		}
+  	})
+  })
+  </script>
+</html>

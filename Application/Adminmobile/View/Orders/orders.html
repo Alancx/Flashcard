@@ -1,0 +1,67 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/orders.css?v=1.9">
+<script type="text/javascript" src="__PUBLIC__/Adminmobile/js/orders.js?v=1.6"></script>
+
+<!-- 顶部搜索框 -->
+<div class="heard">
+	<div class="heardtitle">
+		<input type="text" name="keyword" id="keyword" class="search-input" placeholder="订单号"/>
+		<input type="button" class="search-btn"  value="">
+	</div>
+</div>
+
+<div class="leftmenu">
+	<ul id="tagsel">
+		<li class="sel_tag" data-sel="sel_order_1"  data-more="more_1">待付款<span></span></li>
+		<li data-sel="sel_order_2" data-more="more_2">待发货<span></span></li>
+		<li data-sel="sel_order_3" data-more="more_3">已发货<span></span></li>
+		<li data-sel="sel_order_4" data-more="more_4">待提货<span></span></li>
+		<li data-sel="sel_order_5" data-more="more_5">退款中<span></span></li>
+		<li data-sel="sel_order_6" data-more="more_6">已完成<span></span></li>
+		<li data-sel="sel_order_7" data-more="more_7" style="display:none">已关闭<span></span></li>
+	</ul>
+</div>
+<div class="rightorders">
+	<div class="taborder sel_order_1 sel_order" data-p="-1">
+		<!-- <div class="orderinfo">
+			<label class="orderid">会员名称<br><span>订单号:20160509123654</span><span>12-12 12:12:12</span></label>
+			<div class="prolist">
+				<div class="proinfo">
+					<img src="__PUBLIC__/Adminmobile/img/peitu.png">
+					<label class="proname">蛋白素肉90gx2袋蛋白素肉90gx2袋蛋白素肉90gx2袋</label>
+					<label class="proattr">袋装;300G</label>
+					<label class="proprice"><span>￥</span>20.00<span>×3</span></label>
+				</div>
+			</div>
+			<label class="totalprice">共6件,合计:<span>￥130.00</span>(含运费:10)</label>
+		</div> -->
+		<label class="moreorder more_1">加载更多</label>
+	</div>
+	<div class="taborder sel_order_2" data-p="-1">
+		<label class="moreorder more_2">加载更多</label>
+	</div>
+	<div class="taborder sel_order_3" data-p="-1">
+		<label class="moreorder more_3">加载更多</label>
+	</div>
+	<div class="taborder sel_order_4" data-p="-1">
+		<label class="moreorder more_4">加载更多</label>
+	</div>
+	<div class="taborder sel_order_5" data-p="-1">
+		<label class="moreorder more_5">加载更多</label>
+	</div>
+	<div class="taborder sel_order_6" data-p="-1">
+		<label class="moreorder more_6">加载更多</label>
+	</div>
+	<div class="taborder sel_order_7" data-p="-1">
+		<label class="moreorder more_7">加载更多</label>
+	</div>
+</div>
+<script type="text/javascript">
+ var loadmore_1_url="{:U('Orders/getmoreorder_1')}";//待付款
+ var loadmore_2_url="{:U('Orders/getmoreorder_2')}";//待发货
+ var loadmore_3_url="{:U('Orders/getmoreorder_3')}";//已发货
+ var loadmore_4_url="{:U('Orders/getmoreorder_4')}";//待提货
+ var loadmore_5_url="{:U('Orders/getmoreorder_5')}";//退款中
+ var loadmore_6_url="{:U('Orders/getmoreorder_6')}";//已完成
+ var loadmore_7_url="{:U('Orders/getmoreorder_7')}";//已关闭
+</script>

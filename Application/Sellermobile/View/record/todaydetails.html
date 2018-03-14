@@ -1,0 +1,15 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/todaydetails.css?v=1.0">
+<div class="reheard">
+  <div class="showtop">
+		<label class="tmoney">今日收入(元)<br><span><?php echo $countmoney?sprintf("%.2f",$countmoney):'0' ?></span></label>
+	</div>
+</div>
+<div class="part-con" data-page="-1">
+  <label class="proder">加载更多</label>
+</div>
+<script type="text/javascript">
+var selday="0";
+var yesorder_url="{:U('Record/otherdayorders')}"; //加载某一天的订单
+</script>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/todaydetails.js?v=1.0"></script>

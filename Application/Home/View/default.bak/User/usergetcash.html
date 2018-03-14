@@ -1,0 +1,92 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usergetcash.css?v=2">
+
+<div class="getcashpart">
+    <label>收益总额<span>{$AllMoney}</span></label>
+</div>
+<div class="getcashpart">
+  <div class="getcash-1">
+    <label>可提金额</label>
+  </div>
+  <div class="getcash-2">
+    <label class="selgetc sactive" datas='1' >会员金额:<span id="cmoney">{$CutMoney}</span></label>
+    <label class="selgetc" datas='2' >推广金额:<span id="tmoney">{$tMoney}</span></label>
+  </div>
+</div>
+<div class="getcashpart">
+    <label style="width: auto">提现金额</label>
+    <input type="number" class="getcash" id="money"  name="getcash" placeholder="单次提现金额不能大于200.00">
+</div>
+
+<div class="getcashsure">
+    <label id="getcash">确认提现</label>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $("#money").keyup(function(){
+    });
+
+    //
+    $("#checkWX").click(function(){
+      window.location.href="{:U('User/getopen')}";
+    });
+
+    $(".selgetc").click(function(){
+      if(!$(this).hasClass('sactive')){
+        $('.sactive').removeClass('sactive');
+        $(this).addClass('sactive');
+      }
+    })
+
+    $("#getcash").click(function()
+    {
+
+      var money=parseInt($("#money").val());
+      var cmoney=parseInt($(".sactive>span").html());
+       //console.log(money,cmoney);
+      //alert(money);
+      if (isNaN(money)){
+        tips('notice','非法金额',1000,'weui_icon_notice');
+        $('#money').val('');
+        return false;
+      }
+      if ((money>cmoney)||(money>200)||(money==0))
+      {
+        tips('notice','非法金额',1000,'weui_icon_notice');
+        $('#money').val('');
+        return false;
+      }
+
+      if (confirm('确定要申请提现吗？')) {
+        $('.getcashsure').html('');
+        $("#getcash").attr('disabled',true);
+        $.ajax({
+          type:"post",
+          url:"{:U('User/getcash')}",
+          data:"cash="+$('#money').val()+"&ttype="+$('.sactive').attr('datas'),
+          dataType:"json",
+          complete:function(){
+
+          },
+          success:function(msg)
+          {
+            if (msg.status=='true') {
+              tips('notice','申请成功');
+
+              setTimeout(function(e){
+                window.location.href="{:U('User/usergetcashrec')}";
+              },3000);
+
+            }else{
+              tips('notice','申请出错，刷新后请核实可提现金额','2000','weui_icon_notice');
+              window.location.reload();
+            }
+          }
+        });
+      }
+    });
+
+
+  });
+</script>

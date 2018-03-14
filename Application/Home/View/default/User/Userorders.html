@@ -1,0 +1,133 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/userorders.css?v=1.2" />
+<div class="orderparts">
+  <div class="seltoptab">
+    <span class="otype getseltypeactive" data-type='0'>
+      <span class="ggg icon_allorder"></span>
+      <span class="typetext">全部</span>
+    </span>
+    <span class="otype" data-type='1'>
+      <span class="ggg icon_dfukuan"></span>
+      <span class="typetext">待付款</span>
+    </span>
+    <span class="otype" data-type='2'>
+      <span class="ggg icon_dshiyong"></span>
+      <span class="typetext">待使用</span>
+    </span>
+    <span class="otype" data-type='3'>
+      <span class="ggg icon_dpingjia"></span>
+      <span class="typetext">待评价</span>
+    </span>
+    <span class="otype" data-type='4'>
+      <span class="ggg icon_shouhou"></span>
+      <span class="typetext">退款/售后</span>
+    </span>
+  </div>
+  <div class="orderlist">
+    <if condition="$orderinfo neq null ">
+      <foreach name="orderinfo" item="oinfo" >
+        <div class="orderinfo" data-oid="{$oinfo['oid']}" data-status ="{$oinfo['status']}" data-isevaluation ="{$oinfo['isevaluation']}" data-stoken ="{$oinfo['stoken']}">
+          <div class="shopinfo">
+            <img src="{$oinfo['slogo']}" alt="">
+            <span>
+              <span class="sname mui-ellipsis">{$oinfo['sname']}</span>
+              <span class="mui-icon mui-icon-arrowright righticon"></span>
+              <span class="orderstatus">
+                <switch name="oinfo.status">
+                  <case value="1">待付款</case>
+                  <case value="2">待使用</case>
+                  <case value="3">待使用</case>
+                  <case value="4">
+                    <if condition ="$oinfo.isevaluation eq 0">
+                      待评价
+                      <else />
+                      已完成
+                    </if>
+                  </case>
+                  <case value="5">退款中</case>
+                  <case value="8">已退款</case>
+                  <default />待付款
+                </switch>
+              </span>
+              <span class="orderinfoid">订单号:{$oinfo['oid']}<br>
+                <notempty name="oinfo.soid">
+                  <span>就餐码:{$oinfo.soid};</span>
+                </notempty>
+                <notempty name="oinfo.tableid">
+                  <span>桌号:{$oinfo.tableid};</span>
+                </notempty>
+              </span>
+              <!-- <if condition="$oinfo['soid'] neq null ">
+
+                <else/>
+                <span class="orderinfoid">订单号:{$oinfo['oid']}</span>
+              </if> -->
+            </span>
+          </div>
+          <div class="prosinfo" RPath="{:U('Orders/orderinfos',array('oid'=>$oinfo['oid']))}">
+            <for start="1" end="4">
+              <if condition="$oinfo['plist'][$i-1] neq null ">
+                <span><span>{$oinfo['plist'][$i-1]['pname']}</span><span>×{$oinfo['plist'][$i-1]['pnums']}</span></span>
+              </if>
+            </for>
+            <div class="totalprice">
+              <span class="mui-icon mui-icon-more"></span>
+              <span class="total_price">共计{$oinfo['count']}件商品,实付<span><?php echo number_format(($oinfo['price']),2); ?></span></span>
+            </div>
+          </div>
+          <div class="btngroup">
+            <switch name="oinfo.status">
+              <case value="1"><span class="qxorder">取消订单</span><span class="payorder">立即付款</span></case>
+              <case value="2">
+                <!-- <span class="tkorder">退款</span> -->
+                <!-- <if condition="$oinfo.tableid eq ''">
+                <span class="eatorder">就餐码</span>
+                <else/>
+                <span class="sureorder">确认完成</span>
+              </if> -->
+              <span class="shareorder">立即分享</span>
+            </case>
+            <case value="3">
+              <!-- <span class="tkorder">退款</span> -->
+              <!-- <if condition="$oinfo.tableid eq ''">
+              <span class="eatorder">就餐码</span>
+              <else/>
+              <span class="sureorder">确认完成</span>
+            </if> -->
+            <span class="shareorder">立即分享</span>
+          </case>
+          <case value="4">
+            <if condition ="$oinfo.isevaluation eq 0">
+              <span class="evalorder">立即评价</span>
+              <else />
+              <span class="delorder">删除订单</span>
+            </if>
+            <span class="shareorder">立即分享</span>
+          </case>
+          <case value="8"><span class="qxorder">取消订单</span><span class="shareorder">立即分享</span></case>
+          <default />
+        </switch>
+      </div>
+    </div>
+  </foreach>
+</if>
+</div>
+</div>
+<!-- 就餐码 -->
+<div class="eatqrcodemark">
+  <div class="showeatcode">
+    <img src="" alt="">
+    <span class="closeatcode">关闭</span>
+  </div>
+</div>
+<!-- 就餐码end -->
+<script type="text/javascript">
+var eatordercode_url ="{:U('Public/geteatcode',array('oid'=>'ORDERIDTEMP','type'=>'cancelorder','stoken'=>'STOKENTEMP'))}";//获取就餐码
+var getorderstatus_url="{:U('User/getorderstatus')}"; // 获得订单状态
+var payorder_url="{:U('Payment/Index')}?oid=ORDERIDTEMPS";//立即支付
+var setorderstatus_url="{:U('User/setorderstatus')}";//修改订单转态
+var setorderend_url="{:U('User/setorderend')}";//确认完成
+var gotoevaluation_url="{:U('User/userevaluation',array('oid'=>'ORDERIDTEMPS','stoken'=>'STOKENTEMPS'))}";//去评价订单信息
+var paysuccess_url = "{:U('Home/Orders/shareorderpages',array('oid'=>'ORDERIDTEMPS'))}"; // 支付成功跳转页面
+</script>
+<script src="__PUBLIC__/newhome/js/userorders.js?v=1.2" type="text/javascript" charset="utf-8"></script>

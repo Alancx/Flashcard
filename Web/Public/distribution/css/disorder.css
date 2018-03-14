@@ -1,0 +1,109 @@
+body{
+  background-color: #ffffff!important;
+}
+#touch{
+  display: none!important;
+}
+.disorderpart,.disorderpart div{
+  display: block;
+  overflow: hidden;
+}
+.orderstyle{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 47px;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-color: #dddddd;
+}
+.orderstyle>label{
+  float: left;
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  margin: 0px;
+  width: 50%;
+  height: 45px;
+}
+.orderstyle>label>span{
+  display: block;
+  height: 40px;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  line-height: 40px;
+}
+.disorderactive{
+  border-bottom-style: solid;
+  border-width: 5px;
+  border-color: #ff4200;
+  color: #ff4200;
+}
+.orderinfo{
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+.order_info{
+  position: relative;
+  padding: 0px 10px 0px 10px;
+}
+.order_info>label{
+  margin: 0px 0px 0px 0px;
+  position: relative;
+}
+.orderid{
+display: block;
+width: 100%;
+line-height: 30px;
+font-size: 14px;
+border-bottom-style: dashed;
+border-width: 1px;
+border-color: #dddddd;
+}
+.orderprice{
+  position: absolute!important;
+  right: 10px;
+  top: 0px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #ff4200;
+}
+.order_info>label>span{
+  display: block;
+  position: absolute;
+  width: 80px;
+  left: 0px;
+  top: 0px;
+}
+.ordername,.orderphone{
+  display: block;
+  line-height: 25px;
+  font-size: 14px;
+  padding: 0px 0px 0px 80px;
+
+}
+.orderaddr{
+  display: block;
+  padding: 0px 0px 0px 80px;
+}
+.btn_group{
+  border-top-style: dashed;
+  border-width: 1px;
+  border-color: #dddddd;
+  padding: 5px 10px 5px 10px;
+}
+.suresend,.sureend{
+  float: right;
+  margin: 0px 0px 0px 0px;
+  width: 75px;
+  line-height: 28px;
+  border-radius: 5px;
+  color: #ff4200;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ff4200;
+}

@@ -1,0 +1,111 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+.collectionpart{
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.coltitle{
+    height: 40px;
+    padding: 0px 15px 0px 15px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.coltitle>img{
+    float: left;
+    margin: 4px 10px 0px 0px;
+    width: 30px;
+    border-radius: 50%;
+}
+.procollb{
+    float: left;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 39px;
+}
+.coltime{
+    float: right;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    font-size: 12px;
+    color: #999999;
+    line-height: 39px;
+}
+.coltitle>span{
+    float: right;
+    width: 39px;
+    height: 39px;
+    background-image: url("../Images/guanbi.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+.colpro{
+    position: relative;
+    height: 75px;
+    padding: 0px 15px 0px 15px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.colpro>img{
+    float: left;
+    margin: 4px 10px 0px 0px;
+    width: 65px;
+}
+.procolname{
+    float: left;
+    width: calc(100% - 120px);
+    height: 100%;
+    margin: 0px;
+    padding: 5px 0px 5px 0px;
+    font-size: 14px;
+    color: #333333;
+}
+.procolname>span{
+  font-size: 12px;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.procolprice{
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 16px;
+    color: #FF4200;
+}
+.delcollection{
+    position: relative;
+    height: 40px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+
+}
+.delcollection>label{
+    height: 30px;
+    width: 75px;
+    float: right;
+    font-size: 14px;
+    color: #999999;
+    text-align: center;
+    line-height: 30px;
+    margin: 5px 10px 5px 0px;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    border-radius: 5px;
+}

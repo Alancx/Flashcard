@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>生意参谋</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.top_btn,.top_top{
+			width: 25%;
+			float: left;
+			text-align: center;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		.active{
+			background-color: #434343;
+			color: #fff;
+		}
+		#notice_box{
+			position:fixed;top:200px;left:30%;width:40%;padding:10px 5px;max-height:50px;border:2px solid red;text-align:center;z-index:1;
+			background-color: rgba(255,13,13,.54);
+			font-weight: bold;
+			color: #fff;
+		}
+		#btn_pre{
+			position: fixed;
+			right: 5px;
+			top: 40px;
+
+		}
+		.cos{
+			text-align: center;
+			padding-top: 5px;
+			float: left;
+			width: 30%;
+		}
+		.cos select{
+			width: 100%;
+			text-align: center;
+			border: 0px solid #ccc;
+		}
+	</style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+		<div class="col-xs-12 col-sm-12" style="padding:0px;">
+			<div class="top_top" style="border-right:1px solid #999;display:none;" data-type='money'>销售额<span class='glyphicon glyphicon-sort'></span></div>
+			<div class="top_btn active" style="" data-st='d' id="defualt">日</div>
+			<input type="hidden" name="" id="date_d" onclick="WdatePicker({el:'date_d',onpicked:function(){getdatabypost(this);}})" data-st='d'>
+			<div class="top_btn" style="" data-st='w'>周</div>
+			<input type="hidden" name="" id="date_w" onclick="WdatePicker({el:'date_w',onpicked:function(){getdatabypost(this);},disabledDays:[0,2,3,4,5,6]})" data-st='w'>
+			<div class="top_btn" style="" data-st='m'>月</div>
+			<input type="hidden" name="" id="date_m" onclick="WdatePicker({el:'date_m',onpicked:function(){getdatabypost(this)},dateFmt:'yyyy-MM'})" data-st='m'>
+			<div class="top_btn" style="" data-st='y'>年</div>
+			<input type="hidden" name="" id="date_y" onclick="WdatePicker({el:'date_y',onpicked:function(){getdatabypost(this);},dateFmt:'yyyy'})" data-st='y'>
+		</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;border-bottom:5px solid #ccc;border-top:5px solid #ccc;">
+				<div id="lincharts" style="height:200px;width:100%;text-align:center;line-height:200px;">当日销售额：{$allmoney}</div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<!-- <td>#</td> -->
+							<td>商品名称</td>
+							<td>销售额/量&emsp;<b id='fiving' data-st='top'>TOP50 <span class='glyphicon glyphicon-arrow-up'></span></b></td>
+						</tr>
+					</thead>
+					<tbody id="stcontet">
+					<foreach name='lists' item='stm'>
+						<tr>
+							<!-- <td>{$stm.stoken}</td> -->
+							<td>{$stm.ProName}</td>
+							<td>{$stm.SaleMoney}/{$stm.SaleCount}</td>
+						</tr>
+					</foreach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+	<div id="notice_box" style="display:none;">提示信息</div>
+	<!-- <button id="btn_pre" class="btn btn-xs btn-white"><span class='glyphicon glyphicon-arrow-left'></span></button> -->
+  </body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/Admin/js/echarts.min.js"></script>
+	<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/greenWdatePicker.js"></script>
+<script type="text/javascript">
+	var linecharts='';
+	var data_type='';
+	var get_type='d';
+	var nowtime='{$nowtime}';
+	// var nowtime='{$today}';
+	$(document).ready(function(){
+		$('.top_btn').click(function(){
+			$('.top_btn').removeClass('active');
+			$(this).addClass('active');
+			var get_type=$(this).attr('data-st');
+			$('#date_'+get_type).click();
+		})
+		$('.jump').click(function(){
+			window.location.href=$(this).attr('data-url');
+		})
+		$('#sure').click(function(){
+			pname=$('#province').val();
+			cname=$('#city').val();
+			getdatabypost_noparam();
+		})
+		$('#fiving').click(function(){
+			var st=$(this).attr('data-st');
+			if (st=='top') {
+				$(this).html('BOT50 <span class="glyphicon glyphicon-arrow-down"></span>').attr('data-st','bot');
+			}else{
+				$(this).html('TOP50 <span class="glyphicon glyphicon-arrow-up"></span>').attr('data-st','top');
+			}
+			getdatabypost_noparam($('#fiving').attr('data-st'));
+		})
+
+	})
+
+function getdatabypost_noparam(type){
+	var get_type=$('.active').attr('data-st');
+	$.ajax({
+		url:"{:U('Phone/terrace')}",
+		type:"post",
+		data:"get_type="+get_type+"&data_type="+data_type+"&nowtime="+nowtime+"&order="+type,
+		dataType:"json",
+		success:function(msg){
+			if (get_type=='d') {
+				$('#lincharts').html(nowtime+"销售额："+msg.allmoney);
+			}else if (get_type=='m') {
+				$('#lincharts').html(nowtime+"月份 销售额："+msg.allmoney);
+				line(msg.lx,msg.ly,msg.lz);
+			}else if (get_type=='y') {
+				$('#lincharts').html(nowtime+"年 销售额："+msg.allmoney);
+				line(msg.lx,msg.ly,msg.lz);
+			}else{
+				$("#lincharts").html(msg.nowtime+'--'+msg.endtime+'销售额：'+msg.allmoney);
+				line(msg.lx,msg.ly,msg.lz);
+			}
+			var _html='';
+			$.each(msg.lists,function(index,item){
+				_html+='<tr><td>'+item.ProName+'</td><td>'+item.SaleMoney+'/'+item.SaleCount+'</td></tr>';
+			})
+			$('#stcontet').html(_html);
+		}
+	})
+
+}
+
+function getdatabypost(_me){
+	// console.log($(_me).val());
+	if ($(_me).val()) {
+		nowtime=$(_me).val();
+	}else{
+		// nowtime=$(_me).val();
+	}
+	get_type=$(_me).attr('data-st');
+	data_type=$('.top_top').attr('data-type');
+	// $('#date_'+get_type).click();
+	$.ajax({
+		url:"{:U('Phone/terrace')}",
+		type:"post",
+		data:"get_type="+get_type+"&nowtime="+nowtime+"&data_type="+data_type,
+		dataType:"json",
+		success:function(msg){
+			if (get_type=='d') {
+				$('#lincharts').html(nowtime+"销售额："+msg.allmoney);
+			}else if (get_type=='m') {
+				$('#lincharts').html(nowtime+"月份 销售额："+msg.allmoney);
+				line(msg.lx,msg.ly,msg.lz);
+			}else if (get_type=='y') {
+				$('#lincharts').html(nowtime+"年 销售额："+msg.allmoney);
+				line(msg.lx,msg.ly,msg.lz);
+			}else{
+				$("#lincharts").html(msg.nowtime+'--'+msg.endtime+'销售额：'+msg.allmoney);
+				line(msg.lx,msg.ly,msg.lz);
+			}
+			var _html='';
+			$.each(msg.lists,function(index,item){
+				_html+='<tr><td>'+item.ProName+'</td><td>'+item.SaleMoney+'/'+item.SaleCount+'</td></tr>';
+			})
+			$('#stcontet').html(_html);
+		}
+	})
+
+}
+function line(x,y,z){
+	linecharts=echarts.init(document.getElementById("lincharts"),'infographic');
+	var linechartsOptions= {
+	    tooltip: {
+	        trigger: 'axis'
+	    },
+	    title:{
+	    	text:z.title,
+	    	subtitle:z.subtitle
+	    },
+	    grid:{
+	    	left:20,
+	    	right:20,
+	    },
+	    toolbox: {
+	        feature: {
+	            // dataView: {show: true, readOnly: false},
+	            magicType: {show: true, type: ['line']},
+	            restore: {show: true},
+	            // saveAsImage: {show: true}
+	        },
+	        itemSize:25,
+	        itemGap:20,
+	        bottom:0,
+	        right:0
+	    },
+	    legend: {
+	        data:z.subtitle,
+	        orient:'horizontal',
+	        formatter: function (name) {
+		        return echarts.format.truncateText(name, 60, '14px Microsoft Yahei', '…');
+		    }
+	    },
+	    xAxis: [
+	        {
+	            type: 'category',
+	            data: x
+	        }
+	    ],
+	    yAxis: [
+	        {
+	            type: 'value',
+	            name: z.type,
+	            subtext:z.subtitle,
+	            position:'left',
+	            nameGap:15,
+	            axisLabel: {
+	                formatter: '{value}',
+	                inside:true,
+	            }
+	        }
+	    ],
+	    series: [
+	        {
+	            name:z.subtitle,
+	            type:'bar',
+	            data:y
+	        }
+	    ]
+	};
+	linecharts.setOption(linechartsOptions);
+}
+
+function notice(a,b){
+	$('#notice_box').fadeIn().html(a);
+	setTimeout("$('#notice_box').fadeOut()",b);
+}
+</script>
+</html>

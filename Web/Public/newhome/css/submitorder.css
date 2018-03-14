@@ -1,0 +1,666 @@
+.submitorderpart{
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #F4F4F4;
+}
+.orderpart{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  bottom: 53px;
+  right: 10px;
+  background-color: #ffffff;
+  border-top: #dddddd solid 1px;
+  overflow: auto;
+  padding: 0px 0px 10px 0px;
+}
+.topsinfo{
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 10px 0px 10px;
+}
+.topsinfo>img{
+  float: left;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 5px 10px 5px 0px;
+}
+.topsinfo>.sname{
+  float: left;
+  height: 40px;
+  font-size: 16px;
+  color: #666666;
+}
+.topsinfo>.sicon{
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #666666;
+}
+.proslist{
+  display: block;
+  overflow: hidden;
+  height: auto;
+  position: relative;
+  padding: 0px 0px 0px 0px;
+}
+.pro_list{
+  display: block;
+  overflow: hidden;
+}
+.proinfo{
+  display: block;
+  position: relative;
+  background-color: #FBFBFB;
+  height: 85px;
+  margin: 0px 0px 0px 0px;
+  padding: 10px 8px 10px 10px;
+  overflow: hidden;
+  border-bottom: #ffffff solid 5px;
+}
+.proinfo>img{
+  float: left;
+  height: 60px;
+  width: 60px;
+}
+.proinfo>.pname{
+  float: left;
+  width: calc(100% - 70px);
+  height: 25px;
+  font-size: 18px;
+  color: #000000;
+  margin: 0px 0px 0px 10px;
+}
+.proinfo>.prospec{
+  float: left;
+  width: calc(100% - 70px);
+  height: 25px;
+  font-size: 14px;
+  color: #666666;
+  margin: 0px 0px 0px 10px;
+}
+.proinfo>.psnums{
+  float: left;
+  width: calc(100% - 70px);
+  height: 20px;
+  font-size: 14px;
+  color: #999999;
+  margin: 0px 0px 0px 10px;
+}
+.proinfo>.pprice{
+  position: absolute;
+  top: 10px;
+  right: 7px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #000000;
+}
+.proinfo>.pprice::before{
+  content: "￥";
+}
+.getmorepros{
+  display: none;
+  height: 60px;
+  overflow: hidden;
+  width: 100%;
+  background-color: #ffffff;
+}
+.getmorepros>.getmorebtn{
+  display: block;
+  width: 100px;
+  height: 32px;
+  line-height: 30px;
+  border: #eeeeee solid 1px;
+  font-size: 14px;
+  color: #666666;
+  text-align: center;
+  margin: 14px calc(50% - 50px) 14px calc(50% - 50px);
+  padding: 0px 5px 0px 0px;
+}
+.getmorepros>.getmorebtn>.showgeticon{
+  float: right;
+  height: 30px;
+  line-height: 30px;
+}
+.showpriceinfo{
+  display: block;
+  overflow: hidden;
+  padding: 0px 10px 0px 10px;
+}
+.showpriceinfo>.cutleryfee,.showpriceinfo>.fullreduction{
+  display: block;
+  overflow: hidden;
+  height: 30px;
+  line-height: 30px!important;
+}
+.cutleryfee>span:first-child{
+  float: left;
+  font-size: 16px;
+  color: #333333;
+}
+.cutleryfee>span:last-child{
+  float: right;
+  font-size: 14px;
+  color: #333333;
+}
+.cutleryfee>span:last-child::before{
+  content: "￥";
+}
+
+.fullreduction>span:first-child{
+  float: left;
+  font-size: 16px;
+  color: #333333;
+}
+.fullreduction>span:first-child::before{
+  content: "满";
+  float: left;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #ff0000;
+  margin: 5px 5px 5px 0px;
+}
+.fullreduction>span:last-child{
+  float: right;
+  font-size: 14px;
+  color: #ff0000;
+}
+.fullreduction>span:last-child::before{
+  content: "￥";
+}
+.showpriceinfo>.redparts{
+  display: block;
+  overflow: hidden;
+  height: 40px;
+  line-height: 40px!important;
+}
+.showpriceinfo>.redparts{
+  display: block;
+  overflow: hidden;
+  height: 47px;
+  line-height: 40px!important;
+  border-top: #F4F4F4 dashed 2px;
+  padding: 5px 0px 0px 0px;
+  margin: 5px 0px 0px 0px;
+}
+.showpriceinfo>.redparts>span:first-child{
+  float: left;
+  font-size: 16px;
+  color: #333333;
+}
+.showpriceinfo>.redparts>span:first-child>span{
+  font-size: 14px;
+  color: #999999;
+}
+.showpriceinfo>.redparts>.redprice{
+  float: right;
+  font-size: 14px;
+  color: #ff0000;
+}
+.showpriceinfo>.redparts>.redprice::before{
+  content: "￥";
+}
+.showpriceinfo>.redparts>span:nth-child(2){
+  float: right;
+  color: #666666;
+  height: 40px;
+  line-height: 40px;
+  margin: 0px 10px 0px 10px;
+}
+.showlines{
+  display: block;
+  height: 18px;
+  margin: 0px -10px 0px -10px;
+  overflow: hidden;
+}
+.showlines>.lineleft{
+  float: left;
+  height: 17px;
+  width: 17px;
+  border-radius: 50%;
+  margin: 0px 0px 0px -9px;
+  background-color: #F4F4F4;
+}
+.showlines>.lineright{
+  float: right;
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin: 0px -9px 0px 0px;
+  background-color: #F4F4F4;
+}
+.showlines>.linecenter{
+  float: left;
+  height: 2px;
+  width: calc(100% - 18px);
+  margin: 8px 0px 0px 0px;
+  border-top: #F4F4F4 dashed 2px;
+}
+.alltotalprice{
+  height: 50px;
+  line-height: 50px;
+}
+.alltotalprice>span{
+  float: right;
+  height: 50px;
+  line-height: 50px;
+  color: #333333;
+}
+.alltotalprice>.aprice{
+  color: #ff0000;
+}
+.alltotalprice>.aprice::before{
+  content: "￥";
+}
+.eaterinfo{
+  display: block;
+  height: 40px;
+  overflow: hidden;
+  padding: 0px 10px 0px 10px;
+}
+.eaterinfo>span:first-child{
+  float: left;
+  height: 40px;
+  width: 80px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #333333;
+}
+.eaterinfo>span:nth-child(2){
+  float: left;
+  height: 40px;
+  width: calc(100% - 110px);
+  line-height: 40px;
+  text-align: right;
+  font-size: 14px;
+  color: #666666;
+}
+.eaterinfo>span:last-child{
+  float: right;
+  height: 40px;
+  width: 30px;
+  line-height: 40px;
+  text-align: right;
+  color: #666666;
+}
+
+
+
+
+
+/*底部按钮部分*/
+.bottompart{
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 50px;
+  width: 100%;
+  background-color: #ffffff;
+}
+.yhinfo{
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  color: #666666;
+  font-size: 16px;
+  padding: 0px 0px 0px 10px;
+}
+.yhinfo>span::before{
+  content: "￥";
+}
+.totalprcie{
+  float: right;
+  height: 50px;
+  line-height: 50px;
+  color: #666666;
+  font-size: 16px;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 10px 0px 0px;
+}
+.totalprcie>span{
+  color: #ff0000;
+}
+.totalprcie>span::before{
+  content: "￥";
+}
+.submitbtn{
+  float: right!important;
+  height: 50px;
+  line-height: 50px;
+  width: 120px;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
+  background-color: #FF8500;
+}
+.hassendorderactive{
+  background-color: #DDDDDD;
+}
+/* 选择红包 */
+.redpackmark{
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 10;
+  padding: 60px 20px 60px 20px;
+}
+.redpacklist{
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.redtitle{
+  display: block;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  background-color: #ff8500;
+  color: #ffffff;
+  position: relative;
+}
+.closeredpack{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 10px 0px 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+}
+.redlist{
+  display: block;
+  height: calc(100% - 50px);
+  width: 100%;
+  overflow: auto;
+}
+.redinfo{
+  display: block;
+  height: 83px;
+  border-bottom: #eeeeee solid 3px;
+}
+.redinfo>.redrules{
+  float: left;
+  width: 81px;
+  height: 70px;
+  padding: 5px 0px 5px 0px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 30px;
+  margin: 5px 0px 5px 0px;
+  border-right: #eeeeee dashed 1px;
+  color: #ff0000;
+}
+.redinfo>.redrules::after{
+  display: block;
+  content: "元";
+  font-size: 24px;
+}
+.redinfo>.red_info{
+  float: left;
+  width: calc(100% - 81px);
+  height: 80px;
+}
+.redinfo>.red_info>span:first-child{
+  display: block;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
+}
+.redinfo>.red_info>span:last-child{
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  text-align: center;
+  color: #999999;
+}
+/* 就餐人数 */
+.eatingnummark,.remarkmark{
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+.eatingnuminfo{
+  display: block;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  height: 300px;
+  width: 100%;
+  background-color: #ffffff;
+}
+.topinfo{
+  display: block;
+  width: 100%;
+  height: 40px;
+  background-color: #ff8500;
+  position: relative;
+  color: #ffffff;
+}
+.topinfo>span:first-child{
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+.topinfo>.closeeatingnum{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 60px;
+  height: 40px;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+}
+.seleatnums{
+  display: block;
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+}
+.seleatnums>span{
+  float: left;
+  width: 25%;
+  height: 50px;
+}
+.seleatnums>span:last-child{
+  float: left;
+  width: 50%;
+  height: 50px;
+}
+.seleatnums>span>span{
+  display: block;
+  height: 40px;
+  margin: 5px 5px 5px 5px;
+  border: #eeeeee solid 1px;
+  border-radius: 3px;
+  text-align: center;
+  line-height: 38px;
+  font-size: 14px;
+  color: #333333;
+}
+.seleatnumactive>span{
+  border: none!important;
+  line-height: 40px!important;
+  background-color: #ff8500!important;
+  color: #ffffff!important;
+}
+/* 备注信息 */
+.remarkinfo{
+  display: block;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  /* height: 300px; */
+  top: 60px;
+  width: 100%;
+  background-color: #ffffff;
+}
+.remarktopinfo{
+  display: block;
+  width: 100%;
+  height: 41px;
+  background-color: #ffffff;
+  position: relative;
+  color: #666666;
+  border-bottom: 1px #eeeeee solid;
+}
+.remarktopinfo>span:first-child{
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+.remark_info{
+  display: block;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  padding: 10px 10px 10px 10px;
+}
+.remarkcontent{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 14px;
+  margin: 0px 0px 0px 0px;
+  color: #666666;
+  background-color: #eeeeee;
+  padding: 8px 8px 8px 8px;
+  border-radius: 5px;
+}
+.remarklist{
+  display: block;
+  width: 100%;
+  height: calc(100% - 192px);
+  background-color: #ffffff;
+}
+.remarktitle{
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  padding: 0px 10px 0px 10px;
+  font-size: 14px;
+  color: #999999;
+}
+.remark_list{
+  display: block;
+  overflow: auto;
+  height: calc(100% - 30px);
+}
+.remark_list_info{
+  display: block;
+  margin: 5px 10px 5px 10px;
+  border: 1px solid #dddddd;
+  font-size: 14px;
+  line-height: 18px;
+  color: #333333;
+  padding: 5px 5px 5px 5px;
+  border-radius: 3px;
+}
+.remarkbtn{
+  display: block;
+  overflow: hidden;
+  height: 51px;
+  border-top: solid 1px #eeeeee;
+}
+
+.closeremark{
+  float: left;
+  width: 80px;
+  height: 36px;
+  background-color: #dddddd;
+  margin: 8px 0px 8px 25px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 36px;
+  color: #666666;
+  border-radius: 4px;
+}
+.sureremark{
+  float: right;
+  width: 80px;
+  height: 36px;
+  background-color: #FF8500;
+  margin: 8px 25px 8px 0px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 36px;
+  color: #ffffff;
+  border-radius: 4px;
+}
+.inredinfo{
+  display: none;
+  overflow: hidden;
+  height: 35px;
+  line-height: 30px!important;
+  border-bottom: #F4F4F4 dashed 2px;
+  margin: 0px 0px 5px 0px;
+  padding: 0px 0px 5px 0px;
+}
+.inredinfo>span:first-child{
+  float: left;
+  font-size: 16px;
+  color: #333333;
+}
+.inredinfo>span:first-child::before {
+  content: "进";
+  float: left;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #ff0000;
+  margin: 5px 5px 5px 0px;
+}
+.inredinfo>span:last-child::before {
+  content: "￥";
+}
+.inredinfo>span:last-child {
+  float: right;
+  font-size: 14px;
+  color: #ff0000;
+}

@@ -1,0 +1,49 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/list.css">
+<script src="__PUBLIC__/Sellermobile/js/base.js"></script>
+<!-- <script scr="__PUBLIC__/Sellermobile/js/.css"></script> -->
+	<div class="top">多吃优惠商品列表  <a style="color:#000000;" href="{:U('Cheap/edit',array('ProId'=>'add'))}">十</a></b></div>
+	<foreach name="list" item="row">
+	<div class="zhong">
+		<div class="img"><img src="{$row['ProLogoImg']}" /></div>
+		<div class="text"><span>{$row['ProName']}</span></div>
+		<div class="price"><span>
+		<for start="1" end="$row['Level']+1">
+			￥<?php echo $row['Lv'.$i]; ?>/
+		</for>
+		</span>
+
+		</div>
+		<div class="right">
+			<a href="{:U('Cheap/edit',array('ProId'=>$row['ProId']))}" style="color:#000000; height:40px;line-height:40px;">编辑</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a style="color:#000000; height:40px;line-height:40px;" data-id="{$row['ProId']}" class="delete">删除</a>
+		</div>
+	</div>
+	</foreach>
+	<script>
+	// $(document).on('click','.delete',function(){
+		$('.delete').click(function(){
+		var ProId=$(this).attr('data-id');
+		// console.log(ProId);
+		var senddata = {
+			ProId:ProId,
+		}
+		tips('waiting','正在删除中···');
+		$.ajax({
+			url:"{:U('Cheap/delete')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', '删除成功!', 1500, 'weui_icon_toast');
+					setTimeout( window.location.reload(),1500);
+				}else{
+					tips('notice', '删除失败!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+	})
+	</script>

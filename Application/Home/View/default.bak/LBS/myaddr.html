@@ -1,0 +1,458 @@
+<layout name="Public/PageModel"/>
+
+<style type="text/css">
+.set-full-width {
+  position: relative;
+  width: 100%;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  z-index: 11;
+}
+
+#allmap {
+  width: 100%;
+  overflow: hidden;
+}
+#corvertxdt{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 18px;
+}
+#posibtn{
+  display: none;
+  position: absolute;
+  top: 91px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-shadow: rgba(0, 0, 0, 0.498039) 0px 0px 6px;
+  border-radius: 2px;
+}
+
+.click {
+  background-color: #f3f3f3;
+}
+
+label {
+  max-width: none !important;
+}
+
+.table-content {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 156px;
+  width: 100%;
+  overflow: auto;
+  background-color: #ffffff;
+  margin-bottom: 54px;
+}
+
+.shop {
+  position: relative;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  margin: 0px;
+}
+.lxgh{
+  position: absolute;
+  top: 5%;
+  right: 0px;
+  width: 50px;
+  height: 90%;
+  margin: 0px;
+  border-left-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  background-image: url("__PUBLIC__/theme2/Images/address.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+}
+.seacher{
+  display: block;
+  height: 45px;
+  padding: 4px 10px 5px 10px;
+  background-color: #ffffff;
+}
+.Ranges-content {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  border-radius: 18px;
+  padding: 0px 10px 0px 15px;
+  position: relative;
+}
+.selline{
+  float: left;
+  position: relative;
+  width: 60px;
+  height: 34px;
+  border-right-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  z-index: 2;
+}
+.sel_line{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: #333333;
+  line-height: 34px;
+  text-align: center;
+  top: 0px;
+  left: 0px;
+  margin: 0px;
+}
+#lang{
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.iconseach{
+  float: right;
+  height: 34px;
+  width: 34px;
+  padding: 5px;
+  z-index: 2;
+  position: relative;
+}
+#seachshopname{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  border: none;
+  outline: none;
+  padding: 0px 50px 0px 80px;
+  z-index: 1;
+}
+</style>
+<!-- 腾讯地图前端定位组件 -->
+<script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<!-- 腾讯地图API接口文件 -->
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4&libraries=convertor,geometry"></script>
+<div class="seacher">
+  <div class="Ranges-content">
+    <div class="selline">
+      <label class="sel_line">5KM</label>
+      <select id="lang" onchange="cg();" >
+        <option value="5000">5KM</option>
+        <option value="10000">10KM</option>
+        <option value="15000">15KM</option>
+        <option value="20000">20KM</option>
+        <option value="25000">25KM</option>
+      </select>
+    </div>
+    <img class="iconseach" src="__PUBLIC__/theme2/Images/PageModelIcon/search.png" alt="">
+    <input type="text" id="seachshopname" name="seachshopname" value="" placeholder="输入小店名称">
+  </div>
+</div>
+
+<!--地图显示-->
+<div class="set-full-width">
+  <div id="allmap"></div>
+  <div id="corvertxdt"></div>
+  <div id="posibtn" onclick="myposition(this)"><img style="width:20px;height:20px;margin:10px 10px" src="__PUBLIC__/theme2/Images/dwan.png"/></div>
+</div>
+<!--列表显示-->
+<div id="listshop" class="table-content" style="">
+
+</div>
+
+<script type="text/javascript">
+  var home_url="{:U('Index/Index',array('stoken'=>'SHOPTOKEN'))}";
+  var seachshop_url="{:U('LBS/seachshop',array('shopname'=>'SHOPNAME'))}";
+</script>
+<script type="text/javascript">
+$('#allmap').css('height',$(document).height()-256+'px');
+var map; //定义地图
+var mymarker;//定义我的位置组件
+var shoplabel;//门店信息
+var mycity='';//当前所在城市
+var markersArray = [];//定义附近商店位置组件数组
+var shoppointArray= [];//门店经纬度数组，转换过之后
+$(document).ready(function(){
+  $('.iconseach').click(function(){
+    var shopname=$('#seachshopname').val();
+    if (shopname!='') {
+      var seachshopurl=seachshop_url.replace(/SHOPNAME/g,shopname);
+      window.location.href=seachshopurl;
+    } else {
+      tips('notice', '输入小店名称!', 1500, 'weui_icon_notice');
+    }
+  })
+})
+//腾讯地图API功能
+window.onload = function(){
+  //直接加载地图
+  //初始化地图函数  自定义函数名init
+  function init() {
+    //定义map变量 调用 qq.maps.Map() 构造函数   获取地图显示容器
+    map = new qq.maps.Map(document.getElementById("allmap"), {
+      center: new qq.maps.LatLng(39.916527,116.397128),      // 地图的中心地理坐标。
+      zoom:13,
+      //设置控件的地图类型和位置
+      mapTypeControlOptions: {
+        //设置控件的地图类型ID，ROADMAP显示普通街道地图，SATELLITE显示卫星图像，HYBRID显示卫星图像上的主要街道透明层
+        mapTypeIds: [
+          // qq.maps.MapTypeId.ROADMAP,
+          // qq.maps.MapTypeId.SATELLITE,
+          // qq.maps.MapTypeId.HYBRID
+        ],
+        //设置控件位置相对上方中间位置对齐
+        position: qq.maps.ControlPosition.TOP_LEFT
+      },
+      //启用缩放控件
+      zoomControl: true,
+      //设置缩放控件的位置和样式
+      zoomControlOptions: {
+        //设置缩放控件的位置为相对左方中间位置对齐.
+        position: qq.maps.ControlPosition.TOP_RIGHT,
+        //设置缩放控件样式为仅包含放大缩小两个按钮
+        style: qq.maps.ZoomControlStyle.DEFAULT
+      }
+    });
+    //$('.csssprite').parent().parent().remove();
+    //初始化我的位置
+    var anchor = new qq.maps.Point(10, 10),
+    size = new qq.maps.Size(40, 40),
+    origin = new qq.maps.Point(0, 0),
+    scaleSize=new qq.maps.Size(20,20),
+    icon = new qq.maps.MarkerImage(
+      "__PUBLIC__/theme2/Images/dqwz.png",
+      size,
+      origin,
+      anchor,
+      scaleSize
+    );
+    mymarker = new qq.maps.Marker({
+      icon:icon,
+      position: new qq.maps.LatLng(39.916527,116.397128),
+      map: map
+    });
+    mymarker.setMap(null);
+    //初始化显示点击显示门店信息
+    var cssC = {
+      color: "#ffffff",
+      fontSize: "10px",
+      height:"23px",
+      padding:"2px 5px 2px 5px",
+      lineHeight:"19px",
+      border:"none",
+      borderRadius:"2px",
+      backgroundColor:"rgba(0, 0, 0, 0.5)"
+    };
+    shoplabel = new qq.maps.Label({
+      clickable: true,
+      content: '显示门店信息',
+      map: map,
+      offset: new qq.maps.Size(-10, -50),
+      position: new qq.maps.LatLng(39.916527,116.397128),
+      style: cssC,
+      visible: false,
+      zIndex: 1000
+    });
+    //显示定位按钮
+    $('#posibtn').css("display","block");
+  }
+  //调用初始化函数地图
+  init();
+  geolocation.getLocation(showPosition, showErr, options);
+}
+//百度地图获取当前位置
+var geolocation = new qq.maps.Geolocation("NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4", "web商店");
+var options = {timeout: 6000};
+//定位成功返回函数
+function showPosition(position) {
+  var mycenter=new qq.maps.LatLng(position.lat, position.lng);
+  map.panTo(mycenter);
+  if(mymarker.getMap()){
+    mymarker.setPosition(mycenter);
+  }else{
+    mymarker.setMap(map);
+    mymarker.setPosition(mycenter);
+  }
+  if ((mycity=='')||(mycity!=position.city)){
+    mycity=position.city;
+    for(var i=0;i<markersArray.length;i++){
+      markersArray[i].setMap(null);
+    }
+    markersArray.length=0;
+    shoppointArray.length=0;
+    getshop(true);
+  } else{
+
+  }
+};
+//定位失败返回函数
+function showErr() {
+  tips('notice', '定位失败!', 1500, 'weui_icon_notice');
+};
+//设置门店显示组件图标
+var nsanchor = new qq.maps.Point(10, 25),
+nssize = new qq.maps.Size(40, 50),
+nsorigin = new qq.maps.Point(0, 0),
+nsscaleSize=new qq.maps.Size(20,25),
+nsicon = new qq.maps.MarkerImage(
+  "__PUBLIC__/theme2/Images/mddw1.png",
+  nssize,
+  nsorigin,
+  nsanchor,
+  nsscaleSize
+);
+var sanchor = new qq.maps.Point(10, 25),
+ssize = new qq.maps.Size(40, 50),
+sorigin = new qq.maps.Point(0, 0),
+sscaleSize=new qq.maps.Size(20,25),
+sicon = new qq.maps.MarkerImage(
+  "__PUBLIC__/theme2/Images/mddw2.png",
+  ssize,
+  sorigin,
+  sanchor,
+  sscaleSize
+);
+//获取后台附近门店信息通过ajax 操作获得
+function getshop(itype){
+  if (itype==true){
+    $.ajax({
+      type: "post", //请求的方式
+      dataType: "json", //数据的格式 建议大家使用json格式
+      data: {'slng': 0, 'slat': 0, 'slong': 0,'city':mycity}, //请求的数据
+      url: "{:U('LBS/getRanges')}", //请求的url地址
+      success: function (data) { //请求成功时，处理返回来的数据
+        showshop(data);
+      }
+    })
+  }
+}
+//门店坐标转化为腾讯坐标并存入数组,并创建marker数组,显示范围内的marker
+function shoppoints(sid,slat,slng){
+  var shoppoint=new qq.maps.LatLng(slat, slng);
+  shoppointArray[sid]=shoppoint;
+  var slength=parseInt($("#lang").val());
+  if(ifpos(shoppoint,slength)){
+    var smarker = new qq.maps.Marker({
+      icon:nsicon,
+      map: map,
+      position: shoppoint
+    });
+    $('#'+sid).css("display","block");
+  } else{
+    var smarker = new qq.maps.Marker({
+      icon:nsicon,
+      map: map,
+      visible: false,
+      position: shoppoint
+    });
+    $('#'+sid).css("display","none");
+  }
+  markersArray[sid]=smarker;
+}
+//加载门店信息，显示范围内的门店信息
+function showshop(data){
+  var htmls = "";
+  var shopid=0;
+  for (var key in data) {
+    if((data[key].lat!=null)&&(data[key].lang!=null)){
+      htmls += ' <div id=' + shopid +' shopname='+data[key].storename+' dpoint=' + data[key].lang + ' mpoint=' + data[key].lat + ' class="row shop" style="display:none" data-stoken='+data[key].stoken+' onclick="shopclick(this)">' +
+      ' <label class="control-label col-xs-12 col-sm-12"style="margin: 0px; padding: 5px 60px 0px 15px;color: #333333;font-size: 14px">' +
+      data[key].storename + '</label>' +
+      '<label class="control-label col-xs-12 col-sm-12"style="margin: 0px; padding: 0px 60px 5px 15px;color: #999999;font-size: 12px"">' +
+      data[key].province + data[key].city + data[key].area + data[key].addr +
+      '</label><div class="lxgh" onclick="satnav(this)"></div></div>';
+      shopid++;
+    }
+  }
+  $(".table-content").html(htmls);
+  shopid=0;
+  for(var key in data){
+    if((data[key].lat!=null)&&(data[key].lang!=null)){
+      shoppoints(shopid,data[key].lat, data[key].lang);
+      shopid++;
+    }
+  }
+}
+//点击门店
+function shopclick(e) {
+  var shoptoken=$(e).attr('data-stoken');
+  var homeurl=home_url.replace(/SHOPTOKEN/g,shoptoken);
+  window.location.href=homeurl;
+  map.panTo(shoppointArray[$(e).attr("id")]);
+  if (!$(e).hasClass("click")) {
+    shoplabel.setVisible(false);
+    shoplabel.setPosition(shoppointArray[$(e).attr("id")]);
+    if($(".click").length>0){
+      markersArray[$(".click").attr("id")].setIcon(nsicon);
+      markersArray[$(".click").attr("id")].setZIndex(0);
+    }
+    $(".click").addClass("del");
+    $(".del").removeClass("click");
+    $(".del").removeClass("del");
+    $(e).addClass("click");
+    markersArray[$(e).attr("id")].setIcon(sicon);
+    markersArray[$(e).attr("id")].setZIndex(1);
+    shoplabel.setContent($(e).attr("shopname"));
+    shoplabel.setVisible(true);
+  }
+}
+//显示所选范围内的门店信息
+function shopshows(){
+  var slength=parseInt($("#lang").val());
+  map.panTo(mymarker.getPosition());
+  shoplabel.setVisible(false);
+  if($(".click").length>0){
+    markersArray[$(".click").attr("id")].setIcon(nsicon);
+    markersArray[$(".click").attr("id")].setZIndex(0);
+    $(".click").removeClass("click");
+  }
+  for(var i=0;i<shoppointArray.length;i++){
+    if(ifpos(shoppointArray[i],slength)){
+      $('#'+i).css("display","block");
+      markersArray[i].setVisible(true);
+    } else{
+      $('#'+i).css("display","none");
+      markersArray[i].setVisible(false);
+    }
+  }
+}
+//判断当前位置和商店位置距离是否在所选距离范围内
+function ifpos(spoint,length){
+  if(length>qq.maps.geometry.spherical.computeDistanceBetween(spoint, mymarker.getPosition())){
+    return true;
+  } else{
+    return false;
+  }
+}
+//选择范围发生改变
+function cg() {
+  $('.sel_line').text($('#lang option:selected').text());
+  shopshows();
+}
+//定位到我当前位置按钮
+function myposition(div){
+  geolocation.getLocation(showPosition, showErr, options);
+}
+//点击路线规划
+function satnav(div){
+  var sid=$(div).parent().attr("id");
+  var sname=$(div).parent().attr("shopname");
+  var hrefpath="https://apis.map.qq.com/tools/routeplan/eword="+sname+"&epointx="+shoppointArray[sid].lng+"&epointy="+shoppointArray[sid].lat+
+  "&sword=当前位置&spointx="+mymarker.getPosition().lng+"&spointy="+mymarker.getPosition().lat+"&footdetail=2&navibutton=1&editstartbutton=0"+
+  "?referer=web商店&key=NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4";
+  window.location.href=hrefpath;
+  window.event.stopPropagation();
+  window.event.cancelBubble = true;
+}
+</script>

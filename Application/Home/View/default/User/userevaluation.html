@@ -1,0 +1,104 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/userevaluation.css?v=1.1" />
+<div class="evalparts">
+  <div class="evalinfopart" data-stoken="{$sinfo.stoken}" data-oid="{$oid}">
+    <div class="shopevalpart">
+      <div class="shopinfo">
+        <img src="{$sinfo.Slogo}" alt="">
+        <span class="mui-ellipsis">{$sinfo.storename}<span class="mui-icon mui-icon-arrowright"></span></span>
+      </div>
+      <div class="sevalinfos">
+        <div class="shopservice">
+          <span>商家</span>
+          <div class="starsinfo">
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+          </div>
+        </div>
+        <div class="shoppros">
+          <span>菜品</span>
+          <div class="starsinfo">
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+            <span class="ggg xing_icon"></span>
+          </div>
+        </div>
+        <div class="inputtextinfo">
+          <textarea name="inputinfo" class="inputinfo" placeholder="说两句,谢谢!"></textarea>
+        </div>
+      </div>
+    </div>
+    <!-- 商品 -->
+    <div class="prolistpart">
+      <foreach name="olinfo" item="ol">
+        <div class="proevalpart" data-pid="{$ol.ProId}" data-olid="{$ol.OrderListId}">
+          <div class="proinfo">
+            <img src="{$ol.ProLogoImg}" alt="">
+            <span class="mui-ellipsis">{$ol.ProName}
+              <span class="mui-icon mui-icon-arrowright"></span>
+              <div>
+                <span>{$ol.Price}</span>
+                <span>{$ol.Count}</span>
+              </div>
+            </span>
+          </div>
+          <div class="proevalinfos">
+            <div class="shoppros">
+              <span>菜品</span>
+              <div class="starsinfo">
+                <span class="ggg xing_icon"></span>
+                <span class="ggg xing_icon"></span>
+                <span class="ggg xing_icon"></span>
+                <span class="ggg xing_icon"></span>
+                <span class="ggg xing_icon"></span>
+              </div>
+            </div>
+            <div class="inputtextinfo">
+              <textarea name="inputinfo" class="inputinfo" placeholder="说两句,谢谢!"></textarea>
+            </div>
+          </div>
+        </div>
+      </foreach>
+
+      <!-- <div class="proevalpart">
+        <div class="proinfo">
+          <img src="{$sinfo.Slogo}" alt="">
+          <span class="mui-ellipsis">{$sinfo.storename}<span class="mui-icon mui-icon-arrowright"></span></span>
+        </div>
+        <div class="proevalinfos">
+          <div class="shoppros">
+            <span>菜品</span>
+            <div class="starsinfo">
+              <span class="ggg xing_icon"></span>
+              <span class="ggg xing_icon"></span>
+              <span class="ggg xing_icon"></span>
+              <span class="ggg xing_icon"></span>
+              <span class="ggg xing_icon"></span>
+            </div>
+          </div>
+          <div class="inputtextinfo">
+            <textarea name="inputinfo" class="inputinfo" placeholder="说两句,谢谢!"></textarea>
+          </div>
+        </div>
+      </div>       -->
+
+    </div>
+
+
+
+
+  </div>
+  <div class="sendbtnpart">
+    <span class="sendbtn">提交</span>
+  </div>
+</div>
+<script type="text/javascript">
+  var setuserevaluation_url ="{:U('User/setuserevaluation')}";//提交评论信息
+  var userorders_url ="{:U('User/Userorders')}";//用户订单页面
+</script>
+<script src="__PUBLIC__/newhome/js/userevaluation.js?v=1.1" type="text/javascript" charset="utf-8"></script>

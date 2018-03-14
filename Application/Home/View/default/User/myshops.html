@@ -1,0 +1,25 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/myshops.css?v=1.1" />
+<div class="shoplist">
+  <p style="text-align: center; margin-top: 10px; font-size: 12px;">我关注的店铺，左滑可以取消关注。</p>
+  <ul class="mui-table-view">
+    <foreach name="shopinfo" item="vo" >
+      <li class=" mui-media  mui-table-view-cell " RPath="{:U('Index/Index',array('once'=>'1','stoken'=>$vo['stoken']))}">
+        <a href="javascript:;" class="mui-slider-handle">
+          <img class="mui-media-object mui-pull-left" src="{$vo.Slogo}">
+          <div class="mui-media-body">
+            <span>{$vo.storename}</span>
+            <p class="mui-ellipsis">{$vo.province}{$vo.city}{$vo.area}{$vo.addr}</p>
+          </div>
+        </a>
+        <div class="mui-slider-right mui-disabled delebtn">
+          <a class="mui-btn"><span class="setdelete" data-mcid="{$vo.ID}">取消关注</span></a>
+        </div>
+      </li>
+    </foreach>
+  </ul>
+</div>
+<script type="text/javascript">
+  var setshopcollect_url = "{:U('User/delusercollect')}";
+</script>
+<script type="text/javascript" src="__PUBLIC__/newhome/js/myshops.js?v=1.1"></script>

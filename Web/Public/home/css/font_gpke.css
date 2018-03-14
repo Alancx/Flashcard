@@ -1,0 +1,129 @@
+@font-face {
+    font-family: "icongpk";
+    font-weight: normal;
+    font-style: normal;
+    src:  url('../fonts/gpke.ttf') format('truetype'); /* iOS 4.1- */
+}
+.ggg
+{
+    font-family: "icongpk";
+    font-size: 24px;
+    font-weight: lighter;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/*首页 line*/
+.home_icon:before{
+	content: "\a001";
+}
+/*活动line*/
+.huod_icon:before{
+	content: "\a003";
+}
+/*订单line*/
+.order_icon:before{
+	content: "\a005";
+}
+/*我的line*/
+.mine_icon:before{
+	content: "\a007";
+}
+/*地址line*/
+.address_icon:before{
+	content: "\a021";
+}
+/*电话line*/
+.phone_icon:before{
+	content: "\a012";
+}
+/*购物车line*/
+.gouwu_icon:before{
+	content: "\a038";
+}
+/*点赞line*/
+.dian_icon:before{
+	content: "\a019";
+}
+/*心line*/
+.xin_icon:before{
+	content: "\a009";
+}
+/*心  fill*/
+.xin_fillicon:before{
+	content: "\a010";
+}
+
+/*未选中*/
+.unchecked_icon:before{
+	content: "\a015";
+}
+/*选中*/
+.checked_icon:before{
+	content: "\a016";
+}
+
+
+/*全部订单*/
+.icon_allorder:after{
+	content: "\a033";
+}
+/*待付款*/
+.icon_dfukuan:after{
+	content: "\a034";
+}
+/*待使用*/
+.icon_dshiyong:after{
+	content: "\a035";
+}
+/*待评价*/
+.icon_dpingjia:after{
+	content: "\a036";
+}
+/*退款/售后*/
+.icon_shouhou:after{
+	content: "\a037";
+}
+
+
+/*收藏*/
+.icon_shoucang:after{
+	content: "\a013";
+}
+/*我的关注*/
+.icon_guanzhu:after{
+	content: "\a009";
+}
+/*我的红包*/
+.icon_hongbao:after{
+	content: "\a027";
+}
+/*客服*/
+.icon_kefu:after{
+	content: "\a011";
+}
+/*问题帮助*/
+.icon_help:after{
+	content: "\a028";
+}
+/*协议说明*/
+.icon_xieyi:after{
+	content: "\a029";
+}
+/*星星*/
+.xing_icon:before{
+	content: "\a014";
+}
+/*电话*/
+.phone_icon:before{
+	content: "\a012";
+}
+
+
+
+
+

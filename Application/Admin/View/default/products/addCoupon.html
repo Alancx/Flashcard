@@ -1,0 +1,190 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+  .card{
+    width: 400px;
+    height: 220px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 50px auto;
+    position: relative;
+    background: linear-gradient(to left,#fff,#999);
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.7);
+    color: black;
+  }
+  .card_title{
+    text-align: center;
+    font-size: 2em;
+    height: 40px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    color: black;
+  }
+  .card_rules{
+    font-size: 14px;
+    line-height: 32px;
+    text-align: center;
+    color: black;
+  }
+  .card_bot{
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    height: 20px;    
+    text-align: center;
+    font-size: .8em;
+    color: black;
+  }
+  .vip{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: #ccc;
+    font-size: 1.5em;
+  }
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+  <div class="col-lg-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <div class="alert alert-warning" style="color:red;">
+          1、优惠券添加
+        </div>
+        <div class='col-sm-12 col-md-12'>
+          <h5>优惠券添加</h5>
+        </div>
+      </div>
+      <div class="ibox-content">
+        <div class='row'>
+          <div class='col-md-6 col-lg-6'>
+            <form id='fs' method='post' action="{:U('Products/savecoupons')}">
+              <div class="form-group">
+                <label for="">优惠券类型</label>
+                <select name="CouponType" id="CouponType" class='form-control'>
+                  <option value="">请选择</option>
+                  <option value="0" <if condition="$info['Type'] eq '0'">selected='selected'</if>>现金抵扣券</option>
+                  <!-- <option value="1" <if condition="$info['Type'] eq '1'">selected='selected'</if>>满减了</option> -->
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="">优惠规则</label>
+                <input type="text" name="Rules" id="Rules" value="{$info.Rules}" class='form-control'>
+              </div>
+              <div class='form-group'>
+                <label for="">优惠券数量</label>
+                <input type="number" name="CouponNum" min='1' id="CouponNum" value="{$info.Count}" class='form-control'>
+              </div>
+              <div class='form-group'>
+                <label for="">生效时间</label>
+                <input type="text" name="StartDate" value="{$info.StartDate}" id="StartDate" class='form-control' onClick="WdatePicker({el:'StartDate',onpicked:function(){showtime(this)},dateFmt:'yyyy-MM-dd HH:00:00',minDate:'%y-%M-{%d+0}'})">
+              </div>
+              <div class='form-group'>
+                <label for="">失效时间</label>
+                <input type="text" name="ExpDate" value="{$info.ExpiredDate}" id="ExpDate" class='form-control' onClick="WdatePicker({el:'ExpDate',onpicked:function(){showtime(this)},dateFmt:'yyyy-MM-dd HH:00:00',minDate:'%y-%M-%d {%H+1}:00:00'})">
+              </div>
+<!--               <div class='form-group'>
+                <label for="">限领数量</label>
+                <input type="number" name="GetNum" id="GetNum" min='1' value='{$info.UserCount}' class='form-control'>
+              </div>
+ -->              <input type="hidden" name="oldid" value="{$info.ID}">
+              <button class='btn btn-primary btn-outline' type='submit'>保存</button>
+            </form>
+          </div>
+          <div class='col-md-6 col-lg-6'>
+            <div class='card'>
+              <span class='vip'>VIP</span>
+              <div class='card_title'>{$info.CouponName}</div>
+              <div class='card_rules'><if condition="$info['Type'] eq '0'">平台商品使用立减{$info.Rules}元</if></div>
+              <div class='card_bot'>有效时间： <span id='start'>{$info.StartDate}</span> -- <span id='exp'>{$info.ExpiredDate}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal inmodal fade" id="order_message" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-sm" style="width:428px;">
+    <div class="modal-content">
+      <div class="modal-header" style="padding:10px 15px;">
+        模态框 <span style="color:red" id='add_notice'></span>
+        <button type="button" class="close" data-dismiss="modal" id="cls_modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:15px">
+        
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <button type="button" class="btn btn-w-m btn-success input-sm" data-gid='' id="btn_addrules">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var cardtype='';
+  $(document).ready(function(){
+    $('#fs').submit(function(){
+      if ($('#CouponType').val() && $('#Rules').val() && $('#CouponNum').val() && $('#StartDate').val() && $('#ExpDate').val()) {
+        return true;
+      }else{
+        art.dialog.tips('请填写完整信息');
+        return false;
+      }
+    })
+    $('#CouponType').change(function(){
+      var type=$('#CouponType option:selected').val();
+      // console.log(type);
+      cardtype=type;
+      if (type) {
+        update('title',type);
+      }else{
+        update('title','null');
+      }
+    })
+    $('#Rules').keyup(function(){
+      var rule=$(this).val();
+      update('rule',rule);
+    })
+    // $('#')
+  })
+  function update(type,value){
+    if (type=='title') {
+      if (value=='0') {
+        $('.card_title').html('现金抵扣券');
+        $('#Rules').attr('placeholder','直接输入抵扣金额即可');
+      }else if (value=='1') {
+        $('.card_title').html('满减券');
+      }else{
+        $('.card_title').html('');
+      }
+    }else if (type=='rule') {
+      if (cardtype=='0') {
+        $('.card_rules').html('平台商品使用立减'+value+'元');
+      };
+    };
+  }
+  function showtime(ti){
+    var datatype=$(ti).attr('id');
+    if (datatype=='StartDate') {
+      if ($(ti).val()>$('#ExpDate').val() && $('#ExpDate').val()) {
+        art.dialog.tips('非法时间段');
+        $(ti).val('');
+      };
+      $('#start').html($(ti).val());
+    }else if (datatype=='ExpDate') {
+      if ($(ti).val()<$('#StartDate').val() && $('#StartDate').val()) {
+        art.dialog.tips('非法时间段');
+        $(ti).val('');
+      };
+      $('#exp').html($(ti).val());
+    };
+
+  }
+</script>
+<include file="Common:footer" />

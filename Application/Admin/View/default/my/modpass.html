@@ -1,0 +1,93 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+
+
+                <div class="row  wrapper  white-bg" style="margin:0 1%;">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>修改密码</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form method="post" action="{:U('My/savepass')}" class="form-horizontal" id="svs">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户名</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" name="EmployeeId" id="EmployeeId" readonly="readonly" value="{$info.userName}" class="form-control required" >
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">旧密码</label>
+                                        <div class="col-sm-4">
+                                            <input type="password" name="oldPass" id="oldPass" class="form-control required" value=""> <span class="help-block m-b-none"></span>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">密码</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="password" name="Password" id="Password" class="form-control required" value="">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">确认密码</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="password" name="repass" id="repass" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button class="btn btn-primary btn-outline" type="button" id="sv">保存内容</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#sv").click(function(){
+        	var oldPass=$("#oldPass").val();
+        	var password=$("#Password").val();
+        	var repass=$("#repass").val();
+        	if (!oldPass) {
+        		art.dialog.alert('请输入旧密码');
+        		return false;
+        	};
+        	if (!password) {
+        		art.dialog.alert('请输入密码');
+        		return false;
+        	};
+        	if (repass!=password) {
+        		art.dialog.alert('两次输入不一致');
+        		return false;
+        	}else{
+        		$.ajax({
+	        		type:"post",
+	        		url:"{:U('My/checkpass')}",
+	        		data:"password="+oldPass,
+	        		dateType:"json",
+	        		success:function(msg){
+	        			if (msg=='success') {
+	        				$("#svs").submit();
+	        			};
+	        			if (msg=='error') {
+	        				art.dialog.alert('旧密码错误，请重新输入');
+	        				return false;
+	        			};
+	        		}
+	        	})
+        	}
+        })
+    })
+</script>
+
+ <include file="Common:footer" />

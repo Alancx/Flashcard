@@ -1,0 +1,117 @@
+<layout name="Public/PageModel"/>
+<!-- 腾讯地图前端定位组件 -->
+<script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<style>
+#touch{
+  display: none!important;
+}
+body{
+  background-color: #ffffff!important
+}
+.subscribe{
+  display: none;
+}
+.showpage{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  /*padding: 0px 15% 0px 15%;*/
+}
+.showpage>a>img{
+  width: 100%;
+  height: 100%;
+}
+.showtime{
+  position: fixed;
+  width: 35px;
+  height: 35px;
+  right: 5px;
+  top: 5px;
+  border-radius: 50%;
+  line-height: 33px;
+  color: #ffffff;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.33);
+}
+</style>
+<div class="showpage">
+  <if condition="$bootinfo eq 'NULLDATA' ">
+    <a>
+      <img src="__PUBLIC__/theme2/Images/showpage.jpg" alt="">
+    </a>
+    <else />
+      <if condition="$bootinfo['boothref'] eq 'HTTP://' ">
+        <a>
+          <img src="{:C('RESOURCE_URL')}{$bootinfo['imgurl']}" alt="">
+        </a>
+       <else />
+       <a href="{$bootinfo['boothref']}">
+         <img src="{:C('RESOURCE_URL')}{$bootinfo['imgurl']}" alt="">
+       </a>
+     </if>
+  </if>
+</div>
+<div class="showtime">
+  3
+</div>
+<script type="text/javascript">
+var gotime=3;
+$(document).ready(function(){
+settime();
+})
+function settime(val) {
+  if (gotime == 0) {
+     window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+    return;
+  } else {
+    $('.showtime').text(gotime);
+    gotime--;
+  }
+  setTimeout(function() {
+    settime(val)
+  },1000)
+}
+</script>
+<script type="text/javascript">
+//腾讯地图获取当前位置
+var geolocation = new qq.maps.Geolocation("NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4", "web商店");
+var options = {timeout: 6000};
+window.onload = function(){
+  geolocation.getLocation(showPosition, showErr, options);
+}
+///////定位成功返回函数///////
+function showPosition(position) {
+  var mylat=position.lat;
+  var mylng=position.lng;
+  var mycity=position.city;
+  var senddata={
+    slat:mylat,
+    slng:mylng,
+    scity:mycity,
+  }
+  $.ajax({
+    type: "post", //请求的方式
+    dataType: "json", //数据的格式 建议大家使用json格式
+    data: senddata, //请求的数据
+    url: "{:U('LBS/getchildshop')}", //请求的url地址
+    success: function (data) { //请求成功时，处理返回来的数据
+      if (data.status=='true') {
+        //  window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+      } else{
+        if (data.info=='noShops') {
+          // window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+        } else {
+          // window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+        }
+      }
+    }
+  })
+   console.log('定位成功');
+}
+///////定位失败返回函数////////
+function showErr() {
+  // window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+};
+</script>

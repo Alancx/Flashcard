@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>提交订单</title>
+		<script src="__PUBLIC__/home/js/mui.min.js"></script>
+		<link href="__PUBLIC__/home/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/home/css/font_gpke.css" />
+		<link rel="stylesheet" href="__PUBLIC__/home/css/detail.css" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+</head>
+<body>
+	<div class="order">
+		<div class="order-top">
+			<div class="order-top-img">
+				<img src="__PUBLIC__/home/img//5.png"/>
+			</div>
+			<div class="order-top-text mui-ellipsis">
+				豫川通汇麻辣香锅豫川通汇麻辣香锅豫川通汇麻辣香锅（黄河路店）
+			</div>
+			<div class="order-top-p">
+				<p class="mui-icon mui-icon-arrowright"></p>
+			</div>
+		</div>
+		<if condition="$type eq 1">
+			<volist name="data" id="vo">
+				<div class="shop">
+					<div class="shop-img">
+						<img src="{$vo.ProLogoImg}"/>
+					</div>
+					<div class="shop-number">
+						{$vo.ProName}<br />
+						x{$vo.Num}
+					</div>
+					<div class="shop-price">
+						￥{$vo.Price}
+					</div>
+				</div>
+			</volist>
+			<else />
+			<div class="shop">
+				<div class="shop-img">
+					<img src="./img/5.png"/>
+				</div>
+				<div class="shop-number">
+					腐竹<br />
+					x1
+				</div>
+				<div class="shop-price">
+					￥3
+				</div>
+			</div>
+			<div class="shop">
+				<div class="shop-img">
+					<img src="./img/5.png"/>
+				</div>
+				<div class="shop-number">
+					腐竹<br />
+					x1
+				</div>
+				<div class="shop-price">
+					￥3
+				</div>
+			</div>
+
+			<div class="shop">
+				<div class="shop-img">
+					<img src="./img/5.png"/>
+				</div>
+				<div class="shop-number">
+					腐竹<br />
+					x1
+				</div>
+				<div class="shop-price">
+					￥3
+				</div>
+			</div>
+
+			<div class="shop">
+				<div class="shop-img">
+					<img src="./img/5.png"/>
+				</div>
+				<div class="shop-number">
+					腐竹<br />
+					x1
+				</div>
+				<div class="shop-price">
+					￥3
+				</div>
+			</div>
+		</if>
+
+
+		
+	</div>
+	
+	<div class="jq">
+		<if condition="$length eq 3">
+			<else/>
+			<div class="morelist">
+				展开更多
+				<span class="mui-icon mui-icon-arrowdown"></span>
+			</div>
+		</if>
+		<div class="footer">
+			<div class="tableware">
+				餐具费
+			</div>
+			<div class="price">
+				￥1
+			</div>
+		</div>
+		<div class="jian">
+			<small class="jiansmall">减</small>
+			<span class="jian-text">
+				满减优惠
+			</span>
+			<span class="jian-price">
+				-￥15
+			</span>
+		</div>
+		<div class="left"></div>
+		<div class="right"></div>
+		<div class="total">
+				合计<span>￥{$vo.total}</span>
+		</div>
+		<div class="left"></div>
+		<div class="right"></div>
+		<div class="eat">
+			<div class="eat-people">电话商家</div>
+		</div>
+		
+	</div>
+	<div class="tail">
+		<span>核销码</span>
+		<span>评价</span>
+		<span>退款</span>
+		
+		
+	</div>
+</body>
+<script src="__PUBLIC__/home/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(".morelist").on("tap",function(){
+		$(".order").toggleClass("sl");
+	})
+</script>
+</html>

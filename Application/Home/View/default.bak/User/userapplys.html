@@ -1,0 +1,201 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/userapplys.css?v=1.6">
+<script src="__PUBLIC__/theme2/js/ajaxfileupload.js"></script>
+<script src="__PUBLIC__/theme2/js/userapplys.js?v=2.4"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/plugins/area.js"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4&libraries=convertor,geometry"></script>
+<script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+<script>
+var useridcard= "{:U('User/useridcard')}";//修改会员idcard
+var usersinfo="{:U('User/setusershops')}";//保存会员商店信息
+var imgurl= "__PUBLIC__/theme2/Images/";//图标路径
+var getsmscode= "{:U('User/sendmsmcode')}";//发送短信验证码
+</script>
+
+<div class="ubinfo">
+  <div>
+    <label>真实姓名:</label>
+    <?php if($mshop[IsCheck]=='1'): ?>
+      <input type="text" class="baseinfo" id="shuname" name="shuname" placeholder="姓名" value="{$mshop.TrueName}" readonly="true">
+    <?php else:?>
+      <input type="text" class="baseinfo" id="shuname" name="shuname" placeholder="姓名" value="{$mshop.TrueName}" >
+    <?php endif;?>
+  </div>
+  <div>
+    <label>手机号码:</label>
+    <input type="number" class="baseinfo" id="shphone" name="shphone" placeholder="手机号" value="{$mshop.tel}">
+  </div>
+  <div>
+    <label>验证码:</label>
+    <input type="number" class="baseinfo" id="shcode" name="shcode" placeholder="验证码" value="">
+    <label class="getcode" data-code="" data-s="0">获取验证码</label>
+  </div>
+  <div>
+    <label>身份证号:</label>
+    <?php if($mshop[IsCheck]=='1'): ?>
+      <input type="text" class="baseinfo" id="shidcard" name="shidcard" placeholder="身份证号" value="{$mshop.IdCard}" readonly="true">
+    <?php else:?>
+      <input type="text" class="baseinfo" id="shidcard" name="shidcard" placeholder="身份证号" value="{$mshop.IdCard}">
+    <?php endif;?>
+  </div>
+  <div>
+    <label>商铺名称:</label>
+    <input type="text" class="baseinfo" id="shsname" name="shsname" placeholder="商铺名称" value="{$mshop.storename}">
+  </div>
+  <div>
+    <label>所在地区:</label>
+    <div class="baseinfo addrinfo">
+      <label id="s_province">省</label>
+      <label id="s_city">市</label>
+      <label id="s_county">区/县</label>
+      <!-- <select name="province" id="s_province" value="" onchange="checkField(this)">
+    </select>
+    <select name="city" id="s_city" value=""  onchange="checkField(this)">
+  </select>
+  <select name="county" id="s_county" value="" onchange="checkField(this)">
+</select> -->
+</div>
+</div>
+<div>
+  <label>店铺地址:</label>
+  <input type="text" class="baseinfo" id="shsaddr" name="shsaddr" placeholder="商铺地址" value="{$mshop.addr}">
+</div>
+<div class="selmap">
+  <label class="lebmap">店铺坐标:</label>
+  <label class="selsmap">请选择<span></span></label>
+  <div class="map" id="map" style="display:none"></div>
+  <input id="pointsX" name="lang"  type="hidden" value="{$mshop.lang}"/>
+  <input id="pointsY" name="lat"  type="hidden" value="{$mshop.lat}"/>
+</div>
+</div>
+<div class="ubphoto">
+  <label class="tsinfo">上传手持身份证照片</label>
+  <label class="zyinfo">请保持身份证号清晰可见</label>
+  <div class="sczpinfo">
+    <div>
+      <div>
+        <img src="__PUBLIC__/theme2/Images/ckzp.png">
+      </div>
+      <label>参考照片</label>
+    </div>
+    <div>
+      <div>
+        <?php if($mshop[IdInfo]==''): ?>
+          <img id="usphoto" class="usphoto" src="__PUBLIC__/theme2/Images/tjzp.png">
+        <?php else: ?>
+          <img id="usphoto" class="usphoto" src="{:C('RESOURCE_URL')}{$mshop.IdInfo}">
+        <?php endif; ?>
+        <?php if($mshop[IsCheck]!='1'): ?>
+          <input type="file" id="iptxtp" name="iptxtp" onchange="seltxtp(this)">
+        <?php endif;?>
+        <input type="hidden" id="idcard" value="{$mshop.IdInfo}">
+      </div>
+      <label>你的照片</label>
+    </div>
+  </div>
+</div>
+<div class="surebtn">
+  <?php if($mshop[IsCheck]=='0'): ?>
+    <label class="infomeg">正在审核...</label>
+  <?php elseif($mshop[IsCheck]=='2'): ?>
+    <button type="button" class="btn btn-warning ubtjxx" data-ty="update" onclick="sureclick(this)">从新提交</button>
+    <label class="infomeg">审核失败!<br>{$mshop.Checkmark}<br>{$mshop.Remarks}</label>
+  <?php elseif($mshop[IsCheck]=='1'): ?>
+    <label class="infomeg">审核通过!</label>
+  <?php else: ?>
+    <button type="button" class="btn btn-warning ubtjxx" data-ty="add" onclick="sureclick(this)">立即开通</button>
+  <?php endif; ?>
+  <label>立即免费开店，手机随时管理</label>
+</div>
+<script type="text/javascript">
+var wxmap,geocoder,smarker;
+var ischeck="{$mshop[IsCheck]}";
+if ("{$mshop.province}"!='') {
+  $('#s_province').text("{$mshop.province}");
+  $('#s_province').css('color','#333333');
+}
+if ("{$mshop.city}"!='') {
+  $('#s_city').text("{$mshop.city}");
+  $('#s_city').css('color','#333333');
+}
+if ("{$mshop.area}"!='') {
+  $('#s_county').text("{$mshop.area}");
+  $('#s_county').css('color','#333333');
+}
+// if ("{$mshop.county}"!='') {
+//   $('#s_county').text("{$mshop.county}");
+//   $('#s_county').css('color','#333333');
+// }
+</script>
+<script type="text/javascript">
+window.onload=function(){
+  function init(){
+    wxmap = new qq.maps.Map(document.getElementById("map"), {
+      center: new qq.maps.LatLng(39.916527,116.397128),      // 地图的中心地理坐标。
+      zoom:13,
+      mapTypeControlOptions: {
+        mapTypeIds: [
+        ],
+        position: qq.maps.ControlPosition.TOP_LEFT
+      },
+      zoomControl: true,
+      zoomControlOptions: {
+        position: qq.maps.ControlPosition.TOP_RIGHT,
+        style: qq.maps.ZoomControlStyle.DEFAULT
+      }
+    });
+    smarker = new qq.maps.Marker({
+      map:wxmap,
+      position: new qq.maps.LatLng(39.916527,116.397128)
+    });
+    geocoder = new qq.maps.Geocoder({
+      complete : function(result){
+        wxmap.setCenter(result.detail.location);
+        smarker.setPosition(result.detail.location);
+      }
+    });
+  }
+  init();
+  // if (ischeck=='') {
+    geolocation.getLocation(showPosition, showErr, options);
+  // }
+}
+//////////////////////////////////////
+var gelat='NULLGE';
+var gelng='NULLGE';
+
+//腾讯地图获取当前位置
+var geolocation = new qq.maps.Geolocation("NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4", "web商店");
+var options = {timeout: 6000};
+//定位成功返回函数
+function showPosition(position) {
+  $('#s_province').text(position.province);
+  $('#s_city').text(position.city);
+  $('#s_county').text(position.district);
+  $('#shsaddr').val(position.addr);
+  $('.addrinfo>label').css('color','#333333');
+  gelat=position.lat;
+  gelng=position.lng;
+  $("#pointsX").val(gelng);
+  $("#pointsY").val(gelat);
+  smarker.setPosition(new qq.maps.LatLng(gelat, gelng));
+  var selcircle=new qq.maps.Circle({
+    map:wxmap,
+    center:new qq.maps.LatLng(position.lat, position.lng),
+    radius:3000,
+    fillColor:new qq.maps.Color(0,0,0,0.3),
+    strokeWeight:0
+  });
+  qq.maps.event.addListener(selcircle,"click",function(event){
+    smarker.setPosition(event.latLng);
+    $("#pointsX").val(event.latLng.lng);
+    $("#pointsY").val(event.latLng.lat);
+  });
+};
+//定位失败返回函数
+function showErr() {
+  console.log('定位失败');
+};
+
+
+</script>

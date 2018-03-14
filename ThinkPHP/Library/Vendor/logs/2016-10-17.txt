@@ -1,0 +1,49 @@
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[oUlE8nFTL9cRlXh3]]></nonce_str>
+<sign><![CDATA[ABEF5B0A50A9827A22924B3132AC2BE2]]></sign>
+<result_code><![CDATA[FAIL]]></result_code>
+<err_code><![CDATA[AUTH_CODE_INVALID]]></err_code>
+<err_code_des><![CDATA[请扫描微信支付被扫条码/二维码]]></err_code_des>
+</xml>::::::操作日期:::::::2016-10-17 15:02:47
+操作定位:Cashier/wecode::::刷卡支付失败、err_code:AUTH_CODE_INVALID---err_code_des:请扫描微信支付被扫条码/二维码::::::操作日期:::::::2016-10-17 15:02:47
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[lLvAwENu2gOFIUlm]]></nonce_str>
+<sign><![CDATA[5C9F9558F0F553666879E1B96B35CC6D]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CITIC_DEBIT]]></bank_type>
+<total_fee>10</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004162001201610176933204297]]></transaction_id>
+<out_trade_no><![CDATA[E201610171503322663]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161017150351]]></time_end>
+<cash_fee>10</cash_fee>
+</xml>::::::操作日期:::::::2016-10-17 15:03:59
+操作定位:Cashier/wecode::::<xml><return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[OK]]></return_msg>
+<appid><![CDATA[wx3dd28eb27ded279b]]></appid>
+<mch_id><![CDATA[1394550102]]></mch_id>
+<nonce_str><![CDATA[Yzmfx0cUVc0lSdg7]]></nonce_str>
+<sign><![CDATA[DC5EEE5EDF52280907D40DAC869CA7C1]]></sign>
+<result_code><![CDATA[SUCCESS]]></result_code>
+<openid><![CDATA[oFSe-wbQh30G3Dg-2-oWBm1pbXYM]]></openid>
+<is_subscribe><![CDATA[Y]]></is_subscribe>
+<trade_type><![CDATA[MICROPAY]]></trade_type>
+<bank_type><![CDATA[CFT]]></bank_type>
+<total_fee>10</total_fee>
+<fee_type><![CDATA[CNY]]></fee_type>
+<transaction_id><![CDATA[4004162001201610176948989851]]></transaction_id>
+<out_trade_no><![CDATA[E201610171804502470]]></out_trade_no>
+<attach><![CDATA[]]></attach>
+<time_end><![CDATA[20161017180730]]></time_end>
+<cash_fee>10</cash_fee>
+</xml>::::::操作日期:::::::2016-10-17 18:07:30

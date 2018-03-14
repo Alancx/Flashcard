@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?><h1 style='text-align:center;font-size:2em;'>请勿重复绑定</h1>

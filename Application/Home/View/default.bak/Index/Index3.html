@@ -1,0 +1,164 @@
+<layout name="Public/PageModel"/>
+<script src="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/index3.css?v=1.2">
+<!-- 腾讯地图前端定位组件 -->
+<script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+
+<div class="home-contents">
+  <!-- 轮播图区域 -->
+  <div class="swiper-container swiper-container-home">
+    <div class="swiper-wrapper">
+      <foreach name="homeinfo.lbdata" item='lbinfo'>
+        <div class="swiper-slide">
+          <img src="{:C('RESOURCE_URL')}{$lbinfo['imgurl']}" class="imgslide">
+        </div>
+      </foreach>
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination swiper-pagination-home"></div>
+  </div>
+  <!-- 轮播图区域end -->
+  <!-- 分类区域 -->
+  <div class="swiper-container swiper-container-class">
+    <div class="swiper-wrapper">
+      <empty name="homeinfo.classdata">
+        <for start="1" end="5">
+          <div class="swiper-slide">
+            <div class="classtype">
+              <img src="http://placehold.it/100x100" alt="">
+              <label>分类名称</label>
+            </div>
+          </div>
+        </for>
+        <else />
+        <foreach name="homeinfo.classdata" item='classinfo'>
+          <div class="swiper-slide">
+            <a href="{:U('Index/GoodsList',array('cid'=>$classinfo['cid']))}">
+            <div class="classtype">
+              <img src="{:C('RESOURCE_URL')}{$classinfo['imgurl']}" alt="">
+              <label>{$classinfo['cname']}</label>
+            </div>
+          </a>
+          </div>
+        </foreach>
+      </empty>
+    </div>
+  </div>
+  <!-- 分类区域end -->
+  <!-- 首页活动banner图 -->
+  <div class="home_activity">
+    <if condition="$homeinfo['hclassdata'][0]['imghref'] eq 'HTTP://' ">
+      <a>
+        <img src="{:C('RESOURCE_URL')}{$homeinfo['hclassdata'][0]['imgurl']}" alt="">
+      </a>
+      <else />
+      <a href="{$homeinfo['hclassdata'][0]['imghref']}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo['hclassdata'][0]['imgurl']}" alt="">
+      </a>
+    </if>
+  </div>
+  <!-- 首页banner图end -->
+  <!-- 产品区域一 -->
+  <div class="product_1">
+  <foreach name="homeinfo.oneprodata" item='proinfo'>
+    <div class="proinfo_1">
+      <a href="{:U('Product/Goods',array('pid'=>$proinfo['pid']))}">
+        <img src="{:C('RESOURCE_URL')}{$proinfo['imgurl']}" alt="">
+      </a>
+    </div>
+  </foreach>
+</div>
+<!-- 产品区域一end -->
+<!-- 产品区域二 -->
+<div class="product_2">
+  <foreach name="homeinfo.twoprodata" item='proinfo'>
+    <div class="proinfo_2">
+      <a href="{:U('Product/Goods',array('pid'=>$proinfo['pid']))}">
+        <img src="{:C('RESOURCE_URL')}{$proinfo['imgurl']}" alt="">
+      </a>
+    </div>
+  </foreach>
+  <!-- <for start="0" end="4">
+    <div class="proinfo_2">
+      <a href="{:U('Product/Goods',array('pid'=>$homeinfo['twoprodata'][$i]['pid']))}">
+        <img src="{:C('RESOURCE_URL')}{$homeinfo['twoprodata'][$i]['imgurl']}" alt="">
+      </a>
+    </div>
+  </for>
+</div> -->
+<!-- 产品区域二end -->
+<!-- <div class="getmorepro">
+  <label onclick="getpro(this)">加载更多</label>
+</div> -->
+  <div style="height:10px;"></div>
+</div>
+
+
+<script type="text/javascript">
+var enteronce="{$once}";//////进去的参数设置
+var morderpro="{homeinfo['twoprodata']}";//////商品二
+//轮播图数据
+var swiper_home = new Swiper('.swiper-container-home', {
+	autoplay: 3000,//可选选项，自动滑动
+	pagination: '.swiper-pagination',
+	paginationClickable: true,
+	// autoHeight: true, //enable auto height
+	autoplayDisableOnInteraction:false,
+	loop:true,
+});
+var swiper_class = new Swiper('.swiper-container-class', {
+	slidesPerView: 4,
+	spaceBetween: 0,
+	// autoHeight: true, //enable auto height
+	freeMode: true,
+});
+</script>
+
+<!-- 定位信息 -->
+<script type="text/javascript">
+//////////模块高度设置///////////
+$('.swiper-container-home').css('height',$('.swiper-container-home').width()/8*5+'px');
+$('.classtype>img').css('height',$('.classtype>img').width()+'px');
+//腾讯地图获取当前位置
+var geolocation = new qq.maps.Geolocation("NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4", "web商店");
+var options = {timeout: 6000};
+window.onload = function(){
+  if (enteronce=='1') {
+     geolocation.getLocation(showPosition, showErr, options);
+  }
+}
+///////定位成功返回函数///////
+function showPosition(position) {
+ // alert(position.lat);
+  // var mycenter=new qq.maps.LatLng(position.lat, position.lng);
+  var mylat=position.lat;
+  var mylng=position.lng;
+  var mycity=position.city;
+  var senddata={
+    slat:mylat,
+    slng:mylng,
+    scity:mycity,
+  }
+  $.ajax({
+    type: "post", //请求的方式
+    dataType: "json", //数据的格式 建议大家使用json格式
+    data: senddata, //请求的数据
+    url: "{:U('LBS/getchildshop')}", //请求的url地址
+    success: function (data) { //请求成功时，处理返回来的数据
+      if (data.status=='true') {
+         window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+      } else{
+        if (data.info=='noShops') {
+          window.location.href="{:U('Index/Index',array('once'=>'2'))}";
+        }
+      }
+    }
+  })
+   console.log('定位成功');
+}
+///////定位失败返回函数////////
+function showErr() {
+  console.log('定位失败');
+};
+</script>

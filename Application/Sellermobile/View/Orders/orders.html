@@ -1,0 +1,68 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/orders.css?v=2.4">
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/orders.js?v=2.5"></script>
+
+<!-- 顶部搜索框 -->
+<!-- <div class="heard">
+	<div class="heardtitle">
+		<input type="text" name="keyword" id="keyword" class="search-input" placeholder="订单号"/>
+		<?php echo $dfcount>=100 ? "99+":$dfcount; ?>
+		<input type="button" class="search-btn"  value="">
+	</div>
+</div> -->
+
+<div class="leftmenu">
+	<ul id="tagsel">
+		<li class="sel_tag" data-sel="sel_order_1"  data-more="more_1">待付款<span></span><span><?php echo $dfcount>=10000 ? "9999+":$dfcount; ?></span></li>
+		<li data-sel="sel_order_2" data-more="more_2">待使用<span class="bline"></span><span><?php echo $dfhcount>=10000 ? "9999+":$dfhcount; ?></span></li>
+		<li data-sel="sel_order_3" data-more="more_3" style="display:none;">已发货<span class="bline"></span><span><?php echo $yfhcount>=10000 ? "9999+":$yfhcount; ?></span></li>
+		<li data-sel="sel_order_4" data-more="more_4" style="display:none;">待提货<span class="bline"></span><span><?php echo $dthcount>=10000 ? "9999+":$dthcount; ?></span></li>
+		<li data-sel="sel_order_5" data-more="more_5">退款中<span class="bline"></span><span><?php echo $tkzcount>=10000 ? "9999+":$tkzcount; ?></span></li>
+		<li data-sel="sel_order_6" data-more="more_6">已完成<span class="bline"></span><span><?php echo $ywccount>=10000 ? "9999+":$ywccount; ?></span></li>
+		<li data-sel="sel_order_7" data-more="more_7" style="display:none">已关闭<span></span><span>10</span></li>
+	</ul>
+</div>
+<div class="rightorders">
+	<div class="taborder sel_order_1 sel_order" data-p="-1">
+		<!-- <div class="orderinfo">
+			<label class="orderid">会员名称<br><span>订单号:20160509123654</span><span>12-12 12:12:12</span></label>
+			<div class="prolist">
+				<div class="proinfo">
+					<img src="__PUBLIC__/Adminmobile/img/peitu.png">
+					<label class="proname">蛋白素肉90gx2袋蛋白素肉90gx2袋蛋白素肉90gx2袋</label>
+					<label class="proattr">袋装;300G</label>
+					<label class="proprice"><span>￥</span>20.00<span>×3</span></label>
+				</div>
+			</div>
+			<label class="totalprice">共6件,合计:<span>￥130.00</span>(含运费:10)</label>
+		</div> -->
+		<label class="moreorder more_1">加载更多</label>
+	</div>
+	<div class="taborder sel_order_2" data-p="-1">
+		<label class="moreorder more_2">加载更多</label>
+	</div>
+	<div class="taborder sel_order_3" data-p="-1">
+		<label class="moreorder more_3">加载更多</label>
+	</div>
+	<div class="taborder sel_order_4" data-p="-1">
+		<label class="moreorder more_4">加载更多</label>
+	</div>
+	<div class="taborder sel_order_5" data-p="-1">
+		<label class="moreorder more_5">加载更多</label>
+	</div>
+	<div class="taborder sel_order_6" data-p="-1">
+		<label class="moreorder more_6">加载更多</label>
+	</div>
+	<div class="taborder sel_order_7" data-p="-1">
+		<label class="moreorder more_7">加载更多</label>
+	</div>
+</div>
+<script type="text/javascript">
+ var loadmore_1_url="{:U('Orders/getmoreorder_1')}";//待付款
+ var loadmore_2_url="{:U('Orders/getmoreorder_2')}";//待发货
+ var loadmore_3_url="{:U('Orders/getmoreorder_3')}";//已发货
+ var loadmore_4_url="{:U('Orders/getmoreorder_4')}";//待提货
+ var loadmore_5_url="{:U('Orders/getmoreorder_5')}";//退款中
+ var loadmore_6_url="{:U('Orders/getmoreorder_6')}";//已完成
+ var loadmore_7_url="{:U('Orders/getmoreorder_7')}";//已关闭
+</script>

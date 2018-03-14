@@ -1,0 +1,102 @@
+<layout name="Public/PageModel"/>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/cheap.js?v=1.1"></script>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/cheap.css">
+	<div class="top">多吃优惠设置</div>
+	<div class="head">
+		<div class="shang">
+			<label>选择商品</label>
+			<select id="ect">
+			<if condition="$type eq 'add'">
+				<foreach name="result" item="row">
+					<option value="{$row['ProId']}"  data-date="{$row['CreateDate']}">{$row['ProName']}(原价:<?php echo $row['Price']?sprintf("%.2f",$row['Price']):'0.00' ?>元)</option>
+				</foreach>
+			<else/>
+				<option value="">{$list['ProName']}(原价:<?php echo $list['Price']?sprintf("%.2f",$list['Price']):'0.00' ?>元)</option>
+			</if>
+			</select>
+		</div>
+		<div class="xia">
+			<label>轮次级别</label>
+			<select id="se">
+				<if condition="$type eq 'add'">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				<else/>
+					<for start="1" end="6">
+					<if condition="$list.Level eq $i">
+						<option value="{$i}" selected = "selected" data-ProId="{$list['ProId']}">{$i}</option>
+					<else/>
+						<option value="{$i}" data-ProId="{$list['ProId']}">{$i}</option>
+					</if>
+
+					</for>
+				</if>
+
+			</select>
+		</div>
+
+	</div>
+	<div class="zhong">
+		<if condition="$type eq 'add'">
+			<label>第1次￥</label><input type="text" data-level="Lv1" value=""/>
+		<else/>
+			<for start="1" end="$list['Level']+1">
+				<label>第{$i}次￥</label><input type="text" data-level="Lv{$i}" value="<?php echo $list['Lv'.$i]; ?>"/>
+			</for>
+		</if>
+
+	</div>
+	<div class="bottom" data-type="{$type}">保存</div>
+	<script>
+		// $(document).on('click','.bottom',function(){
+			$('.bottom').click(function(){
+			var ProId=$(this).attr('data-type');
+			var Proid=$('#ect').val();
+			var senddata={};
+			senddata['ProId']=ProId;
+			senddata['Proid']=Proid;
+			senddata['Level']=$('#se').val();
+			senddata['Levels']={};
+			// for()
+			var isnullprice=false;
+			for (var i =1;i <= 5; i++) {
+				if($('input')[i-1]){
+					var price= $($('input')[i-1]).val();
+					if ($.trim(price)=='' ||  parseFloat(price)<=0) {
+						isnullprice = true;
+						break;
+					}
+					var Levels=$($('input')[i-1]).attr('data-level');
+					senddata['Levels']['Lv'+i]=price;
+				}else{
+					senddata['Levels']['Lv'+i]=null;
+				}
+
+			};
+			if (isnullprice == true) {
+				tips('notice', '填写有效价格信息!', 1500, 'weui_icon_notice');
+				return false;
+			}
+			tips('waiting','正在保存中···');
+			$.ajax({
+				url:"{:U('Cheap/updata')}",
+				type:"post",
+				data:senddata,
+				dataType:"json",
+				complete: function(e){
+					hidetips('waiting');
+				},
+				success:function(msg){
+					if(msg.status=='true'){
+						tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+						setTimeout( window.location.reload(),1500);
+					}else{
+						tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+					}
+				}
+			})
+		})
+	</script>

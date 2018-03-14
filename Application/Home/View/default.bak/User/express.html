@@ -1,0 +1,75 @@
+<layout name="Public/PageModel"/>
+<style>
+.part{
+  background-color: #ffffff;
+}
+.part-1{
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  padding: 10px;
+  overflow: hidden;
+}
+.part-1>label{
+  width: 100%;
+  display: block;
+  font-size: 14px;
+  color: #333333;
+  overflow: hidden;
+}
+.kdcontent{
+  min-height: 50px;
+}
+.kdtime{
+  float: left;
+  display: block;
+  width: 30%;
+  height: 100%;
+  font-size: 12px;
+  line-height: 25px;
+  text-align: center;
+}
+.kdcontents{
+  float: left;
+  /*height: 100%;*/
+  min-height: 50px;
+  padding-left:10px;
+  width: 70%;
+  display: block;
+  line-height: 24px;
+  border-left-style: solid;
+  border-color: #dddddd;
+  border-width:2px;
+}
+.part-1>img{
+   float: left;
+   width: 30%;
+   border-style: solid;
+   border-color: #dddddd;
+   border-width:1px;
+}
+.exptitle>div{
+float: left;
+width: 70%;
+padding: 0px 0px 0px 10px;
+}
+.exptitle>div>label{
+  width: 100%;
+  display: block;
+}
+</style>
+<div class="part">
+  <div class="part-1 exptitle">
+    <img src="__PUBLIC__/theme2/images/shoplogo.png">
+    <div>
+    <label class="kdzt">物流状态:{$zdinfo}</label>
+    <label class="kdlx">承运来源:{$expname}</label>
+    <label class="kddh">快递单号:{$expID}</label>
+  </div>
+  </div>
+  <div class="part-1">
+    <foreach name='expinfo' item='info'>
+      <label class="kdcontent"><span class="kdtime">{$info['time']}</span><span class="kdcontents">{$info['context']}</span></label>
+    </foreach>
+  </div>
+</div>

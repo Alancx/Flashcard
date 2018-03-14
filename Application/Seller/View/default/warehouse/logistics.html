@@ -1,0 +1,136 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<include file="$headername" />
+
+ <div class="row wrapper border-bottom white-bg page-heading">
+     <div class="col-lg-10">
+         <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>物流管理</h2>
+         <ol class="breadcrumb">
+             <li>
+                 <a href="index.html">主页</a>
+             </li>
+             <li class="active">
+                 <strong>物流管理</strong>
+             </li>
+         </ol>
+     </div>
+ <div class="col-lg-2"></div>
+ </div>
+
+
+
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+<div class="col-lg-12">
+    <div class="col-lg-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>物流管理</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <form role="form" class="form-inline" action="{:U('Warehouse/savewuliu')}" method="post" id="save">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail2" class="sr-only">物流公司名称</label>
+                                        <input type="text" name="Name" placeholder="请填写物流名称"  class="form-control" id="WarehouseName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail2" class="sr-only">物流编号</label>
+                                        <input type="text" name="Number" placeholder="请填写物流编号"  class="form-control" id="WarehouseName">
+                                    </div>
+                                    <div class="checkbox m-l m-r-xs">
+                                        <label class="i-checks">
+                                            <input type="radio" name="IsDefault" id="IsVisible" value="1" ><i></i> 默认物流</label>
+                                    </div>
+                                    <button class="btn btn-white" type="submit" id="saveNotice">保 存</button>&nbsp;&nbsp;&nbsp;&nbsp;<small style="color:red">注* 物流名称添加后无法修改、删除</small>< <b><a href="__PUBLIC__/logistics.doc">下载查看物流编号</a></b> >
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+<div class="col-lg-10">
+<h3>仓库</h3>
+    <table class="table table-hover">
+        <tr>
+            <td>ID</td>
+            <td>物流名称</td>
+            <td>物流编号</td>
+            <td>创建时间</td>
+            <td>是否默认</td>
+            <!-- <td>操作</td> -->
+        </tr>
+        <foreach name="infos" item="info">
+        <tr>
+            <td>{$info.ID}</td>
+            <td>{$info.Name}</td>
+            <td>{$info.Number}</td>
+            <td >{$info.CreateDate}</td>
+            <td id="ids{$info.ID}"><input type="radio" name="noname" onclick="moren(this.checked,this.id);" id="{$info.ID}" <if condition="$info['IsDefault'] eq 1">checked="checked"</if>></td>
+            <!-- <td id="id{$info.ID}"><if condition="$info['IsDefault'] eq 1"><a href="###" onclick="quxiao('{$info.ID}')">取消默认</a></if><if condition="$info['IsDefault'] eq 0"><a href="###" onclick="moren('{$info.ID}')">设为默认</a></if></td> -->
+        </tr>
+        </foreach>
+    </table>
+    <div style="text-align:right;">{$page}</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#save").submit(function(){
+            var name=$("#WarehouseName").val();
+            var sort=$("#Sort").val();
+            if (!name) {
+                alert('请填写物流名称');
+                return false;
+            }else{
+                return true;
+            };
+        })
+    })
+
+    // function quxiao(id){
+    //     var notice=art.dialog({content:'正在处理...',lock:true});
+    //     $.ajax({
+    //         type:"post",
+    //         url:"{:U('Warehouse/changemoren')}",
+    //         data:"id="+id+"&statu=no",
+    //         dateType:"json",
+    //         success:function(msg){
+    //             if (msg=='success') {
+    //                 notice.close();
+    //                 art.dialog.tips('设置成功');
+    //                 $("#id"+id).html('<a href="###" onclick="moren(\''+id+'\')">设为默认</a>');
+    //                 $("#ids"+id).html('否')
+    //             };
+    //             if (msg=='error') {
+    //                 notice.close();
+    //                 art.dialog.tips('设置失败');
+    //             };
+    //         }
+    //     })
+    // }
+    function moren(statu,id){
+        var notices=art.dialog({content:'正在处理...',lock:true});
+        $.ajax({
+            type:"post",
+            url:"{:U('Warehouse/changemoren')}",
+            data:"id="+id+"&statu=yes",
+            dateType:"json",
+            success:function(msg){
+                if (msg=='success') {
+                    notices.close();
+                    art.dialog.tips('设置成功');
+                    $("#"+id).prop('checked',true);
+                };
+                if (msg=='error') {
+                    notices.close();
+                    art.dialog.tips('设置失败');
+                };
+            }
+        })
+    }
+</script>
+<include file="Common:footer" />

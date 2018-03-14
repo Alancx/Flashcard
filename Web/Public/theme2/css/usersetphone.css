@@ -1,0 +1,125 @@
+#touch{
+  display: none!important;
+}
+body{
+  background-color: #ffffff!important;
+}
+.userinfo{
+  display: block;
+  overflow: hidden;
+  text-align: center;
+  padding: 15px 0px 10px 0px;
+  border-bottom-style: dotted;
+  border-width: 2px;
+  border-color: #dddddd;
+}
+.userinfo>img{
+  width: 100px;
+  height: 100px;
+}
+.userinfo>label{
+  display: block;
+  margin: 15px 0px 10px 0px;
+  text-align: center;
+  width: 100%;
+}
+.setphone{
+  display: block;
+  overflow: hidden;
+  padding: 5px 0px 10px 0px;
+}
+.setphone>label{
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+  color: #C5613D;
+  font-weight: 600!important;
+}
+.conterphone {
+  height: 50px;
+  margin: -1px 0px 0px 0px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+.conterphone>.showtitle {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  width: 65px;
+  line-height: 48px;
+  margin: 0px;
+}
+.phone {
+  height: 100%;
+  width: 100%;
+  font-size: 14px;
+  outline: medium;
+  border-style: none;
+  text-indent: 80px;
+}
+.phonecode {
+  height: 100%;
+  width: 100%;
+  font-size: 14px;
+  outline: medium;
+  border-style: none;
+  text-indent: 80px;
+}
+.getcode {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 0px 0px 0px 0px;
+  font-size: 14px;
+  width: 100px;
+  line-height: 48px;
+  margin: 0px;
+  color: #666666;
+  text-align: center;
+  background-color: #dddddd;
+}
+.agreement{
+  display: block;
+  overflow: hidden;
+  padding: 10px 10px 3px 10px;
+}
+.selagreement{
+  float: left;
+  line-height: 30px;
+  margin: 0px 0px 0px 0px;
+}
+.selagreement>img{
+  width: 20px;
+  height: 20px;
+  margin: -4px 10px 0px 0px;
+}
+.lookagreement{
+  float: right;
+  line-height: 30px;
+  margin: 0px 0px 0px 0px;
+}
+.btn_group{
+  display: block;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 40px;
+  background-color: #ffffff;
+}
+.savephone{
+  display: block;
+  line-height: 40px;
+  font-size: 18px;
+  background-color: #ff4200;
+  color: #ffffff;
+  margin: 0px 0px 0px 0px;
+  text-align: center;
+}

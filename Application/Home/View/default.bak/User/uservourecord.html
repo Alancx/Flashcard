@@ -1,0 +1,41 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/uservourecord.css">
+
+<div class="recordpart">
+    <img src="__PUBLIC__/theme2/Images/wushuju.jpg" class="isshow" style="width: 100%; display: none;">
+  <foreach name='lists' item='list'>
+    <div>
+    <?php if ($list['TransactionId']=='YE'): ?>
+    	<label>消费扣减<br><span>{$list.Date}</span></label>
+    	<label style="color:red;">{$list.Money}元  <br><span>(余额)</span></label>
+    <?php elseif ($list['TransactionId']=='JL'): ?>
+    	<label>消费扣减<br><span>{$list.Date}</span></label>
+    	<label style="color:red;">{$list.Reward}元  <br><span>(奖励)</span></label>
+    <?php else: ?>
+        <label>充值成功<br><span>{$list.Date}</span></label>
+        <label>{$list.Money}元<br><span>奖励{$list.Reward}元</span></label>
+    <?php endif ?>
+    </div>
+  </foreach>
+</div>
+<script>
+$(document).ready(function () {
+  if (ishasorder()=='true') {
+    $('.isshow').css('display','none');
+    $('body').css('background-color','#f3f3f3');
+  } else {
+    $('.isshow').css('display','block');
+    $('body').css('background-color','#f6f6f6');
+    $('.recordpart').css('border','none');
+  }
+})
+function ishasorder(){
+  var hasorder='false';
+  $(".recordpart>div").each(function (index, item) {
+      if ($(item).css('display')!='none') {
+        hasorder='true';
+      }
+  })
+  return hasorder;
+}
+</script>

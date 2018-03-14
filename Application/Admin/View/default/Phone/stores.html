@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>订单数量</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12 col-xs-12" style="padding:0px;">
+				<div id="linecharts" style="height:200px;"></div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;">
+				<div id="linecharts2" style="height:300px;"></div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<!-- <td>#</td> -->
+							<td>店铺名称</td>
+							<td><div class="dropup">
+								  <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    订单量<span class='type'>(日)</span>
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+								    <li class="disabled" data-s='d'><a href="#" >日</a></li>
+								    <li class="" data-s='w'><a href="#" >周</a></li>
+								    <li class="" data-s='m'><a href="#" >月</a></li>
+								  </ul>
+								</div>
+							</td>
+						</tr>
+					</thead>
+					<tbody id="stcontet">
+					<foreach name='store_money' item='stm'>
+						<tr>
+							<!-- <td>{$stm.stoken}</td> -->
+							<td>{$stm.storename}</td>
+							<td>{$stm.count}</td>
+						</tr>
+					</foreach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/Admin/js/echarts.min.js"></script>
+  </body>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$('li').click(function(){
+			var _this=$(this);
+			var st=_this.attr('data-s');
+			var cls=_this.attr('class');
+			if (cls=='disabled') {
+				//
+				console.log('到此为止');
+			}else{
+				$('li').attr('class','');
+				_this.attr('class','disabled');
+				var tname='';
+				if (st=='w') {
+					tname='周';
+				}else if (st=='d') {
+					tname='日';
+				}else if (st=='m') {
+					tname='月';
+				};
+				$('.type').html('('+tname+')');
+				// console.log('去请求');
+				$.ajax({
+					url:"{:U('Phone/stores')}",
+					type:"post",
+					data:"type="+st,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							var data=msg.data;
+							var _html='';
+							$.each(data,function(index,item){
+								_html+='<tr><td>'+item.storename+'</td><td>'+item.count+'</td></tr>';
+							})
+							$('#stcontet').html(_html);
+						}else{
+							alert('未查到相关信息');
+						}
+					}
+				})
+			}
+		})
+
+
+
+
+
+		var oline=echarts.init(document.getElementById('linecharts'));
+		var olineOption = {
+		    title: {
+		        text: '销售量'
+		    },
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['订单量']
+		    },
+		    toolbox: {
+		        feature: {
+		            // saveAsImage: {}
+		        }
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            boundaryGap : false,
+		            data : {$time}
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value'
+		        }
+		    ],
+		    series : [
+		        {
+		            name:'订单量',
+		            type:'line',
+		            stack: '总量',
+		            data:{$count},
+		            areaStyle: {normal: {
+		            	color:"#55a9f3",
+		            }},
+		            lineStyle: {normal: {
+		                color:'#88C3F7'
+		            }},
+		        }
+		    ]
+		};
+		oline.setOption(olineOption);
+		var linecharts=echarts.init(document.getElementById("linecharts2"));
+		var dataAxis = {$all_x};
+		var data = {$all_y};
+		var yMax = {$top};
+		var dataShadow = [];
+
+		for (var i = 0; i < data.length; i++) {
+		    dataShadow.push(yMax);
+		}
+
+		option = {
+		    title: {
+		        text: '销售排行',
+		        subtext: ''
+		    },
+		    xAxis: {
+		        data: dataAxis,
+		        axisLabel: {
+		            inside: true,
+		            textStyle: {
+		                color: '#fff'
+		            }
+		        },
+		        axisTick: {
+		            show: false
+		        },
+		        axisLine: {
+		            show: false
+		        },
+		        axisLabel:{
+		        	textStyle:{
+		        		color:'#000',
+		        	}
+		        },
+		        z: 10
+		    },
+		    yAxis: {
+		        axisLine: {
+		            show: false
+		        },
+		        axisTick: {
+		            show: false
+		        },
+		        axisLabel: {
+		            textStyle: {
+		                color: '#999'
+		            }
+		        }
+		    },
+		    dataZoom: [
+		        {
+		            type: 'inside'
+		        }
+		    ],
+		    series: [
+		        { // For shadow
+		            name:'销售额',
+		            stack: '总量',
+		            type: 'bar',
+		            itemStyle: {
+		                normal: {color: 'rgba(0,0,0,0.05)'}
+		            },
+		            barGap:'-100%',
+		            barCategoryGap:'40%',
+		            data: dataShadow,
+		            animation: false
+		        },
+		        {
+		            type: 'bar',
+		            itemStyle: {
+		                normal: {
+		                    color: new echarts.graphic.LinearGradient(
+		                        0, 0, 0, 1,
+		                        [
+		                            {offset: 0, color: '#83bff6'},
+		                            {offset: 0.5, color: '#188df0'},
+		                            {offset: 1, color: '#188df0'}
+		                        ]
+		                    )
+		                },
+		                emphasis: {
+		                    color: new echarts.graphic.LinearGradient(
+		                        0, 0, 0, 1,
+		                        [
+		                            {offset: 0, color: '#2378f7'},
+		                            {offset: 0.7, color: '#2378f7'},
+		                            {offset: 1, color: '#83bff6'}
+		                        ]
+		                    )
+		                }
+		            },
+		            data: data
+		        }
+		    ]
+		};
+
+		linecharts.setOption(option);
+		// Enable data zoom when user click bar.
+		var zoomSize = 6;
+		linecharts.on('click', function (params) {
+		    console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+		    linecharts.dispatchAction({
+		        type: 'dataZoom',
+		        startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+		        endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+		    });
+		});
+
+	})
+</script>
+</html>

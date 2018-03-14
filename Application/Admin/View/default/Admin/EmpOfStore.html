@@ -1,0 +1,77 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<div class="row  wrapper  white-bg" style="margin:0px;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>管理门店设置</h5>
+			</div>
+			<div class="ibox-content">
+				<form method="post" action="" class="form-horizontal" id="sv">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">用户名</label>
+
+						<div class="col-sm-4">
+							<input type="text" name="" value="{$EmpInfo.userName}" id="" class="form-control" readonly="true">
+							<input type="hidden" name="EmpId" value="{$EmpInfo.id}">
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">已管理门店</label>
+						<div class="col-sm-10">
+							<foreach name="MyStores" item="mst">
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" name="StoreId[]" value="{$mst.id}" checked="true">
+								    {$mst.storename}&emsp;{$mst.province}{$mst.city}{$mst.area}{$mst.addr}
+								  </label>
+								</div>
+							</foreach>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">可选择选择门店</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<select data-placeholder="请选择门店" name="StoreId[]" class="chosen-select" multiple style="width:350px;" tabindex="4">
+									<foreach name="Stores" item="st">
+										<option value="{$st.id}" hassubinfo="true">{$st.storename}&emsp; {$st.province}{$st.city}{$st.area}{$st.addr}</option>
+									</foreach>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							<button class="btn btn-primary btn-outline" type="submit" id="sss">保存内容</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.chosen-select').chosen();
+	$('#sv').submit (function(){
+		var value=$('input[name="StoreId[]"]:checked').val();
+		var newvalue=$('.chosen-select').val();
+		console.log(value,newvalue);
+		if (value || newvalue) {
+			return true;
+		}else{
+			art.dialog.tips('请选择管理门店');
+			return false;
+		}
+	})
+})
+</script>
+
+<include file="Common:footer" />

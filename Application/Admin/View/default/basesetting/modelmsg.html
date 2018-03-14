@@ -1,0 +1,113 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+    <div class="col-lg-12">
+       <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加模板消息</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" class="form-inline" action="" method="post" id="save">
+                    <div class="form-group">
+                        <label for="exampleInputEmail2" class="sr-only">模板类型</label>
+                        <select name="TemplateType" id="TemplateType" class="form-control" value="">
+                        	<option value="">请选择消息类型</option>
+                           <option value="ordersend" class="ordersend">订单发货通知</option>
+                           <option value="createorder" class="createorder">下单通知</option>
+                           <option value="payed" class="payed">支付通知</option>
+                           <option value="disprice" class="disprice">补差价通知</option>
+                    	</select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2" class="sr-only">模板ID</label>
+                    <input type="text" placeholder="请填写模板ID" name="TemplateId" id="TemplateId" style="width:300px;" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2" >信息字体颜色</label>
+                    <input type="color" placeholder="信息字体颜色" name="Color" id="Color" class="form-control" style="width:50px;">
+                </div>
+                          <button class="btn btn-white" type="submit">保 存</button>
+                    </form>
+
+
+                </div>
+
+                <div class="alert alert-warning">
+                                         1、所有商品分类图片尺寸必须保持一致，否则影响前端显示效果<br>
+                                     </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+          <table class="table table-hover table-bordered">
+            <thead>
+            	<tr>
+            		<th>模板ID</th>
+            		<th>模板类型</th>
+            		<th>文字颜色</th>
+            		<th>操作</th>
+            	</tr>
+            </thead>
+            <tbody>
+            <foreach name="msginfos" item='msg'>
+            	<tr>
+            		<td>{$msg.TemplateId}</td>
+            		<td><if condition="$msg['TemplateType'] eq 'ordersend'">订单发货通知<elseif condition="$msg['TemplateType'] eq 'payed'" />支付通知<elseif condition="$msg['TemplateType'] eq 'createorder'">下单通知<elseif condition="$msg['TemplateType'] eq 'disprice'" />补差价通知</if></td>
+            		<td><div style="width:20px;height:20px;background-color:{$msg.Color};"></div></td>
+            		<td><button class="btn btn-warning btn-xs btn-outline" onclick="edit('{$msg.ID}')">编辑</button>&emsp;<button class="btn btn-danger btn-xs btn-outline" onclick="del('{$msg.ID}')">删除</button></td>
+            	</tr>
+            	</foreach>
+            </tbody>
+          </table>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+	var msg={$msgs};
+	$(document).ready(function(){
+		$('#save').submit(function(){
+			var tid=$('#TemplateId').val();
+			var ttype=$('#TemplateType').val();
+			if (!tid) {
+				art.dialog.alert('请填写模板ID');
+				return false;
+			};
+			if (!ttype) {
+				art.dialog.alert('请选择消息类型');
+				return false;
+			}else{
+				return true;
+			}
+		})
+	})
+
+	function edit(id){
+		$.each(msg,function(index,item){
+			if (item.ID==id) {
+				$('#TemplateId').val(item.TemplateId);
+				$('#Color').val(item.Color);
+				// $('option').attr('selected',false);
+				// $('.'+item.TemplateType).attr('selected',true);
+				$('#TemplateType').val(item.TemplateType);
+			};
+		})
+	}
+	function del(id){
+		art.dialog.confirm('确定要删除吗？',function(){
+			window.location.href="{:U('BaseSetting/delMsg')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+</script>
+<include file="Common:footer" />

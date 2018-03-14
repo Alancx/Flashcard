@@ -1,0 +1,49 @@
+@media (min-width:768px){.payment{width:720px}}@media (min-width:992px){.payment{width:940px}}@media (min-width:1200px){.payment{width:1168px}}
+.info{width:25%;height:50px; float:left;}
+.form-horizontal{ background:#e7e7e7;}
+.tips{ text-align:center; line-height:30px;}
+
+.reduce{ width:10px; height:20px; float:left; line-height:20px;cursor:pointer; margin:0px; padding:0px; background:#e7e7e7; border:0px;
+}
+.addonce{ width:10px; height:20px; float:right;  line-height:20px;text-align:center; margin:0px; padding:0px; cursor:pointer; background:#e7e7e7; border:0px;}
+.num{ width:50px; text-align:center;line-height: 35px;}
+.prices{width:50px; text-align:center; border:0px;}
+table>thead>tr{
+	background:#e7e7e7;
+}
+.payment{ position:fixed; bottom:77px; height: 60px;
+    text-align: center; background:#e7e7e7;;overflow:hidden; border-radius:6px; margin-bottom:10px; }
+.payment>div{ float:left; width:20%; line-height:60px; }
+.se-type{ width:210px !important; 
+}
+.payment .btn{ float:right; 
+width:100%; 
+line-height:45px;
+}
+.refersh{
+	float: right!important;
+}
+td{
+	vertical-align: middle!important;
+}
+.btn>input{border-radius:6px;}
+.foot{
+	height:77px;
+	position:fixed;
+	bottom:0px;
+	
+}
+.foot>div>span{ margin-right:15px;}
+.container{
+	margin-top: 20px;
+}
+td{
+	text-align: center;
+}
+.addnum,.lessnum{
+	width: 25px;
+	height: 25px;
+}
+.glyphicon-remove{
+	cursor: pointer!important;
+}

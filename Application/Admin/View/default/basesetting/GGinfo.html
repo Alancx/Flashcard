@@ -1,0 +1,69 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<style type="text/css">
+  .form-control1 {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  }
+  #notices{
+    color: red;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  .tice{
+    color:red;
+  }
+  .m-b{
+    display: block;
+    width: 100%;
+  }
+</style>
+<div class="row">
+  <div class="panel blank-panel">
+    <form method="post" class="form-horizontal" action="{:U('BaseSetting/savegginfo')}" id="savegginfo" style="margin-top:5%;">
+     <div class="form-group">
+      <label class="col-sm-2 control-label">公告语设置 <span class="tice"></span></label>
+      <div class="col-sm-6">
+        <div class="input-group m-b">
+          <input type="text" class="form-control required" name="gginfo" id="gginfo" value="{$gginfo}">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-2">
+        <button class="btn btn-primary" type="submit" id="savepost">保存</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $("#saveimg").click(function(){
+      art.dialog({title:'提示',content:'正在提交数据，请勿重复操作...',lock:true});
+    })
+
+
+  })
+
+</script>
+<include file="Common:footer" />

@@ -1,0 +1,108 @@
+.tit{
+	background: #fff;
+	height: 60px;
+	line-height: 60px;
+	padding: 0 10px;
+}
+.tit img{
+	height: 50px;
+	width: auto;
+	float: right;
+	margin-top: 6px;
+}
+/*红包*/
+.hb{
+	width: 300px;
+	height: 90px;
+	background: linear-gradient(90deg,#f45600,#de1500);
+	margin: 10px auto;
+	position: relative;
+	overflow: hidden;
+}
+.hb:before{
+	content: "";
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius:100% ;
+	background: #EFEFF4;
+	position: absolute;
+	top: 30px;
+	left: -15px;
+}
+.hb:after{
+	content: "";
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius:100% ;
+	background: #EFEFF4;
+	position: absolute;
+	top: 30px;
+	right: -15px;
+}
+.hbt{
+	height: 60px;
+	color: #fff45c;
+	text-align: center;
+	line-height: 60px;
+	border-bottom: 1px dashed #fff;
+	margin: 0 16px;
+}
+.hbb{
+	height: 30px;
+	color: #fff;
+	font-size: 12px;
+	line-height: 30px;
+	padding: 0 10px;
+}
+
+.mianzhi{
+	font-size: 36px;
+}
+.mianzhi:before{
+	content: "￥";
+	font-size: 14px;
+}
+.mianzhi~small{
+	font-size: 14px;
+}
+
+.hbb .youxiaoqi{
+	float: right;
+}
+
+/*做任务领红包*/
+h4{
+	font-size: 14px;
+	padding: 0 10px;
+	margin-top: 10px;
+}
+.uli{
+	list-style-type: decimal;
+	font-size: 14px;
+}
+.cha{
+	color: #ff0000;
+}
+
+.button{
+	background: #ff0000;
+	color: #fff;
+	border: none;
+	margin: 0 auto;
+	display: block;
+	width: 200px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	border-radius:4px ;
+	opacity: 0.2;
+}
+.button:active{
+	opacity: 0.5 !important;
+}
+.shiyongguize{
+	font-size: 14px;
+	padding: 0 10px 0 30px;
+}

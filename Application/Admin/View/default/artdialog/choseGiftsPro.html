@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>选择组合商品</title>
+
+	<!-- Bootstrap -->
+	<link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+	<script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <style type="text/css">
+      	.attrvalues{
+      		border: 1px solid green;
+      		margin:auto 2px;
+      		border-radius: 2px;
+      		padding-left: 2px;
+      		padding-right: 2px;
+      	}
+      </style>
+  </head>
+  <body>
+  	<div class="container" style="width:800px;">
+  		<div class="row">
+  			<form action="{:U('Products/saveProImg')}" method="post" id="saveatr">
+  				<h4 style="text-align:center;">礼包商品选择</h4>
+  				<table class="table table-bordered">
+  					<tr>
+  						<td width="120">请选择商品</td>
+  						<td>
+  							<div class="form-group">
+  								<select name="ProId" id="ProId" data-name='' data-img='' class="form-control">
+  									<option value="">请选择</option>
+  									<foreach name="pros" item="pro">
+  										<option value="{$pro.ProId}">{$pro.ProName}</option>
+  									</foreach>
+  								</select>
+  							</div>
+  						</td>
+  					</tr>
+  					<tr>
+  						<td colspan="2" align="center">请选择属性</td>
+  					</tr>
+  					<tr>
+  						<td colspan="2" align="center"><div class="attrs"></div></td>
+  					</tr>
+  					<tr>
+  						<td colspan="2" align="center"><button class="btn btn-success btn-outline" type="button" id="adds">添 加</button></td>
+  					</tr>
+  				</table>
+  			</form>
+  		</div>
+  	</div>
+  </body>
+  <script type="text/javascript">
+  var thisid=art.dialog.data('thisid');
+  var cid=art.dialog.data('couponid');
+  var prologg='';
+  var ProName='';
+  var ProId='';
+  var fhtml;
+  $(document).ready(function(){
+  	$('#ProId').chosen();
+  	$('#ProId').change(function(){
+  		ProId=$(this).val();
+  		$.ajax({
+  			url:"{:U('ArtDialog/getprolist')}",
+  			type:"post",
+  			data:"ProId="+ProId,
+  			dataType:"json",
+  			success:function(msg){
+  				var html="";
+  				if (msg.statu=='success') {
+  					$.each(msg.data,function(index,item){
+  						html+="<label><input type='checkbox' class='attr' value='"+item.ProIdCard+"' data-ids='"+item.ProSpec1+"/"+item.ProSpec2+"/"+item.ProSpec3+"' data-price='"+item.Price+"'>"+item.ProSpec1+"/"+item.ProSpec2+"/"+item.ProSpec3+" &emsp;&emsp;现售价:"+item.Price+"</label><br/>";
+  					})
+  					$('.attrs').html(html);
+  					prologg=msg.pinfo.ProLogoImg;
+  					ProName=msg.pinfo.ProName;
+  					$('#ProId').attr('data-name',msg.pinfo.ProName);
+  					$('#ProId').attr('data-img',msg.pinfo.ProLogoImg);
+  				};
+  			}
+  		})
+  	})
+
+  	$('#adds').click(function(){
+  		var boxs=$('.attr');
+  		var ischose=false;
+  		var temp='[';
+  		var temphtml='[';
+  		$.each(boxs,function(index,item){
+  			if (item.checked) {
+  				ischose=true;
+		  			// console.log(item.innerHTML);
+		  			var atrs=item.getAttribute('data-ids');
+            		var oldprice=item.getAttribute('data-price');
+		  			temphtml+='{"ProName":"'+ProName+'","ProId":"'+ProId+'","ProIdCard":"'+item.value+'","ProLogoImg":"'+prologg+'","ProAtr":"'+atrs+'","oldPrice":"'+oldprice+'","newPrice":"'+$("#"+item.value).val()+'"},';
+		  			temp+='{"ProIdCard":"'+item.value+'","Price":"'+$("#"+item.value).val()+'"},';
+  			};
+  		})
+  		temp=temp.substring(0,temp.length-1);
+  		temphtml=temphtml.substring(0,temphtml.length-1);
+  		temp+=']';
+  		temphtml+=']';
+  		fhtml=eval("(" + temphtml + ")");
+  		// console.log(typeof(eval("(" + temp + ")")));
+  		if (ischose) {
+  			$.ajax({
+  				type:"post",
+  				url:"{:U('ArtDialog/savegift')}",
+  				data:"json="+temp+"&CouponId="+cid+"&ProId="+ProId,
+  				dataType:"json",
+  				success:function(msg){
+  					console.log(msg);
+  					if (msg.statu=='success') {
+  						var origin=artDialog.open.origin;
+  						var dom=origin.document.getElementById("add"+cid+thisid);
+  						var html='';
+  						$.each(fhtml,function(index,item){
+			            	// console.log(item);
+			            	html+='<div class="row p-box" data-pid="'+item.ProIdCard+'" id="'+item.ProIdCard+'"><div class="col-xs-3 col-sm-3 col-md-3"><img src="'+item.ProLogoImg+'"></div><div class="col-xs-7 col-sm-7 col-md-7"> '+item.ProName+'<br>'+item.ProAtr+'<br> 原价：'+item.oldPrice+' <br> </div><div class="col-xs-2 col-sm-2 col-md-2"><button class="btn btn-xs btn-danger btn-outline" type="button" onclick=\'delpro("'+item.ProIdCard+'","'+cid+'")\'>删除此商品</button></div></div>';
+			            })
+			            // console.log(html);
+			            dom.innerHTML+=html;
+			            art.dialog.close();
+			        };
+			        if (msg.statu=='error') {
+			        	art.dialog.alert('数据库记录失败');
+              // location.reload();
+              setTimeout("art.dialog.close()", 3000 )
+              // art.dialog.close();
+          };
+          if (msg.statu=='cant') {
+          	art.dialog.alert(msg.info);
+              setTimeout("art.dialog.close()", 3000 )
+          };
+  					// console.log(msg.sql);
+  				}
+  			})
+  		}else{
+  			art.dialog.alert('请选择属性');
+  		}
+  	})
+  })
+  </script>
+  </html>

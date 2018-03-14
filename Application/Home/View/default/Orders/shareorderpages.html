@@ -1,0 +1,91 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/shareorderpages.css?v=1.1" />
+<div class="sharecontents">
+  <!-- 顶部信息 -->
+  <div class="toppart">
+    <img class="bgimgshare" src="__PUBLIC__/newhome/img/sharebgimg.png" alt="">
+    <div class="redinfo">
+      <img src="__PUBLIC__/newhome/img/sharered.png" alt="">
+      <empty name="couponinfo">
+        <span class="shareprice">0</span>
+        <else/>
+        <span class="shareprice">{$couponinfo.Rules}</span>
+      </empty>
+    </div>
+    <div class="showtextinfo">
+      <span>分享领红包</span>
+      <if condition="$couponinfo['Type'] eq 2">
+        <span><span><span>满{$couponinfo.Totalrules}元</span><span>抵用现金</span></span></span>
+        <else/>
+        <span><span><span>无门槛</span><span>抵用现金</span></span></span>
+      </if>
+      <span>选择下面任意一个商品分享<br>即可领取该红包</span>
+    </div>
+  </div>
+  <!-- 顶部信息end -->
+  <!-- 门店信息 -->
+  <div class="shoppart">
+    <img src="{$shopinfo['Slogo']}" alt="">
+    <div class="shoptext">
+      <span class="mui-ellipsis">{$shopinfo['storename']}</span>
+      <span class="mui-ellipsis">{$shopinfo['Descinfo']}</span>
+    </div>
+  </div>
+  <!-- 门店信息end -->
+  <!-- 商品信息 -->
+  <div class="propart">
+    <span class="selprosinfo">请选择一个商品<span class="mui-icon mui-icon-arrowdown"></span></span>
+    <div class="proinfo">
+      <div class="proimg">
+        <!-- <img src="__PUBLIC__/newhome/img/spimg.jpg" alt=""> -->
+        商品主图
+      </div>
+      <span class="proname mui-ellipsis">商品名称</span>
+      <span class="proprice">0.00<span></span></span>
+    </div>
+  </div>
+  <!-- 商品信息end -->
+  <!-- 分享信息 -->
+  <div class="sharepart">
+    <span class="sharetop">我要对朋友说的话<span class="changetext" data-type="0">换一句</span></span>
+    <span class="sharetext">这家<span class="shop_name">{$shopinfo['storename']}</span>的<span class="pro_name"></span>真的好吃，你们来吃的话比我还要便宜哦！光盘客，真划算，越吃越便宜！</span>
+    <div class="redrule">
+      <span>红包使用规则:</span>
+      <span>1) 把你喜欢的好吃的分享给朋友，你得红包，朋友和你都能得优惠，越吃越便宜!</span>
+      <span>2) 好吃就吃光！推动光盘行动，利国、利民、惠子孙!</span>
+      <span>3) 光盘客，光盘行动代言人!</span>
+    </div>
+  </div>
+  <!-- 分享信息end -->
+</div>
+<!-- 底部按钮 -->
+<div class="bottombtn">
+  <span>立即分享</span>
+</div>
+<!-- 底部按钮end -->
+<!-- 商品选择 -->
+<div class="prolistmark">
+  <div class="prolist">
+    <foreach name="olinfo" item="ol">
+      <div class="pro_info" data-pid="{$ol.ProId}" data-pname="{$ol.ProName}" data-price="{$ol.Price}" data-plogo="{$ol.ProLogoImg}" data-numtype="{$ol.NumType}">
+        <img src="{$ol.ProLogoImg}" alt="">
+        <span class="pname mui-ellipsis">{$ol.ProName}</span>
+        <if condition="$ol.NumType eq '1' ">
+          <span class="pprice"><?php echo number_format(($ol['Price']),2); ?><span>/份</span></span>
+          <else />
+          <span class="pprice"><?php echo number_format(($ol['Price']),2); ?><span>/斤</span></span>
+        </if>
+      </div>
+    </foreach>
+  </div>
+</div>
+<!-- 商品选择end -->
+<!-- 立即分享提示信息 -->
+<div class="sharemark">
+  <img src="__PUBLIC__/newhome/img/shareinfoimg.png" alt="">
+</div>
+<!-- 立即分享提示信息end -->
+<script type="text/javascript">
+  var sharestoken='{$shopstoken}';
+</script>
+<script src="__PUBLIC__/newhome/js/shareorderpages.js?v=1.2" type="text/javascript" charset="utf-8"></script>

@@ -1,0 +1,53 @@
+<layout name="Public/PageModel" />
+<link rel="stylesheet" href="/Public/CSS/Wap/order.css" media="screen" title="no title" charset="utf-8">
+<script src="__PUBLIC__/Plugins/qrcode/jquery.qrcode.min.js"></script>
+<div class="container-fulid">
+     <div class="row" style="margin:10px 0 60px 0;">
+			 <!-- order-s -->
+ <div class="col-xs-12 col-sm-12 o-box">
+				 <div class="col-xs-12 col-sm-12 orderid">
+					 <span>大礼包提货</span>
+				 </div>
+
+			<foreach name="ginfo" item="gil">
+
+				 <div class="col-xs-12 col-sm-12 oinfo">
+					 <div class="col-xs-2 col-sm-2">
+						 <img src="{:C('RESOURCE_URL')}{$gil['pimg']}" alt="商品图片" />
+					 </div>
+					 <div class="col-xs-8 col-sm-8 titles">
+						 <p>{$gil['pname']} </p>
+						 <p><small>{$gil['spec']}</small></p>
+					 </div>
+					 <div class="col-xs-2 col-sm-2 nums">
+						 <p>￥{$gil['plprice']}				 </p>
+						 <p><small>&times; {$gil['plcount']}</small></p>
+					 </div>
+				 </div>
+
+			</foreach>
+
+				 <div class="col-xs-12 col-sm-12 allprice">
+					 总价：<span>￥ {$ginfo[0]['aprice']}</span>
+					 <div style="float:right;">
+					 	
+					 </div>
+				 </div>
+
+			 </div>
+
+<div class="col-xs-12 col-sm-12 o-box">
+	<form action="{:U('Account/userGiftPost')}" method="post">
+		<div>
+			<input type="hidden" id="oid" name="oid" value="{$oid}"></input>
+			<input type="hidden" id="backPage" name="backPage" value="{$backpageurl}"></input>
+			<input type="submit" value="确认交货"></input>
+		</div>
+	</form>
+
+</div>
+
+
+    <script type="text/javascript">
+
+    </script>

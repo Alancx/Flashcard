@@ -1,0 +1,380 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+.usertitle {
+  position: relative;
+  height: 65px;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+
+.usertx {
+  float: left;
+  height: 50px;
+  width:50px;
+  margin: 7px 10px 8px 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #999999;
+  border-radius: 5px;
+}
+
+.usertitle > label {
+  margin: 10px 0px 5px 0px;
+  line-height: 22px;
+  color: #333333;
+  font-size: 16px;
+}
+
+.usertitle > label > span {
+  font-size: 14px;
+}
+
+.userarrow {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 95%;
+  background-image: url("../Images/Arrow.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 7px;
+}
+
+.userewm {
+  float: right;
+  height: 20px;
+  margin: 22px 10% 5px 5px;
+}
+
+.useraccount, .useroders, .userqd, .userexit,.usershop {
+  background-color: #ffffff;
+  margin: 10px 0px 0px 0px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  overflow: hidden;
+}
+
+.usercz {
+  height: 50px;
+}
+
+.userczye {
+  float: left;
+  height: 100%;
+  font-size: 18px;
+  color: #333333;
+  line-height: 50px;
+  margin: 0px 0px 0px 10px;
+}
+
+.userczzx, .userqbdd {
+  float: right;
+  height: 100%;
+  width: 70px;
+  font-size: 14px;
+  color: #999999;
+  line-height: 50px;
+  margin: 0px 5% 0px 0px;
+  background-image: url("../Images/Arrow.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 7px;
+}
+
+.table {
+  margin: -1px 0px 0px 0px;
+}
+
+.table > tbody > tr > td {
+  width: 50%;
+  padding: 0px;
+}
+
+.tableleft {
+  border-right-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+
+.table > tbody > tr > td > label,
+.table > tbody > tr > td > a > label {
+  height: 55px;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  padding: 10px 0px 0px 65px;
+  font-size: 14px;
+  color: #333333;
+  background-position: 25px center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+}
+
+.table > tbody > tr > td > label > span,
+.table > tbody > tr > td > a > label > span {
+  font-size: 12px;
+  color: #999999;
+}
+
+.tablehyye {
+  background-image: url("../Images/hyye.png");
+}
+
+.tablejlye {
+  background-image: url("../Images/jiangli.png");
+}
+
+.tablesy {
+  background-image: url("../Images/shouyi.png");
+}
+
+.tablejf {
+  background-image: url("../Images/jifen.png");
+}
+
+.tablezd {
+  background-image: url("../Images/zd.png");
+}
+
+.tablehy {
+  background-image: url("../Images/huiyuan.png");
+}
+.tabletx{
+  background-image: url("../Images/tixian.png");
+}
+.tabletxjl{
+  background-image: url("../Images/txjl.png");
+}
+.tablekq{
+  background-image: url("../Images/kq.png");
+}
+
+.tablesc {
+  background-image: url("../Images/shoucang(2).png");
+}
+
+.usercz {
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+
+.userqbdd {
+  width: 100px;
+}
+
+.useroderlx {
+  position: relative;
+  margin: 0px 10px 0px 10px;
+}
+
+.useroderlx > div {
+  position: relative;
+  width: 25%;
+  float: left;
+}
+
+.useroderlx > div > label {
+  width: 100%;
+  text-align: center;
+  color: #333333;
+}
+
+.usernum {
+  position: absolute;
+  top: 3px;
+  right: 20px;
+  height: 20px;
+  width: 20px !important;
+  margin: 0px;
+  border-style: solid;
+  border-color: #ff4200;
+  border-radius: 50%;
+  border-width: 1px;
+  font-size: 10px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #ff4200!important;
+  background-color: #ffffff;
+
+}
+
+.useroderlx > div > div {
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+}
+
+.userdfk {
+  background-image: url("../Images/daifukuan.png");
+}
+
+.userdfh {
+  background-image: url("../Images/daifahuo.png");
+}
+
+.userdsh {
+  background-image: url("../Images/daishouhuo.png");
+}
+
+.userdpj {
+  background-image: url("../Images/daipingjia.png");
+}
+
+.userqd > label {
+  float: left;
+  margin: 10px 0px 10px 10px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #333333;
+}
+
+.userzts {
+  font-size: 12px;
+  color: #666666;
+}
+
+.userlxts {
+  font-size: 14px;
+  color: #666666;
+}
+
+.userqsan {
+  height: 33px;
+  width: 80px;
+  margin: 14px 5% 0px 0px !important;
+  text-align: center;
+  line-height: 33px !important;
+  color: #ffffff !important;
+  background-color: #ffb222;
+  float: right !important;
+  border-radius: 5px;
+}
+
+.userhasqd {
+  background-color: #cccccc;
+}
+
+.userexitan {
+  height: 50px;
+  width: 100%;
+  line-height: 50px;
+  text-align: center;
+  font-size: 18px;
+  color: #ff4200;
+  margin: 0px;
+}
+
+.userexit {
+  margin-bottom: 10px;
+}
+.myalloders{
+  font-size: 18px;
+}
+.usershop{
+  background-image: url("../Images/usershop.png");
+  background-position:15px center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+
+}
+.usershop>label{
+  margin: 0px;
+  width: 95%;
+  height: 50px;
+  font-size: 18px;
+  color: #ff4200;
+  line-height: 50px;
+  padding: 0px 0px 0px 50px;
+  background-image: url("../Images/Arrow.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 7px;
+}
+.cusercover{
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index:111;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.cuserlist{
+  display: block;
+  position: relative;
+  width: 70%;
+  height: 50%;
+  margin: 30% 0px 0px 15%;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+.seltitle {
+  margin: 0px;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 50px;
+  background-color: #64a2ff;
+}
+.selbtn{
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: #DDDDDD;
+}
+.selbtn>div{
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+.selbtn>div:first-child{
+    border-right-style: solid;
+    border-width: 1px;
+    border-color: #DDDDDD;
+}
+.selbtn>div>label{
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    color: #227aff;
+    font-size: 16px;
+    text-align: center;
+    line-height: 49px;
+}
+.selkf{
+  overflow: auto;
+}
+.selkf>label{
+    margin: 0px;
+    width: 100%;
+    height: 50px;
+    color: #333333;
+    font-size: 16px;
+    text-align: center;
+    line-height: 49px;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #DDDDDD;
+
+}
+.kfactive{
+    background-color: #f3f3f3;
+}

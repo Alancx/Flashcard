@@ -1,0 +1,153 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<include file="$headername" />
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>员工提成管理</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>员工提成管理</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>员工提成管理</h5>
+	</div>
+	<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="{:U('Admin/search')}" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<input type="text" name="EmployeeId" placeholder="请填写员工账号" id="EmployeeId" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="text" name="TrueName" id="TrueName" class="form-control" placeholder="请填写真实姓名(选填)">
+			</div>
+			<div class="form-group">
+				<select name="DepartmentName" id="DepartmentName" class="form-control">
+					<option value="">请选择部门</option>
+					<foreach name="allparts" item="part">
+						<if condition="$part['Grade'] eq '1'">
+							<option value="{$part.ID}" style="color:green;font-size:1.1em;">{$part.Name}</option>
+							<else/>
+							<option value="{$part.ID}">&nbsp;&nbsp;&nbsp;&nbsp;{$part.Name}</option>
+						</if>
+					</foreach>
+				</select>
+			</div>
+			<button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button> <!-- <button class="btn btn-primary btn-outline btn-md" type="button" onclick="import();"><span class="glyphicon glyphicon-import"></span>导出员工信息</button> -->
+		</form>
+
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>账号</th>
+					<th>真实姓名</th>
+					<th>可提现金额</th>
+					<th>提成总额</th>
+					<th>备注</th>
+					<th>最后登录时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="emps" item="emp" >
+					<tr>
+						<td>{$emp.id}</td>
+						<td><a href="###" onclick="getQr('{$emp.id}');">{$emp.userName}</a></td>
+						<td>{$emp.TrueName}</td>
+						<td>{$emp.getnums}</td>
+						<td>{$emp.allnums}</td>
+						<td>{$emp.Remarks}</td>
+						<td>{$emp.LastLoginDate|date='Y-m-d H:i:s',###}</td>
+						<td><button  class="btn btn-success btn-oultline btn-xs" type="button"   data-toggle="modal" data-target="#myModal6" onclick="Rmk('{$emp.ID}')">提现</button> </td>
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+
+</div>
+<script type="text/javascript">
+	function Rmk(id){
+		art.dialog.confirm('确定要提取所有可提现金额吗？请确定线下已完成交易',function(){
+			window.location.href="{:U('Admin/getcash')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+		$("#EmployeeIds").val(id);
+	}
+	function getQr(id){
+		art.dialog.open("{:U('ArtDialog/AQr')}?mid="+id);
+	}
+	$(document).ready(function(){
+		$("#search").submit(function(){
+			var EmployeeId=$("#EmployeeId").val();
+			var TrueName=$("#TrueName").val();
+			var DepartmentName=$("#DepartmentName").val();
+			if (!EmployeeId && !TrueName && !DepartmentName) {
+				art.dialog.alert('请输入您要查询的信息');
+				return false;
+			}else{
+				art.dialog({content:'正在查询....',lock:true});
+				return true;
+			}
+		})
+
+		$("#all").click(function(){
+			$("#st").attr('style','display:none;');
+			$("#et").attr('style','display:none;');
+		})
+		$("#time").click(function(){
+			$("#st").attr('style','display:table;');
+			$("#et").attr('style','display:table;');
+		})
+
+		$("#cash").submit(function(){
+			var types=document.getElementsByName('ttype');
+			var statu=false;
+			$.each(types,function(index,item){
+				if (item.checked==true) {
+					statu=true;
+				};
+			})
+			if (statu==false) {
+				$("#notice").html('请选择提现方式');
+				return false;
+			};
+			if ($("input[name='ttype']:checked").val()=='time') {
+				var st=$("#stime").val();
+				var et=$("#etime").val();
+				if (!st) {
+					$("#notice").html('请选择开始时间');
+					return false;
+				};
+				if (!et) {
+					$("#notice").html('请选择结束时间');
+					return false;
+				};
+				if (!st && !et) {
+					$("#notice").html('请选择起始时间');
+					return false;
+				}else{
+					return true;
+				}
+			}else{
+				return true;
+			}
+		})
+	})
+
+</script>
+<include file="Common:footer" />

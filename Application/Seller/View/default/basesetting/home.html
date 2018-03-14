@@ -1,0 +1,191 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<style type="text/css">
+  .form-control1 {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  }
+  #notices{
+    color: red;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  .tice{
+    color:red;
+  }
+</style>
+<include file="$headername" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>基础设置</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">主页</a>
+      </li>
+      <li class="active">
+        <strong>首页轮播图设置</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+
+  </div>
+</div>
+<div class="row">
+  <div class="panel blank-panel">
+    <form method="post" class="form-horizontal" action="{:U('BaseSetting/saveImg')}" id="savePro" style="margin-top:5%;">
+     <div class="form-group has-error" id="logoimg_c">
+      <label class="col-sm-2 control-label">首页轮播图 <span class="tice"><b>*</b></span></label>
+      <small style="color:red;">图片大小最佳为640*270 或者相同比例</small>
+      <div class="col-sm-6">
+        <div class="input-group m-b">
+          <input type="text" class="form-control required" name="ImgPath" id="logoimg" value=""> <span class="input-group-addon"><a href="###" onclick="upimg('logoimg')">上传</a></span><span class="input-group-addon"><a href="###"  id="logoimg_y">预览 </a> </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group has-success" id="">
+      <label class="col-sm-2 control-label">图片链接 </label>
+
+      <div class="col-sm-6">
+        <input type="text" class="form-control required" name="ImgUrl" id="ImgUrl" value="http://">
+      </div>
+    </div>
+    <div class="form-group has-success" id="">
+      <label class="col-sm-2 control-label">图片排序 </label>
+      <small style="color:red;">排序填写格式为01,02,03 以此类推</small>
+      <div class="col-sm-6">
+        <input type="text" class="form-control required" name="Sort" id="sort" >
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="col-lg-2 control-label">是否显示</label>
+
+      <div class="col-lg-10">
+        <div class="radio">
+          <label><input type="radio" name="IsShow" id="IsShow" value="1" checked="checked" class="optionsRadios">是</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="IsShow" id="noShow" value="0" class="optionsRadios">否</label>
+        </div>
+
+      </div>
+    </div>
+    <input type="hidden" name="ID" id="ImgId">
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-2">
+        <button class="btn btn-primary" type="submit" id="savepost">保存</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+<div class="col-sm-10 col-sm-offset-1">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>图片</th>
+        <th>是否显示</th>
+        <th>排序</th>
+        <th>图片链接</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+    <foreach name="imgs" item="img">
+      <tr>
+        <td>{$img.ID}</td>
+        <td><img src="__ROOT__{$img.ImgPath}" width="150" alt=""></td>
+        <td><input type="checkbox" name="no" onclick="show(this.checked,'{$img.ID}');" id="" <if condition="$img['IsShow']">checked="checked"</if>></td>
+        <td>{$img.Sort}</td>
+        <td>{$img.ImgUrl}</td>
+        <td><a href="###" onclick="edit('{$img.ID}');">编辑</a> &nbsp;&nbsp;&nbsp;  <a href="###" onclick="del('{$img.ID}');">删除</a></td>
+      </tr>
+      </foreach>
+    </tbody>
+  </table>
+  <div style="text-align:right;">{$page}</div>
+</div>
+</div>
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $("#logoimg_y").click(function(){
+      art.dialog({title:'图片预览',content:'<img src="__ROOT__'+$('#logoimg').val()+'" style="width:600px;min-width:50%;" />',lock:true,background: '#000',opacity: 0.45})
+    })
+    $("#saveimg").click(function(){
+      art.dialog({title:'提示',content:'正在提交数据，请勿重复操作...',lock:true});
+    })
+
+    $("#savePro").validate();
+
+  })
+  function upimg(id){
+    art.dialog.data('homeDemoPath', "{:U('Product/proadd')}");
+    art.dialog.data('domid',id);
+        // art.dialog.data('width','500px;');
+        // 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+        // document.getElementById('aInput').value = art.dialog.data('test');
+        art.dialog.open('{:U('Upimg/home')}');
+      };
+
+  function edit(id){
+    var data={$jsondata};
+    $.each(data,function(index,item){
+      if (item.ID==id) {
+        $("#logoimg").val(item.ImgPath);
+        $("#ImgUrl").val(item.ImgUrl);
+        $("#sort").val(item.Sort);
+        $("#ImgId").val(item.ID);
+        if (item.IsShow) {
+          $("#IsShow").prop('checked',true);
+        }else{
+          $("#noShow").prop('checked',true);
+        }
+      };
+    })
+  }
+
+  function del(id){
+    art.dialog.confirm('确定要删除吗？',function(){
+      window.location.href="{:U('BaseSetting/delImg')}?id="+id;
+    },function(){
+      art.dialog.tips('取消操作',0.5);
+    })
+  }
+  function show(statu,id){
+    $.ajax({
+      type:"post",
+      url:"{:U('BaseSetting/show')}",
+      data:"statu="+statu+"&id="+id,
+      dateType:"json",
+      success:function(msg){
+        if (msg=='success') {
+          art.dialog.tips('操作成功',0.5);
+        };
+        if (msg=='error') {
+          art.dialog.tips('操作失败',0.5);
+        };
+      }
+    })
+  }
+</script>
+<include file="Common:footer" />

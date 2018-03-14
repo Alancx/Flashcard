@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我要参团</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/GroupBuy/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/InGroup.css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">团购详情</h1>
+		</header>
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--这里放置真实显示的DOM内容-->
+
+				<div class="ct_header">
+					<img src="{:C('RESOURCE_URL')}{$Ginfo.ProLogoImg}" />
+					<div class="headerqight">
+						<span class="biaoti">
+					{$Ginfo.ProName}
+				</span>
+						<div>
+							<div>
+								<del class="yj">原价：￥ <?php echo number_format($Ginfo['PriceRange'],2); ?></del>
+								<small class="kucun">库存{$Ginfo.OffNum}件</small>
+							</div>
+							<div class="tgjia">团购价:￥ <?php echo number_format($Ginfo['Price'],2); ?></div>
+						</div>
+					</div>
+				</div>
+				<!--限时抢购-->
+				<div class="time">
+					<div class="timeleft">
+						<small>限时<br />团购</small>
+						<small>低至 <?php echo number_format($Ginfo['Price'],2); ?> /件</small>
+					</div>
+					<div class="timeright">
+						<small>活动剩余时间</small>
+						<div class="time-item">
+							<span id="days_show"></span>天
+							<span id="hour_show"></span>时
+							<span id="minute_show"></span>分
+							<span id="second_show"></span>秒
+
+						</div>
+					</div>
+				</div>
+				<!--活动进行中-->
+				<div class="ling">
+					<div class='ac_info'>
+						活动正在进行中...
+						<span></span>
+						<small></small>
+					</div>
+				</div>
+				<!--参团详情-->
+				<div class="ctxq">
+					<span class="title">
+						<span>参团详情&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<span class="red"><span>{$Ginfo.PeopleNum}</span>人团，差<span>{$Ginfo.DifPeople}</span>人</span>
+					</span>
+					<foreach name='Ginfo.list' item='li'>
+					<div>
+						<img src="{:C('RESOURCE_URL')}{$li.HeadImgUrl}" />
+						<div>
+							<p>
+								<span>{$li.MemberName}</span>
+								<if condition="$li['IsLeader'] eq '1'">
+								<span class="tuanzhang">团长</span>
+								</if>
+							</p>
+							<small><span>{$li.CreateDate}</span><if condition="$li['IsLeader'] eq '1'">开团<else/>参团</if></small>
+						</div>
+					</div>
+					</foreach>
+				</div>
+				<!--参团-->
+				<if condition="$isme eq '0'">
+				<button id="ctbtn" type="button" class="mui-btn mui-btn-block mui-btn-red">立即参团</button>
+				</if>
+				
+				
+			</div>
+		</div>
+<!--属性选择-->
+		<div class="Spshuxing">
+			<br />
+			<br />
+			<div id="" class="kouwei">
+				<div>团规则</div><br />
+				<small class="ed" data-id="{$Ginfo.GroupListId}">{$Ginfo.PeopleNum}人团/￥ {$Ginfo.Price} 元  限购 {$Ginfo.BuyNum} 件</small>
+			</div>
+			<br />
+			<br /><br /><br />
+			<label>数量：</label>
+			<div class="mui-numbox" data-numbox-step='1' data-numbox-min='1' data-numbox-max='{$Ginfo.BuyNum}'>
+  				<button class="mui-btn mui-numbox-btn-minus" type="button">-</button>
+ 				 <input class="mui-numbox-input" type="number" id="c_count" />
+  				<button class="mui-btn mui-numbox-btn-plus" type="button">+</button>
+			</div>
+			<br /><br />
+			<button type="button" class="mui-btn mui-btn-red mui-btn-block" id="joinGroup">确定</button>
+			<small id="close" class="mui-icon mui-icon-closeempty"></small>
+		</div>
+<!--遮罩-->
+<div id="mask" hidden="hidden">		
+		
+		
+	</body>
+	<script src="__PUBLIC__/GroupBuy/js/mui.min.js"></script>
+	<script src="__PUBLIC__/GroupBuy/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.init()
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+	</script>
+	<script type="text/javascript">
+		//倒计时-----------------------
+var intDiff = {$time};//倒计时总秒数量
+// var intDiff = 3;//倒计时总秒数量
+function timer(intDiff){
+	if (intDiff<=0) {
+		$('.ac_info').html('活动结束<span></span> <small></small>').css({'color':'ccc'});
+		$('#ctbtn').attr('disabled',true).css('background-color','#ccc').html('已结束');
+		$('#second_show').html('00');
+	};
+	var timec=window.setInterval(function(){
+		if (intDiff<=0) {
+			$('.ac_info').html('活动结束<span></span> <small></small>').css({'color':'ccc'});
+			$('#ctbtn').attr('disabled',true).css('background-color','#ccc').html('已结束');
+			$('#second_show').html('00');
+			clearInterval(timec);
+		}else{
+			var hour=0,
+			minute=0,
+	        second=0;//时间默认值        
+	        if(intDiff > 0){
+	        	days=Math.floor(intDiff/(3600*24));
+	        	hour = Math.floor((intDiff-(days*86400))/3600);
+	        	minute=Math.floor((intDiff-(days*86400)-(hour*3600))/60);
+	        	second=intDiff-(days*86400)-(hour*3600)-(minute*60);
+	        }
+	        if (hour <= 9) hour = '0' + hour;
+	        if (minute <= 9) minute = '0' + minute;
+	        if (second <= 9) second = '0' + second;
+	        $('#hour_show').html(hour);
+	        $('#minute_show').html(minute);
+	        $('#second_show').html(second);
+	        $('#days_show').html(days);
+	        intDiff--;
+	    }
+	}, 1000);
+} 
+
+$(function(){
+    timer(intDiff);
+}); 
+
+
+
+//开团
+$("#ctbtn").on('tap',function(){
+//	alert('a')
+	$(".Spshuxing").addClass('tran');
+	$("#mask").css("display",'block');
+})
+//关闭
+$("#close").on('tap',function(){
+//	alert('a')
+	$(".Spshuxing").removeClass('tran');
+	$("#mask").css("display",'none');
+	
+})
+$(document).on('tap','#joinGroup',function(){
+	var glid=$('.ed').attr('data-id');
+	var count=$('#c_count').val();
+	if (glid && count) {
+		window.location.href="{:U('GroupBuy/gofororder')}?glid="+glid+"&count="+count+"&type=join&gyid={$gyid}";
+	}else{
+		mui.toast('请选择数量/团规则');
+	}
+})
+//属性选择
+$(".threesix small,.kouwei small,.baozhuang small").on('tap',function(){
+//	alert('a');
+	$(this).parent().children('small').removeClass('ed').addClass('un');
+	$(this).removeClass('un').addClass('ed')
+})
+	</script>
+</html>

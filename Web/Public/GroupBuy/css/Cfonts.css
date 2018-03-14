@@ -1,0 +1,91 @@
+@font-face {
+	font-family:'CFonts';
+	src: url("../fonts/CFonts.ttf?0826001") format('truetype');;
+}
+
+.cfonts{
+	font-family: "CFonts";
+  font-size:30px;
+  font-style:normal;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*color: #333;*/
+}
+/*首页*/
+.homeicon:before{content: "\c001"; color: #666;}
+.homeicon.add:before{content: "\c002"; color:#d00d00 ;}
+/*分类*/
+.fenleiicon:before{	content: "\c003"; color: #666;}
+.fenleiicon.add:before{	content: "\c004"; color:#d00d00 ;}
+/*附近*/
+.nearbyicon:before{	content: "\c005"; color: #666;}
+.nearbyicon.add:before{	content: "\c006"; color:#d00d00 ;}
+/*我的*/
+.mineicon:before{	content: "\c007"; color: #666;}
+.mineicon.add:before{	content: "\c008"; color:#d00d00 ;}
+/*徽记*/
+#factoryicon img{
+    -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%);
+    width: 50px;
+    margin-top: 0px;
+}
+#factoryicon.add img{
+    -webkit-filter: grayscale(0%); /* Chrome, Safari, Opera */
+    filter: grayscale(0%);
+}
+
+/*设置*/
+.set:before{ content: '\c009'; }
+/*待发货*/
+.fahuo:before{ content: '\c010'; }
+/*待付款*/
+.fukuan:before{ content: '\c011'; }
+/*待收货*/
+.shouhuo:before{ content: '\c013'; }
+/*待评价*/
+.pingjia:before{ content: '\c012'; }
+/* > */
+.next:before{ content: '\e621'; }
+/* 会员 */
+.vip:before{ content: '\c016'; }
+/* 团购 */
+.tuangou:before{ content: '\c015'; }
+/* 我的店铺 */
+.shop:before{ content: '\c014'; }
+/* 店铺图标 */
+.shopico:before{ content: '\e603'; }
+/*地址  线框*/
+.adds:before{ content: '\e657';}
+/*地址  填色*/
+.addf:before{ content: '\e659';}
+/*分享*/
+.share:before{content: "\c017";}
+/*复选框 未选中*/
+.weixuan:before{content: "\e619";}
+/*复选 选中*/
+.xuanzhong:before{content: "\e620";}
+/*微信支付*/
+.wxzf:before{content: "\e617"; color: #4CD964;}
+/*现金支付*/
+.xjzf:before{content: "\e618"; color: #FE931F;}
+/*对号*/
+.true:before{content: "\e694";}
+/*编辑*/
+.edit:before{content: "\e627";}
+
+/*删除*/
+.delete:before{content: "\e629";}
+
+/*加号*/
+.jiahao:before{content: "\f012";}
+
+
+
+
+
+
+
+
+

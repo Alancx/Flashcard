@@ -1,0 +1,340 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<script src="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.min.css">
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/page.js?v=2.4"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/page.css?v=2.4">
+
+<div class="row pagehomeset">
+	<div class="col-lg-4 col-md-4 col-sm-4 pull-left page">
+    <div class="showhome">
+			<!-- 轮播图区域 -->
+			<div class="swiper-container swiper-container-home">
+				<div class="overburden"><div><span>轮播图设置区域,第一张为平台设置,最多设置两个(建议图片设置尺寸800x500)</span></div></div>
+				<div class="swiper-wrapper">
+					<notempty name="homeimg">
+						<div class="swiper-slide">
+							<img src="{$homeimg['ImgPath']}" class="imgslide">
+						</div>
+						<else />
+						<div class="swiper-slide">
+							<img src="http://placehold.it/800x500" class="imgslide">
+						</div>
+					</notempty>
+					<foreach name="lbdata" item='lbinfo'>
+						<div class="swiper-slide">
+							<img src="{$lbinfo['ImgPath']}" class="imgslide">
+						</div>
+					</foreach>
+				</div>
+
+				<!-- Add Pagination -->
+				<div class="swiper-pagination swiper-pagination-home"></div>
+			</div>
+			<!-- 轮播图区域end -->
+			<!-- 产品区域一 -->
+		  <div class="propart">
+		    <div class="pro-title">
+					<label class="pro_hot">热销商品<span>更多</span></label>
+		    </div>
+		    <div class="pro-line-1">
+					<div class="overburden"><div><span>热卖商品设置,第二个为平台设置,最多设置两个商品</span></div></div>
+					<empty name="selhotinfo[0]">
+						<div class="pro-line-1-left hot-pro-1">
+			        <img src="http://placehold.it/100x100" alt="">
+							<label>商品名称<span>￥0.00</span></label>
+			      </div>
+						<else />
+						<div class="pro-line-1-left hot-pro-1">
+			        <img src="{$selhotinfo[0]['ProLogoImg']}" alt="">
+							<label>{$selhotinfo[0]['ProName']}<span>￥<?php echo number_format(($selhotinfo[0]['PriceRange']),2); ?></span></label>
+			      </div>
+					</empty>
+					<empty name="prohot">
+						<div class="pro-line-1-right">
+							<div>
+								<label>商品名称</label>
+								<label>￥0.00</label>
+							</div>
+							<img src="http://placehold.it/100x100" alt="">
+						</div>
+						<else />
+						<div class="pro-line-1-right">
+							<div>
+								<label>{$prohot['ProName']}</label>
+								<label>￥<?php echo number_format(($prohot['PriceRange']),2); ?></label>
+							</div>
+							<img src="{$prohot['ProLogoImg']}" alt="">
+						</div>
+					</empty>
+
+					<empty name="selhotinfo[1]">
+						<div class="pro-line-1-right hot-pro-2">
+							<div>
+								<label>商品名称</label>
+								<label>￥0.00</label>
+							</div>
+							<img src="http://placehold.it/100x100" alt="">
+						</div>
+						<else />
+						<div class="pro-line-1-right hot-pro-2">
+							<div>
+								<label>{$selhotinfo[1]['ProName']}</label>
+								<label>￥<?php echo number_format(($selhotinfo[1]['PriceRange']),2); ?></label>
+							</div>
+							<img src="{$selhotinfo[1]['ProLogoImg']}" alt="">
+						</div>
+					</empty>
+		    </div>
+		  </div>
+			<div class="swiper-container swiper-container-class">
+				<div class="overburden"><div><span>分类设置区域为平台上传，不可编辑</span></div></div>
+				<div class="swiper-wrapper">
+					<empty name="info.classdata">
+						<for start="1" end="5">
+							<div class="swiper-slide">
+								<div class="classtype">
+									<img src="http://placehold.it/100x100" alt="">
+								  <label>分类名称</label>
+								</div>
+							</div>
+						</for>
+						<else />
+						<foreach name="info.classdata" item='classinfo'>
+							<div class="swiper-slide">
+								<div class="classtype">
+									<img src="{$classinfo['imgurl']}" alt="">
+								  <label>{$classinfo['cname']}</label>
+								</div>
+							</div>
+						</foreach>
+					</empty>
+				</div>
+			</div>
+		  <!-- 产品区域一end -->
+		  <!-- 产品区域二 -->
+		  <div class="propart">
+		    <div class="pro-title">
+		      <label class="pro_new">新品推荐<span>更多</span></label>
+		    </div>
+		    <div class="pro-line-3">
+					<div class="overburden"><div><span>新品商品设置,第一个为平台设置,最多设置三个商品</span></div></div>
+					<empty name="pronew">
+						<div>
+							<div>
+								<label>商品名称</label>
+								<label>￥0.00</label>
+							</div>
+							<img src="http://placehold.it/100x100" alt="">
+						</div>
+						<else />
+						<div>
+							<div>
+								<label>{$pronew['ProName']}</label>
+								<label>￥<?php echo number_format(($pronew['PriceRange']),2); ?></label>
+							</div>
+			        <img src="{$prohot['ProLogoImg']}" alt="">
+			      </div>
+					</empty>
+
+					<empty name="selnewinfo[0]">
+						<div class="new_pro_1">
+							<div>
+								<label>商品名称</label>
+								<label>￥0.00</label>
+							</div>
+							<img src="http://placehold.it/100x100" alt="">
+						</div>
+						<else />
+						<div class="new_pro_1">
+							<div>
+								<label>{$selnewinfo[0]['ProName']}</label>
+								<label>￥<?php echo number_format(($selnewinfo[0]['PriceRange']),2); ?></label>
+							</div>
+							<img src="{$selnewinfo[0]['ProLogoImg']}" alt="">
+						</div>
+					</empty>
+					<empty name="selnewinfo[1]">
+						<div class="new_pro_2">
+							<div>
+								<label>商品名称</label>
+								<label>￥0.00</label>
+							</div>
+							<img src="http://placehold.it/100x100" alt="">
+						</div>
+						<else />
+						<div class="new_pro_2">
+							<div>
+								<label>{$selnewinfo[1]['ProName']}</label>
+								<label>￥<?php echo number_format(($selnewinfo[1]['PriceRange']),2); ?></label>
+							</div>
+							<img src="{$selnewinfo[1]['ProLogoImg']}" alt="">
+						</div>
+					</empty>
+					<empty name="selnewinfo[2]">
+						<div class="new_pro_3">
+							<div>
+								<label>商品名称</label>
+								<label>￥0.00</label>
+							</div>
+							<img src="http://placehold.it/100x100" alt="">
+						</div>
+						<else />
+						<div class="new_pro_3">
+							<div>
+								<label>{$selnewinfo[2]['ProName']}</label>
+								<label>￥<?php echo number_format(($selnewinfo[2]['PriceRange']),2); ?></label>
+							</div>
+							<img src="{$selnewinfo[2]['ProLogoImg']}" alt="">
+						</div>
+					</empty>
+		      <!-- <div class="hot_pro_2">
+						<div>
+							<label>商品名称</label>
+							<label>￥0.00</label>
+						</div>
+		        <img src="http://placehold.it/100x100" alt="">
+		      </div>
+		      <div class="hot_pro_3">
+						<div>
+							<label>商品名称</label>
+							<label>￥0.00</label>
+						</div>
+		        <img src="http://placehold.it/100x100" alt="">
+		      </div> -->
+		    </div>
+		  </div>
+		  <!-- 产品区域二end -->
+    </div>
+	</div>
+	<div class="col-lg-8 col-md-8 col-sm-8 editpage">
+    <div>
+    <!-- 轮播图设置区域 -->
+    <div class="editqy">
+      <label>轮播图设置</label>
+			<div class="seltype" style="margin:0px 0px 5px 0px;">
+					<label>轮播图链接</label>
+					<input type="text" name="lb_href" id="lb_href" class="form-control" placeholder="已“HTTP://”开头[可以为空]">
+				</div>
+      <div class="input-group">
+        <input type="text" name="lb_img" id="lb_img" class="form-control">
+        <div class="input-group-addon" onclick="upimg('lb_img')">上传</div>
+        <div class="input-group-addon lbimgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+      </div>
+      <table class="table tabel-hovered table-bordered table-lb" style="margin:5px 0px 0px 0px">
+        <tbody>
+					<foreach name="lbdata" item='lbinfo' key='vo'>
+							<tr id="LB{$vo+1}" class="lbimgurl" data-lbno="LB{$vo+1}" data-iurl="{$lbinfo['ImgPath']}" data-lbhref="{$lbinfo['ImgUrl']}" data-hid="{$lbinfo['ID']}">
+								<td>LB{$vo+1}</td>
+								<td>{$lbinfo['ImgUrl']}</td>
+								<td><img src="{$lbinfo['ImgPath']}" alt="" style="width:150px;"/></td>
+								<td>{$lbinfo['ImgPath']}</td>
+								<td style="width:50px;"><button type="button" class="btn btn-danger btn-xs" onclick="delmsghome(this)">删除</button><button type="button" class="btn btn-warning btn-xs btn-update" onclick="updatemsghome(this)">修改</button></td>
+							</tr>
+						</foreach>
+        </tbody>
+      </table>
+    </div>
+    <!-- 轮播图设置区域end -->
+    <!-- 热卖设置区域 -->
+    <div class="editqy">
+			<label>热卖商品信息设置</label>
+			<div class="input-group">
+				<select name="pro-hot" id="pro-hot" class="form-control">
+					<option value="">请选择</option>
+					<foreach name="hotproinfo" item='pro'>
+					<option value="{$pro.ProId}" data-img="{$pro.ProLogoImg}" data-price="{$pro.PriceRange}">{$pro.ProName}</option>
+					</foreach>
+				</select>
+        <div class="input-group-addon prohot_imgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+      </div>
+			<table class="table tabel-hovered table-bordered table-pro-hot" style="margin:5px 0px 0px 0px">
+        <tbody>
+					<foreach name="selhotinfo" item='pi'>
+						<tr id="{$pi.Position}" class="hotproinfo" data-iurl="{$pi.ProLogoImg}" data-pid="{$pi.ProId}" data-pname="{$pi.ProName}" data-price="{$pi.PriceRange}" data-hid="{$pi.ID}">
+							<td>{$pi.Position}</td>
+							<td>{$pi.ProId}</td>
+							<td>{$pi.ProName}</td>
+							<td>{$pi.PriceRange}</td>
+							<td><img src="{$pi.ProLogoImg}" alt="" style="width:150px;"/></td>
+							<td>{$pi.ProLogoImg}</td>
+							<td style="width:50px;"><button type="button" class="btn btn-warning btn-xs" onclick="updatemsghome(this)">修改</button></td>
+						</tr>
+					</foreach>
+        </tbody>
+      </table>
+    </div>
+    <!-- 热卖设置区域end -->
+		<!-- 新品设置区域 -->
+		<div class="editqy">
+			<label>新品商品信息设置</label>
+			<div class="input-group">
+				<select name="pro-new" id="pro-new" class="form-control">
+					<option value="">请选择</option>
+					<foreach name="newproinfo" item='pro'>
+					<option value="{$pro.ProId}" data-img="{$pro.ProLogoImg}" data-price="{$pro.PriceRange}">{$pro.ProName}</option>
+					</foreach>
+				</select>
+				<div class="input-group-addon pronew_imgsave" style="background-color:#ec4758;color:#ffffff" >保存</div>
+			</div>
+			<table class="table tabel-hovered table-bordered table-pro-new" style="margin:5px 0px 0px 0px">
+				<tbody>
+					<foreach name="selnewinfo" item='pi'>
+						<tr id="{$pi.Position}" class="newproinfo" data-iurl="{$pi.ProLogoImg}" data-pid="{$pi.ProId}" data-pname="{$pi.ProName}" data-price="{$pi.PriceRange}" data-hid="{$pi.ID}">
+							<td>{$pi.Position}</td>
+							<td>{$pi.ProId}</td>
+							<td>{$pi.ProName}</td>
+							<td>{$pi.PriceRange}</td>
+							<td><img src="{$pi.ProLogoImg}" alt="" style="width:150px;"/></td>
+							<td>{$pi.ProLogoImg}</td>
+							<td style="width:50px;"><button type="button" class="btn btn-warning btn-xs" onclick="updatemsghome(this)">修改</button></td>
+						</tr>
+					</foreach>
+				</tbody>
+			</table>
+		</div>
+		<!-- 新品设置区域end -->
+    <div style="height:50px;">
+		<!-- 底部按钮菜单栏 -->
+    <div class="bottom-btn">
+    <button type="button" name="lookhome" id="lookhome" class="btn btn-warning">查看预览</button>
+    <!-- <button type="button" name="savehome" id="savehome" class="btn btn-danger">保&emsp;&emsp;存</button> -->
+    </div>
+    <!-- 底部按钮菜单栏end -->
+      </div>
+
+	</div>
+</div>
+<script type="text/javascript">
+  var savehomeurl="{:U('Store/pageset')}";//////保存地址/////
+	var delhomeurl="{:U('Store/delonhome')}";//////删除地址/////
+    //轮播图数据
+		//轮播图数据
+		var swiper_home = new Swiper('.swiper-container-home', {
+			autoplay: 3000,//可选选项，自动滑动
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			// autoHeight: true, //enable auto height
+			autoplayDisableOnInteraction:false,
+			loop:true,
+		});
+		var swiper_class = new Swiper('.swiper-container-class', {
+			slidesPerView: 4,
+			spaceBetween: 0,
+			autoHeight: true, //enable auto height
+			freeMode: true,
+		});
+</script>
+<script type="text/javascript">
+	function upimg(id){
+		art.dialog.data('domid',id);
+		art.dialog.open('{:U('Upimg/spceil')}');
+	};
+	function show(id){
+		art.dialog({title:'图片预览',content:'<img src="__ROOT__'+$('#'+id).val()+'" style="width:600px;min-width:50%;" />',lock:true,background: '#000',opacity: 0.45})
+	}
+</script>
+<include file="Common:footer" />

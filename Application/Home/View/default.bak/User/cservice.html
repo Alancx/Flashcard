@@ -1,0 +1,50 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/cservice.css?v=1.4">
+<script type="text/javascript" src="__PUBLIC__/theme2/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="__PUBLIC__/theme2/js/resize.js"></script>
+<script type="text/javascript" src="__PUBLIC__/theme2/js/cservice.js?v=2.7"></script>
+<div class="chatlist" data-page="1">
+  <!-- <div class="chatto chatcontent">
+    <img src="__PUBLIC__/theme2/images/touxiang.png">
+    <label class="content">大家好你好我也好</label>
+    <span></span>
+  </div>
+  <div class="time"><span>08-16 12:12</span></div>
+  <div class="chatfrom chatcontent">
+    <img src="__PUBLIC__/theme2/images/touxiang.png">
+    <label class="content">大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好</label>
+    <span></span>
+  </div> -->
+  <!-- <div class="chatto chatcontent">
+    <img src="__PUBLIC__/theme2/images/touxiang.png">
+    <img src="__PUBLIC__/theme2/images/touxiang.png" class="chattoimg">
+    <span></span>
+  </div>
+  <div class="time"><span>08-16 12:12</span></div>
+  <div class="chatfrom chatcontent">
+    <img src="__PUBLIC__/theme2/images/touxiang.png">
+      <img src="__PUBLIC__/theme2/images/touxiang.png" class="chatfromimg">
+    <span></span>
+  </div> -->
+</div>
+<div class="chatedit input-group">
+  <div class="input-group-btn">
+    <img class="sendimg" src="__PUBLIC__/theme2/Images/sendimg.png">
+    <input type="file" id="simg" name="simg" onchange="selsimg(this)">
+  </div>
+  <div class="editchat" contenteditable="true"></div>
+  <span class="input-group-btn">
+    <button class="btnsend" type="button">发送</button>
+  </span>
+</div>
+<script type="text/javascript">
+   var sendmsg_url="{:U('User/sendmsg')}"; //发送消息
+  var getmsg_url="{:U('User/getmsg')}"; //获取聊天记录
+   var memid="{$memid}";
+   var memname="{$memname}";
+   var memimg="{$memimg}";
+   var kefuid="{$serviceid}";
+   var kefuname="{$servicename}";
+   var kefuimg="__PUBLIC__/Admin/Admin/img/headimg/{$serviceimg}";
+   var usersimg_url= "{:U('User/savesengimg')}";//保存发送图片
+</script>

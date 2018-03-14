@@ -1,0 +1,15 @@
+操作定位:Public/godata::::{"account":"xue","password":"321","timestamp":"149983292ato_807ae465533dc6f11503fee5cbcd0366","sign":"1044207e321ade8275b90e011f48956d","type":"s"}::::::操作日期:::::::2017-07-12 12:15:29
+操作定位:Public/godata::::{"account":"xue","password":"321","timestamp":"149983292","sign":"0ce20e2692cf91d5de2490bdc12f0d7b","type":"f"}::::::操作日期:::::::2017-07-12 12:15:36
+操作定位:Phone/getsomething::::get{"data_type":"a","timetype":"d","time":"today","type":"gethomedata","oftype":"sale"}::::::操作日期:::::::2017-07-12 12:15:38
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-07-12 12:15:41
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-07-12 12:16:24
+操作定位:Phone/getsomething::::get{"data_type":"a","type":"dataofareas"}::::::操作日期:::::::2017-07-12 12:16:27
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"dataofemps","desc":"desc"}::::::操作日期:::::::2017-07-12 12:16:29
+操作定位:Phone/getsomething::::人员销售排行--->>>{"status":"success","barx":["\u5510\u745c\u74a0"],"bary":[0],"barz":[0],"tableData":[{"money":0,"count":0,"EmpId":13,"RowNumber":1,"EmpName":"\u5510\u745c\u74a0"}]}::::::操作日期:::::::2017-07-12 12:16:30
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"dataofstores","desc":"desc"}::::::操作日期:::::::2017-07-12 12:16:34
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"gettodaydata"}::::::操作日期:::::::2017-07-12 12:16:38
+操作定位:Phone/getsomething::::get{"time_type":"d","type":"fcsales","desc":"desc"}::::::操作日期:::::::2017-07-12 12:16:39
+操作定位:Phone/getsomething::::get{"type":"getdataofsales","time":"today","time_type":"d","data_type":"count","pname":"","cname":""}::::::操作日期:::::::2017-07-12 12:16:41
+操作定位:Phone/getsomething::::get{"type":"getdataofsales","time":"2017-06","time_type":"m","data_type":"count","pname":"","cname":""}::::::操作日期:::::::2017-07-12 12:16:50
+操作定位:Phone/getsomething::::get{"type":"getdataofsales","time":"today","time_type":"d","data_type":"sales","pname":"","cname":""}::::::操作日期:::::::2017-07-12 12:17:00
+操作定位:Public/godata::::[]::::::操作日期:::::::2017-07-12 15:19:13

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map</title>
+<link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+<link href="__PUBLIC__/Admin/Admin/css/animate.css" rel="stylesheet">
+<script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+    #map{
+        width: 1000px;
+        height: 700px;
+    }
+    .row{
+        margin: 0px;
+    }
+</style>
+</head>
+<body style="">
+    <div class="row">
+        <div id="map"></div>
+    </div>
+</body>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4&libraries=convertor,geometry"></script>
+<script>
+var map;
+var geometry;
+var mapdata={$mapdata};
+function init() {
+    map = new qq.maps.Map(document.getElementById("map"), {    
+        //mapTypeId:qq.maps.MapTypeId.ROADMAP,
+        // 地图的中心地理坐标。
+        center: new qq.maps.LatLng(39.916527,116.397128),
+        zoom:{$Location.level}
+    });
+}
+geocoder = new qq.maps.Geocoder({
+        complete : function(result){
+            map.setCenter(result.detail.location);
+            // var marker = new qq.maps.Marker({
+            //     map:map,
+            //     position: result.detail.location
+            // });
+        }
+    });
+$(document).ready(function(){
+    init();
+    geocoder.getLocation('{$Location.adr}');
+    createMarker();
+})
+function createMarker(){
+    // for (var i = mapdata.length - 1; i >= 0; i--) {
+    //     var latLang= new qq.maps.LatLng(mapdata[i]['lang'],mapdata[i]['lat']);
+    //     console.log(mapdata[i]['lang']);
+    //     var marker = new qq.maps.Marker({
+    //         'position':latLang,
+    //         map:map
+    //     });
+    // };
+
+    $.each(mapdata,function(index,item){
+        console.log(item);
+        var location=new qq.maps.LatLng(item.lat,item.lang);
+        console.log(location);
+        var marker = new qq.maps.Marker({
+            'position':location,
+            'animation':qq.maps.MarkerAnimation.DOWN,
+            'map':map,
+            'title':item.storename+'--销售额：'+item.money+'--销售量：'+item.count,
+            'visible':true
+        })
+    })
+}
+</script>
+</html>

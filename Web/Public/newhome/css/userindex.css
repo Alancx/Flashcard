@@ -1,0 +1,88 @@
+.userparts{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 51px;
+  width: 100%;
+}
+.toppart{
+  display: block;
+  overflow: hidden;
+  height: 120px;
+  padding: 30px 20px 30px 20px;
+  position: relative;
+  width: 100%;
+  background-color: #ff7200;
+}
+.userhead{
+  float: left;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.userinfo{
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  color: #ffffff;
+  margin: 0px 0px 0px 10px;
+  font-size: 16px;
+}
+.userbgimg{
+  position: absolute;
+  top: 10%;
+  right: 10px;
+  height: 80%;
+  width: auto;
+}
+.btngroup{
+  display: block;
+  width: 100%;
+  height: calc(100% - 120px);
+  overflow: auto;
+}
+.btngrouplist{
+  display: block;
+  overflow: hidden;
+  background-color: #ffffff;
+  margin: 0px 0px 10px 0px;
+}
+.btninfo{
+  display: block;
+  height: 45px;
+  border-bottom: #eeeeee solid 1px;
+  padding: 0px 10px 0px 10px;
+  line-height: 44px;
+}
+.btninfo>span:first-child{
+  float: left;
+  height: 44px;
+  width: 44px;
+  line-height: 44px;
+  font-size: 30px;
+  color: #666666;
+}
+.btninfo>span:last-child{
+  float: right;
+  height: 44px;
+  width: 44px;
+  line-height: 44px;
+  font-size: 24px;
+  text-align: right;
+  color: #666666;
+}
+.btninfo>.btntitle{
+  float: left;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  color: #666666;
+}
+.showtitle{
+  float: left;
+  height: 44px;
+  line-height: 44px;
+  font-size: 14px;
+  color: #999999;
+  margin: 0px 0px 0px 15px;
+}

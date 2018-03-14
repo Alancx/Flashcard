@@ -1,0 +1,1 @@
+{"timeStamp":"1495530266","dealMsg":"\u9884\u4e0b\u5355\u6210\u529f","paySign":"D775F791C9B310A0E2FB0C7AB395B055","appId":"wxbf546b9a5b52d5a3","sign":"9EB6B1B76DFB268A4F9A9E4C1E5D1747","signType":"MD5","dealCode":"10000","prepayId":"wx20170523170426c88cae474e0048198440","nonceStr":"A1zUQnzDLOzq0sNV","merchantNo":"TX0001455"}

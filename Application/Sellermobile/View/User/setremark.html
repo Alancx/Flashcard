@@ -1,0 +1,144 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/settable.css?v=1.0">
+<style media="screen">
+  .tablename{
+    font-size: 12px!important;
+    overflow: hidden;
+  }
+</style>
+<div class="tableinfo">
+  <div class="toptitle">
+    <span>备注设置</span>
+  </div>
+  <div class="topset">
+    <span>备注</span>
+    <input type="text" name="inputtableid" class="inputtableid" value="" placeholder="输入内容">
+    <span class="savetableinfo">保存</span>
+  </div>
+  <div class="tablelist">
+    <ul>
+      <foreach name="rinfo" item="tl">
+      <li class="table_info" data-id="{$tl['ID']}" data-content="{$tl['content']}">
+        <span class="tablename">{$tl['content']}<span></span></span>
+        <span class="edit">编辑</span>
+        <span class="delete">删除</span>
+      </li>
+    </foreach>
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    // 设置编辑和删除按钮事件
+    setbtninfo();
+    // 点击保存按钮
+    $('.savetableinfo').click(function(){
+      var tname = $('.inputtableid').val();
+      var tid = 'add';
+      if ($.trim(tname)!='') {
+        if ($('.seltableactive').length>0) {
+          tid =$('.seltableactive').attr('data-id');
+        }
+        var senddata={
+          'tid':tid,
+          'tname':tname,
+          'type':'1',
+        };
+        tips('waiting','备注保存中···');
+        $.ajax({
+          url:"{:U('User/setremark')}",
+          type:"post",
+          data:senddata,
+          dataType:"json",
+          success:function(msg){
+            if (msg.status=='true'){
+              var tinfo = msg.datainfo;
+              var htmls='';
+              $.each(tinfo,function(index,item){
+                htmls+='<li class="table_info" data-id="'+item['ID']+'" data-content="'+item['content']+'">'+
+                  '<span class="tablename">'+item['content']+'</span>'+
+                  '<span class="edit">编辑</span>'+
+                  '<span class="delete">删除</span>'+
+                '</li>';
+              })
+              $('.tablelist>ul').html(htmls);
+              setbtninfo();
+              $('.inputtableid').val('');
+              tips('notice', '备注保存成功!', 1500);
+            } else{
+              tips('notice', '备注保存失败!', 1500, 'weui_icon_notice');
+            }
+          },
+          complete: function (e) {
+            hidetips('waiting');
+          },
+          error: function (data,status,e)//服务器响应失败处理函数
+          {
+            //////
+          }
+        })
+      } else {
+        tips('notice', '备注不能为空!', 1500, 'weui_icon_notice');
+      }
+    })
+  });
+  function setbtninfo(){
+    $('.edit').click(function(){
+      if (!$(this).parents('.table_info').hasClass('seltableactive')) {
+        $('.seltableactive').find('.edit').text('编辑');
+        $('.seltableactive').removeClass('seltableactive');
+        $(this).parents('.table_info').addClass('seltableactive');
+        $(this).parents('.table_info').find('.edit').text('取消');
+        var tnanme = $(this).parents('.table_info').attr('data-content');
+        $('.inputtableid').val(tnanme);
+      } else {
+        $('.seltableactive').find('.edit').text('编辑');
+        $('.seltableactive').removeClass('seltableactive');
+        $('.inputtableid').val('');
+      }
+    });
+    // 删除
+    $('.delete').click(function(){
+      var tid =$(this).parents('.table_info').attr('data-id');
+      var senddata={
+        'tid':tid,
+        'type':'2',
+      };
+      // console.log(senddata);
+      tips('waiting','备注删除中···');
+      $.ajax({
+        url:"{:U('User/setremark')}",
+        type:"post",
+        data:senddata,
+        dataType:"json",
+        success:function(msg){
+          if (msg.status=='true'){
+            var tinfo = msg.datainfo;
+            var htmls='';
+            $.each(tinfo,function(index,item){
+              htmls+='<li class="table_info" data-id="'+item['ID']+'" data-content="'+item['content']+'">'+
+                '<span class="tablename">'+item['content']+'</span>'+
+                '<span class="edit">编辑</span>'+
+                '<span class="delete">删除</span>'+
+              '</li>';
+            })
+            $('.tablelist>ul').html(htmls);
+            setbtninfo();
+            $('.inputtableid').val('');
+            tips('notice', '备注删除成功!', 1500);
+          } else{
+            tips('notice', '备注删除失败!', 1500, 'weui_icon_notice');
+          }
+        },
+        complete: function (e) {
+          hidetips('waiting');
+        },
+        error: function (data,status,e)//服务器响应失败处理函数
+        {
+          //////
+        }
+      })
+    })
+  }
+</script>

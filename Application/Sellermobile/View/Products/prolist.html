@@ -1,0 +1,320 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/prolist.css?v=1.5">
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/prolist.js?V=1.5"></script>
+<script  type="text/javascript">
+var updatepro="{:U('Products/proedit',array('proid'=>'PRODUCTID'))}";//修改自营产品信息
+var updatefacpro="{:U('Products/Factoryproadd',array('proid'=>'PRODUCTID','type'=>'U'))}";//修改工厂产品信息
+var imgurl = "__PUBLIC__/Sellermobile/icon/";//图标路径
+var editshelve="{:U('Products/setshelve')}";////修改是否上架
+var deletepro="{:U('Products/prodelete')}";////删除商品
+var factoryeditsave_url="{:U('Products/Factoryproeditsave')}";////保存批量编辑的工厂商品
+var selfproeditsave_url="{:U('Products/selfproeditsave')}";////保存批量编辑的自营商品
+</script>
+<div class="all_prolist">
+	<div class="sel_protype">
+		<img src="__PUBLIC__/Sellermobile/icon/search.png" class="srarchbtn" alt="">
+		<div class="sel_protype_1">
+			<!-- <label class="sel_protype_top sel_topactive" data-type="1">工厂商品</label> -->
+			<label class="sel_protype_top sel_topactive" data-type="2">自营商品</label>
+			<label class="sel_protype_top" data-type="3">商品分类</label>
+		</div>
+		<div class="sel_protype_2">
+			<label class="sel_protype_bottom sel_bottomactive" data-type="1">出售中<span></span></label>
+			<label class="sel_protype_bottom" data-type="2">已下架<span></span></label>
+		</div>
+	</div>
+	<div class="all_pro_list">
+		<div class="facpro_list" style="display:none;">
+			<if condition="$facpro eq 'NULLFACPRO' ">
+				<img class="watermatk" src="__PUBLIC__/Sellermobile/Icon/watermark.png" alt="">
+				<else />
+				<foreach name="facpro" item="item">
+					<div class="proinfo P_{$item['ProId']}" data-pid="{$item['ProId']}">
+						<span class="selmag" data-type="1" onclick="selmagpro(this)">
+						</span>
+						<img src="{$item['ProLogoImg']}" alt="">
+						<div onclick="openattr(this)">
+							<label class="proname">{$item['ProName']}</label>
+							<label class="protitle">{$item['ProTitle']}</label>
+							<label class="proprice">￥<?php echo $item['Price']?sprintf("%.2f",$item['Price']):'0.00' ?></label>
+							<img class="clickinfo" src="__PUBLIC__/Sellermobile/icon/click_pro.png" alt="" onclick="clickinfo(this)">
+						</div>
+						<div class="editmenu">
+							<div class="delpro" data-pid="{$item['ProId']}" onclick="delpro(this)">
+								<img src="__PUBLIC__/Sellermobile/icon/del_pro.png" alt="">
+								<label>删除</label>
+							</div>
+							<div class="faceditpro" data-pid="{$item['ProId']}" onclick="faceditpro(this)">
+								<img src="__PUBLIC__/Sellermobile/icon/edit_pro.png" alt="">
+								<label>编辑</label>
+							</div>
+						</div>
+						<div class="attrdata">
+		          <div class="attrtop">
+		            <div>
+		              <label>统一销售价格:</label>
+		              <input type="number" name="" value="0.00" class="setaprice">
+		            </div>
+		            <div>
+		              <label>统一采购数量:</label>
+		              <input type="number" name="" value="0" class="setanum">
+		            </div>
+		          </div>
+		          <div class="attrtitle">
+		            <label>属性</label>
+		            <label>原销售价</label>
+		            <label>销售价格/元</label>
+		            <label>采购数量</label>
+		          </div>
+		          <foreach name="item['attrlist']" item="attritem">
+		            <div class="attritem" data-cid="{$item['ClassType']}" data-pcid="{$attritem['ProIdCard']}" data-gzprice="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" data-cprice="<?php echo $attritem['CosPrice']?sprintf("%.2f",$attritem['CosPrice']):'0.00' ?>">
+		              <div><label>{$attritem['ProSpec1']}</label></div>
+		              <div><label><?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?></label></div>
+		              <div><input type="number" name="" value="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" class="attrprice"></div>
+		              <div><input type="number" name="" value="0" class="attrnum"></div>
+		            </div>
+		          </foreach>
+		        </div>
+					</div>
+				</foreach>
+			</if>
+		</div>
+		<div class="selfpro_list">
+			<if condition="$selfpro eq 'NULLSELFPRO' ">
+				<img class="watermatk" src="__PUBLIC__/Sellermobile/Icon/watermark.png" alt="">
+				<else />
+				<foreach name="selfpro" item="item">
+					<if condition="$item['IsShelves'] eq '1' ">
+					<div class="proinfo P_{$item['ProId']}" data-pid="{$item['ProId']}" data-shelve="{$item['IsShelves']}">
+						<span class="selmag" data-type="1" onclick="selmagpro(this)">
+						</span>
+						<img src="{$item['ProLogoImg']}" alt="">
+						<div onclick="openattr(this)">
+							<label class="proname">{$item['ProName']}</label>
+							<label class="protitle">{$item['ProTitle']}</label>
+							<label class="proprice">￥<?php echo $item['Price']?sprintf("%.2f",$item['Price']):'0.00' ?></label>
+							<img class="clickinfo" src="__PUBLIC__/Sellermobile/icon/click_pro.png" alt="" onclick="clickinfo(this)">
+						</div>
+						<div class="editmenu">
+							<div class="delpro" data-pid="{$item['ProId']}" onclick="delpro(this)">
+								<img src="__PUBLIC__/Sellermobile/icon/del_pro.png" alt="">
+								<label>删除</label>
+							</div>
+							<div class="shelvepro" data-pid="{$item['ProId']}" onclick="shelvepro(this)" >
+								<img src="__PUBLIC__/Sellermobile/icon/xj_pro.png" alt="">
+								<label>下架</label>
+							</div>
+							<div class="selfeditpro" data-pid="{$item['ProId']}" onclick="editpro(this)">
+								<img src="__PUBLIC__/Sellermobile/icon/edit_pro.png" alt="">
+								<label>编辑</label>
+							</div>
+						</div>
+						<div class="attrdata">
+		          <div class="attrtop">
+		            <div>
+		              <label>统一销售价格:</label>
+		              <input type="number" name="" value="0.00" class="setaprice">
+		            </div>
+		          </div>
+		          <div class="attrtitle">
+		            <label>属性</label>
+		            <label>原销售价</label>
+		            <label>销售价格/元</label>
+		          </div>
+		          <foreach name="item['attrlist']" item="attritem">
+		            <div class="attritem" data-cid="{$item['ClassType']}" data-pcid="{$attritem['ProIdCard']}" data-gzprice="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" data-cprice="<?php echo $attritem['CosPrice']?sprintf("%.2f",$attritem['CosPrice']):'0.00' ?>">
+		              <div><label>{$attritem['ProSpec1']}</label></div>
+		              <div><label><?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?></label></div>
+		              <div><input type="number" name="" value="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" class="attrprice"></div>
+		            </div>
+		          </foreach>
+		        </div>
+					</div>
+					<else />
+					<div class="proinfo P_{$item['ProId']}" data-pid="{$item['ProId']}" data-shelve="{$item['IsShelves']}" style="display:none;">
+						<span class="selmag" data-type="1" onclick="selmagpro(this)">
+						</span>
+						<img src="{$item['ProLogoImg']}" alt="">
+						<div onclick="openattr(this)">
+							<label class="proname">{$item['ProName']}</label>
+							<label class="protitle">{$item['ProTitle']}</label>
+							<label class="proprice">￥<?php echo $item['PriceRange']?sprintf("%.2f",$item['PriceRange']):'0.00' ?></label>
+							<img class="clickinfo" src="__PUBLIC__/Sellermobile/icon/click_pro.png" alt="" onclick="clickinfo(this)">
+						</div>
+						<div class="editmenu">
+							<div class="delpro" data-pid="{$item['ProId']}" onclick="delpro(this)">
+								<img src="__PUBLIC__/Sellermobile/icon/del_pro.png" alt="">
+								<label>删除</label>
+							</div>
+							<div class="shelvepro" data-pid="{$item['ProId']}" onclick="shelvepro(this)">
+								<img src="__PUBLIC__/Sellermobile/icon/xj_pro.png" alt="">
+								<label>上架</label>
+							</div>
+							<div class="selfeditpro" data-pid="{$item['ProId']}" onclick="editpro(this)">
+								<img src="__PUBLIC__/Sellermobile/icon/edit_pro.png" alt="">
+								<label>编辑</label>
+							</div>
+						</div>
+						<div class="attrdata">
+		          <div class="attrtop">
+		            <div>
+		              <label>统一销售价格:</label>
+		              <input type="number" name="" value="0.00" class="setaprice">
+		            </div>
+		          </div>
+		          <div class="attrtitle">
+		            <label>属性</label>
+		            <label>原销售价</label>
+		            <label>销售价格/元</label>
+		          </div>
+		          <foreach name="item['attrlist']" item="attritem">
+		            <div class="attritem" data-cid="{$item['ClassType']}" data-pcid="{$attritem['ProIdCard']}" data-gzprice="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" data-cprice="<?php echo $attritem['CosPrice']?sprintf("%.2f",$attritem['CosPrice']):'0.00' ?>">
+		              <div><label>{$attritem['ProSpec1']}</label></div>
+		              <div><label><?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?></label></div>
+		              <div><input type="number" name="" value="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" class="attrprice"></div>
+		            </div>
+		          </foreach>
+		        </div>
+					</div>
+				</if>
+				</foreach>
+			</if>
+		</div>
+		<div class="classpro_list" style="display:none;">
+			<if condition="$allpro eq 'NULLALLPRO' ">
+				<img class="watermatk" src="__PUBLIC__/Sellermobile/Icon/watermark.png" alt="">
+				<else />
+				<div class="classtype_list">
+				</div>
+				<foreach name="allpro" item="item">
+					<if condition="$item['ptype'] eq '1'">
+						<div class="proinfo P_{$item['ProId']}" data-pid="{$item['ProId']}" data-cname="{$item['ClassName']}" data-cid="{$item['ClassType']}" data-ptype="{$item['ptype']}">
+							<img src="{$item['ProLogoImg']}" alt="">
+							<div>
+								<label class="proname">{$item['ProName']}</label>
+								<label class="protitle">{$item['ProTitle']}</label>
+								<label class="proprice">￥<?php echo $item['PriceRange']?sprintf("%.2f",$item['PriceRange']):'0.00' ?></label>
+								<img class="clickinfo" src="__PUBLIC__/Sellermobile/icon/click_pro.png" alt="" onclick="clickinfo(this)">
+							</div>
+							<div class="editmenu">
+								<div class="delpro" data-pid="{$item['ProId']}" onclick="delpro(this)">
+									<img src="__PUBLIC__/Sellermobile/icon/del_pro.png" alt="">
+									<label>删除</label>
+								</div>
+								<div class="faceditpro" data-pid="{$item['ProId']}" onclick="faceditpro(this)">
+									<img src="__PUBLIC__/Sellermobile/icon/edit_pro.png" alt="">
+									<label>编辑</label>
+								</div>
+							</div>
+						</div>
+						<else/>
+						<if condition="$item['IsShelves'] eq '1' ">
+							<div class="proinfo P_{$item['ProId']}" data-pid="{$item['ProId']}" data-shelve="{$item['IsShelves']}" data-cname="{$item['ClassName']}" data-cid="{$item['ClassType']}" data-ptype="{$item['ptype']}">
+								<img src="{$item['ProLogoImg']}" alt="">
+								<div>
+									<label class="proname">{$item['ProName']}</label>
+									<label class="protitle">{$item['ProTitle']}</label>
+									<label class="proprice">￥<?php echo $item['PriceRange']?sprintf("%.2f",$item['PriceRange']):'0.00' ?></label>
+									<img class="clickinfo" src="__PUBLIC__/Sellermobile/icon/click_pro.png" alt="" onclick="clickinfo(this)">
+								</div>
+								<div class="editmenu">
+									<div class="delpro" data-pid="{$item['ProId']}" onclick="delpro(this)">
+										<img src="__PUBLIC__/Sellermobile/icon/del_pro.png" alt="">
+										<label>删除</label>
+									</div>
+									<div class="shelvepro" data-pid="{$item['ProId']}" onclick="shelvepro(this)" >
+										<img src="__PUBLIC__/Sellermobile/icon/xj_pro.png" alt="">
+										<label>下架</label>
+									</div>
+									<div class="selfeditpro" data-pid="{$item['ProId']}" onclick="editpro(this)">
+										<img src="__PUBLIC__/Sellermobile/icon/edit_pro.png" alt="">
+										<label>编辑</label>
+									</div>
+								</div>
+							</div>
+							<else />
+							<div class="proinfo P_{$item['ProId']}" data-pid="{$item['ProId']}" data-shelve="{$item['IsShelves']}" data-cname="{$item['ClassName']}" data-cid="{$item['ClassType']}" data-ptype="{$item['ptype']}">
+								<img src="{$item['ProLogoImg']}" alt="">
+								<div>
+									<label class="proname">{$item['ProName']}</label>
+									<label class="protitle">{$item['ProTitle']}</label>
+									<label class="proprice">￥<?php echo $item['PriceRange']?sprintf("%.2f",$item['PriceRange']):'0.00' ?></label>
+									<img class="clickinfo" src="__PUBLIC__/Sellermobile/icon/click_pro.png" alt="" onclick="clickinfo(this)">
+								</div>
+								<div class="editmenu">
+									<div class="delpro" data-pid="{$item['ProId']}" onclick="delpro(this)">
+										<img src="__PUBLIC__/Sellermobile/icon/del_pro.png" alt="">
+										<label>删除</label>
+									</div>
+									<div class="shelvepro" data-pid="{$item['ProId']}" onclick="shelvepro(this)">
+										<img src="__PUBLIC__/Sellermobile/icon/xj_pro.png" alt="">
+										<label>上架</label>
+									</div>
+									<div class="selfeditpro" data-pid="{$item['ProId']}" onclick="editpro(this)">
+										<img src="__PUBLIC__/Sellermobile/icon/edit_pro.png" alt="">
+										<label>编辑</label>
+									</div>
+								</div>
+							</div>
+						</if>
+					</if>
+				</foreach>
+			</if>
+		</div>
+	</div>
+	<div class="btn_group">
+		<div class="noedit">
+			<label class="add_pro" data-url="{:U('Products/proedit')}">添加商品</label>
+			<label class="magpro">批量管理</label>
+		</div>
+		<div class="yesedit">
+			<label class="magdel_pro" onclick="magdelpro()">删除</label>
+			<div class="mag_sel">
+				<label class="sel_all" onclick="selmagallpro(this)" data-type="1">全选</label>
+				<label class="sel_exit">取消</label>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 批量操作菜单 -->
+<div class="menulistconver">
+	<div class="menulist">
+		<label class="menuedit" style="display:none;">批量编辑</label>
+		<label class="menuxj">批量下架</label>
+		<label class="menudel">批量删除</label>
+	</div>
+</div>
+<!-- 批量操作菜单end -->
+<!-- 添加商品页面 -->
+<div class="converaddpro">
+	<div>
+		<div class="selpro">
+			<div>
+				<a href="{:U('Products/Factorypro')}">
+				<img src="__PUBLIC__/Sellermobile/icon/add_factory.png" alt="">
+				<label>工厂选货</label>
+			</a>
+			</div>
+			<div>
+				<a href="{:U('Products/proedit')}">
+				<img src="__PUBLIC__/Sellermobile/icon/add_self.png" alt="">
+				<label>自营商品</label>
+			</a>
+			</div>
+		</div>
+		<div class="cancelpro">取消</div>
+	</div>
+</div>
+<!-- 搜索页面 -->
+<div class="searchconver">
+	<div class="seachhaeard">
+		<label class="qxsearch">取消</label>
+		<div class="inputseach">
+			<input id="inputseach" type="text" name="" value="" placeholder="输入商品名称">
+			<img id="iconseach" src="/Public/Sellermobile/Icon/search.png" alt="">
+		</div>
+	</div>
+	<div class="searchprolist">
+	</div>
+</div>
+<!-- end搜索页面 -->

@@ -1,0 +1,151 @@
+<layout name="Public/PageModel"/>
+
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/uservoucher.css">
+
+<div class="voucherpart">
+    <div class="vouczlb">
+      <foreach name='discount' item='di'>
+        <label class="vouczlb-1">
+        充值满{$di['cmoney']}元
+        <br/>
+        <span>奖励{$di['dmoney']}元</span>
+        
+
+        <if condition="empty($di['zcmoney'])">
+            <else/>
+            <br/>
+            <span>赠送{$di['zcmoney']}元现金券{$di['zcnum']}张</span>
+        </if>
+
+
+
+        </label>
+      </foreach>
+        <!-- <label class="vouczlb-2">满200元<br><span>奖励15元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-3">满300元<br><span>奖励25元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-4">满500元<br><span>奖励60元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-5">满800元<br><span>奖励100元</span><span class="vouxz"></span></label>
+        <label class="vouczlb-6">满1000元<br><span>奖励200元</span><span class="vouxz"></span></label> -->
+    </div>
+      <div class="voupayment">
+          <label>微信支付<br><span>推荐安装微信5.0及以上版本的使用</span></label>
+      </div>
+      <div class="voupayments">
+        <input  class="col-xs-12 col-sm-12" type="text" placeholder="充值金额" id="money">
+      </div>
+</div>
+<div class="vousuer">
+    <label id="save">确认支付</label>
+</div>
+
+
+
+<script type="text/javascript">
+
+var subLock=false;
+
+$(document).ready(function(){
+
+    if (subLock) {
+
+      return;
+    }
+
+    subLock=true;
+
+    $("#save").click(function(){
+
+      if (parseFloat($("#money").val())>0) {
+
+      }
+      else
+      {
+        tips('notice','请输入大于0的整数','2000','weui_icon_notice');
+        return;
+      }
+
+      waiting("正在生成充值数据");
+      $.ajax({
+          url:"{:U('Payment/Rechange')}",
+          type:"post",
+          dataType:"json",
+          data:{type:'RECHANGE',money:$("#money").val()},
+          complete:function(e)
+          {
+            closeWaiting();
+          },
+          success:function(data)
+          {
+            if (data.status!="false")
+            {
+              jsApiCall(eval('('+data.data+')'));
+            }
+            else
+            {
+              subLock=false;
+              tips('notice','生成充值数据出错','2000','weui_icon_notice');
+            }
+          },
+          error:function(e)
+          {
+            subLock=false;
+            tips('notice','生成充值数据出错','2000','weui_icon_notice');
+          }
+      });
+  });
+});
+
+function jsApiCall(data) {
+    WeixinJSBridge.invoke('getBrandWCPayRequest',data,
+     function (res)
+     {
+        //WeixinJSBridge.log(res.err_msg);
+        //alert(res.err_code + res.err_desc + res.err_msg);
+        if(res.err_msg == "get_brand_wcpay_request:cancel")
+        {
+        //var err_msg = "您取消了支付";
+          subLock=false;
+          alert("您取消了支付");
+        }
+        else if(res.err_msg == "get_brand_wcpay_request:fail")
+        {
+        //var err_msg = "支付失败<br/>错误信息："+res.err_desc;
+          subLock=false;
+          alert("支付失败,错误信息："+res.err_desc);
+        }
+        else if(res.err_msg == "get_brand_wcpay_request:ok")
+        {
+          alert("充值成功.");
+          setTimeout(function() { window.location.href="{:U('Home/User/Index')}";}, 1000);
+        }
+        else
+        {
+          subLock=false;
+          alert("支付遇到未知错误。");
+        }
+     }
+  );
+}
+
+function callpay()
+{
+     if (typeof WeixinJSBridge == "undefined")
+     {
+         if (document.addEventListener)
+         {
+             document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+         }
+         else if (document.attachEvent)
+         {
+             document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+             document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+         }
+     }
+     else
+     {
+         jsApiCall();
+     }
+}
+
+
+    </script>

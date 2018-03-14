@@ -1,0 +1,91 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/sqWarehouse.css?v=1.4">
+
+<div class="allconternts">
+  <div class="part part_top">
+    <label>订货申请单</label>
+    <if condition="$saveType eq '0' ">
+      <div class="orderinfo">
+        <div class="infoitem">
+          <label class="house" data-wid="wh{:substr($sinfo['token'],-8)}_{$sinfo['id']}" data-wname="{$sinfo['storename']}">订货仓库:</label><span>{$sinfo['storename']}</span>
+        </div>
+        <div class="infoitem">
+          <label class="oname" data-uid="{$uinfo['id']}" data-uname="{$uinfo['TrueName']}">订货人员:</label><span>{$uinfo['TrueName']}</span>
+        </div>
+        <div class="infoitem">
+          <label class="odate" data-date="{:date('Y-m-d H:i')}">订货日期:</label><span>{:date('Y-m-d H:i')}</span>
+        </div>
+        <div class="infoitem">
+          <label class="otype">订货类型:</label><span>订货申请</span>
+        </div>
+      </div>
+      <else />
+      <div class="orderinfo">
+        <div class="infoitem">
+          <label>系统单号:</label><span>{$saveType}</span>
+        </div>
+        <div class="infoitem">
+          <label class="house" data-wid="{$warhouse['InStorehouseId']}" data-wname="{$warhouse['InStorehouseName']}">订货仓库:</label><span>{$warhouse['InStorehouseName']}</span>
+        </div>
+        <div class="infoitem">
+          <label class="oname" data-uid="{$warhouse['InputId']}" data-uname="{$warhouse['InputName']}">订货人员:</label><span>{$warhouse['InputName']}</span>
+        </div>
+        <div class="infoitem">
+          <label class="odate" data-date="{$warhouse['oDate']}">订货日期:</label><span>{$warhouse['oDate']}</span>
+        </div>
+        <div class="infoitem">
+          <label class="otype">订货类型:</label><span>订货申请</span>
+        </div>
+      </div>
+    </if>
+  </div>
+  <div class="part pro_list">
+    <label class="proinfo">订货商品 <span onclick="selectProFun();">添加商品</span></label>
+  </div>
+  <div class="prolist">
+    <foreach name="warhouselist" item="litem">
+      <div class="proitem plitem" id="pl_{$litem['ProIdCard']}" data-pid="{$litem['ProId']}" data-pcid="{$litem['ProIdCard']}" data-pattr="{$litem['ProSpec1']}" data-pname="{$litem['ProName']}" data-cid="{$litem['ClassId']}" data-pimg="{$litem['ProLogoImg']}" data-cosp="<?php echo $litem['cosp']?sprintf("%.2f",$litem['cosp']):'0.00' ?>" data-price="<?php echo $litem['Price']?sprintf("%.2f",$litem['Price']):'0.00' ?>">
+        <span onclick="delselpro(this)"></span>
+        <img src="{$litem['ProLogoImg']}" alt="">
+        <div class="pcontent">
+          <label class="pname">{$litem['ProName']}</label>
+          <label class="pattr">{$litem['ProSpec1']}</label>
+          <label class="pprice">售价:<span>￥<?php echo $litem['Price']?sprintf("%.2f",$litem['Price']):'0.00' ?></span>&emsp;&emsp;进价:<span>￥<?php echo $litem['cosp']?sprintf("%.2f",$litem['cosp']):'0.00' ?></span></label>
+        </div>
+        <div class="pnum"><label>数量</label><input type="number" class="nums" name="" value="{$litem['Count']}"></div>
+      </div>
+    </foreach>
+  </div>
+  <div class="submitpro">
+    <label class="submitproL" data-type="0">保存订货申请</label>
+    <label class="submitproL" data-type="2">提交订货申请</label>
+  </div>
+</div>
+<!-- /////选择平台商品////// -->
+<div class="proconver">
+  <div class="getproinfo">
+    <foreach name="cinfo" item="citem">
+      <div class="proitem" id="ps_{$citem['ProIdCard']}" data-pid="{$citem['ProId']}" data-pcid="{$citem['ProIdCard']}" data-pname="{$citem['ProName']}" data-cid="{$citem['ClassId']}" data-pattr="{$citem['ProSpec1']}" data-pimg="{$citem['ProLogoImg']}" data-cosp="<?php echo $citem['CosPrice']?sprintf("%.2f",$citem['CosPrice']):'0.00' ?>" data-price="<?php echo $citem['Price']?sprintf("%.2f",$citem['Price']):'0.00' ?>">
+        <img src="{$citem['ProLogoImg']}" alt="">
+        <div class="pcontent">
+          <label class="pname">{$citem['ProName']}</label>
+          <label class="pattr">{$citem['ProSpec1']}</label>
+          <label class="pprice">售价:<span>￥<?php echo $citem['Price']?sprintf("%.2f",$citem['Price']):'0.00' ?></span>&emsp;&emsp;进价:<span>￥<?php echo $citem['CosPrice']?sprintf("%.2f",$citem['CosPrice']):'0.00' ?></span></label>
+        </div>
+        <div class="suresel">
+
+        </div>
+      </div>
+    </foreach>
+  </div>
+  <div class="suregetpro">
+    <label class="suregselpro">确定</label>
+  </div>
+</div>
+
+<script type="text/javascript">
+var addwh_url="{:U('UMWareHouse/addSQWarehouse')}";
+var send_url="{:U('Sellermobile/UMWareHouse/sqWarehouselist')}";
+var whid="{$saveType}";
+</script>
+<script src="__PUBLIC__/Sellermobile/js/sqWarehouse.js?v=1.5" charset="utf-8"></script>

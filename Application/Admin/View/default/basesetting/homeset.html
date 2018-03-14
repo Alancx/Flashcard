@@ -1,0 +1,174 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<style type="text/css">
+.row{
+  padding: 20px 40px 20px 40px;
+}
+.showtable>tbody>tr>td{
+  width: 25%;
+}
+.input-group-addon{
+  cursor: pointer;
+}
+.input_sel{
+  position: relative;
+}
+.input_sel>label{
+  position: absolute;
+  width: 150px;
+  margin: 0px;
+  left: 0px;
+  top: 7px;
+  text-align: center;
+}
+</style>
+<div class="row">
+  <div class="input-group input_sel" style="padding:0px 0px 20px 150px;">
+    <label>小店首页轮播图</label>
+    <input type="text" class="form-control required" name="ImgPath" id="logoimg" value="">
+     <span class="input-group-addon" onclick="upimg('logoimg')">上传</span>
+  </div>
+  <div class="input-group input_sel" style="padding:0px 0px 20px 150px;">
+    <label>轮播图链接</label>
+    <input type="text" class="form-control required" name="ImgPath" id="imghref" value="HTTP://">
+    <span class="input-group-addon" onclick="saveimg(this)">保存 </span>
+  </div>
+  <div class="input-group input_sel" style="padding:0px 0px 20px 150px;">
+    <label>小店首页商品一</label>
+    <select name="pro-one" id="pro-one" class="form-control">
+      <option value="">请选择</option>
+      <foreach name="proinfo" item='pro'>
+        <option value="{$pro.ProId}" data-img="{$pro.ProLogoImg}">{$pro.ProName}</option>
+      </foreach>
+    </select>
+     <span class="input-group-addon" onclick="savepro(1)">保存 </span>
+  </div>
+  <div class="input-group input_sel" style="padding:0px 0px 20px 150px;">
+    <label>小店首页商品二</label>
+    <select name="pro-two" id="pro-two" class="form-control">
+      <option value="">请选择</option>
+      <foreach name="proinfo" item='pro'>
+        <option value="{$pro.ProId}" data-img="{$pro.ProLogoImg}">{$pro.ProName}</option>
+      </foreach>
+    </select>
+     <span class="input-group-addon" onclick="savepro(2)">保存 </span>
+  </div>
+  <table class="table tabel-hovered table-bordered showtable">
+    <tbody>
+      <tr class="home_img">
+        <td>小店首页轮播图</td>
+        <td>LB1</td>
+        <td>{$homeimg['ImgPath']}</td>
+        <td><img src="{$PICURL}{$homeimg['ImgPath']}" alt="" style="width:150px;"></td>
+      </tr>
+      <tr class="home_pro_1">
+        <td>小店首页商品一</td>
+        <td>{$prohot['ProId']}</td>
+        <td>{$prohot['ProName']}</td>
+        <td><img src="{$PICURL}{$prohot['ProLogoImg']}" alt="" style="width:150px;"></td>
+      </tr>
+      <tr class="home_pro_2">
+        <td>小店首页商品二</td>
+        <td>{$pronew['ProId']}</td>
+        <td>{$pronew['ProName']}</td>
+        <td><img src="{$PICURL}{$pronew['ProLogoImg']}" alt="" style="width:150px;"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script type="text/javascript">
+var imgurl_href = "{$PICURL}";
+function upimg(id){
+  art.dialog.data('domid',id);
+  art.dialog.open('{:U('Upimg/home')}');
+};
+function saveimg(){
+  if ($('#logoimg').val()!='') {
+    $('.home_img').children('td').eq(1).text($('#imghref').val());
+    $('.home_img').children('td').eq(2).text($('#logoimg').val());
+    $('.home_img').children('td').eq(3).children('img').attr('src',imgurl_href+$('#logoimg').val());
+    var imgurl=$('#logoimg').val();
+    var imghref=$('#imghref').val();
+    $.ajax({
+      type:"post",
+      url:"{:U('BaseSetting/homesave')}",
+      data:"imgurl="+imgurl+"&type=0&imghref="+imghref,
+      dateType:"json",
+      success:function(msg){
+        if (msg.status=='true') {
+          art.dialog.tips('保存成功',0.5);
+        };
+        if (msg.status=='error') {
+          art.dialog.tips('保存失败',0.5);
+        };
+      }
+    })
+  }
+};
+function savepro(type){
+  if (type==1) {
+    if ($("#pro-one option:selected").val()=='') {
+      return;
+    }
+    var pid=$("#pro-one option:selected").val();
+    var pname=$("#pro-one option:selected").text();
+    var pimg=$("#pro-one option:selected").attr('data-img');
+    $('.home_pro_1').children('td').eq(1).text(pid);
+    $('.home_pro_1').children('td').eq(2).text(pname);
+    $('.home_pro_1').children('td').eq(3).children('img').attr('src',imgurl_href+pimg);
+  } else {
+    if ($("#pro-two option:selected").val()=='') {
+      return;
+    }
+    var pid=$("#pro-two option:selected").val();
+    var pname=$("#pro-two option:selected").text();
+    var pimg=$("#pro-two option:selected").attr('data-img');
+    $('.home_pro_2').children('td').eq(1).text(pid);
+    $('.home_pro_2').children('td').eq(2).text(pname);
+    $('.home_pro_2').children('td').eq(3).children('img').attr('src',imgurl_href+pimg);
+  }
+    $.ajax({
+      type:"post",
+      url:"{:U('BaseSetting/homesave')}",
+      data:"pid="+pid+"&type="+type,
+      dateType:"json",
+      success:function(msg){
+        if (msg.status=='true') {
+          art.dialog.tips('保存成功',0.5);
+        };
+        if (msg.status=='error') {
+          art.dialog.tips('保存失败',0.5);
+        };
+      }
+    })
+  // if ($('#logoimg').val()!='') {
+  //   $('.home_img').children('td').eq(1).text($('#imghref').val());
+  //   $('.home_img').children('td').eq(2).text($('#logoimg').val());
+  //   $('.home_img').children('td').eq(3).children('img').attr('src',$('#logoimg').val());
+  //   var imgurl=$('#logoimg').val();
+  //   var imghref=$('#imghref').val();
+  //   $.ajax({
+  //     type:"post",
+  //     url:"{:U('BaseSetting/homesave')}",
+  //     data:"imgurl="+imgurl+"&type=1&imghref="+imghref,
+  //     dateType:"json",
+  //     success:function(msg){
+  //       if (msg.status=='true') {
+  //         art.dialog.tips('保存成功',0.5);
+  //       };
+  //       if (msg.status=='error') {
+  //         art.dialog.tips('保存失败',0.5);
+  //       };
+  //     }
+  //   })
+  // }
+};
+</script>
+
+
+
+<include file="Common:footer" />

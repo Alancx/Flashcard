@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的团购</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/GroupBuy/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/GroupBuy/css/MyGroup.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-home mui-pull-right" href="{:U('GroupBuy/Group')}"></a>
+			<div class="tab2">
+				<span>我的开团</span>
+				<span>我的参团</span>
+				<small class="tab2nav"></small>
+			</div>
+		</header>
+		<div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--我的开团-->
+				<div class="" data-oo="mytuan">
+					<foreach name='myGroup' item='da'>
+					<div class="listdiv statesuccess">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<span class="zhuangtai">{$da.Stname}</span>
+								<if condition="$da['Status'] eq '1'">
+								<!-- <small class="wuliu">查看物流</small> -->
+								</if>
+							</li>
+						</ul>
+						<ul class="ulview" data-id='{$da.GroupId}'>
+							<li class="srcimg">
+								<img src="{:C('RESOURCE_URL')}{$da.ProLogoImg}" class="goodsimg" />
+							</li>
+							<li class="spantext">
+								<span>{$da.ProName}</span>
+								<br /><br />
+								<small class="sign">团购价</small>
+								<span class="jiage">￥ <?php echo number_format($da['Price'],2) ?></span>
+							</li>
+						</ul>
+						<div class="dateinfor">
+							<small>{$da.KTDate}</small><small>&nbsp;开团</small>
+							<if condition="$da['Status'] eq '0'">
+							<span><label>{$da.TpeopleNum}</label>人团，仅差<label><?php echo intval($da['TpeopleNum'])-intval($da['PeopleNum']); ?></label>人</span>
+								<else/>
+							<span><label>{$da.TpeopleNum}</label>人团</span>
+							</if>
+
+						</div>
+						<!--进度条-->
+						<if condition="$da['Status'] eq '0'">
+						<div class='probar' data-probar='<?php echo intval($da['PeopleNum'])/intval($da['TpeopleNum'])*100; ?>' class="mui-progressbar">
+							<span></span>
+						</div>
+						<else/>
+						<div class='probar' data-probar='100' class="mui-progressbar">
+							<span></span>
+						</div>
+						</if>
+						<!--剩余时间-->
+						<div class="timeright">
+							<if condition="$da['IsOver'] eq '1'">
+								<small class='mui-badge mui-badge-danger'>已结束</small>
+								<else/>
+								<small class='mui-badge mui-badge-success'>进行中</small>
+							</if>
+							<small>截止:</small>
+							<label class="time-item">
+								<small>{$da.EndDate}</small>
+								</label>
+						</div>
+					</div>
+					</foreach>
+				</div>
+				<!--我的参团-->
+				<div class="" data-oo="mytuan" hidden="hidden">
+					<foreach name='inGroup' item='ig'>
+					<div class="listdiv statesuccess">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell">
+								<span class="zhaungtai">{$ig.Stname}</span>
+								<!-- <small class="wuliu">查看物流</small> -->
+							</li>
+						</ul>
+						<ul class="ulview" data-id='{$ig.GroupId}'>
+							<li class="srcimg">
+								<img src="{:C('RESOURCE_URL')}{$ig.ProLogoImg}" class="goodsimg" />
+							</li>
+							<li class="spantext">
+								<span>{$ig.ProName}</span>
+								<br /><br />
+								<small class="sign">团购价</small>
+								<span class="jiage">￥{$ig.Price}</span>
+							</li>
+						</ul>
+						<div class="dateinfor">
+							<small>{$ig.KTDate}</small><small>&nbsp;参团</small>
+							<if condition="$ig['Status'] eq '0'">
+							<span><label>{$ig.TpeopleNum}</label>人团，仅差<label><?php echo intval($ig['TpeopleNum'])-intval($ig['PeopleNum']); ?></label>人</span>
+								<else/>
+							<span><label>{$ig.TpeopleNum}</label>人团</span>
+							</if>
+
+						</div>
+						<!--进度条-->
+						<div class="probar" data-probar='<?php echo intval($ig['PeopleNum'])/intval($ig['TpeopleNum'])*100; ?>'   class="mui-progressbar">
+							<span></span>
+
+						</div>
+						<!--剩余时间-->
+						<div class="timeright">
+							<label class="time-item">
+							<if condition="$ig['IsOver'] eq '1'">
+								<small class='mui-badge mui-badge-danger'>已结束</small>
+								<else/>
+								<small class='mui-badge mui-badge-success'>进行中</small>
+							</if>
+							<small>截止:</small>
+							<label class="time-item">
+								<small>{$ig.EndDate}</small>
+								</label>
+						</div>
+					</div>
+					</foreach>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="__PUBLIC__/GroupBuy/js/mui.min.js"></script>
+	<script src="__PUBLIC__/GroupBuy/js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/GroupBuy/js/MyGroup.js?v=1" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.init()
+			//初始化页面
+		mui.plusReady(function() {});
+		//初始化滚动组件
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+		});
+	</script>
+
+</html>

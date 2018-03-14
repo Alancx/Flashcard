@@ -1,0 +1,188 @@
+#touch{
+  display: none!important;
+}
+.selshoptype{
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 45px;
+  padding: 10px 20% 5px 20%;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+.selshoptype>div{
+  display: block;
+  width: 100%;
+  height: 30px;
+  border-radius: 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #949494;
+  overflow: hidden;
+}
+.shoptype{
+  float: left;
+  width: 50%;
+  line-height: 26px;
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+}
+.selshopactive{
+  background-color: #fbb03b;
+  color: #ffffff;
+}
+.shop_content,.shop_content div {
+  overflow: hidden;
+}
+.shop_content{
+  position: relative;
+  top: 55px;
+  left: 0px;
+  width: 100%;
+  height: 100px;
+  background-color: #ffffff;
+}
+.shop_content>div{
+  overflow: auto!important;
+}
+.shopinfo{
+  height: 80px;
+  padding: 5px 10px 5px 10px;
+  background-color: #F5F5F5;
+  margin: 5px 0px 0px 0px;
+  position: relative;
+}
+.shopinfo:first-child{
+  margin: 0px 0px 0px 0px;
+}
+.shopinfo>img{
+  float: left;
+  height:70px;
+  width: 70px;
+  border-radius: 8px;
+  border-color: #dddddd;
+  border-width: 1px;
+  border-style: solid;
+}
+.shopinfo>label{
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  padding: 0px 10px 0px 90px;
+  margin: 0px 0px 0px 0px;
+}
+.shopname{
+  top: 5px;
+  font-size: 14px;
+  color: #333333;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 20px;
+}
+.shopaddr{
+  top: 25px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #666666;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+.shoptel{
+  bottom: 5px;
+  text-align: right;
+  font-size: 12px;
+  color: #666666;
+}
+.btn_group{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  padding: 5px 40px 5px 40px;
+  background-color: #eeeeee;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #ffffff;
+  overflow: hidden;
+}
+.saveselshop{
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 40px;
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #feb221;
+  border-radius: 20px;
+  margin: 0px 0px 0px 0px;
+}
+.conver_shop{
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.selshop>.conver_shop{
+  display: block!important;
+}
+.conver_shop>img{
+  position: absolute;
+  width: 30px;;
+  right: 0px;
+  top: 0px;
+}
+.dhopinfo{
+  height: 55px;
+  padding: 5px 10px 5px 10px;
+  position: relative;
+  border-bottom-style: solid;
+  border-width: 5px;
+  border-color: #eeeeee;
+}
+.dhopinfo>img{
+  float: left;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  padding: 2px;
+}
+.disstatus{
+  float: right;
+  height: 40px;
+  width: 100px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  border-left-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  margin: 0px 0px 0px 0px;
+}
+.shopselname{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  margin: 0px 0px 0px 0px;
+  line-height: 50px;
+  padding: 0px 120px 0px 70px;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

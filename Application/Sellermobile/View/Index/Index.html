@@ -1,0 +1,140 @@
+<layout name="Public/PageModel"/>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/echarts.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/Index.css?v=1.3">
+<div class="indexcontent">
+	<div class="part allcash">
+		<div>
+			<label class="cashtype" style="display:none;">现金收款<span><?php echo $cashmoney?sprintf("%.2f",$cashmoney):'0.00' ?>(元)<span></label>
+			</div>
+			<div>
+				<label class="wxchattype">微信收款
+					<div>
+						<label><?php echo $wxmoney?sprintf("%.2f",$wxmoney):'0.00' ?>(元)</label>
+						<a href="{:U('Orders/incompleteorders')}">
+							<label><span>未完成</span><?php echo $wxhasnomoney?sprintf("%.2f",$wxhasnomoney):'0.00' ?>(元)</label>
+						</a>
+					</div>
+				</label>
+				<div class="wxcashinfo">
+					<div>
+						<label><?php echo $wxhasmoney?sprintf("%.2f",$wxhasmoney):'0.00' ?>(元)</label>
+						<label>已完成</label>
+					</div>
+					<div>
+						<label><?php echo $wxhasjsmoney?sprintf("%.2f",$wxhasjsmoney):'0.00' ?>(元)</label>
+						<label>已结算</label>
+					</div>
+					<div>
+						<label><?php echo $wxnojsmoney?sprintf("%.2f",$wxnojsmoney):'0.00' ?>(元)</label>
+						<label>未结算</label>
+					</div>
+				</div>
+			</div>
+			<div class="revtop">
+				<!-- <label class="revtop_item">今日访问量(<span>2000</span>人)</label> -->
+				<label class="revtop_item">今日收入(<span><?php echo $todayprice?sprintf("%.2f",$todayprice):'0.00' ?></span>元)</label>
+				<label class="revtop_item">今日订单数(<span><?php echo $todayorder?sprintf("%.0f",$todayorder):'0' ?></span>单)</label>
+			</div>
+		</div>
+
+		<div class="part bottomenv">
+			<div class="addpro" style="display:none;">
+				<label class="add_pro" data-url="{:U('Products/proedit')}"><span>添加商品</span></label>
+			</div>
+			<div class="botmenu">
+				<div class="bot_menu">
+					<a href="{:U('Orders/index')}">
+						<img src="__PUBLIC__/Sellermobile/icon/order_icon.png" alt="">
+						<label>订单管理</label>
+					</a>
+				</div>
+				<!-- <div class="bot_menu">
+				<a href="{:U('UMWareHouse/stockquery')}">
+				<img src="__PUBLIC__/Sellermobile/icon/ck_icon.png" alt="">
+				<label>库存管理</label>
+			</a>
+		</div> -->
+		<div class="bot_menu">
+			<a href="{:U('Staff/ordercut')}">
+				<img src="__PUBLIC__/Sellermobile/icon/ck_icon.png" alt="">
+				<label>订单结算</label>
+			</a>
+		</div>
+		<div class="bot_menu">
+			<a href="{:U('Staff/Staff')}">
+				<img src="__PUBLIC__/Sellermobile/icon/kc_icon.png" alt="">
+				<label>账户提现</label>
+			</a>
+		</div>
+		<div class="bot_menu">
+			<a href="{:U('Record/record')}">
+				<img src="__PUBLIC__/Sellermobile/icon/svg_icon.png" alt="">
+				<label>数据统计</label>
+			</a>
+		</div>
+		<div class="bot_menu">
+			<a href="{:U('Envelopes/index')}">
+				<img src="__PUBLIC__/Sellermobile/icon/js_icon.png" alt="">
+				<label>红包设置</label>
+			</a>
+		</div>
+		<div class="bot_menu">
+			<a href="{:U('Cheap/index')}">
+				<img src="__PUBLIC__/Sellermobile/icon/ps_icon.png" alt="">
+				<label>越用越便宜</label>
+			</a>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="part topherd">
+	<div class="sumtop">
+		<label class="sumprice">近30天营业情况<br><span>收入总额<?php echo $avgprice?sprintf("%.2f",$avgprice):'0.00' ?>元<span></label>
+			<!-- <label class="svgprice">最高日收入{$maxev[dsum]}元<br>最低日收入{$minev[dsum]}元</label> -->
+		</div>
+		<div id="topcharts">
+
+		</div>
+
+	</div>
+	<div class="part centerenv">
+		<div class="sumcenter">
+			<label class="sumprice">今日营业收入情况<br><span>收入总额<?php echo $todayprice?sprintf("%.2f",$todayprice):'0.00' ?>元<span></label>
+				<!-- <label class="svgprice">最高日访客3600人<br>最低日访客2800人</label> -->
+			</div>
+			<div id="centercharts">
+
+			</div>
+		</div>
+
+		<div class="converaddpro">
+			<div>
+				<div class="selpro">
+					<div>
+						<a href="{:U('Products/Factorypro')}">
+							<img src="__PUBLIC__/Sellermobile/icon/add_factory.png" alt="">
+							<label>工厂选货</label>
+						</a>
+					</div>
+					<div>
+						<a href="{:U('Products/proedit')}">
+							<img src="__PUBLIC__/Sellermobile/icon/add_self.png" alt="">
+							<label>自营商品</label>
+						</a>
+					</div>
+				</div>
+				<div class="cancelpro">取消</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	//////三十天的数据情况////////////
+	var dataday={$dataday};
+	var daymon={$daymon};
+	///////今日数据情况////////
+	var odataday={$odataday};
+	var odaymon={$odaymon};
+</script>
+<script src="__PUBLIC__/Sellermobile/js/Index.js?v=1.2" charset="utf-8"></script>

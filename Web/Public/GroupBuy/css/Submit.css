@@ -1,0 +1,331 @@
+body,div,ul,li,dt,dd,dl,table,h1,h2,h3,h4,h5,h6,p,span,tr,th,td,img{margin: 0px;padding: 0px;list-style-type: none;}
+a{text-decoration: none;color: #444;margin: 0;padding: 0;}
+body{font-family: "微软雅黑",arial; padding: 0px; background: #fff;}
+
+header{
+	background: rgba(255,255,255,.95) !important;
+}
+.content .mui-scroll{
+	margin-top: 44px;
+}
+
+.mui-table-view:after{
+	background: none !important;
+	
+}
+.address a{
+	white-space: initial !important;
+}
+.namephone{
+	color: #DD524D;
+}
+.ad{
+	font-size: 15px;
+}
+.bg{
+	height: 4px;
+	background: url(../images/addbar.png) repeat-x;
+	background-size:auto 4px; 
+	border-bottom: 10px solid #eee;
+	box-sizing: initial !important;
+	padding-bottom: 4px;
+}
+.goodsinfor{
+	padding: 0 !important;
+}
+.goodsinfor .title{
+	padding: 15px;
+}
+.goodsinfor .title:active{
+	background: #eee;
+}
+.goods{
+	background: #eee;
+	/*padding: 10px;*/
+}
+.goods img{
+	width: 100px;
+	margin-right: 10px;
+}
+.goods li{
+	display: flex;
+	align-items: flex-start;
+	height: 120px;
+	padding: 10px;
+	border-bottom: 2px solid #fff;
+}
+.goods li div{
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+.guige{
+	color: #888;
+}
+.jiage{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	color: #DD524D;
+}
+.number{
+	color: #666;
+}
+.xiaoji{
+	padding: 10px;
+	text-align: right;
+	color: #DD524D;
+	border-bottom: 1px solid #eee;
+}
+/**/
+/*右浮动*/
+.righttext{
+	float: right;
+	color: #444;
+	margin-right: 20px;
+	font-size: 15px;
+}
+/*红色字体*/
+.redtext{
+	color: #DD524D;
+	
+}
+/*提交按钮*/
+.mui-btn.mui-btn-red.mui-btn-block{
+	position: fixed;
+	bottom: 0;
+	z-index: 100;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	height: 50px  !important;
+	padding: 0 !important;
+}
+
+/*合计*/
+.heji{
+	text-align: right;
+	padding: 10px;
+	font-size: 18px;
+}
+#zongjia{
+	font-weight: bold;
+}
+.mui-btn.mui-poppicker-btn-cancel,
+.mui-btn.mui-poppicker-btn-ok{
+	border: none !important;
+	border-radius:50px ;
+}
+.mui-btn.mui-poppicker-btn-ok{
+	background: #DD524D !important;
+}
+
+/*支付方式*/
+.mask{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0,0,0,.4);
+	z-index: 1000;
+}
+.zhifufangshi{
+	position: fixed;
+	z-index: 1001;
+	width: 300px;
+	height: 200px;
+	top:calc(50% - 100px);
+	left: calc(50% - 150px);
+}
+.zhifufangshi li{
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255,255,255,.95);
+}
+.zhifufangshi li:first-child{
+	margin-bottom: 1px;
+	border-top-left-radius:20px ;
+	border-top-right-radius:20px ;
+}
+.zhifufangshi li:last-child{
+	border-bottom-left-radius:20px ;
+	border-bottom-right-radius:20px ;
+}
+.zhifufangshi li:active{
+	background: #eee;
+}
+.wxzf,.xjzf{
+	font-size: 60px  !important;
+	margin-right: 20px;
+}
+
+/*地址管理*/
+
+
+#AddrG{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	top: 0;
+	left: 0;
+	z-index: 998;
+}
+#AddrTitle{
+	background: rgba(255,255,255,.95) !important;
+}
+#AddrClose{
+line-height: 44px;
+}
+#AddrOk{
+	float: right;
+	line-height: 44px;
+}
+#AddrOk:active{
+color: #999;
+}
+.SubAddr .mui-scroll{
+	margin-top: 33px;
+	height: calc(100% + 1px) !important;
+	padding: 10px 0;
+}
+.true{
+	color: #DD524D;
+	font-size: 42px !important;
+}
+.edit,.delete{
+	margin-right:6px ;
+	margin-left: 20px;
+}
+
+.addr{
+	border-top:1px solid #eee ;
+	border-bottom: 8px solid #eee;
+	padding: 10px;
+	overflow: hidden;
+}
+.addr:active{
+background: #eee;
+}
+
+.addr .xuanzhong{
+	color: #DD524D;
+	
+}
+.addr li:first-child{
+	padding: 10px 0;
+	position: relative;
+}
+.addr li:last-child{
+	border-top:1px solid #eee ;
+	padding: 10px 0;
+	color: #666;
+}
+.moren{
+	display: flex;
+	align-items: center;
+	float: left;
+}
+.caozuo>span{
+	display: flex;
+	align-items: center;
+	float: right;
+}
+.caozuo>span:active{
+	color: #999;
+}
+/*新建地址*/
+.newadd{
+	position: fixed;
+	bottom: 20px;
+	left: 20%;
+	width: 60%;
+	height: 40px;
+	background: #DD524D;
+	color: #fff;
+	text-align: center;
+	line-height: 32px;
+	border-radius:4px ;
+	z-index: 998;
+}
+.newadd:active{
+	background: #E87A77;
+}
+/*新建  编辑*/
+#AddrEdit{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	top: 0;
+	left: 0;
+	z-index: 998;
+}
+#EditClose{
+	line-height: 44px;
+}
+#EditClose:active{
+	color: #999;
+}
+#EditTitle{
+	background: rgba(255,255,255,.95) !important;
+	box-shadow: none !important;
+	border-bottom: 1px solid #eee !important;
+}
+.AddrE .mui-scroll{
+	margin-top: 33px;
+	height: calc(100% + 1px);
+	padding: 10px 0;
+}
+.mui-input-row{
+	font-size: 15px;
+	color: #444;
+	border-bottom: 1px solid #eee;
+}
+.mui-input-row label{
+	width: 120px;
+}
+.mui-input-row label~input{
+	width: calc(100% - 120px);
+}
+.mui-input-row label~input::-webkit-input-placeholder{
+	font-size: 14px;
+}
+
+.save{
+	position: fixed;
+	bottom: 20px;
+	left: 20%;
+	width: 60%;
+	height: 40px;
+	background: #DD524D;
+	color: #fff;
+	text-align: center;
+	line-height: 40px;
+	border-radius:4px ;
+	z-index: 998;
+}
+
+.save:active{
+	background: #E87A77;
+}
+textarea{
+	font-size: 14px;
+}
+#diqu{
+	color: #444;
+}
+.mui-btn.mui-poppicker-btn-cancel,
+.mui-btn.mui-poppicker-btn-ok{
+	border: none !important;
+	border-radius:50px ;
+}
+.mui-btn.mui-poppicker-btn-ok{
+	background: #DD524D !important;
+}
+.newa{
+	position: static!important;
+	margin: auto!important;
+}

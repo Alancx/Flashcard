@@ -1,0 +1,43 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usercollection.css?v=1.1">
+<script language="javascript" src="__PUBLIC__/theme2/JS/usercollection.js"></script>
+<script>
+    var ubill ="{:U('User/delcollect')}";//删除收藏
+</script>
+<div class="collepart">
+  <img src="__PUBLIC__/theme2/Images/wushuju.jpg" class="isshow" style="width: 100%; display: none;">
+    <foreach name='collects' item='clt'>
+        <div class="collectionpart" id="{$clt.ProId}">
+            <a href="{:U('Product/Goods')}?pid={$clt.ProId}">
+                <div class="coltitle">
+                    <!-- <img src="__PUBLIC__/theme2/Images/tu02.png"> -->
+                    <label class="procollb">{$clt.ClassName}</label>
+                    <!--<span proid="{$clt.ProId}" onclick="delcollect(this)"></span>-->
+                    <label class="coltime">{$clt.CreateDate}</label>
+                </div>
+                <div class="colpro">
+                    <img src="{:C('RESOURCE_URL')}{$clt.ProLogoImg}">
+                    <label class="procolname">{$clt.ProName}<br><span>{$clt.ProTitle}</span></label>
+                    <label class="procolprice">￥<?php echo number_format(($clt['PriceRange']),2); ?></label>
+                </div>
+                <div class="delcollection">
+                   <label proid="{$clt.ProId}" onclick="delcollect(this)">取消收藏</label>
+                    </div>
+            </a>
+        </div>
+    </foreach>
+
+    <!--<div class="collectionpart">
+        <div class="coltitle">
+            <img src="__PUBLIC__/theme2/Images/tu02.png">
+            <label class="procollb">蜂之巢</label>
+            <span></span>
+            <label class="coltime">2016-05-18 12:25:36</label>
+        </div>
+        <div class="colpro">
+            <img src="__PUBLIC__/theme2/Images/tu02.png">
+            <label class="procolname">蜂之巢原味蜂蜜<br><span>蜂之巢天然蜂蜜纯农家自产便携36条小袋装6条小袋装</span></label>
+            <label class="procolprice">10000.00</label>
+        </div>
+    </div>-->
+</div>

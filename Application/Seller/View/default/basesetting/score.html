@@ -1,0 +1,192 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<include file="$headername" />
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>积分相关设置</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>积分设置</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			</div>
+			<div class="ibox-content">
+				<div class="col-lg-3 col-md-4 col-lg-offset-8 col-md-offset-8 pull-right" style="height:300px;border:0px solid red;position:absolute;top:5px;right:5px;">
+					<div class="panel">
+						<div class="panel-heading">
+							<i class="fa fa-warning"></i> 提示信息
+						</div>
+						<div class="panel-body">
+							<div class="alert alert-warning">
+								?1、每日首次登陆送积分<br>
+								?2、每消费1元送x积分 <br>
+								?3、签到积分设置、例：第一次签到送10分，以后的7天内每天连续签到+1天 积分比前一天增加5分，连续签到7天以上每天送100积分，不再递增。此时 <kbd>签到积分设置</kbd>中依次填写 <kbd>10</kbd> <kbd>7</kbd> <kbd>5</kbd> <kbd>100</kbd> <br>
+<!-- 								?4、会员推广用户注册即可获得积分<br>
+ -->								<b><span style="color:red;">*</span>标记的为必填项、其他为选填项</b>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+					<h5>登陆积分设置  ?1</h5>
+							<form role="form" class="form-inline" id="login" method="post" action="">
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">积分数</label>
+									<input type="number" name="score" placeholder="每日首次登陆送?积分" id="score" class="form-control" value="{$login.score}">
+								</div>
+								<div class="checkbox m-l m-r-xs">
+									<label class="i-checks">
+										<input type="checkbox" name="switchs" <if condition="$login['switchs'] eq 2">checked="checked"</if>><i></i> 开启登陆送积分</label>
+									</div>
+									<input type="hidden" name="type" value="login">
+									<input type="hidden" name="id" value="{$login.ID}">
+									<button class="btn btn-white" type="submit">保存设置</button>
+								</form>
+						</div>
+					</div>
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+					<h5>消费积分设置 ?2</h5>
+							<form role="form" class="form-inline" id="cons"  method="post" action="">
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">积分数</label>
+									<input type="number"  name="score" placeholder="每消费1元送?积分" id="cscore" class="form-control" value="{$cons.score}">
+								</div>
+								<div class="checkbox m-l m-r-xs">
+									<label class="i-checks">
+										<input type="checkbox" name="switchs" <if condition="$cons['switchs'] eq 2">checked="checked"</if>><i></i> 开启消费送积分</label>
+									</div>
+									<input type="hidden" name="type" value="cons">
+									<input type="hidden" name="id" value="{$cons.ID}">
+									<button class="btn btn-white" type="submit">保存设置</button>
+								</form>
+						</div>
+					</div>
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+					<h5>签到积分设置 ?3</h5>
+							<form role="form" class="form-inline" id="sign"  method="post" action="">
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">积分数</label>
+									<input type="number"  name="score" placeholder="首次签到送？积分" id="sscore" class="form-control" value="{$sign.score}">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">积分数</label>
+									<input type="number" name="days" placeholder="连续签到S天数" id="days" class="form-control" value="{$sign.days}">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">积分数</label>
+									<input type="number" name="adds" placeholder="连续签到递增？分" id="adds" class="form-control" value="{$sign.adds}">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail2" class="sr-only">积分数</label>
+									<input type="number" name="scores" placeholder="连续签S天以上送？分" id="scores" class="form-control" value="{$sign.scores}">
+								</div>
+								<div class="checkbox m-l m-r-xs">
+									<label class="i-checks">
+										<input type="checkbox" name="switchs" <if condition="$sign['switchs'] eq 2">checked="checked"</if>><i></i> 开启签到送积分</label>
+									</div>
+									<input type="hidden" name="type" value="sign">
+									<input type="hidden" name="id" value="{$sign.ID}">
+									<button class="btn btn-white" type="submit">保存设置</button>
+								</form>
+						</div>
+					</div>
+<!-- 				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+					<h5>推广积分设置 ?4</h5>
+							<form role="form" class="form-inline" id="extends"  method="post" action="">
+								<div class="form-group	col-xs-4">
+									<label for="exampleInputEmail2" class="sr-only">积分数</label>
+									<input type="number" name="score" placeholder="推广注册一个会员送？积分" id="escore" class="form-control" style="width:100%;margin-left:-15px;margin-right:-15px;" value="{$extends.score}">
+								</div>
+								<div class="checkbox m-l m-r-xs">
+									<label class="i-checks">
+										<input type="checkbox" name="switchs" <if condition="$extends['switchs'] eq 2">checked="checked"</if>><i></i> 开启推广送积分</label>
+									</div>
+									<input type="hidden" name="type" value="extends">
+									<button class="btn btn-white" type="submit">保存设置</button>
+								</form>
+						</div>
+					</div>
+ -->				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	//验证
+		$(document).ready(function(){
+			$("#login").submit(function(){
+				var score=$("#score").val();
+				if (score) {
+					return true;
+				}else{
+					art.dialog.alert('请填写积分数');
+					return false;
+				}
+			});
+			$("#cons").submit(function(){
+				var cscore=$("#cscore").val();
+				if (cscore) {
+					return true;
+				}else{
+					art.dialog.alert('请填写积分数');
+					return false;
+				}
+			});
+			$("#extends").submit(function(){
+				var escore=$("#escore").val();
+				if (escore) {
+					return true;
+				}else{
+					art.dialog.alert('请填写积分数');
+					return false;
+				}
+			});
+			$("#sign").submit(function(){
+				var sscore=$("#sscore").val();
+				var days=$("#days").val();
+				var adds=$("#adds").val();
+				var scores=$("#scores").val();
+				if (!sscore) {
+					art.dialog.alert('请填写首次签到积分数');
+					return false;
+				};
+				if (!days) {
+					art.dialog.alert('请填写连续签到天数');
+					return false;
+				};
+				if (!adds) {
+					art.dialog.alert('请填写递增分数');
+					return false;
+				};
+				if (!scores) {
+					art.dialog.alert('请填写连续签到'+days+'天以上送积分数');
+					return false;
+				}else{
+					return true;
+				}
+			})
+		})
+	</script>
+	<include file="Common:footer" />

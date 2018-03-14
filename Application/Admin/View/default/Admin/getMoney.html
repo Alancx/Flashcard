@@ -1,0 +1,119 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+	.form-group{margin-bottom: 10px!important;}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0px;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>推广人员提现信息管理</h5>
+	</div>
+	<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		
+
+	</div>
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<if condition="$employees['msg']">
+		<h3>{$employees.msg}</h3>
+		<else/>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>账号</th>
+					<th>姓名</th>
+					<th>提现时间</th>
+					<th>提现金额 (元)</th>
+					<th>账户信息</th>
+					<th>当前状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="users" item="emp" >
+					<tr>
+						<td>{$emp.userName}</td>
+						<td>{$emp.TrueName}</td>
+						<td>{$emp.createdate}</td>
+						<td>{$emp.Money}</td>
+						<td>户主：{$emp.IdName} <br>银行：{$emp.BankName} <br>卡号：{$emp.BankId}</td>
+						<td class="statu" value="{$emp.Status}"><if condition="$emp['Status'] eq '0'">待处理<elseif condition="$emp['Status'] eq '1'"/>已完成<elseif condition="$emp['Status'] eq '2'"/>已拒绝</if></td>
+						<td class="pass" value="{$emp.id}"><if condition="$emp['Status'] eq '1'"><button class="btn btn-xs btn-primary passcheck" data-id='{$emp.Tid}'>通过审核</button>&emsp;<elseif condition="$emp['Status'] eq '2'" /><button class="btn btn-xs btn-danger passchecks" data-id='{$emp.Tid}'>已拒绝</button><elseif condition="$emp['Status'] eq '0'"/>
+							<button class="btn btn-xs btn-warning agree"  data-id='{$emp.Tid}'>同意</button> &emsp; <button class="btn btn-xs btn-danger refuse" data-id='{$emp.Tid}'>拒绝</button></if></td>
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		</if>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+
+<script src="__PUBLIC__/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__PUBLIC__/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="__PUBLIC__/newadmin/js/plugins/layer/layer.min.js"></script>
+<!-- /*<script type="text/javascript">
+	$(document).ready(function() {
+    var inits = $(".init").DataTable();//初始化分页数据
+})
+</script>*/ -->
+<script type="text/javascript">
+// var jsondata={$jsondata};
+	$(document).ready(function(){
+		
+		$(document).on('click','.refuse',function(){
+			var _this=$(this);
+			// alert($('.pass').attr('value'));
+			layer.confirm('确定要拒绝审核吗？',{
+				btn:['确定','取消'],
+				shade:false
+			},function(){
+				layer.msg('处理中...');
+				$.ajax({
+					url:"{:U('Admin/checkMoney')}",
+					type:"post",
+					data:"tid="+_this.attr('data-id')+"&type="+'0'+"&id="+$('.pass').attr('value'),
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							layer.msg('处理成功');
+							_this.parent().parent().find('.statu').html('已拒绝');
+							// _this.remove();
+							window.location.reload();
+						}else{
+							layer.msg(msg.info);
+						}
+					}
+				})
+			})
+		})
+		$(document).on('click','.agree',function(){
+			var _this=$(this);
+			layer.confirm('确定要通过审核吗？',{
+				btn:['确定','取消'],
+				shade:false
+			},function(){
+				layer.msg('处理中...');
+				$.ajax({
+					url:"{:U('Admin/checkMoney')}",
+					type:"post",
+					data:"tid="+_this.attr('data-id')+"&type="+'1'+"&id="+$('.pass').attr('value'),
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							layer.msg('处理成功');
+							_this.parent().parent().find('.statu').html('已审核');
+							// _this.remove();
+							// $('.refuse').remove();
+							window.location.reload();
+						}else{
+							layer.msg(msg.info);
+						}
+					}
+				})
+			})
+		})
+	})
+
+</script> 
+<include file="Common:footer" />

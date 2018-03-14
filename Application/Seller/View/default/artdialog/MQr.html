@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>noname</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .attrvalues{
+        border: 1px solid green;
+        margin:auto 2px;
+        border-radius: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="width:560px;height:380px;">
+      <div class="row">
+        <form method="post" id="saveatr">
+        <h4 style="text-align:center;">生成推广二维码</h4>
+          <table class="table table-bordered">
+            <tr>
+              <td>选择场景</td>
+              <td>
+                <select name="AttributeId" class="chosen-select form-control" id="chosen" style="width:150px;" tabindex="2" >
+                  <option value="">请选择场景</option>
+                  <foreach name="scenes" item="attr">
+                  <option value="{$attr.ID}" id="atname{$attr.AttributeId}">{$attr.SceneName}</option>
+                  </foreach>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>二维码</td>
+              <td>
+                <div class="col-sm-4"  style="margin-top:0px;height:150px;width:100%;"><span  id="img"></span></div>
+                <input type="hidden" name="pid" value="{$memberId}" id="pid">
+              </td>
+            </tr>
+          </table>
+
+
+          <div style="text-align:center;margin-top:15px;width:100%;"><button type="button" class="btn btn-success btn-md" onclick="setAttr();">生成二维码</button></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  </body>
+<script type="text/javascript">
+$("#chosen").chosen();
+
+function setAttr(){
+	var pid=$("#pid").val();
+	var sid=$("#chosen").val();
+	// alert(sid);
+	// $.ajax({
+	// 	type:'post',
+	// 	url:'{:U('ArtDialog/getQr')}',
+	// 	data:'sid='+sid+'&pid='+pid,
+	// 	dateType:'json',
+	// 	success:function(msg){
+	// 		// alert(msg);
+      $("#img").html('<img src="{:U('ArtDialog/GetMQr')}?sid='+sid+'&memberId='+pid+'" alt="" />');
+	// 		console.log(msg);
+	// 	}
+	// })
+}
+</script>
+</html>

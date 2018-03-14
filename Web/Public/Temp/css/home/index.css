@@ -1,0 +1,21 @@
+﻿.classDiv{
+width:100%;
+}
+.classDiv ul{
+width:100%;
+}
+.classDiv ul li{
+float:left; 
+width:50%; 
+height:150px; 
+list-style-type:none; 
+background-color:#FFF;
+border:1px solid #3DBB2B;
+background-size:100% 100%;
+}
+.classDiv ul li div{
+margin-top:5px; 
+margin-left:10px; 
+font-size:12px; 
+color:#3DBB2B;
+}

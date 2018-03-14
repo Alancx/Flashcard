@@ -1,0 +1,202 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>商户审核</h5>
+	</div>
+	<div class="col-sm-12">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>门店名称</th>
+					<th>联系电话</th>
+					<th>门店地址</th>
+					<!-- <th>身份证号</th> -->
+					<!-- <th>验证信息</th> -->
+					<th>申请时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="stores" item="emp" >
+					<tr>
+						<td>{$emp.id}</td>
+						<td>{$emp.storename}</td>
+						<td>{$emp.tel}</td>
+						<td>{$emp.province}{$emp.city}{$emp.area}{$emp.addr}</td>
+						<!-- <td>{$emp.IdCard}</td> -->
+						<!-- <td><img src="{$PICURL}{$emp.IdInfo}" alt="" width="150" height="150" id="{$emp.id}"><br><button class="btn btn-xs btn-primary btn-outline" onclick="show('{$emp.id}')">查看原图</button></td> -->
+						<td>{$emp.CreateDate}</td>
+						<td><if condition="$emp['IsCheck'] eq '0'"><button class="btn btn-primary btn-xs btn-outline" onclick="pass('{$emp.id}')">通过申请</button><br><br><button class="btn btn-xs btn-warning btn-outline" onclick="Reject('{$emp.id}')" data-toggle="modal" data-target="#myModal6">拒绝申请</button><br><br> <small>未审核</small><elseif condition="$emp['IsCheck'] eq '2'" /><button class="btn btn-danger btn-xs btn-outline">删除</button><br><br><button class="btn btn-white btn-xs btn-outline showrmk" data-rmk="{$emp.Checkmark}{$emp.Remarks}" data-toggle="modal" data-target="#myModal7">查看备注</button><br><br><small>审核未通过</small><else/><button class="btn btn-white btn-xs btn-outline showrmk" data-rmk="{$emp.Checkmark}{$emp.Remarks}"  data-toggle="modal" data-target="#myModal7">查看备注</button><br><br><small>审核已通过</small></if>
+							<?php if (empty($emp['openid']) && $emp['IsCheck']==1): ?>
+								<!-- <button class="btn btn-default btn-xs showqr" data-id='{$emp.id}' data-toggle="modal" data-target="#showqr">查看绑定二维码</button> -->
+							<?php else: ?>
+								
+							<?php endif ?>
+						</if>
+						
+					</td>
+				</tr>
+			</foreach>
+		</tbody>
+
+
+
+
+
+
+		<div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">拒绝原因</h4>
+					</div>
+					<div class="modal-body">
+						<form action="##" class="form">
+							<div class="form-group" class="col-sm-12">
+								<label>拒绝原因</label>
+								<select name="backres" id="backres" class="form-control">
+									<option value="身份信息不清晰">身份信息不清晰</option>
+									<option value="门店名称不规则">门店名称不规则</option>
+									<option value="门店地址不明确">门店地址不明确</option>
+									<option value="身份信息不一致">身份信息不一致</option>
+								</select>
+							</div>
+							<div class="form-group" class="col-sm-12">
+								<label>备注信息</label>
+								<textarea name="Remarks" cols="30" rows="5" style="width:100%;" id="content" value=""></textarea>
+								<input type="hidden" name="hid" id="hid" value="">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveRemarks">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal inmodal fade" id="myModal7" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">备注内容</h4>
+					</div>
+					<div class="modal-body">
+						<form action="##" class="form">
+							<div class="form-group" class="col-sm-12">
+								<label>备注信息</label>
+								<textarea name="Remarks" cols="30" rows="10" style="width:100%;" id="contentss" value=""></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal inmodal fade" id="showqr" tabindex="-1" role="dialog"  aria-hidden="true">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">qrcode</h4>
+					</div>
+					<div class="modal-body">
+						<form action="##" class="form">
+							<div class="form-group" class="col-sm-12" style="text-align:center">
+								<img src="" alt="" style="width:200px;height:200px;" id="qre">
+								<br>
+								<small>请使用微信扫码</small>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+	</table>
+	<div style="text-align:right;">{$page}</div>
+</div>
+</div>
+<script type="text/javascript">
+	function show(id){
+		art.dialog({title:'图片预览',content:'<img src="'+$('#'+id).attr('src')+'" style="width:600px;min-width:50%;" />',lock:true,background: '#000',opacity: 0.45})
+	}
+
+	function showrmk(content){
+		$('#contents').val(content);
+	}
+	function Reject(id){
+		//拒绝
+		$("#hid").val(id);
+	}
+	function pass(id){
+		//通过
+		art.dialog.confirm('确定要通过审核吗？',function(){
+			window.location.href="{:U('Storers/checking')}?statu=1&id="+id;
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+	function del(id){
+		art.dialog.confirm('确定要删除吗？,此操作将把该门店所有核销员一并删除！！！',function(){
+			window.location.href="{:U('Store/del')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+	function edit(id){
+		window.location.href="{:U('Store/edit')}?id="+id;
+	}
+	function getq(id){
+		art.dialog.confirm('此操作将把上次生成的验证码作废，请确认？',function(){
+			art.dialog.open('{:U('ArtDialog/checkStore')}?id='+id);
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+	$(document).ready(function(){
+		$('.showqr').click(function(){
+			$('#qre').attr('src','');
+			var id=$(this).attr('data-id');
+			var img="{:U('Storers/showqr')}?id="+id;
+			$('#qre').attr('src',img);
+		})
+		$('#saveRemarks').click(function(){
+			var id=$('#hid').val();
+			var rmk=$('#content').val();
+			var brmk=$('#backres').val();
+			if (brmk && id) {
+				art.dialog.confirm('确定要拒绝该申请吗？',function(){
+					window.location.href="{:U('Storers/checking')}?statu=2&id="+id+"&Remarks="+rmk+"&Brmk="+brmk;
+				},function(){
+					art.dialog.tips('取消操作');
+				})
+			}else{
+				art.dialog.alert('请填写备注内容');
+			}
+		})
+		$('.showrmk').click(function(){
+			$('#contentss').val('');
+			var rmk=$(this).attr('data-rmk');
+			$('#contentss').val(rmk);
+		})
+	})
+</script>
+<include file="Common:footer" />

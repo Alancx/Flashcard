@@ -1,0 +1,41 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.whhouse{
+  background-color: #ffffff;
+  margin: 10px 0px 0px 0px;
+  border-top-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  overflow: hidden;
+}
+.whhouse>div{
+  height: 50px;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  background-size: 25px;
+}
+.whhouse>div>a>label {
+    width: 95%;
+    height: 100%;
+    font-size: 14px;
+    color: #333333;
+    line-height: 49px;
+    margin: 0px;
+    padding: 0px 0px 0px 50px;
+    background-image: url("../icon/Arrow-1.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 7px;
+}
+.whinhouse {
+    background-image: url("../icon/usershzy.png");
+}
+
+.whouthouse {
+    background-image: url("../icon/userxgzl.png");
+}

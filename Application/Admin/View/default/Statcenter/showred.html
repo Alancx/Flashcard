@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html style="height:auto">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit">
+
+  <title>提现明细</title>
+
+  <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/Admin/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+  <!-- Morris -->
+  <link href="__PUBLIC__/Admin/Admin/css/animate.css" rel="stylesheet">
+  <link href="__PUBLIC__/Admin/Admin/css/style.css?v=2.2.0" rel="stylesheet">
+  <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+
+  <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+  <script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+</head>
+
+<body style="background-color:#fff;height:auto;">
+
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-2"></div>
+  </div>
+  <div class="row  wrapper  white-bg" style="margin:0 1%;">
+    <div class="col-sm-12">
+      <table class="table table-bordered">
+        <tbody>
+            <tr>
+               <td style="width:80px;">提现人账号</td>
+               <td>{$info.MemberId}</td>
+             </tr>
+            <tr>
+               <td style="width:80px;">提现人姓名</td>
+               <td>{$info.GetName}</td>
+             </tr>
+            <tr>
+               <td style="width:80px;">提现金额</td>
+               <td>{$info.Money}</td>
+             </tr>
+            <tr>
+               <td style="width:80px;">申请时间</td>
+               <td>{$info.CreateDate}</td>
+             </tr>
+            <tr>
+               <td style="width:80px;">审核时间</td>
+               <td>{$info.CheckDate}</td>
+             </tr>
+            <tr>
+               <td style="width:80px;">处理时间</td>
+               <td>{$info.EndDate}</td>
+             </tr>
+            <tr>
+               <td style="width:80px;">处理结果</td>
+               <td><if condition="$info['Status'] eq 1">待审核<elseif condition="$info['Status'] eq 2"/>待处理<else/>已处理</if></td>
+             </tr>
+            <tr>
+               <td style="width:80px;">备注内容</td>
+               <td>{$info.Remarks}</td>
+             </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- Mainly scripts -->
+  <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+</body>
+</html>

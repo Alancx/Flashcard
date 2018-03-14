@@ -1,0 +1,192 @@
+﻿<layout name="Public/PageModel"/>
+<link href="__PUBLIC__/theme2/plugins/weui/weui.css" rel="stylesheet">
+<link href="__PUBLIC__/theme2/css/orderinfo.css" rel="stylesheet">
+<script type="text/javascript">
+    var imgurl = "__PUBLIC__/theme2/Images/";
+    var saveorder="{:U('Gift/Pay')}";
+    var saveaddr="{:U('Public/AddAddress')}";
+    var cdeladdr= "{:U('User/deladdr')}";//删除地址
+    var gomyorder="{:U('Home/User/scoreoder')}";
+    var subOrder="{:U('Payment/Index',array('oid'=>'ORDERIDREPLACE'))}";
+    var fjson={$fjson};
+    var cid='{$cid}';
+    var pic='{$pic}';
+</script>
+<script src="__PUBLIC__/theme2/js/orderinfo.js?v=1"></script>
+<script src="__PUBLIC__/JS/plugins/address/provincesdata.js"></script>
+<script src="__PUBLIC__/JS/plugins/address/provinces.js"></script>
+<script src="__PUBLIC__/theme2/js/common.js"></script>
+<!--邮寄地址-->
+<div class="orderaddr">
+    <div class="oraddrs" data-s='{$add.ReceivingId}' onclick="selectaddr(this)" data-prov='{$add.Province}'>
+        <if condition="$hasAdd eq '1'">
+            <label class="address-name">{$add.Name}</label>
+            <label class="address-addr">{$add.Province}{$add.City}{$add.Area}{$add.Address}</label>
+            <label class="telephone">{$add.Phone}</label>
+        <else/>
+            <label class="address-name">点击添加收货地址</label>
+            <label class="address-addr"></label>
+            <label class="telephone"></label>
+        </if>
+    </div>
+</div>
+<!--end 邮寄地址-->
+<div class="division"></div>
+
+<!--end 商品列表-->
+<div class="details">
+    <div class="orderdetails">
+        <div class="ordertitle">
+            <!-- <img src="__PUBLIC__/theme2/Images/tu02.png">
+            <label>蜂之巢</label> -->
+        </div>
+        <foreach name="gInfo" item='pro'>
+            <div class="ordercontent">
+                <img src="{:C('RESOURCE_URL')}{$pro.ProLogoImg}">
+                <div class="ordercontents">
+                    <label class="ordername">{$pro.ProName}</label>
+                    <label class="orderspec">规格:{$pro.ProSpec1},{$pro.ProSpec2},{$pro.ProSpec3}</label>
+                    <!-- <label class="orderftime">发货时间:111</label> -->
+                    <label class="orderprice">市场价：￥{$pro.Price}<label>×{$pro.nums}</label></label>
+                </div>
+            </div>
+        </foreach>
+    </div>
+</div>
+<!--商品列表-->
+
+<!--配送优惠以及金额-->
+    <div class="ordersdis">
+    <label class="distr">配送方式</label>
+    <label class="seldistr" datalx="0" datasz="免邮" datamd="0" onclick="seldistr(this)">快递
+        <!-- <span>免邮</span> --></label>
+    </div>
+
+    <div class="ordersdis">
+        <label class="distr">优惠</label>
+        <label class="selyh" data-s='{$totlePrice-$lessprice}' data-old='{$totlePrice-$lessprice}' data-cid='NONE'>￥-{$totlePrice-$lessprice}（礼包）</label>
+    </div>
+
+    <div class="ordersdis">
+        <!-- <label class="distr">共2件商品</label> -->
+        <label class="ordertotal" datatotal="{$freight}" data-allprice="{$freight}">合计:<b id="price-box">￥{$freight}</b></label>
+    </div>
+    <!--end配送优惠以及金额-->
+
+    <!--地址选择-->
+    <div class="coversel">
+        <div class="addrselect">
+            <foreach name="addrs" item='adr'>
+                <div id="{$adr.ReceivingId}" class="addr-box" data-s='{$adr.ReceivingId}' onclick="sueraddr(this)" data-prov="{$adr.Province}">
+                    <label class="addrname">{$adr.Name}</label>
+                    <label class="addraddr" data-province="{$adr.Province}" data-city="{$adr.City}" data-area="{$adr.Area}"
+                           data-address="{$adr.Address}">{$adr.Province}{$adr.City}{$adr.Area}{$adr.Address}</label>
+                    <label class="addrphone">{$adr.Phone}</label>
+                    <div class="addrsedit">
+                        <if condition="$adr['IsDefault'] eq '1'">
+                            <label class="addrdefault schecked">默认地址</label>
+                            <else/>
+                            <label class="addrdefault">默认地址</label>
+                        </if>
+                        <label class="addrdel" addrsID="{$adr.ReceivingId}" onclick="addressdel(this)">删除</label>
+                        <label class="addredit" onclick="addressedit(this)">编辑</label>
+                    </div>
+                </div>
+            </foreach>
+
+            <div style="height: 55px"></div>
+        </div>
+        <div class="but-address">
+            <label class="addrback" onclick="csback(this)">返回</label>
+            <label class="add-address" onclick="addressadd(this)">添加新地址</label>
+        </div>
+    </div>
+    <!--end地址选择-->
+
+    <!--地址编辑-->
+    <div class="coveredit">
+        <div class="addressedit" data-s=''>
+            <div class="conters">
+                <label>收货人</label>
+                <input type="text" class="shnames" name="shnames" placeholder="请填写姓名">
+            </div>
+            <div class="conters">
+                <label>联系电话</label>
+                <input type="text" class="shphones" name="shphones" placeholder="请填写联系电话">
+            </div>
+            <div class="conters">
+                <label>所在地区</label>
+                <label class="shshregions" data-province='' data-city='' data-area=''></label>
+                <input type="hidden" class="shregion" name="shregion">
+                <label class="region" onclick="selregion(this)">请选择</label>
+            </div>
+            <div class="contersxx">
+                <label>详细地址</label>
+                <textarea class="xxaddr" rows="3"></textarea>
+            </div>
+            <div class="mraddr">
+                <label>设为默认</label>
+                <div class="addrcheck">
+                    <input type="checkbox" id="checkbox_c1" class="chk_3" data-s='0' />
+                    <label for="checkbox_c1"></label>
+                </div>
+            </div>
+            <div style="height: 55px"></div>
+        </div>
+        <div class="but-address">
+            <label class="addrback" onclick="ceback(this)">返回</label>
+            <label class="add-address" onclick="addresssave(this)">保存</label>
+        </div>
+    </div>
+    <!--end地址编辑-->
+
+    <!--地区选择-->
+    <div class="coverregion">
+        <div class="selectregion">
+            <div style="height: 40px;background-color: #ffffff">
+                <label class="regionback" onclick="gbselregion(this)">取消</label>
+                <label class="regionsure" onclick="wcselregion(this)">完成</label>
+            </div>
+            <div id="addressPCD"></div>
+        </div>
+    </div>
+    <!--end地区选择-->
+
+    <!--配送方式-->
+    <div class="coverdistr">
+        <div class="distrdiv">
+            <label class="distrtitle">配送方式</label>
+            <div class="distrkd" onclick="seldistrs(this)">
+                <label>快递 </label>
+            </div>
+            <if condition="$hadStore eq 'inline'">
+                <div class="distrzt" onclick="seldistrs(this)">
+                    <label>自提</label>
+                    <select class="xzmd" data-s=''>
+                        <option value="0" data-s='0'>请选择门店</option>
+                        <foreach name='storeList' item='st'>
+                            <option value="{$st.storename}" data-s="{$st.id}">{$st.storename}</option>
+                        </foreach>
+                    </select>
+                </div>
+            </if>
+        </div>
+        <div class="but-address">
+            <label class="add-address" id="chosestore" style="width: 100%" onclick="gbseldistr(this)">确认</label>
+        </div>
+    </div>
+
+
+
+    <div style="height:55px;"></div>
+    <div class="footeroder">
+        <div class="footeroderg">
+            <label onclick="lgjs(this)">确认订单</label>
+        </div>
+    </div>
+
+
+
+    <div style="display:none;">
+        <span id="orderid">{$orderid}</span>
+    </div>

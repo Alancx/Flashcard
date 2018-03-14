@@ -1,0 +1,59 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/userindex.css?v=1.1" />
+<div class="userparts">
+  <div class="toppart">
+    <img class="userhead" src="{$minfo['HeadImgUrl']}" alt="" RPath="{:U('User/setuserinfo')}">
+    <span class="userinfo" RPath="{:U('User/setuserinfo')}">
+      <span class="username">{$minfo['MemberName']}</span>
+      <span class="mui-icon mui-icon-arrowright"></span>
+    </span>
+    <img class="userbgimg" src="__PUBLIC__/newhome/img/centerBg.png" alt="">
+  </div>
+  <div class="btngroup">
+    <div class="btngrouplist">
+      <div class="btninfo" RPath="{:U('User/mycollect')}">
+        <span class="ggg icon_shoucang" style="font-weight: 600;"></span>
+        <span class="btntitle">我的收藏</span>
+        <span class="mui-icon mui-icon-arrowright"></span>
+      </div>
+      <div class="btninfo" RPath="{:U('User/myshops')}">
+        <span class="ggg icon_guanzhu"></span>
+        <span class="btntitle">我的关注</span>
+        <span class="mui-icon mui-icon-arrowright"></span>
+      </div>
+      <div class="btninfo" RPath="{:U('User/myredpack')}">
+        <span class="ggg icon_hongbao"></span>
+        <span class="btntitle">我的红包</span>
+        <span class="mui-icon mui-icon-arrowright"></span>
+      </div>
+    </div>
+
+    <div class="btngrouplist">
+      <div class="btninfo" RPath="tel:{$sinfo.tel}">
+        <span class="ggg icon_kefu"></span>
+        <span class="btntitle">客服服务</span>
+        <span class="mui-icon mui-icon-arrowright"></span>
+      </div>
+      <div class="btninfo">
+        <span class="ggg icon_help"></span>
+        <span class="btntitle">问题帮助</span>
+        <span class="mui-icon mui-icon-arrowright"></span>
+      </div>
+      <div class="btninfo">
+        <span class="ggg icon_xieyi"></span>
+        <span class="btntitle">协议条款</span>
+        <span class="mui-icon mui-icon-arrowright"></span>
+      </div>
+    </div>
+
+    <div class="btngrouplist">
+      <div class="btninfo" RPath="{:U('User/Vernotes')}">
+        <span class="ggg icon_allorder"></span>
+        <span class="btntitle">版本说明</span>
+        <span class="showtitle">1.4</span>
+        <span class="mui-icon mui-icon-arrowright"></span>
+      </div>
+    </div>
+  </div>
+
+</div>

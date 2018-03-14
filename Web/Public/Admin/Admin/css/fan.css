@@ -1,0 +1,160 @@
+body,div,ul,li,dt,dd,dl,table,h1,h2,h3,h4,h5,h6,p,tr,th,td,img{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #444;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "微软雅黑", "arial";
+	/*background: #ddd;*/
+}
+
+
+/*-------------tab*/
+.fantab{
+	margin: 10px 0px;
+	background: #fff;
+	overflow: hidden;
+	position: relative;
+}
+.fantab li{
+	float: left;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+.curbg{
+	background: dodgerblue;
+	height: 4px;
+	width:66px; 
+	border-radius:2px ; 
+	position:absolute; 
+	bottom:0;  
+	left:20px;
+}
+
+/*------------tab1----*/
+.fanhear{
+	padding: 0px 20px 0px 80px;
+	background: #eee;
+	overflow: hidden;
+}
+.fanhear p{
+	margin:10px 0px ;
+}
+.fanhear span{
+	padding: 0px 20px;
+	cursor: pointer;
+}
+.fanhear small{
+	font-size: 16px;
+	padding: 0px 20px;
+	cursor: pointer;
+}
+/*---------------addclass*/
+.boo{
+	border: 1px solid dodgerblue;
+	border-radius:20px ;
+	box-sizing:border-box ;
+	color: dodgerblue;
+}
+.zdy{
+	color: dodgerblue;
+}
+
+
+
+
+/*-------筛选结果----------------*/
+.jieguo{
+margin: 20px;	
+}
+.number{
+	color: red;
+}
+
+/*--------------标题*/
+.header{
+	overflow: hidden;
+}
+.header input{
+	float: left;
+}
+.header li{
+	float: left;
+	width: 10%;
+	text-align: center;
+	color: dodgerblue;
+}
+.header li:first-child{
+	width: 15%;
+	color: #000;
+}
+.header li:last-child{
+	width: 15%;
+	color: #000;
+}
+
+
+.hr{
+	height: 1px; 
+	border: none; 
+	background: linear-gradient(to left,
+	        rgba(0,0,0,0),
+	        rgba(0,0,0,1),
+	        rgba(0,0,0,1),
+	        rgba(0,0,0,0)
+	        );
+}
+
+/*----------------------内容*/
+.conli.header{
+	
+}
+.conli.header li{
+	height: 66px;
+	text-align: center;
+	line-height: 60px;
+	color: #000;
+	/*border: 1px solid red;
+	box-sizing: border-box;*/
+	overflow: hidden;
+}
+.conli.header li:first-child{
+	text-align: center;
+	align-items: center;
+}
+.conli.header li img{
+	max-width: 60px;
+	border: 1px solid #000;
+}
+.conli.header li input{
+	
+}
+
+.name{
+	margin: 0px 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis ;
+	
+}
+
+
+.time{
+	width: 100%;
+}
+.conli.header li:last-child p a{
+	color: dodgerblue;
+	cursor: pointer;
+}
+.conli.header li:last-child span{
+	color: darkblue;
+	cursor: pointer;
+}

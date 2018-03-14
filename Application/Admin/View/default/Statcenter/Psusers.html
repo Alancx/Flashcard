@@ -1,0 +1,101 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/newadmin/css/plugins/dataTables/dataTables.bootstrap.css">
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-sm-12 col-md-12">
+		<div class="ibox float-e-margins" style='margin-bottom:150px;'>
+			<div class="ibox-content">
+				<table class='table table-bordered table-hovered datatables'>
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>身份信息</td>
+							<td>电话</td>
+							<td>注册日期</td>
+							<td>消息接收状态</td>
+							<td>性别</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						<foreach name='Psusers' item='ps'>
+						<tr>
+							<td align='center'>{$ps.TrueName} &emsp; <if condition="$ps['IsBoss'] eq '1'"><b class='text-info'>店主</b></if><br> <img src="{$PICURL}{$ps.HeadImg}" style="width:80px;height:80px;" alt="">  </td>
+							<td align='center'><img src="{$PICURL}{$ps.IdImg}" style="width:80px;height:80px;" alt=""> <br> {$ps.IdCard} </td>
+							<td>{$ps.Phone}</td>
+							<td>{$ps.RegisterDate}</td>
+							<td>{$ps.IsReceving}</td>
+							<td>{$ps.Sex}</td>
+							<td><button class='btn btn-xs btn-default showstore' data-toggle='modal' data-target="#show_group" data-mid='{$ps.MemberId}'>查看绑定门店</button></td>
+						</tr>
+						</foreach>
+					</tbody>
+				</table>
+			</div>
+			{$page}
+		</div>
+	</div>
+</div>
+<div class="modal inmodal fade" id="show_group" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:528px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				绑定店铺信息 <span style="color:red" id='add_notice'></span>
+				<button type="button" class="close" data-dismiss="modal" id="cls_modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<table class='table table-hover table-bordered'>
+					<thead>
+						<tr>
+							<th>店铺名称</th>
+							<th>申请时间</th>
+							<th>当前状态</th>
+						</tr>
+					</thead>
+					<tbody id='showpeo_content'></tbody>
+				</table>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Common:footer" />
+<script src="__PUBLIC__/Admin/Admin/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/echarts/echarts-all.js"></script>
+<script src="__PUBLIC__/newadmin/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="__PUBLIC__/newadmin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__PUBLIC__/newadmin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.datatables').DataTable();
+		$(document).on('click','.showstore',function(){
+			$('#showpeo_content').html('');
+			var mid=$(this).attr('data-mid');
+			art.dialog.tips('加载中...');
+			$.ajax({
+				url:"{:U('Statcenter/Psusers')}",
+				type:"post",
+				data:"mid="+mid,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						var data=msg.data;
+						var _html='';
+						$.each(data,function(index,item){
+							_html+='<tr><td>'+item.storename+'</td><td>'+item.date+'</td><td>'+item.stname+'</td></tr>';
+						})
+						$('#showpeo_content').html(_html);
+					}else{
+						art.dialog.tips(msg.info);
+					}
+				}
+			})
+		})
+	})
+</script>

@@ -1,0 +1,43 @@
+.infor{
+	height: 100px;
+	background: url(../img/CenterBg.png) no-repeat center right 20px,#ff7200;
+	background-size:auto 80%;
+	overflow: hidden;
+}
+.infor>div{
+	height: 50px;
+	margin: 25px 0 0 25px;
+	line-height: 50px;
+}
+.myphoto{
+	width: 50px;
+	height: 50px;
+	border-radius:50% ;
+	float: left;
+	margin-right: 10px;
+}
+.myname{
+	color: #fff;
+	display: inline-block;
+}
+
+/**/
+.mui-table-view{
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+.mui-table-view .ggg{
+	vertical-align: middle;
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	margin-right: 6px;
+}
+
+
+
+
+
+
+
+

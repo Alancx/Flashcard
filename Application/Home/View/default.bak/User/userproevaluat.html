@@ -1,0 +1,59 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/userproevaluat.css">
+<script type="text/javascript">
+  var savepj="{:U('User/saveEval')}";
+  var toOrder="{:U('User/usermyoders')}";
+</script>
+<script src="__PUBLIC__/theme2/js/userproevaluat.js"></script>
+<!-- <php>var_dump($datapro);</php> -->
+<div class="proeval">
+    <div class="projbxx">
+        <img src="{:C('RESOURCE_URL')}{$datapro.ProLogoImg}">
+        <label class="proevname">{$datapro.ProName}</label>
+        <label class="proevgg">规格:{$datapro.Spec}</label>
+        <label class="proevfasj" hidden>发货时间:</label>
+        <label class="proevalprice"><?php echo number_format(($datapro['Price']),2); ?><span>×{$datapro.Count}</span></label>
+    </div>
+    <div class="mrproevalpy">
+      <label class="mrtitle" datanr="" onclick="openpjnr(this)">请选择<span class="tblx" ></span></label>
+      <div class="moplnr">
+      <foreach name="devals" item="evl">
+        <label datanr="{$evl.content}"  onclick="selpjnr(this)">{$evl.content}</label>
+      </foreach>
+      </div>
+    </div>
+    <textarea class="porevalpy" name="porevalpy"></textarea>
+</div>
+<div class="proevalxj">
+    <div>
+        <label>商品评分</label>
+        <span class="sp" dataxj="1"></span>
+        <span class="sp" dataxj="2"></span>
+        <span class="sp" dataxj="3"></span>
+        <span class="sp" dataxj="4"></span>
+        <span class="sp" dataxj="5"></span>
+        <input type="hidden" class="sppf" name="sppf">
+    </div>
+    <div>
+        <label>服务评分</label>
+        <span class="fw" dataxj="1"></span>
+        <span class="fw" dataxj="2"></span>
+        <span class="fw" dataxj="3"></span>
+        <span class="fw" dataxj="4"></span>
+        <span class="fw" dataxj="5"></span>
+        <input type="hidden" class="fwpf" name="fwpf">
+    </div>
+    <div>
+        <label>物流评分</label>
+        <span class="wl" dataxj="1"></span>
+        <span class="wl" dataxj="2"></span>
+        <span class="wl" dataxj="3"></span>
+        <span class="wl" dataxj="4"></span>
+        <span class="wl" dataxj="5"></span>
+        <input type="hidden" class="wlpf" name="wlpf">
+    </div>
+</div>
+<input type="hidden" name="" id="oid" value="{$datapro.OrderId}">
+<input type="hidden" name="" id="olid" value="{$datapro.OrderListId}">
+<input type="hidden" name="" id="pid" value="{$datapro.ProId}">
+<button type="button" class="evaltjpl">提交评论</button>

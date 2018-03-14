@@ -1,0 +1,58 @@
+body{
+	/*background-color: #f34235;*/
+}
+.shopimg{
+	margin: 40px 0px 0px 0px;
+	height: 70px;
+	text-align: center;
+}
+.shopimage{
+	width: 70px;
+	/*height: 70px;
+	border-radius: 50%;*/
+}
+.imputlogin{
+	margin: 10px 10px 0px 10px;
+	/*background-color: #ffffff;
+	border-radius: 8px;*/
+	overflow: hidden;
+}
+.imputlogin>input{
+	width: 100%;
+	height: 40px;
+	outline: medium;
+	border-style: none;
+	border-width: 0px;
+	font-size: 14px;
+	color: #333333!important;
+	text-indent: 35px;
+	background-color: inherit;
+}
+.username,.passwords{
+	border-style: solid!important;
+	border-bottom-width:1px!important;
+	border-color: #dddddd;
+	background-position: 10px center;
+	background-repeat: no-repeat;
+	background-size: 20px;
+}
+.username{
+	background-image: url("../icon/username.png");
+}
+.passwords{
+	background-image: url("../icon/password.png");
+}
+.butlogin{
+	margin: 10px 10px 0px 10px;
+}
+.btnlogin{
+	height: 40px;
+	font-size: 16px;
+	outline: none!important;
+	border: none;
+	/*background-color: rgba(255, 255, 255, 0.1)*/
+}
+.btnlogin:disabled{
+	background-color: #dddddd;
+	opacity: 1;
+}

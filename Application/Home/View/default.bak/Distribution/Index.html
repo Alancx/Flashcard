@@ -1,0 +1,96 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/distribution/css/Index.css?v=1.9">
+<div class="part_content">
+  <div class="disinfo">
+    <empty name="disinfo.HeadImg">
+      <img class="heardimg" src="__PUBLIC__/distribution/images/default.png" alt="">
+     <else />
+     <img class="heardimg" src="{:C('RESOURCE_URL')}{$disinfo['HeadImg']}" alt="">
+   </empty>
+    <img class="back_img" src="__PUBLIC__/distribution/images/bg_heard.png">
+    <div class="userinfo">
+      <label class="disname">{$disinfo['TrueName']}</label>
+      <label class="disphone">{$disinfo['Phone']}</label>
+      <a href="{:U('Distribution/disaddshop')}"><label class="disorder">添加门店</label></a>
+    </div>
+    <if condition="$disinfo['IsReceving'] eq '0' ">
+      <label class="seldising" data-type="0" data-boss="{$disinfo['IsBoss']}">配送中</label>
+      <else />
+      <label class="seldising" data-type="1" data-boss="{$disinfo['IsBoss']}">休息中</label>
+    </if>
+  </div>
+  <div class="disallcash">
+    <label>可提金额：<?php echo $getmoney?sprintf("%.2f",$getmoney):'0.00' ?>元</label>
+    <a href="{:U('Distribution/disgetcashlist')}"><label>查看明细</label></a>
+  </div>
+  <div class="disshops">
+    <img class="back_img" src="__PUBLIC__/distribution/images/bg_orderinfo.png" alt="">
+    <div class="selordertype">
+      <div>
+        <label class="ordertype selorderactive" data-type='0'>配送中</label>
+        <label class="ordertype" data-type="1">已完成</label>
+      </div>
+    </div>
+    <if condition="$disingorder eq 'NULLORDERINFO' ">
+      <div class="disstype dising" style="display:block;" type-page="-1">
+        <label class="nullorder">没有正在配送的订单,请积极抢单</label>
+      </div>
+      <else />
+      <div class="disstype dising" style="display:block;" type-page="1">
+        <foreach name="disingorder" item="orderitem">
+          <div class="orderinfo">
+            <div class="order_info">
+              <label class="orderid">订单号 :{$orderitem['OrderId']}</label>
+              <label class="orderprice">配送费 :￥<?php echo number_format($orderitem['Price'],2); ?></label>
+              <label class="ordername"><span>收货人姓名:</span>{$orderitem['RecevingName']}</label>
+              <label class="orderphone"><span>收货人电话:</span>{$orderitem['RecevingPhone']}</label>
+              <label class="orderaddr"><span>收货人地址:</span>{$orderitem['addr']}</label>
+              <label class="prolist"><span>商品信息:</span>
+                <foreach name="orderitem['prolist']" item="proitem">
+                  {$proitem['product']};
+                </foreach>
+              </label>
+            </div>
+            <div class="btn_group">
+              <if condition="$orderitem['Status'] eq '0' ">
+                <label class="suresend" data-oid="{$orderitem['OrderId']}" onclick="suresend(this)">确认提货</label>
+                <else />
+                <label class="suresend" data-oid="{$orderitem['OrderId']}" onclick="suresend(this)">确认送达</label>
+              </if>
+            </div>
+          </div>
+        </foreach>
+        <label class="getmoreorder" data-type="ordering">加载更多</label>
+      </div>
+    </if>
+    <div class="disstype disend" style="display:none;" type-page="0">
+      <label class="getmoreorder" data-type="orderend">加载更多</label>
+    </div>
+  </div>
+</div>
+<!-- 输入验证码 -->
+<div class="convercode">
+  <div>
+    <div class="inputcode">
+      <div>
+        <label>输入验证码</label>
+        <input type="text" name="" value="" id="input_code" placeholder="输入验证码">
+        <div class="btn_groups">
+          <label class="qx" onclick="quxiaocode()">取消</label>
+          <label class="qd" onclick="surecode()">确定</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 输入验证码 end -->
+
+<script type="text/javascript">
+  var getmoreorder_url="{:U('Distribution/getmoreorder')}";//获得更多订单信息
+  var savesidlist="{:U('Distribution/savesendorder')}";//配送员订单处理完成
+  var updatedistype="{:U('Distribution/updatedistype')}";//配送员是否接送配送消息
+  var iconhref="__PUBLIC__/theme2/Images/";//图片路径
+  $('.disshops').css('height',$(window).innerHeight()-$('.disallcash').outerHeight()-$('.disinfo').outerHeight()+'px');
+  $('.disstype').css('height',$('.disshops').innerHeight()-$('.selordertype').outerHeight()+'px');
+</script>
+<script src="__PUBLIC__/distribution/js/Index.js?v=1.9" charset="utf-8"></script>

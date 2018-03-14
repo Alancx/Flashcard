@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>生意参谋</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+	<style type="text/css">
+		.top_btn,.top_top{
+			width: 20%;
+			float: left;
+			text-align: center;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		.active{
+			background-color: #434343;
+			color: #fff;
+		}
+		#notice_box{
+			position:fixed;top:200px;left:30%;width:40%;padding:10px 5px;max-height:50px;border:2px solid red;text-align:center;z-index:1;
+			background-color: rgba(255,13,13,.54);
+			font-weight: bold;
+			color: #fff;
+		}
+		#btn_pre{
+			position: fixed;
+			right: 5px;
+			top: 40px;
+
+		}
+	</style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+		<div class="col-xs-12 col-sm-12" style="padding:0px;">
+			<div class="top_top" style="border-right:1px solid #999;" data-type='money'>销售额<span class='glyphicon glyphicon-sort'></span></div>
+			<div class="top_btn active" style="" data-st='d' id="defualt">日</div>
+			<input type="hidden" name="" id="date_d" onclick="WdatePicker({el:'date_d',onpicked:function(){getdatabypost(this);}})" data-st='d'>
+			<div class="top_btn" style="" data-st='w'>周</div>
+			<input type="hidden" name="" id="date_w" onclick="WdatePicker({el:'date_w',onpicked:function(){getdatabypost(this);},isShowToday:false,disabledDays:[0,2,3,4,5,6]})" data-st='w'>
+			<div class="top_btn" style="" data-st='m'>月</div>
+			<input type="hidden" name="" id="date_m" onclick="WdatePicker({el:'date_m',onpicked:function(){getdatabypost(this)},isShowToday:false,dateFmt:'yyyy-MM'})" data-st='m'>
+			<div class="top_btn" style="" data-st='y'>年</div>
+			<input type="hidden" name="" id="date_y" onclick="WdatePicker({el:'date_y',onpicked:function(){getdatabypost(this);},isShowToday:false,dateFmt:'yyyy'})" data-st='y'>
+		</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;border-bottom:5px solid #ccc;border-top:5px solid #ccc;">
+				<div id="piecharts" style="height:200px;width:100%"></div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;border-bottom:5px solid #ccc;">
+				<div id="linecharts" style="height:250px;width:100%"></div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="border-bottom:1px solid #ccc;padding-top:10px;padding-bottom:10px">
+				我的应用
+			</div>
+			<div class="col-sm-12 col-xs-12" style="border-bottom:1px solid #ccc;">
+				<div class="col-xs-3 col-sm-3 jump" data-url="{:U('sales')}" style="text-align:center;padding:15px;border-right:1px solid #ccc;font-size:.6em;border-bottom:1px solid #ccc;"><img src="__PUBLIC__/Admin/Admin/img/sales.png" style="width:60%;" alt=""><br>销售金额</div>
+				<div class="col-xs-3 col-sm-3 jump" data-url="{:U('stores')}" style="text-align:center;padding:15px;border-right:1px solid #ccc;font-size:.6em;border-bottom:1px solid #ccc;"><img src="__PUBLIC__/Admin/Admin/img/orders.png" style="width:60%;" alt=""><br>订单数量</div>
+				<div class="col-xs-3 col-sm-3 jump" data-url="{:U('Phone/table1')}" style="text-align:center;padding:15px;border-right:1px solid #ccc;font-size:.6em;border-bottom:1px solid #ccc;"><img src="__PUBLIC__/Admin/Admin/img/peoples.png" style="width:60%;" alt=""><br>员工排行</div>
+				<div class="col-xs-3 col-sm-3 jump" data-url="{:U('Phone/table2')}" style="text-align:center;padding:15px;font-size:.6em;border-bottom:1px solid #ccc;"><img src="__PUBLIC__/Admin/Admin/img/paihang.png" style="width:60%;" alt=""><br>销售排行</div>
+				<div class="col-xs-3 col-sm-3 jump" data-url="{:U('Phone/stype')}" style="text-align:center;padding:15px;font-size:.6em;border-right:1px solid #ccc;"><img src="__PUBLIC__/Admin/Admin/img/goaway.png" style="width:60%;" alt=""><br>销售渠道</div>
+				<div class="col-xs-3 col-sm-3 jump" data-url="{:U('Phone/terrace')}" style="text-align:center;padding:15px;font-size:.6em;border-right:1px solid #ccc;"><img src="__PUBLIC__/Admin/Admin/img/ptsale.png" style="width:60%;" alt=""><br>徽记销售</div>
+			</div>
+		</div>
+		
+	</div>
+	<div id="notice_box" style="display:none;">提示信息</div>
+	<button id="btn_pre" class="btn btn-xs btn-white"><span class='glyphicon glyphicon-arrow-left'></span></button>
+	<div style="position:fixed;bottom:10px;right:10px;font-size:1.5em;display:inline;padding:5px 10px;border:1px solid #ccc;border-radius:5px;" class="out"> <span class='glyphicon glyphicon-log-out'></span> </div> 
+	</body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__PUBLIC__/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/Admin/js/echarts.min.js"></script>
+	<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/greenWdatePicker.js"></script>
+<script type="text/javascript">
+	var linecharts='';
+	var piecharts='';
+	var lx={$lx};
+	var ly={$ly};
+	var lz={$lz};
+	var px={$px};
+	var py={$py};
+	var pz={$pz};
+	var pname='';
+	var data_type='A'; //A区域  P省份  C城市  S
+	var cname='';
+	var aname='';
+	var nowtime='{$today}';
+	var tpdom=$('#date_d');
+	$(document).ready(function(){
+		$('.out').click(function(){
+			if (confirm('确定要退出当前账号吗？')) {
+				window.location.href="{:U('Public/goout')}";
+			};
+		})
+		pie(px,py,pz);
+		line(lx,ly,lz);
+		$('.top_btn').click(function(){
+			$('.top_btn').removeClass('active');
+			$(this).addClass('active');
+			var get_type=$(this).attr('data-st');
+			tpdom=$('#date_'+get_type);
+			$('#date_'+get_type).click();
+		})
+		// $(document).on('click','.active',function(){
+		// 	var get_type=$(this).attr('data-st');
+		// 	console.log(get_type);
+
+		// })
+		// $('.active').click(function(){
+			// $('#date_'+get_type).click();
+		// })
+		$('.top_top').click(function(){
+			var _this=$(this);
+			var type=_this.attr('data-type');
+			var truetype='';
+			if (type=='money') {
+				_this.attr('data-type','num').html('订单量<span class=\'glyphicon glyphicon-sort\'></span>');
+				type='num';
+			}else{
+				_this.attr('data-type','money').html('销售额<span class=\'glyphicon glyphicon-sort\'></span>');
+				type='money';
+			}
+			var get_type=$('.active').attr('data-st');
+			linecharts.clear();
+			piecharts.clear();
+			linecharts.showLoading();
+			piecharts.showLoading();
+			$.ajax({
+				url:"{:U('Phone/index')}",
+				type:"post",
+				data:"get_type="+get_type+"&type="+type+"&data_type="+data_type+"&aname="+aname+"&pname="+pname+"&cname="+cname+"&nowtime="+nowtime,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						pie(msg.px,msg.py,msg.pz)
+						line(msg.lx,msg.ly,msg.lz)
+						piecharts.on('click',function(params){
+							getdetail(params);
+						})
+						//更新图表数据
+					}else{
+						notice('暂未查询到数据',3000);
+						// pie(px,py,pz);
+						// line(lx,ly,lz);
+						// $('#active').click();
+					}
+					// data_type='A';
+					linecharts.hideLoading();
+					piecharts.hideLoading();
+				}
+			})
+
+		})
+
+		piecharts.on('click',function(params){
+			getdetail(params);
+		})
+		$('.jump').click(function(){
+			window.location.href=$(this).attr('data-url');
+		})
+
+		$('#btn_pre').click(function(){
+			if (data_type=='P') {
+				pname='';
+				cname='';
+				aname='';
+				data_type='A';
+			}else if (data_type=='C') {
+				cname='';
+				pname='';
+				data_type='P';
+			}else if (data_type=='S') {
+				data_type='C';
+				cname='';
+			};
+			// tpdom.click();
+			tmpgetdata()
+			// $('.active').click();
+			// console.log('123');
+		})
+
+	})
+function tmpgetdata(){
+	var get_type=$('.active').attr('data-st');
+	// $('#date_'+get_type).click();
+	var type=$('.top_top').attr('data-type');
+	linecharts.showLoading();
+	piecharts.showLoading();
+	$.ajax({
+		url:"{:U('Phone/index')}",
+		type:"post",
+		data:"get_type="+get_type+"&type="+type+'&data_type='+data_type+"&aname="+aname+"&pname="+pname+"&cname="+cname+"&nowtime="+nowtime,
+		dataType:"json",
+		success:function(msg){
+			if (msg.status=='success') {
+				pie(msg.px,msg.py,msg.pz)
+				line(msg.lx,msg.ly,msg.lz)
+				piecharts.on('click',function(params){
+					getdetail(params);
+				})
+				//更新图表数据
+			}else{
+				notice('暂未查询到数据',3000);
+			}
+			// data_type='A';
+			linecharts.hideLoading();
+			piecharts.hideLoading();
+		}
+	})
+}
+
+function getdatabypost(_me){
+	console.log($(_me).val());
+	nowtime=$(_me).val();
+	var get_type=$(_me).attr('data-st');
+	// $('#date_'+get_type).click();
+	var type=$('.top_top').attr('data-type');
+	linecharts.showLoading();
+	piecharts.showLoading();
+	$.ajax({
+		url:"{:U('Phone/index')}",
+		type:"post",
+		data:"get_type="+get_type+"&type="+type+'&data_type='+data_type+"&aname="+aname+"&pname="+pname+"&cname="+cname+"&nowtime="+nowtime,
+		dataType:"json",
+		success:function(msg){
+			if (msg.status=='success') {
+				pie(msg.px,msg.py,msg.pz)
+				line(msg.lx,msg.ly,msg.lz)
+				piecharts.on('click',function(params){
+					getdetail(params);
+				})
+				//更新图表数据
+			}else{
+				notice('暂未查询到数据',3000);
+				// pie(px,py,pz);
+				// line(lx,ly,lz);
+				// $('#active').click();
+			}
+			// data_type='A';
+			linecharts.hideLoading();
+			piecharts.hideLoading();
+		}
+	})
+
+}
+
+function getdetail(params){
+	var tmp='';
+	var type=$('.top_top').attr('data-type');
+	var get_type=$('.active').attr('data-st');
+
+	if (data_type=='A') {
+		tmp='P';
+		aname=params.name;
+	}else if (data_type=='P') {
+		tmp='C';
+		pname=params.name;
+	}else if (data_type=='C') {
+		tmp='S';
+		cname=params.name;
+		console.log(params.name);
+	};
+	$.ajax({
+		url:"{:U('Phone/index')}",
+		type:"post",
+		data:"get_type="+get_type+"&type="+type+"&data_type="+tmp+"&aname="+aname+"&pname="+pname+"&cname="+cname+"&nowtime="+nowtime,
+		dataType:"json",
+		success:function(msg){
+			if (msg.status=='success') {
+				line(msg.lx,msg.ly,msg.lz);
+				pie(msg.px,msg.py,msg.pz);
+				data_type=tmp;
+				if (tmp!='S') {
+					piecharts.on('click',function(params){
+						getdetail(params);
+					})
+				};
+			}else{
+				notice('暂未查询到数据',3000);
+			}
+		}
+	})
+	console.log(params.name);
+
+}
+
+function pie(x,y,z){
+	piecharts=echarts.init(document.getElementById('piecharts'));
+	var pieOptions= {
+	    title : {
+	        text: z.title,
+	        subtext: z.subtitle,
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient: 'vertical',
+	        left: 'left',
+	        data: x
+	    },
+	    series : [
+	        {
+	            name: z.type,
+	            type: 'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	            data:y,
+	            itemStyle: {
+	                emphasis: {
+	                    shadowBlur: 10,
+	                    shadowOffsetX: 0,
+	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                },
+	                normal:{ 
+	                  label:{ 
+	                    show: true, 
+	                    formatter: '{c} ({d}%)' 
+	                  }, 
+	                  labelLine :{show:true} 
+	                } 
+	            }
+	        }
+	    ]
+	};
+	piecharts.setOption(pieOptions);
+}
+function line(x,y,z){
+	linecharts=echarts.init(document.getElementById("linecharts"),'infographic');
+	var linechartsOptions= {
+	    tooltip: {
+	        trigger: 'axis'
+	    },
+	    title:{
+	    	text:"",
+	    	subtitle:z.subtitle
+	    },
+	    grid:{
+	    	left:20,
+	    	right:20,
+	    },
+	    toolbox: {
+	        feature: {
+	            // dataView: {show: true, readOnly: false},
+	            magicType: {show: true, type: ['line']},
+	            restore: {show: true},
+	            // saveAsImage: {show: true}
+	        },
+	        itemSize:25,
+	        itemGap:20,
+	        bottom:0,
+	        right:0
+	    },
+	    legend: {
+	        data:z.title,
+	        orient:'horizontal',
+	        formatter: function (name) {
+		        return echarts.format.truncateText(name, 60, '14px Microsoft Yahei', '…');
+		    }
+	    },
+	    xAxis: [
+	        {
+	            type: 'category',
+	            data: x
+	        }
+	    ],
+	    yAxis: [
+	        {
+	            type: 'value',
+	            name: z.type,
+	            subtext:z.subtitle,
+	            position:'left',
+	            nameGap:15,
+	            axisLabel: {
+	                formatter: '{value}',
+	                inside:true,
+	            }
+	        }
+	    ],
+	    series: [
+	        {
+	            name:z.title,
+	            type:'bar',
+	            data:y
+	        }
+	    ]
+	};
+	linecharts.setOption(linechartsOptions);
+}
+function notice(a,b){
+	$('#notice_box').fadeIn().html(a);
+	setTimeout("$('#notice_box').fadeOut()",b);
+}
+</script>
+</html>

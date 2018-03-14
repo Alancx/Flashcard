@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>注册</title>
+
+  <!-- Bootstrap -->
+  <link href="__PUBLIC__/theme2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/css/login.css" rel="stylesheet">
+  <link href="__PUBLIC__/theme2/plugins/weui/weui.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="container">
+    <form id="subForm"  method="post">
+      <div class="form-box">
+        <div class="input-group border-top border-bottom-opt">
+          <span class="input-group-addon"><img src="__PUBLIC__/theme2/Images/shoujihao.png" alt=""></span>
+          <input type="number" name="phone" id="phone" class="form-control" placeholder="请输入手机号">
+        </div>
+        <div class="input-group border-bottom-opt">
+          <span class="input-group-addon"><img src="__PUBLIC__/theme2/Images/shurumima.png" alt=""></span>
+          <input type="password" name="password" id="password" class="form-control" placeholder="请输入密码">
+        </div>
+        <div class="input-group border-bottom">
+          <span class="input-group-addon"><img src="__PUBLIC__/theme2/Images/querenmima.png" alt=""></span>
+          <input type="password" name="repass" id="repass" class="form-control" placeholder="请确认密码">
+        </div>
+      </div>
+      <div class="form-btn">
+        <button class="btn btn-warning btn-md disabled" type="button" id="sub">免费注册</button>
+      </div>
+      <!-- <div class="link">
+        <span class="readsome"><span><img src="__PUBLIC__/theme2/Images/tongyi-01.png" alt=""></span>&nbsp;我已阅读并同意<a href="###">使用条款</a>和<a href="###">隐私政策</a></span>
+        <span class="reg" id="log"><a href="login.html">已有账号，登录</a></span>
+      </div> -->
+    </form>
+  </div>
+  <div id="notice" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+      <i class="weui_icon_toast"></i>
+      <p class="weui_toast_content"></p>
+    </div>
+  </div>
+  <div id="waiting" class="weui_loading_toast" style="display:none;">
+      <div class="weui_mask_transparent"></div>
+      <div class="weui_toast">
+          <div class="weui_loading">
+              <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+              <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+          </div>
+          <p class="weui_toast_content">数据加载中</p>
+      </div>
+  </div>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="__PUBLIC__/theme2/js/jquery.1.11.3.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="__PUBLIC__/theme2/js/bootstrap.min.js"></script>
+  <script src="__PUBLIC__/theme2/js/common.js"></script>
+</body>
+
+
+		<script type="text/javascript">
+			var timeoutObj=null;
+			var timeoutCount=0;
+      $(document).ready(function(){
+        $("#phone").focus();
+      })
+			$(function(){
+
+				$("#authcode").blur(function(){
+					if($("#authcode").val()!="")
+					{
+						$.ajax({
+							url:"{:U('Public/CheckSMSCode')}",
+							type:"post",
+							dataType:"json",
+							data:{"authcode":$("#authcode").val()},
+							complete:function(e){
+
+							},
+							success:function(data){
+								if (data.status!="false") {
+
+								}
+								else
+								{
+									tips("验证码输入错误，请重试");
+									$("#authcode").val("");
+								}
+							},
+							error:function(e){
+								tips("验证码输入错误，请重试");
+								$("#authcode").val("");
+							}
+						});
+					}
+				});
+
+				$("#verify").click(function(){
+					if (timeoutCount!=0) {
+						return false;
+					}
+					$.ajax({
+						url:"{:U('Public/GetSMSCode')}",
+						type:"post",
+						dataType:"json",
+						data:{"phone":$("#phone").val()},
+						complete:function(e){
+
+						},
+						success:function(data){
+							if (data.status!="false") {
+					//$("#verify").html("60秒后可重新发送。序号:"+data.info);
+					timeoutObj=setInterval(function(){
+						$("#verify").html((60-timeoutCount)+"秒后可重新发送。序号:"+data.info);
+						timeoutCount++;
+						if (timeoutCount==60) {
+							clearInterval(timeoutObj);
+							$("#verify").html("点击发送验证码");
+							timeoutCount=0;
+						}
+					},1000);
+				}
+				else
+				{
+					tips("验证码发送失败，请重试");
+				}
+			},
+			error:function(e){
+				tips("验证码发送失败，请重试");
+			}
+		});
+				});
+
+
+
+
+        $("#repass").focus(function(){
+          $("#sub").removeClass('disabled');
+        })
+
+
+        $("#sub").click(function(){
+
+          if($("#phone").val()=="")
+          {
+            tips('notice',"用户名不能为空",1500,'weui_icon_notice');
+            return false;
+          }
+
+          if($("#password").val()=="")
+          {
+            tips('notice',"密码不能为空",1500,'weui_icon_notice');
+            return false;
+          }
+
+          if($("#repass").val()==""||$("#repass").val()!=$("#password").val())
+          {
+            tips('notice',"两次输入密码不一致",1500,'weui_icon_notice');
+            return false;
+          }
+
+					//if ($("#authcode").val()=="")
+					//{
+					//	tips("验证码不能为空");
+					//	return false;
+					//}
+
+					tips('waiting',"正在注册...");
+					$.ajax({
+						url:"{:U('User/Register')}",
+						type:"post",
+						dataType:"json",
+						data:{"username":$("#phone").val(),"password":$("#password").val()},
+						complete:function(e){
+							// closeWaiting();
+              $("#waiting").hide();
+						},
+						success:function(data){
+							if (data.status!="false") {
+								if (data.info=="SuccessToCoupon") {
+									window.location.href="{:U('Home/Account/QrCodeHandle',array('tp'=>5))}";
+								}
+								else
+								{
+                  					tips('notice','注册成功',2000);
+                            history.go(-1);location.reload()
+									// window.location.href="{:U('Home/User/set')}";
+								}
+							}
+							else
+							{
+								if (data.info=="HasUser") {
+									tips('notice',"该用户已注册",2000,'weui_icon_notice');
+								}
+								else
+								{
+									tips('notice',"注册失败",1500,'weui_icon_notice');
+								}
+							}
+						},
+					error:function(e){
+						tips('notice',"注册失败",1500,'weui_icon_notice');
+					}
+				});
+		//$("#subForm").submit();
+	});
+});
+</script>
+
+</html>

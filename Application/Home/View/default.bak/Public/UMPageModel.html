@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>{$TitleInfo}-{$Title}</title>
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Plugins/bootstrap/CSS/bootstrap.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/theme2/plugins/weui/weui.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__PUBLIC__/JS/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Plugins/bootstrap/JS/bootstrap.min.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/theme2/css/my.css?V=04201719" media="screen" title="no title"
+          charset="utf-8">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+
+        var wxJSSDKConfig = {$wxJSSDKConfigStr};
+
+        wx.config(wxJSSDKConfig);
+
+        wx.ready(function (a) {
+            wx.hideAllNonBaseMenuItem();
+        });
+
+        wx.error(function (res) {
+        });
+
+        // function wxScanQRCode() {
+        //     wx.scanQRCode({
+        //         needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+        //         scanType: ["qrCode", "barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+        //         success: function (res) {
+        //             res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+        //         }
+        //     });
+        // }
+    </script>
+</head>
+<body>
+
+<!--浮动菜单按钮-->
+<!-- <div class="flomenu" id="touch">
+    <div class="scanning" onclick="wxScanQRCode();">
+    </div>
+    <div class="scart">
+    </div>
+</div> -->
+<!--end 浮动菜单按钮-->
+<div class="container-fulid">
+    <div class="row" style="margin:0px;">
+        <div class="container"> {__CONTENT__}</div>
+    </div>
+</div>
+<!--<div class="waiting" style="display: none;"></div>-->
+<!-- footer-menus -->
+<if condition="empty($footerSign)">
+
+    <div class="footer">
+        <div class="home"><a href="{:U('Index/Index')}">
+            <div class="ficon"><span class="glyphicon glyphicon-home"></span>
+                <br/></div>
+            <span>首页</span> </a></div>
+
+        <div class="menu"><a href="{:U('LBS/Index')}">
+            <div class="ficon"><span class="glyphicon glyphicon-map-marker"></span>
+                <br/></div>
+            <span>商户自营</span> </a></div>
+
+        <div class="menu"><a href="{:U('UMOrder/Index')}">
+            <div class="ficon"><span class="glyphicon glyphicon-list"></span>
+                <br/></div>
+            <span>订单管理</span> </a></div>
+
+        <div class="menu"><a href="{:U('UMWareHouse/Index')}">
+            <div class="ficon"><span class="glyphicon glyphicon-shopping-cart"></span>
+                <br/></div>
+            <span>库存管理</span> </a></div>
+
+        <div class="menu"><a href="{:U('User/Index')}">
+            <div class="ficon"><span class="glyphicon glyphicon-user"></span>
+                <br/></div>
+            <span>个人中心</span> </a></div>
+    </div>
+    <elseif condition="$footerSign eq 0"/>
+
+</if>
+<!-- footer-menus -->
+<!-- weui提示框 -->
+<div id="notice" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <i class="weui_icon_toast"></i>
+        <p class="weui_toast_content"></p>
+    </div>
+</div>
+
+<div class="weui_dialog_confirm" id="confirm" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">操作提示</strong></div>
+        <div class="weui_dialog_bd"></div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog default" id="esc">取消</a>
+            <a href="javascript:;" class="weui_btn_dialog primary" id="enter" data-s="" data-idcard=''>确定</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="weui_dialog_alert" id="alert" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">提示信息</strong></div>
+        <div class="weui_dialog_bd"></div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog primary" id='alertenter'>确定</a>
+        </div>
+    </div>
+</div>
+
+<div id="waiting" class="weui_loading_toast" style="display:none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <div class="weui_loading">
+            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+        </div>
+        <p class="weui_toast_content">数据加载中</p>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="__PUBLIC__/theme2/js/Base.js?v=1"></script>
+<script type="text/javascript">
+    // $('.scart').click(function () {
+    //     window.location.href = "{:U('Order/Cart')}";
+    // });
+    // $('.jump').click(function () {
+    //     window.location.href = $(this).attr('data-url');
+    // });
+</script>
+<script>
+////////浮动按钮拖动////////////////
+ // var div = document.getElementById('touch');
+ // var divstarttop;
+ // var divstarleft;
+ // div.addEventListener('touchstart', function (event) {
+ //     // 如果这个元素的位置内只有一个手指的话
+
+ //     if (event.targetTouches.length == 1) {
+ //         var touch = event.targetTouches[0];  // 把元素放在手指所在的位置
+ //         div.style.background = "";
+ //         divstarttop = touch.clientY - div.offsetTop;
+ //         divstarleft = touch.clientX - div.offsetLeft;
+ //     }
+ // });
+
+ // div.addEventListener('touchmove', function (event) {
+ //     event.preventDefault();//阻止其他事件
+ //     // 如果这个元素的位置内只有一个手指的话
+ //     if (event.targetTouches.length == 1) {
+
+ //         var touch = event.targetTouches[0];  // 把元素放在手指所在的位置
+ //         var divleft = touch.clientX - divstarleft;
+ //         var divtop = touch.clientY - divstarttop;
+ //         var divwidth = div.offsetWidth;
+ //         var divheight = div.offsetHeight;
+ //         if ((divleft > 0) && (divtop > 0) && (document.documentElement.clientWidth > (divleft + divwidth)) && (document.documentElement.clientHeight > (divtop + divheight))) {
+ //             div.style.left = divleft + 'px';
+ //             div.style.top = divtop + 'px';
+ //         }
+ //         div.style.background = "";
+ //     }
+ // }, false);
+ // div.addEventListener('touchend', function (event) {
+
+ // });
+</script>
+</html>

@@ -1,0 +1,202 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<script src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<style type="text/css">
+	.input-group{
+		display: block!important;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;padding-top:20px;">
+	<div class="col-sm-12">
+		<h5>结算账户信息设置</h5>
+		<form action="" method='post' class='form form-horizontal'>
+			<div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">银行名称</label>
+		    <!--<div class="col-sm-10">
+		    	<input type="text" name="BankName" class="form-control" value="{$binfo.BankName}" required id="">
+		    </div>-->
+				<div class="col-sm-4">
+					<select class="form-control" name="BankName">
+						<option value="{$binfo.BankName}">请选择</option>
+						<if condition="$binfo['BankName'] eq '中国银行' ">
+							<option selected="selected">中国银行</option>
+						<else />
+							<option>中国银行</option>
+						</if>
+						<if condition="$binfo['BankName'] eq '中国农业银行' ">
+							<option selected="selected">中国农业银行</option>
+						<else />
+							<option>中国农业银行</option>
+						</if>
+						<if condition="$binfo['BankName'] eq '中国工商银行' ">
+							<option selected="selected">中国工商银行</option>
+						<else />
+							<option>中国工商银行</option>
+						</if>
+						<if condition="$binfo['BankName'] eq '中国建设银行' ">
+							<option selected="selected">中国建设银行</option>
+						<else />
+							<option>中国建设银行</option>
+						</if>
+						<if condition="$binfo['BankName'] eq '交通银行' ">
+							<option selected="selected">交通银行</option>
+						<else />
+							<option>交通银行</option>
+						</if>
+						<if condition="$binfo['BankName'] eq '招商银行' ">
+							<option selected="selected">招商银行</option>
+						<else />
+							<option>招商银行</option>
+						</if>
+						<if condition="$binfo['BankName'] eq '平安银行' ">
+							<option selected="selected">平安银行</option>
+						<else />
+							<option>平安银行</option>
+						</if>
+						<if condition="$binfo['BankName'] eq '光大银行' ">
+							<option selected="selected">光大银行</option>
+						<else />
+							<option>光大银行</option>
+						</if>
+					</select>
+				</div>
+			</div>
+		  <div class="form-group">
+		  	<label class="col-sm-2 control-label">银行卡号</label>
+		  	<div class="col-sm-4">
+		  		<input type="text" name="IdCard" class="form-control" required id="" value="{$binfo.IdCard}">
+		  	</div>
+		  </div>
+		  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">户主</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" name="IdName" required id="IdName" value="{$binfo.IdName}" placeholder="开户人名">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">手机号码</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" name="phone" required id="phone" value="{$binfo.tel}" placeholder="手机号码">
+		    </div>
+		  </div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label ">验证码</label>
+				<div class="col-sm-3 ">
+					<input type="text" class="form-control" required id="code" placeholder="请填写验证码">
+					<input type="text" class="hcode" hidden value="0">
+				</div>
+				<button type="button" class="btn btn-default get-code" id="J_getCode">获取验证码</button>
+				<button class="btn btn-small reset-code" id="J_resetCode" style="display:none;"><span id="J_second">60</span>秒后重发</button>
+			</div>
+		  <div class="form-group" style="text-align:center;position: absolute;left: 400px">
+		  	<button class="btn btn-primary btn-outline save" type="submit">保 存</button>
+		  </div>
+		</form>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $(document).on('click','.get-code',function() {
+		        getCode(this);
+		        var phone = $('#phone').val();
+                $.ajax({
+                    url : 'sendCode',
+                    type : 'post',
+                    data : 'phone='+phone,
+                    dataType : 'json',
+                    success : function(msg) {
+                        if(msg.status == 'success') {
+                            layer.msg(msg.info);
+                            $('.hcode').val(msg.code);
+                        }
+                    }
+                })
+			})
+
+            $(document).on('click', '.save', function () {
+                var code = $('#code').val();
+                var hcode = $('.hcode').val();
+                // console.log(code);
+                // console.log(hcode);
+                if(code != hcode) {
+                    layer.msg('验证码不正确');
+                    return false;
+                }
+                if(code == '') {
+                    layer.msg('请填写正确的验证码');
+                    return false;
+                }else {
+                    $.ajax({
+                        url : 'sinfoset',
+                        type : 'post',
+                        data : 'code='+code,
+                        dataType : 'json',
+                        success : function(msg) {
+							if(msg.status == 'success') {
+							    layer.msg(msg.info);
+							}else {
+                                layer.msg(msg.info);
+                                return false;
+							}
+                        }
+                    })
+                }
+            })
+
+
+		})
+
+	</script>
+	<script type="text/javascript">
+        /*获取验证码*/
+        var isPhone = 1;
+        function getCode(e){
+            checkPhone(); //验证手机号码
+            if(isPhone){
+                resetCode(); //倒计时
+            }else{
+                $('#phone').focus();
+            }
+
+        }
+        //验证手机号码
+        function checkPhone(){
+            var phone = $('#phone').val();
+            var pattern = /^1[0-9]{10}$/;
+            isPhone = 1;
+            if(phone == '') {
+               layer.msg('请输入手机号码');
+                isPhone = 0;
+                return;
+            }
+            if(!pattern.test(phone)){
+                layer.msg('请输入正确的手机号码');
+                isPhone = 0;
+                return;
+            }
+        }
+        //倒计时
+        function resetCode(){
+            $('#J_getCode').hide();
+            $('#J_second').html('120');
+            $('#J_resetCode').show();
+            var second = 120;
+            var timer = null;
+            timer = setInterval(function(){
+                second -= 1;
+                if(second >0 ){
+                    $('#J_second').html(second);
+                }else{
+                    clearInterval(timer);
+                    $('#J_getCode').show();
+                    $('#J_resetCode').hide();
+                }
+            },1000);
+        }
+	</script>
+
+
+<include file="Common:footer" />

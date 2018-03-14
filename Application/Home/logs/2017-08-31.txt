@@ -1,0 +1,1 @@
+操作定位:User/userjfxq::::SELECT T1.* FROM (SELECT thinkphp.*, ROW_NUMBER() OVER ( ORDER BY rand()) AS ROW_NUMBER FROM (SELECT  SUM(Integral) AS tp_SUM FROM [rs_integraldetail] WHERE ( MemberId='14950255928594' and token='rhbnja145862596121' and (Type<>'xf' and Type<>'constk') )) AS thinkphp) AS T1 WHERE (T1.ROW_NUMBER BETWEEN 1 AND 1)::::::操作日期:::::::2017-08-31 19:00:50

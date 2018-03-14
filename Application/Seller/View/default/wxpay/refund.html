@@ -1,0 +1,130 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<include file="$headername" />
+ <div class="row wrapper border-bottom white-bg page-heading">
+     <div class="col-lg-10">
+         <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>微信退款处理</h2>
+         <ol class="breadcrumb">
+             <li>
+                 <a href="index.html">主页</a>
+             </li>
+             <li class="active">
+                 <strong>微信退款</strong>
+             </li>
+         </ol>
+     </div>
+ <div class="col-lg-2"></div>
+ </div>
+
+
+                <div class="row  wrapper  white-bg" style="margin:0 1%;">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>微信退款</h5>
+                            </div>
+                            <div class="ibox-content">
+                            <if condition="$refundResult">
+                            <if condition="$refundResult['return_code'] eq 'FAIL'">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>业务结果</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>通信出错：{$refundResult.return_msg}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </if>
+                            <if condition="$refundResult['return_code'] eq 'SUCCESS'">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>业务结果</td>
+                                        <td>公众账号ID</td>
+                                        <td>商户号</td>
+                                        <td>微信订单号</td>
+                                        <td>商户订单号</td>
+                                        <td>商户退款单号</td>
+                                        <td>退款渠道</td>
+                                        <td>退款金额(分)</td>
+                                        <td>内容描述</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{$refundResult.result_code}</td>
+                                        <td>{$refundResult.appid}</td>
+                                        <td>{$refundResult.mch_id}</td>
+                                        <td>{$refundResult.transaction_id}</td>
+                                        <td>{$refundResult.out_trade_no}</td>
+                                        <td>{$refundResult.out_refund_no}</td>
+                                        <td>{$refundResult.refund_channel}</td>
+                                        <td>{$refundResult.refund_fee}</td>
+                                        <td>{$refundResult.err_code_des}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <else/>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <td>业务结果</td>
+                                        <td>错误代码</td>
+                                        <td>错误代码描述</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{$refundResult.result_code}</td>
+                                        <td>{$refundResult.err_code}</td>
+                                        <td>{$refundResult.err_code_des}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </if>
+                            <div><a href="{:U('Order/allOrder')}"  class="btn btn-outline btn-warning" >返回订单列表</a></div>
+
+                            <else/>
+                                <form method="post" action="" class="form-horizontal" id="sv">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">订单号</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" name="out_trade_no" id="out_trade_no" class="form-control" value="{$out_trade_no}">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">订单金额</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="total_fee" id="total_fee" class="form-control" value="{$refund_fee}" readonly="readonly"> <span class="help-block m-b-none"></span>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">退款金额</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" name="refund_fee" id="refund_fee" class="form-control" value="{$refund_fee}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button class="btn btn-primary btn-outline" type="submit">确定退款</button>
+                                            <a href="{:U('Order/allOrder')}"  class="btn btn-outline btn-warning" >返回</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ <include file="Common:footer" />

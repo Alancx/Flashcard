@@ -1,0 +1,42 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/distribution/css/disorder.css?v=1.1">
+<div class="disorderpart">
+  <div class="orderstyle">
+  <label class="disordertyle disorderactive" data-style="0"><span>配送中</span></label>
+  <label class="disordertyle" data-style="1"><span>已完成</span></label>
+  </div>
+  <div style="height:47px;"></div>
+  <foreach name="orderlist" item="orderitem">
+    <if condition="$orderitem['IsSuccess'] eq '0'">
+      <div class="orderinfo" data-style="0">
+        <div class="order_info">
+          <label class="orderid">订单号 :{$orderitem['OrderId']}</label>
+          <label class="orderprice">金额 :￥{$orderitem['Price']}</label>
+          <label class="ordername"><span>收货人姓名:</span>{$orderitem['RecevingName']}</label>
+          <label class="orderphone"><span>收货人电话:</span>{$orderitem['RecevingPhone']}</label>
+          <label class="orderaddr"><span>收货人地址:</span>{$orderitem['addr']}</label>
+        </div>
+        <div class="btn_group">
+          <label class="suresend" data-oid="{$orderitem['OrderId']}">确认送达</label>
+        </div>
+      </div>
+      <else/>
+      <div class="orderinfo" data-style="1" style="display:none;">
+        <div class="order_info">
+          <label class="orderid">订单号 :{$orderitem['OrderId']}</label>
+          <label class="orderprice">金额 :￥{$orderitem['Price']}</label>
+          <label class="ordername"><span>收货人姓名:</span>{$orderitem['RecevingName']}</label>
+          <label class="orderphone"><span>收货人电话:</span>{$orderitem['RecevingPhone']}</label>
+          <label class="orderaddr"><span>收货人地址:</span>{$orderitem['addr']}</label>
+        </div>
+        <div class="btn_group">
+          <label class="sureend">配送完成</label>
+        </div>
+      </div>
+    </if>
+  </foreach>
+</div>
+<script type="text/javascript">
+  var savesidlist="{:U('Distribution/savesendorder')}";//配送员处理完成
+</script>
+<script src="__PUBLIC__/distribution/js/disorder.js?v=1.0" charset="utf-8"></script>

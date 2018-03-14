@@ -1,0 +1,83 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>门店管理</h5>
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>门店名称</th>
+					<th>联系电话</th>
+					<th>门店地址</th>
+					<th>核销总额</th>
+					<th>核销订单数</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="stores" item="emp" >
+					<tr>
+						<td>{$emp.id}</td>
+						<td>{$emp.storename}</td>
+						<td>{$emp.tel}</td>
+						<td>{$emp.province}{$emp.city}{$emp.area}{$emp.addr}</td>
+						<td>{$emp.moneys}</td>
+						<td><if condition="$emp['ordernums']"><a href="{:U('Order/allOrder')}?username={$emp.id}">{$emp.ordernums}</a><else/>{$emp.ordernums}</if></td>
+						<td> <a data-toggle="modal" data-target="#myModal" class="cashierqr" data-sid='{$emp.id}'>前往收银台</a> |<a href="###" onclick="getq('{$emp.id}');">添加核销员</a> | <a href="###" onclick="edit('{$emp.id}')">编辑</a> | <a href="###" onclick="del('{$emp.id}');">删除</a>			|			<a href="{:U('Store/userlist')}?sid={$emp.id}&type=XJ">管理支付核销员</a> |
+							<a href="{:U('Store/userlist')}?sid={$emp.id}&type=TH">管理提货核销员</a> 
+						</td>
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">收银台</h4>
+      </div>
+      <div class="modal-body" style="text-align:center">
+         <img src=""  id="getqr" style="height:150px;height:150px;" alt="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary data-dismiss="modal"">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	function del(id){
+		art.dialog.confirm('确定要删除吗？,此操作将把该门店所有核销员一并删除！！！',function(){
+			window.location.href="{:U('Store/del')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+	function edit(id){
+		window.location.href="{:U('Store/edit')}?id="+id;
+	}
+	function getq(id){
+		art.dialog.confirm('此操作将把上次生成的验证码作废，请确认？',function(){
+			art.dialog.open('{:U('ArtDialog/checkStore')}?id='+id);
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+	$('.cashierqr').click(function(){
+		var id=$(this).attr('data-sid');
+		$('#getqr').attr('src','{:U('Store/getcashierqr')}?id='+id);
+	})
+</script>
+<include file="Common:footer" />

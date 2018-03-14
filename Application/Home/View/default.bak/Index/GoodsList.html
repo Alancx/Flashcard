@@ -1,0 +1,60 @@
+<layout name="Public/PageModel"/>
+
+<link rel="stylesheet" href="/Public/theme2/css/class.css?v=1.1">
+<!-- 商品信息-start -->
+<div class="set-full-width">
+    <div class="p-box">
+        <div class="row p-boxrow">
+            <!-- proinfo-box -->
+
+            <foreach name="pl" item="pi">
+
+                <div class="pro-box col-md-6 col-sm-6 col-xs-6">
+
+                    <a href="{:U('Product/Goods',array('pid'=>$pi['ProId']))}">
+                        <div style="text-align:center; padding: 4px 4px 4px 4px">
+                            <img class="proimgs" src="{:C('RESOURCE_URL')}{$pi['ProLogoImg']}" alt="{$pi['ProName']}"/>
+                        </div>
+
+                        <div class="pinfo">
+                            <p class="price"><span>￥</span><?php echo number_format(($pi['PriceRange']),2); ?> </p>
+                            <p class="pname">
+                              <?php if ($stoken=='0'): ?>
+                                <!-- <span class="selfpro showlogo">
+                                  <img src="__PUBLIC__/Images/logoIndex-act.png" alt="">
+                                </span> -->
+                              <?php else: ?>
+                                <?php if ($pi['protype']=='1'): ?>
+                                  <!-- <span class="selfpro showlogo">
+                                    <img src="__PUBLIC__/Images/logoIndex-act.png" alt="">
+                                  </span> -->
+                                <?php else: ?>
+                                  <!-- <span class="selfpro">小店</span> -->
+                                  <?php endif;?>
+                              <?php endif;?>
+                               {$pi['ProName']}
+                             </p>
+                            <p class="ptname">{$pi['ProTitle']}</p>
+                            <div class="xingji">
+                                <span></span>
+                            </div>
+                            <p class="scprice">
+                              {$pi['stype']}
+                                <!-- <del><span>￥</span><?php echo number_format(($pi['Price']),2); ?></del> -->
+                            </p>
+                        </div>
+                    </a>
+                </div>
+
+            </foreach>
+        </div>
+    </div>
+
+</div>
+<!-- 商品信息-end -->
+
+<script>
+    $(function () {
+        $(".proimgs").height($(".proimgs").width());
+    });
+</script>

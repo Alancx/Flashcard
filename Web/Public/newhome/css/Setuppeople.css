@@ -1,0 +1,92 @@
+body,
+div,
+ul,
+li,
+dt,
+dd,
+dl,
+table,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+tr,
+th,
+td,
+img {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	color: #444;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "微软雅黑", arial;
+	padding: 0px;
+	font-size: 14px;
+}
+
+header {
+	background: #fff !important;
+}
+
+.content .mui-scroll {
+	padding-bottom: 10px;
+}
+
+label {
+	text-align: right;
+	color: #444;
+	font-size: 14px !important;
+	width: 110px !important;
+}
+
+input {
+	width: calc(100% - 110px) !important;
+}
+
+input::-webkit-input-placeholder {
+	font-size: 14px;
+}
+
+#RegBtn {
+	margin: 40px 10px 0 10px;
+	height: 50px;
+	padding: 0 !important;
+	background: #ff4e00 !important;
+	width: calc(100% - 20px);
+}
+
+#yzm input[type=text] {
+	width: 40% !important;
+	float: left !important;
+}
+
+#timebtn {
+	display: inline-block;
+	float: right;
+	width: 25% !important;
+	height: 100%;
+	background: #FF4E00;
+	color: #fff;
+	padding: 0 !important;
+}
+
+
+#showtips{
+	display: none;
+	text-align: center;
+	padding: 10px 10px 10px 10px;
+	line-height: 20px;
+}
+

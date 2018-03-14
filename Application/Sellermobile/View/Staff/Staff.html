@@ -1,0 +1,98 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/staff.css?v=1.0">
+<div class="cashcontent">
+<style type="text/css">
+  .geted{
+    height:45px;background-color:#FF3E00;font-size:1.2em;line-height:45px;color:#fff;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    z-index: 1;
+  }
+  .geted>div{float: right;}
+  .geting{
+    height:45px;background-color:#FE670E;border-left:1px solid #fff;font-size:1.2em;line-height:45px;color:#fff;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    z-index: 1;
+    text-align: right;
+  }
+  .geting>div{float: left;}
+</style>
+<div class="row">
+  <div class="col-xs-12 col-sm-12" style="margin-top:5px;">
+    <div class="col-xs-6 col-sm-6 geted">
+      已结算 <div><?php echo floatval($ylcuted)+floatval($xscuted) ?></div>
+    </div>
+    <div class="col-xs-6 col-sm-6 geting">
+      待结算 <div><?php echo floatval($ylcuting)+floatval($xscuting) ?></div>
+    </div>
+  </div>
+  <div class="col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1" style="margin-top: -5px;border:1px solid #FF3E00;border-bottom-left-radius:5px;border-bottom-right-radius:5px;    padding-bottom: 10px;">
+    <div class="col-xs-12 col-sm-12" style="text-align:center;padding-top:15px;">销售金额</div>
+    <div class="col-xs-6 col-sm-6" style="text-align:right;height:40px;line-height:40px;font-size:1.2em;border-bottom:1px solid #ccc;">{$xscuted}</div>
+    <div class="col-xs-6 col-sm-6" style="text-align:left;height:40px;line-height:40px;font-size:1.2em;border-bottom:1px solid #ccc;border-left:1px solid #ccc;">{$xscuting}</div>
+    <div class="col-xs-12 col-sm-12" style="text-align:center;padding-top:15px;">引流金额</div>
+    <div class="col-xs-6 col-sm-6" style="text-align:right;height:40px;line-height:40px;font-size:1.2em;border-bottom:1px solid #ccc;">{$ylcuted}</div>
+    <div class="col-xs-6 col-sm-6" style="text-align:left;height:40px;line-height:40px;font-size:1.2em;border-bottom:1px solid #ccc;border-left:1px solid #ccc;">{$ylcuting}</div>
+  </div>
+</div>
+<!--     <div class="topalltotal">
+      <div class="totalpart_1">
+        <label>待结算<span><?php echo floatval($ylcuting)+floatval($xscuting) ?>(元)</span><span>金额:</span></label>
+      </div>
+      <div class="totalpart_2">
+        <label><span>{$xscuting}(元)</span><span>商品销售待结:</span></label>
+        <label><span>{$ylcuting}(元)</span><span>引流待结:</span></label>
+      </div>
+      <div class="totalpart_1">
+        <label>已结算<span><?php echo floatval($ylcuted)+floatval($xscuted) ?>(元)</span><span>金额:</span></label>
+      </div>
+      <div class="totalpart_2">
+        <label><span>{$xscuted}(元)</span><span>商品销售已结:</span></label>
+        <label><span>{$ylcuted}(元)</span><span>引流已结:</span></label>
+      </div>
+    </div>
+ -->    <div class="showinfo">
+      已结算明细
+    </div>
+    <div class="totalinfo">
+      <div class="toptitle">
+        <label>结算时间</label>
+        <label>结算人</label>
+        <label>结算类型</label>
+        <label>结算金额</label>
+      </div>
+      <div class="total_info">
+      <foreach name='table_data' item='tb'>
+        <div>
+          <label>{$tb.ExecDate}</label>
+          <label>{$tb.cutname}</label>
+          <label>{$tb.Type}</label>
+          <label>￥{$tb.Money}</label>
+        </div>
+      </foreach>
+      </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.totalinfo').css('height',$('.cashcontent').height()-$('.topalltotal').height()-40+'px');
+  $('.total_info').css('height',$('.totalinfo').height()-$('.toptitle').height()+'px');
+})
+</script>
+
+<!-- <if condition="$cashinfo eq 'NULLDATA' ">
+  <div class="nodata">
+    <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+  </div>
+  <else />
+  <div class="cashcontent">
+    <foreach name="cashinfo" item="info">
+      <div class="cashinfo">
+        <label class="time">{$info['ExecDate']}</label>
+        <label class="exname">{$info['ExecName']}</label>
+        <label class="money">￥<?php echo number_format(($info['Money']),2); ?></label>
+      </div>
+    </foreach>
+  </div>
+</if> -->

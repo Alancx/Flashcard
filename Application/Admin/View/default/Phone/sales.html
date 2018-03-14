@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>销售金额</title>
+
+    <!-- Bootstrap -->
+    <link href="__PUBLIC__/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+		td{text-align: center;}
+    </style>
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12 col-xs-12" style="padding:0px;border-bottom:1px solid #ccc;">
+				<div id="linecharts" style="height:200px;"></div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;border-bottom:5px solid #ccc;">
+				<div id="piecharts" style="height:200px;width:100%"></div>
+			</div>
+			<div class="col-sm-12 col-xs-12" style="padding:0px;">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<!-- <td>#</td> -->
+							<td>店铺名称</td>
+							<td><div class="dropup">
+								  <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    销售额<span class='type'>(日)</span>
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+								    <li class="disabled" data-s='d'><a href="#" >日</a></li>
+								    <li class="" data-s='w'><a href="#" >周</a></li>
+								    <li class="" data-s='m'><a href="#" >月</a></li>
+								  </ul>
+								</div>
+							</td>
+						</tr>
+					</thead>
+					<tbody id="stcontet">
+					<foreach name='store_money' item='stm'>
+						<tr>
+							<!-- <td>{$stm.stoken}</td> -->
+							<td>{$stm.storename}</td>
+							<td>{$stm.money}</td>
+						</tr>
+					</foreach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/Admin/js/echarts.min.js"></script>
+  </body>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$('li').click(function(){
+			var _this=$(this);
+			var st=_this.attr('data-s');
+			var cls=_this.attr('class');
+			if (cls=='disabled') {
+				//
+				console.log('到此为止');
+			}else{
+				$('li').attr('class','');
+				_this.attr('class','disabled');
+				var tname='';
+				if (st=='w') {
+					tname='周';
+				}else if (st=='d') {
+					tname='日';
+				}else if (st=='m') {
+					tname='月';
+				};
+				$('.type').html('('+tname+')');
+				// console.log('去请求');
+				$.ajax({
+					url:"{:U('Phone/sales')}",
+					type:"post",
+					data:"type="+st,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							var data=msg.data;
+							var _html='';
+							$.each(data,function(index,item){
+								_html+='<tr><td>'+item.storename+'</td><td>'+item.money+'</td></tr>';
+							})
+							$('#stcontet').html(_html);
+						}else{
+							alert('未查到相关信息');
+						}
+					}
+				})
+			}
+		})
+		var linecharts=echarts.init(document.getElementById("linecharts"));
+		var linechartsOptions = {
+		    title: {
+		        text: '销售一览'
+		    },
+		    tooltip : {
+		        trigger: 'axis'
+		    },
+		    legend: {
+		        data:['销售额']
+		    },
+		    toolbox: {
+		        feature: {
+		            // saveAsImage: {}
+		        }
+		    },
+		    grid: {
+		        left: '7%',
+		        right: '4%',
+		        bottom: '10%',
+		        containLabel: true,
+		        show:true,
+		        // backgroundColor :"#F75C58"
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            boundaryGap : false,
+		            data : {$time},
+		            nameRotate : 45,
+		            axisLabel:{
+		            	rotate :45
+		            },
+		            splitNumber :30
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value',
+		            axisLabel:{
+		            	inside:true,
+		            }
+		        }
+		    ],
+		    series : [
+		        {
+		            name:'销售额',
+		            type:'line',
+		            stack: '总量',
+		            label: {
+		                normal: {
+		                    show: true,
+		                    position: 'top'
+		                }
+		            },
+		            areaStyle: {normal: {
+		            	color:"#F75C58",
+		            }},
+		            lineStyle: {normal: {
+		                color:'#F75C58'
+		            }},
+		            markLine : {
+		            data : [
+		            {type : 'average', name : '平均值'}
+		            ]},
+		            data:{$money}
+		        }
+		    ]
+		};
+		linecharts.setOption(linechartsOptions);
+		var piecharts=echarts.init(document.getElementById("piecharts"));
+		var pieOption = {
+			    title : {
+			        text: '支付方式',
+			        subtext: '-',
+			        x:'center'
+			    },
+			    tooltip : {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b} : {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        left: 'left',
+			        data: {$pie_name}
+			    },
+			    series : [
+			        {
+			            name: '访问来源',
+			            type: 'pie',
+			            radius : '55%',
+			            center: ['50%', '60%'],
+			            data:{$pie_data},
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                },
+			                normal:{ 
+			                  label:{ 
+			                    show: true, 
+			                    formatter: '{c} ({d}%)' 
+			                  }, 
+			                  labelLine :{show:true} 
+			                } 
+			            }
+			        }
+			    ]
+			};
+		piecharts.setOption(pieOption);
+		console.log({$pie_data},{$pie_name});
+	})
+</script>
+</html>

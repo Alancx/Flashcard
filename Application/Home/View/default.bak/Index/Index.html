@@ -1,0 +1,290 @@
+<layout name="Public/PageModel"/>
+<script src="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.jquery.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/index.css?v=1.1">
+
+<!-- 腾讯地图前端定位组件 -->
+<script type="text/javascript" src="http://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<div class="tl">
+  <!--轮播图s-->
+  <div class="swiper-container set-full-width">
+    <div class="swiper-wrapper">
+
+      <foreach name="imgs" item="il">
+        <div class="swiper-slide"><img class="imgScrollSize" src="{:C('RESOURCE_URL')}{$il['ImgPath']}"/></div>
+      </foreach>
+
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <!--轮播图e-->
+  <!--热销排行-->
+  <if condition="$isself eq 'true'">
+    <div class="prohot row">
+      <div class="prohottitle">
+        <label class="hottitle">自营商品</label>
+        <label class="modsel jump" data-url="{:U('Index/GoodsList',array('type'=>'selfp'))}">更多</label>
+      </div>
+      <div class="prohotlist">
+        <foreach name='selfp' item='sp'>
+
+        </foreach>
+        <div class="pro-list-1 row">
+          <div class="plist-1 col-md-6 col-sm-6 col-xs-6 jump" data-url="{:U('Product/Goods',array('pid'=>$selfp[0]['ProId']))}">
+            <div class="plist-1-mage">
+              <!-- <label class="plist-1-name"><?php echo mb_substr($selfp[0]['ProName'],0,5,'utf-8'); ?></label> -->
+              <label class="plist-1-name">{$selfp[0]['ProName']}</label>
+              <div class="xingji">
+                <span></span>
+              </div>
+            </div>
+            <div class="plist-1-jiage">
+              <label class="plist-1-price">￥<?php echo number_format(($selfp[0]['PriceRange']),2); ?></label>
+              <label class="plist-1-salv">已售<?php echo $selfp[0]['SalesCount']?$selfp[0]['SalesCount']:0 ?></label>
+            </div>
+            <div class="plist-1-image">
+              <img src="{:C('RESOURCE_URL')}{$selfp.0.ProLogoImg}">
+            </div>
+          </div>
+          <div class="plist-2 col-md-6 col-sm-6 col-xs-6">
+            <div class="plist-2-1 jump" data-url="{:U('Product/Goods',array('pid'=>$selfp[1]['ProId']))}">
+              <div class="plist-2-mage">
+                <!-- <label class="plist-2-name"><?php echo mb_substr($selfp[1]['ProName'],0,5,'utf-8'); ?></label> -->
+                <label class="plist-2-name">{$selfp[1]['ProName']}</label>
+                <div class="xingji">
+                  <span></span>
+                </div>
+                <label class="plist-2-price">￥<?php echo number_format(($selfp[1]['PriceRange']),2); ?></label>
+                <label class="plist-2-salv">已售<?php echo $selfp[1]['SalesCount']?$selfp[1]['SalesCount']:0 ?></label>
+              </div>
+              <div class="plist-2-image">
+                <img src="{:C('RESOURCE_URL')}{$selfp.1.ProLogoImg}">
+              </div>
+            </div>
+            <div style="height: 2vw"></div>
+            <div class="plist-2-1 jump" data-url="{:U('Product/Goods',array('pid'=>$selfp[2]['ProId']))}">
+              <div class="plist-2-mage">
+                <!-- <label class="plist-2-name"><?php echo mb_substr($selfp[2]['ProName'],0,5,'utf-8'); ?></label> -->
+                <label class="plist-2-name">{$selfp[2]['ProName']}</label>
+                <div class="xingji">
+                  <span></span>
+                </div>
+                <label class="plist-2-price">￥<?php echo number_format(($selfp[2]['PriceRange']),2); ?></label>
+                <label class="plist-2-salv">已售<?php echo $selfp[2]['SalesCount']?$selfp[2]['SalesCount']:0 ?></label>
+              </div>
+              <div class="plist-2-image">
+                <img src="{:C('RESOURCE_URL')}{$selfp.2.ProLogoImg}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pro-list-2 row">
+          <for start='3' end='6' step='1'>
+            <div class="plist-3 col-md-4 col-sm-4 col-xs-4 jump" data-url="{:U('Product/Goods',array('pid'=>$selfp[$i]['ProId']))}">
+              <div class="plist-3-image">
+                <img src="{:C('RESOURCE_URL')}<?php echo ($selfp[$i]['ProLogoImg']); ?>">
+              </div>
+              <!-- <label class="plist-3-name"> <?php echo mb_substr($selfp[$i]['ProName'],0,5,'utf-8'); ?></label> -->
+              <label class="plist-1-name">{$selfp[$i]['ProName']}</label>
+              <div class="xingji">
+                <span></span>
+              </div>
+              <label class="plist-3-price"><span>￥</span><?php echo number_format(($selfp[$i]['PriceRange']),2); ?></label>
+              <label class="plist-3-salv">已售<?php echo $selfp[$i]['SalesCount']?$selfp[$i]['SalesCount']:0 ?></label>
+            </div>
+          </for>
+        </div>
+      </div>
+    </div>
+    <else/>
+    <div class="prohot row">
+      <div class="prohottitle">
+        <label class="hottitle">热销排行</label>
+        <label class="modsel jump" data-url="{:U('Index/GoodsList',array('type'=>'hot'))}">更多</label>
+      </div>
+      <div class="prohotlist">
+        <div class="pro-list-1 row">
+          <div class="plist-1 col-md-6 col-sm-6 col-xs-6 jump" data-url="{:U('Product/Goods',array('pid'=>$top['ProId']))}">
+            <div class="plist-1-mage">
+              <!-- <label class="plist-1-name"><?php echo mb_substr($top['ProName'],0,5,'utf-8'); ?></label> -->
+              <label class="plist-1-name">{$top['ProName']}</label>
+              <div class="xingji">
+                <span></span>
+              </div>
+            </div>
+            <div class="plist-1-jiage">
+              <label class="plist-1-price">￥<?php echo number_format(($top['PriceRange']),2); ?></label>
+              <label class="plist-1-salv">已售<?php echo $top['SalesCount']?$top['SalesCount']:0 ?></label>
+            </div>
+            <div class="plist-1-image">
+              <img src="{:C('RESOURCE_URL')}{$top.ProLogoImg}">
+            </div>
+          </div>
+          <div class="plist-2 col-md-6 col-sm-6 col-xs-6">
+            <div class="plist-2-1 jump" data-url="{:U('Product/Goods',array('pid'=>$lefts[0]['ProId']))}">
+              <div class="plist-2-mage">
+                <!-- <label class="plist-2-name"><?php echo mb_substr($lefts[0]['ProName'],0,5,'utf-8'); ?></label> -->
+                <label class="plist-2-name">{$lefts[0]['ProName']}</label>
+                <div class="xingji">
+                  <span></span>
+                </div>
+                <label class="plist-2-price">￥<?php echo number_format(($lefts[0]['PriceRange']),2); ?></label>
+                <label class="plist-2-salv">已售<?php echo $lefts[0]['SalesCount']?$lefts[0]['SalesCount']:0 ?></label>
+              </div>
+              <div class="plist-2-image">
+                <img src="{:C('RESOURCE_URL')}{$lefts.0.ProLogoImg}">
+              </div>
+            </div>
+            <div style="height: 2vw"></div>
+            <div class="plist-2-1 jump" data-url="{:U('Product/Goods',array('pid'=>$lefts[1]['ProId']))}">
+              <div class="plist-2-mage">
+                <!-- <label class="plist-2-name"><?php echo mb_substr($lefts[1]['ProName'],0,5,'utf-8'); ?></label> -->
+                <label class="plist-2-name">{$lefts[1]['ProName']}</label>
+                <div class="xingji">
+                  <span></span>
+                </div>
+                <label class="plist-2-price">￥<?php echo number_format(($lefts[1]['PriceRange']),2); ?></label>
+                <label class="plist-2-salv">已售<?php echo $lefts[1]['SalesCount']?$lefts[1]['SalesCount']:0 ?></label>
+              </div>
+              <div class="plist-2-image">
+                <img src="{:C('RESOURCE_URL')}{$lefts.1.ProLogoImg}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pro-list-2 row">
+          <for start='0' end='3' step='1'>
+            <div class="plist-3 col-md-4 col-sm-4 col-xs-4 jump" data-url="{:U('Product/Goods',array('pid'=>$hot[$i]['ProId']))}">
+              <div class="plist-3-image">
+                <img src="{:C('RESOURCE_URL')}<?php echo ($hot[$i]['ProLogoImg']); ?>">
+              </div>
+              <!-- <label class="plist-3-name"> <?php echo mb_substr($hot[$i]['ProName'],0,5,'utf-8'); ?></label> -->
+              <label class="plist-3-name">{$hot[$i]['ProName']}</label>
+              <div class="xingji">
+                <span></span>
+              </div>
+              <label class="plist-3-price"><span>￥</span><?php echo number_format(($hot[$i]['PriceRange']),2); ?></label>
+              <label class="plist-3-salv">已售<?php echo $hot[$i]['SalesCount']?$hot[$i]['SalesCount']:0 ?></label>
+            </div>
+          </for>
+        </div>
+      </div>
+    </div>
+  </if>
+  <!--end 热销排行-->
+  <!--新品专区-->
+  <div class="pronew row">
+    <div class="prohottitle">
+      <label class="newtitle">新品专区</label>
+      <label class="modsel jump" data-url="{:U('Index/GoodsList',array('type'=>'new'))}">更多</label>
+    </div>
+    <div class="pronewlist row">
+      <foreach name='new' item='np'>
+        <div class="pnewlist col-md-6 col-sm-6 col-xs-6 jump" data-url="{:U('Product/Goods',array('pid'=>$np['ProId']))}">
+          <div class="plist-2-mage">
+            <!-- <label class="plist-2-name"><?php echo mb_substr($np['ProName'],0,5,'utf-8'); ?></label> -->
+            <label class="plist-2-name">{$np['ProName']}</label>
+            <label class="plist-2-tname"><?php echo mb_substr($np['ProTitle'],0,6,'utf-8'); ?></label>
+            <div class="xingji">
+              <span></span>
+            </div>
+            <label class="plist-2-price"><span>￥</span><?php echo number_format(($np['PriceRange']),2); ?></label>
+          </div>
+          <div class="plist-2-image">
+            <img src="{:C('RESOURCE_URL')}{$np.ProLogoImg}">
+          </div>
+        </div>
+      </foreach>
+    </div>
+  </div>
+  <!--end 新品专区-->
+  <!--推荐专区-->
+  <!-- <div class="prohot row">
+  <div class="prohottitle">
+  <label class="sugtitle">推荐专区</label>
+  <label class="modsel">更多</label>
+</div>
+<div class="prosuglist row">
+<div class="psuglist col-md-12 col-sm-12 col-xs-12"  style="border-style: none">
+<div class="plist-sug-mage">
+<label class="plist-sug-name">蜜之姣</label>
+<label class="plist-sug-fname">样样经典 个个美味</label>
+<div class="xingji">
+<span></span>
+</div>
+<label class="plist-sug-price">￥100.00</label>
+</div>
+<div class="plist-sug-image">
+<img src="/Upload/Uoloads/2016-04-13/570db395903b5.jpg">
+</div>
+</div>
+</div>
+</div> -->
+<!--end推荐专区-->
+<!--所有商品-->
+<!-- <div class="allpro">
+查看所有商品
+</div> -->
+<!--end所有商品-->
+</div>
+
+<script type="text/javascript">
+//轮播图数据
+var mySwiper = new Swiper('.swiper-container', {
+  autoplay: 3000,//可选选项，自动滑动
+  pagination: '.swiper-pagination', //分页器
+  paginationClickable: true,//分页器圆点是否可以点击
+  preloadImages: false,//强制加载图片
+  shortSwipes: true, //快速短距离的拖动触发
+  loop: true,
+});
+</script>
+
+<!-- 定位信息 -->
+<script type="text/javascript">
+//腾讯地图获取当前位置
+var geolocation = new qq.maps.Geolocation("NROBZ-QPFHX-DNA4U-7NIQN-RFGHS-4HFS4", "web商店");
+var options = {timeout: 6000};
+window.onload = function(){
+    geolocation.getLocation(showPosition, showErr, options);  
+}
+///////定位成功返回函数///////
+function showPosition(position) { 
+// alert(position.lat); 
+  // var mycenter=new qq.maps.LatLng(position.lat, position.lng);
+  var mylat=position.lat;
+  var mylng=position.lng;
+  var mycity=position.city;
+  var senddata={
+    slat:mylat,
+    slng:mylng,
+    scity:mycity,
+  }    
+  $.ajax({
+    type: "post", //请求的方式
+    dataType: "json", //数据的格式 建议大家使用json格式
+    data: senddata, //请求的数据
+    url: "{:U('LBS/getchildshop')}", //请求的url地址
+    success: function (data) { //请求成功时，处理返回来的数据
+      if (data.status=='true') {
+         window.location.href="{:U('Index/Index')}";
+
+      }
+    }
+  })
+   console.log('定位成功');
+}
+///////定位失败返回函数////////
+function showErr() {
+  console.log('定位失败');
+};
+</script>

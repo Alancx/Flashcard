@@ -1,0 +1,56 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/ordercut.css" />
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/bootstrap-datetimepicker.min.css" />
+<div class="ordercutpart">
+  <div class="topinfo">
+    <span>截至日期:</span>
+    <div class="inputdate">
+      <span class="showdate" data-date="">选择日期</span>
+      <span class="showicon"></span>
+    </div>
+    <span class="suredate">搜索</span>
+  </div>
+  <div class="cutpart">
+    <div class="cutitem">
+      <span>金额:</span>
+      <span class="allprice">0元</span>
+    </div>
+    <div class="cutitem">
+      <span>平台扣点:</span>
+      <span class="cutprice">0元</span>
+    </div>
+    <div class="cutitem">
+      <span>扣点比率:</span>
+      <span class="cutper">0%</span>
+    </div>
+    <div class="cutitem">
+      <span>最后结算时间:</span>
+      <span class="lastcuttime">结算时间</span>
+    </div>
+    <span class="showcutinfo">提示:仅优惠订单扣除手续费<br>
+      <if condition="$sinfo['IsFreeCut'] eq 1"><span>免结算手续费时间段 {$sinfo.FreeStime}-{$sinfo.FreeEtime}</span></if>
+    </span>
+  </div>
+  <div class="bottombtn">
+    <span class="lookinfo" stime="" etime="">查看明细</span>
+    <span class="surebtn" stime="" etime="">结算</span>
+  </div>
+</div>
+<div class="ordersmark">
+  <div class="orderslist">
+    <!-- <div class="orderinfo">
+      <span>订单号<span>优惠订单</span></span>
+      <span>金额<span>100.00</span></span>
+      <span>下单时间<span>100.00</span></span>
+    </div> -->
+  </div>
+  <span class="closeorders">关闭</span>
+</div>
+<script type="text/javascript">
+var search_url = "{:U('Staff/ordercut')}";
+var cut_url = "{:U('Staff/cuted')}";
+var getcut_url = "{:U('Staff/Staff')}";
+var lookcut_url = "{:U('Staff/getdetail')}";
+</script>
+<script src="__PUBLIC__/Sellermobile/js/bootstrap-datetimepicker.js?v=1.0" charset="utf-8"></script>
+<script src="__PUBLIC__/Sellermobile/js/ordercut.js?v=1.0" charset="utf-8"></script>

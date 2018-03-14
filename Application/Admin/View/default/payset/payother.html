@@ -1,0 +1,73 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+ <div class="col-lg-3 col-md-4 col-lg-offset-8 col-md-offset-8 pull-right" style="height:300px;border:0px solid red;position:absolute;top:5px;right:5px;z-index:9;">
+     <div class="panel">
+         <div class="panel-heading">
+             <i class="fa fa-warning"></i> 提示信息
+         </div>
+         <div class="panel-body">
+             <div class="alert alert-warning">
+             <img src="{:U('Payset/openidqr')}" style="width:200px;height:200px;" alt="">
+          </div>
+      </div>
+  </div>
+</div>
+
+
+                <div class="row  wrapper  white-bg" style="margin:0 1%;">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>微信转账</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form method="post" action="{:U('Payset/givemoney')}" class="form-horizontal" id="sv">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户Openid</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" name="openid" id="openid" class="form-control required" value="{$config.appid}" >
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">转账金额</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="money" id="money" class="form-control required" value="{$config.appsecret}"> <span class="help-block m-b-none"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button class="btn btn-primary btn-outline" type="submit">保存内容</button>
+                                            <button class="btn btn-outline btn-warning" type="reset">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#sv").validate({
+            rules: {
+                repass:{
+                        required: true,
+                        equalTo: "#Password"
+                },
+                DepartmentName: 'required'
+            }
+        });
+    })
+
+
+    function upfile(id){
+      	art.dialog.data('domid',id);
+  		art.dialog.open("{:U('ArtDialog/upcert')}");
+  	}
+</script>
+
+ <include file="Common:footer" />

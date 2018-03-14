@@ -1,0 +1,64 @@
+body,div,ul,li,dt,dd,dl,table,h1,h2,h3,h4,h5,h6,p,span,tr,th,td,img{margin: 0px;padding: 0px;list-style-type: none; }
+a{text-decoration: none;color: #444;margin: 0;padding: 0;}
+body{font-family: "微软雅黑",arial; background: #fff !important; overflow: hidden;}
+
+header{
+	background: rgba(255,255,255,0.95) !important;
+}
+
+.mui-scroll-wrapper{
+	margin-top: 44px;
+	padding: 10px 0;
+}
+.tuangou{
+	font-size: 36px !important;
+	color: #40D29B;
+	margin-right: 10px;
+}
+/**/
+
+#mygroup a{
+	display: flex !important;
+	align-items: center;
+}
+.floatright{
+	color: #999;
+	margin-right: 20px;
+	position: absolute;
+	right: 20px !important;
+}
+
+h4{
+	padding: 10px;
+	color: #444;
+}
+.mui-grid-view.mui-grid-9{
+	background: #fff;
+}
+.mui-media-object{
+	width: 150px !important;
+	height: 150px !important;
+}
+.mui-media-body{
+	height: auto !important;
+	text-overflow: initial !important;
+	white-space: normal !important;
+	text-align: left;
+	
+}
+.sign{
+	background: #DD524D;
+	color: #fff;
+	padding: 0 4px;
+}
+.jiage{
+	color: #DD524D;
+	font-size: 18px;
+}
+#TGlist li{
+	height: 250px;
+}
+.mui-media-body>span{
+	height: 20px;
+}
+

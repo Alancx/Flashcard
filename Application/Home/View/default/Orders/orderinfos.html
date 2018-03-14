@@ -1,0 +1,189 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/orderinfos.css?v=1.1" />
+<div class="submitorderpart">
+  <div class="orderpart">
+    <div class="topsinfo">
+      <img src="{$sinfo['Slogo']}" alt="">
+      <span class="sname">{$sinfo['storename']}</span>
+      <span class="mui-icon mui-icon-arrowright sicon"></span>
+    </div>
+    <div class="proslist">
+      <div class="pro_list">
+
+      </div>
+      <div class="getmorepros">
+        <span class="getmorebtn" data-type="0"><span class="showtext">展开更多</span><span class="mui-icon mui-icon-arrowdown showgeticon"></span></span>
+      </div>
+    </div>
+    <div class="showpriceinfo">
+      <!-- <div class="cutleryfee">
+        <span>餐具费</span>
+        <span>0.00</span>
+      </div> -->
+      <!-- <div class="fullreduction">
+        <span>满减优惠</span>
+        <span>0.00</span>
+      </div> -->
+      <if condition="$oinfo['CouponListId'] neq '0'">
+        <div class="redparts">
+          <span>红包</span>
+          <span class="redprice">{$oinfo.Coupon}</span>
+        </div>
+      </if>
+      <!-- <div class="redparts">
+        <span>就餐人数</span>
+        <span class="">{$oinfo.TableId}</span>
+      </div> -->
+      <div class="showlines">
+        <span class="lineleft"></span>
+        <span class="linecenter"></span>
+        <span class="lineright"></span>
+      </div>
+      <div class="alltotalprice">
+        <span class="aprice"><?php echo number_format(($oinfo['Price']),2); ?></span>
+        <span>合计</span>
+      </div>
+      <div class="showlines">
+        <span class="lineleft"></span>
+        <span class="linecenter"></span>
+        <span class="lineright"></span>
+      </div>
+      <div class="telinfo">
+        <span class="ggg phone_icon" RPath="tel:{$sinfo.tel}">电话商家</span>
+      </div>
+    </div>
+  </div>
+  <div class="bottompart">
+    <!-- <switch name="oinfo.Status">
+      <case value="1"><span class="qxorder">取消订单</span><span class="payorder">立即付款</span></case>
+      <case value="2"><span class="tkorder">退款</span><span class="eatorder">就餐码</span></case>
+      <case value="3"><span class="tkorder">退款</span><span class="eatorder">就餐码</span></case>
+      <case value="4">
+        <if condition ="$oinfo.IsEvaluation eq 0">
+          <span class="evalorder">立即评价</span>
+          <else />
+          <span class="delorder">删除订单</span>
+        </if>
+      </case>
+      <case value="8"><span class="qxorder">取消订单</span></case>
+      <default />
+    </switch> -->
+    <switch name="oinfo.Status">
+      <case value="2"><span class="shareorder" RPath="{:U('Home/Orders/shareorderpages',array('oid'=>$orderid))}">立即分享</span></case>
+      <case value="3"><span class="shareorder" RPath="{:U('Home/Orders/shareorderpages',array('oid'=>$orderid))}">立即分享</span></case>
+      <case value="4"><span class="shareorder" RPath="{:U('Home/Orders/shareorderpages',array('oid'=>$orderid))}">立即分享</span></case>
+      <case value="8"><span class="shareorder" RPath="{:U('Home/Orders/shareorderpages',array('oid'=>$orderid))}">立即分享</span></case>
+      <default />
+    </switch>
+
+  </div>
+</div>
+<script src="__PUBLIC__/newhome/js/orderinfos.js?v=1.3" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  var olinfo = '{$olinfo}';
+  var orderid ='{$orderid}';
+</script>
+
+
+<!-- <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+<!-- <script type="text/javascript">
+var SID;//分享预处理ID
+$(document).ready(function() {
+    $.ajax({
+        url: "{:U('Orders/shareinfo')}",
+        type: "post",
+        data: {
+            Type: "O",
+            //分享类型 商品分享
+            Sharer: '{$oinfo.MemberId}',
+            ShareId: orderid,
+            s: "preshare"
+        },
+        dataType: "json",
+        success: function(msg) {
+            if (msg.status == 'success') {
+                SID = msg.ID;
+            } else {
+
+            }
+        }
+    })
+    wx.config({$wxJSSDKConfigStr});
+    wx.ready(function() {
+        wx.onMenuShareTimeline({
+
+            title: '{$sinfo.storename}',
+            // 分享标题
+
+            link: window.location.href + '&SID=' + SID,
+            // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+
+            imgUrl: window.location.protocol + '//' + window.location.host + '{$sinfo.Slogo}',
+            // 分享图标
+
+            success: function() {
+                // 用户确认分享后执行的回调函数
+                sharesuccess();
+
+            },
+        });
+        wx.onMenuShareAppMessage({
+
+            title: '{$sinfo.storename}',
+            // 分享标题
+
+            desc: '{$sinfo.storename}',
+            // 分享描述
+
+            link: window.location.href + '&SID=' + SID,
+            // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+
+            imgUrl: window.location.protocol + '//' + window.location.host + '{$sinfo.Slogo}',
+            // 分享图标
+
+            type: '',
+            // 分享类型,music、video或link，不填默认为link
+
+            dataUrl: '',
+            // 如果type是music或video，则要提供数据链接，默认为空
+
+            success: function() {
+
+                sharesuccess();
+
+            },
+
+            cancel: function() {
+
+                // 用户取消分享后执行的回调函数
+
+            }
+
+        });
+    })
+})
+function sharesuccess(){
+  $.ajax({
+      url:"{:U('Orders/shareinfo')}",
+      type:"post",
+      data:{
+        s:"shareout",
+        ID:SID
+    },
+    dataType:"json",
+    success:function(msg){
+        if (msg.status=='success') {
+          console.log(msg);
+              //成功信息  判断是否有红包
+              if (msg.redpaper=='yes') {
+                //有红包处理一下
+            }else{
+                //没红包，普通的分享
+            }
+        }else{
+              //错误信息
+          }
+      }
+  })
+}
+</script> -->

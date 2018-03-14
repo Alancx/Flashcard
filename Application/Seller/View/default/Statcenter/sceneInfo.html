@@ -1,0 +1,158 @@
+<include file="Common:top" />
+<link href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css" rel="stylesheet">
+<link href="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager_blue.css" rel="stylesheet">
+<link href="__PUBLIC__/Admin/Admin/common/css/order.style.css" rel="stylesheet">
+<style type="text/css">
+    ul,ol,li{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<include file="$headername" />
+<!--面包屑 标题栏-->
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>场景数据统计</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{:U('Index/index')}">主页</a>
+            </li>
+            <li class="active"> <strong>场景数据统计</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox-content dash-ibox-content">
+                <div id="js-pagedata" class="widget widget-pagedata" style="padding:0 0 10px 0px;margin-top:0px;">
+                    <div class="widget-inner">
+                        <div class="widget-head">
+                            <h3 class="widget-title">场景数据概况</h3>
+                            <div class="help tooltip-demo">
+                                <a href="javascript:void(0);" class="js-help-icon" data-toggle="tooltip" data-placement="left" data-original-title="只计算通过场景扫描注册会员数">?</a>
+                            </div>
+                        </div>
+                        <div class="widget-body with-border" id="echarts_sceneinfo">
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content" style="padding-bottom:0px;">
+                    <form role="form" class="form-horizontal" method="post" id="allorder_form">
+                        <div class="filter-groups" style="width:540px;">
+                            <div class="form-group">
+                                <label class="control-label">注册日期：</label>
+                                <div class="controls">
+                                    <input readonly type="text" name="start_time" id="start_time" onfocus="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd',autoPickDate:true,maxDate:'%y-%M-{%d-2}'})" class="Wdate form-control input-sm" style="width:120px;display:inline-block;">
+                                    <span>至</span>
+                                    <input readonly type="text" name="end_time" id="end_time" onfocus="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd',autoPickDate:true,maxDate:'%y-%M-%d'})" class="Wdate form-control input-sm" style="width:120px;display:inline-block;">
+                                    <a class="btn btn-xs" data-day="0">清空</a>
+                                    <a class="btn btn-xs" data-day="6">最近7天</a>
+                                    <a class="btn btn-xs" data-day="29">最近30天</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-groups">
+                            <label for="exampleInputPassword2" class="sr-only">选择商品</label>
+                            <select name="sid" id="chosen" class="form-control" value="">
+                            <option value="">请选择场景</option>
+                                <foreach name="allScene" item="scene">
+                                    <option value="{$scene.ID}">{$scene.SceneName}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div style="clear:left;"></div>
+                        <div>
+                            <button type="button" class="btn btn-w-m btn-success btn-sm" id="btn_select">筛选</button>
+                            <button type="button" class="btn btn-w-m btn-white" id="btn_excel"><i class="fa fa-download"></i>&nbsp;&nbsp;导出</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="js-pagedata" class="widget widget-pagedata" style="padding:0 0 10px 0px;">
+                    <div class="widget-inner">
+                        <div class="widget-head">
+                            <h3 class="widget-title">场景-注册会员统计</h3>
+                            <div class="help tooltip-demo">
+                                <a href="javascript:void(0);" class="js-help-icon" data-toggle="tooltip" data-placement="left" data-original-title="根据日期进行筛选">?</a>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr style="background-color:#eaeaea;">
+                                    <th>#</th>
+                                    <th>场景名称</th>
+                                    <th>会员账号</th>
+                                    <th>性别</th>
+                                    <th>出生日期</th>
+                                    <th>所在地</th>
+                                    <th>会员消费订单额</th>
+                                    <th>推广人账号</th>
+                                    <th>注册日期</th>
+                                </tr>
+                            </thead>
+                            <tbody id="member_scene_tbl">
+                                <foreach name="dataMember" item="vo" key="k">
+                                    <tr>
+                                        <td>{$vo.k}</td>
+                                        <td>{$vo.SceneName}</td>
+                                        <td>{$vo.MemberId}</td>
+                                        <td>{$vo.Sex}</td>
+                                        <td>{$vo.Birthday}</td>
+                                        <td>{$vo.Address}</td>
+                                        <td>{$vo.OrderMoney|round=2}</td>
+                                        <td>{$vo.SceneMember}</td>
+                                        <td>{$vo.RegDate}</td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                        </table>
+                        <if condition="$pageCount eq 0">
+                            <div class="alert alert-warning" id="alert_message" style="display:block;">还没有相关数据！</div>
+                            <else/>
+                            <div class="alert alert-warning" id="alert_message" style="display:none;"></div>
+                        </if>
+                        <div id="kkpager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/echarts/echarts-all.js"></script>
+<script src="__PUBLIC__/Admin/Admin/common/js/validaterReg.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/toastr/toastr.min.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager.min.js"></script>
+<script>
+    var bindoption = {
+        postUrl: "{:U('sceneInfo')}",
+        postExport:"{:U('sceneExport')}",
+        optionY:[{$outSceneName|implode=",",###}],
+        option1X:[{$outSceneMember|implode=",",###}],
+        option2X:[{$outSceneCount|implode=",",###}],
+        isdate:"开始日期小于结束日期",
+        pageCount:"{$pageCount}",
+        totalPage:"{$totalPage}",
+        pno:1
+    };
+   $(function(){var start_time=$("#start_time");var end_time=$("#end_time");var alert_message=$("#alert_message");var member_scene_tbl=$("#member_scene_tbl");var echarts_sceneinfo=$("#echarts_sceneinfo");if(bindoption.optionY.length>0){var _height=bindoption.optionY.length*45+120+"px";echarts_sceneinfo.css("height",_height);var dataChart1=echarts.init(document.getElementById("echarts_sceneinfo"));var dataOption1={tooltip:{trigger:"axis"},legend:{data:["注册会员数","对应订单数"]},toolbox:{show:true,feature:{mark:{show:true},dataView:{show:true,readOnly:false},magicType:{show:true,type:["line","bar"]},restore:{show:true},saveAsImage:{show:true}}},calculable:true,xAxis:[{type:"value",boundaryGap:[0,0.01]}],yAxis:[{type:"category",data:bindoption.optionY}],series:[{name:"注册会员数",type:"bar",barWidth:25,barGap:10,data:bindoption.option1X},{name:"对应订单数",type:"bar",barWidth:20,barGap:8,data:bindoption.option2X}]};dataChart1.setOption(dataOption1)}else{echarts_sceneinfo.css("height","60px");echarts_sceneinfo.html('<div style="padding:20px 0 20px 20px">暂无数据</div>')}var config={".chosen-select":{},".chosen-select-deselect":{allow_single_deselect:true},".chosen-select-no-single":{disable_search_threshold:10},".chosen-select-no-results":{no_results_text:"Oops, nothing found!"},".chosen-select-width":{width:"95%"}};for(var selector in config){$(selector).chosen(config[selector])}var SetPager=function(){kkpager.generPageHtml({pno:bindoption.pno,total:bindoption.totalPage,totalRecords:bindoption.pageCount,isShowTotalRecords:true,isShowTotalPage:false,mode:"click",click:function(n){NProgress.start();bindoption.pno=n;getDatapager();this.selectPage(n);NProgress.done();return false}},true);NProgress.done()};var getDatapager=function(){member_scene_tbl.html("");$.ajax({type:"POST",async:false,url:bindoption.postUrl,contentType:"application/x-www-form-urlencoded; charset=utf-8",data:{"stime":$.trim(start_time.val()),"etime":$.trim(end_time.val()),"sid":$("#chosen").val(),"pindex":bindoption.pno,"order":"DESC","r":(Math.random()*Math.random())},dataType:"json",timeout:20000,success:function(data){if(data.code=="0"){alert_message.css("display","none");bindoption.pageCount=data.pageCount;bindoption.totalPage=data.totalPage;var _html="";var rowspan="";$(data.dataMember).each(function(index,vo){member_scene_tbl.append("<tr><td>"+vo.k+"</td><td>"+vo.SceneName+"</td><td>"+vo.MemberId+"</td><td>"+vo.Sex+"</td><td>"+vo.Birthday+"</td><td>"+vo.Address+"</td><td>"+Number(vo.OrderMoney).toFixed(2)+"</td><td>"+vo.SceneMember+"</td><td>"+vo.RegDate+"</td></tr>")})}else{alert_message.css("display","block");alert_message.html("还没有相关数据！")}},error:function(XMLHttpRequest,textStatus,thrownError){if(textStatus=="timeout"){alert_message.css("display","block");alert_message.html("请求超时!")}else{alert_message.css("display","block");alert_message.html("发生未知异常错误!")}}})};var proid=$("#proid");$("#btn_select").bind("click",function(){var s=$.trim(start_time.val());var e=$.trim(end_time.val());if((validateRules.isNull(s)&&!validateRules.isNull(e))||(!validateRules.isNull(s)&&validateRules.isNull(e))){toastr.warning("日期两个都不能为空！");return false}if(Date.parse(s)>Date.parse(e)){toastr.warning(bindoption.isdate);return false}NProgress.start();bindoption.pno=1;bindoption.pageCount=0;bindoption.totalPage=1;getDatapager();SetPager()});$("#btn_excel").bind("click",function(){location.href=bindoption.postExport+"?start_time="+$.trim(start_time.val())+"&end_time="+$.trim(end_time.val())});$(".btn-xs").bind("click",function(){var _that=$.trim($(this).attr("data-day"));if(_that=="0"){start_time.val("");end_time.val("")}else{var nowtime=addDate(CurentTime("dd"),-1);var temp_start_time=addDate(nowtime,-parseInt(_that));start_time.val(temp_start_time);end_time.val(nowtime)}});var config={".chosen-select":{},".chosen-select-deselect":{allow_single_deselect:true},".chosen-select-no-single":{disable_search_threshold:10},".chosen-select-no-results":{no_results_text:"Oops, nothing found!"},".chosen-select-width":{width:"95%"}};for(var selector in config){$(selector).chosen(config[selector])}toastr.options={"closeButton":true,"debug":false,"progressBar":false,"positionClass":"toast-top-center","onclick":null,"showDuration":"300","hideDuration":"1000","timeOut":"1500","extendedTimeOut":"0","showEasing":"swing","hideEasing":"linear","showMethod":"fadeIn","hideMethod":"fadeOut"};SetPager()});
+// var name=$.trim(proid.val());
+// if(name=="-1"){
+//     toastr.warning("请选择商品信息！");return false;
+// }
+$(document).ready(function(){
+    $("#chosen").chosen();
+})
+</script>
+</body>
+</html>

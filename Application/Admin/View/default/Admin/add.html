@@ -1,0 +1,170 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<style type="text/css">
+    .enotice{color: #f00;font-weight: bold;}
+</style>
+
+                <div class="row  wrapper  white-bg" style="margin:0 1%;">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>{$pagename}</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form method="post" action="{:U('Admin/save')}" class="form-horizontal" id="sv">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">用户名</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="text" name="EmployeeId" id="EmployeeId" class="form-control required" ><span class="help-block m-b-none enotice"></span>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">真实姓名</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="TrueName" id="TrueName" class="form-control required" value=""> <span class="help-block m-b-none"></span>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">密码</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="password" name="Password" id="Password" class="form-control required" value="">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">确认密码</label>
+
+                                        <div class="col-sm-4">
+                                            <input type="password" name="repass" id="repass" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">选择用户组</label>
+
+                                        <div class="col-sm-4">
+                                            <select class="form-control m-b required" name="GroupId" id="GroupId">
+                                                <option value="">请选择</option>
+                                                <foreach name="groups" item="group" >
+                                                <option style="color:green;" value="{$group.GroupId}">{$group.GroupName}</option>
+                                                </foreach>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">性别
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio"  value="1" id="optionsRadios1" name="Sex">男</label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" id="optionsRadios2" value="2" name="Sex">女</label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" id="optionsRadios2" checked="checked" value="0" name="Sex">保密</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"><span style='color:red;'>是否允许登录</span>
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio"  value="1" id="optionsRadios1" name="IsLogin" checked="checked">是</label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" id="optionsRadios2" value="0" name="IsLogin">否</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label class="col-sm-2 control-label"><span style='color:red;'>管理层</span>
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                              <label>
+                                                <input type="checkbox" value="1" name="IsLeader" id="IsLeader">
+                                                管理层请勾选
+                                              </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"><span style='color:red;'>客服</span>
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                              <label>
+                                                <input type="checkbox" value="1" name="IsServer" id="IsServer">
+                                                客服请勾选
+                                              </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div> -->
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-2">
+                                            <button class="btn btn-primary btn-outline" type="submit">保存内容</button>
+                                            <button class="btn btn-outline btn-warning" type="reset">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(document).on('keyup','#EmployeeId',function(){
+            $('.enotice').html('');
+        })
+        $('#EmployeeId').blur(function(){
+            $.ajax({
+                url:"{:U('Admin/checkparam')}",
+                type:"post",
+                data:"type=name&key="+$('#EmployeeId').val(),
+                dataType:"json",
+                success:function(msg){
+                    if (msg.status=='success') {
+
+                    }else{
+                        $('#EmployeeId').val('').focus();
+                        $('.enotice').html('用户名重复');
+                    }
+                }
+            })
+        })
+        $("#sv").validate({
+            rules: {
+                repass:{
+                    required: true,
+                    equalTo: "#Password"
+                },
+                DepartmentName: 'required'
+            }
+        });
+    })
+</script>
+
+ <include file="Common:footer" />

@@ -1,0 +1,167 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+.container{
+  margin: 0px;
+  width: 100%;
+}
+.ubinfo,.ubphoto{
+  background-color: #ffffff;
+  margin: 10px 0px 0px 0px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  overflow: hidden;
+}
+.ubinfo>div{
+  position: relative;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  height: 50px;
+}
+.ubinfo>div:last-child{
+  border-color: rgba(221, 221, 221, 0);
+}
+.ubinfo>div>label{
+  float: left;
+  margin: 0px;
+  height: 100%;
+  width:30%;
+  line-height: 49px;
+  color: #666666;
+  font-size: 16px;
+  padding: 0px 0px 0px 15px;
+}
+.baseinfo{
+  float: right;
+  width: 70%;
+  border: none;
+  height: 100%;
+  font-size: 14px;
+  line-height: 49px;
+  outline: medium;
+  padding: 0px 10px 0px 0px;
+}
+.selmap{
+  height: auto!important;
+}
+.lebmap{
+  height: auto!important;
+}
+.map{
+  float: right;
+  width: 96%;
+  margin: 0px 2% 5px 2%;
+  height: 300px;
+  border: 1px dashed rgb(185, 185, 185);
+}
+.selsmap{
+  float: right!important;
+  color: #666666!important;
+  font-size: 12px!important;
+  width: auto!important;
+  margin-right: 10px!important;
+  line-height: 50px!important;
+}
+.selsmap>span{
+  float: right;
+    height: 50px;
+    width: 20px;
+    background-image: url("../Images/Arrow-1.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 7px;
+}
+.tsinfo{
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  padding: 10px 0px 0px 15px;
+  font-size: 16px;
+  color: #333333;
+}
+.zyinfo{
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 35px;
+  font-size: 12px;
+  color: #227aff;
+  background-image: url("../Images/tsinfo.png");
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+}
+.sczpinfo>div{
+  float: left;
+  width: 50vw;
+  padding: 5px 0px 0px 0px;
+}
+.sczpinfo>div>div{
+  position: relative;
+  padding: 0px 2vw 0px 2vw;
+  width: 50vw;
+  height: 30vw;
+}
+#iptxtp{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.sczpinfo>div>div>img{
+  width: 100%;
+  height: 30vw;
+}
+.sczpinfo>div>label{
+  width: 100%;
+  margin: 3px 0px 3px 0px;
+  font-size: 14px;
+  text-align: center;
+  color:#999999;
+}
+.surebtn{
+  margin: 4% 15px 0px 4%;
+}
+.ubtjxx{
+  width: 100%;
+  height: 40px;
+  border: 0px solid #ccc;
+  outline: none!important;
+}
+.surebtn>label{
+  margin: 25px 0px 25px 0px;
+  width: 100%;
+  font-size: 14px;
+  color: #999999;
+  text-align: center;
+}
+.infomeg{
+  margin: 0px 0px 0px 0px !important;
+  font-size: 16px!important;
+  color: #0b33e8!important;
+}
+.addrinfo>label{
+  float: left;
+  height: 49px;
+  width: 29%;
+  margin: 0px 2.16% 0px 2.16%;
+  font-size: 12px;
+  border-radius: 3px;
+  outline: medium;
+  text-align: center;
+  color: #999999;
+}
+.getcode{
+  position: absolute;
+  top:0px;
+  right: 0px;
+  padding: 0px 0px 0px 0px!important;
+  font-size: 14px!important;
+  width: 100px!important;
+  text-align: center;
+  background-color: #dddddd;
+}

@@ -1,0 +1,38 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/odersoff.css">
+
+<div class="odersinfo">
+    <label class="odersid">E2016050931524<span>用户自提</span></label>
+    <div class="oderpro">
+        <img class="col-xs-3 col-sm-3 col-md-3" src="__PUBLIC__/theme2/images/tu02.png">
+        <div class=" proinfo col-xs-9 col-sm-9 col-md-9">
+            <label class="proname">蜂之巢原味蜂蜜</label>
+            <label class="protype">规格:袋装</label>
+            <label class="proprice"><span>￥</span>100.00<span class="prosum">×1</span></label>
+        </div>
+    </div>
+    <div class="oderpro">
+        <img class="col-xs-3 col-sm-3 col-md-3" src="__PUBLIC__/theme2/images/tu02.png">
+        <div class=" proinfo col-xs-9 col-sm-9 col-md-9">
+            <label class="proname">蜂之巢原味蜂蜜</label>
+            <label class="protype">规格:袋装</label>
+            <label class="proprice"><span>￥</span>100.00<span class="prosum">×1</span></label>
+        </div>
+    </div>
+    <div class="typesel">
+        <label class="selty activesel">收款不发货</label>
+        <label class="selty">收款同时发货</label>
+    </div>
+</div>
+<div>
+    <button class="btn btn-warning btn-hx" id="sub" type="button" RPath="{:U('User/oderprompt')}" >确认收到现金</button>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.selty').click(function () {
+            $('.selty').removeClass("activesel");
+            $(this).addClass("activesel");
+        });
+    })
+</script>

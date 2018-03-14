@@ -1,0 +1,276 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<div class="alert alert-warning" style="color:red;">
+					1、如有查询不到的过期团，请点击过期团信息更新<br>
+					2、批量处理退款 <br>
+					3、团购主体命名方式为： 团开始日期_团购商品名称_团购状态 <br>
+					4、<b>退款非即时退款，具体时间视银行处理情况而定</b>
+				</div>
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<form role="form" class="form-inline" id="savebuy"  method="post" action="">
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only">选择团购主体</label>
+								<select name="GroupId" id="chosen" class="form-control" style="width:100%;" value="">
+									<option value="">请选择团购主体</option>
+									<foreach name="gps" item="pro">
+										<?php if ($pro['GroupId']==$Param['GroupId']) {
+											$tmstr="selected='selected'";
+										} ?>
+										<if condition="$pro['Name'] eq '已强制结束'">
+										<option value="{$pro.GroupId}" {$tmstr} style="color:red">{$pro.PreName}{$pro.Name}</option>
+										<elseif condition="$pro['Name'] eq '已过期'" />
+										<option value="{$pro.GroupId}" {$tmstr} style="color:orange">{$pro.PreName}{$pro.Name}</option>
+										<else/>
+										<option value="{$pro.GroupId}" {$tmstr} style="color:green">{$pro.PreName}{$pro.Name}</option>
+										</if>
+									</foreach>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword2" class="sr-only"></label>
+								<select name="type" id="type" class='form-control'>
+									<option value="">请选择</option>
+									<option value="0"<if condition="$Param['type'] eq '0'">selected='selected'</if>>进行中</option>
+									<option value="1"<if condition="$Param['type'] eq '1'">selected='selected'</if>>已完成</option>
+									<option value="2"<if condition="$Param['type'] eq '2'">selected='selected'</if>>已过期</option>
+									<option value="3"<if condition="$Param['type'] eq '3'">selected='selected'</if>>已退款</option>
+								</select>
+							</div>
+							<button class="btn btn-primary btn-outline"  type="submit"> 搜 索 </button>&emsp;<br><br>
+							<button class="btn btn-primary btn-md update_info" type='button'><span class='glyphicon glyphicon-refresh'></span>&nbsp;更新过期团信息</button> &emsp;
+							<button class="btn btn-default btn-md allrefund" type='button'><span class='glyphicon glyphicon-random'></span>&nbsp;过期团批量退款</button>&emsp;
+							<button class="btn btn-success btn-md update_refund" type='button'><span class='glyphicon glyphicon-random'></span>&nbsp;更新团退款信息</button>&emsp;
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="col-sm-12 col-md-12">
+					<table class="table bordered">
+						<thead>
+							<tr>
+								<td>团信息</td>
+								<td>参团信息</td>
+								<td>当前状态</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody>
+						<foreach name='Groups' item='li'>
+							<tr>
+								<td>{$li.ProName}<br><img src="{$li.ProLogoImg}" style="width:100px;height:100px;" alt=""></td>
+								<td>{$li.PeopleNum}人团&emsp;/&emsp;团购价：{$li.Price} &emsp;/&emsp;{$li.op}人参与&emsp;/&emsp;每人限购{$li.BuyNum}件</td>
+								<td>{$li.Stname}</td>
+								<td>
+								<if condition="$li['Status'] eq '0'">
+									<button class='btn btn-xs btn-white showpeo' data-id='{$li.GroupBuyerId}' data-toggle='modal' data-target='#order_message'>查看团信息</button>&emsp;
+								<elseif condition="$li['Status'] eq '1'"/>
+									<button class='btn btn-xs btn-white showpeo' data-id='{$li.GroupBuyerId}' data-toggle='modal' data-target='#order_message'>查看团信息</button>&emsp;
+								<elseif condition="$li['Status'] eq '2'"/>
+									<button class='btn btn-xs btn-white showpeo' data-id='{$li.GroupBuyerId}' data-toggle='modal' data-target='#order_message'>查看团信息</button>&emsp;
+									<button class='btn btn-xs btn-warning offmoney' data-id='{$li.GroupBuyerId}'>退款</button>&emsp;
+								<elseif condition="$li['Status'] eq '3'"/>
+									<button class='btn btn-xs btn-white showpeo' data-id='{$li.GroupBuyerId}' data-toggle='modal' data-target='#order_message'>查看团信息</button>&emsp;
+									<!-- <button class='btn btn-xs btn-danger delete' data-id='{$li.GroupBuyerId}'>删除</button>&emsp; -->
+								</if>
+								</td>
+							</tr>
+						</foreach>
+						</tbody>
+					</table>
+					{$page}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal inmodal fade" id="order_message" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:528px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				查看团信息 <span style="color:red" id='add_notice'></span>
+				<button type="button" class="close" data-dismiss="modal" id="cls_modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<table class='table table-hover table-bordered'>
+					<thead>
+						<tr>
+							<th>参团人</th>
+							<th>购买单价</th>
+							<th>购买数量</th>
+							<th>购买金额</th>
+							<th>参团时间</th>
+							<th>#</th>
+						</tr>
+					</thead>
+					<tbody id='showpeo_content'></tbody>
+				</table>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.update_info').click(function(){
+			art.dialog.confirm('确定要更新过期团信息吗？',function(){
+				$.ajax({
+					url:"{:U('Products/gpmanager')}",
+					type:"post",
+					data:"type=update",
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							art.dialog.tips(msg.info,3);
+							// if (parseInt(msg.info)) {};
+							setTimeout('location.reload()',3000);
+						}else{
+							art.dialog.tips('error');
+						}
+					}
+				})
+			})
+		})
+
+		// 查看团信息
+		$('.showpeo').click(function(){
+			var id=$(this).attr('data-id');
+			$.ajax({
+				url:"{:U('Products/gpmanager')}",
+				type:"post",
+				data:"type=show&bid="+id,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						var data=msg.data;
+						var _html='';
+						$.each(data,function(index,item){
+							var tpStr='';
+							var tpBtn='';
+							if (item.IsLeader=='1') {
+								tpStr='<span style="font-weight:bold;color:red">团长</span>';
+							};
+							if (item.gs=='2') {
+								if (item.Status=='0') {
+									tpBtn='<button class="btn btn-warning btn-xs refund" data-id="'+item.ID+'">退款</button>';
+								}else{
+									tpBtn='已退款';
+								}
+							}else if (item.gs=='3') {
+								tpBtn='已退款';
+							}else{
+								tpBtn='已付款';
+							}
+							_html+='<tr><td>'+item.MemberName+'&emsp;'+tpStr+'</td><td>'+item.Price+'</td><td>'+item.Count+'</td><td>'+item.Money+'</td><td>'+item.CreateDate+'</td><td>'+tpBtn+'</td></tr>';
+						})
+						$('#showpeo_content').html(_html);
+					}else{
+						//提示信息
+						$('#cls_modal').click();
+						art.dialog.tips('查询失败:(',2);
+					}
+				}
+			})
+		})
+
+		// 全部退款
+		$('.allrefund').click(function(){
+			art.dialog.confirm('该操作将对所有团状态未已过期的参团人进行退款！请确保付款账户内有足够的金额！！！是否继续？',function(){
+				art.dialog.tips('处理时长视数据量而定，请耐心等待',100);
+				$.ajax({
+					url:"{:U('Products/GroupRefund')}",
+					type:"post",
+					data:"type=all",
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							art.dialog.tips('处理完毕',1);
+							art.dialog.alert('查找到符合条件的记录'+msg.all+'条，退款成功'+msg.j+'条,数据处理成功'+msg.i+'条。');
+						}else{
+							art.dialog.tips('操作异常');
+						}
+					}
+				})
+			})
+		})
+
+		$('.offmoney').click(function(){
+			var bid=$(this).attr('data-id');
+			art.dialog.confirm('確定要對此團進行退款處理嗎？請確保賬戶内有足夠的餘額！！是否繼續？',function(){
+				art.dialog.tips('處理中',10);
+				$.ajax({
+					url:"{:U('Products/GroupRefund')}",
+					type:"post",
+					data:"type=one&bid="+bid,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							art.dialog.alert('查找到符合条件的记录'+msg.all+'条，退款成功'+msg.j+'条,数据处理成功'+msg.i+'条。');
+						}else{
+							art.dialog.tips('操作異常');
+						}
+					}
+				})
+			})
+		})
+
+		$(document).on('click','.refund',function(){
+			var _this=$(this);
+			var id=_this.attr('data-id');
+			if (confirm('確定要退款嗎？')) {
+				_this.addClass('disabled').html('處理中...');
+				$.ajax({
+					url:"{:U(Products/GroupRefund)}",
+					type:"post",
+					data:"type=person&id="+id,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success' && msg.info=='success') {
+							_this.html('已退款');
+						}else{
+							$('#add_notice').html('處理失敗');
+							_this.removeClass('disabled').html('退款');
+						}
+					}
+				})
+			};
+			// art.dialog.confirm('確定要退款嗎？',function(){
+
+			// })
+		})
+		$('.update_refund').click(function(){
+			art.dialog.confirm('确定要更新已退款团信息吗？',function(){
+				$.ajax({
+					url:"{:U('Products/gpmanager')}",
+					type:"post",
+					data:"type=update_refund",
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							art.dialog.tips(msg.info,3);
+							// if (parseInt(msg.info)) {};
+							setTimeout('location.reload()',3000);
+						}else{
+							art.dialog.tips('error');
+						}
+					}
+				})
+			})
+		})
+	})
+</script>
+<include file="Common:footer" />

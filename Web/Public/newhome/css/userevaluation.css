@@ -1,0 +1,231 @@
+.evalparts{
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+.evalinfopart{
+  position: absolute;
+  top: 0px;
+  bottom: 55px;
+  left: 0px;
+  width: 100%;
+  overflow: auto;
+}
+.shopevalpart{
+  display: block;
+  overflow: hidden;
+  border-bottom: #eeeeee solid 3px;
+}
+.shopevalpart>.shopinfo{
+  display: block;
+  height: 51px;
+  overflow: hidden;
+}
+.shopevalpart>.shopinfo>img{
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin: 5px 10px 5px 15px;
+  border-radius: 50%;
+}
+.shopevalpart>.shopinfo>span{
+  float: left;
+  height: 51px;
+  width: calc(100% - 65px);
+  padding: 0px 80px 0px 0px;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
+  line-height: 50px;
+  border-bottom:#eeeeee solid 1px;
+}
+.shopevalpart>.shopinfo>span>span{
+  float: right;
+  line-height: 50px;
+  color: #333333;
+}
+.sevalinfos{
+  display: block;
+  overflow: hidden;
+}
+.sevalinfos>div{
+  display: block;
+  overflow: hidden;
+  height: 50px;
+  padding: 0px 0px 0px 15px;
+}
+.sevalinfos>div>span{
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  width: 80px;
+  font-size: 14px;
+}
+.sevalinfos>div>.starsinfo{
+  display: block;
+  float: right;
+  width: calc(100% - 80px);
+  height: 50px;
+}
+.sevalinfos>div>.starsinfo>span{
+  float: left;
+  height: 50px;
+  width: 34px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: #eeeeee;
+}
+.inputtextinfo{
+  display: block;
+  height: 100px!important;
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 10px 10px 10px!important;
+}
+.inputtextinfo>.inputinfo{
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0px 0px 0px 0px;
+  padding: 8px 8px 8px 8px;
+  border:none;
+  outline: none;
+  background-color: #F4F4F4;
+
+}
+/*商品评价信息*/
+.prolistpart{
+  display: block;
+  overflow: hidden;
+}
+
+
+.proevalpart{
+  display: block;
+  overflow: hidden;
+  border-bottom: #eeeeee solid 3px;
+}
+.proevalpart>.proinfo{
+  display: block;
+  height: 51px;
+  overflow: hidden;
+}
+.proevalpart>.proinfo>img{
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin: 5px 10px 5px 15px;
+  border-radius: 50%;
+}
+.proevalpart>.proinfo>span{
+  float: left;
+  height: 51px;
+  width: calc(100% - 65px);
+  padding: 0px 80px 0px 0px;
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
+  line-height: 50px;
+  border-bottom:#eeeeee solid 1px;
+  position: relative;
+}
+.proevalpart>.proinfo>span>span{
+  float: right;
+  line-height: 50px;
+  color: #333333;
+}
+.proevalpart>.proinfo>span>div{
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  width: 70px;
+  height: 30px;
+  overflow: hidden;
+}
+.proevalpart>.proinfo>span>div>span:first-child{
+  display: block;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  color: #ff0000;
+  font-size: 12px;
+}
+.proevalpart>.proinfo>span>div>span:first-child::before{
+  content: "￥";
+}
+.proevalpart>.proinfo>span>div>span:last-child{
+  display: block;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  color: #999999;
+  font-size: 10px;
+}
+.proevalpart>.proinfo>span>div>span:last-child::before{
+  content: "×";
+}
+.proevalinfos{
+  display: block;
+  overflow: hidden;
+}
+.proevalinfos>div{
+  display: block;
+  overflow: hidden;
+  height: 50px;
+  padding: 0px 0px 0px 15px;
+}
+.proevalinfos>div>span{
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  width: 80px;
+  font-size: 14px;
+}
+.proevalinfos>div>.starsinfo{
+  display: block;
+  float: right;
+  width: calc(100% - 80px);
+  height: 50px;
+}
+.proevalinfos>div>.starsinfo>span{
+  float: left;
+  height: 50px;
+  width: 34px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 30px;
+  color: #eeeeee;
+}
+
+
+
+/*底部提交按钮*/
+.sendbtnpart{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 55px;
+  border-top: #eeeeee solid 5px;
+}
+.sendbtnpart>.sendbtn{
+  margin: 5px 20% 5px 20%;
+  display: block;
+  width: 60%;
+  height: 40px;
+  line-height: 40px;
+  color: #ffffff;
+  background-color: #ff8500;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.setstartactive{
+  color: #ff8500!important;
+}

@@ -1,0 +1,118 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/newadmin/css/plugins/dataTables/dataTables.bootstrap.css">
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="ibox-content">
+		<div class="col-md-12 col-lg-12">
+			<!-- <form class="form-inline" method="post" id="searchofdata">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">团主体</div>
+						<select name="AreaId" id="s_area" class="form-control">
+							<option value="">请选择</option>
+							<foreach name='Area' item='ar'>
+								<option value="{$ar.ID}" <if condition="$ar eq $param['AreaId']">selected="selected"</if>>{$ar.AreaName}</option>
+							</foreach>
+						</select>
+					</div>
+					<div class="input-group">
+						<div class="input-group-addon">状态</div>
+						<select name="province" id="s_province" class="form-control">
+							<option value="">请选择</option>
+							<option value="0">进行中</option>
+							<option value="1">已完成</option>
+							<option value="2">已过期</option>
+							<option value="3">已退款</option>
+						</select>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>&emsp;search</button>
+			</form> -->
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-12">
+		<div class="ibox float-e-margins" style='margin-bottom:150px;'>
+			<div class="ibox-content">
+				<foreach name="mdata" item='md'>
+					<div class="panel-body" style="padding:0px;">
+						<div class="panel-group" id="panel{$area.SSid}" style="margin-bottom:0px;">
+							<div class="panel panel-default" style="border-radius:0px;border:1px solid #ccc;">
+								<div class="panel-heading">
+									<h5 class="panel-title">
+										<a data-toggle="collapse" data-parent="#panel{$md.GroupId}" href="tabs_panels.html#collapse{$md.GroupId}"><button class="btn btn-xs btn-defualt getareadata" data-area='{$area.ID}' data-st='0'>+</button></a>
+										<img src="{$md.ProLogoImg}" style='width:100px;height:100px;' alt=""> {$md.ProName} / 总{$md.ProductNum}件 已团{$md.ProductSnum}件 &emsp; 已有{$md.count}个团&emsp;&emsp;{$md.StartDate}--{$md.EndDate}
+									</h5>
+								</div>
+								<div id="collapse{$md.GroupId}" class="panel-collapse collapse">
+									<div class="panel-body">
+										<table class='table table-hovered table-borderd'>
+											<thead>
+												<tr>
+													<td>团信息</td>
+													<td>团状态</td>
+													<td>开团时间</td>
+													<td>团长</td>
+													<td>操作</td>
+												</tr>
+											</thead>
+											<tbody>
+											<foreach name='md.smdata' item='sd'>
+												<tr>
+													<td>{$sd.PeopleNum} 人团 / ￥：{$sd.Price}  /每人限购 {$sd.BuyNum} 件 <br>已参团{$sd.nownum}人</td>
+													<td>{$sd.stname}</td>
+													<td>{$sd.CreateDate}</td>
+													<td><img src="{$sd.HeadImgUrl}" style='width:50px;height:50px;' alt=""> {$sd.MemberName}</td>
+													<td><button class='btn btn-primary btn-xs  showgroup' data-id='{$sd.GroupBuyerId}' data-toggle='modal' data-target='#show_group'>查看参团信息</button></td>
+												</tr>
+											</foreach>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</foreach>
+			</div>
+			{$page}
+		</div>
+	</div>
+</div>
+<div class="modal inmodal fade" id="show_group" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-sm" style="width:528px;">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				查看团信息 <span style="color:red" id='add_notice'></span>
+				<button type="button" class="close" data-dismiss="modal" id="cls_modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<table class='table table-hover table-bordered'>
+					<thead>
+						<tr>
+							<th>参团人</th>
+							<th>购买单价</th>
+							<th>购买数量</th>
+							<th>购买金额</th>
+							<th>参团时间</th>
+							<th>#</th>
+						</tr>
+					</thead>
+					<tbody id='showpeo_content'></tbody>
+				</table>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Common:footer" />
+<script src="__PUBLIC__/Admin/Admin/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/echarts/echarts-all.js"></script>
+<script src="__PUBLIC__/newadmin/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="__PUBLIC__/newadmin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="__PUBLIC__/newadmin/js/plugins/dataTables/dataTables.bootstrap.js"></script>

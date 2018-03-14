@@ -1,0 +1,92 @@
+*{
+	/*background: #fff;*/
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	color: #444;
+}
+body{
+	line-height: inherit !important;
+	/*background: #fff;*/
+}
+a{color: #444;}
+a:active{
+	color: #fff;
+}
+p{
+	margin: 0 !important;
+}
+/*14px 字体*/
+.shisi{
+	font-size: 14px;
+}
+/*12px 字体*/
+.shier{
+	font-size: 12px;
+}
+/*价格*/
+.jiage:before{
+	content: "￥";
+	font-size: 12px;
+}
+/*删除线*/
+.delxian{
+	text-decoration: line-through;
+	color: #999;
+}
+
+.mui-bar.mui-bar-nav{
+	box-shadow: none;
+	/*box-shadow: 0 2px 4px rgba(0,0,0,.2);*/
+	background: #fff;
+	padding-top:20px ;
+	height: 64px !important;
+}
+/*以上为样式重置*/
+
+
+.Bcontent{
+}
+.toutu{
+	width: 100%;
+	display: block;
+}
+.kefuul li{
+	padding: 15px 10px;
+	background: #fff;
+	margin-bottom: 1px;
+}
+.phone{
+	color: #32d5fe;
+}
+.copy{
+	border: 1px solid #444;
+	padding: 2px 6px;
+	border-radius:2px ;
+	margin-left: 10px;
+	color: #44;
+}
+
+
+.mui-popup-button{
+	color: #999;
+}
+.mui-popup-button-bold{
+	background: #444;
+	color: #fff;
+}
+.mui-popup-backdrop{
+	z-index: 1001;
+}
+
+
+
+
+
+
+
+
+
+
+

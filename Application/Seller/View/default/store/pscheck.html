@@ -1,0 +1,133 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<style type="text/css">
+	td{
+		/*text-align: center;*/
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>配送员提现申请</h5>
+	</div>
+	<div class="col-sm-12 col-md-12"  style="padding-bottom:10px;">
+		<form class="form-inline" method="post" id="ser">
+		  <div class="form-group">
+		    <label for="exampleInputName2">配送员姓名</label>
+		    <input type="text" class="form-control" name="MemberName" value="{$Param.MemberName}" id="exampleInputName2" placeholder="配送员姓名">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputEmail2">记录类型</label>
+		    <select name="Status" id="" class="form-control">
+		    	<option value="">全部</option>
+		    	<option value="0"  <if condition="$Param['Status'] eq '0'">selected="selected"</if>   >待审核</option>
+		    	<option value="1"  <if condition="$Param['Status'] eq '1'">selected="selected"</if>   >已审核</option>
+		    	<option value="2"  <if condition="$Param['Status'] eq '2'">selected="selected"</if>   >已完成</option>
+		    	<option value="3"  <if condition="$Param['Status'] eq '3'">selected="selected"</if>   >已拒绝</option>
+		    </select>
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputEmail2">申请时间</label>
+		    <input type="text" name="StartDate" id="StartDate" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})" value="{$Param.StartDate}" placeholder='开始时间'>
+		  </div>
+		  <div class="form-group">
+		    <input type="text" name="EndDate" id="EndDate" value="{$Param.EndDate}" class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})" placeholder='结束时间'>
+		  </div>
+		  <button type="submit" class="btn btn-default" >搜 索</button>
+		</form>
+	</div>
+	<div class="col-sm-12 col-md-12">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>配送员</th>
+					<th>提现金额</th>
+					<th>申请时间</th>
+					<th>当前状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="lists" item="or" >
+					<tr>
+						<td>{$or.TrueName}</td>
+						<td>{$or.Money}</td>
+						<td>{$or.CreateDate}</td>
+						<td>{$or.Stname}</td>
+						<td><if condition="$or['Status'] eq '0'"><button class="btn btn-primary btn-xs btn-outline pspass" data-id='{$or.ID}'>同意申请</button> &emsp; <button class="btn btn-warning btn-xs btn-outline refund" data-id='{$or.ID}'>拒绝申请</button><elseif condition="$or['Status'] eq '1'" />已审核/等待平台处理<elseif condition="$or['Status'] eq '2'" />已完成<elseif condition="$or['Status'] eq '3'" />已拒绝申请</if></td>
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.pspass').click(function(){
+		var _this=$(this);
+		var id=_this.attr('data-id');
+		art.dialog.confirm('确定要同意提现申请吗？',function(){
+			_this.addClass('disabled').html('处理中...');
+			$.ajax({
+				url:"{:U('Store/setpscheck')}",
+				type:"post",
+				data:"type=pass&id="+id,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						_this.parent().html('已审核/等待平台处理');
+					}else{
+						art.dialog.tips(msg.info);
+						_this.removeClass('disabled').html('同意申请');
+					}
+				}
+			})
+		})
+	})
+	$('.refund').click(function(){
+		var _this=$(this);
+		var id=_this.attr('data-id');
+		art.dialog.confirm('确定要拒绝提现申请吗？',function(){
+			_this.addClass('disabled').html('处理中...');
+			$.ajax({
+				url:"{:U('Store/setpscheck')}",
+				type:"post",
+				data:"type=refund&id="+id,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						_this.parent().html('已拒绝');
+					}else{
+						_art.dialog.tips(msg.info);
+						_this.removeClass('disabled').html('拒绝申请');
+					}
+				}
+			})
+		})
+	})
+	$('#ser').submit(function(){
+		var StartDate=$('#StartDate').val();
+		var EndDate=$('#EndDate').val();
+		if (StartDate || EndDate) {
+			if (StartDate && EndDate) {
+				if (StartDate>EndDate) {
+					art.dialog.tips('非法时间区间');
+					return false;
+				}else{
+					return true;
+				}
+			}else{
+				art.dialog.tips('请选择完整时间区间');
+				return false;
+			}
+		}else{
+			return true;
+		}
+	})
+})
+</script>
+<include file="Common:footer" />

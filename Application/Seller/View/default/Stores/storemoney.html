@@ -1,0 +1,109 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="col-sm-12" style="padding-top:20px;">
+		<table class="table table-hover table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>时间</th>
+					<th>变动类型</th>
+					<th>变动金额</th>
+					<!-- <th>实时余额</th> -->
+					<th>###</th>
+					<th>#</th>
+				</tr>
+				<tr>
+					<th colspan="5">当前余额：{$MoneyInfo.Money}   &emsp;&emsp;&emsp;账户总额：{$MoneyInfo.TotalMoney}  &emsp; <small style="font-size:.8em;color:red;font-weight:300">部分资金提现中(未处理)</small></th>
+				</tr>
+			</thead>
+			<tbody id="content">
+				<foreach name="lists" item="list" >
+					<tr>
+						<td>{$list.CreateDate}</td>
+						<td>{$list.Type}</td>
+						<td>{$list.Money}</td>
+						<!-- <td>{$list.TmpMoney}</td> -->
+						<td>{$list.Useage}</td>
+						<td><if condition="$list['Type'] eq '支出'"><else/><button class='btn btn-xs btn-default showdetail' data-id="{$list.ID}" data-toggle="modal" data-type='{$list.Uname}' data-target='#mingxi'>查看明细</button></if></td>
+					</tr>
+			</foreach>
+		</tbody>
+	</table>
+	<div style="text-align:right;">{$page}</div>
+</div>
+</div>
+<div class="modal inmodal fade" id="mingxi" tabindex="-1" role="dialog"  aria-hidden="true">
+	<div class="modal-dialog modal-lg" style="">
+		<div class="modal-content">
+			<div class="modal-header" style="padding:10px 15px;">
+				明细
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+			</div>
+			<div class="modal-body" style="padding:15px">
+				<table class='table table-bordered'>
+					<thead class='thead'>
+						
+					</thead>
+					<tbody class='tbody'>
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer" style="text-align:center;">
+				<button type="button" class="btn btn-w-m btn-success input-sm" id="cls" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Common:footer" />
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(document).on('click','.showdetail',function(){
+			var type=$(this).attr('data-type');
+			var ID=$(this).attr('data-id');
+			art.dialog.tips('加载中...');
+			$('.thead').html('');
+			$('.tbody').html('');
+			$.ajax({
+				url:"{:U('Stores/showmlist')}",
+				type:"post",
+				data:"ID="+ID,
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						var data=msg.data;
+						var _html='';
+						if (type=='YL') {
+							var head="<tr><td>订单号</td><td>订单金额</td><td>引流佣金</td><td>支付方式</td><td>下单时间</td></tr>";
+							$.each(data,function(index,item){
+								_html+='<tr><td>'+item.OrderId+'</td><td>'+item.Price+'</td><td>'+item.CutMoney+'</td><td>'+item.PayName+'</td><td>'+item.CreateDate+'</td></tr>';
+							})
+						}else if (type=='XS') {
+							var head="<tr><td>订单号</td><td>订单金额</td><td>支付方式</td><td>下单时间</td></tr>";
+							$.each(data,function(index,item){
+								if (item.IsDis=='1') {
+									var dis='<small style="color:red">优惠订单</small>';
+								}else{
+									var dis='';
+								}
+								_html+='<tr><td>'+item.OrderId+dis+'</td><td>'+item.Price+'</td><td>'+item.PayName+'</td><td>'+item.CreateDate+'</td></tr>';
+							})
+						};
+						$('.thead').html(head);
+						$('.tbody').html(_html);
+					}else{
+						$('#cls').click();
+						art.dialog.tips(msg.info,20);
+					}
+				}
+			})
+		})
+	})
+</script>
+
+

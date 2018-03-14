@@ -1,0 +1,25 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/orderindex.css?v=1.0">
+
+<div class="ordercontents">
+  <div class="umenu">
+    <div class="u_menu">
+      <a href="{:U('Orders/orders')}">
+        <img src="__PUBLIC__/Sellermobile/icon/all_order.png" alt="">
+        <label>全部订单</label>
+      </a>
+    </div>
+    <div class="u_menu">
+      <a href="{:U('Orders/tkorders')}">
+        <img src="__PUBLIC__/Sellermobile/icon/tk_order.png" alt="">
+        <label>退款订单<span>(待处理)</span></label>
+      </a>
+    </div>
+    <div class="u_menu">
+      <a href="{:U('Orders/noendorders')}">
+        <img src="__PUBLIC__/Sellermobile/icon/daiend.png" alt="">
+        <label>未完成订单<span>(待处理)</span></label>
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/usersetphone.css?v=1.1">
+<div class="userinfo">
+  <label>关联账号</label>
+  <img src="{:C('RESOURCE_URL')}{$himg}" alt="">
+  <label>{$hname}</label>
+</div>
+<div class="setphone">
+  <label>完善用户资料</label>
+  <div class="conterphone">
+    <label class="showtitle">手机号码</label>
+    <input type="number" class="phone" name="phone" placeholder="设置手机号">
+  </div>
+  <div class="conterphone">
+    <label class="showtitle">验证码</label>
+    <input type="text" class="phonecode" name="phonecode" placeholder="填写验证码">
+    <label class="getcode" data-code="" data-s="0">获取验证码</label>
+  </div>
+  <div class="agreement">
+    <label class="selagreement" data-type="0"><img src="__PUBLIC__/theme2/Images/xuanze2.png" alt="">用户协议</label>
+    <a href="{:U('User/useragreement')}"><label class="lookagreement">查看</label></a>
+  </div>
+</div>
+<div class="btn_group">
+  <label class="savephone" data-type="0">提交资料</label>
+</div>
+<script type="text/javascript">
+   var iconsrc="__PUBLIC__/theme2/Images/";
+   var gotophnesms="{:U('User/sendphonecode')}";
+   var savephone="{:U('User/updatephone')}";
+   var gouserindex="{:U('User/index')}";
+</script>
+<script src="__PUBLIC__/theme2/js/usersetphone.js?v=1.2" charset="utf-8"></script>

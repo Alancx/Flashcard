@@ -1,0 +1,47 @@
+<layout name="Public/PageModel"/>
+
+<link rel="stylesheet" href="/Public/theme2/css/class.css">
+<!-- 商品信息-start -->
+<div class="set-full-width">
+  <div class="integraltitle">
+    <label class="uintegral">可用积分<br><span>{$myintegral}</span></label>
+    <label class="uintegraljl" RPath="{:U('User/usererecord')}">兑换记录</label>
+  </div>
+  <div style="height:50px"></div>
+  <div class="p-box">
+    <div class="row p-boxrow">
+      <!-- proinfo-box -->
+      <label class="smtitle">积分好礼，超值兑换</label>
+      <foreach name="pl" item="pi">
+
+        <div class="pro-box col-md-6 col-sm-6 col-xs-6">
+
+          <a href="{:U('JiFenStore/Goods',array('pid'=>$pi['ProId'],'type'=>'jf'))}">
+            <div style="text-align:center; padding: 4px 4px 4px 4px">
+              <img class="proimgs" src="{$pi['ProLogoImg']}" alt="{$pi['ProName']}"/>
+            </div>
+
+            <div class="pinfo">
+              <p class="price  usxjf"><span></span>{$pi['Score']}积分 </p>
+              <p class="pname">{$pi['ProName']}</p>
+              <p class="ptname uptname">{$pi['ProTitle']}</p>
+
+              <p class="scprice">
+                <del><span></span>{:number_format($pi['PriceRange'],2)}元</del>
+              </p>
+            </div>
+          </a>
+        </div>
+
+      </foreach>
+    </div>
+  </div>
+
+</div>
+<!-- 商品信息-end -->
+
+<script>
+$(function () {
+  $(".proimgs").height($(".proimgs").width());
+});
+</script>

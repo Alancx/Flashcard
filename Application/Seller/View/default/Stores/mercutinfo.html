@@ -1,0 +1,112 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>配送费用设置 <small>配送费类型为<b>固定金额</b>时，最高/最低配送费不生效</small></h5> 
+	</div>
+	<div class="col-sm-12">
+		<table class="table table-hover table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>门店地址</th>
+					<th width='100'>配送费类型</th>
+					<th>起配价 &emsp; <button class='btn btn-xs btn-danger' data-container="body" data-toggle="popover" data-placement="right" data-content="起配价：免配送费用的价格（如起配价填写30,支付金额大于等于30免配送费）"> &nbsp;?&nbsp; </button></th>
+					<th>配送费 &emsp; <button class='btn btn-xs btn-danger' data-container="body" data-toggle="popover" data-placement="right" data-content="配送费：1% 填写1 即可"> &nbsp;?&nbsp; </button></th>
+					<th>最低配送费&emsp; <button class='btn btn-xs btn-danger' data-container="body" data-toggle="popover" data-placement="right" data-content="保底配送费"> &nbsp;?&nbsp; </button></th>
+					<th>最高配送费&emsp; <button class='btn btn-xs btn-danger' data-container="body" data-toggle="popover" data-placement="right" data-content="最高配送费"> &nbsp;?&nbsp; </button></th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="store" item="emp" >
+					<tr>
+						<td>{$emp.province}{$emp.city}{$emp.area}{$emp.addr}</td>
+						<td><div class="input-group">
+							<div class="radio">
+							  <label>
+							    <input type="radio" name="PsgetType" class='psradio' id="optionsRadios1" value="0" <if condition="$emp['PsgetType'] eq '0'">checked</if> >
+							    按百分比
+							  </label>
+							</div>
+							<div class="radio">
+							  <label>
+							    <input type="radio" name="PsgetType" class='psradio' id="optionsRadios2" value="1" <if condition="$emp['PsgetType'] eq '1'">checked</if> >
+							    按固定金额
+							  </label>
+							</div>
+						</div></td>
+						<td><div class="input-group">
+							<input type="text" name="PsPrice" id="PsPrice{$emp.id}" class="form-control input-xs" placeholder='满？元配送' value="{$emp.PsPrice}">
+							<span class='input-group-addon'>元</span>
+						</div></td>
+						<td><div class="input-group">
+							<input type="text" name="PsGet" id="PsGet{$emp.id}" class="form-control input-xs" placeholder='配送费用(付配送员)' value="{$emp.PsGet}">
+							<span class='input-group-addon'><span class='psgettype'><if condition="$emp['PsgetType'] eq '1'">元<else/>%</if></span>/单</span>
+						</div></td>
+						<td><div class="input-group">
+							<input type="text" name="MinPsGet" id="MinPsGet{$emp.id}" class="form-control input-xs" placeholder='最低配送费(保底)' value="{$emp.MinPsGet}">
+							<span class='input-group-addon'>元/单</span>
+						</div></td>
+						<td><div class="input-group">
+							<input type="text" name="MaxPsGet" id="MaxPsGet{$emp.id}" class="form-control input-xs" placeholder='最高配送费' value="{$emp.MaxPsGet}">
+							<span class='input-group-addon'>元/单</span>
+						</div></td>
+						<td><button class="btn btn-xs btn-primary btn-outline savekd" data-id='{$emp.id}'>保存设置信息</button></td>
+					</td>
+				</tr>
+				<tr>
+					<td colspan='7' class='text-danger'>
+						<b>设置说明 </b><br>按百分比：订单金额超出起配价时，配送员获取最高配送费，配送费由商户支付。 <br> 按固定金额：订单金额超出起配价时，配送员获取配送费金额，配送费由商户支付
+					</td>
+				</tr>
+			</foreach>
+		</tbody>
+	</table>
+	<div style="text-align:right;">{$page}</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.psradio').click(function(){
+			if ($(this).val()=='0') {
+				$('.psgettype').html('%');
+			}else if ($(this).val()=='1') {
+				$('.psgettype').html('元');
+			};
+		})
+		$('.savekd').click(function(){
+			var id=$(this).attr('data-id');
+			// var CutNum=$("#CutNum"+id).val();
+			var PsPrice=$('#PsPrice'+id).val();
+			var PsGet=$('#PsGet'+id).val();
+			var MinPsGet=$('#MinPsGet'+id).val();
+			var MaxPsGet=$('#MaxPsGet'+id).val();
+			var PsgetType=$('input[name="PsgetType"]:checked').val();
+			if (PsPrice && PsGet && MinPsGet && MaxPsGet) {
+				$.ajax({
+					url:"{:U('Stores/mercutinfo')}",
+					type:"post",
+					data:"id="+id+"&PsPrice="+PsPrice+"&PsGet="+PsGet+"&MinPsGet="+MinPsGet+"&MaxPsGet="+MaxPsGet+"&PsgetType="+PsgetType,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							art.dialog.tips('保存成功');
+						}else{
+							art.dialog.tips(msg.info);
+						}
+					}
+				})
+			}else{
+				art.dialog.tips('请完善设置信息');
+				if (PsPrice) {
+					$('#PsGet'+id).focus();
+				}else{
+					$('#PsPrice'+id).focus();
+				}
+			}
+		})
+	})
+</script>
+<script type="text/javascript" src="__PUBLIC__/newadmin/js/content.min.js?v=1.0.0"></script>
+<include file="Common:footer" />

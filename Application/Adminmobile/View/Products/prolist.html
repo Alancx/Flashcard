@@ -1,0 +1,89 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Adminmobile/css/prolist.css?v=1">
+<script type="text/javascript" src="__PUBLIC__/Adminmobile/js/prolist.js?V=5"></script>
+<script  type="text/javascript">
+var loadmore_1_url="{:U('Products/getmorepro_1')}"; //出售中加载更多
+var loadmore_2_url="{:U('Products/getmorepro_2')}"; //售馨的加载更多
+var loadmore_3_url="{:U('Products/getmorepro_3')}"; //售馨的加载更多
+var loadmore_4_url="{:U('Products/getmorepro_4')}"; //售馨的加载更多
+var updatepro="{:U('Products/proedit',array('proid'=>'PRODUCTID'))}"//修改产品信息
+var imgurl = "__PUBLIC__/Adminmobile/icon/";//图标路径
+var editshelve="{:U('Products/setshelve')}";////修改是否上架
+var deletepro="{:U('Products/prodelete')}";////删除商品
+</script>
+
+
+<!-- 顶部搜索框 -->
+<div class="heard">
+	<div class="heardtitle">
+		<input type="text" name="keyword" id="keyword" class="search-input" placeholder="请输入商品名称"/>
+		<input type="button" class="search-btn"  value="">
+	</div>
+	<label>更多</label>
+</div>
+
+<div class="seltype">
+	<div class="prosel sel-1 proselactive" data-s="1">
+		<label>出售中</label>
+	</div>
+	<div class="prosel sel-2" data-s="2">
+		<label>售馨的</label>
+	</div>
+	<div class="prosel sel-3" data-s="3">
+		<label>仓库中</label>
+	</div>
+	<div class="prosel sel-4" data-s="4">
+		<label>最新商品</label>
+	</div>
+</div>
+<div class="prolists">
+	<!-- 出售中商品列表 -->
+	<div class="prolist prolist-1" data-p='0'>
+		<foreach name="prodatas" item="pro">
+			<div class="prodata" data-proid="{$pro['ProId']}">
+				<img class="proimg" src="{$pro['ProLogoImg']}">
+				<div class="prodata-1">
+					<label class="protitle">{$pro['ProTitle']}</label>
+					<label class="proprice">￥{$pro['PriceRange']}</label>
+					<label class="propcount">库存:{$pro['PCount']}
+						<span class="czicon" data-proid="{$pro['ProId']}" data-shelves="{$pro['IsShelves']}" onclick="sheditmenu(this)"></span>
+						<span class="proscont">销量:{$pro['SCount']}</span>
+					</label>
+				</div>
+			</div>
+		</foreach>
+		<label class="jzmore pro-1">加载更多</label>
+	</div>
+	<!-- 售馨的商品列表 -->
+	<div class="prolist prolist-2" data-p='-1' style="display:none">
+		<label class="jzmore pro-2">加载更多</label>
+	</div>
+	<!-- 仓库中列表 -->
+	<div class="prolist prolist-3" data-p='-1' style="display:none">
+		<label class="jzmore pro-3">加载更多</label>
+	</div>
+	<!-- 最新商品列表 -->
+	<div class="prolist prolist-4" data-p='-1' style="display:none">
+		<label class="jzmore pro-4">加载更多</label>
+	</div>
+	<!-- 编辑菜单 -->
+	<div class="editmenu" style="display:none;">
+		<div onclick="proedit(this)">
+			<img src="__PUBLIC__/Adminmobile/icon/bjpro.png">
+			<label>编辑</label>
+		</div>
+		<div onclick="proshelve(this)">
+			<img class="imgshelve" src="__PUBLIC__/Adminmobile/icon/xjpro.png">
+			<label class="lshelve" >下架</label>
+		</div>
+		<div onclick="prodel(this)">
+			<img src="__PUBLIC__/Adminmobile/icon/scpro.png">
+			<label>删除</label>
+		</div>
+	</div>
+</div>
+<div class="addpro">
+<a href="{:U('Products/proedit')}">
+	<button type="button" class="btn btn-danger  btn-block" id="addpro">添加商品</button>
+</a>
+</div>

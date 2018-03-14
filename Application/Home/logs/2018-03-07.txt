@@ -1,0 +1,16 @@
+操作定位:Payment/WXPayNotify::::商城微信支付反馈信息--->>>{"appid":"wx3dd28eb27ded279b","bank_type":"CFT","cash_fee":"1","fee_type":"CNY","is_subscribe":"Y","mch_id":"1394550102","nonce_str":"0tmU4ZwykXlUGk3o","openid":"oFSe-wbQh30G3Dg-2-oWBm1pbXYM","out_trade_no":"E201803070920149616FJ8381","result_code":"SUCCESS","return_code":"SUCCESS","sign":"7CA33524A8B944E1C2BA4FF880D1F856","time_end":"20180307092026","total_fee":"1","trade_type":"JSAPI","transaction_id":"4200000098201803074082763129"}::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::appid=wx3dd28eb27ded279b&bank_type=CFT&cash_fee=1&fee_type=CNY&is_subscribe=Y&mch_id=1394550102&nonce_str=0tmU4ZwykXlUGk3o&openid=oFSe-wbQh30G3Dg-2-oWBm1pbXYM&out_trade_no=E201803070920149616FJ8381&result_code=SUCCESS&return_code=SUCCESS&time_end=20180307092026&total_fee=1&trade_type=JSAPI&transaction_id=4200000098201803074082763129&key=henanshunlianruanjian66666666666::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::7CA33524A8B944E1C2BA4FF880D1F856::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::微信支付验签成功::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::微信消息---结果{"errcode":40003,"errmsg":"invalid openid hint: [pafyAA0628ge31]"}::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::微信消息---结果{"errcode":0,"errmsg":"ok","msgid":181082490075889665}::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::商城微信支付反馈信息--->>>false::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::key=henanshunlianruanjian66666666666::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::BD65E15AEF13712DD786D1785BC2892E::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::微信支付验签失败>>>>>BD65E15AEF13712DD786D1785BC2892E>>>>>::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::商城微信支付反馈信息--->>>{"appid":"wx3dd28eb27ded279b","bank_type":"CFT","cash_fee":"1","fee_type":"CNY","is_subscribe":"Y","mch_id":"1394550102","nonce_str":"JFlI8zXGZKRYPr8F","openid":"oFSe-wbQh30G3Dg-2-oWBm1pbXYM","out_trade_no":"E201803071506179421FJ6762","result_code":"SUCCESS","return_code":"SUCCESS","sign":"BEDC17B6CAB73C816DD66B086DBC4CE3","time_end":"20180307150638","total_fee":"1","trade_type":"JSAPI","transaction_id":"4200000087201803074317884617"}::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::appid=wx3dd28eb27ded279b&bank_type=CFT&cash_fee=1&fee_type=CNY&is_subscribe=Y&mch_id=1394550102&nonce_str=JFlI8zXGZKRYPr8F&openid=oFSe-wbQh30G3Dg-2-oWBm1pbXYM&out_trade_no=E201803071506179421FJ6762&result_code=SUCCESS&return_code=SUCCESS&time_end=20180307150638&total_fee=1&trade_type=JSAPI&transaction_id=4200000087201803074317884617&key=henanshunlianruanjian66666666666::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::BEDC17B6CAB73C816DD66B086DBC4CE3::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::微信支付验签成功::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::微信消息---结果{"errcode":40003,"errmsg":"invalid openid hint: [02B530399ge20]"}::::::操作日期:::::::
+操作定位:Payment/WXPayNotify::::微信消息---结果{"errcode":0,"errmsg":"ok","msgid":181430980635279360}::::::操作日期:::::::

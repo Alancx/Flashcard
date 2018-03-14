@@ -1,0 +1,42 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/orders.css?v=1.9">
+<style>
+.nodata{
+  display: block;
+  padding: 20% 15% 0px 15%;
+}
+.nodata>img{
+  width: 100%;
+}
+</style>
+<empty name="orderlist">
+  <div class="nodata">
+    <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+  </div>
+  <else />
+  <foreach name="orderlist" item="oitem">
+    <div class="orderinfo">
+      <label class="orderid">{$oitem['MemberName']}
+      <switch name="oitem.Status">
+            <case value="2"><span>待发货</span><br></case>
+            <case value="3"><span>待收货</span><br></case>
+            <case value="5"><span>退款中</span><br></case>
+            <default /><span>未完成</span><br>
+          </switch>
+        <span>{$oitem['OrderId']}</span>
+        <span>{$oitem['oDate']}</span>
+      </label>
+      <div class="prolist">
+        <foreach name="oitem['prolist']" item="proinfo">
+          <div class="proinfo">
+            <img src="{$proinfo['ProLogoImg']}">
+            <label class="proname">{$proinfo['ProName']}</label>
+            <label class="proattr">{$proinfo['Spec']};</label>
+            <label class="proprice"><span>￥</span><?php echo $proinfo['Price']?sprintf("%.2f",$proinfo['Price']):'0.00' ?><span>×{$proinfo['Count']}</span></label>
+          </div>
+        </foreach>
+      </div>
+      <label class="totalprice">共{$oitem['Count']}件,合计:<span>￥<?php echo $oitem['Price']?sprintf("%.2f",$oitem['Price']):'0.00' ?></span>(含运费:<?php echo $oitem['Freight']?sprintf("%.2f",$oitem['Freight']):'0.00' ?>)</label>
+    </div>
+  </foreach>
+</empty>

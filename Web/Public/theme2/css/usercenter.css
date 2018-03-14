@@ -1,0 +1,808 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+.ucenterpart {
+    position: relative;
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.ucenterpart > div {
+    position: relative;
+    height: 50px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.ucenterpart > div > label {
+    width: 95%;
+    height: 100%;
+    margin: 0px;
+    font-size: 16px;
+    line-height: 49px;
+    padding: 0px 0px 0px 10px;
+    color: #333333;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 7px;
+}
+
+.ucenterpart > div > label > span {
+    float: right;
+    font-size: 14px;
+    color: #999999;
+    margin: 0px 17px 0px 0px;
+}
+
+.usercentertx, .usercenterxb {
+    position: absolute;
+    top: 12px;
+    right: 35px;
+    height: 25px;
+    width: 25px;
+    /*border-radius: 50%;*/
+    border-style: solid;
+    border-width: 1px;
+    border-color: #999999;
+    border-radius: 5px;
+}
+
+.userqr-codes {
+    position: relative;
+    z-index: 1;
+}
+
+.usercenterewm {
+    position: absolute;
+    top: 13px;
+    right: 35px;
+    height: 25px;
+    z-index: 0;
+}
+
+.nickname {
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    outline: medium;
+    border-style: none;
+    text-indent: 15px;
+}
+
+.coversex, .coversel, .coveredit, .coverregion,
+.coverpassword, .coverqrcode, .couvercoupons, .covernick,.couverxgtx,.coverphone {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.51);
+    z-index: 100;
+}
+
+.selectsex {
+    position: absolute;
+    overflow: auto;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 80%;
+    background-color: #ffffff;
+}
+
+.selectsex > div > img {
+    margin: 40px 35% 0px 35%;
+    width: 30%;
+}
+
+.selectsex > div > label {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0px 0px 0px;
+    font-size: 16px;
+    color: #666666;
+}
+
+.selectregion {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 130px;
+    background-color: #f3f3f3;
+}
+.synchro{
+  display: block;
+  text-align: center;
+  line-height: 45px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #ff4200;
+}
+
+#addressPCD {
+    margin: 20px 0px 0px 0px;
+}
+
+#addressPCD > select {
+    width: 23%;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    /*margin: 0px 5% 0px 5%;*/
+}
+
+.regionback {
+    width: auto;
+    margin: 0px 0px 0px 10px;
+    float: left;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    color: #0a9dcc;
+}
+
+.regionsure {
+    width: auto;
+    margin: 0px 10px 0px 0px;
+    float: right;
+    height: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 40px;
+    color: #0a9dcc;
+}
+
+.addrselect, .addressedit, .passwordset,
+.qr-codes, .coupons, .nicknameset,.phoneset {
+    position: absolute;
+    overflow: auto;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #f3f3f3;
+}
+
+.conternicks,.conterphone {
+    height: 50px;
+    margin: 0px 0px 20px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    position: relative;
+    overflow: hidden;
+}
+.conterphone:last-child{
+  margin: -21px 0px 20px 0px;
+}
+.conterphone>.showtitle{
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  width: 65px;
+  line-height: 48px;
+  margin: 0px;
+}
+.phone {
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    outline: medium;
+    border-style: none;
+    text-indent: 80px;
+}
+.phonecode {
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    outline: medium;
+    border-style: none;
+    text-indent: 80px;
+}
+.getcode {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0px 0px 0px 0px;
+    font-size: 14px;
+    width: 100px;
+    line-height: 48px;
+    margin: 0px;
+    color: #666666;
+    text-align: center;
+    background-color: #dddddd;
+}
+.addr-box {
+    position: relative;
+    margin: 10px 0px 0px 0px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.addr-box label {
+    width: 100%;
+}
+
+.addrname {
+    padding: 15px 10px 0px 10px;
+    font-size: 16px !important;
+}
+
+.addraddr {
+    padding: 0px 10px 0px 10px;
+    font-size: 16px !important;
+}
+
+.addrphone {
+    position: absolute;
+    width: auto !important;
+    top: 15px;
+    right: 25px;
+    font-size: 16px !important;
+}
+
+.addrsedit {
+    height: 40px;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.addrdefault {
+    float: left;
+    width: auto !important;
+    height: 100%;
+    font-size: 14px !important;
+    line-height: 40px;
+    padding: 0px 0px 0px 45px;
+    background-image: url("../Images/weixuanze.png");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.schecked {
+    background-image: url("../Images/tongyi-01.png") !important;
+}
+
+.addrdel {
+    float: right;
+    width: auto !important;
+    height: 100%;
+    font-size: 14px !important;
+    line-height: 40px;
+    padding: 0px 0px 0px 35px;
+    margin: 0px 30px 0px 0px;
+    background-image: url("../Images/shanchu.png");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+}
+
+.addredit {
+    float: right;
+    width: auto !important;
+    height: 100%;
+    font-size: 14px !important;
+    line-height: 40px;
+    padding: 0px 0px 0px 35px;
+    background-image: url("../Images/bianji.png");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+}
+
+.but-address {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 55px;
+    z-index: 101;
+}
+
+.but-address > label {
+    color: #ffffff;
+    line-height: 55px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.addrback {
+    float: left;
+    height: 100%;
+    width: 30%;
+    background-color: #ff2222;
+}
+
+.add-address {
+    float: left;
+    height: 100%;
+    width: 70%;
+    background-color: #ffb222;
+}
+
+/*******STYLE 3*******/
+.chk_3 {
+    display: none;
+}
+
+.chk_3 + label {
+    background-color: #fafbfa;
+    border-radius: 50px;
+    display: inline-block;
+    position: relative;
+    -webkit-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    width: 58px;
+    height: 33px;
+}
+
+.chk_3 + label:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    -webkit-transition: box-shadow 0.1s ease-in;
+    transition: box-shadow 0.1s ease-in;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    box-shadow: inset 0 0 0 0 #eee, 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.chk_3 + label:before {
+    content: ' ';
+    position: absolute;
+    background: white;
+    top: 1px;
+    left: 1px;
+    z-index: 100;
+    width: 31px;
+    -webkit-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    height: 31px;
+    border-radius: 100px;
+    box-shadow: 0 3px 1px rgba(0, 0, 0, 0.05), 0 0px 1px rgba(0, 0, 0, 0.3);
+}
+
+.chk_3:active + label:after {
+    box-shadow: inset 0 0 0 20px #eee, 0 0 1px #eee;
+}
+
+.chk_3:active + label:before {
+    width: 37px;
+}
+
+.chk_3:checked:active + label:before {
+    width: 37px;
+    left: 20px;
+}
+
+.chk_3 + label:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chk_3:checked + label:before {
+    content: ' ';
+    position: absolute;
+    left: 26px;
+    border-radius: 100px;
+}
+
+.chk_3:checked + label:after {
+    content: ' ';
+    font-size: 1.5em;
+    position: absolute;
+    background: #4cda60;
+    box-shadow: 0 0 1px #4cda60;
+}
+
+.addressedit {
+    padding: 10px 0px 0px 0px;
+}
+
+.conters, .contersxx {
+    height: 50px;
+    padding: 0px 10px 0px 10px;
+    background-color: #ffffff;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+    overflow: hidden;
+}
+
+.contersxx {
+    height: 80px;
+    border-bottom-style: solid;
+}
+
+.conters label {
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 50px;
+}
+
+.shnames, .shphones, .oldpassword, .newpassword,
+.newnextpassword {
+    float: right;
+    width: 70%;
+    border: none;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+    outline: medium;
+}
+
+.conters > .region {
+    float: right;
+    width: auto;
+    height: 100%;
+    padding: 0px 15px 0px 0px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 50px;
+    color: #999999;
+    background-image: url("../Images/Arrow.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+.contersxx > label {
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 50px;
+}
+
+.xxaddr {
+    float: right;
+    width: 70%;
+    height: 68px;
+    margin: 5px 0px 5px 0px;
+    font-size: 16px;
+    font-weight: 400;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+.mraddr {
+    height: 50px;
+    background-color: #ffffff;
+}
+
+.mraddr > label {
+    float: left;
+    padding: 0px 0px 0px 10px;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 50px;
+}
+
+.addrcheck {
+    float: right;
+    width: 20%;
+    height: 100%;
+    margin: 6px 0px 0px 0px;
+    padding: 3px;
+}
+
+.shshregions {
+    width: auto !important;
+}
+
+.passwordset > div {
+    margin: 0px 0px 20px 0px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+
+.but-password {
+    position: relative;
+    padding: 0px 10px 0px 10px;
+    background-color: #f3f3f3 !important;
+    border-width: 0px !important;
+}
+
+.passwordback {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.passwordsave {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.qr-codesmy {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #333333;
+    margin: 80px 0px 0px 0px;
+}
+
+.qr-codes > img {
+    width: 60%;
+    margin: 10px 20% 0px 20%;
+}
+
+.qr-codess {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: #333333;
+    margin: 10px 0px 0px 0px;
+}
+
+.qr-codegb {
+    width: 80%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #ffffff;
+    margin: 10px 10% 0px 10%;
+    background-color: #ffb222;
+    border-radius: 5px;
+}
+
+/*我的卡卷*/
+.backcoupons {
+    width: 100%;
+}
+
+.couponpart {
+    position: relative;
+    margin: 10px 15px 0px 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.coupondata {
+    position: relative;
+    height: 90px;
+}
+
+.couponprice {
+    float: left;
+    width: 30%;
+    height: 100%;
+    margin: 0px;
+    color: #ffb222;
+    padding: 25px 0px 0px 0px;
+    font-size: 30px;
+    line-height: 15px;
+    text-align: center;
+    border-right-style: dotted;
+    border-width: 3px;
+    border-color: #f3f3f3;
+}
+
+.couponprice > span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.coupontime {
+    height: 30px;
+    background-color: #facc76;
+}
+
+.coupontime > label {
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+    height: 100%;
+    line-height: 30px;
+    margin: 0px;
+    padding: 0px 0px 0px 10px;
+}
+
+.couponuse {
+    float: left;
+    width: 70%;
+    height: 100%;
+    margin: 0px;
+    color: #333333;
+    padding: 12px 0px 0px 10px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.couponuse-1 {
+    color: #999999;
+    font-size: 14px;
+}
+
+.couponuse-1 > span {
+    color: #333333;
+}
+
+.couponuse-2 {
+    color: #999999;
+    font-size: 12px;
+}
+
+.coupxjdk {
+    color: #ff4200;
+}
+
+.coupxjtime {
+    background-color: #fa8976;
+}
+
+.coupzk {
+    color: #227aff;
+}
+
+.coupzktime {
+    background-color: #76aafa;
+}
+
+.couponnum {
+    position: absolute;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+    top: 15px;
+    right: 30px;
+}
+
+/*无效优惠券*/
+.couponwx label {
+    color: #BBBBBB;
+}
+
+.couponwx span {
+    color: #BBBBBB;
+}
+
+.couponwx > .coupontime {
+    background-color: #DDDDDD;
+}
+
+.couponwx > .couponwxt {
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    width: 70px;
+    height: 70px;
+    background-image: url("../Images/wuxiaotu.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60px;
+}
+
+.nicknameset,.phoneset{
+    background-color: #ffffff;
+}
+.butnickpasswoes,.butphonepasswoes{
+    position: relative;
+    height:45px!important;
+    margin: 0px 2% 0px 2% !important;
+    /*border-style: solid!important;
+    border-width: 2px!important;
+    border-color: #ffb222!important;*/
+    background-color: #ffffff!important;
+    border-radius: 7px!important;
+    overflow: hidden;
+}
+.nickpasswordback,.nickpasswordsave,.phonepasswordback,.phonepasswordsave{
+    float: left;
+    width: 50%;
+    height: 100%;
+    margin: 0px;
+    color: #ffffff;
+    background-color: #ffb222;
+    font-size: 16px;
+    text-align: center;
+    line-height: 45px;
+}
+.nickpasswordback,.phonepasswordback{
+    border-right-style: solid;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+/*.nickpasswordback:hover,.nickpasswordsave:hover{
+    background-color: #ffb222;
+    color: #ffffff;
+}*/
+.passwordset{
+    background-color: #ffffff;
+}
+.butpassword{
+    margin-top: 20px!important;
+}
+
+.couverxgtx{
+  text-align: center;
+}
+
+#txxg{
+  width: 100vw;
+  height: 100vw;
+}
+.couverxgtx{
+  background-color: #ffffff;
+}
+.txbtn{
+  position: absolute;
+  bottom: 10px;
+  left: 2%;
+  width: 96%;
+  height: 98px;
+  /*background-color: #FFFFFF;*/
+}
+.txbtn>label{
+  float: left;
+  margin: 0px;
+  height: 44px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 44px;
+  border-right-style: solid;
+  border-width: 2px;
+  border-color: #ffffff;
+  color: #ffffff;
+  background-color: #ffb222;
+}
+.txbtn>label:first-child{
+  border: none;
+}
+.txbtn>label:last-child{
+  border: none;
+}
+.txback{
+  width: 50%;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+  /*background-color: #ff4200;*/
+}
+.txsuer{
+  width: 50%;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+  /*background-color: #09BB07;*/
+}
+.seltx{
+  margin-bottom: 10px!important;
+  border-radius: 7px;
+  width: 100%;
+  /*background-color: #ffb222;*/
+}
+#iptxtp{
+  display: none;
+}

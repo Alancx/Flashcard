@@ -1,0 +1,93 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+	.tice{
+		color:red;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+			</div>
+			<div class="ibox-content">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>等级名称</td>
+							<td>佣金比例</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						<foreach name='data' item='da'>
+						<tr>
+							<td>{$da.LevelName}</td>
+							<td><div class="input-group"><input type="text" name="" class="form-control" id=""><span class='input-group-addon'>%</span></div></td>
+							<td><button class="btn btn-xs btn-success">保存</button></td>
+						</tr>
+						</foreach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//验证
+	$(document).ready(function(){
+		$("#login").submit(function(){
+			var score=$("#score").val();
+			if (score) {
+				return true;
+			}else{
+				art.dialog.alert('请填写积分数');
+				return false;
+			}
+		});
+		$("#cons").submit(function(){
+			var cscore=$("#cscore").val();
+			if (cscore) {
+				return true;
+			}else{
+				art.dialog.alert('请填写积分数');
+				return false;
+			}
+		});
+		$("#extends").submit(function(){
+			var escore=$("#escore").val();
+			if (escore) {
+				return true;
+			}else{
+				art.dialog.alert('请填写积分数');
+				return false;
+			}
+		});
+		$("#sign").submit(function(){
+			var sscore=$("#sscore").val();
+			var days=$("#days").val();
+			var adds=$("#adds").val();
+			var scores=$("#scores").val();
+			if (!sscore) {
+				art.dialog.alert('请填写首次签到积分数');
+				return false;
+			};
+			if (!days) {
+				art.dialog.alert('请填写连续签到天数');
+				return false;
+			};
+			if (!adds) {
+				art.dialog.alert('请填写递增分数');
+				return false;
+			};
+			if (!scores) {
+				art.dialog.alert('请填写连续签到'+days+'天以上送积分数');
+				return false;
+			}else{
+				return true;
+			}
+		})
+	})
+</script>
+<include file="Common:footer" />

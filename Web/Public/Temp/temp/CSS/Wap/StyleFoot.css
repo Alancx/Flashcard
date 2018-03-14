@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+/*footer*/
+footer{background:url(../../Images/Wap/Public/foot.png);height:94px;width:100%;position:fixed;bottom:0px;z-index:999;}
+footer a{color:#dbdbdb;font-size:1.25rem;display:block;width:100%;padding-top:56px;text-align:center;}
+.fooat_foot{float:left;width:20%;}
+.fooat_foot a,.fooat_foot a:visited{color:#666;}
+.fooat_foot a:hover{color:#d7161b;}
+.foot_left{background:url(../../Images/Wap/Public/home.png) no-repeat center 20px;}
+.foot_leftl{background:url(../../Images/Wap/Public/list.png) no-repeat center 20px;}
+.foot_left2{background:url(../../Images/Wap/Public/message.png) no-repeat center 21px;}
+.foot_left3{background:url(../../Images/Wap/Public/shopping_cart.png) no-repeat center 19px;}
+.foot_left3 a,.foot_left3 a:visited{color:#666;}
+.foot_left4{background:url(../../Images/Wap/Public/personal.png) no-repeat center 20px;}
+.foot_left:hover{background:url(../../Images/Wap/Public/homehover.png) no-repeat center 20px;}
+.foot_leftl:hover{background:url(../../Images/Wap/Public/list.png) no-repeat center 20px;}
+.foot_left2:hover{background:url(../../Images/Wap/Public/message.png) no-repeat center 21px;}
+.foot_left3:hover{background:url(../../Images/Wap/Public/shopping_carthover.png) no-repeat center 19px;}
+.foot_left4:hover{background:url(../../Images/Wap/Public/personalhover.png) no-repeat center 20px;}

@@ -1,0 +1,242 @@
+body,div,ul,li,dt,dd,dl,table,h1,h2,h3,h4,h5,h6,p,span,tr,th,td,img{margin: 0px;padding: 0px;list-style-type: none;}
+a{text-decoration: none;color: #444;margin: 0;padding: 0;}
+body{font-family: "微软雅黑",arial; padding: 0px;}
+
+
+
+
+header{
+	display: flex;
+	justify-content: center;
+	margin: 10px 0;
+}
+/*--------tab1*/
+.tab1{
+	width: 240px;
+	height: 30px;
+	border: 1px solid #e87a77;
+	border-radius:100px ;
+	display: flex;
+	position: relative;
+}
+.tab1 span{
+	width: 100%;
+	text-align: center;
+	line-height: 30px;
+	color: #e87a77;
+}
+.tab1 span:first-child{
+	color: #fff;
+}
+.tab1nav{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50%;
+	height: 30px;
+	background: #f79a9a;
+	border-radius:20px;
+	z-index: -1;
+}
+
+/*优惠券样式*/
+
+/*灰色*/
+.hui{
+	border-top:2px solid #999 ;
+}
+.hui>div{
+	background: -webkit-linear-gradient(45deg,#909090,#606060);
+}
+/*5元*/
+.five{
+	border-top:2px solid #00a8ae ;
+}
+.five>div{
+	background: -webkit-linear-gradient(45deg,#00ecf5,#00a8ae);
+}
+/*10元*/
+.ten{
+	border-top:2px solid #e87a77 ;
+}
+.ten>div{
+	background: -webkit-linear-gradient(45deg,#f8c99c,#e87a77);
+}
+
+/*优惠券*/
+.quan{
+	margin-bottom: 10px;
+
+}
+.quan-ul{
+	height: 100px;
+	margin: 0 10px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+.li1{
+	width: 100px;
+}
+.li1>small{
+	font-size: 20px;
+}
+.li1>span{
+	font-size: 60px;
+}
+.li2{
+	width: calc(100% - 100px);
+	padding-left: 10px;
+	margin-bottom: 25px;
+}
+.li2 p{
+	font-size: 14px;
+}
+.btn{
+	border: 1px solid #fff;
+	border-radius:100px ;
+	padding: 0 10px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.guize{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+
+.quan2{
+	margin-bottom: 10px;
+
+}
+.quan2-ul{
+	height: 100px;
+	margin: 0 10px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.quan2 .li1{
+	width: 100px;
+}
+.quan2 .li1>small{
+	font-size: 20px;
+}
+.quan2 .li1>span{
+	font-size: 60px;
+}
+.quan2 .li2{
+	width: calc(100% - 100px);
+	padding-left: 10px;
+}
+.quan2 .li2 p{
+	font-size: 14px;
+}
+.quan2 .btn{
+	border: 1px solid #fff;
+	border-radius:100px ;
+	padding: 0 10px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.quan2 .guize{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+
+
+
+
+.mine{
+	overflow: hidden;
+	width: 100%;
+	padding-top: 20px;
+	position: relative;
+}
+.mine ul{
+	display: flex;
+	align-items: center;
+	padding-bottom:6px;
+}
+.mine ul li{
+	width: 100%;
+	text-align: center;
+}
+.tabnav{
+	width: 0;
+	height: 2px;
+	background: #ff3e00;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+/*使用规则*/
+.shiyongguize{
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+.shiyongguize>div{
+	width: 300px;
+	height: 500px;
+	background: rgba(255,255,255,.9);
+	border-radius:20px ;
+	-webkit-border-radius:20px ;
+	position: relative;
+
+}
+.shiyongguize>div>div{
+	overflow-y: auto;
+	margin-top: 20px;
+}
+h5{
+	text-align: center;
+	border-bottom: 1px solid #666;
+	padding: 15px 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: #eee;
+	-webkit-border-top-left-radius: 20px;
+	-webkit-border-top-right-radius: 20px;
+	border-top-left-radius:20px ;
+	border-top-right-radius:20px ;
+
+}
+.shiyongguize>div ol{
+	margin-top: 50px;
+	padding-left:30px ;
+	padding-right: 10px;
+	height: 380px;
+}
+.shiyongguize>div ol li{
+	list-style-type: decimal !important;
+}
+.off{
+	width: 100%;
+	position: absolute;
+	text-align: center;
+	bottom: 8px;
+	left: 0;
+	margin: 0 !important;
+	color: #d00d00;
+}

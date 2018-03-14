@@ -1,0 +1,186 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.source.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="ibox-title">
+		<h5>提现管理</h5>
+	</div>
+
+	<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="{:U('Users/searchsss')}" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<select name="type" id="type" class="form-control">
+					<option value="">请选择查询类型</option>
+					<option value="1">待审核</option>
+					<option value="2">已审核</option>
+					<option value="3">已处理</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input type="text" name="Member" placeholder="请填写会员账号(选填)" id="member" class="form-control">
+			</div>
+			<button class="btn btn-primary btn-outline btn-md"><span class="glyphicon glyphicon-search"></span> 搜 索</button>
+		</form>
+
+	</div>
+
+	<div class="col-sm-12">
+			<table class="table table-condensed table-bordered table-hover">
+				<thead>
+					<tr>
+						<td style="width:5%">#</td>
+						<td style="width:10%">提现账号</td>
+						<td style="width:12%">提现人</td>
+						<!-- <td style="width:5%">提现账户</td> -->
+						<td style="width:9%">类型</td>
+						<td style="width:13%">提现金额</td>
+						<td style="width:18%">申请时间</td>
+						<td style="width:18%">处理时间</td>
+						<td style="width:10%">状态</td>
+						<td style="width:10%">操作</td>
+					</tr>
+				</thead>
+				<if condition="$mps['msg']">
+				<h3>{$mps.msg}</h3>
+				<else/>
+				<tbody id="tbody">
+					<foreach name="mps" item="mber" >
+						<tr>
+							<td>{$mber.ID}</td>
+							<td>{$mber.MemberId}</td>
+							<td>{$mber.GetName}</td>
+							<!-- <td>{$mber.GetAccount}</td> -->
+							<td><if condition="$mber['AccountType'] neq 'WXPAY'">推广佣金<else/>会员收益</if></td>
+							<td>{$mber.Money}</td>
+							<td>{$mber.CreateDate}</td>
+							<td>{$mber.EndDate}</td>
+							<td><if condition="$mber['Status'] eq 1">待审核</if><if condition="$mber['Status'] eq 2">已审核</if><if condition="$mber['Status'] eq 3">已处理</if></td>
+							<td id="{$mber['ID']}"><if condition="$mber['Status'] eq 1"><button class="btn btn-primary btn-oultline btn-xs" type="button" onclick="checks('{$mber['ID']}');">通过审核</button></if><if condition="$mber['Status'] eq 2"><button  class="btn btn-warning btn-oultline btn-xs" type="button" onclick="givecash('{$mber['ID']}');">发放红包</button></if>&nbsp;&nbsp;<button  class="btn btn-success btn-oultline btn-xs" type="button"   data-toggle="modal" data-target="#myModal6" onclick="Rmk('{$mber.ID}')">备注信息</button><input type="hidden" name="remarks" id="id{$mber.ID}" value="{$mber.Remarks}"></td>
+						</tr>
+					</foreach>
+				</tbody>
+				</if>
+
+			</table>
+
+		<div>{$page}</div>
+	</div>
+</div>
+
+
+<!-- model -start -->
+                            <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">提现备注信息</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="##" class="form">
+                                            	<div class="form-group" class="col-sm-12">
+                                            		<label>备注信息</label>
+                                            		<textarea name="Remarks" cols="30" rows="10" style="width:100%;" id="content" value=""></textarea>
+                                            		<input type="hidden" name="hid" id="hid" value="">
+                                            	</div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveRemarks">保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+<!-- model -end -->
+<script type="text/javascript">
+
+	function Rmk(id){
+		var remarks=$("#id"+id).val();
+		$("#hid").val(id);
+		$("#content").val(remarks);
+	}
+
+	function checks(id){
+		art.dialog.confirm('确定要通过审核吗？',function(){
+			window.location.href="{:U('Users/checkcash')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作',1);
+		})
+	}
+
+	function givecash(id){
+		art.dialog.confirm('是否确认发放提现红包？',function(){
+            var cash=art.dialog.tips('正在处理数据...',20,true);
+			$.ajax({
+				type:"post",
+				url:"{:U('Users/gethb')}",
+				data:"id="+id,
+				dateType:"json",
+				success:function(msg){
+					art.dialog.alert(msg);
+					$("#"+id).html('&nbsp;&nbsp;<button  class="btn btn-success btn-oultline btn-xs" type="button"   data-toggle="modal" data-target="#myModal6" onclick="Rmk(\''+id+'\')">备注信息</button><input type="hidden" name="remarks" id="id'+id+'" value="'+msg+'">')
+					cash.close();
+				}
+			})
+			// window.location.href="{:U('Users/gethb')}?id="+id;
+		},function(){
+			art.dialog.tips('取消操作');
+		})
+	}
+
+	// function nocash(id){
+	// 	art.dialog.confirm('请在备注信息中注明转账失败原因',function(){
+	// 		window.location.href="{:U('Users/nocash')}?id="+id;
+	// 	},function(){
+	// 		art.dialog.tips('取消操作',1);
+	// 	})
+	// }
+
+
+	$(document).ready(function(){
+		$("#search").submit(function(){
+			var type=$("#type").val();
+			var member=$("#member").val();
+			if (!member && !type) {
+				art.dialog.alert('请输入查询内容');
+				return false;
+			};
+			if (!type) {
+				art.dialog.alert('请选择查询类型');
+				return false;
+			} else{
+				return true;
+			}
+
+		})
+
+
+		$("#saveRemarks").click(function(){
+			var id=$("#hid").val();
+			var text=$("#content").val();
+			console.log(text);
+			$.ajax({
+				type:"post",
+				url:"{:U('Users/cashRmks')}",
+				data:"id="+id+"&text="+text,
+				dateType:"json",
+				success:function(msg){
+					if (msg=='success') {
+						art.dialog.tips('备注成功');
+						$("#id"+id).val(text);
+					};
+					if (msg=='error') {
+						art.dialog.tips('备注失败');
+					};
+				}
+			})
+		})
+
+
+
+	})
+</script>
+<include file="Common:footer" />

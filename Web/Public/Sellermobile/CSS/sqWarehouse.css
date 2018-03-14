@@ -1,0 +1,303 @@
+.allconternts{
+  display: block;
+  overflow: hidden;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+.part{
+  display: block;
+  overflow: hidden;
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+.part>label{
+  display: block;
+  overflow: hidden;
+  padding: 0px 10px 0px 10px;
+  line-height: 40px;
+  border-bottom-style: dashed;
+  border-color: #dddddd;
+  border-width: 1px;
+  font-size: 18px;
+}
+.orderinfo{
+  display: block;
+  overflow: hidden;
+  padding: 0px 10px 0px 10px;
+  margin: 0px 0px -1px 0px;
+}
+.orderinfo>.infoitem{
+  display: block;
+  padding: 0px 10px 0px 10px;
+  border-bottom-style: dashed;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+.orderinfo>.infoitem>label{
+  line-height: 30px;
+  font-size: 16px;
+  width: 80px;
+  text-align: center;
+}
+.orderinfo>.infoitem>span{
+  line-height: 30px;
+  font-size: 14px;
+  color: #666666;
+}
+.pro_list{
+  border: none;
+}
+.proinfo{
+  font-size: 16px!important;
+  margin: 0px 10px 0px 10px;
+}
+.proinfo>span{
+  float: right;
+  line-height: 30px;
+  margin: 5px -10px 0px 0px;
+  padding: 0px 5px 0px 30px;
+  background-image: url("../icon/addpro.png");
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-color: #c7c7c7;
+  border-radius: 3px;
+}
+.prolist{
+  background-color: #ffffff;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  overflow: auto;
+}
+.submitpro{
+  display: block;
+  overflow: hidden;
+  padding: 5px 15% 5px 15%;
+  background-color: #ffffff;
+}
+.submitpro>label{
+  display: block;
+  width: 45%;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #ff4200;
+  color: #ffffff;
+  font-size: 14px!important;
+
+}
+.submitpro>label:first-child{
+  float: left;
+}
+.submitpro>label:last-child{
+  float: right;
+}
+/*//////////////////////////*/
+.proconver{
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+.getproinfo{
+  display: block;
+  position: fixed;
+  overflow: auto;
+  bottom: 41px;
+  left: 0px;
+  top: 10%;
+  right: 0px;
+  background-color: #ffffff;
+}
+.suregetpro{
+  display: block;
+  position: fixed;
+  overflow: hidden;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 41px;
+  background-color: #ffffff;
+  border-top-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  padding: 5px 20% 5px 20%;
+}
+.suregetpro>label{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  line-height: 30px;
+  background-color: #ff4200;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+}
+.proitem{
+  display: block;
+  overflow: hidden;
+  height: 71px;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  position: relative;
+}
+.proitem>img{
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin: 5px 5px 5px 5px;
+}
+.proitem>.pcontent{
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 75px;
+  bottom: 0px;
+  right: 50px;
+}
+.proitem>.pcontent>label{
+  display: block;
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.proitem>.pcontent>.pname{
+  display: block;
+  line-height: 24px;
+  font-size: 16px;
+  color: #333333;
+}
+.proitem>.pcontent>.pattr{
+  display: block;
+  line-height: 22px;
+  font-size: 14px;
+  color: #666666;
+}
+.proitem>.pcontent>.pprice{
+  display: block;
+  line-height: 22px;
+  font-size: 12px;
+  color: #666666;
+}
+.proitem>.pcontent>.pprice>span{
+  font-size: 14px;
+  color: #ff4200;
+}
+.proitem>.suresel{
+  display: block;
+  position: absolute;
+  padding: 20px 20px 20px 20px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 70px;
+  overflow: hidden;
+  background-image: url("../icon/uncheck.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 30px;
+}
+.proitem>.sureselactive{
+  background-image: url("../icon/checked.png");
+}
+
+.plitem{
+  display: block;
+  overflow: hidden;
+  height: 71px;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  position: relative;
+}
+.plitem>span{
+  float: left;
+  height: 70px;
+  width: 30px;
+  background-image: url("../icon/deleteattr.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+}
+.plitem>img{
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin: 5px 5px 5px 0px;
+}
+.plitem>.pcontent{
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 100px;
+  bottom: 0px;
+  right: 70px;
+}
+.proitem>.pcontent>label{
+  display: block;
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.plitem>.pcontent>.pname{
+  display: block;
+  line-height: 24px;
+  font-size: 16px;
+  color: #333333;
+}
+.plitem>.pcontent>.pattr{
+  display: block;
+  line-height: 22px;
+  font-size: 14px;
+  color: #666666;
+}
+.plitem>.pcontent>.pprice{
+  display: block;
+  line-height: 22px;
+  font-size: 12px;
+  color: #666666;
+}
+.plitem>.pcontent>.pprice>span{
+  font-size: 14px;
+  color: #ff4200;
+}
+.plitem>.pnum{
+  display: block;
+  position: absolute;
+  padding: 5px 10px 10px 10px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 70px;
+}
+.plitem>.pnum>label{
+  display: block;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+}
+.plitem>.pnum>input{
+  display: block;
+  width: 50px;
+  height: 40px;
+  outline: none;
+  border-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+}

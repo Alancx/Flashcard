@@ -1,0 +1,65 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/Factorypro.css?v=1.2">
+<div class="factorycontent">
+  <if condition="$prodata eq 'NULLPRO'">
+    <div class="null_data">
+      <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+    </div>
+    <else />
+    <div class="seachhaeard">
+      <div class="inputseach">
+        <input id="inputseach" type="text" name="" value="" placeholder="输入商品名称">
+        <img id="iconseach" src="__PUBLIC__/Sellermobile/Icon/search.png" alt="">
+      </div>
+    </div>
+    <div style="height:45px;"></div>
+    <div class="prolist">
+    <foreach name="prodata" item="proinfo">
+      <div class="Factorypro" data-proid="{$proinfo['ProId']}">
+        <span class="selpro"></span>
+        <img class="proimg" src="{$proinfo['ProLogoImg']}" alt="">
+        <div class="prodata">
+          <label class="proname">{$proinfo['ProName']}</label>
+          <label class="protitle">{$proinfo['ProTitle']}</label>
+        </div>
+        <div class="attrdata">
+          <div class="attrtop">
+            <div>
+              <label>统一销售价格:</label>
+              <input type="number" name="" value="0.00" class="setaprice">
+            </div>
+            <div>
+              <label>统一采购数量:</label>
+              <input type="number" name="" value="0" class="setanum">
+            </div>
+          </div>
+          <div class="attrtitle">
+            <label>属性</label>
+            <label>工厂价</label>
+            <label>销售价格/元</label>
+            <label>采购数量</label>
+          </div>
+          <foreach name="proinfo['attrlist']" item="attritem">
+            <div class="attritem" data-cid="{$proinfo['ClassType']}" data-pcid="{$attritem['ProIdCard']}" data-gzprice="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" data-cprice="<?php echo $attritem['CosPrice']?sprintf("%.2f",$attritem['CosPrice']):'0.00' ?>">
+              <div><label>{$attritem['ProSpec1']}</label></div>
+              <div><label><?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?></label></div>
+              <div><input type="number" name="" value="<?php echo $attritem['Price']?sprintf("%.2f",$attritem['Price']):'0.00' ?>" class="attrprice"></div>
+              <div><input type="number" name="" value="0" class="attrnum"></div>
+            </div>
+          </foreach>
+        </div>
+      </div>
+    </foreach>
+  </div>
+    <div style="height:50px;"></div>
+    <div class="btn_group">
+      <label class="sel_all">全选</label>
+      <label class="savesel">提交</label>
+    </div>
+  </if>
+</div>
+<script type="text/javascript">
+var factorysearch_url="{:U('Products/Factorypro')}";///搜索获取商品地址
+var factorysave_url="{:U('Products/Factoryprosave')}";////保存选择商品
+</script>
+<script src="__PUBLIC__/Sellermobile/JS/Factorypro.js?v=1.2" charset="utf-8"></script>

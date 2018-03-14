@@ -1,0 +1,33 @@
+.card{
+    width:225px;
+    height: 125px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px;
+    /*margin: 50px auto 20px auto;*/
+    position: relative;
+    background: #f8c95a;
+  }
+  .card .title{
+    /*border: 1px solid red;*/
+    height: 15px;
+    /*width: 100px;*/
+    margin: 15px auto 15px auto;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+  }
+  .card .content{
+    /*border: 1px solid orange;*/
+    width: 200px;
+    text-align: center;
+    font-size: 9px;
+    line-height: 9px;
+    margin: auto;
+  }
+  .card .end{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    /*border: 1px solid red;*/
+  }

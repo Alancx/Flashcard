@@ -1,0 +1,330 @@
+body{
+  background-color: #ffffff!important;
+}
+a,a:visited,a:active,a:focus,a:hover,a:link{
+  text-decoration: none;
+}
+#touch{
+  display: none!important;
+}
+.part_content>div{
+  display: block;
+  overflow: hidden;
+}
+.part_content{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.disinfo{
+  height: 160px;
+  padding: 30px 30px 30px 30px;
+  position: relative;
+}
+.back_img{
+  display:block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+.heardimg{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #ffffff;
+  position: relative;
+  z-index: 10;
+}
+.userinfo{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 50px 20px 10px 150px;
+  width: 100%;
+  height: 100%;
+}
+.userinfo>label{
+  display: block;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+}
+.disname{
+  background-image: url("../Images/disname.png");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding: 0px 0px 0px 25px;
+  font-size: 16px;
+  color: #ffffff;
+}
+.disphone{
+  margin: 10px 0px 0px 0px!important;
+  background-image: url("../Images/disphone.png");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  padding: 0px 0px 0px 25px;
+  font-size: 16px;
+  color: #ffffff;
+}
+.disorder{
+  display: block;
+  margin: 10px 0px 0px 0px!important;
+  color: #ffffff;
+  line-height: 30px;
+  background-image: url("../Images/disbg.png");
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: 130px 30px;
+  padding: 0px 0px 0px 25px;
+  font-size: 16px;
+  text-align: right;
+  padding: 0px 35px 0px 0px;
+}
+.disallcash{
+   display: block;
+   border-top-style: dashed;
+   border-width: 1px;
+   border-color: #ffffff;
+   background-color:#b8a88e;
+   padding: 0px 10px 0px 10px;
+}
+.disallcash>label:nth-child(1){
+  float: left;
+  margin: 0px 0px 0px 0px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #ffffff;
+}
+.disallcash>a>label{
+  float: right;
+  margin: 0px 0px 0px 0px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #ffffff;
+}
+.disshops{
+  overflow: hidden;
+  position: relative;
+  padding: 0px 0px 41px 0px;
+}
+
+.selordertype{
+  display: block;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 45px;
+  padding: 10px 20% 5px 20%;
+  overflow: hidden;
+}
+.selordertype>div{
+  display: block;
+  width: 100%;
+  height: 30px;
+  border-radius: 15px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #ffffff;
+  overflow: hidden;
+}
+.ordertype{
+  float: left;
+  width: 50%;
+  line-height: 26px;
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+}
+.selorderactive{
+  background-color: #fbb03b;
+  color: #ffffff;
+}
+.disstype{
+  overflow: auto;
+  position: relative;
+}
+/*订单信息*/
+.orderinfo{
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #BD6161;
+}
+.order_info{
+  position: relative;
+  padding: 0px 10px 0px 10px;
+}
+.order_info>label{
+  margin: 0px 0px 0px 0px;
+  position: relative;
+}
+.orderid{
+  display: block;
+  width: 100%;
+  line-height: 30px;
+  font-size: 14px;
+  border-bottom-style: dashed;
+  border-width: 1px;
+  border-color: #BD6161;
+}
+.orderprice{
+  position: absolute!important;
+  right: 10px;
+  top: 0px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #ff4200;
+}
+.order_info>label>span{
+  display: block;
+  position: absolute;
+  width: 80px;
+  left: 0px;
+  top: 0px;
+}
+.ordername,.orderphone{
+  display: block;
+  line-height: 25px;
+  font-size: 14px;
+  padding: 0px 0px 0px 80px;
+
+}
+.orderaddr,.prolist{
+  display: block;
+  padding: 0px 0px 0px 80px;
+}
+.btn_group{
+  border-top-style: dashed;
+  border-width: 1px;
+  border-color: #BD6161;
+  padding: 5px 10px 5px 10px;
+  overflow: hidden;
+}
+.suresend,.sureend{
+  float: right;
+  margin: 0px 0px 0px 0px;
+  width: 75px;
+  line-height: 28px;
+  border-radius: 5px;
+  color: #ff4200;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ff4200;
+}
+.nullorder{
+  display: block;
+  margin: 50px 0px 0px 0px;
+  text-align: center;
+  font-size: 18px;
+  color: #A99191;
+  font-weight: 600!important;
+}
+.getmoreorder{
+  display: block;
+  margin: 10px 30% 10px 30%;
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #987878;
+  line-height: 26px;
+  border-radius: 13px;
+}
+.seldising{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: auto;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 30px;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 10px 0px 10px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #EF6565;
+  border-radius: 10px;
+}
+.seldising>img{
+  width: 20px;
+  margin: 0px 5px 0px 0px;
+}
+.enddis_btn{
+  padding: 0px 0px 0px 0px;
+  border: none;
+}
+.convercode{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 11;
+}
+.convercode>div{
+  display: table;
+  width: 100%;
+  height: 100%;
+
+}
+.inputcode{
+  display: table-cell;
+  vertical-align: middle;
+}
+.inputcode>div{
+  display: block;
+  width: 60%;
+  margin: 0px 20% 0px 20%;
+  background-color: #ffffff;
+  border-color: #dddddd;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.inputcode>div>label{
+  display: block;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  background-color: #FBB03B;
+  color: #ffffff;
+  text-align: center;
+  border-color: #dddddd;
+  border-bottom-style: solid;
+  border-width: 1px;
+  font-size: 18px;
+  line-height: 30px;
+}
+.inputcode>div>input{
+  display: block;
+  width: 100%;
+border: none;
+outline: none;
+line-height: 40px;
+padding: 0px 15px 0px 15px;
+}
+.btn_groups{
+  display: block;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}
+.btn_groups>label{
+  float: left;
+  width: 50%;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  margin: 0px;
+
+}
+.btn_groups>label:nth-child(1){
+  border-right-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+}

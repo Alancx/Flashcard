@@ -1,0 +1,77 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.recordtitle {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 40px;
+    width: 100%;
+    background-color: #f3f3f3;
+    padding: 0px 15px 0px 15px;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.recordtitle >div{
+    float: left;
+    width: auto;
+    height: 100%;
+    padding: 7px 0px 0px 0px;
+}
+.recordtitle >div> select {
+	font-size: 14px;
+    font-weight: 400;
+    height: 27px;
+    background-color: #f3f3f3;
+    border-radius: 3px;
+    outline: medium;
+		width: 60px;
+}
+.recordtitle>label{
+    float: right;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    color: #999999;
+    line-height: 39px;
+}
+.recordlist {
+    height: 0px;
+    background-color: #ffffff;
+    padding-bottom: 5px;
+    overflow: auto;
+  }
+.recordpart{
+  height: 50px;
+  width: 100%;
+  border-bottom-style: solid;
+  border-color: #dddddd;
+  border-width: 1px;
+}
+.recordimg{
+  float: left;
+  width:35px;
+  height: 35px;
+  margin: 8px 0px 7px 10px;
+  border-radius: 50%;
+}
+.recordcons{
+  float: left;
+  height: 39px;
+  line-height: 17px;
+  margin: 10px 10px 0px 10px;
+  font-size: 14px;
+  color: #f10180;
+  overflow: hidden;
+}
+.recordcons>span{
+  font-size: 12px;
+  color: #999999;
+}
+.recordcons-1{
+  float: right;
+  color: #666666!important;
+}

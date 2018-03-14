@@ -1,0 +1,3 @@
+操作定位:Products/saveEdit::::商品修改失败--->>>1 &&  && 1 && 1 && 1 && 1 && 1::::::操作日期:::::::2017-02-10 16:29:59
+操作定位:Products/saveEdit::::INSERT INTO [RS_ProductList] ([ProIdCard],[ProSpec1],[ProSpec2],[ProSpec3],[ProSpec4],[ProSpec5],[LastUpdateDate],[ProIdInputCard],[Count],[Price],[ProId],[EmpCut],[Iszp],[IsUseScore],[Score],[token]) VALUES ('pro6711367121_4',null,' ',' ',' ',' ','2017-02-10 16:31:34','AAB1000','199','99','pro6711367121','','0','0','','rhbnja145862596121')::::::操作日期:::::::2017-02-10 16:31:35
+操作定位:Products/saveEdit::::商品修改失败--->>>1 &&  && 1 && 1 && 1 && 1 && 1::::::操作日期:::::::2017-02-10 16:31:36

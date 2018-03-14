@@ -1,0 +1,91 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<include file="$headername" />
+
+ <div class="row wrapper border-bottom white-bg page-heading">
+     <div class="col-lg-10">
+         <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>仓库管理</h2>
+         <ol class="breadcrumb">
+             <li>
+                 <a href="index.html">主页</a>
+             </li>
+             <li class="active">
+                 <strong>添加仓库</strong>
+             </li>
+         </ol>
+     </div>
+ <div class="col-lg-2"></div>
+ </div>
+
+
+
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+<div class="col-lg-12">
+	<div class="col-lg-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>添加仓库</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <form role="form" class="form-inline" action="{:U('Warehouse/savehouse')}" method="post" id="save">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail2" class="sr-only">仓库名称</label>
+                                        <input type="text" name="WarehouseName" placeholder="请填写仓库名称"  class="form-control" id="WarehouseName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail2" class="sr-only">仓库排序</label>
+                                        <input type="text" name="Sort" placeholder="请填写仓库排序"  class="form-control" id="Sort">
+                                    </div>
+                                    <input type="hidden" name="ID" id="ID" value="">
+                                    <button class="btn btn-white" type="submit" id="saveNotice">保 存</button>&nbsp;&nbsp;&nbsp;&nbsp;<small style="color:red">注* 仓库名确定后无法修改</small>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+<div class="col-lg-10">
+<h3>仓库</h3>
+	<table class="table">
+		<tr>
+			<td>#</td>
+			<td>仓库名称</td>
+			<td>仓库编号</td>
+			<td>创建时间</td>
+		</tr>
+        <foreach name="Warehouse" item="w">
+		<tr>
+			<td>{$w.ID}</td>
+			<td>{$w.WarehouseName}</td>
+			<td > {$w.WarehouseCard}</td>
+			<td>{$w.CreateDate}</td>
+		</tr>
+        </foreach>
+	</table>
+    <div style="text-align:right;">{$page}</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#save").submit(function(){
+			var name=$("#WarehouseName").val();
+			var sort=$("#Sort").val();
+			if (!name) {
+				alert('请填写仓库名称');
+				return false;
+			};
+			if (!sort) {
+				alert('请填写仓库排序');
+				return false;
+			}else{
+				return true;
+			}
+		})
+	})
+</script>
+<include file="Common:footer" />

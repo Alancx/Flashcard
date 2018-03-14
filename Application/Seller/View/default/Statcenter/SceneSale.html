@@ -1,0 +1,202 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<script src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<style type="text/css">
+	.ibox{
+		margin-bottom: 0px!important;
+	}
+</style>
+<include file="$headername" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+	<div class="col-lg-10">
+		<h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>数据统计</h2>
+		<ol class="breadcrumb">
+			<li>
+				<a href="index.html">主页</a>
+			</li>
+			<li class="active">
+				<strong>场景销售统计</strong>
+			</li>
+		</ol>
+	</div>
+	<div class="col-lg-2"></div>
+</div>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="row">
+		<div class="col-lg-6" style="display:none;">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<div class="flot-chart">
+						<div class="flot-chart-content" id="flot-bar-chart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>一周内提现金额 <span style="font-size:1.5em;">￥{$allmoney}</span></h5>
+					<div style="padding-bottom:15px;text-align:right;">
+						最后统计时间： {$etime}
+					</div>
+				</div>
+				<div class="ibox-content">
+					<div class="echarts" id="echarts-line-chart"></div>
+				</div>
+			</div>
+		</div>
+	-->	</div>
+	<div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="{:U('Statcenter/SceneSale')}" class="form-inline" method="post"  id="search">
+			<div class="form-group">
+				<label for="exampleInputPassword2" class="sr-only">选择场景</label>
+				<select name="sid" id="chosen" class="form-control" value="">
+					<option value="">请选择场景</option>
+					<foreach name="allScene" item="scene">
+						<option value="{$scene.ID}">{$scene.SceneName}</option>
+					</foreach>
+				</select>
+			</div>
+			<div class="form-group">
+				<select name="PayName" id="PayName" class="form-control">
+					<option value="">请选择支付类型</option>
+					<option value="XJ" style="color:green;font-size:1.1em;">现金支付</option>
+					<option value="T" style="color:orange;font-size:1.1em;">微信支付</option>
+					<option value="YE" style="color:green;font-size:1.1em;">余额支付</option>
+					<option value="JL" style="color:orange;font-size:1.1em;">奖励余额支付</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input type="text" name="strtime" id="stime" class="form-control" placeholder="请选择开始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+			</div>
+			<div class="form-group">
+				<input type="text" name="endtime" id="etime" class="form-control" placeholder="请选择结束时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+			</div>
+			<button class="btn btn-primary btn-outline btn-md" type="submit"><span class="glyphicon glyphicon-search"></span> 搜 索</button> <button class="btn btn-default btn-outline btn-md" type="button" id="import"><span class="glyphicon glyphicon-export"></span> 导出</button>
+		</form>
+
+	</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<if condition="$errmsg">
+			<h3>{$errmsg}</h3>
+			<else/>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr class="success">
+						<th colspan="5">场景名称： {$SceneName}  &emsp;&emsp;&emsp;支付方式：<if condition="$data['PayName'] eq 'XJ'">现金支付<elseif condition="$data['PayName'] eq 'T'"/>微信支付<elseif condition="$data['PayName'] eq 'YE'"/>余额支付<elseif condition="$data['PayName'] eq 'JL'"/>奖励余额支付<else/> 全部 </if> <if condition="$data['strtime']">&emsp;&emsp;&emsp;时间范围：{$data.strtime}——{$data.endtime}</if> </th>
+					</tr>
+					<tr>
+						<th>订单号</th>
+						<th>用户ID</th>
+						<th>支付金额</th>
+						<th>付款方式 </th>
+						<th>付款时间 </th>
+					</tr>
+				</thead>
+				<tbody>
+					<foreach name="lists" item="list" >
+						<tr>
+							<td><a href="{:U('Order/allOrder')}?oid={$list.OrderId}">{$list.OrderId}</a></td>
+							<td>{$list.MemberId}</td>
+							<td>{$list.Price}</td>
+							<if condition="$list['PayName'] eq 'XJ'"><td class="info">现金支付<elseif condition="$list['PayName'] eq 'T'"/><td class="success">微信支付<elseif condition="$list['PayName'] eq 'YE'"/><td class="warning">余额支付<elseif condition="$list['PayName'] eq 'JL'"/><td class="danger">奖励余额支付<else/> <td class="active">其他 </if></td>
+							<td>{$list.PayDate}</td>
+						</tr>
+					</foreach>
+				</tbody>
+				<thead>
+					<tr class="info">
+						<th colspan="5">总订单数：{$count} &emsp;&emsp;总订单额：{$allmoney}</th>
+					</tr>
+				</thead>
+			</table>
+		</if>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#chosen').chosen();
+		$('#PayName').chosen();
+		$("#search").submit(function(){
+			var sid=$('#chosen').val();
+			var PayName=$('#PayName').val();
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (!sid) {
+				art.dialog.alert('请选择场景');
+				return false;
+				$("#chosen").focus();
+			};
+			if (sid || PayName || stime || etime) {
+				if (stime || etime) {
+					if (stime && etime) {
+						if (stime<etime) {
+							art.dialog.tips('查询中...',100);
+							return true;
+						}else{
+							art.dialog.alert('非法时间段');
+							return false;
+						}
+					}else{
+						art.dialog.alert('请选择完整的时间段');
+						return false;
+					}
+				}else{
+					art.dialog.tips('查询中...',100);
+					return true;
+				}
+			}else{
+				art.dialog.alert('请选择查询条件');
+				return false;
+			}
+		})
+		$('#import').click(function(){
+			var sid=$('#chosen').val();
+			var PayName=$('#PayName').val();
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (!sid) {
+				art.dialog.alert('请选择场景');
+				return false;
+				$("#chosen").focus();
+			};
+			if (sid || PayName || stime || etime) {
+				if (stime || etime) {
+					if (stime && etime) {
+						if (stime<etime) {
+							art.dialog.tips('数据处理中...',3);
+							window.location.href="{:U('Statcenter/SceneOut')}?sid="+sid+"&stime="+stime+"&etime="+etime+"&PayName="+PayName;
+						}else{
+							art.dialog.alert('非法时间段');
+							return false;
+						}
+					}else{
+						art.dialog.alert('请选择完整的时间段');
+						return false;
+					}
+				}else{
+					art.dialog.tips('数据处理中...',3);
+					window.location.href="{:U('Statcenter/SceneOut')}?sid="+sid+"&stime="+stime+"&etime="+etime+"&PayName="+PayName;
+				}
+			}else{
+				art.dialog.alert('请选择查询条件');
+				return false;
+			}
+		})
+	})
+
+
+	
+
+
+</script>
+<include file="Common:footer" />
+<!-- <script src="__PUBLIC__/Admin/Admin/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/echarts/echarts-all.js"></script>
+ -->

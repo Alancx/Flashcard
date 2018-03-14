@@ -1,0 +1,50 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/serviceindex.js?v=1.2"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/ajaxfileupload.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/serviceindex.css?v=1.2">
+
+<div class="row  wrapper  white-bg chatpart" >
+  <div class="chat chatcontent col-lg-9">
+    <label class="chattop memname">选择在线客户</label>
+    <div class="contents">
+      <!-- <div class="chatto chatcontent">
+        <img src="__PUBLIC__/theme2/images/touxiang.png">
+        <label class="content">大家好你好我也好</label>
+        <span></span>
+      </div> -->
+      <!-- <div class="chatfrom chatcontent">
+        <img src="__PUBLIC__/theme2/images/touxiang.png">
+        <label class="content">大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好大家好你好我也好</label>
+        <span></span>
+      </div> -->
+    </div>
+    <div class="inputcontent input-group">
+      <div class="input-group-btn">
+        <img class="sendimg" src="__PUBLIC__/theme2/Images/sendimg.png">
+        <input type="file" id="simg" name="simg" onchange="selsimg(this)">
+      </div>
+      <input type="text" class="editchat" name="editchat" id="editchat">
+      <span class="input-group-btn">
+        <button class="btnsend" type="button">发送</button>
+      </span>
+    </div>
+  </div>
+  <div class="chat memlist col-lg-3">
+    <div class="memberlist">
+      <label class="chattop">在线客户</label>
+      <ul class="listmem">
+        <!-- <li class="limember"><img src="__PUBLIC__/theme2/images/touxiang.png">13711555815</li> -->
+      </ul>
+    </div>
+  </div>
+</div>
+<include file="Common:footer" />
+<script type="text/javascript">
+  var sendmsg_url="{:U('Service/sendmsg')}"; //发送消息
+   var kefuid="{$serviceid}";
+   var kefuname="{$servicename}";
+   var kefuimg="__PUBLIC__/Admin/Admin/img/headimg/{$serviceimg}";
+   var kefusimg_url= "{:U('Service/savesengimg')}";//保存发送图片
+</script>

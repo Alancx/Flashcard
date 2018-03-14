@@ -1,0 +1,75 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/userjfxq.css">
+
+<div class="jftitle">
+  <div class="jfsel sel-1 jfselactive" onclick="seljflx(this)">
+      <label>积分奖励</label>
+  </div>
+  <div class="jfsel sel-2" onclick="seljflx(this)">
+      <label>积分扣减</label>
+  </div>
+</div>
+<div style="height: 50px"></div>
+<div class="usermempart">
+    <foreach name='jfdata' item='ui'>
+        <div class="mymember {$ui['Type']}">
+            <if condition="$ui['Type']=='sign'">
+                <img src="__PUBLIC__/theme2/Images/qdjf.png">
+                <label class="memnc">签到积分<br><span>签到送积分</span></label>
+                <label class="memsy-1">{$ui['Cdata']}<br><span>+{$ui['Integral']}</span></label>
+                <elseif condition="$ui['Type']=='login'"/>
+                <img src="__PUBLIC__/theme2/Images/dljf.png">
+                <label class="memnc">登录积分<br><span>登录送积分</span></label>
+                <label class="memsy-1">{$ui['Cdata']}<br><span>+{$ui['Integral']}</span></label>
+                <elseif condition="$ui['Type']=='cons'"/>
+                <img src="__PUBLIC__/theme2/Images/xfjf.png">
+                <label class="memnc">消费积分<br><span>购物送积分</span></label>
+                <label class="memsy-1">{$ui['Cdata']}<br><span>+{$ui['Integral']}</span></label>
+                <elseif condition="$ui['Type']=='xf'"/>
+                <img src="__PUBLIC__/theme2/Images/jfdh.png">
+                <label class="memnc">兑换积分<br><span>兑换扣减积分</span></label>
+                <label class="memsy-1">{$ui['Cdata']}<br><span>{$ui['Integral']}</span></label>
+                <elseif condition="$ui['Type']=='constk'"/>
+                <img src="__PUBLIC__/theme2/Images/jfdh.png">
+                <label class="memnc">退款积分<br><span>退款扣减积分</span></label>
+                <label class="memsy-1">{$ui['Cdata']}<br><span>{$ui['Integral']}</span></label>
+            </if>
+        </div>
+    </foreach>
+</div>
+<div style="height: 40px"></div>
+<div class="jftotal">
+  <label>合计:<span>{$jftotal}</span></label>
+  <label>扣减积分:<span>{$jfkjtotal}</span></label>
+  <label>奖励积分:<span>{$jfjltotal}</span></label>
+</div>
+<script>
+$(document).ready(function () {
+  $(".xf").css("display", "none");
+  $(".constk").css("display", "none");
+})
+
+function seljflx(div) {
+  if (!$(div).hasClass("jfselactive")) {
+    $(".jfselactive").removeClass("jfselactive");
+    $(div).addClass("jfselactive");
+    if ($(div).hasClass("sel-1")) {
+      $(".usermempart").children(".mymember").each(function (index, itme) {
+        if ($(itme).hasClass("xf")) {
+          $(itme).css("display", "none");
+        } else {
+          $(itme).css("display", "block");
+        }
+      })
+    } else if ($(div).hasClass("sel-2")) {
+      $(".usermempart").children(".mymember").each(function (index, itme) {
+        if ($(itme).hasClass("xf")) {
+          $(itme).css("display", "block");
+        } else {
+          $(itme).css("display", "none");
+        }
+      })
+    }
+  }
+}
+</script>

@@ -1,0 +1,537 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/ueditor/ueditor.all.js?v=1.1 "></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css">
+<style type="text/css">
+    .attrvalues{
+        border: 1px solid green;
+        margin:auto 2px;
+        border-radius: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    img{
+        width: 100%;
+        margin-bottom: 0px;
+
+    }
+    .img-box{
+        width:150px;height:170px;border:1px solid #ccc;
+        margin-top: 10px;
+        margin-left: 15px;
+    }
+    .img-content{
+        width:100%;height:150px;
+    }
+    .img-btn{
+        width:100%;height:20px;text-align:center;
+    }
+</style>
+<div class="row">
+    <div class="panel blank-panel">
+        <form method="post" class="form-horizontal" action="{:U('Products/saveEdit')}" id="savePro">
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>商品添加 <small>products</small></h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content"  style="position:relative;">
+                            <div class="form-group">
+                                <label class="col-lg-2 col-md-2 col-sm-2" style="text-align:right;">当前分类</label>
+                                <div class="input-group m-b col-lg-3 col-md-4"><span id="hclasstype"><input type="hidden" id="ClassType" name="ClassType"  value="{$proinfo.ClassType}"></span>
+                                    {$nowClass}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button class="btn btn-primary btn-outline" type="button"  onclick="editClass();" >修改</button>
+                                </div>
+
+                            </div>
+                          <div class="form-group">
+                            <label class="col-lg-2 col-md-2 col-sm-2" style="text-align:right;">当前供应商 <span class="tice"><b>*</b></span></label>
+                            <div class="input-group m-b col-lg-3 col-md-4">
+                              <select data-placeholder="请选择供应商" class="chosen-select" name="SupplierId" id="SupplierId" style="width:350px;" tabindex="2" >
+                                <option value="">请选择供应商</option>
+                                <foreach name="Suppliers" item="oc">
+                                  <option value="{$oc.ID}" hassubinfo="true" <if condition="$proinfo['SupplierId'] eq $oc[ID]">selected="selected"</if>>{$oc.Supplier}</option>
+                                </foreach>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- <div class="form-group">
+                            <label class="col-lg-2 col-md-2 col-sm-2" style="text-align:right;">选择商品类型</label>
+                            <div class="input-group m-b col-lg-3 col-md-4">
+                              <select class="form-control" name="ProType" id="ProType" style="width:350px;" tabindex="2" >
+                                <option value="1" <if condition="$proinfo['ProType'] eq '1'">selected="selected"</if> >单品</option>
+                                <option value="2" <if condition="$proinfo['ProType'] eq '2'">selected="selected"</if> >组合商品</option>
+                              </select>
+                            </div>
+                          </div> -->
+                            <div class="form-group">
+                                <label class="col-lg-2 col-md-2 col-sm-2" style="text-align:right;">当前属性</label>
+                                <div class="input-group m-b col-lg-6 col-md-6 col-sm-6 col-md-6" id="table">
+                                    <table class="table table-bordered table-responsive table-condensed">
+                                        <thead>
+                                            <tr>
+                                                <th>属性</th>
+                                                <th>条码</th>
+                                                <th>售价</th>
+                                                <!-- <th>数量</th> -->
+                                                <th>编码</th>
+                                                <th>供货价</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <foreach name="proinfo.ProductList" item='pson'>
+                                            <tr>
+                                                <td><input type="text" name="specs[]" value="{$pson.ProSpec1}" id=""><input type="hidden" name="ProIdCards[]" class='old_pid' value="{$pson.ProIdCard}"></td>
+                                                <td><input type="text" name="barcodes[]" value="{$pson.ProIdInputCard}" id=""></td>
+                                                <td><input type="text" style="width:80px;" name="prices[]" value="{$pson.Price}" id=""></td>
+                                                <!-- <td><input type="number" style="width:80px;" name="nums[]" value="{$pson.Count}" id=""></td> -->
+                                                <td><input type="text" name="oldcodes[]" value="{$pson.InputCode}" id=""></td>
+                                                <td><input type="text" style="width:80px;" name="oldcosprice[]" value="{$pson.CosPrice}" id=""></td>
+                                                <td><button type="button" class="btn btn-danger btn-xs pson_delete" data-pid='{$pson.ProIdCard}'>删除</button></td>
+                                            </tr>
+                                            </foreach>
+                                        </tbody>
+                                        <tbody id="newatrcontent">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-offset-2 col-md-offset-2"><button class="btn btn-primary btn-outline btn-xs" id="addnewatr" type="button">添加新属性</button></div>
+                            </div>
+                            <div class="form-group" id="chose-class">
+                                <label class="col-lg-2 col-md-2 col-sm-2" style="text-align:right;">选择分类</label>
+                                <div class="input-group m-b col-lg-3 col-md-4">
+                                    <select data-placeholder="请选择分类" class="chosen-select" id="chose" style="width:350px;" tabindex="2" >
+                                        <option value="">请选择分类</option>
+                                        <foreach name="oclass" item="oc">
+                                            <option value="{$oc.ClassId}" hassubinfo="true">{$oc.ClassName}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                                <label class="col-lg-2 col-md-2 col-sm-2" style="text-align:right;">选择子分类</label>
+                                <div class="input-group m-b col-lg-3">
+                                    <select data-placeholder="请选择子分类" class="" name="ClassType" id="sonClass" style="width:350px;" tabindex="2">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-lg-3 col-md-4 col-lg-offset-8 col-md-offset-8 pull-right" style="height:300px;border:0px solid red;position:absolute;top:5px;right:5px;">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <i class="fa fa-warning"></i> 提示信息
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="alert alert-warning">
+                                         1、如有新增属性信息，请勾选新增属性修改<br>
+                                         2、如有新图片改动，请勾选展示图修改<br>
+                                         3、LOGO图请选择200*200图片上传，以免影响显示效果<br>
+                                         4、商品展示图请上传宽高比例为16：9的图片 分辨率640*360最佳<br>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div> -->
+
+                         <div class="form-group" id="chose-attrs">
+                            <label class="col-lg-2 col-md-2 col-sm-2" style="text-align:right;">商品属性</label>
+                            <div class="col-sm-6">
+                                <div class="form-group" id="valuearea">
+
+                                </div>
+                                <div class="input-group m-b col-lg-3 col-md-4" id="chose-attr" value="1">
+                                    <select data-placeholder="请选择分类" class="chosen-select" id="chose-attrid" onchange="getAttrbute();" style="width:150px;" tabindex="2" >
+                                        <option value="">选择属性</option>
+                                        <foreach name="attributes" item="attr">
+                                            <option value="{$attr.AttributeId}" id="name{$attr.AttributeId}" hassubinfo="true">{$attr.AttributeName}</option>
+                                        </foreach>
+                                    </select>
+                                    <hr>
+                                </div>
+                                <div class="input-group m-b">
+                                    <button type="button" class="btn btn-outline btn-primary btn-md" id="add" onclick="setAttr();">添加属性</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="button" class="btn btn-outline btn-primary btn-md" id="yes" onclick="sayyes();">确定</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary btn-md btn-outline" onclick="clears();" type="button">清空已选属性</button>
+                                </div>
+                            </div>
+                            <div style="border:0px solid orange;" class="input-group col-sm-8 col-sm-offset-2 col-lg-offset-2 col-lg-7"  id="table">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-md-2 col-sm-2 control-label"></label>
+
+                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                <div class="radio">
+                                    <label><input type="radio" name="IsAddAttr" id="" value="1" class="optionsRadios">新增商品属性修改请勾选此项</label>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="form-group" >
+                            <label class="col-sm-2 control-label">商品编号</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="ProNumber" value="{$proinfo.ProNumber}">
+                            </div>
+                        </div>
+                        <div class="form-group" id="ProName" >
+                            <label class="col-sm-2 control-label">商品名称</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="ProName_c" name="ProName" value="{$proinfo.ProName}">
+                            </div>
+                        </div>
+                        <div class="form-group" id="ProTitle">
+                            <label class="col-sm-2 control-label">商品标题</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="ProTitle_c" name="ProTitle" value="{$proinfo.ProTitle}"> <span class="help-block m-b-none"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" id="ProSubtitle">
+                            <label class="col-sm-2 control-label">商品重量/单位(g) <span class="tice"><b>*</b></span></label>
+
+                            <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input type="number" name="Weight" class="form-control" id="Weight" value="{$proinfo.Weight}"><span class="input-group-addon">g</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 col-md-2 col-sm-2 control-label">是否使用积分兑换</label>
+
+                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                <div class="radio">
+                                    <label><input type="radio" name="IsUseScore" id="IsUseScore" value="1" <if condition="$proinfo['IsUseScore'] eq 1">checked="checked" data-s="1"</if> class="optionsRadios">是</label>
+                                </div>
+                                <div class="radio">
+                                    <label><input type="radio" name="IsUseScore" id="NOUseScore" value="0" <if condition="$proinfo['IsUseScore'] eq 0">checked="checked" </if> class="optionsRadios">否</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="">
+                            <label class="col-lg-2 col-md-2 col-sm-2 control-label">兑换所需积分数</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <input type="text" name="Score" class="form-control" id="Score"  value="{$proinfo.Score}"><span class="input-group-addon">分</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="">
+                            <label class="col-lg-2 col-md-2 col-sm-2 control-label">引流佣金</label>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <input type="text" name="Cut" class="form-control" id="Cut"  value="{$proinfo.Cut}"><span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group has-error" id="ProLogoImg_c">
+                            <label class="col-sm-2 control-label">商品主图</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="pull-left img-box">
+                                        <div class="img-content" id="ProLogoImg_con">
+                                            <img id="ProLogoImg_url" src="{$PICURL}{$proinfo['ProLogoImg']}" alt="">
+                                        </div>
+                                        <div class="img-btn">
+                                            <button class="btn btn-xs btn-warning" type="button" onclick="upimg('ProLogoImg')">修改</button>
+                                            <input type="hidden" class="form-control" name="ProLogoImg" id="ProLogoImg" value="{$proinfo['ProLogoImg']}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+
+
+                        <div class="form-group has-error" id="mainimg_c">
+                            <label class="col-sm-2 control-label">商品展示图</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="pull-left img-box">
+                                        <div class="img-content" id="mainimg_con">
+                                        <if condition="$proinfo['imgs'][0]">
+                                            <img id="mainimg_url" src="{$PICURL}{$proinfo['imgs'][0]}" alt="">
+                                            <else/>
+                                            暂无图片
+                                            </if>
+                                        </div>
+                                        <div class="img-btn">
+                                            <button type="button" class="btn btn-xs btn-warning" onclick="upimg('mainimg')">修改</button><input type="hidden" class="form-control" name="mainImg" id="mainimg" value="{$proinfo['imgs'][0]}">
+                                        </div>
+                                    </div>
+                                    <?php for ($i=1; $i < 6; $i++) { ?>
+                                        <div class="pull-left img-box">
+                                            <div class="img-content" id="img{$i}_con">
+                                                <if condition="$proinfo['imgs'][$i]">
+                                                <img id="img1_url" src="{$PICURL}{$proinfo['imgs'][$i]}" alt="">
+                                                <?php $isimg=1; ?>
+                                                <else/>
+                                                <?php $isimg=0; ?>
+                                                暂无图片
+                                                </if>
+                                            </div>
+                                            <div class="img-btn">
+                                                <button type="button" class="btn btn-xs btn-warning" onclick="upimg('img{$i}')">修改</button>&emsp;<button type="button" class="btn btn-xs btn-danger" onclick="del('{$isimg}','img{$i}')">删除</button><input type="hidden" class="form-control" name="img{$i}" id="img{$i}" value="{$proinfo['imgs'][$i]}">
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-lg-2 col-md-2 col-sm-2 control-label"></label>
+
+                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                <div class="radio">
+                                    <label><input type="radio" name="IschangImg" id="" value="1" class="optionsRadios">展示图修改请勾选此项</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品详情</label>
+                            <div class="col-sm-8">
+                                <textarea name="ProContent" class="form-control1" id="editor" style="width:100%;height:600px;">{$proinfo.ProContent}</textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="ProId" value="{$proinfo.ProId}">
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit" id="savepost">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+</div>
+
+
+<script type="text/javascript">
+var pid='{$ProId}';
+    var ue = UE.getEditor('editor');
+    $(document).ready(function(){
+        $('#NOUseScore').click(function(){$("#IsUseScore").attr('data-s','0')})
+        $('#IsUseScore').click(function(){$("#IsUseScore").attr('data-s','1')})
+        $("#chose-class").hide();
+        $("#chose-attr").hide();
+        $("#chose-attrs").hide();
+        $("#saveimg").click(function(){
+            art.dialog({title:'提示',content:'正在提交数据，请勿重复操作...',lock:true});
+        })
+        $("#savePro").submit(function(){
+            // var ProAttr=$("price[]").val();
+            var ProName=$('#ProName_c').val();
+            var ProTitle=$("#ProTitle_c").val();
+            var logoimg=$("#ProLogoImg").val();
+            var IsUseScore=$("#IsUseScore").attr('data-s');
+            var score=$("#Score").val();
+            // alert(logoimg);
+            // console.log($("#ProLogoImg").val());
+            // return false;
+            if (!ProName) {
+                art.dialog.alert('请填写商品名称');
+                return false;
+            };
+            if (!ProTitle) {
+                art.dialog.alert('请填写商品标题');
+                return false;
+            };
+            if (IsUseScore=='1') {
+                if (!score) {
+                    art.dialog.alert('请填写兑换所需积分数');
+                    return false;
+                };
+            };
+            if (!logoimg) {
+                art.dialog.alert('请上传商品主图');
+                return false;
+            }else{
+                art.dialog({title:'提示',content:'正在提交数据，请勿重复操作...',lock:true});
+                // return true;
+            }
+        })
+
+        $("#addimport").click(function(){$("#imports").show();$("#changimport").val('true')});
+        var lastid=$('.old_pid:last').val();
+        var spid={$spid};
+        $('#addnewatr').click(function(){
+            var _tphtml="<tr class='attr_tr'><td><input type='text' name='new_specs[]' class='input_spec' placeholder='请输入属性名称' /><input type='hidden' name='new_pids[]' value='"+spid+"'/></td><td><input type='text' name='new_barcodes[]' class='input_barcode' placeholder='请输入商品条码'/></td><td><input type='text' name='new_prices[]'  class='input_price' placeholder='请输入售价' style='width:80px;' /></td><td><input type='text' name='new_codes[]' class='new_codes' placeholder='请输入编码'/></td><td><input type='text' name='new_cosprice[]' class='new_cosprice' placeholder='请输入供货价' style='width:80px;' /></td><td><button class='btn btn-danger btn-xs delatr' type='button'>删除</button></td></tr>";
+            //<td><input type='number' name='new_nums[]' class='input_nums' placeholder='请输入数量' style='width:80px;' /></td>
+            var atrlang=$('.attr_tr').length;
+            if (atrlang=='0') {
+                $('#newatrcontent').append(_tphtml);
+                spid++;
+                $('.input_spec:last').focus();
+            }else{
+                if ($('.input_spec:last').val() && $('.input_barcode:last').val()  && $('.input_price').val() && $('.new_codes:last').val() && $('.new_cosprice:last').val()) {
+                    $('#newatrcontent').append(_tphtml);
+                  spid++;
+                  $('.input_spec:last').focus();
+              }else{
+                  art.dialog.tips('请完善属性信息',2);
+              }
+          }        
+      })
+      $(document).on('click','.delatr',function(){
+        $(this).parent().parent().remove();
+      })
+      $(document).on('click','.pson_delete',function(){
+        var pid=$(this).attr('data-pid');
+        var _this=$(this);
+        art.dialog.confirm('确定要删除此属性吗（立即生效）？',function(){
+            art.dialog.tips('处理中...',20);
+            $.ajax({
+                url:"{:U('Products/delatr')}",
+                type:"post",
+                data:"pid="+pid,
+                dataType:"json",
+                success:function(msg){
+                    if (msg.status=='success') {
+                        art.dialog.tips('处理成功');
+                        _this.parent().parent().remove();
+                    }else{
+                        art.dialog.tips('处理失败');
+                    }
+                }
+            })
+        })
+      })
+
+    })
+function upimg(id){
+    // art.dialog.data('homeDemoPath', "{:U('Product/proadd')}");
+    art.dialog.data('domid',id);
+    art.dialog.open('{:U('Upimg/editpro')}');
+};
+
+var config = {
+    '#sonClass':{},
+    '.chosen-select': {},
+    '.chosen-select-deselect': {
+        allow_single_deselect: true
+    },
+    '.chosen-select-no-single': {
+        disable_search_threshold: 10
+    },
+    '.chosen-select-no-results': {
+        no_results_text: 'Oops, nothing found!'
+    },
+    '.chosen-select-width': {
+        width: "95%"
+    }
+}
+for (var selector in config) {
+    $(selector).chosen(config[selector]);
+}
+
+$(function() {
+    var data={$allClass};
+    var init = function() {
+        var option = [];
+        $.each(data,
+            function(index, item) {
+                var province = item.province;
+                option.push('<option value="'+item.id+'">',province,'</option>');
+            });
+        option = option.join('');
+        $('#chose').html(option);
+        $("#chose").chosen({
+            disable_search_threshold: 5,
+            no_results_text: "Oops, nothing found!",
+            width: "100PX",
+            enable_split_word_search: false,
+            placeholder_text_single: '请选择'
+        });
+        $("#sonClass").chosen({
+            disable_search_threshold: 5,
+            no_results_text: "Oops, nothing found!",
+            width: "100PX",
+            enable_split_word_search: false,
+            placeholder_text_single: '请选择'
+        });
+    }
+    init();
+    $('#chose').change(function(){
+        var province = $(this).val();
+        var citys = null;
+        $.each(data,function(index,item){
+            if(item.id == province){
+                citys = item.city;
+            }
+        });
+        var option = [];
+        $.each(citys,function(index,item){
+            option.push('<option value="'+item.id+'">',item.cityname,'</option>');
+        });
+        $('#sonClass').html(option.join(''));
+        $('#sonClass').trigger('chosen:updated');
+    });
+});
+
+function clears(){
+    var lang=$("varea");
+    if (lang.length<3) {
+        $("#add").show();
+    };
+    $('#valuearea').html('');
+    $("#table").html('');
+}
+
+function editClass(){
+    // alert($("#hclasstype").html());
+    $("#hclasstype").html('');
+    $('#chose-class').show();
+}
+
+function addAttr(){
+    $("#chose-attrs").show();
+}
+
+function checklang(id){
+    var v=$("#"+id).val();
+    if (v.length>2) {
+        $("#"+id).val(v.substr(0,2));
+        art.dialog.tips('非法数字',0.5);
+    };
+}
+
+function del(id,imgid){
+    if (id==1) {
+        art.dialog.confirm('确定要删除吗？',function(){
+            art.dialog.tips('此栏位图片已删除,保存修改后生效');
+            $("#"+imgid+"_con").html('图片已删除,保存修改后生效');
+            $("#"+imgid+"id").val('');
+            $("#"+imgid).val('');
+        },function(){
+            art.dialog.tips('取消操作',1);
+        })
+    }else{
+        art.dialog.alert('此栏位没有图片');
+    }
+}
+
+
+
+
+</script>
+
+<include file="Common:footer" />

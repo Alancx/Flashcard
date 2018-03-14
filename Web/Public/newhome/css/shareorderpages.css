@@ -1,0 +1,351 @@
+.sharecontents{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  bottom: 50px;
+  background-color: #f4f4f4;
+  z-index: 10;
+  overflow: auto;
+}
+.toppart{
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.toppart>.bgimgshare{
+  display: block;
+  width: 100%;
+}
+.redinfo{
+  position: absolute;
+  width: auto;
+  top: 25px;
+  right: 30px;
+  bottom: 25px;
+  overflow: hidden;
+  border-radius: 5px;
+  -webkit-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+  -moz-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+}
+.redinfo>img{
+  display: block;
+  height: 100%;
+}
+.redinfo>.shareprice{
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+  bottom: 16%;
+  font-size: 24px;
+  color: #ffcc00;
+}
+.redinfo>.shareprice::after{
+  content: "元";
+  font-size: 16px;
+  margin: 0px 0px 0px 3px;
+}
+.showtextinfo{
+  position: absolute;
+  top: 10%;
+  left: 10px;
+  bottom: 10%;
+  width: 55%;
+  font-size: 40px;
+  overflow: hidden;
+}
+.showtextinfo>span:nth-child(1){
+  display: block;
+  width: 100%;
+  font-size: 0.8em;
+  color: #ffffff;
+  font-weight: 600;
+  text-align: right;
+  line-height: 34px;
+  -webkit-text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  -moz-text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+.showtextinfo>span:nth-child(2){
+  display: block;
+  width: 100%;
+  text-align: right;
+  height: 30px;
+  overflow: hidden;
+  position: relative;
+}
+.showtextinfo>span:nth-child(2)>span{
+  float: right;
+  height: 30px;
+  border-bottom: solid #ffeb00 1px;
+}
+.showtextinfo>span:nth-child(2)>span>span:nth-child(1){
+  display: inline-block;
+  font-size: 0.5em;
+  color: #fff000;
+  font-weight: 600;
+  padding: 0px 10px 0px 0px;
+  vertical-align: middle;
+}
+.showtextinfo>span:nth-child(2)>span>span:nth-child(2){
+  display: inline-block;
+  font-size: 0.4em;
+  color: #ffeb00;
+  vertical-align: middle;
+}
+
+.showtextinfo>span:nth-child(3){
+  margin: 10px 0px 0px 0px;
+  display: block;
+  width: 100%;
+  font-size: 0.3em;
+  color: #ffffff;
+  text-align: right;
+  line-height: 1.4;
+}
+.shoppart{
+  display: block;
+  width: 100%;
+  height: 70px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+.shoppart>img{
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin: 5px 0px 5px 10px;
+  border-radius: 5px;
+}
+.shoptext{
+  float: right;
+  width: calc(100% - 80px);
+  height: 60px;
+  margin: 5px 0px 0px 0px;
+}
+.shoptext>span:first-child{
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 18px;
+  color: #333333;
+}
+.shoptext>span:last-child{
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #999999;
+}
+.propart{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  margin: 10px 0px 0px 0px;
+  background-color: #ffffff;
+}
+.selprosinfo{
+  display: block;
+  overflow: hidden;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #666666;
+}
+.selprosinfo>span{
+  float: right;
+  height: 30px;
+  line-height: 30px;
+  margin: 0px 10px 0px 0px;
+}
+.proinfo{
+  display: block;
+  width: 170px;
+  height: auto;
+  overflow: hidden;
+  background-color: #efeff4;
+  margin: 5px 0px 15px calc(50% - 85px);
+}
+.proimg{
+  display: block;
+  width: 140px;
+  height: 140px;
+  text-align: center;
+  line-height: 138px;
+  border-radius: 5px;
+  border: #dddddd solid 1px;
+  margin: 15px 15px 10px 15px;
+  color: #999999;
+  overflow: hidden;
+}
+.proimg>img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.proname{
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  padding: 0px 15px 0px 15px;
+  color: #333333;
+}
+.proprice{
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  padding: 0px 15px 0px 15px;
+  color: #ff0000;
+}
+.proprice::before{
+  content: "￥";
+}
+.proprice>span{
+  font-size: 14px;
+  color: #999999;
+}
+.sharepart{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  margin: 10px 0px 0px 0px;
+  background-color: #ffffff;
+}
+.sharetop{
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #666666;
+  padding: 0px 10px 0px 10px;
+}
+.sharetop>.changetext{
+  float: right;
+  height: 30px;
+  line-height: 30px;
+  color: #999999;
+}
+.sharetext{
+  display: block;
+  margin: 5px 10px 10px 10px;
+  background-color: #efeff4;
+  padding: 5px 5px 5px 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333333;
+}
+.sharetext>span{
+  color: #ff0000;
+}
+.redrule{
+  display: block;
+  overflow: hidden;
+  padding: 0px 10px 40px 10px;
+}
+.redrule>span{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  font-size: 16px;
+  line-height: 20px;
+}
+.bottombtn{
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: #ff4f00;
+  z-index: 11;
+}
+.bottombtn>span{
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff;
+}
+.prolistmark{
+  position: fixed;
+  display: none;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.prolist{
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: auto;
+  padding: 8px 8px 8px 8px;
+}
+.pro_info{
+  display: block;
+  border-bottom: #eeeeee solid 1px;
+  padding: 5px 10px 5px 10px;
+  overflow: hidden;
+}
+.pro_info>img{
+  display: block;
+  float: left;
+  width: 60px;
+  height: 60px;
+  border-radius: 3px;
+}
+.pname{
+  float: right;
+  width: calc(100% - 70px);
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #333333;
+}
+.pprice{
+  float: right;
+  width: calc(100% - 70px);
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #ff0000;
+}
+.pprice::before{
+  content: "￥";
+}
+.pprice>span{
+  font-size: 14px;
+  color: #999999;
+}
+.sharemark{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  z-index: 20;
+}
+.sharemark>img{
+  display: block;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,84 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/revenue.css?v=1.3">
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/orders.css?v=2.0">
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/echarts.common.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/reorder.js?v=1.2"></script>
+<style>
+.nodata{
+  display: block;
+  padding: 20% 20% 0px 20%;
+}
+.nodata>img{
+  width: 100%;
+}
+</style>
+<div class="reheard reheardo">
+  <div id="scharts" class="reheard-1">
+  </div>
+  <div class="reheard-2">
+    <div>
+      <label><?php echo $sdordercount?sprintf("%.0f",$sdordercount):'0' ?><br><span>下单笔数</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdorderpcount?sprintf("%.0f",$sdorderpcount):'0' ?><br><span>待付订单</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdorderfcount?sprintf("%.0f",$sdorderfcount):'0' ?><br><span>发货订单</span></label>
+    </div>
+  </div>
+  <div class="reheard-2 reheardo-2 ">
+    <div>
+      <label><?php echo $sdorderypcount?sprintf("%.0f",$sdorderypcount):'0' ?><br><span>付款人数</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdordercount!='0'?(sprintf("%.2f",1-($sdorderpcount/$sdordercount))*100).'%':'0.00%' ?><br><span>购买转化率</span></label>
+    </div>
+    <div>
+      <label><?php echo $sdorderypcount!='0'?sprintf("%.2f",$sdorderpmcount/$sdorderypcount):'0.00' ?><br><span>平均客单价</span></label>
+    </div>
+  </div>
+</div>
+<div class="part" style="display:none">
+  <label>订单管理</label>
+</div>
+<div class="part-con" data-page="-1">
+  <empty name="orderlist">
+    <div class="nodata">
+      <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+    </div>
+    <else />
+    <foreach name="orderlist" item="oitem">
+      <div class="orderinfo" style="margin-bottom:0px;border-width:5px;border-color:#eee;">
+        <label class="orderid">{$oitem['MemberName']}
+        <switch name="oitem.Status">
+              <case value="1"><span>待付款</span><br></case>
+              <case value="2"><span>待发货</span><br></case>
+              <case value="3"><span>待收货</span><br></case>
+              <case value="4"><span>已完成</span><br></case>
+              <case value="5"><span>退款中</span><br></case>
+              <default /><span>已完成</span><br>
+            </switch>
+          <span>{$oitem['OrderId']}</span>
+          <span>{$oitem['oDate']}</span>
+        </label>
+        <div class="prolist">
+          <foreach name="oitem['prolist']" item="proinfo">
+            <div class="proinfo">
+              <img src="{$proinfo['ProLogoImg']}">
+              <label class="proname">{$proinfo['ProName']}</label>
+              <label class="proattr">{$proinfo['Spec']};</label>
+              <label class="proprice" style="position:relative;text-align:left;"><span>￥</span><?php echo $proinfo['Price']?sprintf("%.2f",$proinfo['Price']):'0.00' ?><span>×{$proinfo['Count']}</span></label>
+            </div>
+          </foreach>
+        </div>
+        <label class="totalprice" style="border:none;">共{$oitem['Count']}件,合计:<span>￥<?php echo $oitem['Price']?sprintf("%.2f",$oitem['Price']):'0.00' ?></span>(含运费:<?php echo $oitem['Freight']?sprintf("%.2f",$oitem['Freight']):'0.00' ?>)</label>
+      </div>
+    </foreach>
+  </empty>
+</div>
+<script type="text/javascript">
+var dataday={$dataday};
+var daymon={$daymon};
+var selday="{$getday}";
+var yesorder_url="{:U('Record/otherdayorders')}"; //加载某一天的订单
+</script>

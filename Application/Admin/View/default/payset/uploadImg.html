@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <title>商品添加</title>
+    <link href="__PUBLIC__/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="__PUBLIC__/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__PUBLIC__/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/animate.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/plugins/webuploader/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/demo/webuploader-demo.min.css?v=1">
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/ueditor.config.js?v=11"></script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/ueditor/ueditor.all.min.js"> </script>
+    <style type="text/css">
+    .upimg,.showimg{
+        cursor: pointer;
+    }
+    .notice{
+        position: fixed;
+        top: 80px;
+        right: 30px;
+    }
+    </style>
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>商品添加/编辑</h5>
+                    </div>
+                    <div class="ibox-content">
+                    <div class="alert alert-warning notice">
+                            <b>商品分类选定之后，后期无法通过商品编辑更改</b> <br>
+                            <b class='text-warning'>商品LOGO图尽量选择宽高1:1的图片</b>
+                            <br>
+                            <b class='text-info'>商品轮播图一次可以选取多张，请在选取完所有图片后点击开始上传</b>
+                            <br>
+                            <b class='text-danger'>规格中的每项信息请务必选择</b>
+                        </
+                        <form method="post" class="form-horizontal" id="saveproinfo">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">商品类型</label>
+                                <div class="col-sm-6">
+                                    <select name="Isep" id="Isep" class="form-control">
+                                        <option value="0">成品</option>
+                                        <option value="1">半成品</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">计价类型</label>
+                                <div class="col-sm-6">
+                                    <select name="Ptype" required id="Ptype" class="form-control">
+                                        <option value="">请选择</option>
+                                        <foreach name='ptypes' item='pt'>
+                                        <option value="{$pt.Id}">{$pt.Pname}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">商品名称</label>
+
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="Proname" id="Proname"><span class="help-block m-b-none">必填信息</span>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="Protitle" id="Protitle"> <span class="help-block m-b-none">辅助显示，非必填</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">排序序号</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="Sorter" id="Sorter">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">选择分类</label>
+                                <div class="col-sm-6">
+                                    <select name="Classid" id="Classid" class="form-control">
+                                        <option value="">请选择</option>
+                                        <foreach name='class' item='cls'>
+                                        <option value="{$cls.Id}">{$cls.prename}_{$cls.Classname}</option>
+                                        </foreach>
+                                    </select><span class="help-block m-b-none">必填信息</span>
+                                </div>
+                            </div>
+                            <!-- <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">提示</label>
+
+                                <div class="col-sm-6">
+                                    <input type="text" placeholder="提示信息" class="form-control">
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <label class="col-sm-2 control-label">内联复选框</label>
+
+                                <div class="col-sm-6">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" value="option1">a</label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" value="option2">b</label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" value="option3">c</label>
+                                </div>
+                            </div> -->
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">规格信息完善</label>
+
+                                <div class="col-sm-10">
+                                    <table class="table table-bordered">
+                                        <thead class="attr_head">
+                                            
+                                        </thead>
+                                        <tbody class="attr_body">
+                                            
+                                        </tbody>
+                                        <tfoot class="attr_foot">
+                                            
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">商品Logo图</label>
+                                <div class="col-sm-6">
+                                <div class="input-group">
+                                    <input type="text" name="Logoimg" id="Logoimg" class="form-control"><div class="input-group-addon btn-primary upimg" data-toggle='modal' data-target='#modal-form'>上传</div><div class="input-group-addon btn-warning showimg" data-toggle='modal' data-target='#showimg'>预览</div>
+                                </div><span class="help-block m-b-none">必填信息</span>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label class="control-label col-sm-2">商品轮播图</label>
+                                <div class="col-sm-6">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content">
+                                        <div class="page-container">
+                                            <div id="uploader" class="wu-example">
+                                            <div id="Images"></div>
+                                                <div class="queueList">
+                                                    <div id="dndArea" class="placeholder">
+                                                        <div id="filePicker"></div>
+                                                        <p>或将照片拖到这里，单次最多可选300张</p>
+                                                    </div>
+                                                </div>
+                                                <div class="statusBar" style="display:none;">
+                                                    <div class="progress">
+                                                        <span class="text">0%</span>
+                                                        <span class="percentage"></span>
+                                                    </div>
+                                                    <div class="info"></div>
+                                                    <div class="btns">
+                                                        <div id="filePicker2"></div>
+                                                        <div class="uploadBtn">开始上传</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           <div style="text-align:right;"> <button class="btn btn-xs btn-danger" type="button" id="resetup"> 重新上传</button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">商品详情</label>
+                                <div class="col-sm-8">
+                                    <textarea name="Content" id="editor" style="width:100%;height:500px;"></textarea>
+                                </div>
+                            </div> -->
+                            <!-- 放处理过的规格值 -->
+                            <div id="attr_box"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                <!-- 记一下所使用的规格名称 -->
+                                <input type="hidden" name="attrnames" id="attrnames">
+                                
+                                    <button class="btn btn-primary" type="submit">保存内容</button>
+                                    <button class="btn btn-white" type="reset">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="close_up" data-dismiss="modal" style="position:absolute;right:5px;top:5px;padding:5px;cursor: pointer;">&times;</div>
+                    <div class="form-group" style="margin-top:20px;">
+                        <input type="file" name="logo" id="logo" class="form-control" placeholder='选择图片'>
+                    </div>
+                    <div style="text-align:right;">
+                        <button class="btn btn-primary btn-outline" id="startup">开始上传</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="showimg" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="max-width:100%;width:500px;">
+                <div class="modal-body">
+                    <div data-dismiss="modal" style="position:absolute;right:5px;top:5px;padding:5px;cursor: pointer;">&times;</div>
+                    <div style="text-align:center">
+                        <img src="" alt="" id="show_img" style="max-width:100%;width:500px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="__PUBLIC__/js/jquery.min.js?v=2.1.4"></script>
+    <script src="__PUBLIC__/js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="__PUBLIC__/js/content.min.js?v=1.0.0"></script>
+    <script src="__PUBLIC__/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="__PUBLIC__/js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript">
+        var BASE_URL = '__PUBLIC__/js/plugins/webuploader';
+        var imgboxDom=$('#Images');
+        var Upurl='<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/Home/Upload/Savelistimg'; ?>';
+    </script>
+    <script src="__PUBLIC__/js/plugins/webuploader/webuploader.min.js?v=1.3"></script>
+    <script src="__PUBLIC__/js/demo/webuploader-demo.min.js?v=1.3"></script>
+    <script>
+    var doms=[]; //规格class
+    var content='';
+    var tmpcount='';
+        $(document).ready(function(){
+            // UPUP();
+            // var ue = UE.getEditor('editor');
+            $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})
+            $('#resetup').click(function(){
+                $('#uploader').html('<div class="queueList"> <div id="dndArea" class="placeholder"> <div id="filePicker"></div> <p>或将照片拖到这里，单次最多可选300张</p> </div> </div> <div class="statusBar" style="display:none;"> <div class="progress"> <span class="text">0%</span> <span class="percentage"></span> </div> <div class="info"></div> <div class="btns"> <div id="filePicker2"></div> <div class="uploadBtn">开始上传</div> </div> </div>');
+                UPUP();
+            })
+            $('#Classid').change(function(){
+                var id=$(this).val();
+                if (id) {
+                    layer.msg('规格加载中');
+                    $('.attr_body').html('');
+                    $('.attr_head').html('');
+                    $.ajax({
+                        url:"{:U('Product/getclassattrforpro')}",
+                        type:"post",
+                        data:"id="+id,
+                        dataType:"json",
+                        success:function(msg){
+                            if (msg.status=='success') {
+                                doms=[];
+                                var data=msg.data;
+                                var _title='<tr id="t_title" data-lang="'+msg.count+'">';
+                                _content='<tr>';
+                                var tmpStr='';
+                                tmpcount=msg.count;
+                                var i=1;
+                                $.each(data,function(index,item){
+                                    tmpStr+='_'+item.Id+'^'+item.Attrname; //拼一下备用
+                                    _title+='<td>'+item.Attrname+'</td>';
+                                    _content+='<td><input name="'+item.Id+'[]" type="text" class="form-control cls'+i+'" ></td>';
+                                    i++;
+                                })
+                                $('#attrnames').val(tmpStr);
+                                _title+='<td>重量</td><td>期初价</td><td>排序序号</td><td>差价</td><td>比率</td></tr>';
+                                _content+='<td><input type="text" class="form-control weight" name="weight[]" id="" /></td><td><input type="text" name="prices[]" class="form-control prices" id="" /></td><td><input type="text" name="sort[]" class="form-control sort" id="" /></td><td><input type="text" name="Cprice[]" class="form-control" value="0"></td><td><input type="text" name="Bilvs[]" class="form-control" value="0"></td></tr>';
+                                $('.attr_head').html(_title);
+                                $('.attr_body').html(_content);
+                                var cp=parseInt(tmpcount)+5;
+                                $('.attr_foot').html('<tr><td colspan="'+cp+'"><button class="btn btn-xs btn-primary btn-outline addattrs" type="button">继续添加</button></td></tr>')
+                                $(".cls1:last").focus();
+                            }else{
+                                layer.msg('查询失败，请确认该分类下已绑定规格');
+                            }
+                        }
+                    })
+                }
+            })
+
+            $(document).on('click','.addattrs',function(){
+                // var st=true;
+                // for (var i = 1; i <= tmpcount; i++) {
+                //     var s='.cls'+i+':last';
+                //     console.log(s);
+                //     if (!$(s).val()) {
+                //         st=false
+                //         $(s).focus();
+                //         layer.msg('请完善规格信息');
+                //         return false
+                //     };
+                // }
+                // if (st) {
+                //     if ($('.weight:last').val() && $('.prices:last').val() && $('.sort:last').val()) {
+                        $('.attr_body').append(_content);
+                        $('.cls1:last').focus();
+                //     }else{
+                //         if (!$('.weight:last').val()) {
+                //             $('.weight:last').focus();
+                //         }else if (!$('.prices:last').val()) {
+                //             $('.prices:last').focus();
+                //         }else if (!$('.sort:last').val()) {
+                //             $('.sort:last').focus();
+                //         };
+                //         layer.msg('请完善规格信息');
+                //     }
+                // }
+            })
+            $('#saveproinfo').submit(function(){
+                var Proname=$('#Proname').val();
+                var Classid=$('#Classid').val();
+                var Logoimg=$('#Logoimg').val();
+                // var Proimgs=$('.Proimgs:last').val();
+                var Proimgs=1;
+                var domstat=true;
+                var st=true;
+                for (var i = 1; i <= tmpcount; i++) {
+                    var s='.cls'+i+':last';
+                    if (!$(s).val()) {
+                        st=false
+                        $(s).focus();
+                        layer.msg('请完善规格信息');
+                        return false
+                    };
+                }
+                if (st) {
+                    if ($('.weight:last').val() && $('.prices:last').val() && $('.sort:last').val()) {
+                        if (!Proname) {
+                            layer.msg('请填写商品名称');
+                            $('#Proname').focus();
+                            return false;
+                        }else if (!Classid) {
+                            layer.msg('请选择分类');
+                            $('#Classid').focus();
+                            return false;
+                        }else if (!Logoimg) {
+                            layer.msg('请上传商品Logo图');
+                            $('.upimg').focus().click();
+                            return false;
+                        }else if (!Proimgs) {
+                            layer.msg('请上传轮播图');
+                            return false;
+                        }else{
+                            $('#attr_box').append('<input type="hidden" name="attrStr[]" value="'+lastAttr+'" />')
+                            return true;
+                        }
+                    }else{
+                        if (!$('.weight:last').val()) {
+                            $('.weight:last').focus();
+                        }else if (!$('.prices:last').val()) {
+                            $('.prices:last').focus();
+                        }else if (!$('.sort:last').val()) {
+                            $('.sort:last').focus();
+                        };
+                        layer.msg('请完善规格信息');
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
+            })
+            $('#startup').click(function(){
+                upload($(this),$('#logo'));
+            })
+            $('.showimg').click(function(){
+                $('#show_img').attr('src',$('#Logoimg').val());
+            })
+        });
+
+
+        function upload(msgdom,imgdom){
+            msgdom.addClass('disabled').html('正在上传<span class="jdbar">0</span>%');
+            //1、准备FormData
+            var fd = new FormData();
+            fd.append("imgs",imgdom[0].files[0]);
+            var imginfo=imgdom[0].files[0];
+            //创建xhr对象
+            if (imginfo['size']>=2097152) {
+                $('#warninginfo').html('图片过大，上传缓慢')
+                // alert('图片大小超出2M');
+                // return false;
+            };
+            var xhr = new XMLHttpRequest();
+
+            //监听状态，实时响应
+            //xhr和xhr.upload 都有progress事件，xhr.progress是下载进度，xhr.upload.progress是上传进度
+            xhr.upload.onprogress = function(event){
+                if(event.lengthComputable){
+                    var percent = Math.round(event.loaded * 100 / event.total);
+                    // console.log('%d%',percent);
+                    $('.jdbar').html(percent);
+                }
+            }
+
+            //传输开始事件
+            xhr.onloadstart = function(event){
+            }
+
+            //ajax过程成功完成事件
+            xhr.onload = function(event){
+                msgdom.html('开始上传').removeClass('disabled');
+                data=eval("("+xhr.responseText+")");
+                    if (data.status=='success'){
+                        $('#selswimg').val('');
+                        $('#Logoimg').val(data.img);
+                        $('.close_up').click();
+                        layer.msg('上传成功');
+                    }else{
+                        layer.msg(data.info);
+                    }
+            }
+
+            //ajax过程发生错误事件
+            xhr.onerror = function(event){
+                msgdom.removeClass('disabled').html('开始上传');
+                layer.msg('发生错误')
+            }
+
+            //ajax被取消
+            xhr.open('POST',"{:U('Upload/Saveprologo')}",true);
+            xhr.send(fd);
+        }
+    </script>
+</body>
+
+</html>

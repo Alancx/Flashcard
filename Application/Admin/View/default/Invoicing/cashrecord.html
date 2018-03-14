@@ -1,0 +1,133 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/validate/messages_zh.min.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		$("#save").validate();
+	});
+</script>
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+				<form action="" class="form-inline" method="post" id="search">
+				<div class="form-group">
+						<input type="text" name="stime" placeholder="开始日期" id="stime" value="{$data.stime}" class="form-control" onfocus="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+					</div>
+				<div class="form-group">
+						<input type="text" name="etime" placeholder="结束日期" id="etime" value="{$data.etime}" class="form-control" onfocus="WdatePicker({startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+					</div>
+				<div class="form-group">
+						<select name="sup" id="sup" class="form-control">
+							<option value="">请选择供货商</option>
+							<?php foreach ($sps as $sp): ?>
+								<option value="{$sp.ID}" <if condition="$sp['ID'] eq $data['sup']"> select="select" </if> >{$sp.Supplier}</option>
+							<?php endforeach ?>
+						</select>
+					</div>
+					<button class="btn btn-primary btn-outline btn-md" type="submit"><span class="glyphicon glyphicon-search"></span> 搜 索</button>
+					<button class="btn btn-primary btn-outline btn-md" type="button" id="import"><span class="glyphicon glyphicon-import"></span> 导 出</button>
+				</form>
+
+			</div>
+
+			<div class="ibox-content">
+				<table class="table table-bordered table-condensed table-responsive table-hover">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>供应商名称</td>
+							<td>金额</td>
+							<td>类型</td>
+							<td>时间</td>
+						</tr>
+					</thead>
+					<tbody>
+						<foreach name="infos" item='supplier' >
+							<tr>
+								<td>{$supplier.ID}</td>
+								<td>{$supplier.Supplier}</td>
+								<td><if condition="$supplier['Type'] eq 'add'">+</if><if condition="$supplier['Type'] eq 'less'">-</if>{$supplier.Moneys}</td>
+								<td><if condition="$supplier['Status'] eq '0'">进货单结转</if><if condition="$supplier['Status'] eq '1'">销售单结转</if><if condition="$supplier['Status'] eq '2'">付款结转</if></td>
+								<td>{$supplier.LastDate}</td>
+							</tr>
+						</foreach>
+					</tbody>
+				</table>
+			</div>
+			<div style="text-align:right;">{$page}</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#search").submit(function(){
+			var sup=$("#sup").val();
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime ||sup) {
+				if (stime || etime) {
+					if (stime && etime) {
+						if (stime<etime) {
+							return true;
+						}else{
+							art.dialog.tips('非法时间段');
+							$('#stime').val('').focus();
+							return false;
+						}
+					}else{
+						art.dialog.tips('请选择完整时间段');
+						$('#stime').val('').focus();
+						return false;
+					}
+				}else{
+					return true;
+				}
+			}else{
+				art.dialog.tips('请选择查询条件');
+				return false;
+			}
+		})
+		$("#import").click(function(){
+			var sup=$("#sup").val();
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime ||sup) {
+				if (stime || etime) {
+					if (stime && etime) {
+						if (stime<etime) {
+							window.location.href="{:U('Invoicing/recordout')}?sup="+sup+"&stime="+stime+"&etime="+etime;
+						}else{
+							art.dialog.tips('非法时间段');
+							$('#stime').val('').focus();
+							return false;
+						}
+					}else{
+						art.dialog.tips('请选择完整时间段');
+						$('#stime').val('').focus();
+						return false;
+					}
+				}else{
+					window.location.href="{:U('Invoicing/recordout')}?sup="+sup;
+				}
+			}else{
+				art.dialog.tips('请选择查询条件');
+				return false;
+			}
+		})
+		$('.alipay').click(function(){
+			var sid=$(this).attr('data-sid');
+			art.dialog.open("{:U('Invoicing/pay')}?type=alipay&sid="+sid);
+		})
+		$('.unionpay').click(function(){
+			var sid=$(this).attr('data-sid');
+			art.dialog.open("{:U('Invoicing/pay')}?type=unionpay&sid="+sid);
+		})
+	})
+
+</script>
+<include file="Common:footer" />

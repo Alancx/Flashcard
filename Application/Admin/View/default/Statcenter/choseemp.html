@@ -1,0 +1,40 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/newadmin/css/plugins/dataTables/dataTables.bootstrap.css">
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="ibox-content">
+		<div class="col-md-12 col-lg-12">
+			<form class="form-inline" action="{:U('Statcenter/EmpOfStore')}" method="get" id="searchofdata">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">人员</div>
+						<select name="uid" id="s_area" class="form-control">
+							<option value="">请选择人员</option>
+							<foreach name='user' item='us'>
+								<option value="{$us.id}" >{$us.userName}/{$us.TrueName}</option>
+							</foreach>
+						</select>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>&emsp;go</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<include file="Common:footer" />
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#searchofdata').submit(function(){
+			if ($('#s_area').val()) {
+				return true;
+			}else{
+				art.dialog.tips('请选择人员');
+				$('#s_area').focus();
+				return false;
+			}
+		})
+	})
+</script>

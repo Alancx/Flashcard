@@ -1,0 +1,93 @@
+<include file="Common:top" />
+<style type="text/css">
+	.keyword{
+		border:1px solid #ccc;
+		padding: 5px 10px;
+		border-radius: 5px;
+		display: block;
+		float: left;
+		margin-left: 10px;
+		cursor: pointer;
+	}
+	.keyword:hover{
+		background-color: #f00;
+		color: #FFF;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0px;">
+	<div class="ibox-title">
+		<h5>默认备注管理</h5>
+	</div>
+	<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="" class="form-inline" method="post" id="search">
+			<div class="form-group">
+				<div class="input-group">
+					<span class='input-group-addon'>备注内容</span>
+					<input type="text" name="Content" id="Content" class="form-control">
+				</div>
+			</div>
+			<button class="btn btn-primary btn-outline btn-md" type="button" id="savecontent">添加</button>
+			<small>点击备注内容可删除</small>
+			</div>
+		</form>
+
+	</div>
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="box">
+			<foreach name='rmks' item='rm'><span class='keyword' data-id='{$rm.ID}'>{$rm.content}</span></foreach>
+		</div>
+		
+	</div>
+</div>
+
+
+<script type="text/javascript" src="__PUBLIC__/newadmin/js/plugins/layer/layer.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(document).on('click','#savecontent',function(){
+			var content=$('#Content').val();
+			if (content) {
+				layer.msg('处理中');
+				$.ajax({
+					url:"{:U('BaseSetting/defaultrmk')}",
+					type:"post",
+					data:"content="+content,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							layer.msg('添加成功');
+							$('.box').append('<span class="keyword" data-id="'+msg.id+'">'+content+'</span>');
+							$('#Content').val('').focus();
+						}else{
+							layer.msg(msg.info);
+						}
+					}
+				})
+			};
+		})
+		$(document).on('click','.keyword',function(){
+			var _this=$(this);
+			layer.confirm('确定要删除此条默认备注内容吗？',{
+				btn:['确定','取消'],
+				shade:false
+			},function(){
+				layer.msg('处理中');
+				$.ajax({
+					url:"{:U('BaseSetting/deldefrmk')}",
+					type:"post",
+					data:"id="+_this.attr('data-id'),
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							layer.msg('已删除');
+							_this.remove();
+						}else{
+							layer.msg(msg.info);
+						}
+					}
+				})
+			})
+		})
+	})
+</script>
+<include file="Common:footer" />

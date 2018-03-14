@@ -1,0 +1,76 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/addcoupons.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/addcoupons.css">
+<style type="text/css">
+    .form-group{
+      padding-top: 50px;
+    }
+    body{
+    background-color: #fff!important;
+  }
+</style>
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+<div class="col-lg-12">
+
+<div class="col-lg-10" style="padding-bottom:50px;">
+  <form class="form" style="margin-top:50px;" method="post" <if condition="$coupon['CouponId']"> action="{:U('Products/addcoupons')}" </if>>
+    <div class="form-group">
+      <label for="type" class="col-sm-2 control-label">请选择优惠券类型</label>
+      <div class="col-sm-10">
+        <select class="form-control" name="type" id="type" value="{$coupon.Type}">
+          <option value="">请选择</option>
+        <option value="0" <if condition="$coupon['Type'] eq '0'">selected="selected"</if> >现金抵扣券</option>
+        <option value="1" <if condition="$coupon['Type'] eq '1'">selected="selected"</if> >折扣券</option>
+        <option value="2" <if condition="$coupon['Type'] eq '2'">selected="selected"</if> >满减券</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type" class="col-sm-2 control-label">请填写优惠规则</label>
+      <div class="col-sm-10">
+        <input type="text" name="rules" id="rules" class="form-control" value="{$coupon.Rules}" placeholder="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type" class="col-sm-2 control-label">生效时间</label>
+      <div class="col-sm-10">
+        <input type="text" name="stime" id="stime" value="{$coupon.CreateDate}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+0}'})" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type" class="col-sm-2 control-label">失效时间</label>
+      <div class="col-sm-10">
+        <input type="text" name="etime" id="etime" value="{$coupon.ExpiredDate}" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+0}'})" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type" class="col-sm-2 control-label">数量</label>
+      <div class="col-sm-10">
+        <input type="number" name="nums" id="nums" value="{$coupon.Count}" class="form-control">
+      </div>
+    </div>
+<!--     <div class="form-group">
+      <label for="type" class="col-sm-2 control-label">用户可领取数量</label>
+      <div class="col-sm-10">
+        <input type="number" name="usernums" id="usernums" value="{$coupon.UserCount}" class="form-control">
+      </div>
+    </div>
+ -->    <div class="col-sm-12">
+      <div class="card">
+        <div class="title" id="title">{$coupon.CouponName}</div>
+        <div class="content"><small id="content"><if condition="$coupon['Type'] eq '0'">交易时使用此券可抵扣{$coupon.Rules}元</if><if condition="$coupon['Type'] eq '1'">交易时使用此券可享受{$coupon.Rules}折</if><if condition="$coupon['Type'] eq '2'">交易时使用此券,满{$coupon.Ruless.0}元 可减免{$coupon.Ruless.1}元</if></small></div>
+        <div class="end">有效期：<span id="start">{$coupon.CreateDate}</span> 至 <span id="en">{$coupon.ExpiredDate}</span></div>
+      </div>
+    </div>
+    <input type="hidden" name="couponid" value="{$coupon.CouponId}">
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2"><button type="submit" class="btn btn-success btn-outline">保存内容</button></div>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+<include file="Common:footer" />

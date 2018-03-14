@@ -1,0 +1,143 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的佣金</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/newhome/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/withdraw.css" />
+
+	</head>
+
+	<body>
+		<div class="infor">
+			<div class="">
+				<span class="myCommission">我的佣金 (元)</span>
+				<span class="commissionRule">佣金规则</span>
+				<span class="myMoney">{$sum}</span>
+			</div>
+		</div>
+
+		<div class="withdrawMoney">
+			<ul class="mui-table-view">
+				<p class="withBank"><span class="tx">提现到  </span>  
+					<span class="bank" value="{$bank.ID}">
+						<if condition="$type eq 1">
+							{$bank.BankName} ({$bank.bankCard})
+						<else />
+							点击添加银行卡信息
+						</if>
+					</span>
+					<!--<span class="dy">&gt;</span>-->
+					<span class="mui-icon mui-icon-forward"></span>
+				</p>
+				
+				<li class="mui-table-view-cell">
+					<!--<p>提现金额 </p>-->
+					<span class="rmb">¥</span>
+					<input type="text" class="putmoney"/>
+					<button type="button" class="mui-btn mui-btn-warning mui-btn-outlined" id="withdrawButton">提现</button>
+				</li>
+			</ul>
+		</div>
+		<div style="padding: 10px;">
+			收益明细
+		</div>
+		<div class="mx">
+			<volist name="detail" id="pro">
+				<ul class="mui-table-view" style="font-size: 14px!important">
+					<li class=" mui-media  mui-table-view-cell ">
+						<input type="text" class="hid" value="{$pro.TuierId}" hidden="hidden"/>
+						<!-- <img class="mui-media-object mui-pull-left" src="{$pro.Slogo}"> -->
+						<div class="mui-media-body">
+							<!-- <span class="titles">{$pro.storename}</span> -->
+							<if condition="$pro.Type eq 'add'">
+								<span class="nums">佣金:  + {$pro.Money} 元</span>
+							<else />
+								<span class="nums">提现:  - {$pro.Money} 元</span>
+								<if condition="$pro.Status eq '0'">
+									<span class="statu"> 待处理</span>
+								<elseif condition="$pro.Status eq '1'"/>
+									<span class="statu"> 已完成</span>
+								<elseif condition="$pro.Status eq '2'" />
+									<span class="statu"> 已拒绝</span>
+								</if>
+							</if>
+							<span class="creatTime"> {$pro.createdate}</span>
+						</div>
+					</li>
+				</ul>
+				</volist>
+		</div>
+		<script src="__PUBLIC__/newhome/js/mui.min.js"></script>
+		<script src="__PUBLIC__/newadmin/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/JS/plugins/layer/layer.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript">
+			$(document).on("tap",".withBank",function() {
+				var id = $(".bank").attr('value');
+				location.href = "{:U('Tuier/bankMessage')}?id="+id;
+			})
+			$(document).on("tap",".commissionRule",function() {
+				window.location.href = "{:U('Tuier/rules')}";
+			})
+			$(document).ready(function() {
+				//点击提现按钮
+				$("#withdrawButton").on("tap",function() {
+					var TuierId = $(".hid").val();
+					var money = $(".putmoney").val();
+					$.ajax({
+						url:"{:U('Tuier/getMoney')}",
+						type:'post',
+						data:'money='+money+'&TuierId='+TuierId,
+						dataType:'json',
+						success:function(msg) {
+							if(money == ''){
+								layer.msg("请填写提现金额");
+							}else {
+								if(msg.type == "success") {
+									if(msg.bankmsg){
+										var updateMoney = msg.money;
+										var _html = "";
+										var data = msg.ajaxMoney;
+										$.each(data,function(index,item) {
+											if(item.Type == 'add'){
+												var status ='<span class="nums">佣金: + '+item.Money+'</span>';
+												var style = '<span class="statu"> </span>';
+											}else{
+												var status = '<span class="nums">提现: - '+item.Money+'</span>';
+												if (item.Status == '0') {
+									            	var style = '<span class="statu"> 待处理</span>';
+									        	}
+									        	else if (item.Status == '1'){
+								                	var style = '<span class="statu"> 已完成</span>';
+								                }
+								                else if(item.Status == '2') {
+								                	var style = '<span class="statu"> 已拒绝</span>';
+								                }
+											}
+											_html += '<div class="mx"><ul class="mui-table-view"><li class="mui-media mui-table-view-cell"><input type="text" class="hid" value='+item.TuierId+' hidden><div class="mui-media-body">'+status+style+'<span class="creatTime">'+item.createdate+'</span></div></li></ul></div>';
+										});
+										$(".mx").html(_html);
+										$('.myMoney').html(updateMoney);
+										$('.putmoney').val('');
+									}else {
+										layer.msg('操作失败');
+									}
+								}else {
+										layer.msg("请先添加银行卡信息");
+									
+	//								layer.msg('提现金额超出总金额');
+								}
+							}
+							
+						}
+					})
+				})
+			})
+		</script>
+	</body>
+
+</html>

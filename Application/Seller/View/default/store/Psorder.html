@@ -1,0 +1,79 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<style type="text/css">
+	td{
+		text-align: center;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:0 1%;padding-bottom:10%;">
+	<div class="ibox-title">
+		<h5>配送订单信息</h5>
+	</div>
+	<div class="col-sm-12 col-md-12"  style="padding-bottom:10px;">
+		<form class="form-inline" method="post">
+		  <div class="form-group">
+		    <label for="exampleInputName2">订单号</label>
+		    <input type="text" class="form-control" name="OrderId" id="exampleInputName2" value="{$param['OrderId']}" placeholder="订单号">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputEmail2">配送员名/手机号</label>
+		    <input type="text" class="form-control" id="exampleInputEmail2" name='Psinfo' value="{$param['Psinfo']}" placeholder="配送员名/手机号">
+		  </div>
+		  <button type="submit" class="btn btn-default">搜 索</button>
+		</form>
+	</div>
+	<div class="col-sm-12 col-md-12">
+		<table class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>订单号</th>
+					<th>抢单时间</th>
+					<th>收货信息</th>
+					<th>配送员信息</th>
+					<th>当前状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				<foreach name="order" item="or" >
+					<tr>
+						<td>{$or.OrderId}</td>
+						<td>{$or.GetDate}</td>
+						<td>{$or.Receving}</td>
+						<td>{$or.PS}</td>
+						<td><if condition="$or['Status'] eq '2'"><span style="color:green;font-weight:bold">配送完成</span><br><span style='color:green'>{$or.OverDate}</span><elseif condition="$or['Status'] eq '1'"/><span style='color:orange;font-weight:bold'>配送中(已提货)</span><else/>等待取货 <br> <button class="btn btn-warning btn-xs resend" type="button" data-oid='{$or.OrderId}' title="用于配送员抢单长时间未取货时使用" alt="用于配送员抢单长时间未取货时使用">重新发送抢单信息</button> </if></td>
+					</tr>
+				</foreach>
+			</tbody>
+
+		</table>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.resend').click(function(){
+		var _this=$(this);
+		art.dialog.confirm("确定要重新发布抢单信息吗？",function(){
+			_this.html('处理中...').addClass('disabled');
+			$.ajax({
+				url:"{:U('Store/resend')}",
+				type:"post",
+				data:"oid="+_this.attr('data-oid'),
+				dataType:"json",
+				success:function(msg){
+					if (msg.status=='success') {
+						art.dialog.tips('处理成功');
+						_this.parent().parent().remove();
+					}else{
+						_this.html('重新发送抢单信息').removeClass('disabled');
+						art.dialog.tips('处理失败');
+					}
+				}
+			})
+		})
+	})
+})
+</script>
+<include file="Common:footer" />

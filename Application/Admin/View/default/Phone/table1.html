@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>员工门店排行</title>
+    <script src="__PUBLIC__/JS/jquery.min.js"></script>
+    
+    <link href="__PUBLIC__/Plugins/bootstrap/CSS/bootstrap.min.css" rel="stylesheet">
+    <script src="__PUBLIC__/Plugins/bootstrap/JS/bootstrap.min.js"></script>
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="__PUBLIC__/JS/plugins/echarts.min.js"></script>
+	
+	<style type="text/css">
+		.form-group{
+			display: inline-block;
+		    margin: 15px 15px;
+		    vertical-align: middle;
+		}
+	</style>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row" style="margin:15px 0px;">
+
+
+		<div>
+
+			<label>区域</label>
+
+			<select id="areaSelect" name="areaSelect" class="areaSelect form-control" style="display: inline-block;margin-left:15px;width:20%;">
+				<option value="0" selected="selected">总览</option>
+	
+				<foreach name="aArea" item="aa">
+					<option value="{$aa['ID']}">{$aa['AreaName']}</option>
+				</foreach>
+
+			</select>
+
+
+			<select id="areaP" name="areaP" class="areaSelect form-control" style="display: inline-block;margin-left:15px;width:20%;">
+				<option value="0" selected="selected">省</option>
+
+			</select>
+
+			<select id="areaC" name="areaC" class="areaSelect form-control" style="display: inline-block;margin-left:15px;width:20%;">
+				<option value="0" selected="selected">市</option>
+
+			</select>
+
+		</div>
+
+		<div style="margin:15px 0px;text-align:center;">
+
+			<foreach name="sDate" item="si">
+				<button type="button" class="selectDate btn btn-default {$si['d']}" style="margin: 0px 5px;padding:3px 3px;" data-t="{$si['t']}" data-s="{$si['s']}" data-e="{$si['e']}">{$si['k']}</button>
+			</foreach>
+
+		</div>
+
+	    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+		<div style="width:100%;overflow:auto;">
+			<div id="main" style="width: 1000%;height:300px;"></div>
+		</div>
+
+	</div>
+
+<hr style="margin-top: 5px;margin-bottom: 5px;border: 1px;border-top: 1px solid #c1a5d2;" width="90%" />
+
+	<div class="row"  style="margin:15px 0px;">
+		<div>
+
+			<label>员工门店排行</label>
+
+			<select id="storeTop" name="storeTop" class="storeSelectHandle form-control" style="display: inline-block;margin-left:15px;width:30%;">
+				<option value="f" selected="selected">前50</option>
+				<option value="b">后50</option>
+			</select>
+
+		</div>
+	</div>
+
+	<div class="row"  style="margin:15px 0px;">
+		<div class="table-responsive">
+
+			<table class="table">
+
+				<thead>
+					<tr>
+						<td>#</td>
+						<td>姓名</td>
+						<td>销售额</td>
+					</tr>
+				</thead>
+				
+				<tbody id="asMoney">
+	
+				<?php $indexasm=1; ?>
+	
+				<foreach name="asMoney" item="ai" key="ak">
+					<tr>
+						<td>{$indexasm}</td>
+
+						<if condition="$ak eq 'x_0'">
+								<td>工厂直销</td>
+							<else/>
+								<td>{$ai['name']}</td>
+						</if>
+						
+						<td>{:number_format($ai['aMoney'],2)}</td>
+					</tr>
+
+					<?php $indexasm++; ?>
+				</foreach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>
+
+    <script type="text/javascript">
+
+		var mainDivObj=document.getElementById('main');
+		var optionVar=null;
+		var titleVar='';
+
+
+		var ajaxLock=true;
+
+
+        function getData(dType,sDate,eDate,type,isDraw,areatype)
+        {
+			if (ajaxLock) 
+			{
+
+				$.ajax({
+				    type: "post",
+				    url: "{:U('Phone/table1')}",
+				    data: {'type':dType,'sdate':sDate,'edate':eDate,'tp':type,'aid':$('#areaSelect').val(),'pid':$('#areaP').val(),'cid':$('#areaC').val(),'idw':isDraw},
+				    dateType: "json",
+				    beforesend:function(){
+				    	//ajaxLock=false;有等待效果后放开
+				    },
+				   	complete:function(msg)
+				    {
+				    	//ajaxLock=true;有等待效果后放开
+				    },
+				    success: function (msg) 
+				    {
+
+				    	if (isDraw=='0') 
+				    	{
+					    	titleVar='员工门店排行';
+					      	optionVar =  {
+							    title: {
+							        text: titleVar,
+							        subtext: msg.showdate
+							    },
+							    color: ['#3398DB'],
+							    tooltip : {
+							        trigger: 'axis',
+							        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+							            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+							        }
+							    },
+							    grid: {
+							        left: '3%',
+							        right: '4%',
+							        bottom: '3%',
+							        containLabel: true
+							    },
+							    xAxis : [
+							        {
+							            type : 'category',
+							            data : msg.name,
+							            axisTick: {
+							                alignWithLabel: true
+							            }
+							        }
+							    ],
+							    yAxis : [
+							        {
+							            type : 'value'
+							        }
+							    ],
+							    series : [
+							        {
+							            name:'销售额',
+							            type:'bar',
+							            barWidth: '60%',
+							            data:msg.data
+							        }
+							    ]
+							};
+
+							if (msg.name.length<10) {
+								document.getElementById('main').style.width='384px';
+							}
+							else
+							{
+								document.getElementById('main').style.width=(30*msg.name.length)+'px';
+							}
+
+							setTable(mainDivObj,optionVar,titleVar);
+				    	}
+
+
+				    	if (areatype=='areaSelect') 
+				    	{
+				    		$('#areaC').html('<option value="0" selected="selected">市</option>');
+
+				    		var tempStrSelect='<option value="0" selected="selected">省</option>';
+
+
+				    		$.each(msg.p,function(k,v){
+
+				    			tempStrSelect+='<option value="'+v['ID']+'">'+v['Area']+'</option>';
+
+				    		});
+
+
+				    		$('#areaP').html(tempStrSelect);
+				    	}
+
+				    	if (areatype=='areaP') 
+				    	{
+
+				    		var tempStrSelect='<option value="0" selected="selected">市</option>';
+
+
+				    		$.each(msg.c,function(k,v){
+
+				    			tempStrSelect+='<option value="'+v['city']+'">'+v['city']+'</option>';
+
+				    		});
+
+
+				    		$('#areaC').html(tempStrSelect);
+				    	}
+
+
+
+
+				    	setStoreTable(msg.tabledata);
+
+
+				    }
+				});
+			}
+			else
+			{
+
+			}
+
+        }
+
+
+        function setTable(obj,option,title)
+        {
+	      	// 基于准备好的dom，初始化echarts实例
+	        var myChart = echarts.init(obj);
+
+	        // 指定图表的配置项和数据
+			myChart.title = title;
+
+
+	        // 使用刚指定的配置项和数据显示图表。
+	        myChart.setOption(optionVar);
+        }
+
+        function setStoreTable(data)
+        {
+        	var asMoneyObj=$('#asMoney');
+
+        	var tempStoreStr='';
+
+        	var indexst=1;
+
+        	$.each(data,function(k,v){
+
+        		if (k=='x_0') {
+        			tempStoreStr+="<tr><td>"+indexst+"</td><td>工厂直销</td><td>"+(parseFloat(v['aMoney']).toFixed(2))+"</td></tr>";
+        		}
+        		else
+        		{
+        			tempStoreStr+="<tr><td>"+indexst+"</td><td>"+(v['name'])+"</td><td>"+(parseFloat(v['aMoney']).toFixed(2))+"</td></tr>";
+        		}
+
+        		indexst++;
+
+        	});
+
+        	asMoneyObj.html(tempStoreStr);
+        }
+
+        $(function(e){
+
+	        $('.storeSelectHandle').change(function(e){
+
+	        	var nowObj=$('.btn-success');
+
+	        	getData(nowObj.attr('data-t'),nowObj.attr('data-s'),nowObj.attr('data-e'),$(this).val(),'1','x');
+	        });
+
+	        $('.selectDate').click(function(e){
+	        	$('.selectDate').removeClass('btn-success');
+	        	$(this).addClass('btn-success');
+
+	        	var nowObj=$(this);
+
+	        	getData(nowObj.attr('data-t'),nowObj.attr('data-s'),nowObj.attr('data-e'),$('.storeSelectHandle').val(),'0','x');
+	        });
+
+
+
+
+
+
+	        $('.areaSelect').change(function(e){
+	        	var nowObj=$('.btn-success');
+
+
+	        	var selectType=$(this).attr('id');
+
+
+
+	        	if (selectType=='areaSelect') 
+	        	{
+        			$('#areaP').html('<option value="0" selected="selected">省</option>');
+        			$('#areaC').html('<option value="0" selected="selected">市</option>');
+	        	}
+	        	else if (selectType=='areaP') 
+	        	{
+					$('#areaC').html('<option value="0" selected="selected">市</option>');
+	        	}
+	        	else if (selectType=='areaC') 
+	        	{
+
+	        	}
+
+
+	        	getData(nowObj.attr('data-t'),nowObj.attr('data-s'),nowObj.attr('data-e'),$('.storeSelectHandle').val(),'0',selectType);
+	        });
+
+
+        	titleVar='员工门店排行';
+
+			optionVar = {
+				    title: {
+				        text: titleVar,
+				        subtext: '{$nowDay}'
+				    },
+				    color: ['#3398DB'],
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				    grid: {
+				        left: '3%',
+				        right: '4%',
+				        bottom: '3%',
+				        containLabel: true
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : {$cname},
+				            axisTick: 
+				            {
+				                alignWithLabel: true
+				            }
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'销售额',
+				            type:'bar',
+				            barWidth: '60%',
+				            data:{$tdata}
+				        }
+				    ]
+
+			};
+
+			if ({:count($tempData)}<10) {
+				document.getElementById('main').style.width='384px';
+			}
+			else
+			{
+				document.getElementById('main').style.width=(30*{:count($tempData)})+'px';
+			}
+
+			setTable(mainDivObj,optionVar,titleVar);
+
+        });
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

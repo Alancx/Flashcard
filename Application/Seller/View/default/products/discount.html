@@ -1,0 +1,214 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<style type="text/css">
+  body{
+    background-color: #fff!important;
+  }
+</style>
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+    <div class="col-lg-12">
+       <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加规则</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <form role="form" class="form-inline" action="" method="post" id="save">
+                <div class="form-group">
+                        <label for="exampleInputEmail2" class="sr-only">优惠类型</label>
+                        <select name="DiscountType" id="DiscountType" class="form-control" value="">
+                           <option value="">请选择优惠类型</option>
+                           <option value="0" id="c0">订单满减</option>
+                           <option value="1" id="c1">消费返券</option>
+                           <option value="2" id="c2">注册返券</option>
+                           <option value="3" id="c3">充值满返</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <input type="number" placeholder="请填写金额条件" name="Consume" id="Consume" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="number" placeholder="减免/返券 金额" name="Discount" id="Discount" class="form-control">
+                </div>
+                <div class="form-group cz" style="display:none;">
+                    <input type="number" placeholder="赠送优惠券面额" name="CouponNotes" id="CouponNotes" class="form-control">
+                </div>
+                <div class="form-group cz" style="display:none;">
+                    <input type="number" placeholder="赠送数量" name="CouponNum" id="CouponNum" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="stime" id="stime" placeholder="开始日期" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d}'})" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="etime" id="etime" placeholder="结束日期" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-{%d+0}'})" class="form-control">
+                </div>
+
+                <div class="checkbox m-l m-r-xs">
+                  <input type="hidden" name="id" id="ID" value="">
+                  <input type="hidden" name="CouponId" id="CouponId" value="">
+                  <button class="btn btn-white" type="submit" id="btn-submit">添加规则</button>
+                    </form>
+                </div>
+                <div class="alert alert-warning">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-10">
+            <h3>优惠管理</h3>
+            <table class="table">
+              <tr>
+                 <td>#</td>
+                 <td>优惠类型</td>
+                 <td>优惠条件</td>
+                 <td>优惠/返券金额</td>
+                 <td>操作</td>
+             </tr>
+             <foreach name="discounts" item="dis">
+              <tr>
+                 <td>{$dis.ID}</td>
+                 <td>
+                      <if condition="$dis['DiscountType'] eq '0'">
+                      订单满减
+                      <elseif condition="$dis['DiscountType'] eq '1'"/>
+                      消费返券
+                      <elseif condition="$dis['DiscountType'] eq '2'"/>
+                      注册返券
+                      <else/>
+                      充值满返
+                      </if>
+                    </td>
+                 <td>{$dis.Consume}</td>
+                 <td>{$dis.Discount}</td>
+                 <td><a href="###" onclick="edit('{$dis.ID}');">修改</a> | <a href="###" onclick="del('{$dis.ID}');">删除</a></td>
+             </tr>
+         </foreach>
+     </table>
+     <div style="text-align:right;margin-bottom:100px;">{$page}</div>
+ </div>
+</div>
+</div>
+<script type="text/javascript">
+  var jsondata={$jsondata}; //json数据
+  //修改数据展示
+  function edit(id){
+    $.each(jsondata,function(index,item){
+      if (item.ID==id) {
+        $("#Consume").val(item.Consume);
+        $("#Discount").val(item.Discount);
+        $("#DiscountType").val(item.DiscountType);
+        $("#stime").val(item.stime.date);
+        $("#etime").val(item.etime.date);
+
+
+
+
+        $("#ID").val(id);
+        if (item.DiscountType=='1') {
+          $("#CouponId").val(item.CouponId);
+          $("#c1").attr('selected',true);
+          $("#c2").attr('selected',false);
+          $("#c0").attr('selected',false);
+          $("#c3").attr('selected',false);
+          $('.cz').hide();
+        }
+        else if (item.DiscountType=='2') {
+          $("#CouponId").val(item.CouponId);
+          $("#c2").attr('selected',true);
+          $("#c0").attr('selected',false);
+          $("#c1").attr('selected',false);
+          $("#c3").attr('selected',false);
+          $('.cz').hide();
+        }
+        else if (item.DiscountType=='3') {
+          $("#CouponId").val(item.CouponId);
+          $('#CouponNotes').val(item.CouponNotes);
+          $('#CouponNum').val(item.CouponNum);
+          $('.cz').show();
+          $("#c2").attr('selected',false);
+          $("#c0").attr('selected',false);
+          $("#c1").attr('selected',false);
+          $("#c3").attr('selected',true);
+        }else
+        {
+          $('.cz').hide();
+          $("#c0").attr('selected',true);
+          $("#c1").attr('selected',false);
+          $("#c2").attr('selected',false);
+          $("#c3").attr('selected',false);
+        }
+        $("#btn-submit").html('保存规则')
+        // console.log(item);
+      }
+    })
+  }
+  //删除提示
+  function del(id){
+    art.dialog.confirm('确定要删除此条优惠规则吗？',function(){
+      window.location.href="{:U('Products/delDiscount')}?id="+id;
+    },function(){
+      art.dialog.tips('取消操作',1)
+    })
+  }
+  $(document).ready(function(){
+    $('#DiscountType').change(function(){
+      var type=$(this).val();
+      if (type=='3') {
+        $('.cz').show();
+      }else{
+        $('.cz').hide();
+      }
+    })
+    $('#save').submit(function(){
+      var type=$('#DiscountType').val();
+      var Consume=$('#Consume').val();
+      var Discount=$('#Discount').val();
+      var CouponNotes=$('#CouponNotes').val();
+      var CouponNum=$('#CouponNum').val();
+      var stime=$('#stime').val();
+      var etime=$('#etime').val();
+      if (!type) {
+        art.dialog.alert('请选择优惠类型');
+        return false;
+      };
+      if (!Consume) {
+        art.dialog.alert('请输入金额条件');
+          $('#Consume').focus();
+        return false;
+      };
+      if (!Discount) {
+        art.dialog.alert('请输入减免/返券 金额');
+          $('#Discount').focus();
+        return false;
+      };
+      if (CouponNotes || CouponNum) {
+        if (!CouponNotes) {
+          art.dialog.alert('请输入返券面额');
+          $('#CouponNotes').focus();
+          return false;
+        };
+        if (!CouponNum) {
+          art.dialog.alert('请输入返券数量');
+          $('#CouponNum').focus();
+          return false;
+        };
+      };
+      if (stime && etime) {
+        return true
+      }else{
+        art.dialog.alert('请选择有效时间范围');
+        return false;
+      }
+    })
+  })
+</script>
+<include file="Common:footer" />

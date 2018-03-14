@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>个人中心-优惠券</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="__PUBLIC__/theme2/js/jquery.1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/theme2/js/mycoupons.js?v=1.2" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/theme2/css/mycoupons.css?v=1.1" />
+    <link href="__PUBLIC__/theme2/plugins/weui/weui.css" rel="stylesheet">
+    <script src="__PUBLIC__/theme2/js/common.js"></script>
+	</head>
+  <script type="text/javascript">
+    var getcoupon_url="{:U('User/getusercoupon')}";
+		var classpage_url="{:U('Index/Category')}";
+  </script>
+	<body>
+		<header>
+			<div class="tab1">
+				<span>热门优惠券</span>
+				<span id="me">我的优惠券</span>
+				<small class="tab1nav"></small>
+			</div>
+		</header>
+		<br />
+		<div class="hot " data="tab">
+			<!-- <div class="quan five">
+				<div class="quan-ul ">
+					<div class="li1">
+						<small>￥</small>
+						<span>5</span>
+					</div>
+					<div class="li2">
+						<p>徽记食品，工厂专用现金券</p>
+						<small><span class="date">2017.10.1</span><span>前有效</span></small>
+					</div>
+					<span class="btn">立即领取</span>
+					<small class="guize">使用规则</small>
+				</div>
+			</div>
+			<div class="quan2 ten">
+				<div class="quan2-ul ">
+					<div class="li1">
+						<small>￥</small>
+						<span>10</span>
+					</div>
+					<div class="li2">
+						<p>徽记食品，工厂专用现金券</p>
+						<small><span class="date">2017.10.1</span><span>前有效</span></small>
+					</div>
+					<span class="btn">立即领取</span>
+					<small class="guize">使用规则</small>
+				</div>
+			</div> -->
+      <foreach name="coupons" item="cpinfo">
+        <if condition="$cpinfo['Type'] eq '0'">
+          <if condition="(int)$cpinfo['Rules'] elt 10">
+            <div class="quan five">
+      				<div class="quan-ul ">
+      					<div class="li1">
+      						<small>￥</small>
+      						<span>{$cpinfo['Rules']}</span>
+      					</div>
+      					<div class="li2">
+      						<p>{$cpinfo['CouponName']}</p>
+      						<small><span class="date">{$cpinfo['edate']}</span><span>前有效</span></small>
+      					</div>
+      					<span class="btn get" data-cpid="{$cpinfo['CouponId']}">立即领取</span>
+      					<!-- <small class="guize">使用规则</small> -->
+      				</div>
+      			</div>
+            <else />
+            <div class="quan ten">
+      				<div class="quan-ul ">
+      					<div class="li1">
+      						<small>￥</small>
+      						<span>{$cpinfo['Rules']}</span>
+      					</div>
+      					<div class="li2">
+      						<p>{$cpinfo['CouponName']}</p>
+      						<small><span class="date">{$cpinfo['edate']}</span><span>前有效</span></small>
+      					</div>
+      					<span class="btn get" data-cpid="{$cpinfo['CouponId']}">立即领取</span>
+      					<!-- <small class="guize">使用规则</small> -->
+      				</div>
+      			</div>
+          </if>
+        </if>
+      </foreach>
+
+		</div>
+
+		<div class="my" data="tab" hidden="hidden">
+
+			<div class="mine">
+				<ul>
+					<li class="psli"><span>未使用(<small><?php echo  count($myhascoupons)?count($myhascoupons):0;?></small>)</span></li>
+					<li><span>已使用(<small><?php echo  count($myhadcoupons)?count($myhadcoupons):0;?></small>)</span></li>
+					<li><span>已过期(<small><?php echo  count($myhaecoupons)?count($myhaecoupons):0;?></small>)</span></li>
+				</ul>
+				<div class="tabnav"></div>
+			</div>
+			<br />
+			<div class="" data="tabtab">
+        <foreach name="myhascoupons" item="cpinfo">
+          <if condition="$cpinfo['Type'] eq '0'">
+            <if condition="(int)$cpinfo['Rules'] elt 10">
+              <div class="quan five">
+                <div class="quan-ul ">
+                  <div class="li1">
+                    <small>￥</small>
+                    <span>{$cpinfo['Rules']}</span>
+                  </div>
+                  <div class="li2">
+                    <p>{$cpinfo['CouponName']}</p>
+                    <small><span class="date">{$cpinfo['edate']}</span><span>前有效</span></small>
+                  </div>
+                  <span class="btn use" data-cpid="{$cpinfo['CouponId']}">立即使用</span>
+                  <!-- <small class="guize">使用规则</small> -->
+                </div>
+              </div>
+              <else />
+              <div class="quan ten">
+                <div class="quan-ul ">
+                  <div class="li1">
+                    <small>￥</small>
+                    <span>{$cpinfo['Rules']}</span>
+                  </div>
+                  <div class="li2">
+                    <p>{$cpinfo['CouponName']}</p>
+                    <small><span class="date">{$cpinfo['edate']}</span><span>前有效</span></small>
+                  </div>
+                  <span class="btn use" data-cpid="{$cpinfo['CouponId']}">立即使用</span>
+                  <!-- <small class="guize">使用规则</small> -->
+                </div>
+              </div>
+            </if>
+          </if>
+        </foreach>
+			</div>
+			<div class="" data="tabtab" hidden="hidden">
+
+        <foreach name="myhadcoupons" item="cpinfo">
+          <if condition="$cpinfo['Type'] eq '0'">
+              <div class="quan hui">
+                <div class="quan-ul ">
+                  <div class="li1">
+                    <small>￥</small>
+                    <span>{$cpinfo['Rules']}</span>
+                  </div>
+                  <div class="li2">
+                    <p>{$cpinfo['CouponName']}</p>
+                    <small><span class="date">{$cpinfo['edate']}</span><span>前有效</span></small>
+                  </div>
+                  <span class="btn used" data-cpid="{$cpinfo['CouponId']}">已使用</span>
+                  <!-- <small class="guize">使用规则</small> -->
+                </div>
+              </div>
+            </if>
+        </foreach>
+			</div>
+			<div class="" data="tabtab" hidden="hidden">
+
+        <foreach name="myhaecoupons" item="cpinfo">
+          <if condition="$cpinfo['Type'] eq '0'">
+              <div class="quan hui">
+                <div class="quan-ul ">
+                  <div class="li1">
+                    <small>￥</small>
+                    <span>{$cpinfo['Rules']}</span>
+                  </div>
+                  <div class="li2">
+                    <p>{$cpinfo['CouponName']}</p>
+                    <small><span class="date">{$cpinfo['edate']}</span><span>前有效</span></small>
+                  </div>
+                  <span class="btn used" data-cpid="{$cpinfo['CouponId']}">已过期</span>
+                  <!-- <small class="guize">使用规则</small> -->
+                </div>
+              </div>
+            </if>
+        </foreach>
+			</div>
+		</div>
+
+		<!--使用规则-->
+		<div class="shiyongguize">
+			<div>
+				<h5>使用说明</h5>
+				<div id="">
+					<ol>
+						<li>现金券只能在购买工厂商品时使用，如交易金额低于现金券面值亦可使用(全部抵扣)。</li>
+						<li>在有限期内有效。</li>
+						<li>现金券只能在购买工厂商品时使用，如交易金额低于现金券面值亦可使用(全部抵扣)。</li>
+						<li>在有限期内有效。</li>
+						<li>现金券只能在购买工厂商品时使用，如交易金额低于现金券面值亦可使用(全部抵扣)。</li>
+						<li>在有限期内有效。</li>
+						<li>现金券只能在购买工厂商品时使用，如交易金额低于现金券面值亦可使用(全部抵扣)。</li>
+						<li>在有限期内有效。</li>
+						<li>现金券只能在购买工厂商品时使用，如交易金额低于现金券面值亦可使用(全部抵扣)。</li>
+						<li>在有限期内有效。</li>
+						<li>现金券只能在购买工厂商品时使用，如交易金额低于现金券面值亦可使用(全部抵扣)。</li>
+						<li>在有限期内有效。</li>
+						<li>现金券只能在购买工厂商品时使用，如交易金额低于现金券面值亦可使用(全部抵扣)。</li>
+						<li>在有限期内有效。</li>
+					</ol>
+				</div>
+				<p class="off">关闭</p>
+			</div>
+		</div>
+
+    <!-- weui提示框 -->
+    <div id="notice" style="display: none;">
+      <div class="weui_mask_transparent"></div>
+      <div class="weui_toast">
+        <i class="weui_icon_toast"></i>
+        <p class="weui_toast_content"></p>
+      </div>
+    </div>
+    <div id="waiting" class="weui_loading_toast" style="display:none;">
+        <div class="weui_mask_transparent"></div>
+        <div class="weui_toast">
+            <div class="weui_loading">
+                <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+            </div>
+            <p class="weui_toast_content">数据加载中</p>
+        </div>
+    </div>
+	</body>
+
+</html>

@@ -1,0 +1,122 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>设置商品属性</title>
+
+    <!-- Bootstrap -->
+    <link href="/Public/Admin/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Public/Admin/Admin/js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/Public/Admin/Admin/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Public/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+    <script type="text/javascript" src="/Public/Admin/artDialog/plugins/iframeTools.js"></script>
+    <script type="text/javascript" src="/Public/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+    <link rel="stylesheet" href="/Public/Admin/Admin/css/plugins/chosen/chosen.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+    .attrvalues{
+        border: 1px solid green;
+        margin:auto 2px;
+        border-radius: 2px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="width:560px;height:380px;">
+      <div class="row">
+        <form action="<?php echo U('Products/saveProImg');?>" method="post" id="saveatr">
+        <h4 style="text-align:center;">生成推广二维码</h4>
+          <table class="table table-bordered">
+            <tr>
+              <td>选择场景</td>
+              <td>
+                <select name="AttributeId" class="chosen-select form-control" id="chosen" style="width:150px;" tabindex="2" >
+                  <option value="">请选择场景</option>
+                  <?php if(is_array($scenes)): foreach($scenes as $key=>$attr): ?><option value="<?php echo ($attr["ID"]); ?>" id="atname<?php echo ($attr["AttributeId"]); ?>"><?php echo ($attr["SceneName"]); ?></option><?php endforeach; endif; ?>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>选择规格</td>
+              <td>
+                <select name="proidcard" class="chosen-select form-control" id="chosep" style="width:150px;" tabindex="3" >
+                  <option value="0">请选择规格</option>
+                  <?php if(is_array($ginfo)): foreach($ginfo as $key=>$gl): ?><option value="<?php echo ($gl["ProIdCard"]); ?>" id="<?php echo ($gl["ProIdCard"]); ?>"><?php echo ($gl['ProSpec1']); ?>,<?php echo ($gl['ProSpec2']); ?>,<?php echo ($gl['ProSpec3']); ?>,<?php echo ($gl['ProSpec4']); ?>,<?php echo ($gl['ProSpec5']); ?></option><?php endforeach; endif; ?>
+                </select>
+              </td>
+            </tr>
+            <?php if ($zp=='1'): ?>
+            <tr>
+              <td>是否为赠品</td>
+              <td>
+                <input type="checkbox" name="" id="iszp" value="1" data-s="0">
+              </td>
+            </tr>
+            <?php endif ?>
+            <tr>
+              <td>二维码</td>
+              <td>
+                <div class="col-sm-4"  style="margin-top:0px;height:150px;width:100%;"><span  id="img"></span></div>
+                <input type="hidden" name="pid" value="<?php echo ($pid); ?>" id="pid">
+              </td>
+            </tr>
+          </table>
+
+
+          <div style="text-align:center;margin-top:15px;width:100%;"><button type="button" class="btn btn-success btn-md" onclick="setAttr();">创建二维码</button></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  </body>
+<script type="text/javascript">
+$("#chosen").chosen();
+$(document).ready(function(){
+})
+  $('#iszp').click(function(){
+    var atr=$(this).attr('data-s');
+    if (atr=='1') {
+      $(this).attr('data-s','0');
+    };
+    if (atr=='0') {
+      $(this).attr('data-s','1');
+    };
+  })
+function setAttr(){
+  var pid=$("#pid").val();
+  var sid=$("#chosen").val();
+  // alert(sid);
+  // $.ajax({
+  //  type:'post',
+  //  url:'<?php echo U('ArtDialog/getQr');?>',
+  //  data:'sid='+sid+'&pid='+pid,
+  //  dateType:'json',
+  //  success:function(msg){
+  //    // alert(msg);
+  if ($('#chosep').val()=="0") {
+    alert("请选择一个规格");
+    return false;
+  }
+  if ($('#iszp').attr('data-s')=='1') {
+      $("#img").html('<img src="<?php echo U('ArtDialog/getQr');?>?sid='+sid+'&pid='+$('#chosep').val()+'&zp=1" alt="" />');
+  }else{
+      $("#img").html('<img src="<?php echo U('ArtDialog/getQr');?>?sid='+sid+'&pid='+$('#chosep').val()+'" alt="" />');
+  }
+  //    console.log(msg);
+  //  }
+  // })
+}
+</script>
+</html>

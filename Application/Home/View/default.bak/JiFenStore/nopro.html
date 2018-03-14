@@ -1,0 +1,33 @@
+<layout name="Public/PageModel"/>
+<style>
+#touch{
+  display: none;
+}
+.nodata{
+  display: block;
+  padding: 20% 15% 0px 15%;
+}
+.nodata>img{
+  width: 100%;
+}
+.nodata>label{
+  display: block;
+  margin: 0px 0px 0px 0px;
+line-height: 50px;
+text-align: center;
+color: #ff4200;
+font-size: 18px;
+}
+</style>
+<div class="nodata">
+  <img src="__PUBLIC__/Sellermobile/icon/watermark.png" alt="">
+  <label>商品不存在或者商品已被删除</label>
+  <label style="color:#1671E6;">将要跳转到首页···</label>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+setTimeout(function(){
+window.location.href="{:U('Index/Index')}";
+},"2000");
+});
+</script>

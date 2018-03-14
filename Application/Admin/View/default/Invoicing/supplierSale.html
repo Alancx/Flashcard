@@ -1,0 +1,205 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<link href="__PUBLIC__/Admin/Admin/css/plugins/chosen/chosen.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/css/my.css">
+<script src="__PUBLIC__/Admin/Admin/js/plugins/chosen/chosen.jquery.js"></script>
+<style type="text/css">
+	.ibox{
+		margin-bottom: 0px!important;
+	}
+</style>
+<div class="row  wrapper  white-bg" style="margin:2% 1%;padding-bottom:10%;">
+	<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+		<form action="" class="form-inline" method="post"  id="search">
+			<div class="form-group">
+				<input type="text" name="stime" id="stime" value="{$data.stime}" class="form-control" placeholder="请选择开始时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+			</div>
+			<div class="form-group">
+				<input type="text" name="etime" id="etime" value="{$data.etime}" class="form-control" placeholder="请选择结束时间" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+			</div>
+			<div class="form-group">
+				<select name="SupplierId" id="SupplierId" class="form-control">
+					<option value="">请选择供货商</option>
+					<foreach name="sps" item="sp">
+					<option value="{$sp.ID}">{$sp.Supplier}</option>
+					</foreach>
+				</select>
+			</div>
+			<button class="btn btn-primary btn-outline btn-md" type="submit"><span class="glyphicon glyphicon-search"></span> 搜 索</button> 
+			<!-- <button class="btn btn-default btn-outline btn-md" type="button" id="import"><span class="glyphicon glyphicon-export"></span> 导出</button> &emsp; <small>默认导出当月数据</small> -->
+		</form>
+
+	</div>
+	<div class="col-sm-12">
+		<if condition="$errmsg">
+			<h3>{$errmsg}</h3>
+			<else/>
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr class="success">
+						<th colspan="5">查询时间： {$data.stime}——{$data.etime} </th>
+					</tr>
+					<foreach name='lists' item='list'>
+						<tr>
+							<td colspan="5">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="tabs_panels.html#collapseOne{$list.ID}">供货商名称：{$list.Supplier} &emsp; 余额：{$list.Moneys} &emsp; 查询销售额：{$list.allmoney} &emsp; 查询销售量：{$list.allcount} &emsp; 扣点比： {$list.cut}%  &emsp; 可结转金额： {$list.cutmoney} &emsp; </a><button class="btn btn-xs btn-white btn-outline js" data-id="{$list.ID}" type="button" style="z-index:1">结 算</button>
+										</h5>
+									</div>
+									<div id="collapseOne{$list.ID}" class="panel-collapse collapse">
+										<div class="panel-body">
+											<table class="table table-hover table-bordered">
+												<thead>
+													<tr>
+														<th>商品名称</th>
+														<th>销售量</th>
+														<th>销售额</th>
+													</tr>
+												</thead>
+												<tbody id="tbody{$list.ID}">
+													<foreach name="list.son" item="son">
+														<tr>
+															<td>{$son.ProName}</td>
+															<td>{$son.count}</td>
+															<td>{$son.money}</td>
+														</tr>
+													</foreach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</foreach>
+				</thead>
+			</table>
+		</if>
+		<div style="text-align:right;">{$page}</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.js').click(function(){
+			var js=$(this);
+			var sid = js.attr('data-id');
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime) {
+				if (stime && etime) {
+					if (stime>=etime) {
+						art.dialog.tips('非法时间段');
+						return false;
+					}
+				}else{
+					art.dialog.tips('请选择完整的时间段');
+					return false;
+				}
+			}
+			art.dialog.confirm('确定要结转吗？',function(){
+				//
+				$.ajax({
+					url:"{:U('Invoicing/supplierover')}",
+					type:"post",
+					data:"type=out&sid="+sid+"&stime="+stime+"&etime="+etime,
+					dataType:"json",
+					success:function(msg){
+						if (msg.status=='success') {
+							art.dialog.tips('处理成功');
+							window.location.reload();
+						};
+						if (msg.status=='error') {
+							art.dialog.tips('处理失败');
+						};
+					}
+				})
+				// window.location.href="{:U('Invoicing/supplierover')}?type=out&sid="+sid+"&stime="+stime+"&etime="+etime;
+			},function(){
+				art.dialog.tips('取消操作');
+			})
+		})
+		$("#search").submit(function(){
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime) {
+				if (stime && etime) {
+					if (stime<etime) {
+						art.dialog.tips('查询中...',100);
+						return true;
+					}else{
+						art.dialog.alert('非法时间段');
+						return false;
+					}
+				}else{
+					art.dialog.alert('请选择完整的时间段');
+					return false;
+				}
+			}else{
+				art.dialog.tips('查询中...',100);
+				return true;
+			}
+		})
+		$('#import').click(function(){
+			var stime=$('#stime').val();
+			var etime=$('#etime').val();
+			if (stime || etime) {
+				if (stime && etime) {
+					if (stime<etime) {
+							art.dialog.tips('数据处理中...',3);
+							window.location.href="{:U('Statcenter/posempOut')}?stime="+stime+"&etime="+etime;
+					}else{
+						art.dialog.alert('非法时间段');
+						return false;
+					}
+				}else{
+					art.dialog.alert('请选择完整的时间段');
+					return false;
+				}
+			}else{
+					art.dialog.tips('数据处理中...',3);
+					window.location.href="{:U('Statcenter/posempOut')}?stime="+stime+"&etime="+etime;
+			}
+		})
+
+		$('.addmore').click(function(){
+			art.dialog.tips('正在查询...',2);
+			var stime=$(this).attr('data-stime');
+			var etime=$(this).attr('data-etime');
+			var page=$(this).attr('data-page');
+			var key=$(this).attr('data-key');
+			console.log(stime,etime,page,key);
+			$.ajax({
+				url:"{:U('Statcenter/getMorepos')}",
+				type:"post",
+				data:"stime="+stime+"&etime="+etime+"&page="+page+"&key="+key,
+				dataType:"json",
+				success:function(msg){
+					if (msg.statu=='success') {
+						var html='';
+						$.each(msg.data,function(index,item){
+							html+="<tr><td><a href=\"{:U('Order/allOrder')}?oid="+item.OrderId+"\">"+item.OrderId+"</a></td><td>"+item.MemberId+"</td><td>"+item.Price+"</td><td>"+item.Count+"</td><td>"+item.PayDate+"</td></tr>";
+						})
+						$(html).appendTo($('#tbody'+key));
+						$('#btn'+key).attr('data-page',parseInt(page)+20);
+					};
+					if (msg.statu=='error') {
+						if (msg.info=='nomore') {
+							art.dialog.tips('没有更多了');
+							$('#btn'+key).html('没有更多了...').addClass('disabled');
+						};
+					};
+				}
+			})
+		})
+	})
+
+
+
+
+</script>
+<include file="Common:footer" />
+<script src="__PUBLIC__/Admin/Admin/js/plugins/sparkline/jquery.sparkline.min.js"></script>

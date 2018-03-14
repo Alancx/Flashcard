@@ -1,0 +1,8 @@
+操作定位:Users/setRmks::::UPDATE [RS_Member] SET [Remarks]='2233333' WHERE ( ID=0 )::::::操作日期:::::::2017-01-17 14:52:33
+操作定位:Users/setRmks::::UPDATE [RS_Member] SET [Remarks]='23333333' WHERE ( ID=0 )::::::操作日期:::::::2017-01-17 14:54:34
+操作定位:Users/setRmks::::UPDATE [RS_Member] SET [Remarks]='23333' WHERE ( ID=0 )::::::操作日期:::::::2017-01-17 14:56:36
+操作定位:Users/setRmks::::UPDATE [RS_Member] SET [Remarks]='23333' WHERE ( ID=0 )::::::操作日期:::::::2017-01-17 14:57:06
+操作定位:Users/setRmks::::UPDATE [RS_Member] SET [Remarks]='23333' WHERE ( ID=0 )::::::操作日期:::::::2017-01-17 14:57:11
+操作定位:Users/showcoupons::::SELECT c.CouponId,c.CouponName,c.Rules,c.Type,CONVERT(varchar(100), mc.GetTime, 20)as GetTime,mc.CouponCount,CONVERT(varchar(100),c.ExpiredDate,20) as ExpiredDate ,CONVERT(varchar(100),c.CreateDate,20) as CreateDate FROM RS_MemberCoupon mc LEFT JOIN RS_Coupon c ON c.CouponId=mc.CouponId WHERE MC.MemberId='18408234166'::::::操作日期:::::::2017-01-17 16:31:27
+操作定位:Users/showcoupons::::SELECT c.CouponId,c.CouponName,c.Rules,c.Type,CONVERT(varchar(100), mc.GetTime, 20)as GetTime,mc.CouponCount,CONVERT(varchar(100),c.ExpiredDate,20) as ExpiredDate ,CONVERT(varchar(100),c.CreateDate,20) as CreateDate FROM RS_MemberCoupon mc LEFT JOIN RS_Coupon c ON c.CouponId=mc.CouponId WHERE MC.MemberId='18408234166'::::::操作日期:::::::2017-01-17 16:46:36
+操作定位:Users/showcoupons::::SELECT c.CouponId,c.CouponName,c.Rules,c.Type,CONVERT(varchar(100), mc.GetTime, 20)as GetTime,mc.CouponCount,CONVERT(varchar(100),c.ExpiredDate,20) as ExpiredDate ,CONVERT(varchar(100),c.CreateDate,20) as CreateDate FROM RS_MemberCoupon mc LEFT JOIN RS_Coupon c ON c.CouponId=mc.CouponId WHERE MC.MemberId='12467766897'::::::操作日期:::::::2017-01-17 16:46:43

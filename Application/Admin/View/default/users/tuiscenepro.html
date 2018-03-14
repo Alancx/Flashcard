@@ -1,0 +1,215 @@
+<include file="Common:top" />
+<link href="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager_blue.css" rel="stylesheet">
+<link href="__PUBLIC__/Admin/Admin/common/css/order.style.css" rel="stylesheet">
+<style type="text/css">
+ul,ol,li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+</style>
+<!--主体部分-->
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>条件检索
+                        <small class='text-info'>查询推广人在场景下【可选的】订单（状态：已付款，已发货，交易完成）商品销售数据</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- 条件检索 -->
+                <div class="ibox-content">
+                    <form role="form" class="form-inline" method="post">
+                        <div class="form-group">
+                            <input type="text" id="tuiName" name="tuiName" class="form-control" placeholder="推广人账号..." value="{$user_name}">
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-btn open" style="border-right-width:0px;">
+                                    <select class="form-control" style="font-size:12px;border-right-width:0px;" id="sceneName">
+                                        <option value="">可选推广场景</option>
+                                        <foreach name="scenelist" item="vo">
+                                            <option value="{$vo.Id}">{$vo.Name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                                <input type="text" id="proName" name="proName" class="form-control" placeholder="请输入商品名称或编号...">
+                            </div>
+                        </div>
+                        <button class="btn btn-outline btn-primary btnselect" type="button"
+                                style="margin-bottom: 0px;width:80px;" id="selectKC"><i class="fa fa-search"></i>&nbsp;&nbsp;检索
+                        </button>
+                        <button class="btn btn-outline btn-default btnselect" type="button"
+                                style="margin-bottom: 0px;width:80px;" id="exportKC"><i class="fa fa-download"></i>&nbsp;&nbsp;导出
+                        </button>
+                    </form>
+                </div>
+                <!-- 内容信息 -->
+                <div class="ibox-content">
+                    <table class="table table-hover table-striped" id="data-example">
+                        <thead>
+                        <tr style="background-color:#eaeaea;">
+                            <th>#</th>
+                            <th>商品名称</th>
+                            <th>商品总/推广销量</th>
+                            <th>商品推广订单额</th>
+                            <th>场景名称</th>
+                            <th>推广人账号</th>
+                            <th>推广人昵称</th>
+                        </tr>
+                        </thead>
+                        <tbody id="data-tbody">
+                            <foreach name="dataOrder" item="vo" key="k">
+                                <tr>
+                                    <td>{$vo.RowNumber}</td>
+                                    <td>{$vo.ProName}</td>
+                                    <td>{$vo.SalesCount} / {$vo.Count}</td>
+                                    <td>{$vo.Money|round=2}</td>
+                                    <td>{$vo.SceneName}</td>
+                                    <td>{$vo.SceneMember}</td>
+                                    <td>{$vo.MemberName}</td>
+                                </tr>
+                            </foreach>
+                        </tbody>
+                    </table>
+                    <if condition="$pageCount eq 0">
+                        <div class="alert alert-warning" id="alert_message" style="display:block;">还没有相关数据！</div>
+                    <else/>
+                        <div class="alert alert-warning" id="alert_message" style="display:none;"></div>
+                    </if>
+                    <div id="kkpager"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部版权-->
+<include file="Common:footer_copyright"/>
+<!--js引用-->
+<!-- Mainly scripts -->
+<script src="__PUBLIC__/Admin/Admin/js/bootstrap.min.js?v=3.4.0"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- WdatePicker -->
+<script src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script src="__PUBLIC__/Admin/Admin/common/js/validaterReg.js"></script>
+<script src="__PUBLIC__/Admin/Admin/js/plugins/toastr/toastr.min.js"></script>
+<!-- artDialog -->
+<script src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.source.js"></script>
+<!-- 分页 -->
+<script src="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager.min.js"></script>
+<script>
+var binddefaultinfo={
+    postUrl:"{:U('tuiscenepro')}",
+    pno:1,
+    pageCount:"{$pageCount}",
+    totalPage:"{$totalPage}"
+};
+$(function() {
+    var sceneName = $("#sceneName");
+    var tuiName = $("#tuiName");
+    var alert_message=$("#alert_message");
+    var proName=$("#proName");
+    var data_tbody=$("#data-tbody");
+
+    toastr.options={"closeButton":true,"debug":false,"progressBar":false,"positionClass":"toast-top-center","onclick":null,"showDuration":"300","hideDuration":"1000","timeOut":"1500","extendedTimeOut":"0","showEasing":"swing","hideEasing":"linear","showMethod":"fadeIn","hideMethod":"fadeOut"};
+
+
+    var SetPager=function(){
+        kkpager.generPageHtml({
+            pno:binddefaultinfo.pno,
+            total:binddefaultinfo.totalPage,
+            totalRecords:binddefaultinfo.pageCount,
+            isShowTotalRecords:true,
+            isShowTotalPage:false,
+            mode:"click",
+            click:function(n){
+                NProgress.start();
+                binddefaultinfo.pno=n;
+                getDatapager();
+                this.selectPage(n);
+                NProgress.done();
+                return false
+            }
+        },true);
+        NProgress.done()
+    };
+
+    var getDatapager = function() {
+        data_tbody.html("");
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: binddefaultinfo.postUrl,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data: {
+                "scenename": $.trim(sceneName.val()),
+                "username": $.trim(tuiName.val()),
+                "pindex": binddefaultinfo.pno,
+                "proname":$.trim(proName.val()),
+                "r": (Math.random() * Math.random())
+            },
+            dataType: "json",
+            timeout: 20000,
+            success: function(data) {
+                if (data.code == "0") {
+                    alert_message.css("display", "none");
+                    binddefaultinfo.pageCount = data.pageCount;
+                    binddefaultinfo.totalPage = data.totalPage;
+                    var _html = "";
+                    var rowspan = "";
+                    $(data.dataOrder).each(function(index, vo) {
+                         data_tbody.append('<tr><td>' + vo.RowNumber + '</td><td>' + vo.ProName + '</td><td>' + vo.SalesCount + ' / ' + vo.Count + '</td><td>' + Number(vo.Money).toFixed(2) + '</td><td>' + vo.SceneName + '</td><td>' + vo.SceneMember + '</td><td>'+vo.MemberName+'</td></tr>');
+                    });
+                } else {
+                    alert_message.css("display", "block");
+                    alert_message.html("还没有相关数据！")
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, thrownError) {
+                if (textStatus == "timeout") {
+                    alert_message.css("display", "block");
+                    alert_message.html("请求超时!")
+                } else {
+                    alert_message.css("display", "block");
+                    alert_message.html("发生未知异常错误!")
+                }
+            }
+        });
+    };
+
+    $("#selectKC").bind("click", function() {
+        NProgress.start();
+        binddefaultinfo.pno = 1;
+        binddefaultinfo.pageCount = 0;
+        binddefaultinfo.totalPage = 1;
+        getDatapager();
+        SetPager();
+    });
+
+    SetPager();
+
+});
+$('#exportKC').click(function(){
+    art.dialog.tips('正在处理...',3);
+    var scenename=$('#sceneName').val();
+    var username=$('#tuiName').val();
+    var proname=$('#proName').val();
+    window.location.href="{:U('Users/tuiscenepro')}?type=import&scenename="+scenename+"&username="+username+"&proname="+proname;
+})
+</script>
+</body>
+</html>

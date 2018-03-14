@@ -1,0 +1,42 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+.partmember{
+  display: block;
+  width: 100%;
+  background-color: #ffffff;
+}
+.member{
+  display: block;
+  position: relative;
+  height: 51px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  padding: 5px 0px 0px 0px;
+}
+.member>img{
+  position: absolute;
+  top:5px;
+  left: 5px;
+  width: 40px;
+  border-radius: 50%;
+}
+.member>label{
+  display: block;
+  width: 100%;
+  padding: 0px 10px 0px 50px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #333333;
+}
+.mnum{
+  font-size: 14px!important;
+  color: #666666!important;
+}
+.mnum>span{
+  float: right;
+  font-size: 12px;
+  color: #999999;
+}

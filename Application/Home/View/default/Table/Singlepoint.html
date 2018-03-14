@@ -1,0 +1,236 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/Singlepoint.css?v=1.2" />
+<div class="allparts">
+
+  <div class="tophead">
+    <div class="shopinfor">
+      <img src="{$sinfo.Slogo}" class="shoplogo" />
+      <div class="">
+        <div class="shopname mui-ellipsis">{$sinfo.storename}</div>
+        <span class="shopphone" RPath="tel:{$sinfo.tel}">{$sinfo.tel}</span>
+      </div>
+    </div>
+    <div class="tabileinfo">
+      <span class="tabileid">桌号:<span>{$tid}号</span></span>
+      <img src="__PUBLIC__/newhome/img/erweima.png" alt="" class="showcode">
+      <span class="imgshowtext mui-ellipsis">点击二维码共同点餐</span>
+    </div>
+    <div class="text mui-ellipsis">
+      {$sinfo.city}&nbsp;{$sinfo.area}{$sinfo.addr}
+    </div>
+    <img src="{$sinfo.Slogo}" class="bgimg" />
+  </div>
+
+
+
+  <div class="propart">
+    <div class="lefttab">
+      <ul>
+        <foreach name="allpros" item='ap'>
+          <li class="mui-ellipsis-2"><span class="mui-ellipsis-2">{$ap.ClassName}</span></li>
+        </foreach>
+      </ul>
+    </div>
+    <div class="righttab">
+      <ul>
+        <foreach name='allpros' item='pro'>
+          <li>
+            <div class="class-title"><span>{$pro.ClassName}</span></div>
+            <foreach name='pro.pros' item='po'>
+              <if condition="$po['plcount'] gt 1 ">
+                <div class="spitem outproinfo" data-pid="{$po.ProId}" data-cid="{$pro.ClassId}">
+                  <img src="{$po.ProLogoImg}"/>
+                  <div>
+                    <p class="mui-ellipsis">{$po.ProName}</p>
+                    <div class="">
+                      <span>
+                        <if condition="$po['NumType'] eq '1' ">
+                          <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/份</span></span>
+                          <else/>
+                          <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/斤</span></span>
+                        </if>
+                        <if condition="$po['Price'] neq $po['OldPrice'] ">
+                          <span class="fubiao"><del><?php echo $po['OldPrice']?sprintf("%.2f",$po['OldPrice']):'0.00' ?></del></span>
+                          <else />
+                          <span class="fubiao"></span>
+                        </if>
+                      </span>
+                      <p class="showsale">已售{$po.SalesCount}</p>
+                    </div>
+                    <div class="shownumbtn"  data-pid="{$po.ProId}" data-pname="{$po.ProName}" data-pimg="{$po.ProLogoImg}" data-price="{$po.Price}" data-cid="{$pro.ClassId}" data-plcount="{$po.plcount}" data-numtype="{$po.NumType}">
+                      <span class="selSpec">选规格</span>
+                    </div>
+                  </div>
+                  <if condition="$po['Level'] neq ''">
+                    <span class="eatmore">越吃越便宜</span>
+                  </if>
+                </div>
+                <else/>
+                <div class="spitem outproinfo" data-pid="{$po.ProId}" data-cid="{$pro.ClassId}" data-plid="{$po['prolist'][0]['ProIdCard']}">
+                  <img src="{$po.ProLogoImg}"/>
+                  <div>
+                    <p class="mui-ellipsis">{$po.ProName}</p>
+                    <div class="">
+                      <span>
+                        <if condition="$po['NumType'] eq '1' ">
+                          <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/份</span></span>
+                          <else/>
+                          <span class="jiage"><?php echo $po['Price']?sprintf("%.2f",$po['Price']):'0.00' ?><span>/斤</span></span>
+                        </if>
+                        <if condition="$po['Price'] neq $po['OldPrice'] ">
+                          <span class="fubiao"><del><?php echo $po['OldPrice']?sprintf("%.2f",$po['OldPrice']):'0.00' ?></del></span>
+                          <else />
+                          <span class="fubiao"></span>
+                        </if>
+                      </span>
+                      <p class="showsale">已售{$po.SalesCount}</p>
+                    </div>
+                    <div class="shownumbtn"  data-pid="{$po.ProId}" data-pname="{$po.ProName}" data-pimg="{$po.ProLogoImg}" data-price="{$po.Price}" data-cid="{$pro.ClassId}" data-plcount="{$po.plcount}" data-plid="{$po['prolist'][0]['ProIdCard']}" data-plspec="{$po['prolist'][0]['ProSpec']}" data-numtype="{$po.NumType}">
+                      <if condition="$po['NumType'] eq '1' ">
+                        <span class="minusbtn ggg minus_icon"></span>
+                        <span class="showselnum">0</span>
+                        <span class="plusbtn ggg plus_icon"></span>
+                        <else/>
+                        <input type="text" name="proweight" class="proweight" value="0">
+                      </if>
+                    </div>
+                  </div>
+                  <if condition="$po['Level'] neq ''">
+                    <span class="eatmore">越吃越便宜</span>
+                  </if>
+                </div>
+              </if>
+            </foreach>
+          </li>
+        </foreach>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- 底部结算区域 -->
+  <div class="bottompart">
+    <div class="showgetpronum">
+      <span>已点</span>
+      <span>0</span>
+    </div>
+    <span class="gotopay">去结算</span>
+    <span class="showtotal mui-ellipsis"><span class="totalprice">0.00</span></span>
+    <div class="hasselprosmark">
+      <div class="hasselpros">
+        <div class="hasselprostop">
+          <span class="cleanselpros">清空菜单</span>
+          <span class="downcarts">收起</span>
+        </div>
+        <div class="selproslist">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 选择规格属性 -->
+  <div class="prospecmark">
+    <div class="prospecinfo">
+      <div class="prospec_top">
+        <span class="pspecname mui-ellipsis"></span>
+        <span class="closeselprospec mui-icon mui-icon-closeempty"></span>
+      </div>
+      <div class="prospec_list">
+        <span>规格:</span>
+        <div class="prospec_info_list">
+
+        </div>
+        <!-- <span class="pspec_info mui-ellipsis"><span>微辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>重辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>变态辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>超级辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>重辣</span></span>
+        <span class="pspec_info mui-ellipsis"><span>变态辣</span></span>
+        <span class="pspec_info mui-ellipsis pspec_infoactive"><span>超级辣</span></span> -->
+      </div>
+      <div class="prospec_bottom">
+        <span class="prospecprice">0</span>
+        <span class="prospechas"></span>
+        <div class="shownumbtn"  data-pid="" data-pname="" data-pimg="" data-price="" data-cid="" data-plid="" data-plspec="" data-numtype="">
+          <!-- <span class="minusbtn ggg minus_icon"></span>
+          <span class="showselnum">0</span>
+          <span class="plusbtn ggg plus_icon"></span> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 选择规格属性end -->
+
+  <!-- 显示二维码 -->
+  <div class="codemark">
+    <div class="showcodeinfo">
+      <span>微信扫一扫</span>
+      <img src="" alt="">
+      <span>扫码共同点餐</span>
+    </div>
+  </div>
+
+  <!-- 显示商品详情 -->
+  <div class="proinfo_mark">
+    <div class="pro_info_part">
+      <div class="pro_info_top">
+        <span class="pro_info_mas mui-ellipsis">
+          <span class="pro_name mui-ellipsis"></span>
+          <span class="pro_sale mui-ellipsis"></span>
+        </span>
+        <span class="closeproinfo mui-icon mui-icon-closeempty"></span>
+      </div>
+      <div class="pro_img_list">
+
+      </div>
+
+      <div class="pro_info_bottom">
+        <div class="pro_info_list">
+          <span>规格:</span>
+          <div class="pro_spec_info_list">
+            <!-- <span class="p_spec_info mui-ellipsis" data-pid="pro5483288892" data-plid="pro5483288892_01" data-plspec="微辣">
+              <span class="mui-ellipsis">微辣</span>
+            </span>
+            <span class="p_spec_info mui-ellipsis" data-pid="pro5483288892" data-plid="pro5483288892_02" data-plspec="中辣">
+              <span class="mui-ellipsis">中辣</span>
+            </span>
+            <span class="p_spec_info mui-ellipsis" data-pid="pro5483288892" data-plid="pro5483288892_02" data-plspec="中辣">
+              <span class="mui-ellipsis">中辣</span>
+            </span>
+            <span class="p_spec_info mui-ellipsis" data-pid="pro5483288892" data-plid="pro5483288892_02" data-plspec="中辣">
+              <span class="mui-ellipsis">中辣</span>
+            </span>
+            <span class="p_spec_info mui-ellipsis" data-pid="pro5483288892" data-plid="pro5483288892_02" data-plspec="中辣">
+              <span class="mui-ellipsis">中辣</span>
+            </span>
+            <span class="p_spec_info mui-ellipsis" data-pid="pro5483288892" data-plid="pro5483288892_02" data-plspec="中辣">
+              <span class="mui-ellipsis">中辣</span>
+            </span> -->
+          </div>
+        </div>
+        <div class="pro_spec_bottom">
+          <span class="prospec_price">0</span>
+          <span class="prospe_chas"></span>
+          <div class="shownumbtn" data-pid="" data-pname="" data-pimg="" data-price="" data-cid="" data-plid="" data-plspec="" data-numtype="">
+            <!-- <span class="minusbtn ggg minus_icon" style="display: none;"></span>
+            <span class="showselnum" style="display: none;">0</span>
+            <span class="plusbtn ggg plus_icon" style="display: block;"></span> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- 显示商品详情end -->
+
+</div>
+<script type="text/javascript">
+var cartslist = '{$cartinfo}';
+var updatecart_url = "{:U('Public/updatecart')}";
+var order_url = "{:U('Orders/submitorder')}";
+var allproinfo ='{$allproinfo}';
+var oid = '{$oid}';
+</script>
+
+<script src="__PUBLIC__/newhome/js/Singlepoint.js?v=1.2" type="text/javascript" charset="utf-8"></script>

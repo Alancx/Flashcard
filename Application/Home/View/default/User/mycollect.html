@@ -1,0 +1,28 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/newhome/css/mycollect.css?v=1.1" />
+<div class="prolist">
+  <p style="text-align: center; margin-top: 10px; font-size: 12px;">我收藏的美食，左滑可以取消收藏。</p>
+  <ul class="mui-table-view total" >
+    <foreach name="proinfo" item="vo" >
+      <li class=" mui-media  mui-table-view-cell ">
+        <a href="javascript:;" class="mui-slider-handle" data-id="{$vo.ProId}">
+          <img class="mui-media-object mui-pull-left" src="{$vo['ProLogoImg']}">
+          <div class="mui-media-body">
+            <div class="mui-ellipsis">{$vo['ProName']}</div>
+            <p>{$vo['storename']}</p>
+            <span class="jiage">{$vo['Price']}</span>
+          </div>
+        </a>
+        <div class="mui-slider-right mui-disabled delebtn" data-oo="{$vo.ID}">
+          <a class="mui-btn cancle">
+            <span class="setdelete" data-mcid="{$vo.ID}">取消收藏</span>
+          </a>
+        </div>
+      </li>
+    </foreach>
+  </ul>
+</div>
+<script type="text/javascript">
+  var setshopcollect_url = "{:U('User/delusercollect')}";
+</script>
+<script type="text/javascript" src="__PUBLIC__/newhome/js/mycollect.js?v=1.1"></script>

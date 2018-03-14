@@ -1,0 +1,2 @@
+操作定位:Products/delAttr::::仓库结果:UPDATE [tb_wh62596121] SET [IsDelete]=1 WHERE ( ProIdCard='pro9678637483_1054_1056_1058' )字表:1UPDATE [RS_ProductList] SET [IsDelete]=1 WHERE ( ProIdCard='pro9678637483_1054_1056_1058' )::::::操作日期:::::::2016-07-28 15:47:15
+操作定位:Products/delAttr::::仓库结果:UPDATE [tb_wh62596121] SET [IsDelete]=1 WHERE ( ProIdCard='pro9678637483_1054_1056_1058' )字表:1UPDATE [RS_ProductList] SET [IsDelete]=1 WHERE ( ProIdCard='pro9678637483_1054_1056_1058' )::::::操作日期:::::::2016-07-28 15:49:57

@@ -1,0 +1,157 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/settable.css?v=1.0">
+<div class="tableinfo">
+  <div class="toptitle">
+    <span>桌号设置</span>
+  </div>
+  <div class="topset">
+    <span>桌号</span>
+    <input type="number" name="inputtableid" class="inputtableid" value="" placeholder="输入桌号">
+    <span class="savetableinfo">保存</span>
+  </div>
+  <div class="tablelist">
+    <ul>
+      <foreach name="tinfo" item="tl">
+      <li class="table_info" data-id="{$tl['ID']}" data-tname="{$tl['Tname']}">
+        <span class="tablename">{$tl['Tname']}号<span>点击查看二维码</span></span>
+        <span class="edit">编辑</span>
+        <span class="delete">删除</span>
+      </li>
+    </foreach>
+    </ul>
+  </div>
+  <!-- 二维码页面 -->
+  <div class="showcodemark">
+    <img class="codeinfo" src="" alt="">
+    <img class="closecodeinfo" src="__PUBLIC__/Sellermobile/icon/guanbi.png" alt="">
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    // 关闭二维码信息
+    $('.closecodeinfo').click(function(){
+      $('.showcodemark').css('display','none');
+      $('.codeinfo').attr('src','');
+    })
+    // 设置编辑和删除按钮事件
+    setbtninfo();
+    // 点击保存按钮
+    $('.savetableinfo').click(function(){
+      var tname = $('.inputtableid').val();
+      var tid = 'add';
+      if ($.trim(tname)!='') {
+        if ($('.seltableactive').length>0) {
+          tid =$('.seltableactive').attr('data-id');
+        }
+        var senddata={
+          'tid':tid,
+          'tname':tname,
+          'type':'1',
+        };
+        tips('waiting','桌号保存中···');
+        $.ajax({
+          url:"{:U('User/settable')}",
+          type:"post",
+          data:senddata,
+          dataType:"json",
+          success:function(msg){
+            if (msg.status=='true'){
+              var tinfo = msg.datainfo;
+              var htmls='';
+              $.each(tinfo,function(index,item){
+                htmls+='<li class="table_info" data-id="'+item['ID']+'" data-tname="'+item['Tname']+'">'+
+                  '<span class="tablename">'+item['Tname']+'号<span>点击查看二维码</span></span>'+
+                  '<span class="edit">编辑</span>'+
+                  '<span class="delete">删除</span>'+
+                '</li>';
+              })
+              $('.tablelist>ul').html(htmls);
+              setbtninfo();
+              $('.inputtableid').val('');
+              tips('notice', '桌号保存成功!', 1500);
+            } else{
+              tips('notice', '桌号保存失败!', 1500, 'weui_icon_notice');
+            }
+          },
+          complete: function (e) {
+            hidetips('waiting');
+          },
+          error: function (data,status,e)//服务器响应失败处理函数
+          {
+            //////
+          }
+        })
+      } else {
+        tips('notice', '桌号不能为空!', 1500, 'weui_icon_notice');
+      }
+    })
+  });
+  function setbtninfo(){
+    // 查看二维码信息
+    $('.tablename').click(function(){
+      var id =$(this).parent('.table_info').attr('data-tname');
+      $(".codeinfo").attr('src',"{:U('Public/getQr')}?id="+id+"");
+      $('.showcodemark').css('display','block');
+    })
+
+
+    $('.edit').click(function(){
+      if (!$(this).parents('.table_info').hasClass('seltableactive')) {
+        $('.seltableactive').find('.edit').text('编辑');
+        $('.seltableactive').removeClass('seltableactive');
+        $(this).parents('.table_info').addClass('seltableactive');
+        $(this).parents('.table_info').find('.edit').text('取消');
+        var tnanme = $(this).parents('.table_info').attr('data-tname');
+        $('.inputtableid').val(tnanme);
+      } else {
+        $('.seltableactive').find('.edit').text('编辑');
+        $('.seltableactive').removeClass('seltableactive');
+        $('.inputtableid').val('');
+      }
+    });
+    // 删除
+    $('.delete').click(function(){
+      var tid =$(this).parents('.table_info').attr('data-id');
+      var senddata={
+        'tid':tid,
+        'type':'2',
+      };
+      // console.log(senddata);
+      tips('waiting','桌号删除中···');
+      $.ajax({
+        url:"{:U('User/settable')}",
+        type:"post",
+        data:senddata,
+        dataType:"json",
+        success:function(msg){
+          if (msg.status=='true'){
+            var tinfo = msg.datainfo;
+            var htmls='';
+            $.each(tinfo,function(index,item){
+              htmls+='<li class="table_info" data-id="'+item['ID']+'" data-tname="'+item['Tname']+'">'+
+                '<span class="tablename">'+item['Tname']+'号<span>点击查看二维码</span></span>'+
+                '<span class="edit">编辑</span>'+
+                '<span class="delete">删除</span>'+
+              '</li>';
+            })
+            $('.tablelist>ul').html(htmls);
+            setbtninfo();
+            $('.inputtableid').val('');
+            tips('notice', '桌号删除成功!', 1500);
+          } else{
+            tips('notice', '桌号删除失败!', 1500, 'weui_icon_notice');
+          }
+        },
+        complete: function (e) {
+          hidetips('waiting');
+        },
+        error: function (data,status,e)//服务器响应失败处理函数
+        {
+          //////
+        }
+      })
+    })
+  }
+</script>

@@ -1,0 +1,211 @@
+<layout name="Public/PageModel"/>
+<style type="text/css">
+	td,th{text-align: center;font-size: .08em}
+	.active>a{font-weight: bold;color:red!important;}
+	a{color:#999;}
+	table{
+		margin-top: 0px;
+	}
+</style>
+<ul class="nav nav-tabs">
+    <li class="active" style="width:50%;text-align:center;"><a data-toggle="tab" href="#tab-8"> 配送查询</a>
+    </li>
+    <li class="" style="width:50%;text-align:center;"><a data-toggle="tab" href="#tab-9"> 审核处理</a>
+    </li>
+</ul>
+<div class="tab-content ">
+    <div id="tab-8" class="tab-pane active">
+			<ul class="nav nav-tabs" style="border-top:1px solid #ccc;margin-top:0px;border-bottom:0px solid #ccc;">
+			    <li class="active" style="width:50%;text-align:center;"><a style="padding:5px 5px;border-radius:0px;border:0px solid #ccc;" data-toggle="tab" href="#tab-18"> 配送中</a>
+			    </li>
+			    <li class="" style="width:50%;text-align:center;"><a style="padding:5px 5px;border-radius:0px;border:0px solid #ccc;" data-toggle="tab" href="#tab-19"> 已完成</a>
+			    </li>
+			</ul>
+			<div class="tab-content ">
+			    <div id="tab-18" class="tab-pane active">
+			            <table class="table table-bordered table-condensed">
+			            	<thead>
+			            		<tr>
+				            		<td>单号</td>
+				            		<td>配送信息</td>
+				            		<td>接单时间</td>
+			            		</tr>
+			            	</thead>
+			            	<tbody id="tbody-18">
+			            	<foreach name='psing' item='o'>
+			            		<tr>
+			            			<td>{$o.OrderId}</td>
+			            			<td>{$o.Psinfo}</td>
+			            			<td>{$o.GetDate|substr="5"}</td>
+			            		</tr>
+			            	</foreach>
+			            	</tbody>
+			            	<tfoot>
+			            		<tr>
+			            			<td colspan="3" data-tbody='tbody-18' data-type='getpsing' class="getmore" data-page='{$pagesize}'>加载更多</td>
+			            		</tr>
+			            	</tfoot>
+			            </table>
+			    </div>
+			    <div id="tab-19" class="tab-pane">
+			            <table class="table table-bordered table-condensed">
+			            	<thead>
+			            		<tr>
+				            		<td>单号</td>
+				            		<td>配送信息</td>
+				            		<td>配送时间</td>
+			            		</tr>
+			            	</thead>
+			            	<tbody id="tbody-19">
+			            	<foreach name='psend' item='ps'>
+			            		<tr>
+			            			<td>{$ps.OrderId}</td>
+			            			<td>{$ps.Psinfo}</td>
+			            			<td><span style='color:orange'>{$ps.GetDate|substr="5"}</span><br><span style='color:green'>{$ps.OverDate|substr="5"}</span></td>
+			            		</tr>
+			            	</foreach>
+			            	</tbody>
+			            	<tfoot>
+			            		<tr>
+			            			<td colspan="3" data-tbody='tbody-19' data-type='getpsend' class="getmore" data-page='{$pagesize}'>加载更多</td>
+			            		</tr>
+			            	</tfoot>
+			            </table>
+			    </div>
+			</div>
+    </div>
+    <div id="tab-9" class="tab-pane">
+			<ul class="nav nav-tabs" style="border-top:1px solid #ccc;margin-top:0px;border-bottom:0px solid #ccc;">
+			    <li class="active" style="width:50%;text-align:center;"><a style="padding:5px 5px;border-radius:0px;border:0px solid #ccc;" data-toggle="tab" href="#tab-28"> 待审核</a>
+			    </li>
+			    <li class="" style="width:50%;text-align:center;"><a style="padding:5px 5px;border-radius:0px;border:0px solid #ccc;" data-toggle="tab" href="#tab-29"> 已审核</a>
+			    </li>
+			</ul>
+			<div class="tab-content ">
+			    <div id="tab-28" class="tab-pane active">
+			            <table class="table table-bordered table-condensed">
+			            	<tbody id="tbody-28">
+			            	<foreach name='psping' item='op'>
+			            		<tr>
+			            			<td><img src="{$op.HeadImg}" alt="" style="width:30px;height:30px;"><br>{$op.TrueName} <br> {$op.Phone}<br>{$op.AskDate|substr='5'} </td>
+			            			<td><img src="{$op.IdImg}" class="idimg" alt="" style="max-height:50px;max-width:80px;"> <br>{$op.IdCard}</td>
+			            			<td><button class="btn btn-xs btn-success gook" data-id='{$op.ID}'>同意申请</button><br><br><button class="btn btn-xs btn-default ref" data-id='{$op.ID}'>拒绝申请</button></td>
+			            		</tr>
+			            	</foreach>
+			            	</tbody>
+			            	<tfoot>
+			            		<tr>
+			            			<td colspan="3" data-tbody='tbody-28' data-type='getpsping' class="getmore" data-page='{$pagesize}'>加载更多</td>
+			            		</tr>
+			            	</tfoot>
+			            </table>
+			    </div>
+			    <div id="tab-29" class="tab-pane">
+			            <table class="table table-bordered table-condensed">
+			            	<tbody id="tbody-29">
+			            	<foreach name='pspend' item='os'>
+			            		<tr>
+			            			<td><img src="{$os.HeadImg}" alt="" style="width:30px;height:30px;"> <br>{$os.TrueName} <br> {$os.Phone}<br>{$os.AskDate|substr='5'}</td>
+			            			<td><img src="{$os.IdImg}" class="idimg" alt="" style="max-height:50px;max-width:80px;"> <br>{$os.IdCard}</td>
+			            			<td>已通过</td>
+			            		</tr>
+			            	</foreach>
+			            	</tbody>
+			            	<tfoot>
+			            		<tr>
+			            			<td colspan="3" data-tbody='tbody-29' data-type='getpspend' class="getmore" data-page='{$pagesize}'>加载更多</td>
+			            		</tr>
+			            	</tfoot>
+			            </table>
+			    </div>
+			</div>
+    </div>
+</div>
+<div style="text-align:center;padding-top:10%;width:100%;height:100%;position:absolute;left:0;top:0;background:rgba(0,0,0,.6);display:none" id="imgbox">
+	<img src="" style="max-width:100%;max-height:100%" alt="" class="showimg">
+</div>
+<script type="text/javascript">
+var pagesize={$pagesize};
+$(document).ready(function(){
+	$(document).on('click','.idimg',function(){
+		var src=$(this).attr('src');
+		$('.showimg').attr('src',src);
+		$('#imgbox').show();
+	})
+	$('#imgbox').click(function(){
+		$(this).hide();
+	})
+	$(document).on('click','.gook',function(){
+		var _this=$(this);
+		var id=_this.attr('data-id');
+		$.ajax({
+			url:"{:U('User/AboutPs')}",
+			type:"post",
+			data:"type=gook&id="+id,
+			dataType:"json",
+			success:function(msg){
+				if (msg.status) {
+					_this.parent().html('已审核');
+				}else{
+					alert('处理失败');
+				}
+			}
+		})
+	})
+	$(document).on('click','.ref',function(){
+		var _this=$(this);
+		var id=_this.attr('data-id');
+		$.ajax({
+			url:"{:U('User/AboutPs')}",
+			type:"post",
+			data:"type=ref&id="+id,
+			dataType:"json",
+			success:function(msg){
+				if (msg.status) {
+					_this.parent().html('已拒绝');
+				}else{
+					alert('处理失败');
+				}
+			}
+		})
+	})
+	$('.getmore').click(function(){
+		var _this=$(this);
+		var tid=$(this).attr('data-tbody');
+		var page=$(this).attr('data-page');
+		var type=$(this).attr('data-type');
+		console.log(tid,page);
+		$.ajax({
+			url:"{:U('User/AboutPs')}",
+			type:"post",
+			data:"type="+type+"&page="+page,
+			dataType:"json",
+			success:function(msg){
+				if (msg.status=='success') {
+					var _html='';
+					$.each(msg.data,function(index,item){
+						if (type=='getpsing') {
+							_html+="<tr> <td>"+item.OrderId+"</td> <td>"+item.Psinfo+"</td> <td>"+item.GetDate.substr(5)+"</td> </tr>";
+						}else if (type=='getpsping') {
+							_html+='<tr> <td><img src="'+item.HeadImg+'" alt="" style="width:30px;height:30px;"> <br>'+item.TrueName+' <br> '+item.Phone+'</td> <br>'+item.AskDate.substr(5)+' <td><img src="'+item.IdImg+'" class="idimg" alt="" style="max-height:50px;max-width:80px;"> <br>'+item.IdCard+'</td> <td><button class="btn btn-xs btn-success gook" data-id="'+item.ID+'">同意申请</button><br><br><button class="btn btn-xs btn-default ref" data-id="'+item.ID+'">拒绝申请</button></td> </tr>';
+						}else if (type=='getpspend') {
+							_html+='<tr> <td><img src="'+item.HeadImg+'" alt="" style="width:30px;height:30px;"> <br>'+item.TrueName+' <br> '+item.Phone+'<br>'+item.AskDate.substr(5)+'</td> <td><img src="'+item.IdImg+'" class="idimg" alt="" style="max-height:50px;max-width:80px;"> <br>'+item.IdCard+'</td> <td>已通过</td> </tr>';
+						}else if (type=='getpsend'){
+							_html+="<tr> <td>"+item.OrderId+"</td> <td>"+item.Psinfo+"</td> <td><span style='color:orange'>"+item.GetDate.substr(5)+"</span><br><span style='color:green'>"+item.OverDate.substr(5)+"</span></td> </tr>";
+
+						}
+					})
+					$('#'+tid).append(_html);
+					if (msg.info=='ok') {
+						_this.html('加载更多').attr('data-page',parseInt(pagesize)+parseInt(page));
+					}else{
+						_this.html('没有更多了').attr('data-page',parseInt(pagesize)+parseInt(page)).removeClass().addClass('disabled');
+					}
+				}else{
+					_this.html(msg.info).removeClass().addClass('disabled');
+				}
+			}
+		})
+	})
+})
+</script>

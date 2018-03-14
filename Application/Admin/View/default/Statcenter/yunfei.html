@@ -1,0 +1,185 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager.min.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Admin/Admin/js/plugins/kkpager/kkpager_blue.css">
+<style type="text/css">
+	.emp{
+		border:1px solid green;
+		padding: 2px 2px;
+		margin:0px 2px;
+		border-radius: 2px;
+		background: #ccc;
+	}
+</style>
+
+<div class="row  wrapper  white-bg" style="margin:0 1%;">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>运费统计</h5>
+			</div>
+			<div class="col-lg-12 col-md-12" style="border-bottom:1px solid #ccc;padding-bottom:10px;margin-bottom:20px;">
+				<form action="{:U('Statcenter/search')}" class="form-inline" method="post" id="search">
+					<div class="form-group">
+						<input type="text" name="strtime" id="stime" class="form-control" placeholder="请选择起始时间(发货)" onfocus="WdatePicker({maxDate:'%y-%M-{%d-1}',dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="<?php echo date('Y-m-01 00:00:00',time()); ?>">
+					</div>
+					<div class="form-group">
+						<input type="text" name="endtime" id="etime" class="form-control" placeholder="请选择查询结束时间(发货)" onfocus="WdatePicker({maxDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd HH:mm:ss'})" value="<?php echo date('Y-m-d H:i:s',time()); ?>">
+					</div>
+					<div class="form-group">
+						<select name="logistics" id="logistics" class="form-control">
+							<option value="">请选择快递</option>
+							<foreach name="logistics" item="logi">
+							<option value="{$logi.Number}">{$logi.Name}</option>
+							</foreach>
+						</select>
+					</div>
+					<button class="btn btn-primary btn-outline btn-md" type="submit"><span class="glyphicon glyphicon-search"></span> 搜 索</button>&emsp; <button class="btn btn-default btn-outline btn-md" id="import" type="button"><span class="glyphicon glyphicon-export"></span>导出</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>默认显示当月的运费信息</small>
+				</form>
+
+			</div>
+
+			<div class="col-sm-12">
+					<table class="table table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>订单号</th>
+								<th>发货时间</th>
+								<th>快递公司</th>
+								<th>快递单号</th>
+								<th>运费</th>
+							</tr>
+							<tr>
+								<th colspan="5">总运费：{$all.0.zs}</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+						<if condition="$statu eq 'ok'">
+						<h3>您查询的信息不存在</h3>
+						</if>
+							<foreach name="logs" item="member">
+								<tr>
+									<td>{$member.OrderId}</td>
+									<td>{$member.ShipDate}</td>
+									<td>{$member.Logistics}</td>
+									<td>{$member.LogisticsId}</td>
+									<td>{$member.Freight}</td>
+								</tr>
+							</foreach>
+						</tbody>
+					</table>
+				<div id="kkpager"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		$("#search").submit(function(){
+			var stime=$("#stime").val();
+			var etime=$("#etime").val();
+			var logistics=$("#logistics").val();
+			if (!stime && !etime) {
+				if (!logistics) {
+					art.dialog.alert('请输入查询信息');
+					return false;
+				}else{
+					return true;
+				}
+			};
+			if (!stime) {
+				art.dialog.alert('请输入查询起始时间');
+				return false;
+			};
+			if (!etime) {
+				art.dialog.alert('请输入查询结束时间');
+				return false;
+			};
+			if(stime>etime){
+				art.dialog.alert('时间范围错误');
+				return false;
+			}else{
+                art.dialog({content:'正在查询...',lock:true});
+				return true;
+			}
+		})
+
+		$('#import').click(function(){
+			var stime=$("#stime").val();
+			var etime=$("#etime").val();
+			var logistics=$("#logistics").val();
+			if (!stime && !etime) {
+				if (!logistics) {
+					art.dialog.alert('请输入查询信息');
+					return false;
+				}else{
+					art.dialog.tips('正在处理...',3);
+					window.location.href="{:U('Statcenter/yunfeiOut')}?stime="+stime+"&etime="+etime+"&logistics="+logistics;
+					return true;
+				}
+			};
+			if (!stime) {
+				art.dialog.alert('请输入查询起始时间');
+				return false;
+			};
+			if (!etime) {
+				art.dialog.alert('请输入查询结束时间');
+				return false;
+			};
+			if(stime>etime){
+				art.dialog.alert('时间范围错误');
+				return false;
+			}else{
+				art.dialog.tips('正在处理...',3);
+				window.location.href="{:U('Statcenter/yunfeiOut')}?stime="+stime+"&etime="+etime+"&logistics="+logistics;
+				return true;
+			}
+		})
+
+
+				var data={$members};
+				var pageCount={$pageCount};
+			kkpager.generPageHtml({
+				pno : '1',
+				mode : 'click', //设置为click模式
+				//总页码
+				total : '{$page}',
+				//总数据条数
+				totalRecords : '{$count}',
+				//点击页码、页码输入框跳转、以及首页、下一页等按钮都会调用click
+				//适用于不刷新页面，比如ajax
+				click : function(n){
+					$("#tbody").html('');
+					var str='';
+					var j=n-1;
+					var i=j*pageCount;
+					var k=i+pageCount
+					for (i; i < k; i++) {
+						// alert(data[i].MemberId);
+						if (data[i]) {
+							// alert(data[i]);
+							str+="<tr><td>"+data[i].OrderId+"</td><td>"+data[i].ShipDate+"</td><td>"+data[i].Logistics+"</td><td>"+data[i].LogisticsId+"</td><td>"+data[i].TrueFreight+"</td></tr>";
+						};
+					};
+					//这里可以做自已的处理
+					//...
+					//处理完后可以手动条用selectPage进行页码选中切换
+					// alert(n);
+					$("#tbody").html(str);
+					this.selectPage(n);
+				},
+				//getHref是在click模式下链接算法，一般不需要配置，默认代码如下
+				getHref : function(n){
+					return "#";
+				}
+			})
+
+	})
+
+</script>
+
+<include file="Common:footer" />

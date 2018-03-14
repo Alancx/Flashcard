@@ -1,0 +1,69 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/css/xuanzetejia.css">
+<script src="__PUBLIC__/Sellermobile/js/base.js"></script>
+	<div class="content">
+	<foreach name="rows" item="list">
+		<div class="theme" data-id="{$list['ProId']}">
+			<div class="shang">
+				<div class="img" ><img src="{$list['ProLogoImg']}" /></div>
+				<div class="price">
+					<span>{$list['ProName']}</span>
+					<p>￥{$list['Price']}</p>
+				</div>
+				<div class="ppp" ></div>
+			</div>
+			<div class="xia">
+				<label >特价￥</label>
+				<input type="text" id="price" style="color:rgb(172,172,172);"/>
+			</div>
+		</div>
+	</foreach>
+	</div>
+	<div style="height:60px;"></div>
+	<div class="bottom">
+		<div class="right" data-type="translate" style="width:100%;">确定</div>
+	</div>
+<script>
+	$('.ppp').click(function(){
+
+		$(this).toggleClass('tap');
+	})
+	$('.right').click(function(){
+		var senddata={};
+		senddata['plist']={};
+		// senddata['price']={};
+		var selnum = 0;
+		$.each($('.theme'),function(index,item){
+			if($(item).find('#price').val().length>0){
+				var id=$(item).attr('data-id');
+				var price=$(item).find('#price').val();
+				senddata['plist'][id]=price;
+				// senddata[''][price]=price;
+				selnum = selnum + 1;
+			}
+		})
+		if (selnum == '') {
+			tips('notice', '请选择商品!', 1500, 'weui_icon_notice');
+			return false;
+		}
+		senddata['type']=$(this).attr('data-type');
+		tips('waiting','正在保存中···');
+		$.ajax({
+			url:"{:U('Activity/doadd')}",
+			type:"post",
+			data:senddata,
+			dataType:"json",
+			complete: function(e){
+				hidetips('waiting');
+			},
+			success:function(msg){
+				if(msg.status=='true'){
+					tips('notice', msg.info+'!', 1500, 'weui_icon_toast');
+					setTimeout(window.location.href=document.referrer,1500);
+				}else{
+					tips('notice', msg.info+'!', 1500, 'weui_icon_notice');
+				}
+			}
+		})
+	})
+</script>

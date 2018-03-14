@@ -1,0 +1,203 @@
+<layout name="Public/PageModel"/>
+<link rel="stylesheet" href="__PUBLIC__/theme2/css/userinfo.css?v=1.6">
+<div class="usertitle">
+    <a href="{:U('User/set')}">
+        <div class="userarrow"></div>
+    </a>
+    <if condition="$userInfo['HeadImgUrl'] eq ''">
+          <img class="usertx" src="__PUBLIC__/theme2/Images/touxiang.png">
+      <else/>
+        <img class="usertx" src="{:C('RESOURCE_URL')}{$userInfo['HeadImgUrl']}">
+    </if>
+    <label>{$userInfo['MemberName']}<br><span>帐号:{$userInfo['MemberId']}</span></label>
+    <img class="userewm" src="__PUBLIC__/theme2/Images/erweima.png">
+</div>
+<div class="useraccount">
+    <a href="{:U('User/useraccount')}">
+        <div class="usercz">
+            <!-- <label class="userczye">会员余额:{$userInfo['Money']}</label> -->
+            <label class="userczye">账户中心</label>
+            <label class="userczzx">查看详情</label>
+        </div>
+    </a>
+    <table class="table">
+        <tbody>
+          <tr>
+            <td class="tableleft"><a href="{:U('User/useraccount')}"><label class="tablehyye">会员余额<br><span>{$userInfo['Money']}</span></label></a></td>
+            <td><a href="{:U('User/uservourecord')}"><label class="tablejlye">奖励余额<br><span>{$userInfo['VirtualMoney']}</span></label></a></td>
+          </tr>
+        <tr>
+          <td class="tableleft"><a href="{:U('User/usermyprofit')}"><label class="tablesy">收益<br><span>{$userInfo['CutTotalMoney']}</span></label></a></td>
+          <td><a href="{:U('User/userbill')}"><label class="tablezd">收益账单<br><span>查看详情</span></label></a></td>
+            <!-- <td class="tableleft"><label class="tablejlye">奖励余额<br><span>{$userInfo['VirtualMoney']}</span></label></td>
+            <td><label class="tablesy">收益<br><span>{$userInfo['CutTotalMoney']}</span></label></td> -->
+        </tr>
+        <tr>
+          <td class="tableleft"><a href="{:U('User/usermember')}"><label class="tablehy">会员<br><span>{$userInfo['Fans']}</span></label></a></td>
+            <td><a href="{:U('User/userintegral')}"><label class="tablejf">积分<br><span>{$userInfo['Integral']}</span></label></a></td>
+            <!-- <td class="tableleft"><label class="tablejf">积分<br><span>{$userInfo['Integral']}</span></label></td>
+            <td><a href="{:U('User/userbill')}"><label class="tablezd">账单<br><span>查看详情</span></label></a></td> -->
+        </tr>
+        <tr>
+          <td class="tableleft"><a href="{:U('User/mymoney')}"><label class="tabletx">提现<br><span>{$userInfo['CutMoney']}</span></label></a></td>
+          <td><a href="{:U('User/usergetcashrec')}"><label class="tabletxjl">提现记录<br><span>查看详情</span></label></a></td>
+        </tr>
+        <tr>
+            <td class="tableleft"><a href="{:U('User/mycoupons')}"><label class="tablekq">卡券<br><span>{$cardsum}</span></label></a></td>
+            <td><a href="{:U('User/usercollection')}"><label
+                    class="tablesc">收藏<br><span>{$userInfo['ProCollects']}</span></label></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="useroders">
+    <div class="usercz">
+        <label class="userczye myalloders">我的订单</label>
+        <a href="{:U('User/usermyoders',array('type'=>'1'))}"><label class="userqbdd">查看全部订单</label></a>
+    </div>
+    <div class="useroderlx">
+        <div RPath="{:U('User/usermyoders',array('type'=>'2'))}">
+            <div class="userdfk"></div>
+            <label>待付款</label>
+            <if condition="$userInfo['ToPaynum'] gt 0">
+                <label class="usernum">{$userInfo['ToPaynum']}</label>
+            </if>
+        </div>
+        <div RPath="{:U('User/usermyoders',array('type'=>'3'))}">
+            <div class="userdfh"></div>
+            <label>待发货</label>
+            <if condition="$userInfo['ToSendnum'] gt 0">
+                <label class="usernum">{$userInfo['ToSendnum']}</label>
+            </if>
+        </div>
+        <div RPath="{:U('User/usermyoders',array('type'=>'4'))}">
+            <div class="userdsh"></div>
+            <label>待收货</label>
+            <if condition="$userInfo['ToEndnum'] gt 0">
+                <label class="usernum">{$userInfo['ToEndnum']}</label>
+            </if>
+        </div>
+        <div RPath="{:U('User/usermyoders',array('type'=>'5'))}">
+            <div class="userdpj"></div>
+            <label>待评价</label>
+            <if condition="$userInfo['ToEvaluationnum'] gt 0">
+                <label class="usernum">{$userInfo['ToEvaluationnum']}</label>
+            </if>
+        </div>
+    </div>
+</div>
+<?php if (($mshop=='')||($mshop=='0')||($mshop=='2')): ?>
+  <div class="usershop" RPath="{:U('User/userapplys')}">
+    <label>我要开店</label>
+  </div>
+<?php else: ?>
+  <div class="usershop" RPath="{:U('User/usershops')}">
+    <label>我的店铺</label>
+  </div>
+<?php endif; ?>
+<div class="userqd">
+    <label>签到送积分<span class="userzts">(总签到"{$userInfo['TotalSign']}"天)</span><br><span class="userlxts">你已连续签到{$userInfo['ContinuedSign']}天</span></label>
+    <if condition="$userInfo['SignNewtime'] eq date('Y-m-d',time())">
+        <label class="userqsan userhasqd">已签到</label>
+        <else/>
+        <label class="userqsan" onclick="EverydaySign(this)">签 到</label>
+    </if>
+</div>
+<div class="userexit">
+    <label class="userexitan">退出当前账户</label>
+</div>
+<div class="cusercover">
+  <div class="cuserlist">
+    <label class="seltitle">请选择客服</label>
+    <div class="selkf">
+      <foreach name='service' item='kf'>
+          <label class="selkfli" onclick="selectkf(this)" data-userid="{$kf.id}">{$kf.userName}</label>
+      </foreach>
+      <!-- <label class="selkfli" onclick="selectkf(this)">客服一</label>
+      <label class="selkfli" onclick="selectkf(this)">客服二</label>
+      <label class="selkfli" onclick="selectkf(this)">客服三</label>
+      <label class="selkfli" onclick="selectkf(this)">客服四</label> -->
+    </div>
+    <div class="selbtn">
+        <div>
+            <label id="cancelkf">取消</label>
+        </div>
+        <div>
+            <label id="surekf">确定</label>
+        </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    function EverydaySign(obj) {
+        tips('waiting', '正在签到...', 15000, 'weui_icon_notice');
+        $.ajax({
+            url: "{:U('User/MemberSign')}",
+            type: "post",
+            dataType: "json",
+            data: {"type": "sign"},
+            complete: function (e) {
+                hidetips('waiting');
+            },
+            success: function (data) {
+                if (data.status == 0) {
+                    tips('notice', '签到成功!', 1500, 'weui_icon_toast');
+                    $(obj).parent('.userqd').html('<label>签到送积分<span class="userzts">(总签到"' + data.data.totalsign + '"天)</span><br>'
+                            + '<span class="userlxts">您已连续签到'
+                            + data.data.continuedsign + '天</span> </label>'
+                            + '<label class="userqsan userhasqd">已签到</label>');
+                    $('.tablejf>span').html(data.data.intergral);
+                }
+                else if (data.status == 1) {
+                    tips('notice', '商家没有开通签到功能!', 1500, 'weui_icon_notice');
+                }
+                else if (data.status == 2) {
+                    tips('notice', '今天已签到!', 1500, 'weui_icon_notice');
+                }
+                else {
+                    tips('notice', '签到失败!', 1500, 'weui_icon_notice');
+                }
+            },
+            error: function (e) {
+                tips('notice', '签到失败!', 1500, 'weui_icon_notice');
+            }
+        });
+    }
+    $(document).ready(function(){
+      $('.userexitan').click(function(){
+        tips('confirm','确定要退出吗？');
+        $('#enter').attr('data-s','{:U('Public/lout')}');
+      })
+      $('#enter').click(function(){
+        window.location.href=$(this).attr('data-s');
+      })
+      $('#esc').click(function(){$('#confirm').hide()});
+      $('.cuser').css('display','block');
+      $('.flomenu').css('height','auto');
+      $('.cuser').click(function(){
+        if($('.cusercover').css('display')=='none'){
+          $('.cusercover').css('display','block');
+          $("body").css("overflow", "hidden");
+          $('.selkf').css('height',$('.cuserlist').height()-99+'px');
+        }
+      })
+      $('#cancelkf').click(function(){
+        $('.cusercover').css('display','none');
+        $('body').css('overflow', 'auto');
+      })
+      $('#surekf').click(function(){
+        if($('.kfactive').length<=0){
+          tips('notice', '选择客服!', 1500, 'weui_icon_notice');
+        } else {
+          var userid=$('.kfactive').attr('data-userid');
+          var cservice_url="{:U('User/cservice',array('userid'=>'SELUSERID'))}";
+          cservice_url=cservice_url.replace(/SELUSERID/g,userid);
+          window.location.href=cservice_url;
+        }
+      })
+    })
+    function selectkf(label) {
+        $(".selkfli").removeClass("kfactive");
+        $(label).addClass("kfactive");
+    }
+</script>

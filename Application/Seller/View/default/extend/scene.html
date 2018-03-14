@@ -1,0 +1,156 @@
+<include file="Common:top" />
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/jquery.artDialog.js?skin=default"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/artDialog/plugins/iframeTools.js"></script>
+<include file="$headername" />
+ <div class="row wrapper border-bottom white-bg page-heading">
+     <div class="col-lg-10">
+         <h2><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " id="mini" href="#" style="margin-top:0px;margin-left:0px;"><i class="fa fa-bars"></i> </a>推广管理</h2>
+         <ol class="breadcrumb">
+             <li>
+                 <a href="index.html">主页</a>
+             </li>
+             <li class="active">
+                 <strong>场景管理</strong>
+             </li>
+         </ol>
+     </div>
+ <div class="col-lg-2"></div>
+</div>
+<div class="row wrapper  white-bg" style="margin:0px 1%;">
+<div class="col-lg-12">
+    <div class="col-lg-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>添加场景</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <form role="form" class="form-inline" action="{:U('Extend/saveScene')}" method="post" id="save">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword2" class="sr-only">场景名称</label>
+                                        <input type="text"  placeholder="请填写场景名称" name="SceneName" id="SceneName" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword2" class="sr-only">场景排序</label>
+                                        <input type="text" placeholder="场景排序" name="Sort" id="Sort" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <select name="storeid" id="storeid" class="form-control">
+                                            <option value="">请选门店</option>
+                                            <foreach name="storelist" item="st">
+                                            <option value="{$st.id}">{$st.storename}</option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <div class="checkbox m-l m-r-xs">
+                                        <label class="i-checks">
+                                            <input type="radio" name="IsShow" id="IsShow" value="1" checked="checked"> 显示</label>
+                                    </div>
+                                    <div class="checkbox m-l m-r-xs">
+                                        <label class="i-checks">
+                                            <input type="radio" name="IsShow" id="NoShow" value="0">隐藏</label>
+                                    </div>
+                                    <input type="hidden" name="ID" value="" id="SceneId">
+                                    <button class="btn btn-white" type="submit">保 存</button>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="{:U('Extend/search')}" method="get" class="form-inline">
+                                    <div class="form-group">
+                                        <input type="text" name="keyword" placeholder="请输入场景名称" id="" class="form-control">
+                                    </div>
+                                    <button class="btn btn-primary btn-outline btn-sm">搜索</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+<div class="col-lg-10">
+<h3>分类管理</h3>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>场景名称</td>
+            <td>所属门店</td>
+            <td>排序</td>
+            <td>是否显示</td>
+            <td>操作</td>
+        </tr>
+        <foreach name="scenes" item="scene">
+        <tr>
+            <td>{$scene.ID}</td>
+            <td>{$scene.SceneName}</td>
+            <td>{$scene.storename}</td>
+            <td>{$scene.Sort}</td>
+            <td><if condition="$scene['IsShow'] eq '1'"><input type="checkbox" name="c" id="" onclick="show(this.checked,'{$scene.ID}');" checked="checked"></if><if condition="$scene['IsShow'] eq '0'"><input type="checkbox" name="c" id=""  onclick="show(this.checked,'{$scene.ID}');" ></if></td>
+            <td><a href="###" onclick="edit('{$scene.ID}');">编辑</a> | <a href="###" onclick="del('{$scene.ID}');">删除</a></td>
+        </tr>
+        </foreach>
+    </table>
+    <div style="text-align:right;">{$page}</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    function del(id){
+        art.dialog.confirm('确定要删除此场景吗？',function(){
+            window.location.href="{:U('Extend/delScene')}?id="+id;
+        },function(){
+            art.dialog.tips('取消操作');
+        })
+    }
+
+    function edit(id){
+        document.getElementById('SceneName').readOnly=true;
+        var data={$jsonData};
+        $.each(data,function(index,item){
+            if (item.ID==id) {
+                $("#SceneName").val(item.SceneName);
+                $("#Sort").val(item.Sort);
+                $("#SceneId").val(item.ID);
+                if (item.IsShow=='1') {
+                    $("#NoShow").attr('checked',false);
+                    $("#IsShow").attr('checked',true);
+                };
+                if (item.IsShow=='0') {
+                    $("#IsShow").attr('checked',false);
+                    $("#NoShow").attr('checked',true);
+                };
+            };
+        })
+    }
+
+    $("#save").submit(function(){
+        var SceneName=$("#SceneName").val();
+        var Sort=$("#Sort").val();
+        if (!SceneName) {
+            alert('请填写场景名称');
+            return false;
+        };
+        if (!Sort) {
+            alert('请填写场景排序');
+            return false;
+        }else{
+            art.dialog({content:'正在提交数据，请勿重复操作...',lock:true});
+            return true;
+        }
+    })
+
+    function show(statu,id){
+        var status=1;
+        if (statu==false) {
+            status=0;
+        };
+        $.ajax({
+            type:'post',
+            url:'{:U('Extend/changeshow')}',
+            data:'statu='+status+"&id="+id,
+            dateType:'json',
+            success:function(msg){
+                if (msg=='success') {
+                    art.dialog.tips('操作成功',0.5);
+                };
+            }
+        })
+    }
+</script>
+<include file="Common:footer" />

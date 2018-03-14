@@ -1,0 +1,65 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.usermempart{
+    margin: 10px 0px 0px 0px;
+    border-top-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.mymember{
+    height: 60px;
+    padding: 4px 15px 4px 15px;
+    background-color: #ffffff;
+    border-bottom-style: solid;
+    border-color: #dddddd;
+    border-width: 1px;
+}
+.mymember>img{
+    float: left;
+    width: 40px;
+    margin-top: 6px;
+    border-radius: 50%;
+}
+.memnc{
+    float: left;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    padding: 5px 0px 0px 10px;
+    font-size: 14px;
+    color: #333333;
+}
+.memnc > span{
+    font-size: 12px;
+    color: #999999;
+}
+.memsy{
+    float:right;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    line-height: 51px;
+    font-size: 16px;
+    color: #ff4200;
+}
+.memsy>span{
+    font-size: 16px;
+    color: #ff4200;
+}
+
+.memsys{
+    float:right;
+    width: auto;
+    height: 100%;
+    margin: 0px;
+    line-height: 51px;
+    font-size: 16px;
+    color: #999999;
+}
+.memsys>span{
+    font-size: 16px;
+    color: #999999;
+}

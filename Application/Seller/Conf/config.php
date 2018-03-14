@@ -1,0 +1,55 @@
+<?php
+return array(
+	'DEFAULT_CONTROLLER'=>'Public',
+	'DEFAULT_ACTION'=>'login',
+	'URL_MODEL'=>2,
+	'SESSION_PREFIX'=>'seller',
+    'TMPL_DETECT_THEME'     =>  true,       // 自动侦测模板主题
+    'DEFAULT_THEME'         =>  'default',	// 默认模板主题名称
+	//'配置项'=>'配置值'
+	// "SHOW_PAGE_TRACE"=>true,
+
+	//数据库配置项
+	'DB_TYPE'=>'sqlsrv',
+	'DB_HOST'=>'127.0.0.1',
+	'DB_NAME'=>'FlashCard',
+	'DB_PORT'  => '1433',
+	'DB_USER'=>'sa',
+	'DB_PWD'=>'Cc123',
+	'DB_PREFIX'=>'RS_',
+	'DB_CHARSET'=>'utf8',
+	'WEBURL'=>'http://wx.58ate.com',
+	'ADMINURL'=>'http://wx.58ate.com',
+	'STATICPATH'=>'/HTML/',
+	'SHOPWEBROOT' => 'http://wx.58ate.com',
+	'AREA'=>array('北京','上海','天津','重庆','河北','河南','湖北','湖南','山西','陕西','辽宁','黑龙', '吉林','江苏','浙江','安徽','福建','江西','山东','广东','海南','四川','云南','贵州','甘肃','青海','台湾','广西','内蒙', '西藏','宁夏','新疆','香港','澳门'),
+	'BAIDU_TONGJI_URL'=>'http://tongji.baidu.com/web/welcome/ico?s=5fe6394d7eb4d1c46a81d464d46db432',
+	'BAIDU_TONGJI_PWD'=>'passwd=gg123456',
+	"WXAPPID"=>'wx3dd28eb27ded279b',
+	"WXAPPSECRET"=>'9b7c0e147107c71f367ebb92573f18d5',
+	"CRET_URL"=>'D:/WWW/Lib/ThinkPHP/Library/Vendor/WxPayPubHelper/cert',
+	"MCHID"=>1219664101,
+	"WXKEY"=>'0d5ab00b3fabb5a446d10daf12a05f4e',
+	'MYSQL'=>array(
+		'DB_TYPE'=>'mysql',
+		'DB_HOST'=>'localhost',
+		'DB_NAME'=>'flashcard',
+		'DB_PWD'=>'root',
+		'DB_USER'=>'root',
+		'DB_PREFIX'=>'tb_',
+		),
+	'SQLHOUSE'=>array(
+		'DB_TYPE'=>'sqlsrv',
+		'DB_HOST'=>'127.0.0.1',
+		'DB_NAME'=>'FlashCardwh',
+		'DB_USER'=>'sa',
+		'DB_PWD'=>'Cc123',
+		'DB_PREFIX'=>'tb_',
+		'DB_CHARSET'=>'utf8',
+	),
+	'CKname'=>'FlashCardwh',
+	'MainData'=>'FlashCard',
+	'WXCUT'=>0.6,
+	// 'PICURL'=>'https://hmallresource.oss-cn-shanghai.aliyuncs.com',
+	'PICURL'=>'http://flash.shunliansoft.com',
+);

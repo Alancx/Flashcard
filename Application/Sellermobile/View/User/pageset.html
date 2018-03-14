@@ -1,0 +1,274 @@
+<layout name="Public/PageModel"/>
+<script src="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Sellermobile/js/ajaxfileupload.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/Plugins/Swiper/swiper-3.3.1.min.css">
+<link rel="stylesheet" href="__PUBLIC__/Sellermobile/CSS/pageset.css">
+
+
+<!-- 预览效果区域 -->
+<div class="home-contents">
+  <!-- 轮播图区域 -->
+  <div class="swiper-container swiper-container-home">
+    <div class="overburden">
+      <div>
+        <label class="addlb">添加</label>
+        <label class="updatelb">修改</label>
+        <label class="deletelb">删除</label>
+      </div>
+    </div>
+    <div class="swiper-wrapper">
+      <empty name="homeimg['ImgPath']">
+        <div class="swiper-slide">
+          <img src="http://placehold.it/800x500" class="imgslide">
+        </div>
+        <else />
+        <div class="swiper-slide">
+          <img src="{$homeimg['ImgPath']}" class="imgslide">
+        </div>
+      </empty>
+      <foreach name="lbdata" item='ci'>
+        <div class="swiper-slide" data-url="{$ci['ImgPath']}" data-href="{$ci['ImgUrl']}" data-hid="{$ci['ID']}">
+          <img src="{$ci['ImgPath']}" class="imgslide">
+        </div>
+      </foreach>
+    </div>
+    <div class="swiper-pagination swiper-pagination-home"></div>
+  </div>
+  <!-- 轮播图区域end -->
+  <!-- 门店基本信息 -->
+  <div class="childshop">
+    <empty name="shopinfo['Slogo']">
+      <img src="__PUBLIC__/theme2/images/shoplogo.png" class="childshop_img" alt="">
+      <else />
+      <img src="{$shopinfo.Slogo}" class="childshop_img" alt="">
+    </empty>
+    <label class="childshop_name">{$shopinfo.storename}</label>
+    <label class="childshop_title">{$shopinfo.Descinfo}</label>
+  </div>
+  <!-- end门店基本信息 -->
+  <!-- 产品区域一 -->
+  <div class="propart">
+    <div class="pro-title">
+      <label class="pro_hot">热销商品<span>更多</span></label>
+    </div>
+    <div class="pro-line-1">
+      <empty name="selhotinfo[0]">
+        <div class="pro-line-1-left">
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatehot" data-s="1" data-type="add">编辑</label>
+            </div>
+          </div>
+          <img src="http://placehold.it/100x100" alt="">
+          <label>商品名称<span>￥0.00</span></label>
+        </div>
+        <else />
+        <div class="pro-line-1-left">
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatehot" data-s="1" data-type="{$selhotinfo[0]['ID']}">编辑</label>
+            </div>
+          </div>
+          <img src="{$selhotinfo[0]['ProLogoImg']}" alt="">
+          <label>{$selhotinfo[0]['ProName']}<span>￥<?php echo number_format(($selhotinfo[0]['PriceRange']),2); ?></span></label>
+        </div>
+      </empty>
+      <div class="pro-line-1-right">
+        <div>
+          <label>{$prohot['ProName']}</label>
+          <label>￥<?php echo number_format(($prohot['PriceRange']),2); ?></label>
+        </div>
+        <img src="{$prohot['ProLogoImg']}" alt="">
+      </div>
+      <div class="pro-line-1-right">
+        <empty name="selhotinfo[1]">
+            <div class="overburden">
+              <div>
+                <label class="updatepro updatehot" data-s="2" data-type="add">编辑</label>
+              </div>
+            </div>
+            <div class="hotpnpc">
+              <label>商品名称</label>
+              <label>￥0.00</label>
+            </div>
+            <img src="http://placehold.it/100x100" alt="">
+          <else />
+            <div class="overburden">
+              <div>
+                <label class="updatepro updatehot" data-s="2" data-type="{$selhotinfo[1]['ID']}">编辑</label>
+              </div>
+            </div>
+            <div class="hotpnpc">
+              <label>{$selhotinfo['1']['ProName']}</label>
+              <label>￥<?php echo number_format(($selhotinfo[1]['PriceRange']),2); ?></label>
+            </div>
+            <img src="{$selhotinfo['1']['ProLogoImg']}" alt="">
+        </empty>
+      </div>
+    </div>
+    <div class="swiper-container swiper-container-class">
+      <div class="swiper-wrapper">
+        <empty name="info.classdata">
+          <for start="1" end="5">
+            <div class="swiper-slide">
+              <div class="classtype">
+                <img src="http://placehold.it/100x100" alt="">
+                <label>分类名称</label>
+              </div>
+            </div>
+          </for>
+          <else />
+          <foreach name="info.classdata" item='classinfo'>
+            <div class="swiper-slide">
+              <a>
+                <div class="classtype">
+                  <img src="{$classinfo['imgurl']}" alt="">
+                  <label>{$classinfo['cname']}</label>
+                </div>
+              </a>
+            </div>
+          </foreach>
+        </empty>
+      </div>
+    </div>
+  </div>
+  <!-- 产品区域一end -->
+  <!-- 产品区域二 -->
+  <div class="propart">
+    <div class="pro-title">
+      <label class="pro_new">新品推荐<span>更多</span></label>
+    </div>
+    <div class="pro-line-3">
+      <div>
+        <div>
+          <label>{$pronew['ProName']}</label>
+          <label>￥<?php echo number_format(($pronew['PriceRange']),2); ?></label>
+        </div>
+        <img src="{$pronew['ProLogoImg']}" alt="">
+      </div>
+
+      <div>
+        <empty name="selnewinfo[0]">
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatenew" data-s="1" data-type="add">编辑</label>
+            </div>
+          </div>
+          <div class="newpnpc">
+            <label>商品名称</label>
+            <label>￥0.00</label>
+          </div>
+          <img src="http://placehold.it/100x100" alt="">
+          <else />
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatenew" data-s="1" data-type="{$selnewinfo[0]['ID']}">编辑</label>
+            </div>
+          </div>
+          <div class="newpnpc">
+            <label>{$selnewinfo['0']['ProName']}</label>
+            <label>￥<?php echo number_format(($selnewinfo[0]['PriceRange']),2); ?></label>
+          </div>
+          <img src="{$selnewinfo['0']['ProLogoImg']}" alt="">
+        </empty>
+      </div>
+
+      <div>
+        <empty name="selnewinfo[1]">
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatenew" data-s="1" data-type="add">编辑</label>
+            </div>
+          </div>
+          <div class="newpnpc">
+            <label>商品名称</label>
+            <label>￥0.00</label>
+          </div>
+          <img src="http://placehold.it/100x100" alt="">
+          <else />
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatenew" data-s="1" data-type="{$selnewinfo[1]['ID']}">编辑</label>
+            </div>
+          </div>
+          <div class="newpnpc">
+            <label>{$selnewinfo['0']['ProName']}</label>
+            <label>￥<?php echo number_format(($selnewinfo[0]['PriceRange']),2); ?></label>
+          </div>
+          <img src="{$selnewinfo['1']['ProLogoImg']}" alt="">
+        </empty>
+      </div>
+
+      <div>
+        <empty name="selnewinfo[2]">
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatenew" data-s="1" data-type="add">编辑</label>
+            </div>
+          </div>
+          <div class="newpnpc">
+            <label>商品名称</label>
+            <label>￥0.00</label>
+          </div>
+          <img src="http://placehold.it/100x100" alt="">
+          <else />
+          <div class="overburden">
+            <div>
+              <label class="updatepro updatenew" data-s="1" data-type="{$selnewinfo[2]['ID']}">编辑</label>
+            </div>
+          </div>
+          <div class="newpnpc">
+            <label>{$selnewinfo['2']['ProName']}</label>
+            <label>￥<?php echo number_format(($selnewinfo[2]['PriceRange']),2); ?></label>
+          </div>
+          <img src="{$selnewinfo['2']['ProLogoImg']}" alt="">
+        </empty>
+      </div>
+    </div>
+  </div>
+  <!-- 产品区域二end -->
+</div>
+<div class="lbinfosetconver">
+  <div class="setlbinfo">
+    <img src="__PUBLIC__/Sellermobile/Icon/add_img.png" alt="">
+    <input type="file" name="selimg" id="selimg" value="" onchange="lbimage(this)">
+    <input type="hidden" id="lbimage" value="">
+  </div>
+  <div class="herfinfo">
+    <label>轮播图链接:</label>
+    <input type="text" id="lbinput" name="" value="" placeholder='已"HTTP://"开头[可以为空]'>
+  </div>
+  <div class="btnlb">
+    <label class="quxiaolb">取消</label>
+    <label class="baocunlb">保存</label>
+  </div>
+</div>
+<div class="prohotconver">
+  <div>
+    <div class="proinfos">
+      <foreach name="hotproinfo" item="hotitem">
+        <div class="pro_info hotproinfo" data-pid="{$hotitem['ProId']}" data-imgurl="{$hotitem['ProLogoImg']}" data-pname="{$hotitem['ProName']}" data-price="<?php echo number_format(($hotitem['PriceRange']),2); ?>">
+          <img src="{$hotitem['ProLogoImg']}" alt="">
+          <label>{$hotitem['ProName']}</label>
+          <label>￥<?php echo number_format(($hotitem['PriceRange']),2); ?></label>
+        </div>
+      </foreach>
+      <foreach name="newproinfo" item="newitem">
+        <div class="pro_info newproinfo" data-pid="{$newitem['ProId']}" data-imgurl="{$newitem['ProLogoImg']}" data-pname="{$newitem['ProName']}" data-price="<?php echo number_format(($newitem['PriceRange']),2); ?>">
+          <img src="{$newitem['ProLogoImg']}" alt="">
+          <label>{$newitem['ProName']}</label>
+          <label>￥<?php echo number_format(($newitem['PriceRange']),2); ?></label>
+        </div>
+      </foreach>
+    </div>
+    <div class="proqubtn">
+      <label class="proqusel">取消</label>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var lbimgsaveurl="{:U('User/lbimage')}";
+  var savehomeurl="{:U('User/pageset')}";
+  var lbimgdeleteurl="{:U('User/delonhome')}";
+</script>
+<script src="__PUBLIC__/Sellermobile/JS/pageset.js?v=1.0" charset="utf-8"></script>

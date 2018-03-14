@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的笔记</title>
+		<link href="__PUBLIC__/note/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="__PUBLIC__/note/css/wode.css" />
+	</head>
+
+	<body>
+		<div class="top">
+			<b>我的笔记</b>
+			<div class="zhong">
+				<a href="{:U('Index/note')}">新建笔记</a>
+			</div>
+		</div>
+		<foreach name="mod" item="list">
+			<div class="content">
+			<span>{$list['addtime']}</span>
+			<div class="content-text mui-table-view-cell">
+				<div class="mui-slider-handle">
+					<div class="title">
+						{$list['title']}
+					</div>
+					<div class="title-text">
+						{$list['content']} <br>
+					</div>
+				</div>
+				<div class="mui-slider-right mui-disabled aa">
+					<a  href="{:U('Index/delete')}?id={$list['id']}"class="mui-btn"><span>删除</span></a>
+					<a  href="{:U('Index/update')}?id={$list['id']}"class="mui-btn"><span>修改</span></a>
+				</div>
+			</div>
+		</div>
+		</foreach>
+		
+	</body>
+	<script src="__PUBLIC__/note/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.init();
+	</script>
+
+</html>
